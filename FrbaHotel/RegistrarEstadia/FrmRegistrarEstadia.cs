@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaHotel.Login
+namespace FrbaHotel.RegistrarEstadia
 {
-    public partial class Form1 : Form
+    public partial class FrmRegistrarEstadia : Form
     {
-        public Form1()
+        public FrmRegistrarEstadia()
         {
             InitializeComponent();
         }

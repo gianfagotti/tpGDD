@@ -1,6 +1,6 @@
-﻿namespace FrbaHotel.Login
+﻿namespace FrbaHotel.RegistrarEstadia
 {
-    partial class Form1
+    partial class FrmRegistrarEstadia
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // FrmRegistrarEstadia
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "FrmRegistrarEstadia";
+            this.Text = "Registrar Estadia";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
