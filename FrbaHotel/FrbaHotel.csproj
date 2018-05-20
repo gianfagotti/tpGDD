@@ -74,11 +74,11 @@
     <Compile Include="AbmRol\ModificarRol.Designer.cs">
       <DependentUpon>ModificarRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="CancelarReserva\Form1.cs">
+    <Compile Include="CancelarReserva\CancelarReserva.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CancelarReserva\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CancelarReserva\CancelarReserva.Designer.cs">
+      <DependentUpon>CancelarReserva.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -120,6 +120,9 @@
     </Compile>
     <EmbeddedResource Include="AbmCliente\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CancelarReserva\CancelarReserva.resx">
+      <DependentUpon>CancelarReserva.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>

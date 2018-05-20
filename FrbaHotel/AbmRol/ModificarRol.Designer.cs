@@ -28,23 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.txtNombreRol = new System.Windows.Forms.TextBox();
+            this.cboFuncionalidades = new System.Windows.Forms.ComboBox();
+            this.cboRolActivo = new System.Windows.Forms.CheckBox();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btnModificar
             // 
-            this.button1.Location = new System.Drawing.Point(142, 154);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Modificar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnModificar.Location = new System.Drawing.Point(142, 164);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.TabIndex = 0;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -74,43 +75,53 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Funcionalidades permitidas";
             // 
-            // textBox1
+            // txtNombreRol
             // 
-            this.textBox1.Location = new System.Drawing.Point(29, 29);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(188, 20);
-            this.textBox1.TabIndex = 4;
+            this.txtNombreRol.Location = new System.Drawing.Point(29, 29);
+            this.txtNombreRol.Name = "txtNombreRol";
+            this.txtNombreRol.Size = new System.Drawing.Size(188, 20);
+            this.txtNombreRol.TabIndex = 4;
             // 
-            // comboBox1
+            // cboFuncionalidades
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(29, 84);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(188, 21);
-            this.comboBox1.TabIndex = 5;
+            this.cboFuncionalidades.FormattingEnabled = true;
+            this.cboFuncionalidades.Location = new System.Drawing.Point(29, 84);
+            this.cboFuncionalidades.Name = "cboFuncionalidades";
+            this.cboFuncionalidades.Size = new System.Drawing.Size(188, 21);
+            this.cboFuncionalidades.TabIndex = 5;
             // 
-            // checkBox1
+            // cboRolActivo
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(29, 136);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(75, 17);
-            this.checkBox1.TabIndex = 6;
-            this.checkBox1.Text = "Rol Activo";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cboRolActivo.AutoSize = true;
+            this.cboRolActivo.Location = new System.Drawing.Point(29, 136);
+            this.cboRolActivo.Name = "cboRolActivo";
+            this.cboRolActivo.Size = new System.Drawing.Size(75, 17);
+            this.cboRolActivo.TabIndex = 6;
+            this.cboRolActivo.Text = "Rol Activo";
+            this.cboRolActivo.UseVisualStyleBackColor = true;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(54, 164);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 7;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
             // 
             // ModificarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(237, 199);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.cboRolActivo);
+            this.Controls.Add(this.cboFuncionalidades);
+            this.Controls.Add(this.txtNombreRol);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnModificar);
             this.Name = "ModificarRol";
             this.Text = "Modificar Rol";
             this.ResumeLayout(false);
@@ -120,12 +131,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox txtNombreRol;
+        private System.Windows.Forms.ComboBox cboFuncionalidades;
+        private System.Windows.Forms.CheckBox cboRolActivo;
+        private System.Windows.Forms.Button btnCancelar;
     }
 }
