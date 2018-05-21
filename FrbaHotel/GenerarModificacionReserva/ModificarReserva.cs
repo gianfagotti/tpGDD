@@ -8,23 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaHotel.CancelarReserva
+namespace FrbaHotel.GenerarModificacionReserva
 {
-    public partial class CancelarReserva : Form
+    public partial class ModificarReserva : Form
     {
-        public CancelarReserva()
+        public ModificarReserva()
         {
             InitializeComponent();
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

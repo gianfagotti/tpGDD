@@ -34,7 +34,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtNombreRol = new System.Windows.Forms.TextBox();
             this.cboFuncionalidades = new System.Windows.Forms.ComboBox();
-            this.cboRolActivo = new System.Windows.Forms.CheckBox();
+            this.chkRolActivo = new System.Windows.Forms.CheckBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -90,15 +90,15 @@
             this.cboFuncionalidades.Size = new System.Drawing.Size(188, 21);
             this.cboFuncionalidades.TabIndex = 5;
             // 
-            // cboRolActivo
+            // chkRolActivo
             // 
-            this.cboRolActivo.AutoSize = true;
-            this.cboRolActivo.Location = new System.Drawing.Point(29, 136);
-            this.cboRolActivo.Name = "cboRolActivo";
-            this.cboRolActivo.Size = new System.Drawing.Size(75, 17);
-            this.cboRolActivo.TabIndex = 6;
-            this.cboRolActivo.Text = "Rol Activo";
-            this.cboRolActivo.UseVisualStyleBackColor = true;
+            this.chkRolActivo.AutoSize = true;
+            this.chkRolActivo.Location = new System.Drawing.Point(29, 136);
+            this.chkRolActivo.Name = "chkRolActivo";
+            this.chkRolActivo.Size = new System.Drawing.Size(75, 17);
+            this.chkRolActivo.TabIndex = 6;
+            this.chkRolActivo.Text = "Rol Activo";
+            this.chkRolActivo.UseVisualStyleBackColor = true;
             // 
             // btnCancelar
             // 
@@ -115,7 +115,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(237, 199);
             this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.cboRolActivo);
+            this.Controls.Add(this.chkRolActivo);
             this.Controls.Add(this.cboFuncionalidades);
             this.Controls.Add(this.txtNombreRol);
             this.Controls.Add(this.label3);
@@ -137,7 +137,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtNombreRol;
         private System.Windows.Forms.ComboBox cboFuncionalidades;
-        private System.Windows.Forms.CheckBox cboRolActivo;
+        private System.Windows.Forms.CheckBox chkRolActivo;
         private System.Windows.Forms.Button btnCancelar;
     }
 }
