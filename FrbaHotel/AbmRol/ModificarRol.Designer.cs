@@ -35,7 +35,7 @@
             this.txtNombreRol = new System.Windows.Forms.TextBox();
             this.cboFuncionalidades = new System.Windows.Forms.ComboBox();
             this.chkRolActivo = new System.Windows.Forms.CheckBox();
-            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnModificar
@@ -100,21 +100,21 @@
             this.chkRolActivo.Text = "Rol Activo";
             this.chkRolActivo.UseVisualStyleBackColor = true;
             // 
-            // btnCancelar
+            // btnVolver
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(54, 164);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 7;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnVolver.Location = new System.Drawing.Point(61, 164);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.TabIndex = 7;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // ModificarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(237, 199);
-            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.chkRolActivo);
             this.Controls.Add(this.cboFuncionalidades);
             this.Controls.Add(this.txtNombreRol);
@@ -123,6 +123,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnModificar);
             this.Name = "ModificarRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificar Rol";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -138,6 +139,6 @@
         private System.Windows.Forms.TextBox txtNombreRol;
         private System.Windows.Forms.ComboBox cboFuncionalidades;
         private System.Windows.Forms.CheckBox chkRolActivo;
-        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

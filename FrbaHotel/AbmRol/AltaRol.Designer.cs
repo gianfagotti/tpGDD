@@ -35,6 +35,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cboFuncionalidades = new System.Windows.Forms.ComboBox();
             this.btnAceptar = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // chkRolActivo
@@ -103,11 +104,21 @@
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(306, 88);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.TabIndex = 7;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            // 
             // AltaRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(495, 118);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.cboFuncionalidades);
             this.Controls.Add(this.label3);
@@ -116,6 +127,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chkRolActivo);
             this.Name = "AltaRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta de Rol";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -131,5 +143,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cboFuncionalidades;
         private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

@@ -26,5 +26,12 @@ namespace FrbaHotel.CancelarReserva
         {
 
         }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            MenuesUsuarios.frmMenuCliente frmMenuCliente = new MenuesUsuarios.frmMenuCliente();
+            this.Hide();
+            frmMenuCliente.ShowDialog();
+        }
     }
 }

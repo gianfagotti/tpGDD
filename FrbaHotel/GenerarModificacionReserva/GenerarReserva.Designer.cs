@@ -39,7 +39,7 @@
             this.cboTipoHabitacion = new System.Windows.Forms.ComboBox();
             this.cboRegimen = new System.Windows.Forms.ComboBox();
             this.btnVerificar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cboHotel = new System.Windows.Forms.ComboBox();
@@ -141,16 +141,16 @@
             this.btnVerificar.TabIndex = 12;
             this.btnVerificar.Text = "Verificar disponibilidad";
             this.btnVerificar.UseVisualStyleBackColor = true;
-            this.btnVerificar.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btnCancelar
+            // btnVolver
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(169, 157);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 35);
-            this.btnCancelar.TabIndex = 13;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnVolver.Location = new System.Drawing.Point(169, 157);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 35);
+            this.btnVolver.TabIndex = 13;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // label6
             // 
@@ -185,7 +185,7 @@
             this.Controls.Add(this.cboHotel);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnVerificar);
             this.Controls.Add(this.cboRegimen);
             this.Controls.Add(this.cboTipoHabitacion);
@@ -217,7 +217,7 @@
         private System.Windows.Forms.ComboBox cboTipoHabitacion;
         private System.Windows.Forms.ComboBox cboRegimen;
         private System.Windows.Forms.Button btnVerificar;
-        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cboHotel;

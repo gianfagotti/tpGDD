@@ -32,9 +32,12 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnVolver_Click(object sender, EventArgs e)
         {
-
+            MenuesUsuarios.frmMenuCliente frmMenuCliente = new MenuesUsuarios.frmMenuCliente();
+            this.Hide();
+            frmMenuCliente.ShowDialog();
         }
+
     }
 }

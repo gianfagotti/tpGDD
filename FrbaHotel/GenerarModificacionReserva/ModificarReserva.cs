@@ -16,5 +16,21 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             InitializeComponent();
         }
+
+        private void btnVerificar_Click(object sender, EventArgs e)
+        {
+      
+            this.Hide();
+            DisponibilidadReserva frmDisponibilidadReserva = new DisponibilidadReserva();
+            frmDisponibilidadReserva.ShowDialog();
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            MenuesUsuarios.frmMenuCliente frmMenuCliente = new MenuesUsuarios.frmMenuCliente();
+            this.Hide();
+            frmMenuCliente.ShowDialog();
+        }
+        }
     }
-}
+
