@@ -38,3 +38,5 @@ C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion D
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.ModificarRol.resources
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarEstadia.FrmRegistrarEstadia.resources
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmTipoUsuario.resources
+C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
+C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmSeleccionarRol.resources

@@ -31,7 +31,7 @@
             this.lblTipoUsuario = new System.Windows.Forms.Label();
             this.lblTiposDeUsuario = new System.Windows.Forms.Label();
             this.cmbTiposDeUsuario = new System.Windows.Forms.ComboBox();
-            this.btnAceptar = new System.Windows.Forms.Button();
+            this.btnAceptarTipoUsuario = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTipoUsuario
@@ -62,32 +62,34 @@
             // 
             this.cmbTiposDeUsuario.FormattingEnabled = true;
             this.cmbTiposDeUsuario.Items.AddRange(new object[] {
-            "Empleado",
-            "Cliente"});
+            "Cliente",
+            "Empleado"});
             this.cmbTiposDeUsuario.Location = new System.Drawing.Point(51, 104);
             this.cmbTiposDeUsuario.Name = "cmbTiposDeUsuario";
             this.cmbTiposDeUsuario.Size = new System.Drawing.Size(171, 21);
             this.cmbTiposDeUsuario.TabIndex = 3;
             this.cmbTiposDeUsuario.Text = "Seleccione su tipo de usuario...";
+            this.cmbTiposDeUsuario.SelectedIndexChanged += new System.EventHandler(this.cmbTiposDeUsuario_SelectedIndexChanged);
             // 
-            // btnAceptar
+            // btnAceptarTipoUsuario
             // 
-            this.btnAceptar.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btnAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAceptar.Location = new System.Drawing.Point(96, 169);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 27);
-            this.btnAceptar.TabIndex = 6;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = false;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            this.btnAceptarTipoUsuario.AccessibleName = "btnAceptarTipoUsuario";
+            this.btnAceptarTipoUsuario.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnAceptarTipoUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAceptarTipoUsuario.Location = new System.Drawing.Point(96, 169);
+            this.btnAceptarTipoUsuario.Name = "btnAceptarTipoUsuario";
+            this.btnAceptarTipoUsuario.Size = new System.Drawing.Size(75, 27);
+            this.btnAceptarTipoUsuario.TabIndex = 6;
+            this.btnAceptarTipoUsuario.Text = "Aceptar";
+            this.btnAceptarTipoUsuario.UseVisualStyleBackColor = false;
+            this.btnAceptarTipoUsuario.Click += new System.EventHandler(this.btnAceptarTipoUsuario_Click);
             // 
             // FrmTipoUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.btnAceptar);
+            this.Controls.Add(this.btnAceptarTipoUsuario);
             this.Controls.Add(this.cmbTiposDeUsuario);
             this.Controls.Add(this.lblTiposDeUsuario);
             this.Controls.Add(this.lblTipoUsuario);
@@ -104,6 +106,6 @@
         private System.Windows.Forms.Label lblTipoUsuario;
         private System.Windows.Forms.Label lblTiposDeUsuario;
         private System.Windows.Forms.ComboBox cmbTiposDeUsuario;
-        private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Button btnAceptarTipoUsuario;
     }
 }

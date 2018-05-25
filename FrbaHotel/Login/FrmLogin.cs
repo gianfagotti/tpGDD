@@ -48,7 +48,16 @@ namespace FrbaHotel.Login
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-
+            if (true) //En este condicional tiene que ir la validacion de que el rol que selecciona el usuario esté registrado en la bd para su usuario.
+            {
+                this.Hide();
+                FrmSeleccionarRol frmSeleccionarRol = new FrmSeleccionarRol();
+                frmSeleccionarRol.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un rol válido para su usuario");
+            }
         }
 
         private void lblDatosUsuario_Click(object sender, EventArgs e)

@@ -17,7 +17,7 @@ namespace FrbaHotel.Login
             InitializeComponent();
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private void btnAceptarTipoUsuario_Click(object sender, EventArgs e)
         {
             if (cmbTiposDeUsuario.SelectedItem.ToString() == "Cliente"){
             GenerarModificacionReserva.GenerarReserva frmGenerarReserva = new GenerarModificacionReserva.GenerarReserva();
@@ -29,6 +29,11 @@ namespace FrbaHotel.Login
                this.Hide();
                frmLogin.ShowDialog();
             }
+        }
+
+        private void cmbTiposDeUsuario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
