@@ -110,6 +110,12 @@
     <Compile Include="ListadoEstadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\FrmTipoUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\FrmTipoUsuario.Designer.cs">
+      <DependentUpon>FrmTipoUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\ModificarRol.resx">
       <DependentUpon>ModificarRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\FrmTipoUsuario.resx">
+      <DependentUpon>FrmTipoUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -34,6 +34,7 @@
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.lblContraseña = new System.Windows.Forms.Label();
             this.btnIngresar = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblDatosUsuario
@@ -48,7 +49,7 @@
             this.lblDatosUsuario.TabIndex = 0;
             this.lblDatosUsuario.Text = "Ingrese sus datos de Usuario:";
             this.lblDatosUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblDatosUsuario.Click += new System.EventHandler(this.label1_Click);
+            this.lblDatosUsuario.Click += new System.EventHandler(this.lblDatosUsuario_Click);
             // 
             // lblUsuario
             // 
@@ -94,19 +95,32 @@
             // 
             this.btnIngresar.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnIngresar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIngresar.Location = new System.Drawing.Point(101, 195);
+            this.btnIngresar.Location = new System.Drawing.Point(57, 195);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(75, 27);
             this.btnIngresar.TabIndex = 5;
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.UseVisualStyleBackColor = false;
-            this.btnIngresar.Click += new System.EventHandler(this.button1_Click);
+            this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVolver.Location = new System.Drawing.Point(153, 195);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 27);
+            this.btnVolver.TabIndex = 6;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = false;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.lblContraseña);
             this.Controls.Add(this.txtContraseña);
@@ -115,6 +129,7 @@
             this.Controls.Add(this.lblDatosUsuario);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "FrmLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio de Sesión";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -129,5 +144,6 @@
         private System.Windows.Forms.TextBox txtContraseña;
         private System.Windows.Forms.Label lblContraseña;
         private System.Windows.Forms.Button btnIngresar;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

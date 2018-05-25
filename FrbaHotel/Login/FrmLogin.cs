@@ -17,11 +17,7 @@ namespace FrbaHotel.Login
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+    
         private void lblUsuario_Click(object sender, EventArgs e)
         {
 
@@ -42,7 +38,20 @@ namespace FrbaHotel.Login
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FrmTipoUsuario frmTipoUsuario = new FrmTipoUsuario();
+            frmTipoUsuario.ShowDialog();
+
+        }
+
+        private void btnIngresar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblDatosUsuario_Click(object sender, EventArgs e)
         {
 
         }

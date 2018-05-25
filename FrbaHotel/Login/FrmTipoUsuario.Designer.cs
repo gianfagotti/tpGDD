@@ -1,0 +1,109 @@
+﻿namespace FrbaHotel.Login
+{
+    partial class FrmTipoUsuario
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.lblTipoUsuario = new System.Windows.Forms.Label();
+            this.lblTiposDeUsuario = new System.Windows.Forms.Label();
+            this.cmbTiposDeUsuario = new System.Windows.Forms.ComboBox();
+            this.btnAceptar = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // lblTipoUsuario
+            // 
+            this.lblTipoUsuario.AutoSize = true;
+            this.lblTipoUsuario.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.lblTipoUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTipoUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipoUsuario.Location = new System.Drawing.Point(12, 20);
+            this.lblTipoUsuario.Name = "lblTipoUsuario";
+            this.lblTipoUsuario.Size = new System.Drawing.Size(255, 22);
+            this.lblTipoUsuario.TabIndex = 1;
+            this.lblTipoUsuario.Text = "Seleccione su tipo de Usuario:";
+            this.lblTipoUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblTiposDeUsuario
+            // 
+            this.lblTiposDeUsuario.AutoSize = true;
+            this.lblTiposDeUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTiposDeUsuario.Location = new System.Drawing.Point(71, 63);
+            this.lblTiposDeUsuario.Name = "lblTiposDeUsuario";
+            this.lblTiposDeUsuario.Size = new System.Drawing.Size(129, 16);
+            this.lblTiposDeUsuario.TabIndex = 2;
+            this.lblTiposDeUsuario.Text = "Tipos de usuario:";
+            this.lblTiposDeUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbTiposDeUsuario
+            // 
+            this.cmbTiposDeUsuario.FormattingEnabled = true;
+            this.cmbTiposDeUsuario.Items.AddRange(new object[] {
+            "Empleado",
+            "Cliente"});
+            this.cmbTiposDeUsuario.Location = new System.Drawing.Point(51, 104);
+            this.cmbTiposDeUsuario.Name = "cmbTiposDeUsuario";
+            this.cmbTiposDeUsuario.Size = new System.Drawing.Size(171, 21);
+            this.cmbTiposDeUsuario.TabIndex = 3;
+            this.cmbTiposDeUsuario.Text = "Seleccione su tipo de usuario...";
+            // 
+            // btnAceptar
+            // 
+            this.btnAceptar.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAceptar.Location = new System.Drawing.Point(96, 169);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(75, 27);
+            this.btnAceptar.TabIndex = 6;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = false;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
+            // FrmTipoUsuario
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.btnAceptar);
+            this.Controls.Add(this.cmbTiposDeUsuario);
+            this.Controls.Add(this.lblTiposDeUsuario);
+            this.Controls.Add(this.lblTipoUsuario);
+            this.Name = "FrmTipoUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Tipo de Usuario";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label lblTipoUsuario;
+        private System.Windows.Forms.Label lblTiposDeUsuario;
+        private System.Windows.Forms.ComboBox cmbTiposDeUsuario;
+        private System.Windows.Forms.Button btnAceptar;
+    }
+}
