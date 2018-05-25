@@ -185,6 +185,7 @@
             this.Controls.Add(this.txtCodigoReserva);
             this.Controls.Add(this.label1);
             this.Name = "ModificarReserva";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificar reserva";
             this.ResumeLayout(false);
             this.PerformLayout();

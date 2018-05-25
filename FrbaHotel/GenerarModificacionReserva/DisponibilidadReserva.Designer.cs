@@ -39,6 +39,7 @@
             this.btnVolver.TabIndex = 19;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // DisponibilidadReserva
             // 
@@ -47,6 +48,7 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.btnVolver);
             this.Name = "DisponibilidadReserva";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Disponibilidad Reserva";
             this.ResumeLayout(false);
 

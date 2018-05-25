@@ -20,9 +20,9 @@ namespace FrbaHotel.Login
         private void btnAceptarTipoUsuario_Click(object sender, EventArgs e)
         {
             if (cmbTiposDeUsuario.SelectedItem.ToString() == "Cliente"){
-            GenerarModificacionReserva.GenerarReserva frmGenerarReserva = new GenerarModificacionReserva.GenerarReserva();
+                AbmRol.frmMenuCliente frmMenuCliente = new AbmRol.frmMenuCliente();
             this.Hide();
-            frmGenerarReserva.ShowDialog(); 
+            frmMenuCliente.ShowDialog(); 
            }
            else{
                FrmLogin frmLogin = new FrmLogin();

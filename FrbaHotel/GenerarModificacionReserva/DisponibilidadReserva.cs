@@ -16,5 +16,12 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             InitializeComponent();
         }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            AbmRol.frmMenuCliente frmMenuCliente = new AbmRol.frmMenuCliente();
+            this.Hide();
+            frmMenuCliente.ShowDialog();
+        }
     }
 }

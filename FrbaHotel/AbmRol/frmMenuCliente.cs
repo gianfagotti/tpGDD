@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaHotel.MenuesUsuarios
+namespace FrbaHotel.AbmRol
 {
     public partial class frmMenuCliente : Form
     {
@@ -26,21 +26,21 @@ namespace FrbaHotel.MenuesUsuarios
 
         }
 
-        private void btnModificarReserva_Click(object sender, EventArgs e)
+        private void btnModificarReserva_Click_1(object sender, EventArgs e)
         {
             GenerarModificacionReserva.ModificarReserva frmModificarReserva = new GenerarModificacionReserva.ModificarReserva();
             this.Hide();
             frmModificarReserva.ShowDialog();
         }
 
-        private void btnCancelarReserva_Click(object sender, EventArgs e)
+        private void btnCancelarReserva_Click_1(object sender, EventArgs e)
         {
             CancelarReserva.CancelarReserva frmCancelarReserva = new CancelarReserva.CancelarReserva();
             this.Hide();
             frmCancelarReserva.ShowDialog();
         }
 
-        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        private void btnCerrarSesion_Click_1(object sender, EventArgs e)
         {
             Login.FrmTipoUsuario frmTipoUsuario = new Login.FrmTipoUsuario();
             this.Hide();

@@ -29,7 +29,7 @@ namespace FrbaHotel.CancelarReserva
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            MenuesUsuarios.frmMenuCliente frmMenuCliente = new MenuesUsuarios.frmMenuCliente();
+            AbmRol.frmMenuCliente frmMenuCliente = new AbmRol.frmMenuCliente();
             this.Hide();
             frmMenuCliente.ShowDialog();
         }
