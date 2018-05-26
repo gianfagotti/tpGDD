@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.AbmCliente
 {
-    public partial class Form1 : Form
+    public partial class FrmModificarCliente : Form
     {
-        public Form1()
+        public FrmModificarCliente()
         {
             InitializeComponent();
+        }
+
+        private void lblNombre_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaHotel.AbmHabitacion
+namespace FrbaHotel.AbmRegimen
 {
-    public partial class Form1 : Form
+    public partial class FrmModificarRegimen : Form
     {
-        public Form1()
+        public FrmModificarRegimen()
         {
             InitializeComponent();
+        }
+
+        private void txtPrecio_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -57,3 +57,6 @@ C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.F
 C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
 C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarEstadia.FrmRegistrarEstadia.resources
 C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.exe.config
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.exe
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.pdb
