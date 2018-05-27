@@ -44,23 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbmCliente\FrmModificarCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AbmCliente\FrmModificarCliente.Designer.cs">
-      <DependentUpon>FrmModificarCliente.cs</DependentUpon>
-    </Compile>
     <Compile Include="AbmCliente\FrmAltaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AbmCliente\FrmAltaCliente.Designer.cs">
       <DependentUpon>FrmAltaCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmHabitacion\FrmModificarHabitacion.cs">
+    <Compile Include="AbmCliente\FrmModificarCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmHabitacion\FrmModificarHabitacion.Designer.cs">
-      <DependentUpon>FrmModificarHabitacion.cs</DependentUpon>
+    <Compile Include="AbmCliente\FrmModificarCliente.Designer.cs">
+      <DependentUpon>FrmModificarCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmHabitacion\FrmCrearHabitacion.cs">
       <SubType>Form</SubType>
@@ -68,17 +62,23 @@
     <Compile Include="AbmHabitacion\FrmCrearHabitacion.Designer.cs">
       <DependentUpon>FrmCrearHabitacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRegimen\FrmModificarRegimen.cs">
+    <Compile Include="AbmHabitacion\FrmModificarHabitacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRegimen\FrmModificarRegimen.Designer.cs">
-      <DependentUpon>FrmModificarRegimen.cs</DependentUpon>
+    <Compile Include="AbmHabitacion\FrmModificarHabitacion.Designer.cs">
+      <DependentUpon>FrmModificarHabitacion.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRegimen\FrmCrearRegimen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AbmRegimen\FrmCrearRegimen.Designer.cs">
       <DependentUpon>FrmCrearRegimen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRegimen\FrmModificarRegimen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRegimen\FrmModificarRegimen.Designer.cs">
+      <DependentUpon>FrmModificarRegimen.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\AltaRol.cs">
       <SubType>Form</SubType>
@@ -172,23 +172,23 @@
     <Compile Include="RegistrarEstadia\FrmRegistrarEstadia.Designer.cs">
       <DependentUpon>FrmRegistrarEstadia.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AbmCliente\FrmModificarCliente.resx">
-      <DependentUpon>FrmModificarCliente.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AbmCliente\FrmAltaCliente.resx">
       <DependentUpon>FrmAltaCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmHabitacion\FrmModificarHabitacion.resx">
-      <DependentUpon>FrmModificarHabitacion.cs</DependentUpon>
+    <EmbeddedResource Include="AbmCliente\FrmModificarCliente.resx">
+      <DependentUpon>FrmModificarCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmHabitacion\FrmCrearHabitacion.resx">
       <DependentUpon>FrmCrearHabitacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmRegimen\FrmModificarRegimen.resx">
-      <DependentUpon>FrmModificarRegimen.cs</DependentUpon>
+    <EmbeddedResource Include="AbmHabitacion\FrmModificarHabitacion.resx">
+      <DependentUpon>FrmModificarHabitacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRegimen\FrmCrearRegimen.resx">
       <DependentUpon>FrmCrearRegimen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRegimen\FrmModificarRegimen.resx">
+      <DependentUpon>FrmModificarRegimen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\frmMenuCliente.resx">
       <DependentUpon>frmMenuCliente.cs</DependentUpon>

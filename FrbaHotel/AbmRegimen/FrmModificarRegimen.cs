@@ -16,10 +16,5 @@ namespace FrbaHotel.AbmRegimen
         {
             InitializeComponent();
         }
-
-        private void txtPrecio_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

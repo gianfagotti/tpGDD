@@ -28,291 +28,289 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblNombre = new System.Windows.Forms.Label();
-            this.FrmApellido = new System.Windows.Forms.Label();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtApellido = new System.Windows.Forms.TextBox();
-            this.lblTipoDocumento = new System.Windows.Forms.Label();
-            this.lblNroDocumento = new System.Windows.Forms.Label();
-            this.lblMail = new System.Windows.Forms.Label();
-            this.lblTelefono = new System.Windows.Forms.Label();
-            this.lblCalle = new System.Windows.Forms.Label();
-            this.lblNumero = new System.Windows.Forms.Label();
-            this.lblLocalidad = new System.Windows.Forms.Label();
-            this.lblPaisDeOrigen = new System.Windows.Forms.Label();
-            this.lblNacionalidad = new System.Windows.Forms.Label();
-            this.lblFechaNacimiento = new System.Windows.Forms.Label();
-            this.txtTipoDocumento = new System.Windows.Forms.TextBox();
-            this.txtNroDocumento = new System.Windows.Forms.TextBox();
-            this.txtMail = new System.Windows.Forms.TextBox();
-            this.txtTelefono = new System.Windows.Forms.TextBox();
-            this.txtCalle = new System.Windows.Forms.TextBox();
-            this.txtNroCalle = new System.Windows.Forms.TextBox();
-            this.txtLocalidad = new System.Windows.Forms.TextBox();
-            this.txtPaisOrigen = new System.Windows.Forms.TextBox();
-            this.txtNacionalidad = new System.Windows.Forms.TextBox();
-            this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
-            this.chkHabilitado = new System.Windows.Forms.CheckBox();
-            this.butLimpiar = new System.Windows.Forms.Button();
-            this.butGuardar = new System.Windows.Forms.Button();
+            this.lblNombreMod = new System.Windows.Forms.Label();
+            this.txtNombreMod = new System.Windows.Forms.TextBox();
+            this.lblApellidoMod = new System.Windows.Forms.Label();
+            this.txtApellidoMod = new System.Windows.Forms.TextBox();
+            this.lblTipoDocumentoMod = new System.Windows.Forms.Label();
+            this.txtTipoDocumentoMod = new System.Windows.Forms.TextBox();
+            this.lblNroDocumentoMod = new System.Windows.Forms.Label();
+            this.txtNroDocumentoMod = new System.Windows.Forms.TextBox();
+            this.lblMailMod = new System.Windows.Forms.Label();
+            this.txtMailMod = new System.Windows.Forms.TextBox();
+            this.lblTelefonoMod = new System.Windows.Forms.Label();
+            this.txtTelefonoMod = new System.Windows.Forms.TextBox();
+            this.lblCalleMod = new System.Windows.Forms.Label();
+            this.txtCalleMod = new System.Windows.Forms.TextBox();
+            this.lblNumeroMod = new System.Windows.Forms.Label();
+            this.txtNumeroMod = new System.Windows.Forms.TextBox();
+            this.lblLocalidadMod = new System.Windows.Forms.Label();
+            this.txtLocalidadMod = new System.Windows.Forms.TextBox();
+            this.lblPaisOrigenMod = new System.Windows.Forms.Label();
+            this.txtPaisOrigenMod = new System.Windows.Forms.TextBox();
+            this.lblNacionalidadMod = new System.Windows.Forms.Label();
+            this.txtNacionalidadMod = new System.Windows.Forms.TextBox();
+            this.lblFechaNacimientoMod = new System.Windows.Forms.Label();
+            this.dtpFechaNacimientoMod = new System.Windows.Forms.DateTimePicker();
+            this.chkHabilitadoMod = new System.Windows.Forms.CheckBox();
+            this.butLimpiarMod = new System.Windows.Forms.Button();
+            this.butGuardarMod = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lblNombre
+            // lblNombreMod
             // 
-            this.lblNombre.BackColor = System.Drawing.SystemColors.Control;
-            this.lblNombre.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblNombre.Location = new System.Drawing.Point(12, 9);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(46, 15);
-            this.lblNombre.TabIndex = 0;
-            this.lblNombre.Text = "Nombre";
-            this.lblNombre.Click += new System.EventHandler(this.lblNombre_Click);
+            this.lblNombreMod.AutoSize = true;
+            this.lblNombreMod.Location = new System.Drawing.Point(12, 9);
+            this.lblNombreMod.Name = "lblNombreMod";
+            this.lblNombreMod.Size = new System.Drawing.Size(44, 13);
+            this.lblNombreMod.TabIndex = 0;
+            this.lblNombreMod.Text = "Nombre";
             // 
-            // FrmApellido
+            // txtNombreMod
             // 
-            this.FrmApellido.AutoSize = true;
-            this.FrmApellido.Location = new System.Drawing.Point(161, 9);
-            this.FrmApellido.Name = "FrmApellido";
-            this.FrmApellido.Size = new System.Drawing.Size(44, 13);
-            this.FrmApellido.TabIndex = 1;
-            this.FrmApellido.Text = "Apellido";
+            this.txtNombreMod.Location = new System.Drawing.Point(62, 6);
+            this.txtNombreMod.Name = "txtNombreMod";
+            this.txtNombreMod.Size = new System.Drawing.Size(100, 20);
+            this.txtNombreMod.TabIndex = 1;
             // 
-            // txtNombre
+            // lblApellidoMod
             // 
-            this.txtNombre.Location = new System.Drawing.Point(55, 6);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(100, 20);
-            this.txtNombre.TabIndex = 2;
+            this.lblApellidoMod.AutoSize = true;
+            this.lblApellidoMod.Location = new System.Drawing.Point(168, 9);
+            this.lblApellidoMod.Name = "lblApellidoMod";
+            this.lblApellidoMod.Size = new System.Drawing.Size(44, 13);
+            this.lblApellidoMod.TabIndex = 2;
+            this.lblApellidoMod.Text = "Apellido";
             // 
-            // txtApellido
+            // txtApellidoMod
             // 
-            this.txtApellido.Location = new System.Drawing.Point(202, 6);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(100, 20);
-            this.txtApellido.TabIndex = 3;
+            this.txtApellidoMod.Location = new System.Drawing.Point(218, 6);
+            this.txtApellidoMod.Name = "txtApellidoMod";
+            this.txtApellidoMod.Size = new System.Drawing.Size(100, 20);
+            this.txtApellidoMod.TabIndex = 3;
             // 
-            // lblTipoDocumento
+            // lblTipoDocumentoMod
             // 
-            this.lblTipoDocumento.AutoSize = true;
-            this.lblTipoDocumento.Location = new System.Drawing.Point(12, 33);
-            this.lblTipoDocumento.Name = "lblTipoDocumento";
-            this.lblTipoDocumento.Size = new System.Drawing.Size(86, 13);
-            this.lblTipoDocumento.TabIndex = 4;
-            this.lblTipoDocumento.Text = "Tipo Documento";
+            this.lblTipoDocumentoMod.AutoSize = true;
+            this.lblTipoDocumentoMod.Location = new System.Drawing.Point(12, 33);
+            this.lblTipoDocumentoMod.Name = "lblTipoDocumentoMod";
+            this.lblTipoDocumentoMod.Size = new System.Drawing.Size(86, 13);
+            this.lblTipoDocumentoMod.TabIndex = 4;
+            this.lblTipoDocumentoMod.Text = "Tipo Documento";
             // 
-            // lblNroDocumento
+            // txtTipoDocumentoMod
             // 
-            this.lblNroDocumento.AutoSize = true;
-            this.lblNroDocumento.Location = new System.Drawing.Point(151, 33);
-            this.lblNroDocumento.Name = "lblNroDocumento";
-            this.lblNroDocumento.Size = new System.Drawing.Size(82, 13);
-            this.lblNroDocumento.TabIndex = 5;
-            this.lblNroDocumento.Text = "Nro Documento";
+            this.txtTipoDocumentoMod.Location = new System.Drawing.Point(104, 30);
+            this.txtTipoDocumentoMod.Name = "txtTipoDocumentoMod";
+            this.txtTipoDocumentoMod.Size = new System.Drawing.Size(58, 20);
+            this.txtTipoDocumentoMod.TabIndex = 5;
             // 
-            // lblMail
+            // lblNroDocumentoMod
             // 
-            this.lblMail.AutoSize = true;
-            this.lblMail.Location = new System.Drawing.Point(15, 60);
-            this.lblMail.Name = "lblMail";
-            this.lblMail.Size = new System.Drawing.Size(26, 13);
-            this.lblMail.TabIndex = 6;
-            this.lblMail.Text = "Mail";
+            this.lblNroDocumentoMod.AutoSize = true;
+            this.lblNroDocumentoMod.Location = new System.Drawing.Point(168, 33);
+            this.lblNroDocumentoMod.Name = "lblNroDocumentoMod";
+            this.lblNroDocumentoMod.Size = new System.Drawing.Size(102, 13);
+            this.lblNroDocumentoMod.TabIndex = 6;
+            this.lblNroDocumentoMod.Text = "Numero Documento";
             // 
-            // lblTelefono
+            // txtNroDocumentoMod
             // 
-            this.lblTelefono.AutoSize = true;
-            this.lblTelefono.Location = new System.Drawing.Point(12, 83);
-            this.lblTelefono.Name = "lblTelefono";
-            this.lblTelefono.Size = new System.Drawing.Size(49, 13);
-            this.lblTelefono.TabIndex = 7;
-            this.lblTelefono.Text = "Telefono";
+            this.txtNroDocumentoMod.Location = new System.Drawing.Point(276, 30);
+            this.txtNroDocumentoMod.Name = "txtNroDocumentoMod";
+            this.txtNroDocumentoMod.Size = new System.Drawing.Size(100, 20);
+            this.txtNroDocumentoMod.TabIndex = 7;
             // 
-            // lblCalle
+            // lblMailMod
             // 
-            this.lblCalle.AutoSize = true;
-            this.lblCalle.Location = new System.Drawing.Point(15, 109);
-            this.lblCalle.Name = "lblCalle";
-            this.lblCalle.Size = new System.Drawing.Size(30, 13);
-            this.lblCalle.TabIndex = 8;
-            this.lblCalle.Text = "Calle";
+            this.lblMailMod.AutoSize = true;
+            this.lblMailMod.Location = new System.Drawing.Point(14, 59);
+            this.lblMailMod.Name = "lblMailMod";
+            this.lblMailMod.Size = new System.Drawing.Size(26, 13);
+            this.lblMailMod.TabIndex = 8;
+            this.lblMailMod.Text = "Mail";
             // 
-            // lblNumero
+            // txtMailMod
             // 
-            this.lblNumero.AutoSize = true;
-            this.lblNumero.Location = new System.Drawing.Point(157, 109);
-            this.lblNumero.Name = "lblNumero";
-            this.lblNumero.Size = new System.Drawing.Size(44, 13);
-            this.lblNumero.TabIndex = 9;
-            this.lblNumero.Text = "Numero";
+            this.txtMailMod.Location = new System.Drawing.Point(46, 56);
+            this.txtMailMod.Name = "txtMailMod";
+            this.txtMailMod.Size = new System.Drawing.Size(100, 20);
+            this.txtMailMod.TabIndex = 9;
             // 
-            // lblLocalidad
+            // lblTelefonoMod
             // 
-            this.lblLocalidad.AutoSize = true;
-            this.lblLocalidad.Location = new System.Drawing.Point(263, 109);
-            this.lblLocalidad.Name = "lblLocalidad";
-            this.lblLocalidad.Size = new System.Drawing.Size(53, 13);
-            this.lblLocalidad.TabIndex = 10;
-            this.lblLocalidad.Text = "Localidad";
+            this.lblTelefonoMod.AutoSize = true;
+            this.lblTelefonoMod.Location = new System.Drawing.Point(13, 85);
+            this.lblTelefonoMod.Name = "lblTelefonoMod";
+            this.lblTelefonoMod.Size = new System.Drawing.Size(49, 13);
+            this.lblTelefonoMod.TabIndex = 10;
+            this.lblTelefonoMod.Text = "Telefono";
             // 
-            // lblPaisDeOrigen
+            // txtTelefonoMod
             // 
-            this.lblPaisDeOrigen.AutoSize = true;
-            this.lblPaisDeOrigen.Location = new System.Drawing.Point(428, 109);
-            this.lblPaisDeOrigen.Name = "lblPaisDeOrigen";
-            this.lblPaisDeOrigen.Size = new System.Drawing.Size(76, 13);
-            this.lblPaisDeOrigen.TabIndex = 11;
-            this.lblPaisDeOrigen.Text = "Pais de Origen";
+            this.txtTelefonoMod.Location = new System.Drawing.Point(68, 82);
+            this.txtTelefonoMod.Name = "txtTelefonoMod";
+            this.txtTelefonoMod.Size = new System.Drawing.Size(100, 20);
+            this.txtTelefonoMod.TabIndex = 11;
             // 
-            // lblNacionalidad
+            // lblCalleMod
             // 
-            this.lblNacionalidad.AutoSize = true;
-            this.lblNacionalidad.Location = new System.Drawing.Point(13, 137);
-            this.lblNacionalidad.Name = "lblNacionalidad";
-            this.lblNacionalidad.Size = new System.Drawing.Size(69, 13);
-            this.lblNacionalidad.TabIndex = 12;
-            this.lblNacionalidad.Text = "Nacionalidad";
+            this.lblCalleMod.AutoSize = true;
+            this.lblCalleMod.Location = new System.Drawing.Point(13, 112);
+            this.lblCalleMod.Name = "lblCalleMod";
+            this.lblCalleMod.Size = new System.Drawing.Size(30, 13);
+            this.lblCalleMod.TabIndex = 12;
+            this.lblCalleMod.Text = "Calle";
             // 
-            // lblFechaNacimiento
+            // txtCalleMod
             // 
-            this.lblFechaNacimiento.AutoSize = true;
-            this.lblFechaNacimiento.Location = new System.Drawing.Point(12, 166);
-            this.lblFechaNacimiento.Name = "lblFechaNacimiento";
-            this.lblFechaNacimiento.Size = new System.Drawing.Size(108, 13);
-            this.lblFechaNacimiento.TabIndex = 13;
-            this.lblFechaNacimiento.Text = "Fecha de Nacimiento";
+            this.txtCalleMod.Location = new System.Drawing.Point(49, 109);
+            this.txtCalleMod.Name = "txtCalleMod";
+            this.txtCalleMod.Size = new System.Drawing.Size(100, 20);
+            this.txtCalleMod.TabIndex = 13;
             // 
-            // txtTipoDocumento
+            // lblNumeroMod
             // 
-            this.txtTipoDocumento.Location = new System.Drawing.Point(104, 30);
-            this.txtTipoDocumento.Name = "txtTipoDocumento";
-            this.txtTipoDocumento.Size = new System.Drawing.Size(41, 20);
-            this.txtTipoDocumento.TabIndex = 14;
+            this.lblNumeroMod.AutoSize = true;
+            this.lblNumeroMod.Location = new System.Drawing.Point(155, 112);
+            this.lblNumeroMod.Name = "lblNumeroMod";
+            this.lblNumeroMod.Size = new System.Drawing.Size(44, 13);
+            this.lblNumeroMod.TabIndex = 14;
+            this.lblNumeroMod.Text = "Numero";
             // 
-            // txtNroDocumento
+            // txtNumeroMod
             // 
-            this.txtNroDocumento.Location = new System.Drawing.Point(232, 30);
-            this.txtNroDocumento.Name = "txtNroDocumento";
-            this.txtNroDocumento.Size = new System.Drawing.Size(100, 20);
-            this.txtNroDocumento.TabIndex = 15;
+            this.txtNumeroMod.Location = new System.Drawing.Point(205, 109);
+            this.txtNumeroMod.Name = "txtNumeroMod";
+            this.txtNumeroMod.Size = new System.Drawing.Size(100, 20);
+            this.txtNumeroMod.TabIndex = 15;
             // 
-            // txtMail
+            // lblLocalidadMod
             // 
-            this.txtMail.Location = new System.Drawing.Point(45, 56);
-            this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(100, 20);
-            this.txtMail.TabIndex = 16;
+            this.lblLocalidadMod.AutoSize = true;
+            this.lblLocalidadMod.Location = new System.Drawing.Point(311, 112);
+            this.lblLocalidadMod.Name = "lblLocalidadMod";
+            this.lblLocalidadMod.Size = new System.Drawing.Size(53, 13);
+            this.lblLocalidadMod.TabIndex = 16;
+            this.lblLocalidadMod.Text = "Localidad";
             // 
-            // txtTelefono
+            // txtLocalidadMod
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(67, 80);
-            this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(100, 20);
-            this.txtTelefono.TabIndex = 17;
+            this.txtLocalidadMod.Location = new System.Drawing.Point(370, 109);
+            this.txtLocalidadMod.Name = "txtLocalidadMod";
+            this.txtLocalidadMod.Size = new System.Drawing.Size(100, 20);
+            this.txtLocalidadMod.TabIndex = 17;
             // 
-            // txtCalle
+            // lblPaisOrigenMod
             // 
-            this.txtCalle.Location = new System.Drawing.Point(51, 106);
-            this.txtCalle.Name = "txtCalle";
-            this.txtCalle.Size = new System.Drawing.Size(100, 20);
-            this.txtCalle.TabIndex = 18;
+            this.lblPaisOrigenMod.AutoSize = true;
+            this.lblPaisOrigenMod.Location = new System.Drawing.Point(476, 112);
+            this.lblPaisOrigenMod.Name = "lblPaisOrigenMod";
+            this.lblPaisOrigenMod.Size = new System.Drawing.Size(76, 13);
+            this.lblPaisOrigenMod.TabIndex = 18;
+            this.lblPaisOrigenMod.Text = "Pais de Origen";
             // 
-            // txtNroCalle
+            // txtPaisOrigenMod
             // 
-            this.txtNroCalle.Location = new System.Drawing.Point(207, 106);
-            this.txtNroCalle.Name = "txtNroCalle";
-            this.txtNroCalle.Size = new System.Drawing.Size(50, 20);
-            this.txtNroCalle.TabIndex = 19;
+            this.txtPaisOrigenMod.Location = new System.Drawing.Point(558, 109);
+            this.txtPaisOrigenMod.Name = "txtPaisOrigenMod";
+            this.txtPaisOrigenMod.Size = new System.Drawing.Size(100, 20);
+            this.txtPaisOrigenMod.TabIndex = 19;
             // 
-            // txtLocalidad
+            // lblNacionalidadMod
             // 
-            this.txtLocalidad.Location = new System.Drawing.Point(322, 106);
-            this.txtLocalidad.Name = "txtLocalidad";
-            this.txtLocalidad.Size = new System.Drawing.Size(100, 20);
-            this.txtLocalidad.TabIndex = 20;
+            this.lblNacionalidadMod.AutoSize = true;
+            this.lblNacionalidadMod.Location = new System.Drawing.Point(12, 139);
+            this.lblNacionalidadMod.Name = "lblNacionalidadMod";
+            this.lblNacionalidadMod.Size = new System.Drawing.Size(69, 13);
+            this.lblNacionalidadMod.TabIndex = 20;
+            this.lblNacionalidadMod.Text = "Nacionalidad";
             // 
-            // txtPaisOrigen
+            // txtNacionalidadMod
             // 
-            this.txtPaisOrigen.Location = new System.Drawing.Point(510, 106);
-            this.txtPaisOrigen.Name = "txtPaisOrigen";
-            this.txtPaisOrigen.Size = new System.Drawing.Size(100, 20);
-            this.txtPaisOrigen.TabIndex = 21;
+            this.txtNacionalidadMod.Location = new System.Drawing.Point(87, 136);
+            this.txtNacionalidadMod.Name = "txtNacionalidadMod";
+            this.txtNacionalidadMod.Size = new System.Drawing.Size(100, 20);
+            this.txtNacionalidadMod.TabIndex = 21;
             // 
-            // txtNacionalidad
+            // lblFechaNacimientoMod
             // 
-            this.txtNacionalidad.Location = new System.Drawing.Point(88, 134);
-            this.txtNacionalidad.Name = "txtNacionalidad";
-            this.txtNacionalidad.Size = new System.Drawing.Size(100, 20);
-            this.txtNacionalidad.TabIndex = 22;
+            this.lblFechaNacimientoMod.AutoSize = true;
+            this.lblFechaNacimientoMod.Location = new System.Drawing.Point(13, 165);
+            this.lblFechaNacimientoMod.Name = "lblFechaNacimientoMod";
+            this.lblFechaNacimientoMod.Size = new System.Drawing.Size(106, 13);
+            this.lblFechaNacimientoMod.TabIndex = 22;
+            this.lblFechaNacimientoMod.Text = "Fecha de nacimiento";
             // 
-            // dtpFechaNacimiento
+            // dtpFechaNacimientoMod
             // 
-            this.dtpFechaNacimiento.Location = new System.Drawing.Point(126, 160);
-            this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
-            this.dtpFechaNacimiento.Size = new System.Drawing.Size(200, 20);
-            this.dtpFechaNacimiento.TabIndex = 23;
+            this.dtpFechaNacimientoMod.Location = new System.Drawing.Point(125, 162);
+            this.dtpFechaNacimientoMod.Name = "dtpFechaNacimientoMod";
+            this.dtpFechaNacimientoMod.Size = new System.Drawing.Size(200, 20);
+            this.dtpFechaNacimientoMod.TabIndex = 23;
             // 
-            // chkHabilitado
+            // chkHabilitadoMod
             // 
-            this.chkHabilitado.AutoSize = true;
-            this.chkHabilitado.Location = new System.Drawing.Point(15, 195);
-            this.chkHabilitado.Name = "chkHabilitado";
-            this.chkHabilitado.Size = new System.Drawing.Size(73, 17);
-            this.chkHabilitado.TabIndex = 24;
-            this.chkHabilitado.Text = "Habilitado";
-            this.chkHabilitado.UseVisualStyleBackColor = true;
+            this.chkHabilitadoMod.AutoSize = true;
+            this.chkHabilitadoMod.Location = new System.Drawing.Point(13, 191);
+            this.chkHabilitadoMod.Name = "chkHabilitadoMod";
+            this.chkHabilitadoMod.Size = new System.Drawing.Size(73, 17);
+            this.chkHabilitadoMod.TabIndex = 24;
+            this.chkHabilitadoMod.Text = "Habilitado";
+            this.chkHabilitadoMod.UseVisualStyleBackColor = true;
             // 
-            // butLimpiar
+            // butLimpiarMod
             // 
-            this.butLimpiar.Location = new System.Drawing.Point(12, 218);
-            this.butLimpiar.Name = "butLimpiar";
-            this.butLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.butLimpiar.TabIndex = 25;
-            this.butLimpiar.Text = "Limpiar";
-            this.butLimpiar.UseVisualStyleBackColor = true;
+            this.butLimpiarMod.Location = new System.Drawing.Point(6, 224);
+            this.butLimpiarMod.Name = "butLimpiarMod";
+            this.butLimpiarMod.Size = new System.Drawing.Size(75, 23);
+            this.butLimpiarMod.TabIndex = 25;
+            this.butLimpiarMod.Text = "Limpiar";
+            this.butLimpiarMod.UseVisualStyleBackColor = true;
             // 
-            // butGuardar
+            // butGuardarMod
             // 
-            this.butGuardar.Location = new System.Drawing.Point(535, 218);
-            this.butGuardar.Name = "butGuardar";
-            this.butGuardar.Size = new System.Drawing.Size(75, 23);
-            this.butGuardar.TabIndex = 26;
-            this.butGuardar.Text = "Guardar";
-            this.butGuardar.UseVisualStyleBackColor = true;
+            this.butGuardarMod.Location = new System.Drawing.Point(583, 224);
+            this.butGuardarMod.Name = "butGuardarMod";
+            this.butGuardarMod.Size = new System.Drawing.Size(75, 23);
+            this.butGuardarMod.TabIndex = 26;
+            this.butGuardarMod.Text = "Guardar";
+            this.butGuardarMod.UseVisualStyleBackColor = true;
             // 
             // FrmModificarCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 248);
-            this.Controls.Add(this.butGuardar);
-            this.Controls.Add(this.butLimpiar);
-            this.Controls.Add(this.chkHabilitado);
-            this.Controls.Add(this.dtpFechaNacimiento);
-            this.Controls.Add(this.txtNacionalidad);
-            this.Controls.Add(this.txtPaisOrigen);
-            this.Controls.Add(this.txtLocalidad);
-            this.Controls.Add(this.txtNroCalle);
-            this.Controls.Add(this.txtCalle);
-            this.Controls.Add(this.txtTelefono);
-            this.Controls.Add(this.txtMail);
-            this.Controls.Add(this.txtNroDocumento);
-            this.Controls.Add(this.txtTipoDocumento);
-            this.Controls.Add(this.lblFechaNacimiento);
-            this.Controls.Add(this.lblNacionalidad);
-            this.Controls.Add(this.lblPaisDeOrigen);
-            this.Controls.Add(this.lblLocalidad);
-            this.Controls.Add(this.lblNumero);
-            this.Controls.Add(this.lblCalle);
-            this.Controls.Add(this.lblTelefono);
-            this.Controls.Add(this.lblMail);
-            this.Controls.Add(this.lblNroDocumento);
-            this.Controls.Add(this.lblTipoDocumento);
-            this.Controls.Add(this.txtApellido);
-            this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.FrmApellido);
-            this.Controls.Add(this.lblNombre);
+            this.ClientSize = new System.Drawing.Size(667, 255);
+            this.Controls.Add(this.butGuardarMod);
+            this.Controls.Add(this.butLimpiarMod);
+            this.Controls.Add(this.chkHabilitadoMod);
+            this.Controls.Add(this.dtpFechaNacimientoMod);
+            this.Controls.Add(this.lblFechaNacimientoMod);
+            this.Controls.Add(this.txtNacionalidadMod);
+            this.Controls.Add(this.lblNacionalidadMod);
+            this.Controls.Add(this.txtPaisOrigenMod);
+            this.Controls.Add(this.lblPaisOrigenMod);
+            this.Controls.Add(this.txtLocalidadMod);
+            this.Controls.Add(this.lblLocalidadMod);
+            this.Controls.Add(this.txtNumeroMod);
+            this.Controls.Add(this.lblNumeroMod);
+            this.Controls.Add(this.txtCalleMod);
+            this.Controls.Add(this.lblCalleMod);
+            this.Controls.Add(this.txtTelefonoMod);
+            this.Controls.Add(this.lblTelefonoMod);
+            this.Controls.Add(this.txtMailMod);
+            this.Controls.Add(this.lblMailMod);
+            this.Controls.Add(this.txtNroDocumentoMod);
+            this.Controls.Add(this.lblNroDocumentoMod);
+            this.Controls.Add(this.txtTipoDocumentoMod);
+            this.Controls.Add(this.lblTipoDocumentoMod);
+            this.Controls.Add(this.txtApellidoMod);
+            this.Controls.Add(this.lblApellidoMod);
+            this.Controls.Add(this.txtNombreMod);
+            this.Controls.Add(this.lblNombreMod);
             this.Name = "FrmModificarCliente";
-            this.Text = "Modificar Cliente";
+            this.Text = "Modificar cliente";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -320,32 +318,32 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.Label FrmApellido;
-        private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.TextBox txtApellido;
-        private System.Windows.Forms.Label lblTipoDocumento;
-        private System.Windows.Forms.Label lblNroDocumento;
-        private System.Windows.Forms.Label lblMail;
-        private System.Windows.Forms.Label lblTelefono;
-        private System.Windows.Forms.Label lblCalle;
-        private System.Windows.Forms.Label lblNumero;
-        private System.Windows.Forms.Label lblLocalidad;
-        private System.Windows.Forms.Label lblPaisDeOrigen;
-        private System.Windows.Forms.Label lblNacionalidad;
-        private System.Windows.Forms.Label lblFechaNacimiento;
-        private System.Windows.Forms.TextBox txtTipoDocumento;
-        private System.Windows.Forms.TextBox txtNroDocumento;
-        private System.Windows.Forms.TextBox txtMail;
-        private System.Windows.Forms.TextBox txtTelefono;
-        private System.Windows.Forms.TextBox txtCalle;
-        private System.Windows.Forms.TextBox txtNroCalle;
-        private System.Windows.Forms.TextBox txtLocalidad;
-        private System.Windows.Forms.TextBox txtPaisOrigen;
-        private System.Windows.Forms.TextBox txtNacionalidad;
-        private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
-        private System.Windows.Forms.CheckBox chkHabilitado;
-        private System.Windows.Forms.Button butLimpiar;
-        private System.Windows.Forms.Button butGuardar;
+        private System.Windows.Forms.Label lblNombreMod;
+        private System.Windows.Forms.TextBox txtNombreMod;
+        private System.Windows.Forms.Label lblApellidoMod;
+        private System.Windows.Forms.TextBox txtApellidoMod;
+        private System.Windows.Forms.Label lblTipoDocumentoMod;
+        private System.Windows.Forms.TextBox txtTipoDocumentoMod;
+        private System.Windows.Forms.Label lblNroDocumentoMod;
+        private System.Windows.Forms.TextBox txtNroDocumentoMod;
+        private System.Windows.Forms.Label lblMailMod;
+        private System.Windows.Forms.TextBox txtMailMod;
+        private System.Windows.Forms.Label lblTelefonoMod;
+        private System.Windows.Forms.TextBox txtTelefonoMod;
+        private System.Windows.Forms.Label lblCalleMod;
+        private System.Windows.Forms.TextBox txtCalleMod;
+        private System.Windows.Forms.Label lblNumeroMod;
+        private System.Windows.Forms.TextBox txtNumeroMod;
+        private System.Windows.Forms.Label lblLocalidadMod;
+        private System.Windows.Forms.TextBox txtLocalidadMod;
+        private System.Windows.Forms.Label lblPaisOrigenMod;
+        private System.Windows.Forms.TextBox txtPaisOrigenMod;
+        private System.Windows.Forms.Label lblNacionalidadMod;
+        private System.Windows.Forms.TextBox txtNacionalidadMod;
+        private System.Windows.Forms.Label lblFechaNacimientoMod;
+        private System.Windows.Forms.DateTimePicker dtpFechaNacimientoMod;
+        private System.Windows.Forms.CheckBox chkHabilitadoMod;
+        private System.Windows.Forms.Button butLimpiarMod;
+        private System.Windows.Forms.Button butGuardarMod;
     }
 }

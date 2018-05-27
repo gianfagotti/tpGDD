@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.AbmCliente
 {
-    public partial class FrmModificarCliente : Form
+    public partial class FrmAltaCliente : Form
     {
-        public FrmModificarCliente()
+        public FrmAltaCliente()
         {
             InitializeComponent();
         }
 
-        private void lblNombre_Click(object sender, EventArgs e)
+        private void txtMail_Click(object sender, EventArgs e)
         {
 
         }

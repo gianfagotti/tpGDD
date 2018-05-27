@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.AbmHabitacion
 {
-    partial class FrmModificarHabitacion
+    partial class FrmCrearHabitacion
     {
         /// <summary>
         /// Required designer variable.
@@ -34,8 +34,8 @@
             this.nudPiso = new System.Windows.Forms.NumericUpDown();
             this.lblUbicacion = new System.Windows.Forms.Label();
             this.cboUbicacion = new System.Windows.Forms.ComboBox();
-            this.cboTipoHabitacion = new System.Windows.Forms.ComboBox();
             this.lblTipoHabitacion = new System.Windows.Forms.Label();
+            this.cboTipoHabitacion = new System.Windows.Forms.ComboBox();
             this.lblDescripcion = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.chkHabilitado = new System.Windows.Forms.CheckBox();
@@ -50,21 +50,21 @@
             this.lblNroHabitacion.AutoSize = true;
             this.lblNroHabitacion.Location = new System.Drawing.Point(13, 13);
             this.lblNroHabitacion.Name = "lblNroHabitacion";
-            this.lblNroHabitacion.Size = new System.Drawing.Size(113, 13);
+            this.lblNroHabitacion.Size = new System.Drawing.Size(111, 13);
             this.lblNroHabitacion.TabIndex = 0;
-            this.lblNroHabitacion.Text = "Numero de Habitacion";
+            this.lblNroHabitacion.Text = "Numero de habitacion";
             // 
             // nudNroHabitacion
             // 
-            this.nudNroHabitacion.Location = new System.Drawing.Point(132, 11);
+            this.nudNroHabitacion.Location = new System.Drawing.Point(130, 11);
             this.nudNroHabitacion.Name = "nudNroHabitacion";
-            this.nudNroHabitacion.Size = new System.Drawing.Size(40, 20);
+            this.nudNroHabitacion.Size = new System.Drawing.Size(32, 20);
             this.nudNroHabitacion.TabIndex = 1;
             // 
             // lblPiso
             // 
             this.lblPiso.AutoSize = true;
-            this.lblPiso.Location = new System.Drawing.Point(13, 30);
+            this.lblPiso.Location = new System.Drawing.Point(12, 36);
             this.lblPiso.Name = "lblPiso";
             this.lblPiso.Size = new System.Drawing.Size(27, 13);
             this.lblPiso.TabIndex = 2;
@@ -72,15 +72,15 @@
             // 
             // nudPiso
             // 
-            this.nudPiso.Location = new System.Drawing.Point(47, 30);
+            this.nudPiso.Location = new System.Drawing.Point(42, 34);
             this.nudPiso.Name = "nudPiso";
-            this.nudPiso.Size = new System.Drawing.Size(44, 20);
+            this.nudPiso.Size = new System.Drawing.Size(35, 20);
             this.nudPiso.TabIndex = 3;
             // 
             // lblUbicacion
             // 
             this.lblUbicacion.AutoSize = true;
-            this.lblUbicacion.Location = new System.Drawing.Point(13, 59);
+            this.lblUbicacion.Location = new System.Drawing.Point(12, 62);
             this.lblUbicacion.Name = "lblUbicacion";
             this.lblUbicacion.Size = new System.Drawing.Size(55, 13);
             this.lblUbicacion.TabIndex = 4;
@@ -89,32 +89,32 @@
             // cboUbicacion
             // 
             this.cboUbicacion.FormattingEnabled = true;
-            this.cboUbicacion.Location = new System.Drawing.Point(74, 56);
+            this.cboUbicacion.Location = new System.Drawing.Point(73, 59);
             this.cboUbicacion.Name = "cboUbicacion";
             this.cboUbicacion.Size = new System.Drawing.Size(121, 21);
             this.cboUbicacion.TabIndex = 5;
             // 
-            // cboTipoHabitacion
-            // 
-            this.cboTipoHabitacion.FormattingEnabled = true;
-            this.cboTipoHabitacion.Location = new System.Drawing.Point(100, 87);
-            this.cboTipoHabitacion.Name = "cboTipoHabitacion";
-            this.cboTipoHabitacion.Size = new System.Drawing.Size(121, 21);
-            this.cboTipoHabitacion.TabIndex = 6;
-            // 
             // lblTipoHabitacion
             // 
             this.lblTipoHabitacion.AutoSize = true;
-            this.lblTipoHabitacion.Location = new System.Drawing.Point(12, 90);
+            this.lblTipoHabitacion.Location = new System.Drawing.Point(13, 89);
             this.lblTipoHabitacion.Name = "lblTipoHabitacion";
-            this.lblTipoHabitacion.Size = new System.Drawing.Size(82, 13);
-            this.lblTipoHabitacion.TabIndex = 7;
-            this.lblTipoHabitacion.Text = "Tipo Habitacion";
+            this.lblTipoHabitacion.Size = new System.Drawing.Size(80, 13);
+            this.lblTipoHabitacion.TabIndex = 6;
+            this.lblTipoHabitacion.Text = "Tipo habitacion";
+            // 
+            // cboTipoHabitacion
+            // 
+            this.cboTipoHabitacion.FormattingEnabled = true;
+            this.cboTipoHabitacion.Location = new System.Drawing.Point(99, 86);
+            this.cboTipoHabitacion.Name = "cboTipoHabitacion";
+            this.cboTipoHabitacion.Size = new System.Drawing.Size(121, 21);
+            this.cboTipoHabitacion.TabIndex = 7;
             // 
             // lblDescripcion
             // 
             this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Location = new System.Drawing.Point(12, 121);
+            this.lblDescripcion.Location = new System.Drawing.Point(12, 114);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(63, 13);
             this.lblDescripcion.TabIndex = 8;
@@ -122,16 +122,16 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(81, 118);
+            this.txtDescripcion.Location = new System.Drawing.Point(81, 111);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(247, 61);
+            this.txtDescripcion.Size = new System.Drawing.Size(218, 79);
             this.txtDescripcion.TabIndex = 9;
             // 
             // chkHabilitado
             // 
             this.chkHabilitado.AutoSize = true;
-            this.chkHabilitado.Location = new System.Drawing.Point(12, 194);
+            this.chkHabilitado.Location = new System.Drawing.Point(12, 196);
             this.chkHabilitado.Name = "chkHabilitado";
             this.chkHabilitado.Size = new System.Drawing.Size(73, 17);
             this.chkHabilitado.TabIndex = 10;
@@ -140,7 +140,7 @@
             // 
             // butLimpiar
             // 
-            this.butLimpiar.Location = new System.Drawing.Point(0, 229);
+            this.butLimpiar.Location = new System.Drawing.Point(12, 219);
             this.butLimpiar.Name = "butLimpiar";
             this.butLimpiar.Size = new System.Drawing.Size(75, 23);
             this.butLimpiar.TabIndex = 11;
@@ -149,7 +149,7 @@
             // 
             // butGuardar
             // 
-            this.butGuardar.Location = new System.Drawing.Point(262, 229);
+            this.butGuardar.Location = new System.Drawing.Point(224, 219);
             this.butGuardar.Name = "butGuardar";
             this.butGuardar.Size = new System.Drawing.Size(75, 23);
             this.butGuardar.TabIndex = 12;
@@ -160,14 +160,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 260);
+            this.ClientSize = new System.Drawing.Size(313, 251);
             this.Controls.Add(this.butGuardar);
             this.Controls.Add(this.butLimpiar);
             this.Controls.Add(this.chkHabilitado);
             this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.lblDescripcion);
-            this.Controls.Add(this.lblTipoHabitacion);
             this.Controls.Add(this.cboTipoHabitacion);
+            this.Controls.Add(this.lblTipoHabitacion);
             this.Controls.Add(this.cboUbicacion);
             this.Controls.Add(this.lblUbicacion);
             this.Controls.Add(this.nudPiso);
@@ -191,13 +191,12 @@
         private System.Windows.Forms.NumericUpDown nudPiso;
         private System.Windows.Forms.Label lblUbicacion;
         private System.Windows.Forms.ComboBox cboUbicacion;
-        private System.Windows.Forms.ComboBox cboTipoHabitacion;
         private System.Windows.Forms.Label lblTipoHabitacion;
+        private System.Windows.Forms.ComboBox cboTipoHabitacion;
         private System.Windows.Forms.Label lblDescripcion;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.CheckBox chkHabilitado;
         private System.Windows.Forms.Button butLimpiar;
         private System.Windows.Forms.Button butGuardar;
-
     }
 }

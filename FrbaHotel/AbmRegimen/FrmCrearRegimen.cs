@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.AbmRegimen
 {
-    public partial class FrmModificarRegimen : Form
+    public partial class FrmCrearRegimen : Form
     {
-        public FrmModificarRegimen()
+        public FrmCrearRegimen()
         {
             InitializeComponent();
-        }
-
-        private void txtPrecio_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -28,121 +28,120 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblCodigo = new System.Windows.Forms.Label();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.lblPrecio = new System.Windows.Forms.Label();
-            this.lblDescripcion = new System.Windows.Forms.Label();
-            this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.lblEstado = new System.Windows.Forms.Label();
-            this.cboEstado = new System.Windows.Forms.ComboBox();
-            this.butLimpiar = new System.Windows.Forms.Button();
-            this.butGuardar = new System.Windows.Forms.Button();
-            this.txtPrecio = new System.Windows.Forms.TextBox();
+            this.lblCodigoMod = new System.Windows.Forms.Label();
+            this.txtCodigoMod = new System.Windows.Forms.TextBox();
+            this.lblPrecioMod = new System.Windows.Forms.Label();
+            this.txtPrecioMod = new System.Windows.Forms.TextBox();
+            this.lblDescripcionMod = new System.Windows.Forms.Label();
+            this.txtDescripcionMod = new System.Windows.Forms.TextBox();
+            this.lblEstadoMod = new System.Windows.Forms.Label();
+            this.cboEstadoMod = new System.Windows.Forms.ComboBox();
+            this.butLimpiarMod = new System.Windows.Forms.Button();
+            this.butGuardarMod = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lblCodigo
+            // lblCodigoMod
             // 
-            this.lblCodigo.AutoSize = true;
-            this.lblCodigo.Location = new System.Drawing.Point(12, 9);
-            this.lblCodigo.Name = "lblCodigo";
-            this.lblCodigo.Size = new System.Drawing.Size(40, 13);
-            this.lblCodigo.TabIndex = 0;
-            this.lblCodigo.Text = "Codigo";
+            this.lblCodigoMod.AutoSize = true;
+            this.lblCodigoMod.Location = new System.Drawing.Point(12, 9);
+            this.lblCodigoMod.Name = "lblCodigoMod";
+            this.lblCodigoMod.Size = new System.Drawing.Size(40, 13);
+            this.lblCodigoMod.TabIndex = 0;
+            this.lblCodigoMod.Text = "Codigo";
             // 
-            // txtCodigo
+            // txtCodigoMod
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(58, 6);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(100, 20);
-            this.txtCodigo.TabIndex = 1;
+            this.txtCodigoMod.Location = new System.Drawing.Point(58, 6);
+            this.txtCodigoMod.Name = "txtCodigoMod";
+            this.txtCodigoMod.Size = new System.Drawing.Size(100, 20);
+            this.txtCodigoMod.TabIndex = 1;
             // 
-            // lblPrecio
+            // lblPrecioMod
             // 
-            this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(12, 39);
-            this.lblPrecio.Name = "lblPrecio";
-            this.lblPrecio.Size = new System.Drawing.Size(37, 13);
-            this.lblPrecio.TabIndex = 2;
-            this.lblPrecio.Text = "Precio";
+            this.lblPrecioMod.AutoSize = true;
+            this.lblPrecioMod.Location = new System.Drawing.Point(12, 31);
+            this.lblPrecioMod.Name = "lblPrecioMod";
+            this.lblPrecioMod.Size = new System.Drawing.Size(37, 13);
+            this.lblPrecioMod.TabIndex = 2;
+            this.lblPrecioMod.Text = "Precio";
             // 
-            // lblDescripcion
+            // txtPrecioMod
             // 
-            this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Location = new System.Drawing.Point(12, 65);
-            this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new System.Drawing.Size(63, 13);
-            this.lblDescripcion.TabIndex = 3;
-            this.lblDescripcion.Text = "Descripcion";
+            this.txtPrecioMod.Location = new System.Drawing.Point(58, 28);
+            this.txtPrecioMod.Name = "txtPrecioMod";
+            this.txtPrecioMod.Size = new System.Drawing.Size(100, 20);
+            this.txtPrecioMod.TabIndex = 3;
+            this.txtPrecioMod.Text = "U$";
             // 
-            // txtDescripcion
+            // lblDescripcionMod
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(82, 65);
-            this.txtDescripcion.Multiline = true;
-            this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(163, 61);
-            this.txtDescripcion.TabIndex = 4;
+            this.lblDescripcionMod.AutoSize = true;
+            this.lblDescripcionMod.Location = new System.Drawing.Point(12, 56);
+            this.lblDescripcionMod.Name = "lblDescripcionMod";
+            this.lblDescripcionMod.Size = new System.Drawing.Size(63, 13);
+            this.lblDescripcionMod.TabIndex = 4;
+            this.lblDescripcionMod.Text = "Descripcion";
             // 
-            // lblEstado
+            // txtDescripcionMod
             // 
-            this.lblEstado.AutoSize = true;
-            this.lblEstado.Location = new System.Drawing.Point(12, 137);
-            this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(40, 13);
-            this.lblEstado.TabIndex = 5;
-            this.lblEstado.Text = "Estado";
+            this.txtDescripcionMod.Location = new System.Drawing.Point(81, 53);
+            this.txtDescripcionMod.Multiline = true;
+            this.txtDescripcionMod.Name = "txtDescripcionMod";
+            this.txtDescripcionMod.Size = new System.Drawing.Size(191, 82);
+            this.txtDescripcionMod.TabIndex = 5;
             // 
-            // cboEstado
+            // lblEstadoMod
             // 
-            this.cboEstado.FormattingEnabled = true;
-            this.cboEstado.Location = new System.Drawing.Point(58, 134);
-            this.cboEstado.Name = "cboEstado";
-            this.cboEstado.Size = new System.Drawing.Size(121, 21);
-            this.cboEstado.TabIndex = 6;
+            this.lblEstadoMod.AutoSize = true;
+            this.lblEstadoMod.Location = new System.Drawing.Point(12, 144);
+            this.lblEstadoMod.Name = "lblEstadoMod";
+            this.lblEstadoMod.Size = new System.Drawing.Size(40, 13);
+            this.lblEstadoMod.TabIndex = 6;
+            this.lblEstadoMod.Text = "Estado";
             // 
-            // butLimpiar
+            // cboEstadoMod
             // 
-            this.butLimpiar.Location = new System.Drawing.Point(0, 187);
-            this.butLimpiar.Name = "butLimpiar";
-            this.butLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.butLimpiar.TabIndex = 7;
-            this.butLimpiar.Text = "Limpiar";
-            this.butLimpiar.UseVisualStyleBackColor = true;
+            this.cboEstadoMod.FormattingEnabled = true;
+            this.cboEstadoMod.Location = new System.Drawing.Point(58, 141);
+            this.cboEstadoMod.Name = "cboEstadoMod";
+            this.cboEstadoMod.Size = new System.Drawing.Size(121, 21);
+            this.cboEstadoMod.TabIndex = 7;
             // 
-            // butGuardar
+            // butLimpiarMod
             // 
-            this.butGuardar.Location = new System.Drawing.Point(189, 187);
-            this.butGuardar.Name = "butGuardar";
-            this.butGuardar.Size = new System.Drawing.Size(75, 23);
-            this.butGuardar.TabIndex = 8;
-            this.butGuardar.Text = "Guardar";
-            this.butGuardar.UseVisualStyleBackColor = true;
+            this.butLimpiarMod.Location = new System.Drawing.Point(12, 181);
+            this.butLimpiarMod.Name = "butLimpiarMod";
+            this.butLimpiarMod.Size = new System.Drawing.Size(75, 23);
+            this.butLimpiarMod.TabIndex = 8;
+            this.butLimpiarMod.Text = "Limpiar";
+            this.butLimpiarMod.UseVisualStyleBackColor = true;
             // 
-            // txtPrecio
+            // butGuardarMod
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(58, 36);
-            this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(100, 20);
-            this.txtPrecio.TabIndex = 9;
-            this.txtPrecio.Text = "U$";
-            this.txtPrecio.TextChanged += new System.EventHandler(this.txtPrecio_TextChanged);
+            this.butGuardarMod.Location = new System.Drawing.Point(216, 181);
+            this.butGuardarMod.Name = "butGuardarMod";
+            this.butGuardarMod.Size = new System.Drawing.Size(75, 23);
+            this.butGuardarMod.TabIndex = 9;
+            this.butGuardarMod.Text = "Guardar";
+            this.butGuardarMod.UseVisualStyleBackColor = true;
             // 
             // FrmModificarRegimen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(269, 230);
-            this.Controls.Add(this.txtPrecio);
-            this.Controls.Add(this.butGuardar);
-            this.Controls.Add(this.butLimpiar);
-            this.Controls.Add(this.cboEstado);
-            this.Controls.Add(this.lblEstado);
-            this.Controls.Add(this.txtDescripcion);
-            this.Controls.Add(this.lblDescripcion);
-            this.Controls.Add(this.lblPrecio);
-            this.Controls.Add(this.txtCodigo);
-            this.Controls.Add(this.lblCodigo);
+            this.ClientSize = new System.Drawing.Size(299, 210);
+            this.Controls.Add(this.butGuardarMod);
+            this.Controls.Add(this.butLimpiarMod);
+            this.Controls.Add(this.cboEstadoMod);
+            this.Controls.Add(this.lblEstadoMod);
+            this.Controls.Add(this.txtDescripcionMod);
+            this.Controls.Add(this.lblDescripcionMod);
+            this.Controls.Add(this.txtPrecioMod);
+            this.Controls.Add(this.lblPrecioMod);
+            this.Controls.Add(this.txtCodigoMod);
+            this.Controls.Add(this.lblCodigoMod);
             this.Name = "FrmModificarRegimen";
-            this.Text = "Modificar regimen";
+            this.Text = "Modificar Regimen";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,15 +149,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblCodigo;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.Label lblPrecio;
-        private System.Windows.Forms.Label lblDescripcion;
-        private System.Windows.Forms.TextBox txtDescripcion;
-        private System.Windows.Forms.Label lblEstado;
-        private System.Windows.Forms.ComboBox cboEstado;
-        private System.Windows.Forms.Button butLimpiar;
-        private System.Windows.Forms.Button butGuardar;
-        private System.Windows.Forms.TextBox txtPrecio;
+        private System.Windows.Forms.Label lblCodigoMod;
+        private System.Windows.Forms.TextBox txtCodigoMod;
+        private System.Windows.Forms.Label lblPrecioMod;
+        private System.Windows.Forms.TextBox txtPrecioMod;
+        private System.Windows.Forms.Label lblDescripcionMod;
+        private System.Windows.Forms.TextBox txtDescripcionMod;
+        private System.Windows.Forms.Label lblEstadoMod;
+        private System.Windows.Forms.ComboBox cboEstadoMod;
+        private System.Windows.Forms.Button butLimpiarMod;
+        private System.Windows.Forms.Button butGuardarMod;
     }
 }

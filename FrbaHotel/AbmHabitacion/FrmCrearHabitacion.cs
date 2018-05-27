@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.AbmHabitacion
 {
-    public partial class FrmModificarHabitacion : Form
+    public partial class FrmCrearHabitacion : Form
     {
-        public FrmModificarHabitacion()
+        public FrmCrearHabitacion()
         {
             InitializeComponent();
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
