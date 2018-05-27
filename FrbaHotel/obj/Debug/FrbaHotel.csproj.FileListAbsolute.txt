@@ -60,3 +60,6 @@ C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csproj.
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.exe.config
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.exe
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.pdb
+D:\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.exe.config
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.exe
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.pdb
