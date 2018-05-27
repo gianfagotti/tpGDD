@@ -57,5 +57,64 @@ C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.F
 C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
 C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarEstadia.FrmRegistrarEstadia.resources
 C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
+<<<<<<< HEAD
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.frmMenuCliente.resources
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.frmMenuEmpleado.resources
+=======
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.exe.config
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.exe
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.pdb
+D:\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.exe.config
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.exe
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.pdb
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmCliente.FrmAltaCliente.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmCliente.FrmModificarCliente.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmHabitacion.FrmCrearHabitacion.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmHabitacion.FrmModificarHabitacion.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRegimen.FrmCrearRegimen.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRegimen.FrmModificarRegimen.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.frmMenuCliente.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.frmMenuEmpleado.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.CancelarReserva.CancelarReserva.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.GenerarModificacionReserva.DisponibilidadReserva.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.GenerarModificacionReserva.GenerarReserva.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.GenerarModificacionReserva.ModificarReserva.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmSeleccionarRol.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmLogin.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.AltaRol.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.ModificarRol.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmTipoUsuario.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarEstadia.FrmRegistrarEstadia.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmCliente.FrmAltaCliente.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmCliente.FrmModificarCliente.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmHabitacion.FrmCrearHabitacion.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmHabitacion.FrmModificarHabitacion.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRegimen.FrmCrearRegimen.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRegimen.FrmModificarRegimen.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.frmMenuCliente.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.frmMenuEmpleado.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.CancelarReserva.CancelarReserva.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.GenerarModificacionReserva.DisponibilidadReserva.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.GenerarModificacionReserva.GenerarReserva.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.GenerarModificacionReserva.ModificarReserva.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmSeleccionarRol.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmLogin.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.AltaRol.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.ModificarRol.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmTipoUsuario.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarEstadia.FrmRegistrarEstadia.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
+D:\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.exe
+D:\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.pdb
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.FechaListadoEstadistico.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.ListadoEstadistico.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.exe
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.pdb
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.FechaListadoEstadistico.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.ListadoEstadistico.resources
+>>>>>>> edb2616473d30a2baee4f0012174a7990f82cd49

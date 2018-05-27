@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaHotel.AbmHabitacion
+namespace FrbaHotel.ListadoEstadistico
 {
-    public partial class Form1 : Form
+    public partial class FechaListadoEstadistico : Form
     {
-        public Form1()
+        public FechaListadoEstadistico()
         {
             InitializeComponent();
+        }
+
+        private void lblTitulo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

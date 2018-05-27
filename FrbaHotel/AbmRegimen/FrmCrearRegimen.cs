@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaHotel.AbmCliente
+namespace FrbaHotel.AbmRegimen
 {
-    public partial class Form1 : Form
+    public partial class FrmCrearRegimen : Form
     {
-        public Form1()
+        public FrmCrearRegimen()
         {
             InitializeComponent();
         }

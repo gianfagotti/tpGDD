@@ -58,5 +58,26 @@ namespace FrbaHotel.AbmRol
             this.Hide();
             frmTipoUsuario.ShowDialog();
         }
+
+        private void butAltaCliente_Click(object sender, EventArgs e)
+        {
+            AbmCliente.FrmAltaCliente frmAltaCliente = new AbmCliente.FrmAltaCliente();
+            this.Hide();
+            frmAltaCliente.ShowDialog();
+        }
+
+        private void butCrearHabitacion_Click(object sender, EventArgs e)
+        {
+            AbmHabitacion.FrmCrearHabitacion frmCrearHabitacion = new AbmHabitacion.FrmCrearHabitacion();
+            this.Hide();
+            frmCrearHabitacion.ShowDialog();
+        }
+
+        private void butCrearRegimen_Click(object sender, EventArgs e)
+        {
+            AbmRegimen.FrmCrearRegimen frmCrearRegimen = new AbmRegimen.FrmCrearRegimen();
+            this.Hide();
+            frmCrearRegimen.ShowDialog();
+        }
     }
 }
