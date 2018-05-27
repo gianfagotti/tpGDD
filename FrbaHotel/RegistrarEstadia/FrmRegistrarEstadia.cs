@@ -16,5 +16,47 @@ namespace FrbaHotel.RegistrarEstadia
         {
             InitializeComponent();
         }
+
+        private void FrmRegistrarEstadia_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnFechaCheckOut_Click(object sender, EventArgs e)
+        {
+            this.PnlCheckInYOut.Show();
+        }
+
+        private void BtnFechaCheckIn_Click(object sender, EventArgs e)
+        {
+            this.PnlCheckInYOut.Show();
+        }
+
+        private void BtnAceptarCheckInYOut_Click(object sender, EventArgs e)
+        {
+            this.PnlCheckInYOut.Hide();
+            this.TxtCheckIn.Text = this.McrCheckInYOut.SelectionRange.End.ToShortDateString();
+            this.TxtCheckOut.Text = this.McrCheckInYOut.SelectionRange.Start.ToShortDateString();
+        }
+
+        private void TxtCheckIn_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtCheckOut_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnFacturar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }
