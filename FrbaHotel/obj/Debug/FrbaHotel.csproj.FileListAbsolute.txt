@@ -84,3 +84,28 @@ C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarEstadia.FrmRegistrarEstadia.resources
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmCliente.FrmAltaCliente.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmCliente.FrmModificarCliente.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmHabitacion.FrmCrearHabitacion.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmHabitacion.FrmModificarHabitacion.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRegimen.FrmCrearRegimen.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRegimen.FrmModificarRegimen.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.frmMenuCliente.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.frmMenuEmpleado.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.CancelarReserva.CancelarReserva.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.GenerarModificacionReserva.DisponibilidadReserva.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.GenerarModificacionReserva.GenerarReserva.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.GenerarModificacionReserva.ModificarReserva.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmSeleccionarRol.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmLogin.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.AltaRol.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.ModificarRol.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmTipoUsuario.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarEstadia.FrmRegistrarEstadia.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
+D:\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.exe
+D:\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.pdb
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.FechaListadoEstadistico.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.ListadoEstadistico.resources
