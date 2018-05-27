@@ -33,5 +33,12 @@ namespace FrbaHotel.Login
             FrmTipoUsuario frmTipoUsuario = new FrmTipoUsuario();
             frmTipoUsuario.ShowDialog();
         }
+
+        private void btnAceptarRol_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado();
+            frmMenuEmpleado.ShowDialog();
+        }
     }
 }

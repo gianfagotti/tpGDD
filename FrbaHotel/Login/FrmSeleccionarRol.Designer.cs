@@ -44,6 +44,7 @@
             this.btnAceptarRol.TabIndex = 8;
             this.btnAceptarRol.Text = "Aceptar";
             this.btnAceptarRol.UseVisualStyleBackColor = false;
+            this.btnAceptarRol.Click += new System.EventHandler(this.btnAceptarRol_Click);
             // 
             // cmbRolesRegistrados
             // 

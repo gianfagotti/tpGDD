@@ -89,6 +89,9 @@
             // cboUbicacionMod
             // 
             this.cboUbicacionMod.FormattingEnabled = true;
+            this.cboUbicacionMod.Items.AddRange(new object[] {
+            "Exterior",
+            "Interior"});
             this.cboUbicacionMod.Location = new System.Drawing.Point(73, 59);
             this.cboUbicacionMod.Name = "cboUbicacionMod";
             this.cboUbicacionMod.Size = new System.Drawing.Size(121, 21);
@@ -106,6 +109,12 @@
             // cboTipoHabitacionMod
             // 
             this.cboTipoHabitacionMod.FormattingEnabled = true;
+            this.cboTipoHabitacionMod.Items.AddRange(new object[] {
+            "Simple",
+            "Doble",
+            "Doble twin",
+            "Triple",
+            "Cuadruple"});
             this.cboTipoHabitacionMod.Location = new System.Drawing.Point(98, 86);
             this.cboTipoHabitacionMod.Name = "cboTipoHabitacionMod";
             this.cboTipoHabitacionMod.Size = new System.Drawing.Size(121, 21);

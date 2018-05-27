@@ -102,6 +102,9 @@
             // cboEstadoMod
             // 
             this.cboEstadoMod.FormattingEnabled = true;
+            this.cboEstadoMod.Items.AddRange(new object[] {
+            "Activo",
+            "No activo"});
             this.cboEstadoMod.Location = new System.Drawing.Point(58, 141);
             this.cboEstadoMod.Name = "cboEstadoMod";
             this.cboEstadoMod.Size = new System.Drawing.Size(121, 21);

@@ -109,3 +109,7 @@ D:\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.exe
 D:\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.pdb
 D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.FechaListadoEstadistico.resources
 D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.ListadoEstadistico.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.exe
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.pdb
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.FechaListadoEstadistico.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.ListadoEstadistico.resources

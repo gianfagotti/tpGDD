@@ -29,25 +29,32 @@
         private void InitializeComponent()
         {
             this.grbHuespedes = new System.Windows.Forms.GroupBox();
+            this.butAltaCliente = new System.Windows.Forms.Button();
             this.grbHabitaciones = new System.Windows.Forms.GroupBox();
             this.grbRegimenes = new System.Windows.Forms.GroupBox();
             this.grbRoles = new System.Windows.Forms.GroupBox();
+            this.btnModificarRol = new System.Windows.Forms.Button();
+            this.btnAltaRol = new System.Windows.Forms.Button();
             this.grbReservas = new System.Windows.Forms.GroupBox();
-            this.grbConsumibles = new System.Windows.Forms.GroupBox();
-            this.grbEstadias = new System.Windows.Forms.GroupBox();
-            this.grbListado = new System.Windows.Forms.GroupBox();
             this.btnCancelarReserva = new System.Windows.Forms.Button();
             this.btnModificarReserva = new System.Windows.Forms.Button();
             this.btnNuevaReserva = new System.Windows.Forms.Button();
-            this.btnModificarRol = new System.Windows.Forms.Button();
-            this.btnAltaRol = new System.Windows.Forms.Button();
+            this.grbConsumibles = new System.Windows.Forms.GroupBox();
+            this.grbEstadias = new System.Windows.Forms.GroupBox();
+            this.grbListado = new System.Windows.Forms.GroupBox();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
+            this.butCrearHabitacion = new System.Windows.Forms.Button();
+            this.butCrearRegimen = new System.Windows.Forms.Button();
+            this.grbHuespedes.SuspendLayout();
+            this.grbHabitaciones.SuspendLayout();
+            this.grbRegimenes.SuspendLayout();
             this.grbRoles.SuspendLayout();
             this.grbReservas.SuspendLayout();
             this.SuspendLayout();
             // 
             // grbHuespedes
             // 
+            this.grbHuespedes.Controls.Add(this.butAltaCliente);
             this.grbHuespedes.Location = new System.Drawing.Point(507, 140);
             this.grbHuespedes.Name = "grbHuespedes";
             this.grbHuespedes.Size = new System.Drawing.Size(200, 100);
@@ -55,8 +62,19 @@
             this.grbHuespedes.TabStop = false;
             this.grbHuespedes.Text = "Administración de huespedes";
             // 
+            // butAltaCliente
+            // 
+            this.butAltaCliente.Location = new System.Drawing.Point(27, 19);
+            this.butAltaCliente.Name = "butAltaCliente";
+            this.butAltaCliente.Size = new System.Drawing.Size(149, 23);
+            this.butAltaCliente.TabIndex = 0;
+            this.butAltaCliente.Text = "Ingresar nuevo cliente";
+            this.butAltaCliente.UseVisualStyleBackColor = true;
+            this.butAltaCliente.Click += new System.EventHandler(this.butAltaCliente_Click);
+            // 
             // grbHabitaciones
             // 
+            this.grbHabitaciones.Controls.Add(this.butCrearHabitacion);
             this.grbHabitaciones.Location = new System.Drawing.Point(264, 140);
             this.grbHabitaciones.Name = "grbHabitaciones";
             this.grbHabitaciones.Size = new System.Drawing.Size(218, 100);
@@ -66,6 +84,7 @@
             // 
             // grbRegimenes
             // 
+            this.grbRegimenes.Controls.Add(this.butCrearRegimen);
             this.grbRegimenes.Location = new System.Drawing.Point(12, 257);
             this.grbRegimenes.Name = "grbRegimenes";
             this.grbRegimenes.Size = new System.Drawing.Size(221, 100);
@@ -84,6 +103,26 @@
             this.grbRoles.TabStop = false;
             this.grbRoles.Text = "Administración de roles";
             // 
+            // btnModificarRol
+            // 
+            this.btnModificarRol.Location = new System.Drawing.Point(30, 51);
+            this.btnModificarRol.Name = "btnModificarRol";
+            this.btnModificarRol.Size = new System.Drawing.Size(161, 23);
+            this.btnModificarRol.TabIndex = 10;
+            this.btnModificarRol.Text = "Gestionar rol existente";
+            this.btnModificarRol.UseVisualStyleBackColor = true;
+            this.btnModificarRol.Click += new System.EventHandler(this.btnModificarRol_Click);
+            // 
+            // btnAltaRol
+            // 
+            this.btnAltaRol.Location = new System.Drawing.Point(30, 22);
+            this.btnAltaRol.Name = "btnAltaRol";
+            this.btnAltaRol.Size = new System.Drawing.Size(161, 23);
+            this.btnAltaRol.TabIndex = 9;
+            this.btnAltaRol.Text = "Habilitar nuevo rol";
+            this.btnAltaRol.UseVisualStyleBackColor = true;
+            this.btnAltaRol.Click += new System.EventHandler(this.btnAltaRol_Click);
+            // 
             // grbReservas
             // 
             this.grbReservas.Controls.Add(this.btnCancelarReserva);
@@ -95,33 +134,6 @@
             this.grbReservas.TabIndex = 4;
             this.grbReservas.TabStop = false;
             this.grbReservas.Text = "Administración de reservas";
-            // 
-            // grbConsumibles
-            // 
-            this.grbConsumibles.Location = new System.Drawing.Point(507, 12);
-            this.grbConsumibles.Name = "grbConsumibles";
-            this.grbConsumibles.Size = new System.Drawing.Size(200, 100);
-            this.grbConsumibles.TabIndex = 5;
-            this.grbConsumibles.TabStop = false;
-            this.grbConsumibles.Text = "Administración de consumibles";
-            // 
-            // grbEstadias
-            // 
-            this.grbEstadias.Location = new System.Drawing.Point(13, 140);
-            this.grbEstadias.Name = "grbEstadias";
-            this.grbEstadias.Size = new System.Drawing.Size(220, 100);
-            this.grbEstadias.TabIndex = 6;
-            this.grbEstadias.TabStop = false;
-            this.grbEstadias.Text = "Administración de estadías";
-            // 
-            // grbListado
-            // 
-            this.grbListado.Location = new System.Drawing.Point(264, 257);
-            this.grbListado.Name = "grbListado";
-            this.grbListado.Size = new System.Drawing.Size(218, 100);
-            this.grbListado.TabIndex = 7;
-            this.grbListado.TabStop = false;
-            this.grbListado.Text = "Estadísticas";
             // 
             // btnCancelarReserva
             // 
@@ -153,25 +165,32 @@
             this.btnNuevaReserva.UseVisualStyleBackColor = true;
             this.btnNuevaReserva.Click += new System.EventHandler(this.btnNuevaReserva_Click);
             // 
-            // btnModificarRol
+            // grbConsumibles
             // 
-            this.btnModificarRol.Location = new System.Drawing.Point(30, 51);
-            this.btnModificarRol.Name = "btnModificarRol";
-            this.btnModificarRol.Size = new System.Drawing.Size(161, 23);
-            this.btnModificarRol.TabIndex = 10;
-            this.btnModificarRol.Text = "Gestionar rol existente";
-            this.btnModificarRol.UseVisualStyleBackColor = true;
-            this.btnModificarRol.Click += new System.EventHandler(this.btnModificarRol_Click);
+            this.grbConsumibles.Location = new System.Drawing.Point(507, 12);
+            this.grbConsumibles.Name = "grbConsumibles";
+            this.grbConsumibles.Size = new System.Drawing.Size(200, 100);
+            this.grbConsumibles.TabIndex = 5;
+            this.grbConsumibles.TabStop = false;
+            this.grbConsumibles.Text = "Administración de consumibles";
             // 
-            // btnAltaRol
+            // grbEstadias
             // 
-            this.btnAltaRol.Location = new System.Drawing.Point(30, 22);
-            this.btnAltaRol.Name = "btnAltaRol";
-            this.btnAltaRol.Size = new System.Drawing.Size(161, 23);
-            this.btnAltaRol.TabIndex = 9;
-            this.btnAltaRol.Text = "Habilitar nuevo rol";
-            this.btnAltaRol.UseVisualStyleBackColor = true;
-            this.btnAltaRol.Click += new System.EventHandler(this.btnAltaRol_Click);
+            this.grbEstadias.Location = new System.Drawing.Point(13, 140);
+            this.grbEstadias.Name = "grbEstadias";
+            this.grbEstadias.Size = new System.Drawing.Size(220, 100);
+            this.grbEstadias.TabIndex = 6;
+            this.grbEstadias.TabStop = false;
+            this.grbEstadias.Text = "Administración de estadías";
+            // 
+            // grbListado
+            // 
+            this.grbListado.Location = new System.Drawing.Point(264, 257);
+            this.grbListado.Name = "grbListado";
+            this.grbListado.Size = new System.Drawing.Size(218, 100);
+            this.grbListado.TabIndex = 7;
+            this.grbListado.TabStop = false;
+            this.grbListado.Text = "Estadísticas";
             // 
             // btnCerrarSesion
             // 
@@ -182,6 +201,26 @@
             this.btnCerrarSesion.Text = "Cerrar sesión";
             this.btnCerrarSesion.UseVisualStyleBackColor = true;
             this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
+            // 
+            // butCrearHabitacion
+            // 
+            this.butCrearHabitacion.Location = new System.Drawing.Point(30, 19);
+            this.butCrearHabitacion.Name = "butCrearHabitacion";
+            this.butCrearHabitacion.Size = new System.Drawing.Size(161, 23);
+            this.butCrearHabitacion.TabIndex = 0;
+            this.butCrearHabitacion.Text = "Ingresar nueva habitacion";
+            this.butCrearHabitacion.UseVisualStyleBackColor = true;
+            this.butCrearHabitacion.Click += new System.EventHandler(this.butCrearHabitacion_Click);
+            // 
+            // butCrearRegimen
+            // 
+            this.butCrearRegimen.Location = new System.Drawing.Point(33, 19);
+            this.butCrearRegimen.Name = "butCrearRegimen";
+            this.butCrearRegimen.Size = new System.Drawing.Size(149, 23);
+            this.butCrearRegimen.TabIndex = 0;
+            this.butCrearRegimen.Text = "Crear nuevo regimen";
+            this.butCrearRegimen.UseVisualStyleBackColor = true;
+            this.butCrearRegimen.Click += new System.EventHandler(this.butCrearRegimen_Click);
             // 
             // frmMenuEmpleado
             // 
@@ -199,6 +238,9 @@
             this.Controls.Add(this.grbHuespedes);
             this.Name = "frmMenuEmpleado";
             this.Text = "Menú Principal";
+            this.grbHuespedes.ResumeLayout(false);
+            this.grbHabitaciones.ResumeLayout(false);
+            this.grbRegimenes.ResumeLayout(false);
             this.grbRoles.ResumeLayout(false);
             this.grbReservas.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -221,5 +263,8 @@
         private System.Windows.Forms.Button btnModificarReserva;
         private System.Windows.Forms.Button btnNuevaReserva;
         private System.Windows.Forms.Button btnCerrarSesion;
+        private System.Windows.Forms.Button butAltaCliente;
+        private System.Windows.Forms.Button butCrearHabitacion;
+        private System.Windows.Forms.Button butCrearRegimen;
     }
 }
