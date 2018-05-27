@@ -23,7 +23,6 @@ C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion D
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.pdb
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.exe
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.pdb
-C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmCliente.Form1.resources
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmLogin.resources
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
@@ -57,10 +56,8 @@ C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.F
 C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
 C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarEstadia.FrmRegistrarEstadia.resources
 C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
-<<<<<<< HEAD
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.frmMenuCliente.resources
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.frmMenuEmpleado.resources
-=======
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.exe.config
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.exe
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.pdb
@@ -117,4 +114,13 @@ C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.pdb
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.FechaListadoEstadistico.resources
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.ListadoEstadistico.resources
->>>>>>> edb2616473d30a2baee4f0012174a7990f82cd49
+C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmCliente.FrmAltaCliente.resources
+C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmCliente.FrmModificarCliente.resources
+C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmHabitacion.FrmCrearHabitacion.resources
+C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmHabitacion.FrmModificarHabitacion.resources
+C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRegimen.FrmCrearRegimen.resources
+C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRegimen.FrmModificarRegimen.resources
+C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.FechaListadoEstadistico.resources
+C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.ListadoEstadistico.resources
+C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarConsumible.FrmAgregarConsumibles.resources
+C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarConsumible.FrmSeleccionarEstadia.resources
