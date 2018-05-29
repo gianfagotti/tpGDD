@@ -21,5 +21,10 @@ namespace FrbaHotel.ListadoEstadistico
         {
 
         }
+
+        private void btnConfirmarTrim_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

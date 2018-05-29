@@ -40,16 +40,18 @@
             this.BtnAgregarConsumible = new System.Windows.Forms.Button();
             this.BtnModificarConsumible = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.BtnGuardarCambios = new System.Windows.Forms.Button();
-            this.BtnVolver = new System.Windows.Forms.Button();
-            this.LblCodigoConsumible = new System.Windows.Forms.Label();
-            this.TxtCodigoConsumible = new System.Windows.Forms.TextBox();
             this.CodigoDeEstadia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripción = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CodigoDeConsumible = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtnGuardarCambios = new System.Windows.Forms.Button();
+            this.BtnVolver = new System.Windows.Forms.Button();
+            this.LblCodigoConsumible = new System.Windows.Forms.Label();
+            this.TxtCodigoConsumible = new System.Windows.Forms.TextBox();
+            this.lblAllInclusive = new System.Windows.Forms.Label();
+            this.cboInclusive = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +65,7 @@
             "Alfajor Fantoche",
             ""});
             this.CmbDescripcion.FormattingEnabled = true;
-            this.CmbDescripcion.Location = new System.Drawing.Point(156, 55);
+            this.CmbDescripcion.Location = new System.Drawing.Point(166, 86);
             this.CmbDescripcion.Name = "CmbDescripcion";
             this.CmbDescripcion.Size = new System.Drawing.Size(121, 21);
             this.CmbDescripcion.TabIndex = 0;
@@ -85,7 +87,7 @@
             // 
             this.LblDescripcion.AutoSize = true;
             this.LblDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblDescripcion.Location = new System.Drawing.Point(12, 56);
+            this.LblDescripcion.Location = new System.Drawing.Point(22, 87);
             this.LblDescripcion.Name = "LblDescripcion";
             this.LblDescripcion.Size = new System.Drawing.Size(95, 16);
             this.LblDescripcion.TabIndex = 8;
@@ -96,7 +98,7 @@
             // 
             this.LblTotal.AutoSize = true;
             this.LblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblTotal.Location = new System.Drawing.Point(291, 102);
+            this.LblTotal.Location = new System.Drawing.Point(301, 133);
             this.LblTotal.Name = "LblTotal";
             this.LblTotal.Size = new System.Drawing.Size(48, 16);
             this.LblTotal.TabIndex = 9;
@@ -107,7 +109,7 @@
             // 
             this.LblPrecioIndividual.AutoSize = true;
             this.LblPrecioIndividual.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblPrecioIndividual.Location = new System.Drawing.Point(12, 102);
+            this.LblPrecioIndividual.Location = new System.Drawing.Point(22, 133);
             this.LblPrecioIndividual.Name = "LblPrecioIndividual";
             this.LblPrecioIndividual.Size = new System.Drawing.Size(128, 16);
             this.LblPrecioIndividual.TabIndex = 10;
@@ -119,7 +121,7 @@
             // 
             this.LblCantidad.AutoSize = true;
             this.LblCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblCantidad.Location = new System.Drawing.Point(291, 61);
+            this.LblCantidad.Location = new System.Drawing.Point(301, 92);
             this.LblCantidad.Name = "LblCantidad";
             this.LblCantidad.Size = new System.Drawing.Size(74, 16);
             this.LblCantidad.TabIndex = 11;
@@ -128,7 +130,7 @@
             // 
             // TxtPrecioIndividual
             // 
-            this.TxtPrecioIndividual.Location = new System.Drawing.Point(156, 101);
+            this.TxtPrecioIndividual.Location = new System.Drawing.Point(166, 132);
             this.TxtPrecioIndividual.Name = "TxtPrecioIndividual";
             this.TxtPrecioIndividual.Size = new System.Drawing.Size(100, 20);
             this.TxtPrecioIndividual.TabIndex = 12;
@@ -136,21 +138,21 @@
             // 
             // TxtTotal
             // 
-            this.TxtTotal.Location = new System.Drawing.Point(384, 101);
+            this.TxtTotal.Location = new System.Drawing.Point(394, 132);
             this.TxtTotal.Name = "TxtTotal";
             this.TxtTotal.Size = new System.Drawing.Size(100, 20);
             this.TxtTotal.TabIndex = 13;
             // 
             // TxtCantidad
             // 
-            this.TxtCantidad.Location = new System.Drawing.Point(384, 60);
+            this.TxtCantidad.Location = new System.Drawing.Point(394, 91);
             this.TxtCantidad.Name = "TxtCantidad";
             this.TxtCantidad.Size = new System.Drawing.Size(100, 20);
             this.TxtCantidad.TabIndex = 14;
             // 
             // BtnAgregarConsumible
             // 
-            this.BtnAgregarConsumible.Location = new System.Drawing.Point(501, 98);
+            this.BtnAgregarConsumible.Location = new System.Drawing.Point(511, 129);
             this.BtnAgregarConsumible.Name = "BtnAgregarConsumible";
             this.BtnAgregarConsumible.Size = new System.Drawing.Size(126, 23);
             this.BtnAgregarConsumible.TabIndex = 15;
@@ -159,7 +161,7 @@
             // 
             // BtnModificarConsumible
             // 
-            this.BtnModificarConsumible.Location = new System.Drawing.Point(633, 98);
+            this.BtnModificarConsumible.Location = new System.Drawing.Point(643, 129);
             this.BtnModificarConsumible.Name = "BtnModificarConsumible";
             this.BtnModificarConsumible.Size = new System.Drawing.Size(126, 23);
             this.BtnModificarConsumible.TabIndex = 16;
@@ -176,47 +178,10 @@
             this.CodigoDeConsumible,
             this.Cantidad,
             this.Total});
-            this.dataGridView1.Location = new System.Drawing.Point(66, 142);
+            this.dataGridView1.Location = new System.Drawing.Point(76, 173);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(643, 150);
             this.dataGridView1.TabIndex = 17;
-            // 
-            // BtnGuardarCambios
-            // 
-            this.BtnGuardarCambios.Location = new System.Drawing.Point(393, 298);
-            this.BtnGuardarCambios.Name = "BtnGuardarCambios";
-            this.BtnGuardarCambios.Size = new System.Drawing.Size(126, 23);
-            this.BtnGuardarCambios.TabIndex = 18;
-            this.BtnGuardarCambios.Text = "Guardar Cambios";
-            this.BtnGuardarCambios.UseVisualStyleBackColor = true;
-            // 
-            // BtnVolver
-            // 
-            this.BtnVolver.Location = new System.Drawing.Point(261, 298);
-            this.BtnVolver.Name = "BtnVolver";
-            this.BtnVolver.Size = new System.Drawing.Size(126, 23);
-            this.BtnVolver.TabIndex = 19;
-            this.BtnVolver.Text = "Volver";
-            this.BtnVolver.UseVisualStyleBackColor = true;
-            this.BtnVolver.Click += new System.EventHandler(this.BtnVolver_Click);
-            // 
-            // LblCodigoConsumible
-            // 
-            this.LblCodigoConsumible.AutoSize = true;
-            this.LblCodigoConsumible.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblCodigoConsumible.Location = new System.Drawing.Point(498, 61);
-            this.LblCodigoConsumible.Name = "LblCodigoConsumible";
-            this.LblCodigoConsumible.Size = new System.Drawing.Size(62, 16);
-            this.LblCodigoConsumible.TabIndex = 20;
-            this.LblCodigoConsumible.Text = "Código:";
-            this.LblCodigoConsumible.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // TxtCodigoConsumible
-            // 
-            this.TxtCodigoConsumible.Location = new System.Drawing.Point(579, 61);
-            this.TxtCodigoConsumible.Name = "TxtCodigoConsumible";
-            this.TxtCodigoConsumible.Size = new System.Drawing.Size(100, 20);
-            this.TxtCodigoConsumible.TabIndex = 21;
             // 
             // CodigoDeEstadia
             // 
@@ -248,11 +213,71 @@
             this.Total.HeaderText = "Total";
             this.Total.Name = "Total";
             // 
+            // BtnGuardarCambios
+            // 
+            this.BtnGuardarCambios.Location = new System.Drawing.Point(403, 343);
+            this.BtnGuardarCambios.Name = "BtnGuardarCambios";
+            this.BtnGuardarCambios.Size = new System.Drawing.Size(126, 23);
+            this.BtnGuardarCambios.TabIndex = 18;
+            this.BtnGuardarCambios.Text = "Guardar Cambios";
+            this.BtnGuardarCambios.UseVisualStyleBackColor = true;
+            // 
+            // BtnVolver
+            // 
+            this.BtnVolver.Location = new System.Drawing.Point(271, 343);
+            this.BtnVolver.Name = "BtnVolver";
+            this.BtnVolver.Size = new System.Drawing.Size(126, 23);
+            this.BtnVolver.TabIndex = 19;
+            this.BtnVolver.Text = "Volver";
+            this.BtnVolver.UseVisualStyleBackColor = true;
+            this.BtnVolver.Click += new System.EventHandler(this.BtnVolver_Click);
+            // 
+            // LblCodigoConsumible
+            // 
+            this.LblCodigoConsumible.AutoSize = true;
+            this.LblCodigoConsumible.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblCodigoConsumible.Location = new System.Drawing.Point(508, 92);
+            this.LblCodigoConsumible.Name = "LblCodigoConsumible";
+            this.LblCodigoConsumible.Size = new System.Drawing.Size(62, 16);
+            this.LblCodigoConsumible.TabIndex = 20;
+            this.LblCodigoConsumible.Text = "Código:";
+            this.LblCodigoConsumible.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // TxtCodigoConsumible
+            // 
+            this.TxtCodigoConsumible.Location = new System.Drawing.Point(589, 92);
+            this.TxtCodigoConsumible.Name = "TxtCodigoConsumible";
+            this.TxtCodigoConsumible.Size = new System.Drawing.Size(100, 20);
+            this.TxtCodigoConsumible.TabIndex = 21;
+            // 
+            // lblAllInclusive
+            // 
+            this.lblAllInclusive.AutoSize = true;
+            this.lblAllInclusive.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAllInclusive.Location = new System.Drawing.Point(22, 52);
+            this.lblAllInclusive.Name = "lblAllInclusive";
+            this.lblAllInclusive.Size = new System.Drawing.Size(130, 16);
+            this.lblAllInclusive.TabIndex = 22;
+            this.lblAllInclusive.Text = "¿Es All-Inclusive?";
+            this.lblAllInclusive.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cboInclusive
+            // 
+            this.cboInclusive.AutoSize = true;
+            this.cboInclusive.Location = new System.Drawing.Point(168, 51);
+            this.cboInclusive.Name = "cboInclusive";
+            this.cboInclusive.Size = new System.Drawing.Size(37, 17);
+            this.cboInclusive.TabIndex = 23;
+            this.cboInclusive.Text = "Sí";
+            this.cboInclusive.UseVisualStyleBackColor = true;
+            // 
             // FrmAgregarConsumibles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(779, 333);
+            this.ClientSize = new System.Drawing.Size(779, 390);
+            this.Controls.Add(this.cboInclusive);
+            this.Controls.Add(this.lblAllInclusive);
             this.Controls.Add(this.TxtCodigoConsumible);
             this.Controls.Add(this.LblCodigoConsumible);
             this.Controls.Add(this.BtnVolver);
@@ -301,5 +326,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.Label LblCodigoConsumible;
         private System.Windows.Forms.TextBox TxtCodigoConsumible;
+        private System.Windows.Forms.Label lblAllInclusive;
+        private System.Windows.Forms.CheckBox cboInclusive;
     }
 }

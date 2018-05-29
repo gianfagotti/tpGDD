@@ -16,5 +16,12 @@ namespace FrbaHotel.AbmCliente
         {
             InitializeComponent();
         }
+
+        private void btnVolverMod_Click(object sender, EventArgs e)
+        {
+            AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado();
+            this.Hide();
+            frmMenuEmpleado.ShowDialog();
+        }
     }
 }

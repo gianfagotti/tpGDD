@@ -46,8 +46,6 @@
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.lblLocalidad = new System.Windows.Forms.Label();
             this.txtLocalidad = new System.Windows.Forms.TextBox();
-            this.lblPaisOrigen = new System.Windows.Forms.Label();
-            this.txtPaisOrigen = new System.Windows.Forms.TextBox();
             this.lblNacionalidad = new System.Windows.Forms.Label();
             this.txtNacionalidad = new System.Windows.Forms.TextBox();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
@@ -55,6 +53,7 @@
             this.chkHabilitado = new System.Windows.Forms.CheckBox();
             this.butLimpiar = new System.Windows.Forms.Button();
             this.butGuardar = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -202,26 +201,10 @@
             this.txtLocalidad.Size = new System.Drawing.Size(100, 20);
             this.txtLocalidad.TabIndex = 17;
             // 
-            // lblPaisOrigen
-            // 
-            this.lblPaisOrigen.AutoSize = true;
-            this.lblPaisOrigen.Location = new System.Drawing.Point(418, 117);
-            this.lblPaisOrigen.Name = "lblPaisOrigen";
-            this.lblPaisOrigen.Size = new System.Drawing.Size(76, 13);
-            this.lblPaisOrigen.TabIndex = 18;
-            this.lblPaisOrigen.Text = "Pais de Origen";
-            // 
-            // txtPaisOrigen
-            // 
-            this.txtPaisOrigen.Location = new System.Drawing.Point(500, 114);
-            this.txtPaisOrigen.Name = "txtPaisOrigen";
-            this.txtPaisOrigen.Size = new System.Drawing.Size(100, 20);
-            this.txtPaisOrigen.TabIndex = 19;
-            // 
             // lblNacionalidad
             // 
             this.lblNacionalidad.AutoSize = true;
-            this.lblNacionalidad.Location = new System.Drawing.Point(13, 144);
+            this.lblNacionalidad.Location = new System.Drawing.Point(427, 117);
             this.lblNacionalidad.Name = "lblNacionalidad";
             this.lblNacionalidad.Size = new System.Drawing.Size(69, 13);
             this.lblNacionalidad.TabIndex = 20;
@@ -229,7 +212,7 @@
             // 
             // txtNacionalidad
             // 
-            this.txtNacionalidad.Location = new System.Drawing.Point(88, 141);
+            this.txtNacionalidad.Location = new System.Drawing.Point(502, 114);
             this.txtNacionalidad.Name = "txtNacionalidad";
             this.txtNacionalidad.Size = new System.Drawing.Size(100, 20);
             this.txtNacionalidad.TabIndex = 21;
@@ -237,7 +220,7 @@
             // lblFechaNacimiento
             // 
             this.lblFechaNacimiento.AutoSize = true;
-            this.lblFechaNacimiento.Location = new System.Drawing.Point(13, 171);
+            this.lblFechaNacimiento.Location = new System.Drawing.Point(13, 147);
             this.lblFechaNacimiento.Name = "lblFechaNacimiento";
             this.lblFechaNacimiento.Size = new System.Drawing.Size(106, 13);
             this.lblFechaNacimiento.TabIndex = 22;
@@ -245,15 +228,16 @@
             // 
             // dtpFechaNacimiento
             // 
-            this.dtpFechaNacimiento.Location = new System.Drawing.Point(125, 167);
+            this.dtpFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaNacimiento.Location = new System.Drawing.Point(125, 143);
             this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
-            this.dtpFechaNacimiento.Size = new System.Drawing.Size(195, 20);
+            this.dtpFechaNacimiento.Size = new System.Drawing.Size(99, 20);
             this.dtpFechaNacimiento.TabIndex = 23;
             // 
             // chkHabilitado
             // 
             this.chkHabilitado.AutoSize = true;
-            this.chkHabilitado.Location = new System.Drawing.Point(15, 200);
+            this.chkHabilitado.Location = new System.Drawing.Point(15, 176);
             this.chkHabilitado.Name = "chkHabilitado";
             this.chkHabilitado.Size = new System.Drawing.Size(73, 17);
             this.chkHabilitado.TabIndex = 24;
@@ -262,7 +246,7 @@
             // 
             // butLimpiar
             // 
-            this.butLimpiar.Location = new System.Drawing.Point(7, 234);
+            this.butLimpiar.Location = new System.Drawing.Point(7, 210);
             this.butLimpiar.Name = "butLimpiar";
             this.butLimpiar.Size = new System.Drawing.Size(75, 23);
             this.butLimpiar.TabIndex = 25;
@@ -271,18 +255,29 @@
             // 
             // butGuardar
             // 
-            this.butGuardar.Location = new System.Drawing.Point(525, 234);
+            this.butGuardar.Location = new System.Drawing.Point(525, 210);
             this.butGuardar.Name = "butGuardar";
             this.butGuardar.Size = new System.Drawing.Size(75, 23);
             this.butGuardar.TabIndex = 26;
             this.butGuardar.Text = "Guardar";
             this.butGuardar.UseVisualStyleBackColor = true;
             // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(444, 210);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.TabIndex = 27;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
             // FrmAltaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(607, 269);
+            this.ClientSize = new System.Drawing.Size(607, 241);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.butGuardar);
             this.Controls.Add(this.butLimpiar);
             this.Controls.Add(this.chkHabilitado);
@@ -290,8 +285,6 @@
             this.Controls.Add(this.lblFechaNacimiento);
             this.Controls.Add(this.txtNacionalidad);
             this.Controls.Add(this.lblNacionalidad);
-            this.Controls.Add(this.txtPaisOrigen);
-            this.Controls.Add(this.lblPaisOrigen);
             this.Controls.Add(this.txtLocalidad);
             this.Controls.Add(this.lblLocalidad);
             this.Controls.Add(this.txtNumero);
@@ -337,8 +330,6 @@
         private System.Windows.Forms.TextBox txtNumero;
         private System.Windows.Forms.Label lblLocalidad;
         private System.Windows.Forms.TextBox txtLocalidad;
-        private System.Windows.Forms.Label lblPaisOrigen;
-        private System.Windows.Forms.TextBox txtPaisOrigen;
         private System.Windows.Forms.Label lblNacionalidad;
         private System.Windows.Forms.TextBox txtNacionalidad;
         private System.Windows.Forms.Label lblFechaNacimiento;
@@ -346,5 +337,6 @@
         private System.Windows.Forms.CheckBox chkHabilitado;
         private System.Windows.Forms.Button butLimpiar;
         private System.Windows.Forms.Button butGuardar;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

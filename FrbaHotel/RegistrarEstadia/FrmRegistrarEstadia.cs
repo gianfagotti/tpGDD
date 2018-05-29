@@ -40,8 +40,8 @@ namespace FrbaHotel.RegistrarEstadia
         private void BtnAceptarCheckInYOut_Click(object sender, EventArgs e)
         {
             this.PnlCheckInYOut.Hide();
-            this.TxtCheckIn.Text = this.McrCheckInYOut.SelectionRange.End.ToShortDateString();
-            this.TxtCheckOut.Text = this.McrCheckInYOut.SelectionRange.Start.ToShortDateString();
+            this.TxtCheckIn.Text = this.McrCheckInYOut.SelectionRange.Start.ToShortDateString();
+            this.TxtCheckOut.Text = this.McrCheckInYOut.SelectionRange.End.ToShortDateString();
         }
 
         private void TxtCheckIn_TextChanged(object sender, EventArgs e)
@@ -57,6 +57,13 @@ namespace FrbaHotel.RegistrarEstadia
         private void BtnFacturar_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado();
+            frmMenuEmpleado.ShowDialog();
         }
     }
 }

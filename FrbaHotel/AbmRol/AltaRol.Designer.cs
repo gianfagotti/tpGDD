@@ -43,9 +43,9 @@
             this.chkRolActivo.AutoSize = true;
             this.chkRolActivo.Location = new System.Drawing.Point(387, 28);
             this.chkRolActivo.Name = "chkRolActivo";
-            this.chkRolActivo.Size = new System.Drawing.Size(75, 17);
+            this.chkRolActivo.Size = new System.Drawing.Size(37, 17);
             this.chkRolActivo.TabIndex = 0;
-            this.chkRolActivo.Text = "Rol Activo";
+            this.chkRolActivo.Text = "Sí";
             this.chkRolActivo.UseVisualStyleBackColor = true;
             // 
             // label1

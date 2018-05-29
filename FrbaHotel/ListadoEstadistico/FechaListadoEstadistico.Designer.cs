@@ -31,7 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnConfirmarTrim = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -64,15 +64,16 @@
             this.comboBox1.Size = new System.Drawing.Size(225, 21);
             this.comboBox1.TabIndex = 9;
             // 
-            // button1
+            // btnConfirmarTrim
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.button1.Location = new System.Drawing.Point(133, 159);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(118, 41);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Confirmar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnConfirmarTrim.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.btnConfirmarTrim.Location = new System.Drawing.Point(133, 159);
+            this.btnConfirmarTrim.Name = "btnConfirmarTrim";
+            this.btnConfirmarTrim.Size = new System.Drawing.Size(118, 41);
+            this.btnConfirmarTrim.TabIndex = 10;
+            this.btnConfirmarTrim.Text = "Confirmar";
+            this.btnConfirmarTrim.UseVisualStyleBackColor = true;
+            this.btnConfirmarTrim.Click += new System.EventHandler(this.btnConfirmarTrim_Click);
             // 
             // dateTimePicker1
             // 
@@ -100,7 +101,7 @@
             this.ClientSize = new System.Drawing.Size(389, 221);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnConfirmarTrim);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.label1);
@@ -116,7 +117,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnConfirmarTrim;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
     }

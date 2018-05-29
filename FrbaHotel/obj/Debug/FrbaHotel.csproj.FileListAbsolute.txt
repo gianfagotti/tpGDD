@@ -124,3 +124,5 @@ C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion D
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.ListadoEstadistico.ListadoEstadistico.resources
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarConsumible.FrmAgregarConsumibles.resources
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarConsumible.FrmSeleccionarEstadia.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarConsumible.FrmAgregarConsumibles.resources
+D:\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarConsumible.FrmSeleccionarEstadia.resources

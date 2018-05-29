@@ -32,6 +32,7 @@
             this.LblCodigoDeEstadia = new System.Windows.Forms.Label();
             this.TxtSeleccionCodigoEstadia = new System.Windows.Forms.TextBox();
             this.BtnAceptarSeleccionEstadia = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LblSeleccionarEstadia
@@ -68,19 +69,30 @@
             // 
             // BtnAceptarSeleccionEstadia
             // 
-            this.BtnAceptarSeleccionEstadia.Location = new System.Drawing.Point(138, 121);
+            this.BtnAceptarSeleccionEstadia.Location = new System.Drawing.Point(184, 127);
             this.BtnAceptarSeleccionEstadia.Name = "BtnAceptarSeleccionEstadia";
             this.BtnAceptarSeleccionEstadia.Size = new System.Drawing.Size(75, 23);
             this.BtnAceptarSeleccionEstadia.TabIndex = 9;
             this.BtnAceptarSeleccionEstadia.Text = "Aceptar";
             this.BtnAceptarSeleccionEstadia.UseVisualStyleBackColor = true;
-            this.BtnAceptarSeleccionEstadia.Click += new System.EventHandler(this.button1_Click);
+            this.BtnAceptarSeleccionEstadia.Click += new System.EventHandler(this.BtnAceptarSeleccionEstadia_Click);
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(97, 127);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.TabIndex = 10;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // FrmSeleccionarEstadia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(369, 171);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.BtnAceptarSeleccionEstadia);
             this.Controls.Add(this.TxtSeleccionCodigoEstadia);
             this.Controls.Add(this.LblCodigoDeEstadia);
@@ -98,5 +110,6 @@
         private System.Windows.Forms.Label LblCodigoDeEstadia;
         private System.Windows.Forms.TextBox TxtSeleccionCodigoEstadia;
         private System.Windows.Forms.Button BtnAceptarSeleccionEstadia;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

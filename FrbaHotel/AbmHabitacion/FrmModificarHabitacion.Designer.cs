@@ -41,6 +41,7 @@
             this.chkHabilitadoMod = new System.Windows.Forms.CheckBox();
             this.butLimpiarMod = new System.Windows.Forms.Button();
             this.butGuardarMod = new System.Windows.Forms.Button();
+            this.btnVolverMod = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudNroHabitacionMod)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPisoMod)).BeginInit();
             this.SuspendLayout();
@@ -165,11 +166,22 @@
             this.butGuardarMod.Text = "Guardar";
             this.butGuardarMod.UseVisualStyleBackColor = true;
             // 
+            // btnVolverMod
+            // 
+            this.btnVolverMod.Location = new System.Drawing.Point(151, 230);
+            this.btnVolverMod.Name = "btnVolverMod";
+            this.btnVolverMod.Size = new System.Drawing.Size(75, 23);
+            this.btnVolverMod.TabIndex = 13;
+            this.btnVolverMod.Text = "Volver";
+            this.btnVolverMod.UseVisualStyleBackColor = true;
+            this.btnVolverMod.Click += new System.EventHandler(this.btnVolverMod_Click);
+            // 
             // FrmModificarHabitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(321, 261);
+            this.Controls.Add(this.btnVolverMod);
             this.Controls.Add(this.butGuardarMod);
             this.Controls.Add(this.butLimpiarMod);
             this.Controls.Add(this.chkHabilitadoMod);
@@ -207,5 +219,6 @@
         private System.Windows.Forms.CheckBox chkHabilitadoMod;
         private System.Windows.Forms.Button butLimpiarMod;
         private System.Windows.Forms.Button butGuardarMod;
+        private System.Windows.Forms.Button btnVolverMod;
     }
 }

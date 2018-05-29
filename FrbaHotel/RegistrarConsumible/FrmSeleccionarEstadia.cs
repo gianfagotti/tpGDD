@@ -27,11 +27,18 @@ namespace FrbaHotel.RegistrarConsumible
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void BtnAceptarSeleccionEstadia_Click(object sender, EventArgs e)
         {
             this.Hide();
             FrmAgregarConsumibles frmAgregarConsumibles = new FrmAgregarConsumibles();
             frmAgregarConsumibles.ShowDialog();
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado();
+            frmMenuEmpleado.ShowDialog();
         }
     }
 }

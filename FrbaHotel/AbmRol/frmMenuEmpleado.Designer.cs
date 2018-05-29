@@ -31,7 +31,9 @@
             this.grbHuespedes = new System.Windows.Forms.GroupBox();
             this.butAltaCliente = new System.Windows.Forms.Button();
             this.grbHabitaciones = new System.Windows.Forms.GroupBox();
+            this.butCrearHabitacion = new System.Windows.Forms.Button();
             this.grbRegimenes = new System.Windows.Forms.GroupBox();
+            this.butCrearRegimen = new System.Windows.Forms.Button();
             this.grbRoles = new System.Windows.Forms.GroupBox();
             this.btnModificarRol = new System.Windows.Forms.Button();
             this.btnAltaRol = new System.Windows.Forms.Button();
@@ -42,14 +44,18 @@
             this.grbConsumibles = new System.Windows.Forms.GroupBox();
             this.grbEstadias = new System.Windows.Forms.GroupBox();
             this.grbListado = new System.Windows.Forms.GroupBox();
+            this.btnListadoEst = new System.Windows.Forms.Button();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
-            this.butCrearHabitacion = new System.Windows.Forms.Button();
-            this.butCrearRegimen = new System.Windows.Forms.Button();
+            this.btnRegistrarEstadiabtnRegistrarEstadia = new System.Windows.Forms.Button();
+            this.btnRegistrarConsumible = new System.Windows.Forms.Button();
             this.grbHuespedes.SuspendLayout();
             this.grbHabitaciones.SuspendLayout();
             this.grbRegimenes.SuspendLayout();
             this.grbRoles.SuspendLayout();
             this.grbReservas.SuspendLayout();
+            this.grbConsumibles.SuspendLayout();
+            this.grbEstadias.SuspendLayout();
+            this.grbListado.SuspendLayout();
             this.SuspendLayout();
             // 
             // grbHuespedes
@@ -82,6 +88,16 @@
             this.grbHabitaciones.TabStop = false;
             this.grbHabitaciones.Text = "Administración de habitaciones";
             // 
+            // butCrearHabitacion
+            // 
+            this.butCrearHabitacion.Location = new System.Drawing.Point(30, 19);
+            this.butCrearHabitacion.Name = "butCrearHabitacion";
+            this.butCrearHabitacion.Size = new System.Drawing.Size(161, 23);
+            this.butCrearHabitacion.TabIndex = 0;
+            this.butCrearHabitacion.Text = "Ingresar nueva habitacion";
+            this.butCrearHabitacion.UseVisualStyleBackColor = true;
+            this.butCrearHabitacion.Click += new System.EventHandler(this.butCrearHabitacion_Click);
+            // 
             // grbRegimenes
             // 
             this.grbRegimenes.Controls.Add(this.butCrearRegimen);
@@ -91,6 +107,16 @@
             this.grbRegimenes.TabIndex = 2;
             this.grbRegimenes.TabStop = false;
             this.grbRegimenes.Text = "Administración de regímenes";
+            // 
+            // butCrearRegimen
+            // 
+            this.butCrearRegimen.Location = new System.Drawing.Point(33, 19);
+            this.butCrearRegimen.Name = "butCrearRegimen";
+            this.butCrearRegimen.Size = new System.Drawing.Size(149, 23);
+            this.butCrearRegimen.TabIndex = 0;
+            this.butCrearRegimen.Text = "Crear nuevo regimen";
+            this.butCrearRegimen.UseVisualStyleBackColor = true;
+            this.butCrearRegimen.Click += new System.EventHandler(this.butCrearRegimen_Click);
             // 
             // grbRoles
             // 
@@ -167,6 +193,7 @@
             // 
             // grbConsumibles
             // 
+            this.grbConsumibles.Controls.Add(this.btnRegistrarConsumible);
             this.grbConsumibles.Location = new System.Drawing.Point(507, 12);
             this.grbConsumibles.Name = "grbConsumibles";
             this.grbConsumibles.Size = new System.Drawing.Size(200, 100);
@@ -176,6 +203,7 @@
             // 
             // grbEstadias
             // 
+            this.grbEstadias.Controls.Add(this.btnRegistrarEstadiabtnRegistrarEstadia);
             this.grbEstadias.Location = new System.Drawing.Point(13, 140);
             this.grbEstadias.Name = "grbEstadias";
             this.grbEstadias.Size = new System.Drawing.Size(220, 100);
@@ -185,12 +213,23 @@
             // 
             // grbListado
             // 
+            this.grbListado.Controls.Add(this.btnListadoEst);
             this.grbListado.Location = new System.Drawing.Point(264, 257);
             this.grbListado.Name = "grbListado";
             this.grbListado.Size = new System.Drawing.Size(218, 100);
             this.grbListado.TabIndex = 7;
             this.grbListado.TabStop = false;
             this.grbListado.Text = "Estadísticas";
+            // 
+            // btnListadoEst
+            // 
+            this.btnListadoEst.Location = new System.Drawing.Point(30, 19);
+            this.btnListadoEst.Name = "btnListadoEst";
+            this.btnListadoEst.Size = new System.Drawing.Size(161, 23);
+            this.btnListadoEst.TabIndex = 1;
+            this.btnListadoEst.Text = "Ver listado ";
+            this.btnListadoEst.UseVisualStyleBackColor = true;
+            this.btnListadoEst.Click += new System.EventHandler(this.btnListadoEst_Click);
             // 
             // btnCerrarSesion
             // 
@@ -202,25 +241,25 @@
             this.btnCerrarSesion.UseVisualStyleBackColor = true;
             this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
             // 
-            // butCrearHabitacion
+            // btnRegistrarEstadiabtnRegistrarEstadia
             // 
-            this.butCrearHabitacion.Location = new System.Drawing.Point(30, 19);
-            this.butCrearHabitacion.Name = "butCrearHabitacion";
-            this.butCrearHabitacion.Size = new System.Drawing.Size(161, 23);
-            this.butCrearHabitacion.TabIndex = 0;
-            this.butCrearHabitacion.Text = "Ingresar nueva habitacion";
-            this.butCrearHabitacion.UseVisualStyleBackColor = true;
-            this.butCrearHabitacion.Click += new System.EventHandler(this.butCrearHabitacion_Click);
+            this.btnRegistrarEstadiabtnRegistrarEstadia.Location = new System.Drawing.Point(32, 21);
+            this.btnRegistrarEstadiabtnRegistrarEstadia.Name = "btnRegistrarEstadiabtnRegistrarEstadia";
+            this.btnRegistrarEstadiabtnRegistrarEstadia.Size = new System.Drawing.Size(161, 23);
+            this.btnRegistrarEstadiabtnRegistrarEstadia.TabIndex = 10;
+            this.btnRegistrarEstadiabtnRegistrarEstadia.Text = "Registrar estadía";
+            this.btnRegistrarEstadiabtnRegistrarEstadia.UseVisualStyleBackColor = true;
+            this.btnRegistrarEstadiabtnRegistrarEstadia.Click += new System.EventHandler(this.btnRegistrarEstadiabtnRegistrarEstadia_Click);
             // 
-            // butCrearRegimen
+            // btnRegistrarConsumible
             // 
-            this.butCrearRegimen.Location = new System.Drawing.Point(33, 19);
-            this.butCrearRegimen.Name = "butCrearRegimen";
-            this.butCrearRegimen.Size = new System.Drawing.Size(149, 23);
-            this.butCrearRegimen.TabIndex = 0;
-            this.butCrearRegimen.Text = "Crear nuevo regimen";
-            this.butCrearRegimen.UseVisualStyleBackColor = true;
-            this.butCrearRegimen.Click += new System.EventHandler(this.butCrearRegimen_Click);
+            this.btnRegistrarConsumible.Location = new System.Drawing.Point(27, 22);
+            this.btnRegistrarConsumible.Name = "btnRegistrarConsumible";
+            this.btnRegistrarConsumible.Size = new System.Drawing.Size(149, 23);
+            this.btnRegistrarConsumible.TabIndex = 11;
+            this.btnRegistrarConsumible.Text = "Agregar consumible";
+            this.btnRegistrarConsumible.UseVisualStyleBackColor = true;
+            this.btnRegistrarConsumible.Click += new System.EventHandler(this.btnRegistrarConsumible_Click);
             // 
             // frmMenuEmpleado
             // 
@@ -243,6 +282,9 @@
             this.grbRegimenes.ResumeLayout(false);
             this.grbRoles.ResumeLayout(false);
             this.grbReservas.ResumeLayout(false);
+            this.grbConsumibles.ResumeLayout(false);
+            this.grbEstadias.ResumeLayout(false);
+            this.grbListado.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -266,5 +308,8 @@
         private System.Windows.Forms.Button butAltaCliente;
         private System.Windows.Forms.Button butCrearHabitacion;
         private System.Windows.Forms.Button butCrearRegimen;
+        private System.Windows.Forms.Button btnListadoEst;
+        private System.Windows.Forms.Button btnRegistrarConsumible;
+        private System.Windows.Forms.Button btnRegistrarEstadiabtnRegistrarEstadia;
     }
 }

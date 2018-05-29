@@ -79,5 +79,26 @@ namespace FrbaHotel.AbmRol
             this.Hide();
             frmCrearRegimen.ShowDialog();
         }
+
+        private void btnListadoEst_Click(object sender, EventArgs e)
+        {
+            ListadoEstadistico.ListadoEstadistico frmListadoEst = new ListadoEstadistico.ListadoEstadistico();
+            this.Hide();
+            frmListadoEst.ShowDialog();
+        }
+
+        private void btnRegistrarEstadiabtnRegistrarEstadia_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            RegistrarEstadia.FrmRegistrarEstadia frmRegistrarEst = new RegistrarEstadia.FrmRegistrarEstadia();
+            frmRegistrarEst.ShowDialog();
+        }
+
+        private void btnRegistrarConsumible_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            RegistrarConsumible.FrmSeleccionarEstadia frmSeleccionarEstadia = new RegistrarConsumible.FrmSeleccionarEstadia();
+            frmSeleccionarEstadia.ShowDialog();
+        }
     }
 }

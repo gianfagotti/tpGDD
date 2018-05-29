@@ -55,6 +55,7 @@
             this.Mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LblAl = new System.Windows.Forms.Label();
             this.LblHuéspedes = new System.Windows.Forms.Label();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.PnlCheckInYOut.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -225,7 +226,7 @@
             // 
             // BtnRegistrar
             // 
-            this.BtnRegistrar.Location = new System.Drawing.Point(339, 475);
+            this.BtnRegistrar.Location = new System.Drawing.Point(290, 475);
             this.BtnRegistrar.Name = "BtnRegistrar";
             this.BtnRegistrar.Size = new System.Drawing.Size(75, 23);
             this.BtnRegistrar.TabIndex = 19;
@@ -300,11 +301,22 @@
             this.LblHuéspedes.Text = "Huéspedes:";
             this.LblHuéspedes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(408, 475);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.TabIndex = 23;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
             // FrmRegistrarEstadia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(783, 510);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.LblHuéspedes);
             this.Controls.Add(this.LblAl);
             this.Controls.Add(this.dataGridView1);
@@ -363,5 +375,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nacionalidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mail;
         private System.Windows.Forms.Label LblHuéspedes;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

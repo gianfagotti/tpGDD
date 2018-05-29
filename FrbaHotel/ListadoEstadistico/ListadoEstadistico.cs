@@ -36,5 +36,23 @@ namespace FrbaHotel.ListadoEstadistico
         {
 
         }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado();
+            this.Hide();
+            frmMenuEmpleado.ShowDialog();
+        }
+
+        private void btnEspecifTrim_Click(object sender, EventArgs e)
+        {
+            FechaListadoEstadistico frmFechaListado = new FechaListadoEstadistico();
+            frmFechaListado.ShowDialog();
+        }
     }
 }

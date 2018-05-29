@@ -40,6 +40,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnEspecifTrim = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +49,7 @@
             this.cboEntidad.FormattingEnabled = true;
             this.cboEntidad.Location = new System.Drawing.Point(129, 76);
             this.cboEntidad.Name = "cboEntidad";
-            this.cboEntidad.Size = new System.Drawing.Size(225, 21);
+            this.cboEntidad.Size = new System.Drawing.Size(345, 21);
             this.cboEntidad.TabIndex = 0;
             // 
             // lblEntidad
@@ -87,7 +88,7 @@
             this.cboCateg.FormattingEnabled = true;
             this.cboCateg.Location = new System.Drawing.Point(129, 119);
             this.cboCateg.Name = "cboCateg";
-            this.cboCateg.Size = new System.Drawing.Size(225, 21);
+            this.cboCateg.Size = new System.Drawing.Size(345, 21);
             this.cboCateg.TabIndex = 4;
             // 
             // dataGridView1
@@ -97,7 +98,7 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 301);
+            this.dataGridView1.Location = new System.Drawing.Point(14, 249);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(500, 308);
             this.dataGridView1.TabIndex = 5;
@@ -121,9 +122,9 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.button1.Location = new System.Drawing.Point(34, 226);
+            this.button1.Location = new System.Drawing.Point(146, 196);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(320, 42);
+            this.button1.Size = new System.Drawing.Size(231, 42);
             this.button1.TabIndex = 8;
             this.button1.Text = "Mostrar";
             this.button1.UseVisualStyleBackColor = true;
@@ -133,27 +134,41 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(31, 168);
+            this.label1.Location = new System.Drawing.Point(29, 159);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(155, 17);
             this.label1.TabIndex = 9;
             this.label1.Text = "Trimestre a evaluar:";
+            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // btnEspecifTrim
             // 
             this.btnEspecifTrim.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.btnEspecifTrim.Location = new System.Drawing.Point(204, 160);
+            this.btnEspecifTrim.Location = new System.Drawing.Point(199, 153);
             this.btnEspecifTrim.Name = "btnEspecifTrim";
             this.btnEspecifTrim.Size = new System.Drawing.Size(150, 32);
             this.btnEspecifTrim.TabIndex = 10;
             this.btnEspecifTrim.Text = "Especificar";
             this.btnEspecifTrim.UseVisualStyleBackColor = true;
+            this.btnEspecifTrim.Click += new System.EventHandler(this.btnEspecifTrim_Click);
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.btnVolver.Location = new System.Drawing.Point(378, 567);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(134, 42);
+            this.btnVolver.TabIndex = 11;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // ListadoEstadistico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 621);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnEspecifTrim);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
@@ -186,5 +201,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnEspecifTrim;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

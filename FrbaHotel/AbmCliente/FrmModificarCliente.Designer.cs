@@ -46,15 +46,14 @@
             this.txtNumeroMod = new System.Windows.Forms.TextBox();
             this.lblLocalidadMod = new System.Windows.Forms.Label();
             this.txtLocalidadMod = new System.Windows.Forms.TextBox();
-            this.lblPaisOrigenMod = new System.Windows.Forms.Label();
-            this.txtPaisOrigenMod = new System.Windows.Forms.TextBox();
             this.lblNacionalidadMod = new System.Windows.Forms.Label();
-            this.txtNacionalidadMod = new System.Windows.Forms.TextBox();
             this.lblFechaNacimientoMod = new System.Windows.Forms.Label();
             this.dtpFechaNacimientoMod = new System.Windows.Forms.DateTimePicker();
             this.chkHabilitadoMod = new System.Windows.Forms.CheckBox();
             this.butLimpiarMod = new System.Windows.Forms.Button();
             this.butGuardarMod = new System.Windows.Forms.Button();
+            this.btnVolverMod = new System.Windows.Forms.Button();
+            this.txtNacionalidadMod = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblNombreMod
@@ -201,42 +200,19 @@
             this.txtLocalidadMod.Size = new System.Drawing.Size(100, 20);
             this.txtLocalidadMod.TabIndex = 17;
             // 
-            // lblPaisOrigenMod
-            // 
-            this.lblPaisOrigenMod.AutoSize = true;
-            this.lblPaisOrigenMod.Location = new System.Drawing.Point(476, 112);
-            this.lblPaisOrigenMod.Name = "lblPaisOrigenMod";
-            this.lblPaisOrigenMod.Size = new System.Drawing.Size(76, 13);
-            this.lblPaisOrigenMod.TabIndex = 18;
-            this.lblPaisOrigenMod.Text = "Pais de Origen";
-            // 
-            // txtPaisOrigenMod
-            // 
-            this.txtPaisOrigenMod.Location = new System.Drawing.Point(558, 109);
-            this.txtPaisOrigenMod.Name = "txtPaisOrigenMod";
-            this.txtPaisOrigenMod.Size = new System.Drawing.Size(100, 20);
-            this.txtPaisOrigenMod.TabIndex = 19;
-            // 
             // lblNacionalidadMod
             // 
             this.lblNacionalidadMod.AutoSize = true;
-            this.lblNacionalidadMod.Location = new System.Drawing.Point(12, 139);
+            this.lblNacionalidadMod.Location = new System.Drawing.Point(483, 112);
             this.lblNacionalidadMod.Name = "lblNacionalidadMod";
             this.lblNacionalidadMod.Size = new System.Drawing.Size(69, 13);
             this.lblNacionalidadMod.TabIndex = 20;
             this.lblNacionalidadMod.Text = "Nacionalidad";
             // 
-            // txtNacionalidadMod
-            // 
-            this.txtNacionalidadMod.Location = new System.Drawing.Point(87, 136);
-            this.txtNacionalidadMod.Name = "txtNacionalidadMod";
-            this.txtNacionalidadMod.Size = new System.Drawing.Size(100, 20);
-            this.txtNacionalidadMod.TabIndex = 21;
-            // 
             // lblFechaNacimientoMod
             // 
             this.lblFechaNacimientoMod.AutoSize = true;
-            this.lblFechaNacimientoMod.Location = new System.Drawing.Point(13, 165);
+            this.lblFechaNacimientoMod.Location = new System.Drawing.Point(14, 142);
             this.lblFechaNacimientoMod.Name = "lblFechaNacimientoMod";
             this.lblFechaNacimientoMod.Size = new System.Drawing.Size(106, 13);
             this.lblFechaNacimientoMod.TabIndex = 22;
@@ -244,15 +220,16 @@
             // 
             // dtpFechaNacimientoMod
             // 
-            this.dtpFechaNacimientoMod.Location = new System.Drawing.Point(125, 162);
+            this.dtpFechaNacimientoMod.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaNacimientoMod.Location = new System.Drawing.Point(126, 139);
             this.dtpFechaNacimientoMod.Name = "dtpFechaNacimientoMod";
-            this.dtpFechaNacimientoMod.Size = new System.Drawing.Size(200, 20);
+            this.dtpFechaNacimientoMod.Size = new System.Drawing.Size(96, 20);
             this.dtpFechaNacimientoMod.TabIndex = 23;
             // 
             // chkHabilitadoMod
             // 
             this.chkHabilitadoMod.AutoSize = true;
-            this.chkHabilitadoMod.Location = new System.Drawing.Point(13, 191);
+            this.chkHabilitadoMod.Location = new System.Drawing.Point(14, 168);
             this.chkHabilitadoMod.Name = "chkHabilitadoMod";
             this.chkHabilitadoMod.Size = new System.Drawing.Size(73, 17);
             this.chkHabilitadoMod.TabIndex = 24;
@@ -261,7 +238,7 @@
             // 
             // butLimpiarMod
             // 
-            this.butLimpiarMod.Location = new System.Drawing.Point(6, 224);
+            this.butLimpiarMod.Location = new System.Drawing.Point(7, 201);
             this.butLimpiarMod.Name = "butLimpiarMod";
             this.butLimpiarMod.Size = new System.Drawing.Size(75, 23);
             this.butLimpiarMod.TabIndex = 25;
@@ -270,18 +247,36 @@
             // 
             // butGuardarMod
             // 
-            this.butGuardarMod.Location = new System.Drawing.Point(583, 224);
+            this.butGuardarMod.Location = new System.Drawing.Point(584, 201);
             this.butGuardarMod.Name = "butGuardarMod";
             this.butGuardarMod.Size = new System.Drawing.Size(75, 23);
             this.butGuardarMod.TabIndex = 26;
             this.butGuardarMod.Text = "Guardar";
             this.butGuardarMod.UseVisualStyleBackColor = true;
             // 
+            // btnVolverMod
+            // 
+            this.btnVolverMod.Location = new System.Drawing.Point(503, 201);
+            this.btnVolverMod.Name = "btnVolverMod";
+            this.btnVolverMod.Size = new System.Drawing.Size(75, 23);
+            this.btnVolverMod.TabIndex = 27;
+            this.btnVolverMod.Text = "Volver";
+            this.btnVolverMod.UseVisualStyleBackColor = true;
+            this.btnVolverMod.Click += new System.EventHandler(this.btnVolverMod_Click);
+            // 
+            // txtNacionalidadMod
+            // 
+            this.txtNacionalidadMod.Location = new System.Drawing.Point(558, 109);
+            this.txtNacionalidadMod.Name = "txtNacionalidadMod";
+            this.txtNacionalidadMod.Size = new System.Drawing.Size(100, 20);
+            this.txtNacionalidadMod.TabIndex = 21;
+            // 
             // FrmModificarCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 255);
+            this.ClientSize = new System.Drawing.Size(667, 234);
+            this.Controls.Add(this.btnVolverMod);
             this.Controls.Add(this.butGuardarMod);
             this.Controls.Add(this.butLimpiarMod);
             this.Controls.Add(this.chkHabilitadoMod);
@@ -289,8 +284,6 @@
             this.Controls.Add(this.lblFechaNacimientoMod);
             this.Controls.Add(this.txtNacionalidadMod);
             this.Controls.Add(this.lblNacionalidadMod);
-            this.Controls.Add(this.txtPaisOrigenMod);
-            this.Controls.Add(this.lblPaisOrigenMod);
             this.Controls.Add(this.txtLocalidadMod);
             this.Controls.Add(this.lblLocalidadMod);
             this.Controls.Add(this.txtNumeroMod);
@@ -336,14 +329,13 @@
         private System.Windows.Forms.TextBox txtNumeroMod;
         private System.Windows.Forms.Label lblLocalidadMod;
         private System.Windows.Forms.TextBox txtLocalidadMod;
-        private System.Windows.Forms.Label lblPaisOrigenMod;
-        private System.Windows.Forms.TextBox txtPaisOrigenMod;
         private System.Windows.Forms.Label lblNacionalidadMod;
-        private System.Windows.Forms.TextBox txtNacionalidadMod;
         private System.Windows.Forms.Label lblFechaNacimientoMod;
         private System.Windows.Forms.DateTimePicker dtpFechaNacimientoMod;
         private System.Windows.Forms.CheckBox chkHabilitadoMod;
         private System.Windows.Forms.Button butLimpiarMod;
         private System.Windows.Forms.Button butGuardarMod;
+        private System.Windows.Forms.Button btnVolverMod;
+        private System.Windows.Forms.TextBox txtNacionalidadMod;
     }
 }
