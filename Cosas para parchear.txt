@@ -1,0 +1,6 @@
+- arreglar el "volver" en los formularios de RESERVA.
+- Hotel en REGISTRAR ESTADÍA
+- Si no se elige nada en el combo-box de empleado o cliente y se le da aceptar, explota.
+	- Yo mandaría de una el LOGIN y abajo un lbl o botón que diga "Ingresar como cliente"
+	- y en el mismo login pondría el combo del rol a elegir porque da paja la vida.
+
