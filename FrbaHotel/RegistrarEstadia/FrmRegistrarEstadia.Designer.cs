@@ -337,6 +337,7 @@
             this.Controls.Add(this.LblNumeroDeReserva);
             this.Controls.Add(this.LblRegistrarEstadia);
             this.Name = "FrmRegistrarEstadia";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrar Estadia";
             this.Load += new System.EventHandler(this.FrmRegistrarEstadia_Load);
             this.PnlCheckInYOut.ResumeLayout(false);

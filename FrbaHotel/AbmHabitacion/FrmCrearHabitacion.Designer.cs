@@ -196,6 +196,7 @@
             this.Controls.Add(this.nudNroHabitacion);
             this.Controls.Add(this.lblNroHabitacion);
             this.Name = "FrmCrearHabitacion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crear Habitacion";
             ((System.ComponentModel.ISupportInitialize)(this.nudNroHabitacion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPiso)).EndInit();

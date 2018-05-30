@@ -303,6 +303,7 @@
             this.Controls.Add(this.txtNombreMod);
             this.Controls.Add(this.lblNombreMod);
             this.Name = "FrmModificarCliente";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificar cliente";
             this.ResumeLayout(false);
             this.PerformLayout();

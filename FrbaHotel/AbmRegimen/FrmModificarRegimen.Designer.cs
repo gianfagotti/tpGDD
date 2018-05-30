@@ -156,6 +156,7 @@
             this.Controls.Add(this.txtCodigoMod);
             this.Controls.Add(this.lblCodigoMod);
             this.Name = "FrmModificarRegimen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificar Regimen";
             this.ResumeLayout(false);
             this.PerformLayout();

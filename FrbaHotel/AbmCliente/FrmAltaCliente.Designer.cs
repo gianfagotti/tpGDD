@@ -304,6 +304,7 @@
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.lblNombre);
             this.Name = "FrmAltaCliente";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta cliente";
             this.ResumeLayout(false);
             this.PerformLayout();

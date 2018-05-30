@@ -179,6 +179,7 @@
             this.Controls.Add(this.lblEntidad);
             this.Controls.Add(this.cboEntidad);
             this.Name = "ListadoEstadistico";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado estadístico";
             this.Load += new System.EventHandler(this.frmListadoEstadistico_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

@@ -295,6 +295,7 @@
             this.Controls.Add(this.LblRegistrarConsumibles);
             this.Controls.Add(this.CmbDescripcion);
             this.Name = "FrmAgregarConsumibles";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmAgregarConsumibles";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

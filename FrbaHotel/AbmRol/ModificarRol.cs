@@ -21,5 +21,12 @@ namespace FrbaHotel.AbmRol
         {
 
         }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            frmMenuEmpleado menu = new frmMenuEmpleado();
+            this.Hide();
+            menu.ShowDialog();
+        }
     }
 }

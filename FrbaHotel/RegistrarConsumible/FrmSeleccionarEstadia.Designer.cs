@@ -98,6 +98,7 @@
             this.Controls.Add(this.LblCodigoDeEstadia);
             this.Controls.Add(this.LblSeleccionarEstadia);
             this.Name = "FrmSeleccionarEstadia";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmSeleccionEstadia";
             this.ResumeLayout(false);
             this.PerformLayout();

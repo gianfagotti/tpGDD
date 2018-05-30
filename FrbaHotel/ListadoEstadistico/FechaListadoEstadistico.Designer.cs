@@ -106,6 +106,7 @@
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.label1);
             this.Name = "FechaListadoEstadistico";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FechaListadoEstadistico";
             this.ResumeLayout(false);
             this.PerformLayout();
