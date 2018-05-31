@@ -1,6 +1,7 @@
-- arreglar el "volver" en los formularios de RESERVA.
+- Arreglar volver de RESERVA.
 - Hotel en REGISTRAR ESTADÍA
-- Si no se elige nada en el combo-box de empleado o cliente y se le da aceptar, explota.
-	- Yo mandaría de una el LOGIN y abajo un lbl o botón que diga "Ingresar como cliente"
-	- y en el mismo login pondría el combo del rol a elegir porque da paja la vida.
-
+- Las fechas en las que los hoteles no estén habilitadas deben guardarse.
+ 	-hay que hacer una nueva tabla "baja_hotel" con campos id_baja, codigo_hotel, fecha_inicio, fecha_fin
+- Las estadías tienen (o no) varios clientes
+- reserva_estado varchar(50)?
+- Resolver PK y FKs de Habitacion
