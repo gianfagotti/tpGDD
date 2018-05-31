@@ -19,16 +19,23 @@ namespace FrbaHotel.Login
 
         private void btnAceptarTipoUsuario_Click(object sender, EventArgs e)
         {
-            if (cmbTiposDeUsuario.SelectedItem.ToString() == "Cliente"){
-                AbmRol.frmMenuCliente frmMenuCliente = new AbmRol.frmMenuCliente();
-            this.Hide();
-            frmMenuCliente.ShowDialog(); 
-           }
-           else{
-               FrmLogin frmLogin = new FrmLogin();
-               this.Hide();
-               frmLogin.ShowDialog();
+            if (cmbTiposDeUsuario.SelectedItem != null)
+            {
+                if (cmbTiposDeUsuario.SelectedItem.ToString() == "Cliente")
+                {
+                    AbmRol.frmMenuCliente frmMenuCliente = new AbmRol.frmMenuCliente();
+                    this.Hide();
+                    frmMenuCliente.ShowDialog();
+                }
+                else
+                {
+                    FrmLogin frmLogin = new FrmLogin();
+                    this.Hide();
+                    frmLogin.ShowDialog();
+                }
             }
+            else 
+            MessageBox.Show("Debe Seleccionar algún tipo de usuario","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void cmbTiposDeUsuario_SelectedIndexChanged(object sender, EventArgs e)
