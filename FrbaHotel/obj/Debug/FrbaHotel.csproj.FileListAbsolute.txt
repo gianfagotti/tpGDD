@@ -37,7 +37,6 @@ C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion D
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmRol.ModificarRol.resources
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarEstadia.FrmRegistrarEstadia.resources
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmTipoUsuario.resources
-C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csprojResolveAssemblyReference.cache
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.Login.FrmSeleccionarRol.resources
 C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.exe
 C:\Users\ivan_\Desktop\Gestion\tpGDD\tpGDD\FrbaHotel\bin\Debug\FrbaHotel.pdb
@@ -153,3 +152,4 @@ C:\Users\ivan_\Desktop\Gestion\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarCons
 C:\Users\ivan_\Desktop\Gestion\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarConsumible.FrmSeleccionarEstadia.resources
 C:\Users\ivan_\Desktop\Gestion\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarEstadia.FrmRegistrarEstadia.resources
 C:\Users\ivan_\Desktop\Gestion\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
+C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.FormulariosBase.ListadoDeSeleccion.resources
