@@ -1,7 +1,13 @@
 - Arreglar volver de RESERVA.
 - Hotel en REGISTRAR ESTADÍA
-- Las fechas en las que los hoteles no estén habilitadas deben guardarse.
- 	-hay que hacer una nueva tabla "baja_hotel" con campos id_baja, codigo_hotel, fecha_inicio, fecha_fin
 - Las estadías tienen (o no) varios clientes
 - reserva_estado varchar(50)?
-- Resolver PK y FKs de Habitacion
+- IF exists drop (para las tablas y schema)
+
+(Uno de dos probablemente no podamos evitar)
+- PK de ConsumibleXEstadia como hacer la FK con Item_Factura
+correctamente cuando la PK es compuesta?) -> no funciona
+porq la FK tiene que tener ambas columnas de la tabla a la que esta 
+referenciando (de tener PK compuesta) sino no lo permite.
+- Primary key compuesta de item_factura debe unificar estadia y 
+consumible polimorficamente para evitar NULL en alguna
