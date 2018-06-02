@@ -17,4 +17,5 @@ referenciando (de tener PK compuesta) sino no lo permite.
 - Primary key compuesta de item_factura debe unificar estadia y .
 consumible polimorficamente para evitar NULL en alguna.
 
--Agregar a la tabla clientes la columna cliente_domCalle.
+-Ver si en la reserva tiene que ir si o si el nro de habitacion por más
+ que ya tengamos el codigo de habitacion que te tira toda la data.

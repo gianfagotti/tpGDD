@@ -61,7 +61,7 @@ CREATE TABLE FAGD.Reserva(
 	reserva_clienteNroDocumento numeric(18,0),
 	reserva_nombreUsuario nvarchar(255),
 	reserva_codigoHotel numeric (18,0),
-	reserva_nroHabitacion numeric (18,0)
+	reserva_codigoHabitacion numeric (18,0)
 )
 GO
 
@@ -159,6 +159,7 @@ CREATE TABLE FAGD.Cliente(
  cliente_fechaNac datetime,
  cliente_mail varchar(50),
  cliente_nacionalidad nvarchar(255),
+ cliente_calle nvarchar(255),
  cliente_nroCalle numeric(18),
  cliente_piso numeric(18),
  cliente_dpto varchar(5),
@@ -176,6 +177,7 @@ CREATE TABLE FAGD.ErrorCliente(
  errorCliente_fechaNac datetime,
  errorCliente_mail nvarchar(255),
  errorCliente_nacionalidad nvarchar(255),
+ errorCliente_calle nvarchar(255),
  errorCliente_nroCalle numeric(18),
  errorCliente_piso numeric(18),
  errorCliente_dpto nvarchar(255),
@@ -379,7 +381,7 @@ ALTER TABLE FAGD.Reserva ADD CONSTRAINT FK_Reserva_Usuario
 GO
 
 ALTER TABLE FAGD.Reserva ADD CONSTRAINT FK_Reserva_Habitacion
- FOREIGN KEY (reserva_nroHabitacion) REFERENCES FAGD.Habitacion(habitacion_codigo)
+ FOREIGN KEY (reserva_codigoHabitacion) REFERENCES FAGD.Habitacion(habitacion_codigo)
 GO
 
 ALTER TABLE FAGD.BajaHotel ADD CONSTRAINT FK_BajaHotel_Hotel
