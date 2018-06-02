@@ -1,13 +1,20 @@
 - Arreglar volver de RESERVA.
-- Hotel en REGISTRAR ESTADÍA
-- Las estadías tienen (o no) varios clientes
-- reserva_estado varchar(50)?
-- IF exists drop (para las tablas y schema)
 
-(Uno de dos probablemente no podamos evitar)
-- PK de ConsumibleXEstadia como hacer la FK con Item_Factura
+- Hotel en REGISTRAR ESTADÍA.
+
+- Las estadías tienen (o no) varios clientes.
+
+- ¿reserva_estado varchar(50)?
+
+- IF exists drop (para las tablas y schema).
+
+(Uno de dos probablemente no podamos evitar):
+
+- PK de ConsumibleXEstadia como hacer la FK con Item_Factura.
 correctamente cuando la PK es compuesta?) -> no funciona
-porq la FK tiene que tener ambas columnas de la tabla a la que esta 
+porq la FK tiene que tener ambas columnas de la tabla a la que esta.
 referenciando (de tener PK compuesta) sino no lo permite.
-- Primary key compuesta de item_factura debe unificar estadia y 
-consumible polimorficamente para evitar NULL en alguna
+- Primary key compuesta de item_factura debe unificar estadia y .
+consumible polimorficamente para evitar NULL en alguna.
+
+-Agregar a la tabla clientes la columna cliente_domCalle.

@@ -1,4 +1,3 @@
-
 USE [GD1C2018];
 GO
 
@@ -395,9 +394,7 @@ ALTER TABLE FAGD.HotelXRegimen ADD CONSTRAINT FK_HotelXRegimen_Regimen
  FOREIGN KEY (regimen_codigo) REFERENCES FAGD.Regimen(regimen_codigo)
 GO
 
-
-
-
+-----------------------	 CREACIÓN DE INSERTS DE MIGRACIÓN   ----------------------- 
 
 
 
