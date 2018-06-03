@@ -6,8 +6,8 @@ INSERT INTO FAGD.Regimen ([regimen_descripcion],[regimen_precioBase])
 		SELECT DISTINCT [Regimen_Descripcion],[Regimen_Precio]
 		FROM [GD1C2018].[gd_esquema].[Maestra]
 
-INSERT INTO FAGD.Consumible ([consumible_codigo],[consumible_descripcion],[consumible_precio])
-		SELECT DISTINCT [Consumible_Codigo],[Consumible_Descripcion],[Consumible_Precio]
+INSERT INTO FAGD.Consumible ([consumible_descripcion],[consumible_precio])
+		SELECT DISTINCT [Consumible_Descripcion],[Consumible_Precio]
 		FROM [GD1C2018].[gd_esquema].[Maestra]
 
 INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
@@ -17,15 +17,19 @@ INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nom
 		FROM [GD1C2018].[gd_esquema].[Maestra]
 
 
-INSERT INTO FAGD.Reserva ([reserva_codigo],[reserva_fechaInicio],[reserva_cantNoches],[reserva_codigoRegimen],[reserva_clienteNroDocumento],[reserva_codigoHotel],[reserva_nroHabitacion])
+INSERT INTO FAGD.Reserva ([reserva_codigo],[reserva_fechaInicio],[reserva_cantNoches],[reserva_codigoRegimen],[reserva_clienteNroDocumento],[reserva_codigoHotel],[reserva_codigoHabitacion])
 		--[reserva_nombreUsuario],--
 		
-		SELECT DISTINCT [Reserva_Codigo],[Reserva_Fecha_Inicio],[Reserva_Cant_Noches],
-		[(SELECT regimen_codigo FROM FAGD.Regimen, gd_esquema.Maestra WHERE regimen_descripcion = Regimen_Descripcion)],
+		/*SELECT DISTINCT [Reserva_Codigo],[Reserva_Fecha_Inicio],[Reserva_Cant_Noches],
+		[SELECT regimen_codigo FROM FAGD.Regimen, gd_esquema.Maestra WHERE regimen_descripcion = Regimen_Descripcion],
 		[Cliente_Pasaporte_Nro],
-		[(SELECT hotel_codigo FROM FAGD.Hotel, gd_esquema.Maestra WHERE hotel_calle = Hotel_Calle and hotel_nroCalle = Hotel_Nro_Calle)]
-		--[(SELECT habitacion_codigo FROM FAGD.Habitacion, gd_esquema.Maestra WHERE NO ME DA EL TIEMPO PENSAR ESTE SELECT)]--
-		FROM [GD1C2018].[gd_esquema].[Maestra]
+		[SELECT hotel_codigo FROM FAGD.Hotel, gd_esquema.Maestra WHERE hotel_calle = Hotel_Calle and hotel_nroCalle = Hotel_Nro_Calle],
+		[SELECT habitacion_codigo FROM FAGD.Habitacion, gd_esquema.Maestra WHERE habitacion_nro = Habitacion_Numero and habitacion_codigoHotel = reserva_codigoHotel]
+		FROM [GD1C2018].[gd_esquema].[Maestra]*/
+		SELECT DISTINCT M.Reserva_codigo, M.Reserva_Fecha_Inicio, M.Reserva_Cant_Noches, R.regimen_codigo, M.Cliente_Pasaporte_Nro, H.hotel_codigo, A.habitacion_codigo
+		FROM FAGD.Regimen R, FAGD.Hotel H, FAGD.Habitacion A, gd_esquema.Maestra M
+		WHERE M.Regimen_Descripcion = R.regimen_descripcion and M.Hotel_Calle = H.hotel_calle and M.Hotel_Nro_Calle = H.hotel_nroCalle and M.Habitacion_Numero = A.habitacion_nro
+		ORDER BY M.Reserva_Codigo
 GO
 -------------------------------- ROLES Y FUNCIONALIDADES INICIALES --------------------------------- 
 INSERT INTO FAGD.Rol (rol_nombre,rol_estado)	
