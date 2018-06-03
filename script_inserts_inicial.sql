@@ -11,9 +11,9 @@ INSERT INTO FAGD.Consumible ([consumible_descripcion],[consumible_precio])
 		FROM [GD1C2018].[gd_esquema].[Maestra]
 
 INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
-		[cliente_nroCalle],[cliente_piso],[cliente_dpto],[cliente_nacionalidad])
+		[cliente_nroCalle],[cliente_piso],[cliente_dpto], [cliente_nacionalidad], [cliente_tipoDocumento], [cliente_telefono], [cliente_estado], [cliente_localidad])
 		SELECT DISTINCT [Cliente_Pasaporte_Nro],[Cliente_Apellido],[Cliente_Nombre],[Cliente_Fecha_Nac],[Cliente_Mail],[Cliente_Dom_Calle],
-		[Cliente_Nro_Calle],[Cliente_Piso],[Cliente_Depto],[Cliente_Nacionalidad]
+		[Cliente_Nro_Calle],[Cliente_Piso],[Cliente_Depto],[Cliente_Nacionalidad],'Pasaporte', 000, 1, NULL
 		FROM [GD1C2018].[gd_esquema].[Maestra]
 
 
@@ -30,7 +30,13 @@ INSERT INTO FAGD.Reserva ([reserva_codigo],[reserva_fechaInicio],[reserva_cantNo
 		FROM FAGD.Regimen R, FAGD.Hotel H, FAGD.Habitacion A, gd_esquema.Maestra M
 		WHERE M.Regimen_Descripcion = R.regimen_descripcion and M.Hotel_Calle = H.hotel_calle and M.Hotel_Nro_Calle = H.hotel_nroCalle and M.Habitacion_Numero = A.habitacion_nro
 		ORDER BY M.Reserva_Codigo
-GO
+
+INSERT INTO FAGD.HabitacionTipo(habitacionTipo_codigo, habitacionTipo_descripcion, habitacionTipo_porcentual)
+		
+		SELECT DISTINCT Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual
+		FROM gd_esquema.Maestra 
+
+
 -------------------------------- ROLES Y FUNCIONALIDADES INICIALES --------------------------------- 
 INSERT INTO FAGD.Rol (rol_nombre,rol_estado)	
 		values ('administrador',1),('recepcionista',1),('cliente',1)
