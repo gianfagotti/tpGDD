@@ -136,6 +136,7 @@ GO
 
 CREATE TABLE FAGD.Factura(
  factura_nro numeric(18) NOT NULL,
+ factura_codigoEstadia numeric(18),
  factura_fecha datetime,
  factura_total numeric(18,2),
  factura_estado numeric(1),
@@ -320,16 +321,18 @@ ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT FK_ItemFactura_Factura
  FOREIGN KEY (itemFactura_nro) REFERENCES FAGD.Factura(factura_nro)
 GO
 
-ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT FK_ItemFactura_Estadia
- FOREIGN KEY (item_codigo) REFERENCES FAGD.Estadia(estadia_codigo)
-GO
 
+--------------- TEMA FACTURA E ITEM FACTURA--------------
 ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT FK_ItemFactura_ConsumibleXEstadia
- FOREIGN KEY (item_codigo) REFERENCES FAGD.ConsumibleXEstadia(consumible_codigo,estadia_codigo)
+ FOREIGN KEY (item_codigo) REFERENCES FAGD.ConsumibleXEstadia(consumible_codigo)
 GO
 
 ALTER TABLE FAGD.Factura ADD CONSTRAINT FK_Factura_Cliente
  FOREIGN KEY (factura_documentoCliente) REFERENCES FAGD.Cliente(cliente_nroDocumento)
+GO
+
+ALTER TABLE FAGD.Factura ADD CONSTRAINT FK_Factura_Estadia
+ FOREIGN KEY (factura_codigoEstadia) REFERENCES FAGD.Estadia(estadia_codigo)
 GO
 
 ALTER TABLE FAGD.Pago ADD CONSTRAINT FK_Pago_Factura
@@ -397,12 +400,6 @@ ALTER TABLE FAGD.HotelXRegimen ADD CONSTRAINT FK_HotelXRegimen_Regimen
 GO
 
 -----------------------	 CREACIÓN DE INSERTS DE MIGRACIÓN   ----------------------- 
-
-
-
-
-
-
 
 
 

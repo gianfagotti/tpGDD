@@ -19,3 +19,5 @@ consumible polimorficamente para evitar NULL en alguna.
 
 -Ver si en la reserva tiene que ir si o si el nro de habitacion por más
  que ya tengamos el codigo de habitacion que te tira toda la data.
+
+-Las reservas sin datos de "Estadias" es posible que sean porque la persona no se presentó.
