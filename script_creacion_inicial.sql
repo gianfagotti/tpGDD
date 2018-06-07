@@ -283,7 +283,7 @@ ALTER TABLE FAGD.Consumible ADD CONSTRAINT PK_Consumible
 GO
 
 ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT PK_ConsumibleXEstadia
- PRIMARY KEY CLUSTERED (consumible_codigo,estadia_codigo)
+PRIMARY KEY CLUSTERED (consumible_codigo,estadia_codigo)
 GO
 
 ALTER TABLE FAGD.BajaHotel ADD CONSTRAINT PK_BajaHotel
