@@ -13,11 +13,33 @@ INSERT INTO FAGD.Consumible ([consumible_descripcion],[consumible_precio])
 		FROM [GD1C2018].[gd_esquema].[Maestra]
 GO
 
-INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
-		[cliente_nroCalle],[cliente_piso],[cliente_dpto], [cliente_nacionalidad], [cliente_tipoDocumento], [cliente_telefono], [cliente_estado], [cliente_localidad])
-		SELECT DISTINCT [Cliente_Pasaporte_Nro],[Cliente_Apellido],[Cliente_Nombre],[Cliente_Fecha_Nac],[Cliente_Mail],[Cliente_Dom_Calle],
+INSERT INTO FAGD.Estadia(estadia_fechaInicio,estadia_cantNoches,estadia_clienteNroDocumento,estadia_codigoReserva)
+		SELECT DISTINCT Estadia_Fecha_Inicio, Estadia_Cant_Noches, Cliente_Pasaporte_Nro, Reserva_codigo
+		FROM gd_esquema.Maestra 
+GO
+
+--INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
+		--[cliente_nroCalle],[cliente_piso],[cliente_dpto], [cliente_nacionalidad], [cliente_tipoDocumento], [cliente_telefono], [cliente_estado], [cliente_localidad])
+		--SELECT DISTINCT [Cliente_Pasaporte_Nro],[Cliente_Apellido],[Cliente_Nombre],[Cliente_Fecha_Nac],[Cliente_Mail],[Cliente_Dom_Calle],
+		--[Cliente_Nro_Calle],[Cliente_Piso],[Cliente_Depto],[Cliente_Nacionalidad],'Pasaporte', 000, 1, NULL
+		--FROM [GD1C2018].[gd_esquema].[Maestra]
+		--WHERE [Cliente_Pasaporte_Nro] != 5833450
+--GO
+
+--INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellido],[errorCliente_nombre],[errorCliente_fechaNac],[errorCliente_mail],[errorCliente_calle],
+	--	[errorCliente_nroCalle],[errorCliente_piso],[errorCliente_dpto], [errorCliente_nacionalidad], [errorCliente_tipoDocumento], [errorCliente_telefono], [errorCliente_estado], [errorCliente_localidad])
+	--	SELECT DISTINCT [Cliente_Pasaporte_Nro],[Cliente_Apellido],[Cliente_Nombre],[Cliente_Fecha_Nac],[Cliente_Mail],[Cliente_Dom_Calle],
+	--	[Cliente_Nro_Calle],[Cliente_Piso],[Cliente_Depto],[Cliente_Nacionalidad],'Pasaporte', 000, 1, NULL
+	--	FROM [GD1C2018].[gd_esquema].[Maestra]
+	--	WHERE [Cliente_Pasaporte_Nro] = 5833450
+--GO
+
+INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellido],[errorCliente_nombre],[errorCliente_fechaNac],[errorCliente_mail],[errorCliente_calle],[errorCliente_nroCalle],[errorCliente_piso],[errorCliente_dpto], [errorCliente_nacionalidad], [errorCliente_tipoDocumento], [errorCliente_telefono], [errorCliente_estado], [errorCliente_localidad])
+SELECT DISTINCT [Cliente_Pasaporte_Nro],[Cliente_Apellido],[Cliente_Nombre],[Cliente_Fecha_Nac],[Cliente_Mail],[Cliente_Dom_Calle],
 		[Cliente_Nro_Calle],[Cliente_Piso],[Cliente_Depto],[Cliente_Nacionalidad],'Pasaporte', 000, 1, NULL
-		FROM [GD1C2018].[gd_esquema].[Maestra]
+		FROM [GD1C2018].[gd_esquema].[Maestra] 
+		WHERE [Cliente_Pasaporte_Nro] IN
+			(SELECT [Cliente_Pasaporte_Nro] FROM [GD1C2018].[gd_esquema].[Maestra] GROUP BY [Cliente_Pasaporte_Nro] HAVING COUNT(*) > 1)
 GO
 
 INSERT INTO FAGD.HabitacionTipo(habitacionTipo_codigo, habitacionTipo_descripcion, habitacionTipo_porcentual)
@@ -28,7 +50,7 @@ GO
 INSERT INTO FAGD.Habitacion(habitacion_codigoHotel, habitacion_nro, habitacion_tipoCodigo, habitacion_piso, habitacion_ubicacion, habitacion_descripcion,habitacion_estado)
 	SELECT DISTINCT Hotel.hotel_codigo, Maestra.Habitacion_Numero, Maestra.Habitacion_Tipo_Codigo,  Maestra.Habitacion_Piso, UPPER(Maestra.Habitacion_Frente), UPPER(Maestra.Habitacion_Tipo_Descripcion), 1
 	FROM gd_esquema.Maestra Maestra, FAGD.Hotel Hotel
-	WHERE Hotel.hotel_calle = M.Hotel_Calle AND Hotel.hotel_nroCalle = M.Hotel_Nro_Calle AND Hotel.hotel_ciudad = M.Hotel_Ciudad AND Hotel.hotel_calle IS NOT NULL
+	WHERE Hotel.hotel_calle = Maestra.Hotel_Calle AND Hotel.hotel_nroCalle = Maestra.Hotel_Nro_Calle AND Hotel.hotel_ciudad = Maestra.Hotel_Ciudad AND Hotel.hotel_calle IS NOT NULL
 GO
 
 
@@ -38,11 +60,6 @@ INSERT INTO FAGD.Reserva ([reserva_codigo],[reserva_fechaInicio],[reserva_cantNo
 		FROM FAGD.Regimen R, FAGD.Hotel H, FAGD.Habitacion A, gd_esquema.Maestra M
 		WHERE M.Regimen_Descripcion = R.regimen_descripcion and M.Hotel_Calle = H.hotel_calle and M.Hotel_Nro_Calle = H.hotel_nroCalle and M.Habitacion_Numero = A.habitacion_nro
 		ORDER BY M.Reserva_Codigo
-GO
-
-INSERT INTO FAGD.Estadia(estadia_fechaInicio,estadia_cantNoches,estadia_clienteNroDocumento,estadia_codigoReserva)
-		SELECT DISTINCT Estadia_Fecha_Inicio, Estadia_Cant_Noches, Cliente_Pasaporte_Nro, Reserva_codigo
-		FROM gd_esquema.Maestra 
 GO
 
 

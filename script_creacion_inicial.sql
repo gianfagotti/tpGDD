@@ -30,7 +30,7 @@ CREATE TABLE FAGD.HotelXRegimen(
 GO
 
 CREATE TABLE FAGD.Habitacion(
-	habitacion_codigo numeric(18,0) NOT NULL,
+	habitacion_codigo numeric(18,0) IDENTITY (1,1) NOT NULL,
 	habitacion_codigoHotel numeric (18,0) NOT NULL,
 	habitacion_nro numeric (18,0) NOT NULL,
 	habitacion_tipoCodigo numeric (18,0) NOT NULL,
@@ -207,7 +207,7 @@ CREATE TABLE FAGD.Estadia(
 estadia_codigo numeric(18) IDENTITY(1,1) NOT NULL,
 estadia_fechaInicio datetime,
 estadia_cantNoches numeric(18),
-estadia_clienteNroDocumento numeric (18),
+estadia_clienteNroDocumento numeric (18) NOT NULL,
 estadia_codigoReserva numeric(18) NOT NULL
 )
 GO

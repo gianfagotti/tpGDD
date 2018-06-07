@@ -21,3 +21,5 @@ consumible polimorficamente para evitar NULL en alguna.
  que ya tengamos el codigo de habitacion que te tira toda la data.
 
 -Las reservas sin datos de "Estadias" es posible que sean porque la persona no se presentó.
+
+-Hay clientes que tienen el nro de pasaporte igual a pesar de ser distintas personas. Algo similar pasa con las reservas aunque el campo que esta repetido no lo pude idnetificar. Hay que revisar eso y ver como lo resolvemos (hay un prototipo de insert hecho en el codigo con la tabla errorCliente que hay que probarlo).
