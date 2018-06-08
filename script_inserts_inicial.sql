@@ -13,11 +13,6 @@ INSERT INTO FAGD.Consumible ([consumible_descripcion],[consumible_precio])
 		FROM [GD1C2018].[gd_esquema].[Maestra]
 GO
 
-INSERT INTO FAGD.Estadia(estadia_fechaInicio,estadia_cantNoches,estadia_clienteNroDocumento,estadia_codigoReserva)
-		SELECT DISTINCT Estadia_Fecha_Inicio, Estadia_Cant_Noches, Cliente_Pasaporte_Nro, Reserva_codigo
-		FROM gd_esquema.Maestra 
-GO
-
 INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellido],[errorCliente_nombre],[errorCliente_fechaNac],[errorCliente_mail],[errorCliente_calle],[errorCliente_nroCalle],[errorCliente_piso],[errorCliente_dpto], [errorCliente_nacionalidad], [errorCliente_tipoDocumento], [errorCliente_telefono], [errorCliente_estado], [errorCliente_localidad])
 SELECT DISTINCT A.[Cliente_Pasaporte_Nro],A.[Cliente_Apellido], A.[Cliente_Nombre], A.[Cliente_Fecha_Nac], A.[Cliente_Mail], A.[Cliente_Dom_Calle], A.[Cliente_Nro_Calle],A.[Cliente_Piso],A.[Cliente_Depto],A.[Cliente_Nacionalidad],'Pasaporte', 000, 0, NULL
 FROM gd_esquema.Maestra A JOIN gd_esquema.Maestra B ON (A.[Cliente_Pasaporte_Nro] = B.Cliente_Pasaporte_Nro AND A.Cliente_Apellido <> B.Cliente_Apellido AND A.Cliente_Nombre <> B.Cliente_Nombre)
@@ -31,6 +26,8 @@ INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nom
 		FROM gd_esquema.Maestra
 		WHERE [Cliente_Pasaporte_Nro] NOT IN(SELECT [errorCliente_nroDocumento] FROM FAGD.ErrorCliente)
 GO
+
+
 
 INSERT INTO FAGD.HabitacionTipo(habitacionTipo_codigo, habitacionTipo_descripcion, habitacionTipo_porcentual)
 		SELECT DISTINCT Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual
