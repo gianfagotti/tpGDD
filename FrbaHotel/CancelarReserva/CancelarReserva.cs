@@ -12,9 +12,13 @@ namespace FrbaHotel.CancelarReserva
 {
     public partial class CancelarReserva : Form
     {
-        public CancelarReserva()
+        Form ultimoFormulario = new Form();
+
+        public CancelarReserva(Form form)
         {
             InitializeComponent();
+
+            ultimoFormulario = form;
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -29,9 +33,8 @@ namespace FrbaHotel.CancelarReserva
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            AbmRol.frmMenuCliente frmMenuCliente = new AbmRol.frmMenuCliente();
             this.Hide();
-            frmMenuCliente.ShowDialog();
+            ultimoFormulario.Show();
         }
     }
 }

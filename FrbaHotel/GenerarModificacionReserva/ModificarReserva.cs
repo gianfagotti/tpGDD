@@ -12,9 +12,12 @@ namespace FrbaHotel.GenerarModificacionReserva
 {
     public partial class ModificarReserva : Form
     {
-        public ModificarReserva()
+        Form ultimoFormulario = new Form();
+
+        public ModificarReserva(Form form)
         {
             InitializeComponent();
+            ultimoFormulario = form;
         }
 
         private void btnVerificar_Click(object sender, EventArgs e)
@@ -27,9 +30,8 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            AbmRol.frmMenuCliente frmMenuCliente = new AbmRol.frmMenuCliente();
             this.Hide();
-            frmMenuCliente.ShowDialog();
+            ultimoFormulario.Show();
         }
         }
     }

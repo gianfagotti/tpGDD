@@ -26,16 +26,16 @@ namespace FrbaHotel.AbmRol
 
         private void btnModificarReserva_Click(object sender, EventArgs e)
         {
-            GenerarModificacionReserva.ModificarReserva frmModificarReserva = new GenerarModificacionReserva.ModificarReserva();
+            GenerarModificacionReserva.ModificarReserva frmModificarReserva = new GenerarModificacionReserva.ModificarReserva(this);
             this.Hide();
-            frmModificarReserva.ShowDialog();
+            frmModificarReserva.Show();
         }
 
         private void btnCancelarReserva_Click(object sender, EventArgs e)
         {
-            CancelarReserva.CancelarReserva frmCancelarReserva = new CancelarReserva.CancelarReserva();
+            CancelarReserva.CancelarReserva frmCancelarReserva = new CancelarReserva.CancelarReserva(this);
             this.Hide();
-            frmCancelarReserva.ShowDialog();
+            frmCancelarReserva.Show();
         }
 
         private void btnAltaRol_Click(object sender, EventArgs e)
