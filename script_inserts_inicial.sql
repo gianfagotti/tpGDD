@@ -11,12 +11,13 @@ GO
 INSERT INTO FAGD.Consumible ([consumible_descripcion],[consumible_precio])
 		SELECT DISTINCT [Consumible_Descripcion],[Consumible_Precio]
 		FROM [GD1C2018].[gd_esquema].[Maestra]
+		WHERE Consumible_Codigo IS NOT NULL
 GO
 
 INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellido],[errorCliente_nombre],[errorCliente_fechaNac],[errorCliente_mail],[errorCliente_calle],[errorCliente_nroCalle],[errorCliente_piso],[errorCliente_dpto], [errorCliente_nacionalidad], [errorCliente_tipoDocumento], [errorCliente_telefono], [errorCliente_estado], [errorCliente_localidad])
-SELECT DISTINCT A.[Cliente_Pasaporte_Nro],A.[Cliente_Apellido], A.[Cliente_Nombre], A.[Cliente_Fecha_Nac], A.[Cliente_Mail], A.[Cliente_Dom_Calle], A.[Cliente_Nro_Calle],A.[Cliente_Piso],A.[Cliente_Depto],A.[Cliente_Nacionalidad],'Pasaporte', 000, 0, NULL
-FROM gd_esquema.Maestra A JOIN gd_esquema.Maestra B ON (A.[Cliente_Pasaporte_Nro] = B.Cliente_Pasaporte_Nro AND A.Cliente_Apellido <> B.Cliente_Apellido AND A.Cliente_Nombre <> B.Cliente_Nombre)
-ORDER BY Cliente_Pasaporte_Nro, Cliente_Apellido, Cliente_Nombre
+		SELECT DISTINCT A.[Cliente_Pasaporte_Nro],A.[Cliente_Apellido], A.[Cliente_Nombre], A.[Cliente_Fecha_Nac], A.[Cliente_Mail], A.[Cliente_Dom_Calle], A.[Cliente_Nro_Calle],A.[Cliente_Piso],A.[Cliente_Depto],A.[Cliente_Nacionalidad],'Pasaporte', 000, 0, NULL
+		FROM gd_esquema.Maestra A JOIN gd_esquema.Maestra B ON (A.[Cliente_Pasaporte_Nro] = B.Cliente_Pasaporte_Nro AND A.Cliente_Apellido <> B.Cliente_Apellido AND A.Cliente_Nombre <> B.Cliente_Nombre)
+		ORDER BY Cliente_Pasaporte_Nro, Cliente_Apellido, Cliente_Nombre
 GO
 
 INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
@@ -27,8 +28,6 @@ INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nom
 		WHERE [Cliente_Pasaporte_Nro] NOT IN(SELECT [errorCliente_nroDocumento] FROM FAGD.ErrorCliente)
 GO
 
-
-
 INSERT INTO FAGD.HabitacionTipo(habitacionTipo_codigo, habitacionTipo_descripcion, habitacionTipo_porcentual)
 		SELECT DISTINCT Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual
 		FROM gd_esquema.Maestra 
@@ -38,6 +37,7 @@ INSERT INTO FAGD.Habitacion(habitacion_codigoHotel, habitacion_nro, habitacion_t
 	SELECT DISTINCT Hotel.hotel_codigo, Maestra.Habitacion_Numero, Maestra.Habitacion_Tipo_Codigo,  Maestra.Habitacion_Piso, UPPER(Maestra.Habitacion_Frente), UPPER(Maestra.Habitacion_Tipo_Descripcion), 1
 	FROM gd_esquema.Maestra Maestra, FAGD.Hotel Hotel
 	WHERE Hotel.hotel_calle = Maestra.Hotel_Calle AND Hotel.hotel_nroCalle = Maestra.Hotel_Nro_Calle AND Hotel.hotel_ciudad = Maestra.Hotel_Ciudad AND Hotel.hotel_calle IS NOT NULL
+	ORDER BY Hotel.hotel_codigo
 GO
 
 
@@ -48,11 +48,32 @@ INSERT INTO FAGD.Reserva ([reserva_codigo],[reserva_fechaInicio],[reserva_cantNo
 		ORDER BY M.Reserva_Codigo
 GO
 
+INSERT INTO FAGD.Estadia (estadia_fechaInicio, estadia_cantNoches, estadia_clienteNroDocumento, estadia_codigoReserva)
+		SELECT DISTINCT M.Estadia_Fecha_Inicio, M.Estadia_Cant_Noches, M.Cliente_Pasaporte_Nro, M.Reserva_Codigo
+		FROM gd_esquema.Maestra M, FAGD.Reserva R 
+		WHERE R.reserva_clienteNroDocumento = M.Cliente_Pasaporte_Nro AND R.reserva_codigo = M.Reserva_Codigo
+		ORDER BY M.Reserva_Codigo
+GO
+
+
 INSERT INTO FAGD.Factura(factura_nro, factura_codigoEstadia, factura_fecha, factura_total, factura_documentoCliente) 
 		SELECT DISTINCT Maestra.Factura_Nro, Estadia.estadia_codigo, Maestra.Factura_Fecha, Maestra.Factura_Total,  Maestra.Cliente_Pasaporte_Nro
 		FROM gd_esquema.Maestra Maestra, FAGD.Estadia Estadia
 		WHERE Estadia.estadia_clienteNroDocumento = Maestra.Cliente_Pasaporte_Nro AND Estadia.estadia_codigoReserva = Maestra.Reserva_codigo
 GO
+
+INSERT INTO FAGD.HotelXRegimen (hotel_codigo,regimen_codigo)
+		SELECT DISTINCT hotel_codigo, regimen_codigo
+		FROM gd_esquema.Maestra Maestra, FAGD.Hotel Hotel, FAGD.Regimen Regimen
+		WHERE Hotel.hotel_calle = Maestra.Hotel_Calle AND Hotel.hotel_nroCalle = Maestra.Hotel_Nro_Calle AND Hotel.hotel_ciudad = Maestra.Hotel_Ciudad AND Regimen.regimen_descripcion = Maestra.Regimen_Descripcion AND Regimen.regimen_precioBase = Maestra.Regimen_Precio
+		ORDER BY Hotel.hotel_codigo
+GO
+
+/**INSERT INTO ConsumibleXEstadia (consumible_codigo, consumible_cantidad, estadia_codigo)
+		SELECT DISTINCT consumible_codigo, M.Item_Factura_Cantidad, estadia_codigo
+		FROM gd_esquema.Maestra M, FAGD.Consumible C, FAGD.Estadia E
+		WHERE C.consumible_codigo = M.Consumible_Codigo AND 
+*/
 
 -------------------------------- ROLES Y FUNCIONALIDADES INICIALES --------------------------------- 
 
@@ -76,3 +97,16 @@ GO
 INSERT INTO FAGD.RolXFuncionalidad(rol_codigo,funcionalidad_codigo)
 		values (3,1)
 GO
+
+INSERT INTO FAGD.Usuario (usuario_username, usuario_nombre, usuario_apellido, usuario_direccion, usuario_mail, usuario_telefono, usuario_fechaNacimiento, usuario_estado)
+		values ('IRAA','Ivan','Arnaudo','Calle Falsa 123','ivan.arnaudo@gmail.com','11111111','02/09/96',1)
+GO
+
+INSERT INTO FAGD.UsuarioXRol(usuario_username,rol_codigo)
+		values('IRAA',1)
+GO
+
+INSERT INTO FAGD.UsuarioXHotel(usuario_username,hotel_codigo)
+		values('IRAA',1),('IRAA',2),('IRAA',3),('IRAA',4),('IRAA',5),('IRAA',6)
+GO
+
