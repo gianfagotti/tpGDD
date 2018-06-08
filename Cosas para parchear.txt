@@ -1,4 +1,4 @@
-- Arreglar volver de RESERVA.
+- Arreglar volver de RESERVA (ARREGLADO)
 
 - Hotel en REGISTRAR ESTADÍA.
 

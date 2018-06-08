@@ -20,9 +20,9 @@ namespace FrbaHotel.AbmRol
         private void btnNuevaReserva_Click(object sender, EventArgs e)
         {
 
-            GenerarModificacionReserva.GenerarReserva frmGenerarReserva = new GenerarModificacionReserva.GenerarReserva();
+            GenerarModificacionReserva.GenerarReserva frmGenerarReserva = new GenerarModificacionReserva.GenerarReserva(this);
             this.Hide();
-            frmGenerarReserva.ShowDialog();
+            frmGenerarReserva.Show();
 
         }
 

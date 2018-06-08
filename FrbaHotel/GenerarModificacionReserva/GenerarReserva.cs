@@ -7,14 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FrbaHotel.AbmRol;
 
 namespace FrbaHotel.GenerarModificacionReserva
 {
     public partial class GenerarReserva : Form
     {
-        public GenerarReserva()
+        Form ultimoFormulario = new Form();
+
+        public GenerarReserva(Form form)
         {
             InitializeComponent();
+            
+            ultimoFormulario = form;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -34,9 +39,10 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            AbmRol.frmMenuCliente frmMenuCliente = new AbmRol.frmMenuCliente();
+            //AbmRol.frmMenuCliente frmMenuCliente = new AbmRol.frmMenuCliente();
             this.Hide();
-            frmMenuCliente.ShowDialog();
+            //frmMenuCliente.ShowDialog();
+            ultimoFormulario.Show();
         }
 
     }

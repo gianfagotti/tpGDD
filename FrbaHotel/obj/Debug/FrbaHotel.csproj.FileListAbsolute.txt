@@ -154,3 +154,6 @@ C:\Users\ivan_\Desktop\Gestion\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarEsta
 C:\Users\ivan_\Desktop\Gestion\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
 C:\Users\Alvaro Dati\Desktop\UTN\Gestión de Datos\Trabajo Practico\Aplicacion Desktop\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.FormulariosBase.ListadoDeSeleccion.resources
 C:\Users\ivan_\Desktop\Gestion\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.FormulariosBase.ListadoDeSeleccion.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.FormulariosBase.ListadoDeSeleccion.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarConsumible.FrmAgregarConsumibles.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarConsumible.FrmSeleccionarEstadia.resources
