@@ -41,12 +41,18 @@ INSERT INTO FAGD.Habitacion(habitacion_codigoHotel, habitacion_nro, habitacion_t
 GO
 
 
-INSERT INTO FAGD.Reserva ([reserva_codigo],[reserva_fechaInicio],[reserva_cantNoches],[reserva_codigoRegimen],[reserva_clienteNroDocumento],[reserva_codigoHotel],[reserva_codigoHabitacion])
-		SELECT DISTINCT M.Reserva_codigo, M.Reserva_Fecha_Inicio, M.Reserva_Cant_Noches, R.regimen_codigo, M.Cliente_Pasaporte_Nro, H.hotel_codigo, A.habitacion_codigo
-		FROM FAGD.Regimen R, FAGD.Hotel H, FAGD.Habitacion A, gd_esquema.Maestra M
-		WHERE M.Regimen_Descripcion = R.regimen_descripcion and M.Hotel_Calle = H.hotel_calle and M.Hotel_Nro_Calle = H.hotel_nroCalle and M.Habitacion_Numero = A.habitacion_nro 
+INSERT INTO FAGD.Reserva ([reserva_codigo],[reserva_fechaInicio],[reserva_cantNoches],[reserva_codigoRegimen],[reserva_clienteNroDocumento],[reserva_codigoHotel])
+		SELECT DISTINCT M.Reserva_codigo, M.Reserva_Fecha_Inicio, M.Reserva_Cant_Noches, R.regimen_codigo, M.Cliente_Pasaporte_Nro, H.hotel_codigo
+		FROM FAGD.Regimen R, FAGD.Hotel H, gd_esquema.Maestra M
+		WHERE M.Regimen_Descripcion = R.regimen_descripcion and M.Hotel_Calle = H.hotel_calle and M.Hotel_Nro_Calle = H.hotel_nroCalle 
 		ORDER BY M.Reserva_Codigo
 GO
+
+INSERT INTO FAGD.ReservaxHabitacion(reserva_codigo, habitacion_codigo)
+		SELECT DISTINCT R.reserva_codigo, H.habitacion_codigo
+		FROM gd_esquema.Maestra M, FAGD.Habitacion H, FAGD.Reserva R
+		WHERE M.Habitacion_Numero = H.habitacion_nro and M.Reserva_Codigo = R.reserva_codigo
+		ORDER BY reserva_codigo
 
 INSERT INTO FAGD.Estadia (estadia_fechaInicio, estadia_cantNoches, estadia_clienteNroDocumento, estadia_codigoReserva)
 		SELECT DISTINCT M.Estadia_Fecha_Inicio, M.Estadia_Cant_Noches, M.Cliente_Pasaporte_Nro, M.Reserva_Codigo

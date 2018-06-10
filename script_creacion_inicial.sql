@@ -60,8 +60,13 @@ CREATE TABLE FAGD.Reserva(
 	reserva_codigoRegimen numeric(18),
 	reserva_clienteNroDocumento numeric(18,0),
 	reserva_nombreUsuario nvarchar(255),
-	reserva_codigoHotel numeric (18,0),
-	reserva_codigoHabitacion numeric (18,0)
+	reserva_codigoHotel numeric (18,0)
+)
+GO
+
+CREATE TABLE FAGD.ReservaXHabitacion(
+	reserva_codigo numeric(18,0) NOT NULL,
+	habitacion_codigo numeric(18,0) NOT NULL
 )
 GO
 
@@ -286,6 +291,9 @@ ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT PK_ConsumibleXEstadia
 PRIMARY KEY CLUSTERED (consumible_codigo,estadia_codigo)
 GO
 
+ALTER TABLE FAGD.ReservaXHabitacion ADD CONSTRAINT PK_ReservaXHabitacion
+PRIMARY KEY CLUSTERED (reserva_codigo, habitacion_codigo)
+
 ALTER TABLE FAGD.BajaHotel ADD CONSTRAINT PK_BajaHotel
  PRIMARY KEY CLUSTERED (id_baja)
 GO
@@ -383,9 +391,6 @@ ALTER TABLE FAGD.Reserva ADD CONSTRAINT FK_Reserva_Usuario
  FOREIGN KEY (reserva_nombreUsuario) REFERENCES FAGD.Usuario(usuario_username)
 GO
 
-ALTER TABLE FAGD.Reserva ADD CONSTRAINT FK_Reserva_Habitacion
- FOREIGN KEY (reserva_codigoHabitacion) REFERENCES FAGD.Habitacion(habitacion_codigo)
-GO
 
 ALTER TABLE FAGD.BajaHotel ADD CONSTRAINT FK_BajaHotel_Hotel
  FOREIGN KEY (hotel_codigo) REFERENCES FAGD.Hotel(hotel_codigo)
@@ -397,6 +402,14 @@ GO
 
 ALTER TABLE FAGD.HotelXRegimen ADD CONSTRAINT FK_HotelXRegimen_Regimen
  FOREIGN KEY (regimen_codigo) REFERENCES FAGD.Regimen(regimen_codigo)
+GO
+
+ALTER TABLE FAGD.ReservaXHabitacion ADD CONSTRAINT FK_ReservaXHabitacion_Reserva
+ FOREIGN KEY (reserva_codigo) REFERENCES FAGD.Reserva(reserva_codigo)
+GO
+
+ALTER TABLE FAGD.ReservaXHabitacion ADD CONSTRAINT FK_ReservaXHabitacion_Habitacion
+ FOREIGN KEY (habitacion_codigo) REFERENCES FAGD.Habitacion(habitacion_codigo)
 GO
 
 -----------------------	 CREACIÓN DE INSERTS DE MIGRACIÓN   ----------------------- 
