@@ -131,22 +131,24 @@ CREATE TABLE FAGD.Funcionalidad(
 )
 GO
 
-CREATE TABLE FAGD.ItemFactura(
- itemFactura_nro numeric(18) NOT NULL,
- item_codigo numeric(18) NOT NULL,
- itemConsumible_cantidad numeric(5),
- itemConsumisiones_total numeric (18,2)
-) 
-GO
-
 CREATE TABLE FAGD.Factura(
  factura_nro numeric(18) NOT NULL,
  factura_codigoEstadia numeric(18),
+ factura_codigoHotel numeric (18),
  factura_fecha datetime,
  factura_total numeric(18,2),
- factura_estado numeric(1),
- factura_documentoCliente numeric(18)
-)
+ factura_documentoCliente numeric(18),
+ factura_estado numeric(1)
+ )
+GO
+
+CREATE TABLE FAGD.ItemFactura(
+ itemFactura_nroFactura numeric(18) NOT NULL,
+ itemFactura_codigoEstadia numeric(18),
+ itemFactura_codigoConsumible numeric(18),
+ itemFactura_consumibleCantidad numeric(5),
+ itemFactura_itemTotal numeric (18,2)
+) 
 GO
 
 CREATE TABLE FAGD.Pago(
@@ -202,9 +204,9 @@ consumible_precio numeric (18,2)
 GO
 
 CREATE TABLE FAGD.ConsumibleXEstadia(
+estadia_codigo numeric(18) NOT NULL,
 consumible_codigo numeric(18) NOT NULL,
-consumible_cantidad numeric(3),
-estadia_codigo numeric(18) NOT NULL
+consumible_cantidad numeric(3)
 )
 GO
 
@@ -263,9 +265,11 @@ ALTER TABLE FAGD.Regimen ADD CONSTRAINT PK_Regimen
 	PRIMARY KEY CLUSTERED (regimen_codigo)
 GO
 
+/*
 ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT PK_ItemFactura
  PRIMARY KEY CLUSTERED (itemFactura_nro,item_codigo)
 GO
+*/
 
 ALTER TABLE FAGD.Factura ADD CONSTRAINT PK_Factura
  PRIMARY KEY CLUSTERED (factura_nro)
@@ -285,10 +289,6 @@ GO
 
 ALTER TABLE FAGD.Consumible ADD CONSTRAINT PK_Consumible
  PRIMARY KEY CLUSTERED (consumible_codigo)
-GO
-
-ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT PK_ConsumibleXEstadia
-PRIMARY KEY CLUSTERED (consumible_codigo,estadia_codigo)
 GO
 
 ALTER TABLE FAGD.ReservaXHabitacion ADD CONSTRAINT PK_ReservaXHabitacion
@@ -325,14 +325,13 @@ ALTER TABLE FAGD.UsuarioXHotel ADD CONSTRAINT FK_UsuarioXHotel_1
  FOREIGN KEY (hotel_codigo) REFERENCES FAGD.Hotel(hotel_codigo)
 GO
 
-ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT FK_ItemFactura_Factura
- FOREIGN KEY (itemFactura_nro) REFERENCES FAGD.Factura(factura_nro)
+--------------- TEMA FACTURA E ITEM FACTURA--------------
+ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT FK_ConsumibleXEstadia_Consumible
+ FOREIGN KEY (consumible_codigo) REFERENCES FAGD.Consumible(consumible_codigo)
 GO
 
-
---------------- TEMA FACTURA E ITEM FACTURA--------------
-ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT FK_ItemFactura_ConsumibleXEstadia
- FOREIGN KEY (item_codigo) REFERENCES FAGD.ConsumibleXEstadia(consumible_codigo)
+ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT FK_ConsumibleXEstadia_Estadia
+ FOREIGN KEY (estadia_codigo) REFERENCES FAGD.Estadia(estadia_codigo)
 GO
 
 ALTER TABLE FAGD.Factura ADD CONSTRAINT FK_Factura_Cliente
@@ -341,6 +340,22 @@ GO
 
 ALTER TABLE FAGD.Factura ADD CONSTRAINT FK_Factura_Estadia
  FOREIGN KEY (factura_codigoEstadia) REFERENCES FAGD.Estadia(estadia_codigo)
+GO
+
+ALTER TABLE FAGD.Factura ADD CONSTRAINT FK_Factura_Hotel
+ FOREIGN KEY (factura_codigoHotel) REFERENCES FAGD.Hotel(hotel_codigo)
+GO
+
+ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT FK_ItemFactura_Factura
+ FOREIGN KEY (itemFactura_nroFactura) REFERENCES FAGD.Factura(factura_nro)
+GO
+
+ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT FK_ItemFactura_Estadia
+ FOREIGN KEY (itemFactura_codigoEstadia) REFERENCES FAGD.Estadia(estadia_codigo)
+GO
+
+ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT FK_ItemFactura_Consumible
+ FOREIGN KEY (itemFactura_codigoConsumible) REFERENCES FAGD.Consumible(consumible_codigo)
 GO
 
 ALTER TABLE FAGD.Pago ADD CONSTRAINT FK_Pago_Factura
@@ -353,14 +368,6 @@ GO
 
 ALTER TABLE FAGD.Estadia ADD CONSTRAINT FK_Estadia_Reserva
  FOREIGN KEY (estadia_codigoReserva) REFERENCES FAGD.Reserva(reserva_codigo)
-GO
-
-ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT FK_ConsumibleXEstadia_Consumible
- FOREIGN KEY (consumible_codigo) REFERENCES FAGD.Consumible(consumible_codigo)
-GO
-
-ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT FK_ConsumibleXEstadia_Estadia
- FOREIGN KEY (estadia_codigo) REFERENCES FAGD.Estadia(estadia_codigo)
 GO
 
 ALTER TABLE FAGD.ReservaCancelada ADD CONSTRAINT FK_ReservaCancelada_Usuario
