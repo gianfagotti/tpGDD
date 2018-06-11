@@ -9,8 +9,8 @@ INSERT INTO FAGD.Regimen ([regimen_descripcion],[regimen_precioBase])
 		FROM [GD1C2018].[gd_esquema].[Maestra]
 GO
 
-INSERT INTO FAGD.Consumible ([consumible_descripcion],[consumible_precio])
-		SELECT DISTINCT [Consumible_Descripcion],[Consumible_Precio]
+INSERT INTO FAGD.Consumible (consumible_codigo,consumible_descripcion,consumible_precio)
+		SELECT DISTINCT Consumible_Codigo,[Consumible_Descripcion],[Consumible_Precio]
 		FROM [GD1C2018].[gd_esquema].[Maestra]
 		WHERE Consumible_Codigo IS NOT NULL
 GO
@@ -64,10 +64,10 @@ INSERT INTO FAGD.Estadia (estadia_fechaInicio, estadia_cantNoches, estadia_clien
 GO
 
 
-INSERT INTO FAGD.Factura(factura_nro/*, factura_codigoHotel*/, factura_codigoEstadia, factura_fecha, factura_total, factura_documentoCliente, factura_estado) 
-		SELECT DISTINCT Maestra.Factura_Nro/*, Hotel.hotel_codigo*/, Estadia.estadia_codigo, Maestra.Factura_Fecha, Maestra.Factura_Total,  Maestra.Cliente_Pasaporte_Nro, 1
-		FROM gd_esquema.Maestra Maestra, FAGD.Estadia Estadia/*, FAGD.Hotel Hotel*/
-		WHERE Maestra.Factura_Nro IS NOT NULL AND Estadia.estadia_codigoReserva = Maestra.Reserva_codigo AND Estadia.estadia_clienteNroDocumento = Maestra.Cliente_Pasaporte_Nro
+INSERT INTO FAGD.Factura(factura_nro, factura_codigoHotel, factura_codigoEstadia, factura_fecha, factura_total, factura_documentoCliente, factura_estado) 
+		SELECT DISTINCT Maestra.Factura_Nro, Hotel.hotel_codigo, Estadia.estadia_codigo, Maestra.Factura_Fecha, Maestra.Factura_Total,  Maestra.Cliente_Pasaporte_Nro, 1
+		FROM gd_esquema.Maestra Maestra, FAGD.Estadia Estadia, FAGD.Hotel Hotel
+		WHERE Maestra.Factura_Nro IS NOT NULL AND Estadia.estadia_codigoReserva = Maestra.Reserva_codigo AND  Estadia.estadia_clienteNroDocumento = Maestra.Cliente_Pasaporte_Nro AND Hotel.hotel_calle = Maestra.Hotel_Calle AND Hotel.hotel_nroCalle = Maestra.Hotel_Nro_Calle
 		ORDER BY Maestra.Factura_Nro
 GO
 
@@ -78,11 +78,23 @@ INSERT INTO FAGD.HotelXRegimen (hotel_codigo,regimen_codigo)
 		ORDER BY Hotel.hotel_codigo
 GO
 
-/**INSERT INTO ConsumibleXEstadia (consumible_codigo, consumible_cantidad, estadia_codigo)
-		SELECT DISTINCT consumible_codigo, M.Item_Factura_Cantidad, estadia_codigo
+INSERT INTO FAGD.ConsumibleXEstadia (estadia_codigo, consumible_codigo, consumible_cantidad)
+		SELECT DISTINCT E.estadia_codigo, C.consumible_codigo, M.Item_Factura_Cantidad
 		FROM gd_esquema.Maestra M, FAGD.Consumible C, FAGD.Estadia E
-		WHERE C.consumible_codigo = M.Consumible_Codigo AND 
-*/
+		WHERE M.Consumible_Codigo =  C.consumible_codigo
+		 AND M.Consumible_Descripcion = C.consumible_descripcion
+		 AND E.estadia_cantNoches = M.Estadia_Cant_Noches
+		 AND E.estadia_codigoReserva = M.Reserva_Codigo 
+		 AND E.estadia_fechaInicio = M.Estadia_Fecha_Inicio
+ORDER BY E.estadia_codigo
+GO
+
+INSERT INTO FAGD.ItemFactura (itemFactura_nroFactura,itemFactura_codigoEstadia,itemFactura_codigoConsumible,itemFactura_consumibleCantidad,itemFactura_itemTotal)
+		SELECT DISTINCT F.factura_nro, CxE.estadia_codigo, CxE.consumible_codigo, CxE.consumible_cantidad, (CxE.consumible_cantidad * C.consumible_precio)
+		FROM FAGD.ConsumibleXEstadia CxE, FAGD.Consumible C, FAGD.Factura F
+		WHERE CxE.estadia_codigo = F.factura_codigoEstadia AND C.consumible_codigo = CxE.consumible_codigo
+		ORDER BY F.factura_nro
+GO
 
 -------------------------------- ROLES Y FUNCIONALIDADES INICIALES --------------------------------- 
 

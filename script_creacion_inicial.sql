@@ -197,7 +197,7 @@ CREATE TABLE FAGD.ErrorCliente(
 GO
 
 CREATE TABLE FAGD.Consumible(
-consumible_codigo numeric (18) IDENTITY (1,1) NOT NULL,
+consumible_codigo numeric (18) NOT NULL,
 consumible_descripcion nvarchar(255),
 consumible_precio numeric (18,2) 
 )
@@ -264,12 +264,6 @@ GO
 ALTER TABLE FAGD.Regimen ADD CONSTRAINT PK_Regimen
 	PRIMARY KEY CLUSTERED (regimen_codigo)
 GO
-
-/*
-ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT PK_ItemFactura
- PRIMARY KEY CLUSTERED (itemFactura_nro,item_codigo)
-GO
-*/
 
 ALTER TABLE FAGD.Factura ADD CONSTRAINT PK_Factura
  PRIMARY KEY CLUSTERED (factura_nro)
@@ -398,6 +392,9 @@ ALTER TABLE FAGD.Reserva ADD CONSTRAINT FK_Reserva_Usuario
  FOREIGN KEY (reserva_nombreUsuario) REFERENCES FAGD.Usuario(usuario_username)
 GO
 
+ALTER TABLE FAGD.Reserva ADD CONSTRAINT FK_Reserva_Hotel
+ FOREIGN KEY (reserva_codigoHotel) REFERENCES FAGD.Hotel(hotel_codigo)
+GO
 
 ALTER TABLE FAGD.BajaHotel ADD CONSTRAINT FK_BajaHotel_Hotel
  FOREIGN KEY (hotel_codigo) REFERENCES FAGD.Hotel(hotel_codigo)
