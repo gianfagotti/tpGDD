@@ -57,16 +57,18 @@ INSERT INTO FAGD.ReservaxHabitacion(reserva_codigo, habitacion_codigo)
 
 INSERT INTO FAGD.Estadia (estadia_fechaInicio, estadia_cantNoches, estadia_clienteNroDocumento, estadia_codigoReserva)
 		SELECT DISTINCT M.Estadia_Fecha_Inicio, M.Estadia_Cant_Noches, M.Cliente_Pasaporte_Nro, M.Reserva_Codigo
-		FROM gd_esquema.Maestra M, FAGD.Reserva R 
+		FROM gd_esquema.Maestra M, FAGD.Reserva R
 		WHERE R.reserva_clienteNroDocumento = M.Cliente_Pasaporte_Nro AND R.reserva_codigo = M.Reserva_Codigo
+		AND M.Estadia_Fecha_Inicio IS NOT NULL AND M.Estadia_Cant_Noches IS NOT NULL
 		ORDER BY M.Reserva_Codigo
 GO
 
 
-INSERT INTO FAGD.Factura(factura_nro, factura_codigoEstadia, factura_fecha, factura_total, factura_documentoCliente) 
-		SELECT DISTINCT Maestra.Factura_Nro, Estadia.estadia_codigo, Maestra.Factura_Fecha, Maestra.Factura_Total,  Maestra.Cliente_Pasaporte_Nro
-		FROM gd_esquema.Maestra Maestra, FAGD.Estadia Estadia
+INSERT INTO FAGD.Factura(factura_nro, factura_codigoHotel, factura_codigoEstadia, factura_fecha, factura_total, factura_documentoCliente, factura_estado) 
+		SELECT DISTINCT Maestra.Factura_Nro, H.hotel_codigo, Estadia.estadia_codigo, Maestra.Factura_Fecha, Maestra.Factura_Total,  Maestra.Cliente_Pasaporte_Nro, 1
+		FROM gd_esquema.Maestra Maestra, FAGD.Estadia Estadia, FAGD.Hotel H
 		WHERE Maestra.Factura_Nro IS NOT NULL AND Estadia.estadia_codigoReserva = Maestra.Reserva_codigo AND Estadia.estadia_clienteNroDocumento = Maestra.Cliente_Pasaporte_Nro
+		ORDER BY Maestra.Factura_Nro
 GO
 
 INSERT INTO FAGD.HotelXRegimen (hotel_codigo,regimen_codigo)
