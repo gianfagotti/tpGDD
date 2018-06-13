@@ -12,9 +12,12 @@ namespace FrbaHotel.RegistrarConsumible
 {
     public partial class FrmSeleccionarEstadia : Form
     {
-        public FrmSeleccionarEstadia()
+        AbmRol.frmMenuEmpleado frmMenuEmpleado;
+
+        public FrmSeleccionarEstadia(AbmRol.frmMenuEmpleado form)
         {
             InitializeComponent();
+            frmMenuEmpleado = form;
         }
 
         private void LblSeleccionarEstadia_Click(object sender, EventArgs e)
@@ -29,16 +32,15 @@ namespace FrbaHotel.RegistrarConsumible
 
         private void BtnAceptarSeleccionEstadia_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            FrmAgregarConsumibles frmAgregarConsumibles = new FrmAgregarConsumibles();
-            frmAgregarConsumibles.ShowDialog();
+            FrmAgregarConsumibles frmAgregarConsumibles = new FrmAgregarConsumibles(this);
+            this.Hide();            
+            frmAgregarConsumibles.Show();
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado();
-            frmMenuEmpleado.ShowDialog();
+            this.Close();            
+            frmMenuEmpleado.Show();
         }
     }
 }

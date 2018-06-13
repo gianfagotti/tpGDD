@@ -12,9 +12,12 @@ namespace FrbaHotel.ListadoEstadistico
 {
     public partial class ListadoEstadistico : Form
     {
-        public ListadoEstadistico()
+        AbmRol.frmMenuEmpleado frmMenuEmpleado;
+
+        public ListadoEstadistico(AbmRol.frmMenuEmpleado form)
         {
             InitializeComponent();
+            frmMenuEmpleado = form;
         }
 
         private void frmListadoEstadistico_Load(object sender, EventArgs e)
@@ -44,8 +47,7 @@ namespace FrbaHotel.ListadoEstadistico
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado();
-            this.Hide();
+            this.Close();
             frmMenuEmpleado.ShowDialog();
         }
 

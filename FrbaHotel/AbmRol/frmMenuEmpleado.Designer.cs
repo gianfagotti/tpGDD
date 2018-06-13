@@ -282,6 +282,7 @@
             this.btnModificarUsuario.TabIndex = 0;
             this.btnModificarUsuario.Text = "Modificar usuario";
             this.btnModificarUsuario.UseVisualStyleBackColor = true;
+            this.btnModificarUsuario.Click += new System.EventHandler(this.btnModificarUsuario_Click);
             // 
             // frmMenuEmpleado
             // 

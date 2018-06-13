@@ -12,9 +12,12 @@ namespace FrbaHotel.AbmCliente
 {
     public partial class FrmAltaCliente : Form
     {
-        public FrmAltaCliente()
+        AbmRol.frmMenuEmpleado frmMenuEmpleado;
+
+        public FrmAltaCliente(AbmRol.frmMenuEmpleado form)
         {
             InitializeComponent();
+            frmMenuEmpleado = form;
         }
 
         private void txtMail_Click(object sender, EventArgs e)
@@ -24,9 +27,8 @@ namespace FrbaHotel.AbmCliente
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado();
-            this.Hide();
-            frmMenuEmpleado.ShowDialog();
+            this.Close();
+            frmMenuEmpleado.Show();
         }
 
         private void txtPaisOrigen_TextChanged(object sender, EventArgs e)

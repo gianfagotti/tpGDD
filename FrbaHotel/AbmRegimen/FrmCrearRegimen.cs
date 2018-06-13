@@ -12,16 +12,18 @@ namespace FrbaHotel.AbmRegimen
 {
     public partial class FrmCrearRegimen : Form
     {
-        public FrmCrearRegimen()
+        AbmRol.frmMenuEmpleado frmMenuAnterior;
+
+        public FrmCrearRegimen(AbmRol.frmMenuEmpleado menuAnterior)
         {
             InitializeComponent();
+            frmMenuAnterior = menuAnterior;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado();
-            this.Hide();
-            frmMenuEmpleado.ShowDialog();
+            this.Close();
+            frmMenuAnterior.Show();
         }
     }
 }

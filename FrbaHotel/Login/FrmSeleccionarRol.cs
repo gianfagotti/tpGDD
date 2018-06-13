@@ -29,15 +29,16 @@ namespace FrbaHotel.Login
 
         private void btnVolverATipoUsuario_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             FrmTipoUsuario frmTipoUsuario = new FrmTipoUsuario();
-            frmTipoUsuario.ShowDialog();
+            frmTipoUsuario.Show();
         }
 
         private void btnAceptarRol_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado();
+            string tipoEmpleado = cmbRolesRegistrados.SelectedItem.ToString();
+            AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado(tipoEmpleado);
+            this.Close();            
             frmMenuEmpleado.ShowDialog();
         }
     }

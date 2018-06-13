@@ -12,16 +12,18 @@ namespace FrbaHotel.AbmCliente
 {
     public partial class FrmModificarCliente : Form
     {
-        public FrmModificarCliente()
+        AbmRol.frmMenuEmpleado frmMenuEmpleado;
+
+        public FrmModificarCliente(AbmRol.frmMenuEmpleado form)
         {
             InitializeComponent();
+            frmMenuEmpleado = form;
         }
 
         private void btnVolverMod_Click(object sender, EventArgs e)
         {
-            AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado();
-            this.Hide();
-            frmMenuEmpleado.ShowDialog();
+            this.Close();
+            frmMenuEmpleado.Show();
         }
     }
 }

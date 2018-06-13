@@ -25,13 +25,13 @@ namespace FrbaHotel.Login
                 {
                     AbmRol.frmMenuCliente frmMenuCliente = new AbmRol.frmMenuCliente();
                     this.Hide();
-                    frmMenuCliente.ShowDialog();
+                    frmMenuCliente.Show();
                 }
                 else
                 {
                     FrmLogin frmLogin = new FrmLogin();
                     this.Hide();
-                    frmLogin.ShowDialog();
+                    frmLogin.Show();
                 }
             }
             else 

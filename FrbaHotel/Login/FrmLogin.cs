@@ -40,9 +40,9 @@ namespace FrbaHotel.Login
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             FrmTipoUsuario frmTipoUsuario = new FrmTipoUsuario();
-            frmTipoUsuario.ShowDialog();
+            frmTipoUsuario.Show();
 
         }
 
@@ -50,9 +50,9 @@ namespace FrbaHotel.Login
         {
             if (true) //En este condicional tiene que ir la validacion de que el rol que selecciona el usuario esté registrado en la bd para su usuario.
             {
-                this.Hide();
+                this.Close();
                 FrmSeleccionarRol frmSeleccionarRol = new FrmSeleccionarRol();
-                frmSeleccionarRol.ShowDialog();
+                frmSeleccionarRol.Show();
             }
             else
             {

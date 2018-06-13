@@ -12,9 +12,12 @@ namespace FrbaHotel.AbmRol
 {
     public partial class ModificarRol : Form
     {
-        public ModificarRol()
+        Form ultimoFormulario;
+
+        public ModificarRol(Form form)
         {
             InitializeComponent();
+            ultimoFormulario = form;
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -24,9 +27,8 @@ namespace FrbaHotel.AbmRol
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            frmMenuEmpleado menu = new frmMenuEmpleado();
-            this.Hide();
-            menu.ShowDialog();
+            this.Close();
+            ultimoFormulario.Show();
         }
     }
 }

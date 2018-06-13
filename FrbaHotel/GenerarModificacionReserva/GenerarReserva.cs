@@ -13,7 +13,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 {
     public partial class GenerarReserva : Form
     {
-        Form ultimoFormulario = new Form();
+        Form ultimoFormulario;
 
         public GenerarReserva(Form form)
         {

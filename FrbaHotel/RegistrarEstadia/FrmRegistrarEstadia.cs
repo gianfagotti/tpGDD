@@ -12,9 +12,12 @@ namespace FrbaHotel.RegistrarEstadia
 {
     public partial class FrmRegistrarEstadia : Form
     {
-        public FrmRegistrarEstadia()
+        AbmRol.frmMenuEmpleado frmMenuEmpleado;
+
+        public FrmRegistrarEstadia(AbmRol.frmMenuEmpleado form)
         {
             InitializeComponent();
+            frmMenuEmpleado = form;
         }
 
         private void FrmRegistrarEstadia_Load(object sender, EventArgs e)
@@ -61,9 +64,8 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado();
-            frmMenuEmpleado.ShowDialog();
+            this.Close();            
+            frmMenuEmpleado.Show();
         }
     }
 }
