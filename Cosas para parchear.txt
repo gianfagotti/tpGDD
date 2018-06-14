@@ -1,25 +1,47 @@
-- Arreglar volver de RESERVA (ARREGLADO)
-
 - Hotel en REGISTRAR ESTADÍA.
 
 - Las estadías tienen (o no) varios clientes.
 
 - ¿reserva_estado varchar(50)?
 
-- IF exists drop (para las tablas y schema).
-
-(Uno de dos probablemente no podamos evitar):
-
-- PK de ConsumibleXEstadia como hacer la FK con Item_Factura.
-correctamente cuando la PK es compuesta?) -> no funciona
-porq la FK tiene que tener ambas columnas de la tabla a la que esta.
-referenciando (de tener PK compuesta) sino no lo permite.
-- Primary key compuesta de item_factura debe unificar estadia y .
-consumible polimorficamente para evitar NULL en alguna.
-
 -Ver si en la reserva tiene que ir si o si el nro de habitacion por más
  que ya tengamos el codigo de habitacion que te tira toda la data.
 
 -Las reservas sin datos de "Estadias" es posible que sean porque la persona no se presentó.
 
--Hay clientes que tienen el nro de pasaporte igual a pesar de ser distintas personas. Algo similar pasa con las reservas aunque el campo que esta repetido no lo pude idnetificar. Hay que revisar eso y ver como lo resolvemos (hay un prototipo de insert hecho en el codigo con la tabla errorCliente que hay que probarlo).
+----------------------------------------------------------
+Temas del enunciado a tener en cuenta:
+
+-"Luego de validar el login, la aplicación deberá generar y mostrar las entradas de menú disponibles para este usuario según
+sea el rol que se haya elegido además de ocultar aquellas funcionalidades a las que no tiene
+acceso"
+
+-"El password deberá almacenarse encriptado de forma irreversible bajo el algoritmo de
+encriptación SHA256."
+
+-"Debe tenerse en cuenta que el password se pueda modificar una vez que el usuario se
+encuentre logueado, también debe contemplarse que un administrador solo puede realizar
+modificaciones y dar de baja a usuarios que se desempeñen en el mismo hotel él trabaja"
+
+-"si el usuario desempeña funciones en más de un establecimiento deberá seleccionar a cuál de ellos está ingresando en dicha sesión y solo podrá
+realizar acciones sobre el establecimiento elegido"
+
+-"Si alguno de los acompañantes se encuentra inhabilitado tampoco podrá registra el ingreso al hotel para realizar check-in."
+
+-El tipo de habitación, a diferencia de las otras características, no puede ser modificado.
+
+-"El tipo de habitación hace referencia a si la misma es Simple, Doble, Doble twin, Tiple,
+Cuádruple, etc."
+
+-No hay que desarrollar el ABM de régimen
+
+-"Una vez que el sistema informe la existencia de disponibilidad para el pedido del cliente,
+se informará el costo total de la reserva, expresado en dólares."
+
+-"Todo proceso de generación o modificación de reserva deberá almacenar el usuario que la
+produce"
+
+
+
+
+
