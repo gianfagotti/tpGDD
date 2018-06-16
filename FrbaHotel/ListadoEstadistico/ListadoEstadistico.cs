@@ -18,6 +18,12 @@ namespace FrbaHotel.ListadoEstadistico
         {
             InitializeComponent();
             frmMenuEmpleado = form;
+            cboCateg.Items.Insert(0, "Hotel con mas reservas canceladas");
+            cboCateg.Items.Insert(1, "Hotel con mas consumibles  facturados");
+            cboCateg.Items.Insert(2, "Hotel con mas dias fuera de servicio");
+            cboCateg.Items.Insert(3, "Cliente con mas puntos");
+   
+
         }
 
         private void frmListadoEstadistico_Load(object sender, EventArgs e)
@@ -35,7 +41,7 @@ namespace FrbaHotel.ListadoEstadistico
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnMostrarEstadist_Click(object sender, EventArgs e)
         {
 
         }
