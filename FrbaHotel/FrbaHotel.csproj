@@ -111,6 +111,7 @@
     <Compile Include="CancelarReserva\CancelarReserva.Designer.cs">
       <DependentUpon>CancelarReserva.cs</DependentUpon>
     </Compile>
+    <Compile Include="Conector2.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -141,12 +142,6 @@
     </Compile>
     <Compile Include="GenerarModificacionReserva\ModificarReserva.Designer.cs">
       <DependentUpon>ModificarReserva.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ListadoEstadistico\FechaListadoEstadistico.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListadoEstadistico\FechaListadoEstadistico.Designer.cs">
-      <DependentUpon>FechaListadoEstadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="ListadoEstadistico\ListadoEstadistico.cs">
       <SubType>Form</SubType>
@@ -230,9 +225,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GenerarModificacionReserva\ModificarReserva.resx">
       <DependentUpon>ModificarReserva.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListadoEstadistico\FechaListadoEstadistico.resx">
-      <DependentUpon>FechaListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListadoEstadistico\ListadoEstadistico.resx">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
