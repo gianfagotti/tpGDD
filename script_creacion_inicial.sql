@@ -425,38 +425,94 @@ GO
 -----------------------	 CREACIÓN DE PROCEDURES PARA LA APLICACIÓN   ----------------------- 
 
 
-CREATE PROCEDURE FAGD.lista_hotel_maxConFacturados @trimestre numeric(18,0), @anio numeric(18,0)
-AS BEGIN
+CREATE PROCEDURE FAGD.lista_hotel_maxResCancel @trimestre numeric(18,0), @anio numeric(18,0)
+AS	BEGIN
 		
-		DECLARE @inicio DATETIME
-	DECLARE @fin DATETIME
+	DECLARE @inicioTrimestre DATETIME
+	DECLARE @finTrimestre DATETIME
 	DECLARE @anioAux CHAR(4)
 		SET @anioAux = CAST(@anio AS CHAR(4))
 		
 		IF (@trimestre = 1)
 		BEGIN
-			SET @inicio = @anioAux+'-01-01'
-			SET @fin = @anioAux+'-03-31'
+			SET @inicioTrimestre = @anioAux+'-01-01'
+			SET @finTrimestre = @anioAux+'-03-31'
 		END
 		ELSE IF (@trimestre = 2)
 		BEGIN
-			SET @inicio = @anioAux+'-04-01'
-			SET @fin = @anioAux+'-06-30'
+			SET @inicioTrimestre = @anioAux+'-04-01'
+			SET @finTrimestre = @anioAux+'-06-30'
 		END
 		ELSE IF (@trimestre = 3)
 		BEGIN 
-			SET @inicio = @anioAux+'-07-01'
-			SET @fin = @anioAux+'-09-30'
+			SET @inicioTrimestre = @anioAux+'-07-01'
+			SET @finTrimestre = @anioAux+'-09-30'
 		END
 		ELSE IF (@trimestre = 4)
 		BEGIN 
-			SET @inicio = @anioAux+'-10-01'
-			SET @fin = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioAux+'-10-01'
+			SET @finTrimestre = @anioAux+'-12-31'
 		END
 		ELSE
 		BEGIN
-			SET @inicio = @anioAux+'-01-01'
-			SET @fin = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioAux+'-01-01'
+			SET @finTrimestre = @anioAux+'-12-31'
+		END
+
+SELECT TOP 5 hotel.hotel_codigo, COUNT(resCancel.reservaCancelada_codigoReserva) AS totalCancelaciones 
+
+FROM FAGD.Hotel hotel, FAGD.Habitacion hab, FAGD.ReservaXHabitacion resXHab,
+	 FAGD.Reserva res, FAGD.ReservaCancelada resCancel
+
+WHERE hotel.hotel_codigo = hab.habitacion_codigoHotel AND
+	  hab.habitacion_codigo = resXHab.habitacion_codigo AND
+	  resXHab.reserva_codigo = res.reserva_codigo AND
+	  res.reserva_codigo = resCancel.reservaCancelada_codigoReserva AND
+	  res.reserva_codigoHotel = hotel.hotel_codigo AND
+	  resCancel.reservaCancelada_fechaCancelacion BETWEEN @inicioTrimestre AND @finTrimestre
+GROUP BY hotel.hotel_codigo			
+END
+GO
+
+
+
+
+---------------------------------------------------------------------------------------------
+
+
+
+CREATE PROCEDURE FAGD.lista_hotel_maxConFacturados @trimestre numeric(18,0), @anio numeric(18,0)
+AS BEGIN
+		
+	DECLARE @inicioTrimestre DATETIME
+	DECLARE @finTrimestre DATETIME
+	DECLARE @anioAux CHAR(4)
+		SET @anioAux = CAST(@anio AS CHAR(4))
+		
+		IF (@trimestre = 1)
+		BEGIN
+			SET @inicioTrimestre = @anioAux+'-01-01'
+			SET @finTrimestre = @anioAux+'-03-31'
+		END
+		ELSE IF (@trimestre = 2)
+		BEGIN
+			SET @inicioTrimestre = @anioAux+'-04-01'
+			SET @finTrimestre = @anioAux+'-06-30'
+		END
+		ELSE IF (@trimestre = 3)
+		BEGIN 
+			SET @inicioTrimestre = @anioAux+'-07-01'
+			SET @finTrimestre = @anioAux+'-09-30'
+		END
+		ELSE IF (@trimestre = 4)
+		BEGIN 
+			SET @inicioTrimestre = @anioAux+'-10-01'
+			SET @finTrimestre = @anioAux+'-12-31'
+		END
+		ELSE
+		BEGIN
+			SET @inicioTrimestre = @anioAux+'-01-01'
+			SET @finTrimestre = @anioAux+'-12-31'
 		END
 
 SELECT TOP 5 hotel.hotel_codigo, COUNT(itemFactura_codigoConsumible) AS Cant_Facturada
@@ -465,60 +521,172 @@ WHERE
      hotel.hotel_codigo = factura_codigoHotel AND
 	 fact.factura_nro = itemFactura_nroFactura AND
 	 fact.factura_codigoEstadia = itemFactura_codigoEstadia AND
-	 fact.factura_fecha BETWEEN @inicio AND @fin
+	 fact.factura_fecha BETWEEN @inicioTrimestre AND @finTrimestre
 GROUP BY hotel.hotel_codigo
 ORDER BY Cant_Facturada desc
 END
 GO
 
 
----------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
 
 
-CREATE PROCEDURE FAGD.lista_cliente_maxPuntajes @trimestre numeric(18,0), @anio numeric(18,0)
- AS	BEGIN
+CREATE PROCEDURE FAGD.lista_hotel_diasFueraServ @trimestre numeric(18,0), @anio numeric(18,0)
+AS BEGIN
 		
-	DECLARE @inicio DATETIME
-	DECLARE @fin DATETIME
+	DECLARE @inicioTrimestre DATETIME
+	DECLARE @finTrimestre DATETIME
 	DECLARE @anioAux CHAR(4)
 		SET @anioAux = CAST(@anio AS CHAR(4))
 		
 		IF (@trimestre = 1)
 		BEGIN
-			SET @inicio = @anioAux+'-01-01'
-			SET @fin = @anioAux+'-03-31'
+			SET @inicioTrimestre = @anioAux+'-01-01'
+			SET @finTrimestre = @anioAux+'-03-31'
 		END
 		ELSE IF (@trimestre = 2)
 		BEGIN
-			SET @inicio = @anioAux+'-04-01'
-			SET @fin = @anioAux+'-06-30'
+			SET @inicioTrimestre = @anioAux+'-04-01'
+			SET @finTrimestre = @anioAux+'-06-30'
 		END
 		ELSE IF (@trimestre = 3)
 		BEGIN 
-			SET @inicio = @anioAux+'-07-01'
-			SET @fin = @anioAux+'-09-30'
+			SET @inicioTrimestre = @anioAux+'-07-01'
+			SET @finTrimestre = @anioAux+'-09-30'
 		END
 		ELSE IF (@trimestre = 4)
 		BEGIN 
-			SET @inicio = @anioAux+'-10-01'
-			SET @fin = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioAux+'-10-01'
+			SET @finTrimestre = @anioAux+'-12-31'
 		END
 		ELSE
 		BEGIN
-			SET @inicio = @anioAux+'-01-01'
-			SET @fin = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioAux+'-01-01'
+			SET @finTrimestre = @anioAux+'-12-31'
 		END
 
 
-SELECT TOP 5 cli.cliente_nroDocumento, cli.cliente_nombre AS Nombre, cli.cliente_apellido AS Apellido, /*puntosDeEstadia.Puntos+*/puntosDeConsumibles.Puntos AS Puntaje
-FROM /*(SELECT est.estadia_codigo, SUM(res.costoTotal) AS Gasto, SUM(res.costoTotal)/10 AS Puntos
-	FROM FAGD.Estadia est, FAGD.Reserva res, FAGD.Factura fact
-	WHERE est.estadia_codigoReserva = res.reserva_codigo AND
-		  fact.factura_codigoEstadia = est.estadia_codigo AND
-		  fact.factura_fecha BETWEEN @inicio AND @fin
-	GROUP BY est.estadia_codigo
-	) AS puntosDeEstadia, */
+SELECT TOP 5 bajaTotal.CodigoDelHotel, hotel.hotel_calle ,SUM(bajaTotal.Dias) DiasDeBaja 
+FROM
+	(SELECT * FROM
+			(SELECT hotel.hotel_codigo AS CodigoDelHotel, SUM(DATEDIFF(day,hotelDeBaja.fecha_inicio,hotelDeBaja.fecha_fin)) AS Dias
+			 FROM FAGD.BajaHotel hotelDeBaja, FAGD.Hotel hotel
+			 WHERE hotelDeBaja.hotel_codigo = hotel.hotel_codigo 
+					AND hotelDeBaja.fecha_inicio BETWEEN @inicioTrimestre AND @finTrimestre
+					AND hotelDeBaja.fecha_fin < @finTrimestre
+			group by hotel.hotel_codigo ) as bajaPrevioAlTrimestre
+		
+		UNION ALL
+
+	 SELECT * FROM
+			(SELECT hotel.hotel_codigo AS CodigoDelHotel, SUM(DATEDIFF(day,hotelDeBaja.fecha_inicio,@finTrimestre)) AS Dias
+			FROM FAGD.BajaHotel hotelDeBaja, FAGD.Hotel hotel
+			WHERE hotelDeBaja.hotel_codigo = hotel.hotel_codigo
+					AND hotelDeBaja.fecha_inicio BETWEEN @inicioTrimestre AND @finTrimestre
+					AND hotelDeBaja.fecha_fin > @finTrimestre
+			GROUP BY hotel.hotel_codigo) as bajaPosteriorAlTrimestre
+		) AS bajaTotal,
+		FAGD.Hotel hotel
+		WHERE hotel.hotel_codigo = bajaTotal.CodigoDelHotel
+		GROUP BY bajaTotal.CodigoDelHotel, hotel.hotel_calle
+		ORDER BY DiasDeBaja desc
+END
+GO
+
+
+---------------------------------------------------------------------------------------------------
+
+
+
+CREATE PROCEDURE FAGD.lista_habitacion_maxVecesOcup @trimestre numeric(18,0), @Anio numeric(18,0) 
+AS BEGIN
+
+DECLARE @inicioTrimestre DATETIME
+	DECLARE @finTrimestre DATETIME
+	DECLARE @anioAux CHAR(4)
+		SET @anioAux = CAST(@anio AS CHAR(4))
+		
+		IF (@trimestre = 1)
+		BEGIN
+			SET @inicioTrimestre = @anioAux+'-01-01'
+			SET @finTrimestre = @anioAux+'-03-31'
+		END
+		ELSE IF (@trimestre = 2)
+		BEGIN
+			SET @inicioTrimestre = @anioAux+'-04-01'
+			SET @finTrimestre = @anioAux+'-06-30'
+		END
+		ELSE IF (@trimestre = 3)
+		BEGIN 
+			SET @inicioTrimestre = @anioAux+'-07-01'
+			SET @finTrimestre = @anioAux+'-09-30'
+		END
+		ELSE IF (@trimestre = 4)
+		BEGIN 
+			SET @inicioTrimestre = @anioAux+'-10-01'
+			SET @finTrimestre = @anioAux+'-12-31'
+		END
+		ELSE
+		BEGIN
+			SET @inicioTrimestre = @anioAux+'-01-01'
+			SET @finTrimestre = @anioAux+'-12-31'
+		END
+
+/*SELECT TOP 5*/
+
+END
+GO
+
+
+---------------------------------------------------------------------------------------------------
+
+
+
+CREATE PROCEDURE FAGD.lista_cliente_maxPuntajes @trimestre numeric(18,0), @anio numeric(18,0)
+AS	BEGIN
+		
+	DECLARE @inicioTrimestre DATETIME
+	DECLARE @finTrimestre DATETIME
+	DECLARE @anioAux CHAR(4)
+		SET @anioAux = CAST(@anio AS CHAR(4))
+		
+		IF (@trimestre = 1)
+		BEGIN
+			SET @inicioTrimestre = @anioAux+'-01-01'
+			SET @finTrimestre = @anioAux+'-03-31'
+		END
+		ELSE IF (@trimestre = 2)
+		BEGIN
+			SET @inicioTrimestre = @anioAux+'-04-01'
+			SET @finTrimestre = @anioAux+'-06-30'
+		END
+		ELSE IF (@trimestre = 3)
+		BEGIN 
+			SET @inicioTrimestre = @anioAux+'-07-01'
+			SET @finTrimestre = @anioAux+'-09-30'
+		END
+		ELSE IF (@trimestre = 4)
+		BEGIN 
+			SET @inicioTrimestre = @anioAux+'-10-01'
+			SET @finTrimestre = @anioAux+'-12-31'
+		END
+		ELSE
+		BEGIN
+			SET @inicioTrimestre = @anioAux+'-01-01'
+			SET @finTrimestre = @anioAux+'-12-31'
+		END
+
+
+SELECT TOP 5 cli.cliente_nroDocumento, cli.cliente_nombre AS Nombre, cli.cliente_apellido AS Apellido, puntosDeEstadia.Puntos+puntosDeConsumibles.Puntos AS Puntaje
+FROM 
+(SELECT clie.cliente_nroDocumento, est.estadia_codigo, SUM(fact.factura_total) AS Gasto, SUM(fact.factura_total)/10 AS Puntos
+	FROM FAGD.Cliente clie, FAGD.Estadia est, FAGD.Factura fact
+	WHERE clie.cliente_nroDocumento = estadia_clienteNroDocumento AND
+		  factura_codigoEstadia = est.estadia_codigo AND
+		  fact.factura_fecha BETWEEN @inicioTrimestre AND @finTrimestre
+	GROUP BY clie.cliente_nroDocumento, est.estadia_codigo
+	) AS puntosDeEstadia, 
 
 (SELECT consXEst.estadia_codigo, 
 SUM(itemFactura_codigoConsumible*item.itemFactura_consumibleCantidad) AS Gasto, 
@@ -528,16 +696,15 @@ SUM(itemFactura_codigoConsumible*item.itemFactura_consumibleCantidad)/10 AS Punt
 	WHERE consXEst.consumible_codigo = item.itemFactura_codigoConsumible AND
 	      consxEst.estadia_codigo = itemFactura_codigoEstadia AND
 		  item.itemFactura_nroFactura = fact.factura_nro AND
-		  fact.factura_fecha BETWEEN @inicio AND @fin
+		  fact.factura_fecha BETWEEN @inicioTrimestre AND @finTrimestre
 	GROUP BY consXEst.estadia_codigo
 	) AS puntosDeConsumibles,
 	
 FAGD.Cliente cli, FAGD.Estadia est, FAGD.Reserva res
 WHERE cli.cliente_nroDocumento = res.reserva_clienteNroDocumento AND
 		est.estadia_codigoReserva = res.reserva_codigo AND 
-		puntosDeConsumibles.estadia_codigo = est.estadia_codigo /* AND
-		puntosDeEstadia.estadia_codigo = est.estadia_codigo */
+		puntosDeConsumibles.estadia_codigo = est.estadia_codigo  AND
+		puntosDeEstadia.estadia_codigo = est.estadia_codigo 
 ORDER BY Puntaje DESC
 END
-
 GO

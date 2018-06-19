@@ -25,7 +25,8 @@ namespace FrbaHotel.ListadoEstadistico
             cboCateg.Items.Insert(0, "Hotel con mas reservas canceladas");
             cboCateg.Items.Insert(1, "Hotel con mas consumibles  facturados");
             cboCateg.Items.Insert(2, "Hotel con mas dias fuera de servicio");
-            cboCateg.Items.Insert(3, "Cliente con mas puntos");
+            cboCateg.Items.Insert(3, "Habitacion mayor cantidad de dias ocupada");
+            cboCateg.Items.Insert(4, "Cliente con mas puntos");
             cboTrim.Items.Add("1");
             cboTrim.Items.Add("2");
             cboTrim.Items.Add("3");
@@ -80,6 +81,9 @@ namespace FrbaHotel.ListadoEstadistico
                     categoriaSeleccionada = "EXEC FAGD.lista_hotel_diasFueraServ " + cboTrim.Text + ", " + dtpAnio.Text;
                     break;
                 case 3:
+                    categoriaSeleccionada = "EXEC FAGD.lista_habitacion_maxVecesOcup " + (cboTrim.Text) + ", " + dtpAnio.Text;
+                    break;
+                case 4:
                     categoriaSeleccionada = "EXEC FAGD.lista_cliente_maxPuntajes " + (cboTrim.Text) + ", " + dtpAnio.Text;
                     break;
 
