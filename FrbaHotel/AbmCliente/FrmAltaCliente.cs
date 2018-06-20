@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace FrbaHotel.AbmCliente
 {
     public partial class FrmAltaCliente : Form
     {
         AbmRol.frmMenuEmpleado frmMenuEmpleado;
+        public static Conector2 BD = new Conector2();
+        SqlDataReader resultado;
 
         public FrmAltaCliente(AbmRol.frmMenuEmpleado form)
         {
@@ -31,14 +34,150 @@ namespace FrbaHotel.AbmCliente
             frmMenuEmpleado.Show();
         }
 
-        private void txtPaisOrigen_TextChanged(object sender, EventArgs e)
+        private void txtNombre_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void lblPaisOrigen_Click(object sender, EventArgs e)
+        private void butGuardar_Click(object sender, EventArgs e)
         {
+            int a = checkearCamposVacios();
+            if (a == 0) {
+                string comando = "EXEC FAGD.guardarNuevoCliente ";
+                comando = comando + "'" + txtNombre.Text + "',";
+                comando = comando + "'" + txtApellido.Text + "',";
+                comando = comando + "'" + cboTipoDoc.Text + "',";
+                comando = comando + txtNroDocumento.Text + ",";
+                comando = comando + "'" + txtMail.Text + "',";
+                comando = comando + txtTelefono.Text + ",";
+                comando = comando + "'" + txtCalle.Text + "',";
+                comando = comando + txtNumero.Text + ",";
+                comando = comando + txtPiso.Text + ",";
+                comando = comando + txtDpto.Text + ",";
+                comando = comando + "'" + txtLocalidad.Text + "',";
+                comando = comando + "'" + txtNacionalidad.Text + "',";
 
+                DateTime fecha;
+
+                fecha = Convert.ToDateTime(dtpFechaNacimiento.Value);
+                string lala = fecha.Date.ToString("yyyyMMdd HH:mm:ss");
+
+                comando = comando + "'" + lala + "',";
+
+                if (chkHabilitado.Checked)
+                    comando = comando + "1";
+                else
+                    comando = comando + "0";
+
+                decimal resu = 0;
+                resultado = BD.comando(comando);
+                if (resultado.Read()) {
+                    resu = resultado.GetDecimal(0);
+                }
+                resultado.Close();
+                if(resu==1)
+                    MessageBox.Show("El cliente fue guardado correctamente");
+                else if (resu==2)
+                    MessageBox.Show("Error al guardar, el cliente con ese nro y tipo de doc ya existe");
+                else
+                    MessageBox.Show("Error al guardar, el cliente con ese mail ya existe");
+                
+            }
+        }
+
+        private void butLimpiar_Click(object sender, EventArgs e)
+        {
+            txtNombre.Text = string.Empty;
+            txtApellido.Text = string.Empty;
+            txtNroDocumento.Text = string.Empty;
+            txtMail.Text = string.Empty;
+            txtTelefono.Text = string.Empty;
+            txtCalle.Text = string.Empty;
+            txtNumero.Text = string.Empty;
+            txtPiso.Text = string.Empty;
+            txtDpto.Text = string.Empty;
+            txtLocalidad.Text = string.Empty;
+            txtNacionalidad.Text = string.Empty;
+            cboTipoDoc.ResetText();
+            dtpFechaNacimiento.ResetText();
+            txtNombre.Focus();
+        }
+
+        private int checkearCamposVacios()
+        {
+            int a = 0;
+            string mensaje = "";
+
+            if (string.IsNullOrEmpty(txtNombre.Text))
+            {
+                a = 1;
+                mensaje = mensaje + "El campo nombre es obligatorio\n";
+            }
+            if (string.IsNullOrEmpty(txtApellido.Text))
+            {
+                a = 1;
+                mensaje = mensaje + "El campo apellido es obligatorio\n";
+            }
+            if (string.IsNullOrEmpty(txtNacionalidad.Text))
+            {
+                a = 1;
+                mensaje = mensaje + "El campo nacionalidad es obligatorio\n";
+            }
+
+            if (string.IsNullOrEmpty(cboTipoDoc.Text))
+            {
+                a = 1;
+                mensaje = mensaje + "El campo tipo documento es obligatorio\n";
+            }
+            if (string.IsNullOrEmpty(txtTelefono.Text))
+            {
+                a = 1;
+                mensaje = mensaje + "El campo telefono es obligatorio\n";
+            }
+            if (string.IsNullOrEmpty(txtNroDocumento.Text))
+            {
+                a = 1;
+                mensaje = mensaje + "El campo numero documento es obligatorio\n";
+            }
+            if (string.IsNullOrEmpty(txtMail.Text))
+            {
+                a = 1;
+                mensaje = mensaje + "El campo mail es obligatorio\n";
+            }
+            if (string.IsNullOrEmpty(txtCalle.Text))
+            {
+                a = 1;
+                mensaje = mensaje + "El campo Calle es obligatorio\n";
+            }
+            if (string.IsNullOrEmpty(txtNumero.Text))
+            {
+                a = 1;
+                mensaje = mensaje + "El campo Numero es obligatorio\n";
+            }
+            if (string.IsNullOrEmpty(txtLocalidad.Text))
+            {
+                a = 1;
+                mensaje = mensaje + "El campo Localidad es obligatorio\n";
+            }
+            
+            DateTime fecha;
+            fecha = Convert.ToDateTime(dtpFechaNacimiento.Value);
+
+            DateTime s = DateTime.Now;
+
+            int result = DateTime.Compare(fecha, s);
+
+            if (result >= 0)
+            {
+                a = 1;
+                mensaje = mensaje + "La fecha debe ser menor a la actual\n";
+            }
+
+            if (a == 1)
+            {
+                MessageBox.Show(mensaje);
+            }
+            return a;
         }
     }
 }

@@ -33,7 +33,6 @@
             this.lblApellidoMod = new System.Windows.Forms.Label();
             this.txtApellidoMod = new System.Windows.Forms.TextBox();
             this.lblTipoDocumentoMod = new System.Windows.Forms.Label();
-            this.txtTipoDocumentoMod = new System.Windows.Forms.TextBox();
             this.lblNroDocumentoMod = new System.Windows.Forms.Label();
             this.txtNroDocumentoMod = new System.Windows.Forms.TextBox();
             this.lblMailMod = new System.Windows.Forms.Label();
@@ -54,6 +53,11 @@
             this.butGuardarMod = new System.Windows.Forms.Button();
             this.btnVolverMod = new System.Windows.Forms.Button();
             this.txtNacionalidadMod = new System.Windows.Forms.TextBox();
+            this.lblPisoMod = new System.Windows.Forms.Label();
+            this.lblDptoMod = new System.Windows.Forms.Label();
+            this.txtPisoMod = new System.Windows.Forms.TextBox();
+            this.txtDptoMod = new System.Windows.Forms.TextBox();
+            this.cboTipoDocMod = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblNombreMod
@@ -97,17 +101,10 @@
             this.lblTipoDocumentoMod.TabIndex = 4;
             this.lblTipoDocumentoMod.Text = "Tipo Documento";
             // 
-            // txtTipoDocumentoMod
-            // 
-            this.txtTipoDocumentoMod.Location = new System.Drawing.Point(104, 30);
-            this.txtTipoDocumentoMod.Name = "txtTipoDocumentoMod";
-            this.txtTipoDocumentoMod.Size = new System.Drawing.Size(58, 20);
-            this.txtTipoDocumentoMod.TabIndex = 5;
-            // 
             // lblNroDocumentoMod
             // 
             this.lblNroDocumentoMod.AutoSize = true;
-            this.lblNroDocumentoMod.Location = new System.Drawing.Point(168, 33);
+            this.lblNroDocumentoMod.Location = new System.Drawing.Point(206, 33);
             this.lblNroDocumentoMod.Name = "lblNroDocumentoMod";
             this.lblNroDocumentoMod.Size = new System.Drawing.Size(102, 13);
             this.lblNroDocumentoMod.TabIndex = 6;
@@ -115,7 +112,7 @@
             // 
             // txtNroDocumentoMod
             // 
-            this.txtNroDocumentoMod.Location = new System.Drawing.Point(276, 30);
+            this.txtNroDocumentoMod.Location = new System.Drawing.Point(314, 30);
             this.txtNroDocumentoMod.Name = "txtNroDocumentoMod";
             this.txtNroDocumentoMod.Size = new System.Drawing.Size(100, 20);
             this.txtNroDocumentoMod.TabIndex = 7;
@@ -187,7 +184,7 @@
             // lblLocalidadMod
             // 
             this.lblLocalidadMod.AutoSize = true;
-            this.lblLocalidadMod.Location = new System.Drawing.Point(311, 112);
+            this.lblLocalidadMod.Location = new System.Drawing.Point(10, 147);
             this.lblLocalidadMod.Name = "lblLocalidadMod";
             this.lblLocalidadMod.Size = new System.Drawing.Size(53, 13);
             this.lblLocalidadMod.TabIndex = 16;
@@ -195,7 +192,7 @@
             // 
             // txtLocalidadMod
             // 
-            this.txtLocalidadMod.Location = new System.Drawing.Point(370, 109);
+            this.txtLocalidadMod.Location = new System.Drawing.Point(69, 144);
             this.txtLocalidadMod.Name = "txtLocalidadMod";
             this.txtLocalidadMod.Size = new System.Drawing.Size(100, 20);
             this.txtLocalidadMod.TabIndex = 17;
@@ -203,7 +200,7 @@
             // lblNacionalidadMod
             // 
             this.lblNacionalidadMod.AutoSize = true;
-            this.lblNacionalidadMod.Location = new System.Drawing.Point(483, 112);
+            this.lblNacionalidadMod.Location = new System.Drawing.Point(182, 147);
             this.lblNacionalidadMod.Name = "lblNacionalidadMod";
             this.lblNacionalidadMod.Size = new System.Drawing.Size(69, 13);
             this.lblNacionalidadMod.TabIndex = 20;
@@ -212,7 +209,7 @@
             // lblFechaNacimientoMod
             // 
             this.lblFechaNacimientoMod.AutoSize = true;
-            this.lblFechaNacimientoMod.Location = new System.Drawing.Point(14, 142);
+            this.lblFechaNacimientoMod.Location = new System.Drawing.Point(10, 181);
             this.lblFechaNacimientoMod.Name = "lblFechaNacimientoMod";
             this.lblFechaNacimientoMod.Size = new System.Drawing.Size(106, 13);
             this.lblFechaNacimientoMod.TabIndex = 22;
@@ -221,7 +218,7 @@
             // dtpFechaNacimientoMod
             // 
             this.dtpFechaNacimientoMod.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaNacimientoMod.Location = new System.Drawing.Point(126, 139);
+            this.dtpFechaNacimientoMod.Location = new System.Drawing.Point(122, 178);
             this.dtpFechaNacimientoMod.Name = "dtpFechaNacimientoMod";
             this.dtpFechaNacimientoMod.Size = new System.Drawing.Size(96, 20);
             this.dtpFechaNacimientoMod.TabIndex = 23;
@@ -229,7 +226,7 @@
             // chkHabilitadoMod
             // 
             this.chkHabilitadoMod.AutoSize = true;
-            this.chkHabilitadoMod.Location = new System.Drawing.Point(14, 168);
+            this.chkHabilitadoMod.Location = new System.Drawing.Point(10, 207);
             this.chkHabilitadoMod.Name = "chkHabilitadoMod";
             this.chkHabilitadoMod.Size = new System.Drawing.Size(73, 17);
             this.chkHabilitadoMod.TabIndex = 24;
@@ -238,16 +235,17 @@
             // 
             // butLimpiarMod
             // 
-            this.butLimpiarMod.Location = new System.Drawing.Point(7, 201);
+            this.butLimpiarMod.Location = new System.Drawing.Point(3, 240);
             this.butLimpiarMod.Name = "butLimpiarMod";
             this.butLimpiarMod.Size = new System.Drawing.Size(75, 23);
             this.butLimpiarMod.TabIndex = 25;
             this.butLimpiarMod.Text = "Limpiar";
             this.butLimpiarMod.UseVisualStyleBackColor = true;
+            this.butLimpiarMod.Click += new System.EventHandler(this.butLimpiarMod_Click);
             // 
             // butGuardarMod
             // 
-            this.butGuardarMod.Location = new System.Drawing.Point(584, 201);
+            this.butGuardarMod.Location = new System.Drawing.Point(580, 240);
             this.butGuardarMod.Name = "butGuardarMod";
             this.butGuardarMod.Size = new System.Drawing.Size(75, 23);
             this.butGuardarMod.TabIndex = 26;
@@ -256,7 +254,7 @@
             // 
             // btnVolverMod
             // 
-            this.btnVolverMod.Location = new System.Drawing.Point(503, 201);
+            this.btnVolverMod.Location = new System.Drawing.Point(499, 240);
             this.btnVolverMod.Name = "btnVolverMod";
             this.btnVolverMod.Size = new System.Drawing.Size(75, 23);
             this.btnVolverMod.TabIndex = 27;
@@ -266,16 +264,68 @@
             // 
             // txtNacionalidadMod
             // 
-            this.txtNacionalidadMod.Location = new System.Drawing.Point(558, 109);
+            this.txtNacionalidadMod.Location = new System.Drawing.Point(257, 144);
             this.txtNacionalidadMod.Name = "txtNacionalidadMod";
             this.txtNacionalidadMod.Size = new System.Drawing.Size(100, 20);
             this.txtNacionalidadMod.TabIndex = 21;
+            // 
+            // lblPisoMod
+            // 
+            this.lblPisoMod.AutoSize = true;
+            this.lblPisoMod.Location = new System.Drawing.Point(311, 112);
+            this.lblPisoMod.Name = "lblPisoMod";
+            this.lblPisoMod.Size = new System.Drawing.Size(27, 13);
+            this.lblPisoMod.TabIndex = 28;
+            this.lblPisoMod.Text = "Piso";
+            // 
+            // lblDptoMod
+            // 
+            this.lblDptoMod.AutoSize = true;
+            this.lblDptoMod.Location = new System.Drawing.Point(413, 112);
+            this.lblDptoMod.Name = "lblDptoMod";
+            this.lblDptoMod.Size = new System.Drawing.Size(30, 13);
+            this.lblDptoMod.TabIndex = 29;
+            this.lblDptoMod.Text = "Dpto";
+            // 
+            // txtPisoMod
+            // 
+            this.txtPisoMod.Location = new System.Drawing.Point(344, 109);
+            this.txtPisoMod.Name = "txtPisoMod";
+            this.txtPisoMod.Size = new System.Drawing.Size(63, 20);
+            this.txtPisoMod.TabIndex = 30;
+            // 
+            // txtDptoMod
+            // 
+            this.txtDptoMod.Location = new System.Drawing.Point(449, 109);
+            this.txtDptoMod.Name = "txtDptoMod";
+            this.txtDptoMod.Size = new System.Drawing.Size(100, 20);
+            this.txtDptoMod.TabIndex = 31;
+            // 
+            // cboTipoDocMod
+            // 
+            this.cboTipoDocMod.FormattingEnabled = true;
+            this.cboTipoDocMod.Items.AddRange(new object[] {
+            "DNI",
+            "PASAPORTE",
+            "CARNET EXT.",
+            "RUC",
+            "P. NACI.",
+            "OTROS"});
+            this.cboTipoDocMod.Location = new System.Drawing.Point(99, 29);
+            this.cboTipoDocMod.Name = "cboTipoDocMod";
+            this.cboTipoDocMod.Size = new System.Drawing.Size(100, 21);
+            this.cboTipoDocMod.TabIndex = 32;
             // 
             // FrmModificarCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 234);
+            this.ClientSize = new System.Drawing.Size(667, 270);
+            this.Controls.Add(this.cboTipoDocMod);
+            this.Controls.Add(this.txtDptoMod);
+            this.Controls.Add(this.txtPisoMod);
+            this.Controls.Add(this.lblDptoMod);
+            this.Controls.Add(this.lblPisoMod);
             this.Controls.Add(this.btnVolverMod);
             this.Controls.Add(this.butGuardarMod);
             this.Controls.Add(this.butLimpiarMod);
@@ -296,7 +346,6 @@
             this.Controls.Add(this.lblMailMod);
             this.Controls.Add(this.txtNroDocumentoMod);
             this.Controls.Add(this.lblNroDocumentoMod);
-            this.Controls.Add(this.txtTipoDocumentoMod);
             this.Controls.Add(this.lblTipoDocumentoMod);
             this.Controls.Add(this.txtApellidoMod);
             this.Controls.Add(this.lblApellidoMod);
@@ -317,7 +366,6 @@
         private System.Windows.Forms.Label lblApellidoMod;
         private System.Windows.Forms.TextBox txtApellidoMod;
         private System.Windows.Forms.Label lblTipoDocumentoMod;
-        private System.Windows.Forms.TextBox txtTipoDocumentoMod;
         private System.Windows.Forms.Label lblNroDocumentoMod;
         private System.Windows.Forms.TextBox txtNroDocumentoMod;
         private System.Windows.Forms.Label lblMailMod;
@@ -338,5 +386,10 @@
         private System.Windows.Forms.Button butGuardarMod;
         private System.Windows.Forms.Button btnVolverMod;
         private System.Windows.Forms.TextBox txtNacionalidadMod;
+        private System.Windows.Forms.Label lblPisoMod;
+        private System.Windows.Forms.Label lblDptoMod;
+        private System.Windows.Forms.TextBox txtPisoMod;
+        private System.Windows.Forms.TextBox txtDptoMod;
+        private System.Windows.Forms.ComboBox cboTipoDocMod;
     }
 }

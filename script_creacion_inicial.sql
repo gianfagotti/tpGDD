@@ -708,3 +708,59 @@ WHERE cli.cliente_nroDocumento = res.reserva_clienteNroDocumento AND
 ORDER BY Puntaje DESC
 END
 GO
+
+
+------------------------------------------------------------------------------
+
+create proc FAGD.guardarNuevoCliente 
+@nombre nvarchar(255),
+@apellido nvarchar(255),
+@tipoDocumento nvarchar(255),
+@nroDocumento numeric(18),
+@mail varchar(50),
+@telefono numeric(18),
+@calle nvarchar(255),
+@nroCalle numeric(18),
+@piso numeric(18),
+@dpto varchar(5),
+@localidad nvarchar(255),
+@nacionalidad nvarchar(255),
+@fechaNac datetime,
+@estado bit
+
+as 
+begin
+	declare @fechaNacimiento datetime
+	set @fechaNacimiento = CONVERT(datetime, @fechaNac, 121)
+	declare @respuesta numeric(18)
+
+	begin try
+		if (not exists(select cliente_tipoDocumento, cliente_nroDocumento from FAGD.Cliente 
+						where cliente_tipoDocumento = @tipoDocumento and cliente_nroDocumento = @nroDocumento))
+		begin
+			insert into FAGD.Cliente(cliente_nroDocumento, cliente_apellido, cliente_nombre, cliente_fechaNac, cliente_mail,
+									 cliente_nacionalidad, cliente_calle, cliente_nroCalle, cliente_piso, cliente_dpto,
+									 cliente_tipoDocumento, cliente_telefono, cliente_localidad, cliente_estado)
+			values(@nroDocumento, @apellido, @nombre, @fechaNacimiento, @mail, @nacionalidad, @calle, @nroCalle, @piso, @dpto,
+					@tipoDocumento, @telefono, @localidad, @estado)
+			set @respuesta = 1;
+		end
+		else
+		begin
+			set @respuesta = 2;
+		end
+		select @respuesta as respuesta
+		commit tran cl
+	end try
+	begin catch
+	set @respuesta = 0;
+	select @respuesta as respuesta
+	end catch
+end
+
+				
+
+			
+
+
+

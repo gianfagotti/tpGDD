@@ -25,5 +25,10 @@ namespace FrbaHotel.AbmCliente
             this.Close();
             frmMenuEmpleado.Show();
         }
+
+        private void butLimpiarMod_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

@@ -33,7 +33,6 @@
             this.lblApellido = new System.Windows.Forms.Label();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.lblTipoDocumento = new System.Windows.Forms.Label();
-            this.txtTipoDocumento = new System.Windows.Forms.TextBox();
             this.lblNroDocumento = new System.Windows.Forms.Label();
             this.txtNroDocumento = new System.Windows.Forms.TextBox();
             this.lblMail = new System.Windows.Forms.Label();
@@ -54,6 +53,11 @@
             this.butLimpiar = new System.Windows.Forms.Button();
             this.butGuardar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.lblPiso = new System.Windows.Forms.Label();
+            this.txtPiso = new System.Windows.Forms.TextBox();
+            this.lblDpto = new System.Windows.Forms.Label();
+            this.txtDpto = new System.Windows.Forms.TextBox();
+            this.cboTipoDoc = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -71,6 +75,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
             this.txtNombre.TabIndex = 1;
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             // 
             // lblApellido
             // 
@@ -97,17 +102,10 @@
             this.lblTipoDocumento.TabIndex = 4;
             this.lblTipoDocumento.Text = "Tipo Documento";
             // 
-            // txtTipoDocumento
-            // 
-            this.txtTipoDocumento.Location = new System.Drawing.Point(104, 33);
-            this.txtTipoDocumento.Name = "txtTipoDocumento";
-            this.txtTipoDocumento.Size = new System.Drawing.Size(59, 20);
-            this.txtTipoDocumento.TabIndex = 5;
-            // 
             // lblNroDocumento
             // 
             this.lblNroDocumento.AutoSize = true;
-            this.lblNroDocumento.Location = new System.Drawing.Point(170, 36);
+            this.lblNroDocumento.Location = new System.Drawing.Point(202, 36);
             this.lblNroDocumento.Name = "lblNroDocumento";
             this.lblNroDocumento.Size = new System.Drawing.Size(102, 13);
             this.lblNroDocumento.TabIndex = 6;
@@ -115,7 +113,7 @@
             // 
             // txtNroDocumento
             // 
-            this.txtNroDocumento.Location = new System.Drawing.Point(278, 33);
+            this.txtNroDocumento.Location = new System.Drawing.Point(310, 33);
             this.txtNroDocumento.Name = "txtNroDocumento";
             this.txtNroDocumento.Size = new System.Drawing.Size(100, 20);
             this.txtNroDocumento.TabIndex = 7;
@@ -188,7 +186,7 @@
             // lblLocalidad
             // 
             this.lblLocalidad.AutoSize = true;
-            this.lblLocalidad.Location = new System.Drawing.Point(253, 117);
+            this.lblLocalidad.Location = new System.Drawing.Point(11, 145);
             this.lblLocalidad.Name = "lblLocalidad";
             this.lblLocalidad.Size = new System.Drawing.Size(53, 13);
             this.lblLocalidad.TabIndex = 16;
@@ -196,7 +194,7 @@
             // 
             // txtLocalidad
             // 
-            this.txtLocalidad.Location = new System.Drawing.Point(312, 114);
+            this.txtLocalidad.Location = new System.Drawing.Point(70, 142);
             this.txtLocalidad.Name = "txtLocalidad";
             this.txtLocalidad.Size = new System.Drawing.Size(100, 20);
             this.txtLocalidad.TabIndex = 17;
@@ -204,7 +202,7 @@
             // lblNacionalidad
             // 
             this.lblNacionalidad.AutoSize = true;
-            this.lblNacionalidad.Location = new System.Drawing.Point(427, 117);
+            this.lblNacionalidad.Location = new System.Drawing.Point(185, 145);
             this.lblNacionalidad.Name = "lblNacionalidad";
             this.lblNacionalidad.Size = new System.Drawing.Size(69, 13);
             this.lblNacionalidad.TabIndex = 20;
@@ -212,7 +210,7 @@
             // 
             // txtNacionalidad
             // 
-            this.txtNacionalidad.Location = new System.Drawing.Point(502, 114);
+            this.txtNacionalidad.Location = new System.Drawing.Point(260, 142);
             this.txtNacionalidad.Name = "txtNacionalidad";
             this.txtNacionalidad.Size = new System.Drawing.Size(100, 20);
             this.txtNacionalidad.TabIndex = 21;
@@ -220,7 +218,7 @@
             // lblFechaNacimiento
             // 
             this.lblFechaNacimiento.AutoSize = true;
-            this.lblFechaNacimiento.Location = new System.Drawing.Point(13, 147);
+            this.lblFechaNacimiento.Location = new System.Drawing.Point(12, 175);
             this.lblFechaNacimiento.Name = "lblFechaNacimiento";
             this.lblFechaNacimiento.Size = new System.Drawing.Size(106, 13);
             this.lblFechaNacimiento.TabIndex = 22;
@@ -229,7 +227,7 @@
             // dtpFechaNacimiento
             // 
             this.dtpFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaNacimiento.Location = new System.Drawing.Point(125, 143);
+            this.dtpFechaNacimiento.Location = new System.Drawing.Point(124, 171);
             this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
             this.dtpFechaNacimiento.Size = new System.Drawing.Size(99, 20);
             this.dtpFechaNacimiento.TabIndex = 23;
@@ -237,7 +235,7 @@
             // chkHabilitado
             // 
             this.chkHabilitado.AutoSize = true;
-            this.chkHabilitado.Location = new System.Drawing.Point(15, 176);
+            this.chkHabilitado.Location = new System.Drawing.Point(14, 204);
             this.chkHabilitado.Name = "chkHabilitado";
             this.chkHabilitado.Size = new System.Drawing.Size(73, 17);
             this.chkHabilitado.TabIndex = 24;
@@ -246,25 +244,27 @@
             // 
             // butLimpiar
             // 
-            this.butLimpiar.Location = new System.Drawing.Point(7, 210);
+            this.butLimpiar.Location = new System.Drawing.Point(2, 233);
             this.butLimpiar.Name = "butLimpiar";
             this.butLimpiar.Size = new System.Drawing.Size(75, 23);
             this.butLimpiar.TabIndex = 25;
             this.butLimpiar.Text = "Limpiar";
             this.butLimpiar.UseVisualStyleBackColor = true;
+            this.butLimpiar.Click += new System.EventHandler(this.butLimpiar_Click);
             // 
             // butGuardar
             // 
-            this.butGuardar.Location = new System.Drawing.Point(525, 210);
+            this.butGuardar.Location = new System.Drawing.Point(520, 233);
             this.butGuardar.Name = "butGuardar";
             this.butGuardar.Size = new System.Drawing.Size(75, 23);
             this.butGuardar.TabIndex = 26;
             this.butGuardar.Text = "Guardar";
             this.butGuardar.UseVisualStyleBackColor = true;
+            this.butGuardar.Click += new System.EventHandler(this.butGuardar_Click);
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(444, 210);
+            this.btnVolver.Location = new System.Drawing.Point(439, 233);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
             this.btnVolver.TabIndex = 27;
@@ -272,11 +272,63 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // lblPiso
+            // 
+            this.lblPiso.AutoSize = true;
+            this.lblPiso.Location = new System.Drawing.Point(257, 117);
+            this.lblPiso.Name = "lblPiso";
+            this.lblPiso.Size = new System.Drawing.Size(27, 13);
+            this.lblPiso.TabIndex = 28;
+            this.lblPiso.Text = "Piso";
+            // 
+            // txtPiso
+            // 
+            this.txtPiso.Location = new System.Drawing.Point(291, 114);
+            this.txtPiso.Name = "txtPiso";
+            this.txtPiso.Size = new System.Drawing.Size(69, 20);
+            this.txtPiso.TabIndex = 29;
+            // 
+            // lblDpto
+            // 
+            this.lblDpto.AutoSize = true;
+            this.lblDpto.Location = new System.Drawing.Point(366, 117);
+            this.lblDpto.Name = "lblDpto";
+            this.lblDpto.Size = new System.Drawing.Size(30, 13);
+            this.lblDpto.TabIndex = 30;
+            this.lblDpto.Text = "Dpto";
+            // 
+            // txtDpto
+            // 
+            this.txtDpto.Location = new System.Drawing.Point(402, 114);
+            this.txtDpto.Name = "txtDpto";
+            this.txtDpto.Size = new System.Drawing.Size(100, 20);
+            this.txtDpto.TabIndex = 31;
+            // 
+            // cboTipoDoc
+            // 
+            this.cboTipoDoc.FormattingEnabled = true;
+            this.cboTipoDoc.Items.AddRange(new object[] {
+            "DNI",
+            "PASAPORTE",
+            "CARNET EXT.",
+            "RUC",
+            "P. NACI.",
+            "OTROS"});
+            this.cboTipoDoc.Location = new System.Drawing.Point(98, 32);
+            this.cboTipoDoc.Name = "cboTipoDoc";
+            this.cboTipoDoc.Size = new System.Drawing.Size(97, 21);
+            this.cboTipoDoc.TabIndex = 32;
+            // 
             // FrmAltaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(607, 241);
+            this.ClientSize = new System.Drawing.Size(607, 265);
+            this.Controls.Add(this.cboTipoDoc);
+            this.Controls.Add(this.txtDpto);
+            this.Controls.Add(this.lblDpto);
+            this.Controls.Add(this.txtPiso);
+            this.Controls.Add(this.lblPiso);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.butGuardar);
             this.Controls.Add(this.butLimpiar);
@@ -297,7 +349,6 @@
             this.Controls.Add(this.lblMail);
             this.Controls.Add(this.txtNroDocumento);
             this.Controls.Add(this.lblNroDocumento);
-            this.Controls.Add(this.txtTipoDocumento);
             this.Controls.Add(this.lblTipoDocumento);
             this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.lblApellido);
@@ -318,7 +369,6 @@
         private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Label lblTipoDocumento;
-        private System.Windows.Forms.TextBox txtTipoDocumento;
         private System.Windows.Forms.Label lblNroDocumento;
         private System.Windows.Forms.TextBox txtNroDocumento;
         private System.Windows.Forms.Label lblMail;
@@ -339,5 +389,10 @@
         private System.Windows.Forms.Button butLimpiar;
         private System.Windows.Forms.Button butGuardar;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Label lblPiso;
+        private System.Windows.Forms.TextBox txtPiso;
+        private System.Windows.Forms.Label lblDpto;
+        private System.Windows.Forms.TextBox txtDpto;
+        private System.Windows.Forms.ComboBox cboTipoDoc;
     }
 }
