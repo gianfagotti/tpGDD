@@ -7,12 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace FrbaHotel.AbmRol
 {
     public partial class AltaRol : Form
     {
         Form ultimoFormulario;
+        SqlDataReader resultado;
+        public static Conector2 BD = new Conector2();
+
 
         public AltaRol(Form form)
         {
@@ -20,20 +24,63 @@ namespace FrbaHotel.AbmRol
             ultimoFormulario = form;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
+        private void label1_Click(object sender, EventArgs e) { }
 
-        }
+        private void label2_Click(object sender, EventArgs e) { }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
+        private void btnVolver_Click(object sender, EventArgs e){
             this.Close();
             ultimoFormulario.Show();
         }
+
+
+        private void btnAceptar_Click(object sender, EventArgs e){
+    
+            /* CREACION DEL ROL*/
+            if (String.IsNullOrEmpty(txtNombreRol.Text)){
+                MessageBox.Show("El Rol debe tener un nombre.");
+            }
+
+            String exe = "EXEC FAGD.nuevoRol '" + txtNombreRol.Text + "', ";
+            if (chkRolActivo.Checked)
+                exe = exe + "1";
+            else exe = exe + "0";
+
+            decimal mensaje = 0;
+            resultado = BD.comando(exe);
+            if (resultado.Read()){
+                mensaje = resultado.GetDecimal(0);
+            }
+            // resultado.Close();
+
+            if (mensaje == 0){
+                MessageBox.Show("Ya existe un rol con ese nombre.");
+            }
+
+            else if (mensaje == 2){
+                MessageBox.Show("Error al guardar el Rol.");
+            }
+
+
+            /* LINKEO DE FUNCIONALIDADES */
+            else{
+                exe = "EXEC FAGD.funcionalidadesDelRol '" + txtNombreRol.Text + "', ";
+                /*MAGIA PARA QUE ME TOME LAS FUNCIONALIDADES Y AÑADIRLAS AL EXE*/
+                resultado = BD.comando(exe);
+                if (resultado.Read()){
+                    mensaje = resultado.GetDecimal(0);
+                }
+                if (mensaje == 0){
+                    MessageBox.Show("Error al linkear Rol con funcionalidades.");
+                } else {
+                    MessageBox.Show("Rol guardado correctamente!");
+                }
+
+            }
+        }
     }
 }
+
+
