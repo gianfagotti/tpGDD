@@ -51,6 +51,12 @@
     <Compile Include="AbmCliente\FrmAltaCliente.Designer.cs">
       <DependentUpon>FrmAltaCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmCliente\FrmListadoMod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmCliente\FrmListadoMod.Designer.cs">
+      <DependentUpon>FrmListadoMod.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmCliente\FrmModificarCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +195,9 @@
     </Compile>
     <EmbeddedResource Include="AbmCliente\FrmAltaCliente.resx">
       <DependentUpon>FrmAltaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmCliente\FrmListadoMod.resx">
+      <DependentUpon>FrmListadoMod.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmCliente\FrmModificarCliente.resx">
       <DependentUpon>FrmModificarCliente.cs</DependentUpon>

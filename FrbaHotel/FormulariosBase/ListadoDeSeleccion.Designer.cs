@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cboTabla = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtFiltro1 = new System.Windows.Forms.TextBox();
             this.txtFiltro2 = new System.Windows.Forms.TextBox();
@@ -41,39 +39,19 @@
             this.Columna1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Columna2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.txtTabla = new System.Windows.Forms.TextBox();
+            this.lblFiltro2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cboTabla
-            // 
-            this.cboTabla.FormattingEnabled = true;
-            this.cboTabla.Items.AddRange(new object[] {
-            "Hotel",
-            "Reserva",
-            "Habitación",
-            "Usuario"});
-            this.cboTabla.Location = new System.Drawing.Point(140, 19);
-            this.cboTabla.Name = "cboTabla";
-            this.cboTabla.Size = new System.Drawing.Size(121, 21);
-            this.cboTabla.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 22);
+            this.label1.Location = new System.Drawing.Point(12, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(121, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Tipo de dato a modificar";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(283, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Taradito Alvito";
             // 
             // label3
             // 
@@ -106,6 +84,7 @@
             this.btnLimpiar.TabIndex = 6;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnBuscar
             // 
@@ -115,6 +94,7 @@
             this.btnBuscar.TabIndex = 7;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // dataGridView1
             // 
@@ -127,6 +107,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(444, 238);
             this.dataGridView1.TabIndex = 8;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Seleccionar
             // 
@@ -153,12 +134,32 @@
             this.btnVolver.TabIndex = 9;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
+            // txtTabla
+            // 
+            this.txtTabla.Enabled = false;
+            this.txtTabla.Location = new System.Drawing.Point(139, 16);
+            this.txtTabla.Name = "txtTabla";
+            this.txtTabla.Size = new System.Drawing.Size(77, 20);
+            this.txtTabla.TabIndex = 10;
+            // 
+            // lblFiltro2
+            // 
+            this.lblFiltro2.AutoSize = true;
+            this.lblFiltro2.Location = new System.Drawing.Point(245, 49);
+            this.lblFiltro2.Name = "lblFiltro2";
+            this.lblFiltro2.Size = new System.Drawing.Size(41, 13);
+            this.lblFiltro2.TabIndex = 11;
+            this.lblFiltro2.Text = "Filtro 2:";
             // 
             // ListadoDeSeleccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 396);
+            this.Controls.Add(this.lblFiltro2);
+            this.Controls.Add(this.txtTabla);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnBuscar);
@@ -166,9 +167,7 @@
             this.Controls.Add(this.txtFiltro2);
             this.Controls.Add(this.txtFiltro1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.cboTabla);
             this.Name = "ListadoDeSeleccion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Listado de Selección";
@@ -180,9 +179,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cboTabla;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtFiltro1;
         private System.Windows.Forms.TextBox txtFiltro2;
@@ -193,5 +190,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Columna1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Columna2;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.TextBox txtTabla;
+        private System.Windows.Forms.Label lblFiltro2;
     }
 }

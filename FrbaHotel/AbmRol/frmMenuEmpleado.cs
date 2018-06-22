@@ -133,6 +133,10 @@ namespace FrbaHotel.AbmRol
 
         private void btnModificarUsuario_Click(object sender, EventArgs e)
         {
+            AbmCliente.FrmListadoMod filtro = new AbmCliente.FrmListadoMod(this);
+            this.Hide();
+            filtro.Show();
+
         }
     }
 }

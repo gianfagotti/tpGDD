@@ -52,8 +52,8 @@ namespace FrbaHotel.AbmCliente
                 comando = comando + txtTelefono.Text + ",";
                 comando = comando + "'" + txtCalle.Text + "',";
                 comando = comando + txtNumero.Text + ",";
-                comando = comando + txtPiso.Text + ",";
-                comando = comando + txtDpto.Text + ",";
+                comando = comando + "'" + txtPiso.Text + "',";
+                comando = comando + "'" + txtDpto.Text + "',";
                 comando = comando + "'" + txtLocalidad.Text + "',";
                 comando = comando + "'" + txtNacionalidad.Text + "',";
 
@@ -75,17 +75,20 @@ namespace FrbaHotel.AbmCliente
                     resu = resultado.GetDecimal(0);
                 }
                 resultado.Close();
-                if(resu==1)
+                if (resu == 1)
+                {
                     MessageBox.Show("El cliente fue guardado correctamente");
-                else if (resu==2)
-                    MessageBox.Show("Error al guardar, el cliente con ese nro y tipo de doc ya existe");
-                else
+                    limpiarCampos();
+                }
+                else if (resu == 2)
                     MessageBox.Show("Error al guardar, el cliente con ese mail ya existe");
+                else
+                    MessageBox.Show("Error al guardar, el cliente con ese documento ya existe");
                 
             }
         }
 
-        private void butLimpiar_Click(object sender, EventArgs e)
+        private void limpiarCampos()
         {
             txtNombre.Text = string.Empty;
             txtApellido.Text = string.Empty;
@@ -101,6 +104,11 @@ namespace FrbaHotel.AbmCliente
             cboTipoDoc.ResetText();
             dtpFechaNacimiento.ResetText();
             txtNombre.Focus();
+        }
+
+        private void butLimpiar_Click(object sender, EventArgs e)
+        {
+            limpiarCampos();
         }
 
         private int checkearCamposVacios()
@@ -159,6 +167,15 @@ namespace FrbaHotel.AbmCliente
                 a = 1;
                 mensaje = mensaje + "El campo Localidad es obligatorio\n";
             }
+
+            if (string.IsNullOrEmpty(txtPiso.Text))
+            {
+                txtPiso.Text = "-";
+            }
+            if (string.IsNullOrEmpty(txtDpto.Text))
+            {
+                txtDpto.Text = "-";
+            }
             
             DateTime fecha;
             fecha = Convert.ToDateTime(dtpFechaNacimiento.Value);
@@ -179,5 +196,28 @@ namespace FrbaHotel.AbmCliente
             }
             return a;
         }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtNroDocumento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
     }
 }

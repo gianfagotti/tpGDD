@@ -169,7 +169,7 @@ CREATE TABLE FAGD.Cliente(
  cliente_nacionalidad nvarchar(255),
  cliente_calle nvarchar(255),
  cliente_nroCalle numeric(18),
- cliente_piso numeric(18),
+ cliente_piso varchar(5),
  cliente_dpto varchar(5),
  cliente_tipoDocumento nvarchar(255),
  cliente_telefono numeric(18),
@@ -721,7 +721,7 @@ create proc FAGD.guardarNuevoCliente
 @telefono numeric(18),
 @calle nvarchar(255),
 @nroCalle numeric(18),
-@piso numeric(18),
+@piso varchar(5),
 @dpto varchar(5),
 @localidad nvarchar(255),
 @nacionalidad nvarchar(255),
@@ -736,8 +736,12 @@ begin
 
 	begin try
 		if (not exists(select cliente_tipoDocumento, cliente_nroDocumento from FAGD.Cliente 
-						where cliente_tipoDocumento = @tipoDocumento and cliente_nroDocumento = @nroDocumento))
+						where cliente_mail = @mail))
 		begin
+			if (@piso = '-')
+				set @piso = null
+			if (@dpto = '-')
+				set @dpto = null
 			insert into FAGD.Cliente(cliente_nroDocumento, cliente_apellido, cliente_nombre, cliente_fechaNac, cliente_mail,
 									 cliente_nacionalidad, cliente_calle, cliente_nroCalle, cliente_piso, cliente_dpto,
 									 cliente_tipoDocumento, cliente_telefono, cliente_localidad, cliente_estado)

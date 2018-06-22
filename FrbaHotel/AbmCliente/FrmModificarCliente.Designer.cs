@@ -116,6 +116,7 @@
             this.txtNroDocumentoMod.Name = "txtNroDocumentoMod";
             this.txtNroDocumentoMod.Size = new System.Drawing.Size(100, 20);
             this.txtNroDocumentoMod.TabIndex = 7;
+            this.txtNroDocumentoMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroDocumentoMod_KeyPress);
             // 
             // lblMailMod
             // 
@@ -180,6 +181,7 @@
             this.txtNumeroMod.Name = "txtNumeroMod";
             this.txtNumeroMod.Size = new System.Drawing.Size(100, 20);
             this.txtNumeroMod.TabIndex = 15;
+            this.txtNumeroMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroMod_KeyPress);
             // 
             // lblLocalidadMod
             // 
