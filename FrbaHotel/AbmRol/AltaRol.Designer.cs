@@ -35,7 +35,7 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.dgvFuncionalidades = new System.Windows.Forms.DataGridView();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.columnaHabilitar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFuncionalidades)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,28 +100,26 @@
             // 
             // dgvFuncionalidades
             // 
-            this.dgvFuncionalidades.AllowUserToAddRows = false;
-            this.dgvFuncionalidades.AllowUserToDeleteRows = false;
+            this.dgvFuncionalidades.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvFuncionalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFuncionalidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Seleccionar});
-            this.dgvFuncionalidades.Location = new System.Drawing.Point(26, 92);
+            this.columnaHabilitar});
+            this.dgvFuncionalidades.Location = new System.Drawing.Point(26, 101);
             this.dgvFuncionalidades.Name = "dgvFuncionalidades";
-            this.dgvFuncionalidades.ReadOnly = true;
-            this.dgvFuncionalidades.Size = new System.Drawing.Size(398, 203);
+            this.dgvFuncionalidades.Size = new System.Drawing.Size(398, 197);
             this.dgvFuncionalidades.TabIndex = 8;
             // 
-            // Seleccionar
+            // columnaHabilitar
             // 
-            this.Seleccionar.HeaderText = "Habilitar";
-            this.Seleccionar.Name = "Seleccionar";
-            this.Seleccionar.ReadOnly = true;
+            this.columnaHabilitar.HeaderText = "Habilitar";
+            this.columnaHabilitar.Name = "columnaHabilitar";
+            this.columnaHabilitar.Width = 51;
             // 
             // AltaRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 349);
+            this.ClientSize = new System.Drawing.Size(446, 349);
             this.Controls.Add(this.dgvFuncionalidades);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAceptar);
@@ -147,6 +145,6 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.DataGridView dgvFuncionalidades;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn columnaHabilitar;
     }
 }

@@ -966,7 +966,7 @@ CREATE PROC FAGD.nuevoRol @nombreRol nvarchar (255), @estado bit
 AS
 BEGIN
 	DECLARE @resultado numeric(18)
-
+	BEGIN TRAN rol
 	BEGIN TRY
 		IF (NOT EXISTS(SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre = @nombreRol))
 			BEGIN 
@@ -979,8 +979,10 @@ BEGIN
 				SET @resultado=0; 
 			END
 		SELECT @resultado AS resultado
+		COMMIT TRAN rol
 	END TRY
 	BEGIN CATCH
+		ROLLBACK TRAN rol
 		SET @resultado = 2;
 		SELECT @resultado AS resultado
 	END CATCH 
@@ -991,18 +993,18 @@ GO
 CREATE PROCEDURE FAGD.funcionalidadesDelRol @nombreRol nvarchar (255), @codigoFuncionalidad numeric (18)
 AS 
 BEGIN
- DECLARE @resultado numeric(18)
-
- BEGIN TRY
-  INSERT INTO FAGD.RolXFuncionalidad (rol_codigo,funcionalidad_codigo)
-  VALUES ((SELECT rol_codigo FROM FAGD.Rol WHERE @nombreRol = rol_nombre), @codigoFuncionalidad)
-  SET @resultado=1;
- END
- SELECT @resultado AS resultado
- COMMIT tran cl
- END TRY
- BEGIN CATCH
-  SET @resultado = 0;
-  SELECT @resultado AS resultado
- END CATCH
+	DECLARE @resultado numeric(18)
+	BEGIN TRAN func
+	BEGIN TRY
+		INSERT INTO FAGD.RolXFuncionalidad (rol_codigo,funcionalidad_codigo)
+		VALUES ((SELECT rol_codigo FROM FAGD.Rol WHERE @nombreRol = rol_nombre), @codigoFuncionalidad)
+		SET @resultado=1;
+		SELECT @resultado AS resultado
+		COMMIT tran func
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN func
+		SET @resultado = 0;
+		SELECT @resultado AS resultado
+	END CATCH
 END
