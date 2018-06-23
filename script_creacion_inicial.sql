@@ -773,7 +773,73 @@ GO
 
 ---------------------------------------------------------------------------------------------------
 
+CREATE PROCEDURE FAGD.lista_habitacion_maxVecesOcup @trimestre numeric(18,0), @Anio numeric(18,0) 
+AS BEGIN
 
+DECLARE @inicioTrimestre DATETIME
+	DECLARE @finTrimestre DATETIME
+	DECLARE @anioAux CHAR(4)
+		SET @anioAux = CAST(@anio AS CHAR(4))
+		
+		IF (@trimestre = 1)
+		BEGIN
+			SET @inicioTrimestre = @anioAux+'-01-01'
+			SET @finTrimestre = @anioAux+'-03-31'
+		END
+		ELSE IF (@trimestre = 2)
+		BEGIN
+			SET @inicioTrimestre = @anioAux+'-04-01'
+			SET @finTrimestre = @anioAux+'-06-30'
+		END
+		ELSE IF (@trimestre = 3)
+		BEGIN 
+			SET @inicioTrimestre = @anioAux+'-07-01'
+			SET @finTrimestre = @anioAux+'-09-30'
+		END
+		ELSE IF (@trimestre = 4)
+		BEGIN 
+			SET @inicioTrimestre = @anioAux+'-10-01'
+			SET @finTrimestre = @anioAux+'-12-31'
+		END
+		ELSE
+		BEGIN
+			SET @inicioTrimestre = @anioAux+'-01-01'
+			SET @finTrimestre = @anioAux+'-12-31'
+		END
+
+
+SELECT DISTINCT TOP 5 hab.habitacion_codigoHotel AS CodigoDelHotel, hab.habitacion_nro AS NumeroDeLaHabitacion, consultaCantXHab.cantEstadias AS VecesOcupada,
+consultaCantDias.Dias AS cantDias
+
+FROM
+	(SELECT  hab.habitacion_codigo, hab.habitacion_codigoHotel, COUNT(hab.habitacion_codigo) AS cantEstadias
+	  FROM FAGD.ReservaXHabitacion resXHab, FAGD.Habitacion hab, FAGD.Reserva res, FAGD.Hotel hotel, FAGD.Estadia est
+	  WHERE resXHab.habitacion_codigo = hab.habitacion_codigo AND
+		    resXHab.reserva_codigo = res.reserva_codigo AND
+		    hotel.hotel_codigo = hab.habitacion_codigoHotel AND
+		    est.estadia_codigoReserva = res.reserva_codigo
+      GROUP BY hab.habitacion_codigo, hab.habitacion_codigoHotel) AS consultaCantXHab,
+					
+	(SELECT  hab.habitacion_codigo,	hab.habitacion_codigoHotel, SUM(est.estadia_cantNoches) AS Dias
+	  FROM FAGD.ReservaXHabitacion resXHab, FAGD.Habitacion hab, FAGD.Reserva res, FAGD.Hotel hotel, FAGD.Estadia est
+	  WHERE resXHab.habitacion_codigo = hab.habitacion_codigo AND
+		    resXHab.reserva_codigo = res.reserva_codigo AND
+		    hotel.hotel_codigo = hab.habitacion_codigoHotel AND
+		    est.estadia_codigoReserva = res.reserva_codigo
+	   GROUP BY hab.habitacion_codigo, hab.habitacion_codigoHotel) AS consultaCantDias,
+
+	FAGD.Hotel hotel, FAGD.Habitacion hab,	FAGD.Estadia est
+
+WHERE consultaCantXHab.habitacion_codigoHotel = hotel.hotel_codigo AND
+	  hab.habitacion_codigo = consultaCantXHab.habitacion_codigo AND
+		consultaCantXHab.habitacion_codigo = consultaCantDias.habitacion_codigo	AND
+		est.estadia_fechaInicio BETWEEN @inicioTrimestre AND @finTrimestre
+ORDER BY cantEstadias desc
+	
+END
+GO
+
+--------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.lista_cliente_maxPuntajes @trimestre numeric(18,0), @anio numeric(18,0)
 AS	BEGIN
