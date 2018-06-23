@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,11 @@ namespace FrbaHotel.Login
 {
     public partial class FrmLogin : Form
     {
-        public FrmLogin()
-        {
+        AbmRol.frmMenuEmpleado frmMenuEmpleado;
+        DataTable tabla;
+        public static Conector2 BD = new Conector2();
+
+        public FrmLogin(){
             InitializeComponent();
         }
 
@@ -46,17 +50,27 @@ namespace FrbaHotel.Login
 
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e)
-        {
-            if (true) //En este condicional tiene que ir la validacion de que el rol que selecciona el usuario esté registrado en la bd para su usuario.
+        private void btnIngresar_Click(object sender, EventArgs e){
+            if (this.txtUsuario.Text == "" || this.txtContraseña.Text == "")
             {
-                this.Close();
-                FrmSeleccionarRol frmSeleccionarRol = new FrmSeleccionarRol();
-                frmSeleccionarRol.Show();
+                MessageBox.Show("Debe completar los campos Usuario y Contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show("Seleccione un rol válido para su usuario");
+                String nombreIngresado = this.txtUsuario.Text;
+                String passwordIngresado = this.txtContraseña.Text;
+                BD.conectar();
+                tabla = BD.consultaLogin(nombreIngresado, passwordIngresado);
+                if (tabla.Rows.Count == 1)
+                {
+                    this.Close();
+                    FrmSeleccionarRol frmSeleccionarRol = new FrmSeleccionarRol();
+                    frmSeleccionarRol.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Usuario y/o contraseña incorrecto/s", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

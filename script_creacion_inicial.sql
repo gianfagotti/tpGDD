@@ -538,8 +538,8 @@ INSERT INTO FAGD.RolXFuncionalidad(rol_codigo,funcionalidad_codigo)
 		values (3,1)
 GO
 
-INSERT INTO FAGD.Usuario (usuario_username, usuario_nombre, usuario_apellido, usuario_direccion, usuario_mail, usuario_telefono, usuario_fechaNacimiento, usuario_estado)
-		values ('IRAA','Ivan','Arnaudo','Calle Falsa 123','ivan.arnaudo@gmail.com','11111111','02/09/96',1)
+INSERT INTO FAGD.Usuario (usuario_username,usuario_password, usuario_nombre, usuario_apellido, usuario_direccion, usuario_mail, usuario_telefono, usuario_fechaNacimiento, usuario_estado)
+		values ('IRAA','123','Ivan','Arnaudo','Calle Falsa 123','ivan.arnaudo@gmail.com','11111111','02/09/96',1)
 GO
 
 INSERT INTO FAGD.UsuarioXRol(usuario_username,rol_codigo)
