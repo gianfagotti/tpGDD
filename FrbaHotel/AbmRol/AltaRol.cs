@@ -15,6 +15,8 @@ namespace FrbaHotel.AbmRol
     {
         Form ultimoFormulario;
         SqlDataReader resultado;
+        SqlDataAdapter adapter;
+        DataTable tabla;
         public static Conector2 BD = new Conector2();
 
 
@@ -22,6 +24,14 @@ namespace FrbaHotel.AbmRol
         {
             InitializeComponent();
             ultimoFormulario = form;
+
+            /*carga de la DGV*/
+            String select = "SELECT  FROM FAGD.Funcionalidad";
+            adapter = BD.dameDataAdapter(select);
+            tabla = BD.dameDataTable(adapter);
+            BindingSource bindSource = new BindingSource();
+            bindSource.DataSource = tabla;
+            dgvFuncionalidades.DataSource = bindSource;
         }
 
         private void label1_Click(object sender, EventArgs e) { }
@@ -30,57 +40,79 @@ namespace FrbaHotel.AbmRol
 
 
 
-        private void btnVolver_Click(object sender, EventArgs e){
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
             this.Close();
             ultimoFormulario.Show();
         }
 
 
-        private void btnAceptar_Click(object sender, EventArgs e){
-    
-            /* CREACION DEL ROL*/
-            if (String.IsNullOrEmpty(txtNombreRol.Text)){
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+
+            /*CREACION DEL ROL*/
+            if (String.IsNullOrEmpty(txtNombreRol.Text))
+            {
                 MessageBox.Show("El Rol debe tener un nombre.");
             }
-
-            String exe = "EXEC FAGD.nuevoRol '" + txtNombreRol.Text + "', ";
-            if (chkRolActivo.Checked)
-                exe = exe + "1";
-            else exe = exe + "0";
-
-            decimal mensaje = 0;
-            resultado = BD.comando(exe);
-            if (resultado.Read()){
-                mensaje = resultado.GetDecimal(0);
-            }
-            // resultado.Close();
-
-            if (mensaje == 0){
-                MessageBox.Show("Ya existe un rol con ese nombre.");
-            }
-
-            else if (mensaje == 2){
-                MessageBox.Show("Error al guardar el Rol.");
-            }
+            else
+            {
 
 
-            /* LINKEO DE FUNCIONALIDADES */
-            else{
-                exe = "EXEC FAGD.funcionalidadesDelRol '" + txtNombreRol.Text + "', ";
-                /*MAGIA PARA QUE ME TOME LAS FUNCIONALIDADES Y AÑADIRLAS AL EXE*/
+                String exe = "EXEC FAGD.nuevoRol '" + txtNombreRol.Text + "', ";
+                if (chkRolActivo.Checked)
+                    exe = exe + "1";
+                else exe = exe + "0";
+
+                decimal mensaje = 0;
                 resultado = BD.comando(exe);
-                if (resultado.Read()){
+                if (resultado.Read())
+                {
                     mensaje = resultado.GetDecimal(0);
                 }
-                if (mensaje == 0){
-                    MessageBox.Show("Error al linkear Rol con funcionalidades.");
-                } else {
-                    MessageBox.Show("Rol guardado correctamente!");
+                resultado.Close();
+
+                if (mensaje == 0)
+                {
+                    MessageBox.Show("Ya existe un rol con ese nombre.");
                 }
 
+                else if (mensaje == 2)
+                {
+                    MessageBox.Show("Error al guardar el Rol.");
+                }
+
+
+                /*LINKEO DE FUNCIONALIDADES*/
+                else
+                {
+                    foreach (DataGridViewRow row in dgvFuncionalidades.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[columnaHabilitar.Name].Value) == true)
+                        {
+
+                            String codigoFuncionalidad = row.Cells[1].Value.ToString();
+                            exe = "EXEC FAGD.funcionalidadesDelRol '" + txtNombreRol.Text + "', '" + codigoFuncionalidad + "'";
+
+                            resultado = BD.comando(exe);
+                            if (resultado.Read())
+                            {
+                                mensaje = resultado.GetDecimal(0);
+                            }
+                            resultado.Close();
+                            if (mensaje == 0)
+                            {
+                                MessageBox.Show("Error al linkear el rol con las funcionalidades.");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Rol guardado correctamente!");
+                            }
+                        }
+
+                    }
+                }
             }
         }
     }
 }
-
-

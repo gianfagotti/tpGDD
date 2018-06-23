@@ -988,21 +988,21 @@ END
 GO
 
 
-/*CREATE PROCEDURE FAGD.funcionalidadesDelRol @nombreRol nvarchar (255), @codigoFuncionalidad numeric (18)
+CREATE PROCEDURE FAGD.funcionalidadesDelRol @nombreRol nvarchar (255), @codigoFuncionalidad numeric (18)
 AS 
 BEGIN
-	DECLARE @resultado numeric(18)
+ DECLARE @resultado numeric(18)
 
-	BEGIN TRY
-		INSERT INTO FAGD.RolXFuncionalidad (rol_codigo,funcionalidad_codigo)
-		VALUES ((SELECT rol_codigo FROM FAGD.Rol WHERE @nombreRol = rol_nombre), @codigoFuncionalidad)
-		SET @resultado=1;
-	END
-	SELECT @resultado AS resultado
-	COMMIT tran cl
-	END TRY
-	BEGIN CATCH
-		SET @resultado = 0;
-		SELECT @resultado AS resultado
-	END CATCH 
-END*/
+ BEGIN TRY
+  INSERT INTO FAGD.RolXFuncionalidad (rol_codigo,funcionalidad_codigo)
+  VALUES ((SELECT rol_codigo FROM FAGD.Rol WHERE @nombreRol = rol_nombre), @codigoFuncionalidad)
+  SET @resultado=1;
+ END
+ SELECT @resultado AS resultado
+ COMMIT tran cl
+ END TRY
+ BEGIN CATCH
+  SET @resultado = 0;
+  SELECT @resultado AS resultado
+ END CATCH
+END
