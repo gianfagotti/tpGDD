@@ -867,7 +867,7 @@ begin
 	declare @respuesta numeric(18)
 
 	begin try
-		if (not exists(select cliente_tipoDocumento, cliente_nroDocumento from FAGD.Cliente 
+		if (not exists(select * from FAGD.Cliente 
 						where cliente_mail = @mail))
 		begin
 			if (@piso = '-')
@@ -886,44 +886,108 @@ begin
 			set @respuesta = 2;
 		end
 		select @respuesta as respuesta
-		commit tran cl
 	end try
 	begin catch
-	set @respuesta = 0;
-	select @respuesta as respuesta
+		set @respuesta = 0;
+		select @respuesta as respuesta
 	end catch
 end
+GO
+
+
+create proc FAGD.modificarCliente
+@nombre nvarchar(255),
+@apellido nvarchar(255),
+@tipoDocumento nvarchar(255),
+@nroDocumento numeric(18),
+@mail varchar(50),
+@telefono numeric(18),
+@calle nvarchar(255),
+@nroCalle numeric(18),
+@piso varchar(5),
+@dpto varchar(5),
+@localidad nvarchar(255),
+@nacionalidad nvarchar(255),
+@fechaNac datetime,
+@estado bit
+
+as
+begin
+	declare @fechaNacimiento datetime
+	set @fechaNacimiento = CONVERT(datetime, @fechaNac, 121)
+	declare @respuesta numeric(18)
+
+	begin try
+			if (@piso = '-')
+				set @piso = null
+			if (@dpto = '-')
+				set @dpto = null
+			
+			UPDATE FAGD.Cliente
+
+			set cliente_nombre = @nombre,
+			cliente_apellido = @apellido,
+			cliente_tipoDocumento = @tipoDocumento,
+			cliente_mail = @mail,
+			cliente_telefono = @telefono,
+			cliente_calle = @calle,
+			cliente_nroCalle = @nroCalle,
+			cliente_piso = @piso,
+			cliente_dpto = @dpto,
+			cliente_localidad = @localidad,
+			cliente_nacionalidad = @nacionalidad,
+			cliente_fechaNac = @fechaNacimiento,
+			cliente_estado = @estado
+
+			where cliente_nroDocumento = @nroDocumento;
+
+
+			set @respuesta = 1;
+
+		select @respuesta as respuesta;
+	end try
+	begin catch
+		set @respuesta = 0;
+		select @respuesta as respuesta;
+	end catch
+
+end
+GO
+
 
 				
 ------------------------------------------------IRAA-------------------------------------------------------
 
-CREATE PROCEDURE FAGD.nuevoRol @nombreRol nvarchar (255), @estado bit
+CREATE PROC FAGD.nuevoRol @nombreRol nvarchar (255), @estado bit
 AS
 BEGIN
 	DECLARE @resultado numeric(18)
 
 	BEGIN TRY
 		IF (NOT EXISTS(SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre = @nombreRol))
-		BEGIN 
-			INSERT INTO FAGD.Rol(rol_nombre,rol_estado)
-			VALUES (@nombreRol, @estado)
-			SET @resultado=1;
-		END
-		ELSE BEGIN SET @resultado=0; END
+			BEGIN 
+				INSERT INTO FAGD.Rol(rol_nombre,rol_estado)
+				VALUES (@nombreRol, @estado)
+				SET @resultado=1;
+			END
+		ELSE 
+			BEGIN 
+				SET @resultado=0; 
+			END
 		SELECT @resultado AS resultado
-		COMMIT tran cl
 	END TRY
 	BEGIN CATCH
 		SET @resultado = 2;
 		SELECT @resultado AS resultado
 	END CATCH 
 END
+GO
 
 
-CREATE PROCEDURE FAGD.funcionalidadesDelRol @nombreRol nvarchar (255), @codigoFuncionalidad numeric (18)
+/*CREATE PROCEDURE FAGD.funcionalidadesDelRol @nombreRol nvarchar (255), @codigoFuncionalidad numeric (18)
 AS 
 BEGIN
-/*	DECLARE @resultado numeric(18)
+	DECLARE @resultado numeric(18)
 
 	BEGIN TRY
 		INSERT INTO FAGD.RolXFuncionalidad (rol_codigo,funcionalidad_codigo)
@@ -936,5 +1000,5 @@ BEGIN
 	BEGIN CATCH
 		SET @resultado = 0;
 		SELECT @resultado AS resultado
-	END CATCH */
-END
+	END CATCH 
+END*/

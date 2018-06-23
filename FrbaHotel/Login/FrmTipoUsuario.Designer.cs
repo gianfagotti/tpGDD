@@ -69,7 +69,6 @@
             this.cmbTiposDeUsuario.Size = new System.Drawing.Size(171, 21);
             this.cmbTiposDeUsuario.TabIndex = 3;
             this.cmbTiposDeUsuario.Text = "Seleccione su tipo de usuario...";
-            this.cmbTiposDeUsuario.SelectedIndexChanged += new System.EventHandler(this.cmbTiposDeUsuario_SelectedIndexChanged);
             // 
             // btnAceptarTipoUsuario
             // 
@@ -98,6 +97,7 @@
             this.Text = "Tipo de Usuario";
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmTipoUsuario_FormClosing);
 
         }
 

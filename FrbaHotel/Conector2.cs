@@ -18,6 +18,11 @@ namespace FrbaHotel
 
         public Conector2()
         {
+            
+        }
+
+        public void conectar()
+        {
             try
             {
                 connection = new SqlConnection("Data Source=.\\SQLSERVER2012;Initial Catalog=GD1C2018;user=gdHotel2018;password=gd2018");
@@ -30,6 +35,7 @@ namespace FrbaHotel
 
             }
         }
+
 
         public SqlCommand dameStoreProcedure(string nombre)
         {

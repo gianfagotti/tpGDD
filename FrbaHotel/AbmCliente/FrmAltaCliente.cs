@@ -14,7 +14,6 @@ namespace FrbaHotel.AbmCliente
     public partial class FrmAltaCliente : Form
     {
         AbmRol.frmMenuEmpleado frmMenuEmpleado;
-        public static Conector2 BD = new Conector2();
         SqlDataReader resultado;
 
         public FrmAltaCliente(AbmRol.frmMenuEmpleado form)
@@ -70,7 +69,7 @@ namespace FrbaHotel.AbmCliente
                     comando = comando + "0";
 
                 decimal resu = 0;
-                resultado = BD.comando(comando);
+                resultado = Login.FrmTipoUsuario.BD.comando(comando);
                 if (resultado.Read()) {
                     resu = resultado.GetDecimal(0);
                 }

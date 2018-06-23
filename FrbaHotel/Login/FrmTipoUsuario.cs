@@ -12,9 +12,11 @@ namespace FrbaHotel.Login
 {
     public partial class FrmTipoUsuario : Form
     {
+        public static Conector2 BD = new Conector2();
         public FrmTipoUsuario()
         {
             InitializeComponent();
+            BD.conectar();
         }
 
         private void btnAceptarTipoUsuario_Click(object sender, EventArgs e)
@@ -37,10 +39,9 @@ namespace FrbaHotel.Login
             else 
             MessageBox.Show("Debe Seleccionar algún tipo de usuario","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
-        private void cmbTiposDeUsuario_SelectedIndexChanged(object sender, EventArgs e)
+        private void FrmTipoUsuario_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            Application.Exit();
         }
     }
 }

@@ -16,7 +16,6 @@ namespace FrbaHotel.AbmCliente
         Form abm;
         SqlDataAdapter adaptadorSql;
         DataTable tablaConDatos;
-        public static Conector2 BD = new Conector2();
 
         public FrmListadoMod(Form abmPadre)
         {
@@ -72,8 +71,8 @@ namespace FrbaHotel.AbmCliente
                 consulta = consulta + " where " + query;
             }
 
-            adaptadorSql = BD.dameDataAdapter(consulta);
-            tablaConDatos = BD.dameDataTable(adaptadorSql);
+            adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(consulta);
+            tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
 
             BindingSource bSource = new BindingSource();
 
@@ -90,6 +89,27 @@ namespace FrbaHotel.AbmCliente
             cboTipoDoc.ResetText();
             dgvFiltrado.DataSource = null;
             txtNombre.Focus();
+        }
+
+        private void dgvFiltrado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string nroDoc = dgvFiltrado.CurrentRow.Cells[0].Value.ToString();
+            string apellido = dgvFiltrado.CurrentRow.Cells[1].Value.ToString();
+            string nombre = dgvFiltrado.CurrentRow.Cells[2].Value.ToString();
+            string fecha_nac = dgvFiltrado.CurrentRow.Cells[3].Value.ToString();
+            string mail = dgvFiltrado.CurrentRow.Cells[4].Value.ToString();
+            string nacionalidad = dgvFiltrado.CurrentRow.Cells[5].Value.ToString();
+            string calle = dgvFiltrado.CurrentRow.Cells[6].Value.ToString();
+            string nroCalle = dgvFiltrado.CurrentRow.Cells[7].Value.ToString();
+            string piso = dgvFiltrado.CurrentRow.Cells[8].Value.ToString();
+            string dpto = dgvFiltrado.CurrentRow.Cells[9].Value.ToString();
+            string tipoDoc = dgvFiltrado.CurrentRow.Cells[10].Value.ToString();
+            string telefono = dgvFiltrado.CurrentRow.Cells[11].Value.ToString();
+            string localidad = dgvFiltrado.CurrentRow.Cells[12].Value.ToString();
+            string estado = dgvFiltrado.CurrentRow.Cells[13].Value.ToString();
+
+            FrmModificarCliente mod = new FrmModificarCliente(this, nroDoc, apellido, nombre, fecha_nac, mail, nacionalidad, calle, nroCalle, piso, dpto, tipoDoc, telefono, localidad, estado);
+            mod.Show();
         }
 
     }

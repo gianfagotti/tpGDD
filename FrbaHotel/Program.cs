@@ -16,7 +16,6 @@ namespace FrbaHotel
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Conexion.Conectar();
             Application.Run(new FrbaHotel.Login.FrmTipoUsuario());
         }
     }

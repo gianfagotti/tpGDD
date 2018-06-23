@@ -253,6 +253,7 @@
             this.butGuardarMod.TabIndex = 26;
             this.butGuardarMod.Text = "Guardar";
             this.butGuardarMod.UseVisualStyleBackColor = true;
+            this.butGuardarMod.Click += new System.EventHandler(this.butGuardarMod_Click);
             // 
             // btnVolverMod
             // 

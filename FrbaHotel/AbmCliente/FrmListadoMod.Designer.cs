@@ -167,6 +167,7 @@
             this.dgvFiltrado.Name = "dgvFiltrado";
             this.dgvFiltrado.Size = new System.Drawing.Size(479, 212);
             this.dgvFiltrado.TabIndex = 1;
+            this.dgvFiltrado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFiltrado_CellContentClick);
             // 
             // butLimpiar
             // 
