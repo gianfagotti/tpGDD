@@ -138,5 +138,12 @@ namespace FrbaHotel.AbmRol
             filtro.Show();
 
         }
+
+        private void butBajaCliente_Click(object sender, EventArgs e)
+        {
+            AbmCliente.FrmBajaCliente frm = new AbmCliente.FrmBajaCliente(this);
+            this.Hide();
+            frm.Show();
+        }
     }
 }

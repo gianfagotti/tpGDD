@@ -50,6 +50,7 @@
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.grbUsuarios = new System.Windows.Forms.GroupBox();
             this.btnModificarUsuario = new System.Windows.Forms.Button();
+            this.butBajaCliente = new System.Windows.Forms.Button();
             this.grbHuespedes.SuspendLayout();
             this.grbHabitaciones.SuspendLayout();
             this.grbRegimenes.SuspendLayout();
@@ -63,6 +64,7 @@
             // 
             // grbHuespedes
             // 
+            this.grbHuespedes.Controls.Add(this.butBajaCliente);
             this.grbHuespedes.Controls.Add(this.butAltaCliente);
             this.grbHuespedes.Location = new System.Drawing.Point(507, 140);
             this.grbHuespedes.Name = "grbHuespedes";
@@ -284,6 +286,16 @@
             this.btnModificarUsuario.UseVisualStyleBackColor = true;
             this.btnModificarUsuario.Click += new System.EventHandler(this.btnModificarUsuario_Click);
             // 
+            // butBajaCliente
+            // 
+            this.butBajaCliente.Location = new System.Drawing.Point(27, 48);
+            this.butBajaCliente.Name = "butBajaCliente";
+            this.butBajaCliente.Size = new System.Drawing.Size(149, 23);
+            this.butBajaCliente.TabIndex = 1;
+            this.butBajaCliente.Text = "Dar de baja cliente";
+            this.butBajaCliente.UseVisualStyleBackColor = true;
+            this.butBajaCliente.Click += new System.EventHandler(this.butBajaCliente_Click);
+            // 
             // frmMenuEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,5 +351,6 @@
         private System.Windows.Forms.Button btnRegistrarEstadiabtnRegistrarEstadia;
         private System.Windows.Forms.GroupBox grbUsuarios;
         private System.Windows.Forms.Button btnModificarUsuario;
+        private System.Windows.Forms.Button butBajaCliente;
     }
 }

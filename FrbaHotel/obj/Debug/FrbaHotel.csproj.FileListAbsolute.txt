@@ -157,3 +157,4 @@ C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.RegistrarConsumible.FrmSeleccionarEstadia.resources
 C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmCliente.FrmListadoMod.resources
 C:\Users\ivan_\Desktop\Gestion\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmCliente.FrmListadoMod.resources
+C:\Users\Gian Fagotti\Documents\Gian\Facultad\Tercer Año\GDD\tpIntegrador\tpGDD\FrbaHotel\obj\Debug\FrbaHotel.AbmCliente.FrmBajaCliente.resources

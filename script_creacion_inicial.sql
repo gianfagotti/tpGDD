@@ -865,7 +865,7 @@ begin
 	declare @fechaNacimiento datetime
 	set @fechaNacimiento = CONVERT(datetime, @fechaNac, 121)
 	declare @respuesta numeric(18)
-
+	begin tran cl
 	begin try
 		if (not exists(select * from FAGD.Cliente 
 						where cliente_mail = @mail))
@@ -886,8 +886,10 @@ begin
 			set @respuesta = 2;
 		end
 		select @respuesta as respuesta
+	commit tran cl
 	end try
 	begin catch
+	rollback tran cl
 		set @respuesta = 0;
 		select @respuesta as respuesta
 	end catch
@@ -916,7 +918,7 @@ begin
 	declare @fechaNacimiento datetime
 	set @fechaNacimiento = CONVERT(datetime, @fechaNac, 121)
 	declare @respuesta numeric(18)
-
+	begin tran modcl
 	begin try
 			if (@piso = '-')
 				set @piso = null
@@ -945,8 +947,10 @@ begin
 			set @respuesta = 1;
 
 		select @respuesta as respuesta;
+	commit tran modcl
 	end try
 	begin catch
+	rollback tran modcl
 		set @respuesta = 0;
 		select @respuesta as respuesta;
 	end catch

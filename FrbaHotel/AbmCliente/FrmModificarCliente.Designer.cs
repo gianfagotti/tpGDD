@@ -112,6 +112,7 @@
             // 
             // txtNroDocumentoMod
             // 
+            this.txtNroDocumentoMod.Enabled = false;
             this.txtNroDocumentoMod.Location = new System.Drawing.Point(314, 30);
             this.txtNroDocumentoMod.Name = "txtNroDocumentoMod";
             this.txtNroDocumentoMod.Size = new System.Drawing.Size(100, 20);
