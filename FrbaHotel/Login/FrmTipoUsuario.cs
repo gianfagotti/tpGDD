@@ -32,9 +32,9 @@ namespace FrbaHotel.Login
                 }
                 else
                 {
-                    FrmLogin frmLogin = new FrmLogin(this);
+                    FrmLoginUsuario frmLoginUsuario = new FrmLoginUsuario();
                     this.Hide();
-                    frmLogin.Show();
+                    frmLoginUsuario.Show();
                 }
             }
             else 
@@ -43,6 +43,11 @@ namespace FrbaHotel.Login
         private void FrmTipoUsuario_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void FrmTipoUsuario_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

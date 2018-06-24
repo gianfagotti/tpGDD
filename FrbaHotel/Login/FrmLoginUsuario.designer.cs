@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.Login
 {
-    partial class FrmLogin
+    partial class FrmLoginUsuario
     {
         /// <summary>
         /// Required designer variable.
@@ -31,10 +31,8 @@
             this.lblDatosUsuario = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.txtUsuario = new System.Windows.Forms.TextBox();
-            this.txtContraseña = new System.Windows.Forms.TextBox();
-            this.lblContraseña = new System.Windows.Forms.Label();
-            this.btnIngresar = new System.Windows.Forms.Button();
-            this.btnVolver = new System.Windows.Forms.Button();
+            this.btnIngresarUsuario = new System.Windows.Forms.Button();
+            this.btnVolverUsuario = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblDatosUsuario
@@ -43,11 +41,11 @@
             this.lblDatosUsuario.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.lblDatosUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDatosUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDatosUsuario.Location = new System.Drawing.Point(12, 22);
+            this.lblDatosUsuario.Location = new System.Drawing.Point(47, 20);
             this.lblDatosUsuario.Name = "lblDatosUsuario";
-            this.lblDatosUsuario.Size = new System.Drawing.Size(252, 22);
+            this.lblDatosUsuario.Size = new System.Drawing.Size(168, 22);
             this.lblDatosUsuario.TabIndex = 0;
-            this.lblDatosUsuario.Text = "Ingrese sus datos de Usuario:";
+            this.lblDatosUsuario.Text = "Ingrese su Usuario:";
             this.lblDatosUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblDatosUsuario.Click += new System.EventHandler(this.lblDatosUsuario_Click);
             // 
@@ -71,64 +69,42 @@
             this.txtUsuario.TabIndex = 2;
             this.txtUsuario.TextChanged += new System.EventHandler(this.txtUsuario_TextChanged);
             // 
-            // txtContraseña
+            // btnIngresarUsuario
             // 
-            this.txtContraseña.Location = new System.Drawing.Point(128, 136);
-            this.txtContraseña.Name = "txtContraseña";
-            this.txtContraseña.Size = new System.Drawing.Size(100, 20);
-            this.txtContraseña.TabIndex = 3;
-            this.txtContraseña.TextChanged += new System.EventHandler(this.txtContraseña_TextChanged);
+            this.btnIngresarUsuario.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnIngresarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngresarUsuario.Location = new System.Drawing.Point(30, 148);
+            this.btnIngresarUsuario.Name = "btnIngresarUsuario";
+            this.btnIngresarUsuario.Size = new System.Drawing.Size(75, 27);
+            this.btnIngresarUsuario.TabIndex = 5;
+            this.btnIngresarUsuario.Text = "Ingresar";
+            this.btnIngresarUsuario.UseVisualStyleBackColor = false;
+            this.btnIngresarUsuario.Click += new System.EventHandler(this.btnIngresarUsuario_Click);
             // 
-            // lblContraseña
+            // btnVolverUsuario
             // 
-            this.lblContraseña.AutoSize = true;
-            this.lblContraseña.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblContraseña.Location = new System.Drawing.Point(27, 136);
-            this.lblContraseña.Name = "lblContraseña";
-            this.lblContraseña.Size = new System.Drawing.Size(91, 16);
-            this.lblContraseña.TabIndex = 4;
-            this.lblContraseña.Text = "Contraseña:";
-            this.lblContraseña.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblContraseña.Click += new System.EventHandler(this.lblContraseña_Click);
+            this.btnVolverUsuario.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnVolverUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVolverUsuario.Location = new System.Drawing.Point(150, 148);
+            this.btnVolverUsuario.Name = "btnVolverUsuario";
+            this.btnVolverUsuario.Size = new System.Drawing.Size(75, 27);
+            this.btnVolverUsuario.TabIndex = 6;
+            this.btnVolverUsuario.Text = "Volver";
+            this.btnVolverUsuario.UseVisualStyleBackColor = false;
+            this.btnVolverUsuario.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // btnIngresar
-            // 
-            this.btnIngresar.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btnIngresar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIngresar.Location = new System.Drawing.Point(57, 195);
-            this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(75, 27);
-            this.btnIngresar.TabIndex = 5;
-            this.btnIngresar.Text = "Ingresar";
-            this.btnIngresar.UseVisualStyleBackColor = false;
-            this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
-            // 
-            // btnVolver
-            // 
-            this.btnVolver.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVolver.Location = new System.Drawing.Point(153, 195);
-            this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 27);
-            this.btnVolver.TabIndex = 6;
-            this.btnVolver.Text = "Volver";
-            this.btnVolver.UseVisualStyleBackColor = false;
-            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
-            // 
-            // FrmLogin
+            // FrmLoginUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.btnVolver);
-            this.Controls.Add(this.btnIngresar);
-            this.Controls.Add(this.lblContraseña);
-            this.Controls.Add(this.txtContraseña);
+            this.ClientSize = new System.Drawing.Size(284, 219);
+            this.Controls.Add(this.btnVolverUsuario);
+            this.Controls.Add(this.btnIngresarUsuario);
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.lblUsuario);
             this.Controls.Add(this.lblDatosUsuario);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "FrmLogin";
+            this.Name = "FrmLoginUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio de Sesión";
             this.ResumeLayout(false);
@@ -141,9 +117,7 @@
         private System.Windows.Forms.Label lblDatosUsuario;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.TextBox txtUsuario;
-        private System.Windows.Forms.TextBox txtContraseña;
-        private System.Windows.Forms.Label lblContraseña;
-        private System.Windows.Forms.Button btnIngresar;
-        private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Button btnIngresarUsuario;
+        private System.Windows.Forms.Button btnVolverUsuario;
     }
 }

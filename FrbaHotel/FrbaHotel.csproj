@@ -148,6 +148,18 @@
     <Compile Include="ListadoEstadistico\ListadoEstadistico.Designer.cs">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\FrmLoginContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\FrmLoginContraseña.designer.cs">
+      <DependentUpon>FrmLoginContraseña.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\FrmLoginUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\FrmLoginUsuario.designer.cs">
+      <DependentUpon>FrmLoginUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\FrmSeleccionarRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,12 +171,6 @@
     </Compile>
     <Compile Include="Login\FrmTipoUsuario.Designer.cs">
       <DependentUpon>FrmTipoUsuario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Login\FrmLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Login\FrmLogin.Designer.cs">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -231,11 +237,14 @@
     <EmbeddedResource Include="ListadoEstadistico\ListadoEstadistico.resx">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Login\FrmLoginContraseña.resx">
+      <DependentUpon>FrmLoginContraseña.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\FrmLoginUsuario.resx">
+      <DependentUpon>FrmLoginUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\FrmSeleccionarRol.resx">
       <DependentUpon>FrmSeleccionarRol.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Login\FrmLogin.resx">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>

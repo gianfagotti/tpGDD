@@ -95,9 +95,10 @@
             this.Name = "FrmTipoUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tipo de Usuario";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmTipoUsuario_FormClosing);
+            this.Load += new System.EventHandler(this.FrmTipoUsuario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmTipoUsuario_FormClosing);
 
         }
 
