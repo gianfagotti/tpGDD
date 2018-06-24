@@ -16,7 +16,6 @@ namespace FrbaHotel.ListadoEstadistico
         AbmRol.frmMenuEmpleado frmMenuEmpleado;
         SqlDataAdapter adaptadorSql;
         DataTable tablaConDatos;
-        public static Conector2 BD = new Conector2();
 
         public ListadoEstadistico(AbmRol.frmMenuEmpleado form)
         {
@@ -66,8 +65,8 @@ namespace FrbaHotel.ListadoEstadistico
                 MessageBox.Show("Debe seleccionar un anio");
                 return;
             }
-           
-           
+
+
             String categoriaSeleccionada = "";
             switch (cboCateg.SelectedIndex)
             {
@@ -89,8 +88,8 @@ namespace FrbaHotel.ListadoEstadistico
 
             }
 
-            adaptadorSql = BD.dameDataAdapter(categoriaSeleccionada);
-            tablaConDatos = BD.dameDataTable(adaptadorSql);
+            adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(categoriaSeleccionada);
+            tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
 
             //Establezo que la dataGridView va a ser alimentada por la tabla virtual del adaptador, siendo la bindSource el puente que las une
             BindingSource bindSource = new BindingSource();

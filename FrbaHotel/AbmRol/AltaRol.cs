@@ -17,7 +17,7 @@ namespace FrbaHotel.AbmRol
         SqlDataReader resultado;
         SqlDataAdapter adapter;
         DataTable tabla;
-        public static Conector2 BD = new Conector2();
+        //public static Conector2 BD1 = new Conector2();
 
 
         public AltaRol(Form form)
@@ -26,9 +26,9 @@ namespace FrbaHotel.AbmRol
             ultimoFormulario = form;
 
             /*carga de la DGV*/
-            String select = "SELECT  FROM FAGD.Funcionalidad";
-            adapter = BD.dameDataAdapter(select);
-            tabla = BD.dameDataTable(adapter);
+            String select = "SELECT * FROM FAGD.Funcionalidad";
+            adapter = Login.FrmTipoUsuario.BD.dameDataAdapter(select);
+            tabla = Login.FrmTipoUsuario.BD.dameDataTable(adapter);
             BindingSource bindSource = new BindingSource();
             bindSource.DataSource = tabla;
             dgvFuncionalidades.DataSource = bindSource;
@@ -57,15 +57,13 @@ namespace FrbaHotel.AbmRol
             }
             else
             {
-
-
                 String exe = "EXEC FAGD.nuevoRol '" + txtNombreRol.Text + "', ";
                 if (chkRolActivo.Checked)
-                    exe = exe + "1";
+                     exe = exe + "1";
                 else exe = exe + "0";
 
                 decimal mensaje = 0;
-                resultado = BD.comando(exe);
+                resultado = Login.FrmTipoUsuario.BD.comando(exe);
                 if (resultado.Read())
                 {
                     mensaje = resultado.GetDecimal(0);
@@ -93,8 +91,8 @@ namespace FrbaHotel.AbmRol
 
                             String codigoFuncionalidad = row.Cells[1].Value.ToString();
                             exe = "EXEC FAGD.funcionalidadesDelRol '" + txtNombreRol.Text + "', '" + codigoFuncionalidad + "'";
-
-                            resultado = BD.comando(exe);
+                            resultado = Login.FrmTipoUsuario.BD.comando(exe);
+                            
                             if (resultado.Read())
                             {
                                 mensaje = resultado.GetDecimal(0);
@@ -104,13 +102,17 @@ namespace FrbaHotel.AbmRol
                             {
                                 MessageBox.Show("Error al linkear el rol con las funcionalidades.");
                             }
-                            else
-                            {
-                                MessageBox.Show("Rol guardado correctamente!");
                             }
                         }
-
+                  
+                    MessageBox.Show("Rol guardado correctamente!");
+                    txtNombreRol.Clear();
+                    chkRolActivo.Checked = false;
+                    foreach (DataGridViewRow row in dgvFuncionalidades.Rows)
+                    {
+                        row.Cells[columnaHabilitar.Name].Value = false;
                     }
+
                 }
             }
         }
