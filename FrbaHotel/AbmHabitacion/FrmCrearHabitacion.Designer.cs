@@ -110,12 +110,6 @@
             // cboTipoHabitacion
             // 
             this.cboTipoHabitacion.FormattingEnabled = true;
-            this.cboTipoHabitacion.Items.AddRange(new object[] {
-            "Simple",
-            "Doble",
-            "Doble twin",
-            "Triple",
-            "Cuadruple"});
             this.cboTipoHabitacion.Location = new System.Drawing.Point(99, 86);
             this.cboTipoHabitacion.Name = "cboTipoHabitacion";
             this.cboTipoHabitacion.Size = new System.Drawing.Size(121, 21);

@@ -99,7 +99,7 @@ namespace FrbaHotel.AbmRol
         {
             if (tipoEmpleado.Equals("Administrador"))
             {
-                AbmRegimen.FrmCrearRegimen frmCrearRegimen = new AbmRegimen.FrmCrearRegimen(this);
+                AbmRegimen.FrmRegimen frmCrearRegimen = new AbmRegimen.FrmRegimen(this, "Crear");
                 this.Hide();
                 frmCrearRegimen.Show();
             }else

@@ -13,12 +13,13 @@ namespace FrbaHotel.Login
 {
     public partial class FrmLogin : Form
     {
-        AbmRol.frmMenuEmpleado frmMenuEmpleado;
+        Form abm;
         DataTable tabla;
         public static Conector2 BD = new Conector2();
 
-        public FrmLogin(){
+        public FrmLogin(Form abmPadre){
             InitializeComponent();
+            abm = abmPadre;
         }
 
     
@@ -45,15 +46,16 @@ namespace FrbaHotel.Login
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
-            FrmTipoUsuario frmTipoUsuario = new FrmTipoUsuario();
-            frmTipoUsuario.Show();
+            abm.Show();
 
         }
 
         private void btnIngresar_Click(object sender, EventArgs e){
             if (this.txtUsuario.Text == "" || this.txtContraseña.Text == "")
             {
-                MessageBox.Show("Debe completar los campos Usuario y Contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FrmSeleccionarRol frmSeleccionarRol = new FrmSeleccionarRol();
+                frmSeleccionarRol.Show();
+                //MessageBox.Show("Debe completar los campos Usuario y Contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

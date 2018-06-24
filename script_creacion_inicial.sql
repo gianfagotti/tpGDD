@@ -958,6 +958,35 @@ begin
 end
 GO
 
+create proc FAGD.crearRegimen
+@precio numeric(18),
+@descripcion nvarchar(255),
+@estado bit
+
+as
+begin
+	DECLARE @resultado numeric(18)
+	begin tran nuReg
+	begin try
+		if (not exists(select regimen_descripcion from FAGD.Regimen where regimen_descripcion = @descripcion))
+			begin
+				insert into FAGD.Regimen(regimen_precioBase, regimen_descripcion, regimen_estado)
+				values (@precio, @descripcion, @estado)
+				set @resultado = 1;
+			end
+		else
+			set @resultado = 2;
+		select @resultado as resultado
+		commit tran nuReg
+	end try
+	begin catch
+		rollback tran nuReg
+		set @resultado = 0
+		select @resultado as resultado
+	end catch
+end
+GO
+
 
 				
 ------------------------------------------------IRAA-------------------------------------------------------

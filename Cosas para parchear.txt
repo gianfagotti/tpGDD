@@ -1,3 +1,5 @@
+-CACHEAR ERRORES DE TIPOS CUANDO SE ESCRIBE EN UN FORMULARIO.
+
 - Hotel en REGISTRAR ESTADÍA.
 
 - Las estadías tienen (o no) varios clientes.

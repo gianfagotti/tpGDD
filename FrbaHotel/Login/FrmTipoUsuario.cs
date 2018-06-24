@@ -32,7 +32,7 @@ namespace FrbaHotel.Login
                 }
                 else
                 {
-                    FrmLogin frmLogin = new FrmLogin();
+                    FrmLogin frmLogin = new FrmLogin(this);
                     this.Hide();
                     frmLogin.Show();
                 }
