@@ -726,51 +726,6 @@ FROM
 END
 GO
 
-
----------------------------------------------------------------------------------------------------
-
-
-
-CREATE PROCEDURE FAGD.lista_habitacion_maxVecesOcup @trimestre numeric(18,0), @Anio numeric(18,0) 
-AS BEGIN
-
-DECLARE @inicioTrimestre DATETIME
-	DECLARE @finTrimestre DATETIME
-	DECLARE @anioAux CHAR(4)
-		SET @anioAux = CAST(@anio AS CHAR(4))
-		
-		IF (@trimestre = 1)
-		BEGIN
-			SET @inicioTrimestre = @anioAux+'-01-01'
-			SET @finTrimestre = @anioAux+'-03-31'
-		END
-		ELSE IF (@trimestre = 2)
-		BEGIN
-			SET @inicioTrimestre = @anioAux+'-04-01'
-			SET @finTrimestre = @anioAux+'-06-30'
-		END
-		ELSE IF (@trimestre = 3)
-		BEGIN 
-			SET @inicioTrimestre = @anioAux+'-07-01'
-			SET @finTrimestre = @anioAux+'-09-30'
-		END
-		ELSE IF (@trimestre = 4)
-		BEGIN 
-			SET @inicioTrimestre = @anioAux+'-10-01'
-			SET @finTrimestre = @anioAux+'-12-31'
-		END
-		ELSE
-		BEGIN
-			SET @inicioTrimestre = @anioAux+'-01-01'
-			SET @finTrimestre = @anioAux+'-12-31'
-		END
-
-/*SELECT TOP 5*/
-
-END
-GO
-
-
 ---------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.lista_habitacion_maxVecesOcup @trimestre numeric(18,0), @Anio numeric(18,0) 
@@ -1053,7 +1008,42 @@ begin
 end
 GO
 
+create proc FAGD.GuardarNuevaHabitacion
+@numero numeric(18),
+@piso numeric(18),
+@ubicacion nvarchar(255),
+@tipoHab nvarchar(255),
+@descripcion nvarchar(255),
+@idHotel numeric(18),
+@estado bit
 
+
+as
+begin
+	declare @resultado numeric(18)
+	declare @idTipoHab numeric(18)
+
+	set @idTipoHab = (select habitacionTipo_codigo from FAGD.HabitacionTipo where habitacionTipo_descripcion = @tipoHab)
+	begin tran nuHab
+	begin try
+		if (not exists(select habitacion_nro from FAGD.Habitacion where habitacion_nro = @numero and habitacion_codigoHotel = @idHotel))
+			begin
+				insert into FAGD.Habitacion(habitacion_codigoHotel, habitacion_nro, habitacion_tipoCodigo, habitacion_piso, habitacion_ubicacion, habitacion_descripcion, habitacion_estado)
+				values (@idHotel, @numero, @idTipoHab, @piso, @ubicacion, @descripcion, @estado)
+				set @resultado = 1;
+			end
+		else
+			set @resultado = 2;
+		select @resultado as resultado
+		commit tran nuHab
+	end try
+	begin catch
+		rollback tran nuHab
+		set @resultado = 0
+		select @resultado as resultado
+	end catch
+end
+GO
 				
 ------------------------------------------------IRAA-------------------------------------------------------
 
