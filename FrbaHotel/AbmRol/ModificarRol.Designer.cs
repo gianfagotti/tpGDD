@@ -37,9 +37,9 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.cboModificacion = new System.Windows.Forms.ComboBox();
-            this.dgvFunciones = new System.Windows.Forms.DataGridView();
+            this.dgvFuncionalidades = new System.Windows.Forms.DataGridView();
             this.columnaHabilitar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFunciones)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFuncionalidades)).BeginInit();
             this.SuspendLayout();
             // 
             // btnModificar
@@ -123,27 +123,29 @@
             this.cboModificacion.Size = new System.Drawing.Size(296, 21);
             this.cboModificacion.TabIndex = 9;
             // 
-            // dgvFunciones
+            // dgvFuncionalidades
             // 
-            this.dgvFunciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFunciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvFuncionalidades.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvFuncionalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFuncionalidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnaHabilitar});
-            this.dgvFunciones.Location = new System.Drawing.Point(16, 150);
-            this.dgvFunciones.Name = "dgvFunciones";
-            this.dgvFunciones.Size = new System.Drawing.Size(309, 150);
-            this.dgvFunciones.TabIndex = 10;
+            this.dgvFuncionalidades.Location = new System.Drawing.Point(16, 150);
+            this.dgvFuncionalidades.Name = "dgvFuncionalidades";
+            this.dgvFuncionalidades.Size = new System.Drawing.Size(309, 150);
+            this.dgvFuncionalidades.TabIndex = 10;
             // 
             // columnaHabilitar
             // 
             this.columnaHabilitar.HeaderText = "Habilitar";
             this.columnaHabilitar.Name = "columnaHabilitar";
+            this.columnaHabilitar.Width = 51;
             // 
             // ModificarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(349, 371);
-            this.Controls.Add(this.dgvFunciones);
+            this.Controls.Add(this.dgvFuncionalidades);
             this.Controls.Add(this.cboModificacion);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnVolver);
@@ -156,7 +158,7 @@
             this.Name = "ModificarRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificar Rol";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFunciones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFuncionalidades)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,7 +175,7 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cboModificacion;
-        private System.Windows.Forms.DataGridView dgvFunciones;
+        private System.Windows.Forms.DataGridView dgvFuncionalidades;
         private System.Windows.Forms.DataGridViewCheckBoxColumn columnaHabilitar;
     }
 }

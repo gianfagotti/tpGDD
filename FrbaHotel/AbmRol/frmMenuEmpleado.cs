@@ -61,9 +61,9 @@ namespace FrbaHotel.AbmRol
 
         private void btnModificarRol_Click(object sender, EventArgs e)
         {
-            AbmRol.ModificarRol frmModificarRol = new AbmRol.ModificarRol(this);
+            AbmRol.frmSeleccionarRol frmSeleccionarRol = new AbmRol.frmSeleccionarRol(this);
             this.Hide();
-            frmModificarRol.Show();
+            frmSeleccionarRol.Show();
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
