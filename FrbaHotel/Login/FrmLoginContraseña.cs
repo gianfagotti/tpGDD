@@ -40,8 +40,8 @@ namespace FrbaHotel.Login
                 if (tabla.Rows.Count == 1)
                 {
                     this.Close();
-                    FrmSeleccionarRol frmSeleccionarRol = new FrmSeleccionarRol();
-                    frmSeleccionarRol.Show();
+                    FrmSeleccionarHotel frmSeleccionarHotel = new FrmSeleccionarHotel(usuarioIngresado.ToString());
+                    frmSeleccionarHotel.Show();
                 }
                 else
                 {

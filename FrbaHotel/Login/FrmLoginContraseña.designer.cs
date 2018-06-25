@@ -61,9 +61,9 @@
             this.lblContraseñaUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblContraseñaUsuario.Location = new System.Drawing.Point(36, 18);
             this.lblContraseñaUsuario.Name = "lblContraseñaUsuario";
-            this.lblContraseñaUsuario.Size = new System.Drawing.Size(199, 22);
+            this.lblContraseñaUsuario.Size = new System.Drawing.Size(196, 22);
             this.lblContraseñaUsuario.TabIndex = 7;
-            this.lblContraseñaUsuario.Text = "Ingrese su Contraseña:";
+            this.lblContraseñaUsuario.Text = "Ingrese su contraseña:";
             this.lblContraseñaUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnIngresarContraseña

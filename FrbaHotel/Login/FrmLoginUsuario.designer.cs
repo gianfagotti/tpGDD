@@ -43,9 +43,9 @@
             this.lblDatosUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDatosUsuario.Location = new System.Drawing.Point(47, 20);
             this.lblDatosUsuario.Name = "lblDatosUsuario";
-            this.lblDatosUsuario.Size = new System.Drawing.Size(168, 22);
+            this.lblDatosUsuario.Size = new System.Drawing.Size(165, 22);
             this.lblDatosUsuario.TabIndex = 0;
-            this.lblDatosUsuario.Text = "Ingrese su Usuario:";
+            this.lblDatosUsuario.Text = "Ingrese su usuario:";
             this.lblDatosUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblDatosUsuario.Click += new System.EventHandler(this.lblDatosUsuario_Click);
             // 

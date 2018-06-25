@@ -166,6 +166,12 @@
     <Compile Include="Login\FrmLoginUsuario.designer.cs">
       <DependentUpon>FrmLoginUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\FrmSeleccionarHotel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\FrmSeleccionarHotel.Designer.cs">
+      <DependentUpon>FrmSeleccionarHotel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\FrmSeleccionarRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,6 +257,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login\FrmLoginUsuario.resx">
       <DependentUpon>FrmLoginUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\FrmSeleccionarHotel.resx">
+      <DependentUpon>FrmSeleccionarHotel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\FrmSeleccionarRol.resx">
       <DependentUpon>FrmSeleccionarRol.cs</DependentUpon>

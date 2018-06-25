@@ -77,23 +77,6 @@ namespace FrbaHotel
             return dataTable;
         }
 
-        public DataTable consultaLogin(string usuario, string password)
-        {
-            SqlCommand sqlCommand = new SqlCommand("SELECT usuario_username , usuario_password FROM FAGD.Usuario WHERE usuario_username = @usuarioIngresado AND usuario_password = @passwordIngresada");
-            sqlCommand.CommandTimeout = 999999999;
-            sqlCommand.Parameters.AddWithValue("usuarioIngresado", usuario);
-            sqlCommand.Parameters.AddWithValue("passwordIngresada", password);
-            
-            sqlCommand.Connection = this.connection;
-
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand.CommandText, this.connection);
-
-            DataTable dataTable = new DataTable();
-
-            dataAdapter.Fill(dataTable);
-            return dataTable;
-        }
-
         public SqlDataReader comando(string consulta)
         {
             SqlCommand sqlCommand = new SqlCommand();
