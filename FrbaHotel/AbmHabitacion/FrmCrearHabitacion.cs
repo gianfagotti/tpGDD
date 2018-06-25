@@ -28,6 +28,13 @@ namespace FrbaHotel.AbmHabitacion
                 cboTipoHabitacion.Items.Add(resultado.GetSqlString(0));
             }
             resultado.Close();
+
+            resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT habitacion_ubicacion FROM FAGD.Habitacion");
+            while (resultado.Read() == true)
+            {
+                cboTipoHabitacion.Items.Add(resultado.GetSqlString(0));
+            }
+            resultado.Close();
             txtNroHab.Focus();
         }
 

@@ -133,17 +133,36 @@ namespace FrbaHotel.AbmRol
 
         private void btnModificarUsuario_Click(object sender, EventArgs e)
         {
-            AbmCliente.FrmListadoMod filtro = new AbmCliente.FrmListadoMod(this);
-            this.Hide();
-            filtro.Show();
+            if (tipoEmpleado.Equals("Recepcionista"))
+            {
+                AbmCliente.FrmListadoMod filtro = new AbmCliente.FrmListadoMod(this);
+                this.Hide();
+                filtro.Show();
+            }else
+                MessageBox.Show("La reserva solo puede ser generada por un recepcionista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 
         private void butBajaCliente_Click(object sender, EventArgs e)
         {
-            AbmCliente.FrmBajaCliente frm = new AbmCliente.FrmBajaCliente(this);
-            this.Hide();
-            frm.Show();
+            if (tipoEmpleado.Equals("Recepcionista"))
+            {
+                AbmCliente.FrmBajaCliente frm = new AbmCliente.FrmBajaCliente(this);
+                this.Hide();
+                frm.Show();
+            }else
+                MessageBox.Show("La reserva solo puede ser generada por un recepcionista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void butModHab_Click(object sender, EventArgs e)
+        {
+            if (tipoEmpleado.Equals("Administrador"))
+            {
+                AbmHabitacion.FrmListadoMod frm = new AbmHabitacion.FrmListadoMod(this);
+                this.Hide();
+                frm.Show();
+            }else
+                MessageBox.Show("La reserva solo puede ser generada por un administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

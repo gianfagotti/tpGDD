@@ -1044,6 +1044,52 @@ begin
 	end catch
 end
 GO
+
+create proc FAGD.ModificarHabitacion
+@idHabitacion numeric(18),
+@numero numeric(18),
+@piso numeric(18),
+@ubicacion nvarchar(255),
+@tipoHab nvarchar(255),
+@descripcion nvarchar(255),
+@idHotel numeric(18),
+@estado bit
+
+
+as
+begin
+	declare @resultado numeric(18)
+	declare @idTipoHab numeric(18)
+
+	set @idTipoHab = (select habitacionTipo_codigo from FAGD.HabitacionTipo where habitacionTipo_descripcion = @tipoHab)
+	begin tran nuHab
+	begin try
+		if (not exists(select habitacion_nro from FAGD.Habitacion where habitacion_nro = @numero and habitacion_codigoHotel = @idHotel))
+			begin
+				UPDATE FAGD.Habitacion
+
+				set
+				habitacion_nro = @numero,
+				habitacion_piso = @piso,
+				habitacion_ubicacion = @ubicacion,
+				habitacion_descripcion = @descripcion,
+				habitacion_estado = @estado,
+				habitacion_tipoCodigo = @idTipoHab
+
+				where habitacion_codigo = @idHabitacion;
+				set @resultado = 1;
+			end
+		else set @resultado = 2;
+		select @resultado as resultado
+		commit tran nuHab
+	end try
+	begin catch
+		rollback tran nuHab
+		set @resultado = 0
+		select @resultado as resultado
+	end catch
+end
+GO
 				
 ------------------------------------------------IRAA-------------------------------------------------------
 
