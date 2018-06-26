@@ -49,6 +49,9 @@
             // cmbRolesRegistrados
             // 
             this.cmbRolesRegistrados.FormattingEnabled = true;
+            this.cmbRolesRegistrados.Items.AddRange(new object[] {
+            "Administrador",
+            "Recepcionista"});
             this.cmbRolesRegistrados.Location = new System.Drawing.Point(48, 103);
             this.cmbRolesRegistrados.Name = "cmbRolesRegistrados";
             this.cmbRolesRegistrados.Size = new System.Drawing.Size(184, 21);

@@ -75,12 +75,6 @@
     <Compile Include="AbmHabitacion\FrmCrearHabitacion.Designer.cs">
       <DependentUpon>FrmCrearHabitacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmHabitacion\FrmListadoMod.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AbmHabitacion\FrmListadoMod.Designer.cs">
-      <DependentUpon>FrmListadoMod.cs</DependentUpon>
-    </Compile>
     <Compile Include="AbmHabitacion\FrmModificarHabitacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,9 +218,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmHabitacion\FrmCrearHabitacion.resx">
       <DependentUpon>FrmCrearHabitacion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AbmHabitacion\FrmListadoMod.resx">
-      <DependentUpon>FrmListadoMod.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmHabitacion\FrmModificarHabitacion.resx">
       <DependentUpon>FrmModificarHabitacion.cs</DependentUpon>
