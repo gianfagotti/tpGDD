@@ -16,9 +16,7 @@ namespace FrbaHotel.Login
         public FrmLoginUsuario(){
             InitializeComponent();
         }
-     
-        SqlConnection conexion = new SqlConnection("Data Source=.\\SQLSERVER2012;Initial Catalog=GD1C2018;user=gdHotel2018;password=gd2018");
-
+        private DataTable tabla;
         private void lblUsuario_Click(object sender, EventArgs e)
         {
 
@@ -56,11 +54,7 @@ namespace FrbaHotel.Login
             else
             {
                 string usuarioIngresado = this.txtUsuario.Text;
-                SqlCommand validarUsuario = new SqlCommand("SELECT usuario_username, usuario_estado FROM FAGD.Usuario WHERE usuario_username = @usuario", conexion);
-                validarUsuario.Parameters.AddWithValue("usuario", usuarioIngresado);
-                SqlDataAdapter adaptador = new SqlDataAdapter(validarUsuario);
-                DataTable tabla = new DataTable();
-                adaptador.Fill(tabla);
+                tabla = Login.FrmTipoUsuario.BD.consulta("SELECT usuario_username, usuario_estado FROM FAGD.Usuario WHERE usuario_username = '"+usuarioIngresado+"'");
                 if (tabla.Rows.Count == 1 && (bool)tabla.Rows[0][1])
                 {
                     this.Close();

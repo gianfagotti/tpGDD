@@ -7,14 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace FrbaHotel.Login
 {
     public partial class FrmSeleccionarRol : Form
     {
+        private SqlDataReader resultado;
+
         public FrmSeleccionarRol()
         {
             InitializeComponent();
+            resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT rol_nombre FROM FAGD.Rol where rol_nombre != 'cliente'");
+            while (resultado.Read() == true)
+            {
+                cmbRolesRegistrados.Items.Add(resultado.GetSqlString(0));
+            }
+            resultado.Close();
+
         }
 
         private void cmbRolesRegistrados_SelectedIndexChanged(object sender, EventArgs e)
