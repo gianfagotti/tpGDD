@@ -17,7 +17,9 @@ namespace FrbaHotel.AbmRol
         {
             InitializeComponent();
             tipoEmpleado = tipo;
+
         }
+
 
         private void btnNuevaReserva_Click(object sender, EventArgs e)
         {

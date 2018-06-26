@@ -22,7 +22,7 @@ namespace FrbaHotel.Login
         {
             string usuarioIngresado = usuario;
             InitializeComponent();
-            tabla = Login.FrmTipoUsuario.BD.consulta("SELECT [GD1C2018].[FAGD].[Hotel].[hotel_codigo] ,[hotel_calle],[hotel_nroCalle],[hotel_nombre],usuario_username  FROM [GD1C2018].[FAGD].[Hotel] JOIN [GD1C2018].[FAGD].[UsuarioXHotel] ON([GD1C2018].[FAGD].[Hotel].hotel_codigo = [GD1C2018].[FAGD].[UsuarioXHotel].hotel_codigo) WHERE usuario_username = '" + usuarioIngresado + "'");
+            tabla = Login.FrmTipoUsuario.BD.consulta("SELECT [GD1C2018].[FAGD].[Hotel].[hotel_codigo] ,[hotel_calle],[hotel_nroCalle],[hotel_nombre],usuario_username  FROM [GD1C2018].[FAGD].[Hotel] JOIN [GD1C2018].[FAGD].[UsuarioXHotel] ON([GD1C2018].[FAGD].[Hotel].hotel_codigo = [GD1C2018].[FAGD].[UsuarioXHotel].hotel_codigo) WHERE usuario_username = '" + usuarioIngresado + "' AND hotel_estado = " + 1);
             while (Fila < tabla.Rows.Count)
             {
                 if (string.IsNullOrEmpty(tabla.Rows[Fila][3].ToString()))
