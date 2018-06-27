@@ -18,10 +18,8 @@ namespace FrbaHotel.Login
             InitializeComponent();
             usuarioIngresado = usuario;
         }
-
-        SqlConnection conexion = new SqlConnection("Data Source=.\\SQLSERVER2012;Initial Catalog=GD1C2018;user=gdHotel2018;password=gd2018");
         int intentos = 0;
-
+        private DataTable tabla;
         private void btnIngresarContraseña_Click(object sender, EventArgs e)
         {
             if (this.txtContraseña.Text == "")
@@ -31,12 +29,7 @@ namespace FrbaHotel.Login
             else
             {
                 string contraseñaIngresada = this.txtContraseña.Text;
-                SqlCommand validarContraseña = new SqlCommand("SELECT usuario_username, usuario_password, usuario_estado FROM FAGD.Usuario WHERE usuario_password = @contraseña AND usuario_username = @usuario", conexion);
-                validarContraseña.Parameters.AddWithValue("contraseña", contraseñaIngresada);
-                validarContraseña.Parameters.AddWithValue("usuario", usuarioIngresado);
-                SqlDataAdapter adaptador = new SqlDataAdapter(validarContraseña);
-                DataTable tabla = new DataTable();
-                adaptador.Fill(tabla);
+                tabla = Login.FrmTipoUsuario.BD.consulta("SELECT usuario_username, usuario_password, usuario_estado FROM FAGD.Usuario WHERE usuario_password = '"+contraseñaIngresada+"' AND usuario_username = '"+usuarioIngresado+"'");
                 if (tabla.Rows.Count == 1)
                 {
                     this.Close();
