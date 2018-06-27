@@ -227,6 +227,13 @@ fecha_fin datetime
 )
 GO
 
+CREATE TABLE FAGD.RolXUsuarioXHotel(
+rol_codigo numeric(18) NOT NULL,
+usuario_username nvarchar(255) NOT NULL,
+hotel_codigo numeric(18) NOT NULL
+)
+GO
+
 ---------------------------------- CREACIÓN PRIMARY KEYS ---------------------------------------
 
 ALTER TABLE FAGD.Hotel ADD CONSTRAINT PK_Hotel
@@ -317,6 +324,18 @@ GO
 
 ALTER TABLE FAGD.UsuarioXHotel ADD CONSTRAINT FK_UsuarioXHotel_1
  FOREIGN KEY (hotel_codigo) REFERENCES FAGD.Hotel(hotel_codigo)
+GO
+
+ALTER TABLE FAGD.RolXUsuarioXHotel ADD CONSTRAINT FK_RolXUsuarioXHotel_1
+ FOREIGN KEY (hotel_codigo) REFERENCES FAGD.Hotel(hotel_codigo)
+GO
+
+ALTER TABLE FAGD.RolXUsuarioXHotel ADD CONSTRAINT FK_RolXUsuarioXHotel_2
+ FOREIGN KEY (rol_codigo) REFERENCES FAGD.Rol(rol_codigo)
+GO
+
+ALTER TABLE FAGD.RolXUsuarioXHotel ADD CONSTRAINT FK_RolXUsuarioXHotel_3
+ FOREIGN KEY (usuario_username) REFERENCES FAGD.Usuario(usuario_username)
 GO
 
 --------------- TEMA FACTURA E ITEM FACTURA--------------
