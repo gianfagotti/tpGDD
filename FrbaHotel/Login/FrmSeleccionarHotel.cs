@@ -13,7 +13,7 @@ namespace FrbaHotel.Login
 {
     public partial class FrmSeleccionarHotel : Form
     {
-        private DataTable tabla;
+        private DataTable tabla, tabla2;
         int Fila = 0;
         public decimal codigoHotel;
         private String hotelSeleccionado;
@@ -22,7 +22,7 @@ namespace FrbaHotel.Login
         {
             string usuarioIngresado = usuario;
             InitializeComponent();
-            tabla = Login.FrmTipoUsuario.BD.consulta("SELECT [GD1C2018].[FAGD].[Hotel].[hotel_codigo] ,[hotel_calle],[hotel_nroCalle],[hotel_nombre],usuario_username  FROM [GD1C2018].[FAGD].[Hotel] JOIN [GD1C2018].[FAGD].[UsuarioXHotel] ON([GD1C2018].[FAGD].[Hotel].hotel_codigo = [GD1C2018].[FAGD].[UsuarioXHotel].hotel_codigo) WHERE usuario_username = '" + usuarioIngresado + "' AND hotel_estado = " + 1);
+            tabla = Login.FrmTipoUsuario.BD.consulta("SELECT [GD1C2018].[FAGD].[Hotel].[hotel_codigo] ,[hotel_calle],[hotel_nroCalle],[hotel_nombre],usuario_username  FROM [GD1C2018].[FAGD].[Hotel] JOIN [GD1C2018].[FAGD].[UsuarioXHotel] ON([GD1C2018].[FAGD].[Hotel].hotel_codigo = [GD1C2018].[FAGD].[UsuarioXHotel].hotel_codigo) WHERE usuario_username = '" + usuarioIngresado +"'");
             while (Fila < tabla.Rows.Count)
             {
                 if (string.IsNullOrEmpty(tabla.Rows[Fila][3].ToString()))
@@ -58,9 +58,17 @@ namespace FrbaHotel.Login
             {
                 hotelSeleccionado = cboSeleccionarHotel.Text;
                 codigoHotel = Convert.ToDecimal(hotelSeleccionado.Split(guion)[0]);
-                this.Close();
-                FrmSeleccionarRol frmSeleccionarRol = new FrmSeleccionarRol();
-                frmSeleccionarRol.Show();
+                tabla2 = Login.FrmTipoUsuario.BD.consulta("SELECT * FROM [GD1C2018].[FAGD].[Hotel] WHERE hotel_estado = "+ 0 +"AND hotel_codigo = "+ codigoHotel);
+                if (tabla2.Rows.Count == 1)
+                {
+                    MessageBox.Show("El hotel está inhabilitado, no puede acceder a administrarlo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    this.Close();
+                    FrmSeleccionarRol frmSeleccionarRol = new FrmSeleccionarRol();
+                    frmSeleccionarRol.Show();
+                }
             }
         }
 

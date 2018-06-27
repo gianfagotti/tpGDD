@@ -13,7 +13,7 @@ namespace FrbaHotel.Login
 {
     public partial class FrmLoginContraseña : Form
     {
-        public FrmLoginContraseña(String usuario)
+        public FrmLoginContraseña(String usuario, FrmLoginUsuario frmLoginUsuario)
         {
             InitializeComponent();
             usuarioIngresado = usuario;
