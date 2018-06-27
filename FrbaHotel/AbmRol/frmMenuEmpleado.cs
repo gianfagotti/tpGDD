@@ -7,51 +7,82 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace FrbaHotel.AbmRol
 {
     public partial class frmMenuEmpleado : Form
     {
-        string tipoEmpleado;
-        public frmMenuEmpleado(string tipo)
+        private SqlDataReader resultado;
+        public frmMenuEmpleado(decimal rol)
         {
             InitializeComponent();
-            tipoEmpleado = tipo;
+            habilitarGroupsBoxs(rol);
+        }
 
+        private void habilitarGroupsBoxs(decimal codigoRol)
+        {
+            resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT F.funcionalidad_detalle FROM FAGD.RolXFuncionalidad R, FAGD.Funcionalidad F where R.funcionalidad_codigo = F.funcionalidad_codigo and  R.rol_codigo =" + codigoRol.ToString() + ";");
+            while (resultado.Read() == true)
+            {
+                switch (resultado.GetSqlString(0).ToString())
+                {
+                    case "ABM_Clientes":
+                        grbHuespedes.Enabled = true;
+                        break;
+                    case "ABM_Consumibles":
+                        grbConsumibles.Enabled = true;
+                        break;
+                    case "ABM_Estadias":
+                        grbEstadias.Enabled = true;
+                        break;
+                    case "ABM_Habitaciones":
+                        grbHabitaciones.Enabled = true;
+                        break;
+                    case "ABM_Hoteles":
+                        break;
+                    case "ABM_Regimenes":
+                        grbRegimenes.Enabled = true;
+                        break;
+                    case "ABM_Reservas":
+                        grbReservas.Enabled = true;
+                        break;
+                    case "ABM_Roles":
+                        grbRoles.Enabled = true;
+                        break;
+                    case "ABM_Usuarios":
+                        grbUsuarios.Enabled = true;
+                        break;
+                    case "Estadisticas":
+                        grbListado.Enabled = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            resultado.Close();
         }
 
 
         private void btnNuevaReserva_Click(object sender, EventArgs e)
         {
-            if (tipoEmpleado.Equals("Recepcionista"))
-            {
-                GenerarModificacionReserva.GenerarReserva frmGenerarReserva = new GenerarModificacionReserva.GenerarReserva(this);
-                this.Hide();
-                frmGenerarReserva.Show();
-            }else
-                MessageBox.Show("La reserva solo puede ser generada por un recepcionista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            GenerarModificacionReserva.GenerarReserva frmGenerarReserva = new GenerarModificacionReserva.GenerarReserva(this);
+            this.Hide();
+            frmGenerarReserva.Show();
         }
 
         private void btnModificarReserva_Click(object sender, EventArgs e)
         {
-            if (tipoEmpleado.Equals("Recepcionista"))
-            {
-                GenerarModificacionReserva.ModificarReserva frmModificarReserva = new GenerarModificacionReserva.ModificarReserva(this);
-                this.Hide();
-                frmModificarReserva.Show();
-            }else
-                MessageBox.Show("La reserva solo puede ser generada por un recepcionista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            GenerarModificacionReserva.ModificarReserva frmModificarReserva = new GenerarModificacionReserva.ModificarReserva(this);
+            this.Hide();
+            frmModificarReserva.Show();
         }
 
         private void btnCancelarReserva_Click(object sender, EventArgs e)
         {
-            if (tipoEmpleado.Equals("Recepcionista"))
-            {
-                CancelarReserva.CancelarReserva frmCancelarReserva = new CancelarReserva.CancelarReserva(this);
-                this.Hide();
-                frmCancelarReserva.Show();
-            }else
-                MessageBox.Show("La reserva solo puede ser generada por un recepcionista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            CancelarReserva.CancelarReserva frmCancelarReserva = new CancelarReserva.CancelarReserva(this);
+            this.Hide();
+            frmCancelarReserva.Show();
         }
 
         private void btnAltaRol_Click(object sender, EventArgs e)
@@ -77,35 +108,23 @@ namespace FrbaHotel.AbmRol
 
         private void butAltaCliente_Click(object sender, EventArgs e)
         {
-            if (tipoEmpleado.Equals("Recepcionista"))
-            {
-                AbmCliente.FrmAltaCliente frmAltaCliente = new AbmCliente.FrmAltaCliente(this);
-                this.Hide();
-                frmAltaCliente.Show();
-            }else
-                MessageBox.Show("La reserva solo puede ser generada por un recepcionista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            AbmCliente.FrmAltaCliente frmAltaCliente = new AbmCliente.FrmAltaCliente(this);
+            this.Hide();
+            frmAltaCliente.Show();
         }
 
         private void butCrearHabitacion_Click(object sender, EventArgs e)
         {
-            if (tipoEmpleado.Equals("Administrador"))
-            {
-                AbmHabitacion.FrmCrearHabitacion frmCrearHabitacion = new AbmHabitacion.FrmCrearHabitacion(this);
-                this.Hide();
-                frmCrearHabitacion.Show();
-            }else
-                MessageBox.Show("La reserva solo puede ser generada por un administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            AbmHabitacion.FrmCrearHabitacion frmCrearHabitacion = new AbmHabitacion.FrmCrearHabitacion(this);
+            this.Hide();
+            frmCrearHabitacion.Show();
         }
 
         private void butCrearRegimen_Click(object sender, EventArgs e)
         {
-            if (tipoEmpleado.Equals("Administrador"))
-            {
-                AbmRegimen.FrmRegimen frmCrearRegimen = new AbmRegimen.FrmRegimen(this, "Crear");
-                this.Hide();
-                frmCrearRegimen.Show();
-            }else
-                MessageBox.Show("La reserva solo puede ser generada por un administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            AbmRegimen.FrmRegimen frmCrearRegimen = new AbmRegimen.FrmRegimen(this, "Crear");
+            this.Hide();
+            frmCrearRegimen.Show();
         }
 
         private void btnListadoEst_Click(object sender, EventArgs e)
@@ -117,13 +136,9 @@ namespace FrbaHotel.AbmRol
 
         private void btnRegistrarEstadiabtnRegistrarEstadia_Click(object sender, EventArgs e)
         {
-            if (tipoEmpleado.Equals("Recepcionista"))
-            {
-                RegistrarEstadia.FrmRegistrarEstadia frmRegistrarEst = new RegistrarEstadia.FrmRegistrarEstadia(this);
-                this.Hide();
-                frmRegistrarEst.Show();
-            }else
-                MessageBox.Show("La reserva solo puede ser generada por un recepcionista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            RegistrarEstadia.FrmRegistrarEstadia frmRegistrarEst = new RegistrarEstadia.FrmRegistrarEstadia(this);
+            this.Hide();
+            frmRegistrarEst.Show();
         }
 
         private void btnRegistrarConsumible_Click(object sender, EventArgs e)
@@ -135,36 +150,24 @@ namespace FrbaHotel.AbmRol
 
         private void btnModificarUsuario_Click(object sender, EventArgs e)
         {
-            if (tipoEmpleado.Equals("Recepcionista"))
-            {
-                AbmCliente.FrmListadoMod filtro = new AbmCliente.FrmListadoMod(this);
-                this.Hide();
-                filtro.Show();
-            }else
-                MessageBox.Show("La reserva solo puede ser generada por un recepcionista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            AbmCliente.FrmListadoMod filtro = new AbmCliente.FrmListadoMod(this);
+            this.Hide();
+            filtro.Show();
 
         }
 
         private void butBajaCliente_Click(object sender, EventArgs e)
         {
-            if (tipoEmpleado.Equals("Recepcionista"))
-            {
-                AbmCliente.FrmBajaCliente frm = new AbmCliente.FrmBajaCliente(this);
-                this.Hide();
-                frm.Show();
-            }else
-                MessageBox.Show("La reserva solo puede ser generada por un recepcionista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            AbmCliente.FrmBajaCliente frm = new AbmCliente.FrmBajaCliente(this);
+            this.Hide();
+            frm.Show();
         }
 
         private void butModHab_Click(object sender, EventArgs e)
         {
-            if (tipoEmpleado.Equals("Administrador"))
-            {
-                AbmHabitacion.FrmListadoMod frm = new AbmHabitacion.FrmListadoMod(this);
-                this.Hide();
-                frm.Show();
-            }else
-                MessageBox.Show("La reserva solo puede ser generada por un administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            AbmHabitacion.FrmListadoMod frm = new AbmHabitacion.FrmListadoMod(this);
+            this.Hide();
+            frm.Show();
         }
     }
 }
