@@ -1,3 +1,4 @@
 *.suo
 FrbaHotel/bin/Debug/*
 FrbaHotel/obj/Debug/*
+FrbaHotel/obj/Debug/DesignTimeResolveAssemblyReferences.cache
