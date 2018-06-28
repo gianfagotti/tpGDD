@@ -82,6 +82,7 @@
             this.Controls.Add(this.cboSeleccion);
             this.Controls.Add(this.label4);
             this.Name = "frmSeleccionarRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Seleccionar Rol";
             this.ResumeLayout(false);
             this.PerformLayout();

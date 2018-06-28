@@ -1158,3 +1158,57 @@ BEGIN
 		SELECT @resultado AS resultado
 	END CATCH
 END
+GO
+
+CREATE PROCEDURE FAGD.updatearRol @nombreViejo nvarchar (255), @nombreNuevo nvarchar(255), @estado bit
+AS
+BEGIN
+	DECLARE @resultado numeric(1)
+	BEGIN TRAN upd
+	BEGIN TRY
+		IF (NOT EXISTS(SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre = @nombreNuevo) OR @nombreNuevo = @nombreViejo)
+			BEGIN
+				UPDATE FAGD.Rol
+
+					SET rol_nombre = @nombreNuevo,
+						rol_estado = @estado
+					WHERE rol_nombre = @nombreViejo;
+					SET @resultado = 1;
+			END
+		ELSE
+			BEGIN
+				SET @resultado = 2;
+			END
+		SELECT @resultado AS resultado
+		COMMIT TRAN upd
+	END TRY 
+	BEGIN CATCH
+		ROLLBACK TRAN upd
+		SET @resultado = 0;
+		SELECT @resultado AS resultado
+	END CATCH
+END
+GO
+
+
+CREATE PROCEDURE FAGD.limpiarFuncionalidades @nombreRol nvarchar (255)
+AS
+BEGIN 
+DECLARE @resultado numeric(1)
+	BEGIN TRAN limp
+	BEGIN TRY
+		DELETE 
+			FROM FAGD.RolXFuncionalidad 
+			WHERE rol_codigo = (SELECT rol_codigo FROM FAGD.Rol WHERE rol_nombre = @nombreRol)
+		
+		SET @resultado=1;
+		SELECT @resultado AS resultado
+		COMMIT tran limp
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN limp
+		SET @resultado = 0;
+		SELECT @resultado AS resultado
+	END CATCH
+END
+GO

@@ -17,9 +17,7 @@ namespace FrbaHotel.AbmRol
         SqlDataReader resultado;
         SqlDataAdapter adapter;
         DataTable tabla;
-        //public static Conector2 BD1 = new Conector2();
-
-
+       
         public AltaRol(Form form)
         {
             InitializeComponent();

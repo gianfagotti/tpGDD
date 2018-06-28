@@ -35,8 +35,6 @@
             this.txtNombreRol = new System.Windows.Forms.TextBox();
             this.chkRolActivo = new System.Windows.Forms.CheckBox();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cboModificacion = new System.Windows.Forms.ComboBox();
             this.dgvFuncionalidades = new System.Windows.Forms.DataGridView();
             this.columnaHabilitar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFuncionalidades)).BeginInit();
@@ -44,17 +42,18 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(250, 336);
+            this.btnModificar.Location = new System.Drawing.Point(305, 336);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 0;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 63);
+            this.label1.Location = new System.Drawing.Point(13, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 13);
             this.label1.TabIndex = 1;
@@ -63,7 +62,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(234, 63);
+            this.label2.Location = new System.Drawing.Point(289, 21);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 2;
@@ -73,7 +72,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 118);
+            this.label3.Location = new System.Drawing.Point(13, 75);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 13);
             this.label3.TabIndex = 3;
@@ -81,15 +80,15 @@
             // 
             // txtNombreRol
             // 
-            this.txtNombreRol.Location = new System.Drawing.Point(29, 79);
+            this.txtNombreRol.Location = new System.Drawing.Point(29, 36);
             this.txtNombreRol.Name = "txtNombreRol";
-            this.txtNombreRol.Size = new System.Drawing.Size(188, 20);
+            this.txtNombreRol.Size = new System.Drawing.Size(244, 20);
             this.txtNombreRol.TabIndex = 4;
             // 
             // chkRolActivo
             // 
             this.chkRolActivo.AutoSize = true;
-            this.chkRolActivo.Location = new System.Drawing.Point(250, 80);
+            this.chkRolActivo.Location = new System.Drawing.Point(305, 38);
             this.chkRolActivo.Name = "chkRolActivo";
             this.chkRolActivo.Size = new System.Drawing.Size(75, 17);
             this.chkRolActivo.TabIndex = 6;
@@ -98,7 +97,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(169, 336);
+            this.btnVolver.Location = new System.Drawing.Point(224, 336);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
             this.btnVolver.TabIndex = 7;
@@ -106,32 +105,17 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 14);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Rol a modificar:";
-            // 
-            // cboModificacion
-            // 
-            this.cboModificacion.FormattingEnabled = true;
-            this.cboModificacion.Location = new System.Drawing.Point(29, 30);
-            this.cboModificacion.Name = "cboModificacion";
-            this.cboModificacion.Size = new System.Drawing.Size(296, 21);
-            this.cboModificacion.TabIndex = 9;
-            // 
             // dgvFuncionalidades
             // 
+            this.dgvFuncionalidades.AllowUserToAddRows = false;
+            this.dgvFuncionalidades.AllowUserToDeleteRows = false;
             this.dgvFuncionalidades.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvFuncionalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFuncionalidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnaHabilitar});
-            this.dgvFuncionalidades.Location = new System.Drawing.Point(16, 150);
+            this.dgvFuncionalidades.Location = new System.Drawing.Point(16, 91);
             this.dgvFuncionalidades.Name = "dgvFuncionalidades";
-            this.dgvFuncionalidades.Size = new System.Drawing.Size(309, 150);
+            this.dgvFuncionalidades.Size = new System.Drawing.Size(364, 239);
             this.dgvFuncionalidades.TabIndex = 10;
             // 
             // columnaHabilitar
@@ -144,10 +128,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(349, 371);
+            this.ClientSize = new System.Drawing.Size(392, 371);
             this.Controls.Add(this.dgvFuncionalidades);
-            this.Controls.Add(this.cboModificacion);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.chkRolActivo);
             this.Controls.Add(this.txtNombreRol);
@@ -173,8 +155,6 @@
         private System.Windows.Forms.TextBox txtNombreRol;
         private System.Windows.Forms.CheckBox chkRolActivo;
         private System.Windows.Forms.Button btnVolver;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cboModificacion;
         private System.Windows.Forms.DataGridView dgvFuncionalidades;
         private System.Windows.Forms.DataGridViewCheckBoxColumn columnaHabilitar;
     }
