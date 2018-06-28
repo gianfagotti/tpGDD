@@ -1212,3 +1212,20 @@ DECLARE @resultado numeric(1)
 	END CATCH
 END
 GO
+
+------------------------------------------------Alva-------------------------------------------------------
+
+CREATE PROCEDURE FAGD.desactivarUsuario @username nvarchar (255)
+AS
+BEGIN
+	DECLARE @resultado numeric(1)
+	BEGIN TRAN actualizarEstado
+		UPDATE FAGD.Usuario
+		SET usuario_estado = 0
+		WHERE usuario_username = @username;
+		SET @resultado = 0;
+	SELECT @resultado AS resultado
+	COMMIT TRAN ActualizarEstado
+	SELECT @resultado AS resultado
+END
+GO

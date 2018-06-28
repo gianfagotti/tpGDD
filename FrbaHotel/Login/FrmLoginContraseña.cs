@@ -20,6 +20,7 @@ namespace FrbaHotel.Login
         }
         int intentos = 0;
         private DataTable tabla;
+        SqlDataReader resultado;
         private void btnIngresarContraseña_Click(object sender, EventArgs e)
         {
             if (this.txtContraseña.Text == "")
@@ -49,7 +50,8 @@ namespace FrbaHotel.Login
                         this.Hide();
                         FrmTipoUsuario frmTipoUsuario = new FrmTipoUsuario();
                         frmTipoUsuario.Show();
-                        //ACA VA EL UPDATE EN EL ESTADO DEL USUARIO, FALTA HACER LUEGO
+                        resultado = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.desactivarUsuario '"+usuarioIngresado+"'");
+                        resultado.Close();
                     }
                 }
             }
