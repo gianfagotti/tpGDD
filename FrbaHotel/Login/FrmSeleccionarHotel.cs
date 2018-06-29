@@ -15,15 +15,20 @@ namespace FrbaHotel.Login
     {
         private DataTable tabla, tabla2;
         int Fila = 0;
+<<<<<<< HEAD
         public static decimal codigoHotel = 0;
 
+=======
+        public decimal codigoHotel;
+        public string usuarioIngresado;
+>>>>>>> bee7fbca5b357f5853ca3fad0fa3e658f6c873f6
         private String hotelSeleccionado;
         char guion = '-';
         public FrmSeleccionarHotel(String usuario)
         {
-            string usuarioIngresado = usuario;
+            usuarioIngresado = usuario;
             InitializeComponent();
-            tabla = Login.FrmTipoUsuario.BD.consulta("SELECT [GD1C2018].[FAGD].[Hotel].[hotel_codigo] ,[hotel_calle],[hotel_nroCalle],[hotel_nombre],usuario_username  FROM [GD1C2018].[FAGD].[Hotel] JOIN [GD1C2018].[FAGD].[UsuarioXHotel] ON([GD1C2018].[FAGD].[Hotel].hotel_codigo = [GD1C2018].[FAGD].[UsuarioXHotel].hotel_codigo) WHERE usuario_username = '" + usuarioIngresado + "'");
+            tabla = Login.FrmTipoUsuario.BD.consulta("SELECT DISTINCT [GD1C2018].[FAGD].[Hotel].[hotel_codigo] ,[hotel_calle],[hotel_nroCalle],[hotel_nombre],usuario_username  FROM [GD1C2018].[FAGD].[Hotel] JOIN [GD1C2018].[FAGD].[UsuarioXRolXHotel] ON([GD1C2018].[FAGD].[Hotel].hotel_codigo = [GD1C2018].[FAGD].[UsuarioXRolXHotel].hotel_codigo) WHERE usuario_username = '" + usuarioIngresado + "'");
             while (Fila < tabla.Rows.Count)
             {
                 if (string.IsNullOrEmpty(tabla.Rows[Fila][3].ToString()))
@@ -67,7 +72,7 @@ namespace FrbaHotel.Login
                 else
                 {
                     this.Close();
-                    FrmSeleccionarRol frmSeleccionarRol = new FrmSeleccionarRol();
+                    FrmSeleccionarRol frmSeleccionarRol = new FrmSeleccionarRol(codigoHotel,usuarioIngresado);
                     frmSeleccionarRol.Show();
                 }
             }

@@ -15,7 +15,7 @@ namespace FrbaHotel.Login
     {
         private SqlDataReader resultado;
 
-        public FrmSeleccionarRol()
+        public FrmSeleccionarRol(decimal codigoHotelRecibido, string usuarioIngresado)
         {
             InitializeComponent();
             resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT rol_nombre FROM FAGD.Rol where rol_nombre != 'cliente'");

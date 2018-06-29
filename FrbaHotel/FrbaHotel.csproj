@@ -204,12 +204,6 @@
     <Compile Include="RegistrarConsumible\FrmAgregarConsumibles.Designer.cs">
       <DependentUpon>FrmAgregarConsumibles.cs</DependentUpon>
     </Compile>
-    <Compile Include="RegistrarConsumible\FrmSeleccionarEstadia.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RegistrarConsumible\FrmSeleccionarEstadia.Designer.cs">
-      <DependentUpon>FrmSeleccionarEstadia.cs</DependentUpon>
-    </Compile>
     <Compile Include="RegistrarEstadia\FrmRegistrarEstadia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -302,9 +296,6 @@
     </Compile>
     <EmbeddedResource Include="RegistrarConsumible\FrmAgregarConsumibles.resx">
       <DependentUpon>FrmAgregarConsumibles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RegistrarConsumible\FrmSeleccionarEstadia.resx">
-      <DependentUpon>FrmSeleccionarEstadia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegistrarEstadia\FrmRegistrarEstadia.resx">
       <DependentUpon>FrmRegistrarEstadia.cs</DependentUpon>
