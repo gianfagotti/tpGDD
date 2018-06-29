@@ -17,12 +17,14 @@ namespace FrbaHotel.AbmHabitacion
         private SqlDataReader resultado;
         SqlDataAdapter adaptadorSql;
         DataTable tablaConDatos;
-        decimal codigoHotel = 1;
+        decimal codigoHotel = 0;
 
         public FrmListadoMod(Form form)
         {
             InitializeComponent();
             frmMenuEmpleado = form;
+
+            codigoHotel = Login.FrmSeleccionarHotel.codigoHotel;
 
             resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT habitacionTipo_descripcion FROM FAGD.HabitacionTipo");
             while (resultado.Read() == true)

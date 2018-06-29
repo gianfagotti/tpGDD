@@ -52,6 +52,7 @@
             this.btnListadoEst = new System.Windows.Forms.Button();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.grbUsuarios = new System.Windows.Forms.GroupBox();
+            this.butBajaHab = new System.Windows.Forms.Button();
             this.grbHuespedes.SuspendLayout();
             this.grbHabitaciones.SuspendLayout();
             this.grbRegimenes.SuspendLayout();
@@ -107,6 +108,7 @@
             // 
             // grbHabitaciones
             // 
+            this.grbHabitaciones.Controls.Add(this.butBajaHab);
             this.grbHabitaciones.Controls.Add(this.butModHab);
             this.grbHabitaciones.Controls.Add(this.butCrearHabitacion);
             this.grbHabitaciones.Enabled = false;
@@ -316,6 +318,16 @@
             this.grbUsuarios.TabStop = false;
             this.grbUsuarios.Text = "Administración de usuarios";
             // 
+            // butBajaHab
+            // 
+            this.butBajaHab.Location = new System.Drawing.Point(30, 77);
+            this.butBajaHab.Name = "butBajaHab";
+            this.butBajaHab.Size = new System.Drawing.Size(161, 23);
+            this.butBajaHab.TabIndex = 2;
+            this.butBajaHab.Text = "Inhabilitar habitación";
+            this.butBajaHab.UseVisualStyleBackColor = true;
+            this.butBajaHab.Click += new System.EventHandler(this.butBajaHab_Click);
+            // 
             // frmMenuEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -372,5 +384,6 @@
         private System.Windows.Forms.Button btnModificarUsuario;
         private System.Windows.Forms.Button butBajaCliente;
         private System.Windows.Forms.Button butModHab;
+        private System.Windows.Forms.Button butBajaHab;
     }
 }

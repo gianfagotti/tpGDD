@@ -69,6 +69,12 @@
     <Compile Include="AbmCliente\FrmModificarCliente.Designer.cs">
       <DependentUpon>FrmModificarCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmHabitacion\FrmBajaHabitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmHabitacion\FrmBajaHabitacion.Designer.cs">
+      <DependentUpon>FrmBajaHabitacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmHabitacion\FrmCrearHabitacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmCliente\FrmModificarCliente.resx">
       <DependentUpon>FrmModificarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmHabitacion\FrmBajaHabitacion.resx">
+      <DependentUpon>FrmBajaHabitacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmHabitacion\FrmCrearHabitacion.resx">
       <DependentUpon>FrmCrearHabitacion.cs</DependentUpon>

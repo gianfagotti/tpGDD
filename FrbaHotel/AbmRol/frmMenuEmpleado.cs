@@ -169,5 +169,12 @@ namespace FrbaHotel.AbmRol
             this.Hide();
             frm.Show();
         }
+
+        private void butBajaHab_Click(object sender, EventArgs e)
+        {
+            AbmHabitacion.FrmBajaHabitacion frm = new AbmHabitacion.FrmBajaHabitacion(this);
+            this.Hide();
+            frm.Show();
+        }
     }
 }
