@@ -21,6 +21,9 @@ acceso"
 -"El password deberá almacenarse encriptado de forma irreversible bajo el algoritmo de
 encriptación SHA256."
 
+-"AbmUsuario es una funcionalidad que se encuentra disponible exclusivamente para el administrador del
+sistema y no puede ser asignada a ningún otro tipo de usuario."
+
 -"Debe tenerse en cuenta que el password se pueda modificar una vez que el usuario se
 encuentre logueado, también debe contemplarse que un administrador solo puede realizar
 modificaciones y dar de baja a usuarios que se desempeñen en el mismo hotel él trabaja"

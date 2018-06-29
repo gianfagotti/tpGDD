@@ -169,5 +169,19 @@ namespace FrbaHotel.AbmRol
             this.Hide();
             frm.Show();
         }
+
+        private void btnNuevoUsuario_Click(object sender, EventArgs e)
+        {
+            AbmUsuario.AltaUsuario frm = new AbmUsuario.AltaUsuario(this);
+            this.Hide();
+            frm.Show();
+        }
+
+        private void btnRetocarUsuario_Click(object sender, EventArgs e)
+        {
+            AbmUsuario.SeleccionarUsuario frm = new AbmUsuario.SeleccionarUsuario(this);
+            this.Hide();
+            frm.Show();
+        }
     }
 }
