@@ -100,15 +100,10 @@ CREATE TABLE FAGD.Usuario(
 )
 GO
 
-CREATE TABLE FAGD.UsuarioXHotel(
-	usuario_username nvarchar(255),
-	hotel_codigo numeric (18)
-)
-GO
-
-CREATE TABLE FAGD.UsuarioXRol(
-	usuario_username nvarchar(255),
-	rol_codigo numeric(18),
+CREATE TABLE FAGD.UsuarioXRolXHotel(
+	usuario_username nvarchar(255) NOT NULL,
+	rol_codigo numeric(18) NOT NULL,
+	hotel_codigo numeric(18) NOT NULL
 )
 GO
 
@@ -226,14 +221,6 @@ fecha_inicio datetime,
 fecha_fin datetime
 )
 GO
-
-CREATE TABLE FAGD.RolXUsuarioXHotel(
-rol_codigo numeric(18) NOT NULL,
-usuario_username nvarchar(255) NOT NULL,
-hotel_codigo numeric(18) NOT NULL
-)
-GO
-
 ---------------------------------- CREACIÓN PRIMARY KEYS ---------------------------------------
 
 ALTER TABLE FAGD.Hotel ADD CONSTRAINT PK_Hotel
@@ -310,32 +297,16 @@ ALTER TABLE FAGD.RolXFuncionalidad ADD CONSTRAINT FK_RolXFuncionalidad_1
  FOREIGN KEY (funcionalidad_codigo) REFERENCES FAGD.Funcionalidad(funcionalidad_codigo)
 GO
 
-ALTER TABLE FAGD.UsuarioXRol ADD CONSTRAINT FK_UsuarioXRol
+ALTER TABLE FAGD.UsuarioXRolXHotel ADD CONSTRAINT FK_UsuarioXRolXHotel
  FOREIGN KEY (usuario_username) REFERENCES FAGD.Usuario(usuario_username)
 GO
 
-ALTER TABLE FAGD.UsuarioXRol ADD CONSTRAINT FK_UsuarioXRol_1
+ALTER TABLE FAGD.UsuarioXRolXHotel ADD CONSTRAINT FK_UsuarioXRolXHotel_1
  FOREIGN KEY (rol_codigo) REFERENCES FAGD.Rol(rol_codigo)
 GO
 
-ALTER TABLE FAGD.UsuarioXHotel ADD CONSTRAINT FK_UsuarioXHotel
- FOREIGN KEY (usuario_username) REFERENCES FAGD.Usuario(usuario_username)
-GO
-
-ALTER TABLE FAGD.UsuarioXHotel ADD CONSTRAINT FK_UsuarioXHotel_1
+ALTER TABLE FAGD.UsuarioXRolXHotel ADD CONSTRAINT FK_UsuarioXRolXHotel_2
  FOREIGN KEY (hotel_codigo) REFERENCES FAGD.Hotel(hotel_codigo)
-GO
-
-ALTER TABLE FAGD.RolXUsuarioXHotel ADD CONSTRAINT FK_RolXUsuarioXHotel_1
- FOREIGN KEY (hotel_codigo) REFERENCES FAGD.Hotel(hotel_codigo)
-GO
-
-ALTER TABLE FAGD.RolXUsuarioXHotel ADD CONSTRAINT FK_RolXUsuarioXHotel_2
- FOREIGN KEY (rol_codigo) REFERENCES FAGD.Rol(rol_codigo)
-GO
-
-ALTER TABLE FAGD.RolXUsuarioXHotel ADD CONSTRAINT FK_RolXUsuarioXHotel_3
- FOREIGN KEY (usuario_username) REFERENCES FAGD.Usuario(usuario_username)
 GO
 
 --------------- TEMA FACTURA E ITEM FACTURA--------------
@@ -558,23 +529,18 @@ INSERT INTO FAGD.RolXFuncionalidad(rol_codigo,funcionalidad_codigo)
 GO
 
 INSERT INTO FAGD.Usuario (usuario_username,usuario_password, usuario_nombre, usuario_apellido, usuario_direccion, usuario_mail, usuario_telefono, usuario_fechaNacimiento, usuario_estado)
-		values ('IRAA','123','Ivan','Arnaudo','Calle Falsa 123','ivan.arnaudo@gmail.com','11111111','02/09/96',1)
+		values ('IRAA','123','Ivan','Arnaudo','Calle Falsa 123','ivan.arnaudo@gmail.com','11111111','02/09/96',1),('MAGNO','123','Alvaro','Dati','Calle verdadera 345','alvarocuervo96@gmail.com','1550352388','02/09/96',1)
 GO
 
-INSERT INTO FAGD.UsuarioXRol(usuario_username,rol_codigo)
-		values('IRAA',1)
+INSERT INTO FAGD.UsuarioXRolXHotel(usuario_username,rol_codigo,hotel_codigo)
+		values('IRAA',1,1),('IRAA',2,1),('IRAA',1,2),('IRAA',1,3),('IRAA',2,3),('MAGNO',1,1),('MAGNO',2,1),('MAGNO',1,2),('MAGNO',1,3),('MAGNO',2,3)
 GO
 
-INSERT INTO FAGD.UsuarioXHotel(usuario_username,hotel_codigo)
-		values('IRAA',1),('IRAA',2),('IRAA',3),('IRAA',4),('IRAA',5),('IRAA',6)
-GO
-
-
-
-
+--INSERT INTO FAGD.UsuarioXHotel(usuario_username,hotel_codigo)
+		--values('IRAA',1),('IRAA',2),('IRAA',3),('IRAA',4),('IRAA',5),('IRAA',6)
+--GO
 
 -----------------------	 CREACIÓN DE PROCEDURES PARA LA APLICACIÓN   ----------------------- 
-
 
 CREATE PROCEDURE FAGD.lista_hotel_maxResCancel @trimestre numeric(18,0), @anio numeric(18,0)
 AS	BEGIN
