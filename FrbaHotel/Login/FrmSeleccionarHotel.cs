@@ -15,13 +15,8 @@ namespace FrbaHotel.Login
     {
         private DataTable tabla, tabla2;
         int Fila = 0;
-<<<<<<< HEAD
         public static decimal codigoHotel = 0;
-
-=======
-        public decimal codigoHotel;
         public string usuarioIngresado;
->>>>>>> bee7fbca5b357f5853ca3fad0fa3e658f6c873f6
         private String hotelSeleccionado;
         char guion = '-';
         public FrmSeleccionarHotel(String usuario)
