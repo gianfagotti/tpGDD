@@ -93,6 +93,24 @@
     <Compile Include="AbmHabitacion\FrmModificarHabitacion.Designer.cs">
       <DependentUpon>FrmModificarHabitacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmHotel\AltaHotel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmHotel\AltaHotel.Designer.cs">
+      <DependentUpon>AltaHotel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmHotel\BajaHotel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmHotel\BajaHotel.Designer.cs">
+      <DependentUpon>BajaHotel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmHotel\ModificarHotel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmHotel\ModificarHotel.Designer.cs">
+      <DependentUpon>ModificarHotel.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmRegimen\FrmRegimen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,6 +281,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmHabitacion\FrmModificarHabitacion.resx">
       <DependentUpon>FrmModificarHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmHotel\AltaHotel.resx">
+      <DependentUpon>AltaHotel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmHotel\BajaHotel.resx">
+      <DependentUpon>BajaHotel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmHotel\ModificarHotel.resx">
+      <DependentUpon>ModificarHotel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRegimen\FrmRegimen.resx">
       <DependentUpon>FrmRegimen.cs</DependentUpon>
