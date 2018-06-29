@@ -13,9 +13,10 @@ namespace FrbaHotel.Login
 {
     public partial class FrmSeleccionarHotel : Form
     {
-        private DataTable tabla, tabla2;
+        private DataTable tabla, tabla2, tabla3;
         int Fila = 0;
-        public static decimal codigoHotel = 0;
+        public static decimal codigoHotel;
+        private decimal codigoRol;
         public string usuarioIngresado;
         private String hotelSeleccionado;
         char guion = '-';
@@ -66,9 +67,20 @@ namespace FrbaHotel.Login
                 }
                 else
                 {
-                    this.Close();
-                    FrmSeleccionarRol frmSeleccionarRol = new FrmSeleccionarRol(codigoHotel,usuarioIngresado);
-                    frmSeleccionarRol.Show();
+                    tabla3 = Login.FrmTipoUsuario.BD.consulta("SELECT rol_nombre, FAGD.Rol.rol_codigo FROM FAGD.Rol JOIN FAGD.UsuarioXRolXHotel ON (FAGD.Rol.rol_codigo = FAGD.UsuarioXRolXHotel.rol_codigo) WHERE hotel_codigo = " + codigoHotel + " AND usuario_username = '" + usuarioIngresado + "'");
+                    if (tabla3.Rows.Count == 1)
+                    {
+                        codigoRol = Convert.ToDecimal(tabla3.Rows[0][1]);
+                        AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado(codigoRol);
+                        this.Close();
+                        frmMenuEmpleado.Show();
+                    }
+                    else
+                    {
+                        FrmSeleccionarRol frmSeleccionarRol = new FrmSeleccionarRol(codigoHotel, usuarioIngresado);
+                        frmSeleccionarRol.Show();
+                        this.Close();
+                    }
                 }
             }
         }

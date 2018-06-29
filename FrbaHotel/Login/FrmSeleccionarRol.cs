@@ -14,18 +14,23 @@ namespace FrbaHotel.Login
     public partial class FrmSeleccionarRol : Form
     {
         private SqlDataReader resultado;
-
-        public FrmSeleccionarRol(decimal codigoHotelRecibido, string usuarioIngresado)
+        private DataTable tabla;
+        decimal codigoHotel;
+        decimal codigoRol;
+        string usuarioIngresado;
+        int i = 0;
+        public FrmSeleccionarRol(decimal codigoHotelRecibido, string usuarioIngresadoRecibido)
         {
             InitializeComponent();
-            resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT rol_nombre FROM FAGD.Rol where rol_nombre != 'cliente'");
-            while (resultado.Read() == true)
-            {
-                cmbRolesRegistrados.Items.Add(resultado.GetSqlString(0));
+            codigoHotel = codigoHotelRecibido;
+            usuarioIngresado = usuarioIngresadoRecibido;
+            tabla = Login.FrmTipoUsuario.BD.consulta("SELECT rol_nombre, FAGD.Rol.rol_codigo FROM FAGD.Rol JOIN FAGD.UsuarioXRolXHotel ON (FAGD.Rol.rol_codigo = FAGD.UsuarioXRolXHotel.rol_codigo) WHERE hotel_codigo = " + codigoHotel + " AND usuario_username = '" + usuarioIngresado + "'");
+            while (i < tabla.Rows.Count)
+                {
+                  cmbRolesRegistrados.Items.Add(tabla.Rows[i][0].ToString());
+                  i++;
+                }
             }
-            resultado.Close();
-
-        }
 
         private void cmbRolesRegistrados_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -46,13 +51,13 @@ namespace FrbaHotel.Login
 
         private void btnAceptarRol_Click(object sender, EventArgs e)
         {
-            decimal codigoRol = 0;
 
             resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT rol_codigo FROM FAGD.Rol where rol_nombre = '" + cmbRolesRegistrados.SelectedItem.ToString() + "'");
             if (resultado.Read() == true)
+            {
                 codigoRol = resultado.GetDecimal(0);
-            resultado.Close();
-            
+                resultado.Close();
+            }
             if (codigoRol != 0)
             {
 
