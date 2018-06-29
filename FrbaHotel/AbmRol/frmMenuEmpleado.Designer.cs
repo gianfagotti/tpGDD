@@ -53,6 +53,8 @@
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.grbUsuarios = new System.Windows.Forms.GroupBox();
             this.butBajaHab = new System.Windows.Forms.Button();
+            this.btnNuevoUsuario = new System.Windows.Forms.Button();
+            this.btnRetocarUsuario = new System.Windows.Forms.Button();
             this.grbHuespedes.SuspendLayout();
             this.grbHabitaciones.SuspendLayout();
             this.grbRegimenes.SuspendLayout();
@@ -61,6 +63,7 @@
             this.grbConsumibles.SuspendLayout();
             this.grbEstadias.SuspendLayout();
             this.grbListado.SuspendLayout();
+            this.grbUsuarios.SuspendLayout();
             this.SuspendLayout();
             // 
             // grbHuespedes
@@ -310,6 +313,8 @@
             // 
             // grbUsuarios
             // 
+            this.grbUsuarios.Controls.Add(this.btnRetocarUsuario);
+            this.grbUsuarios.Controls.Add(this.btnNuevoUsuario);
             this.grbUsuarios.Enabled = false;
             this.grbUsuarios.Location = new System.Drawing.Point(264, 257);
             this.grbUsuarios.Name = "grbUsuarios";
@@ -327,6 +332,26 @@
             this.butBajaHab.Text = "Inhabilitar habitación";
             this.butBajaHab.UseVisualStyleBackColor = true;
             this.butBajaHab.Click += new System.EventHandler(this.butBajaHab_Click);
+            //
+            // btnNuevoUsuario
+            // 
+            this.btnNuevoUsuario.Location = new System.Drawing.Point(30, 19);
+            this.btnNuevoUsuario.Name = "btnNuevoUsuario";
+            this.btnNuevoUsuario.Size = new System.Drawing.Size(161, 23);
+            this.btnNuevoUsuario.TabIndex = 0;
+            this.btnNuevoUsuario.Text = "Crear nuevo usuario";
+            this.btnNuevoUsuario.UseVisualStyleBackColor = true;
+            this.btnNuevoUsuario.Click += new System.EventHandler(this.btnNuevoUsuario_Click);
+            // 
+            // btnRetocarUsuario
+            // 
+            this.btnRetocarUsuario.Location = new System.Drawing.Point(30, 48);
+            this.btnRetocarUsuario.Name = "btnRetocarUsuario";
+            this.btnRetocarUsuario.Size = new System.Drawing.Size(161, 23);
+            this.btnRetocarUsuario.TabIndex = 1;
+            this.btnRetocarUsuario.Text = "Modificar usuario";
+            this.btnRetocarUsuario.UseVisualStyleBackColor = true;
+            this.btnRetocarUsuario.Click += new System.EventHandler(this.btnRetocarUsuario_Click);
             // 
             // frmMenuEmpleado
             // 
@@ -354,6 +379,7 @@
             this.grbConsumibles.ResumeLayout(false);
             this.grbEstadias.ResumeLayout(false);
             this.grbListado.ResumeLayout(false);
+            this.grbUsuarios.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -385,5 +411,7 @@
         private System.Windows.Forms.Button butBajaCliente;
         private System.Windows.Forms.Button butModHab;
         private System.Windows.Forms.Button butBajaHab;
+        private System.Windows.Forms.Button btnNuevoUsuario;
+        private System.Windows.Forms.Button btnRetocarUsuario;
     }
 }
