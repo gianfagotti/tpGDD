@@ -55,6 +55,10 @@
             this.grbUsuarios = new System.Windows.Forms.GroupBox();
             this.btnRetocarUsuario = new System.Windows.Forms.Button();
             this.btnNuevoUsuario = new System.Windows.Forms.Button();
+            this.grbHoteles = new System.Windows.Forms.GroupBox();
+            this.btnBajaHotel = new System.Windows.Forms.Button();
+            this.btnNuevoHotel = new System.Windows.Forms.Button();
+            this.btnModificarHotel = new System.Windows.Forms.Button();
             this.grbHuespedes.SuspendLayout();
             this.grbHabitaciones.SuspendLayout();
             this.grbRegimenes.SuspendLayout();
@@ -64,6 +68,7 @@
             this.grbEstadias.SuspendLayout();
             this.grbListado.SuspendLayout();
             this.grbUsuarios.SuspendLayout();
+            this.grbHoteles.SuspendLayout();
             this.SuspendLayout();
             // 
             // grbHuespedes
@@ -156,9 +161,9 @@
             // 
             this.grbRegimenes.Controls.Add(this.butCrearRegimen);
             this.grbRegimenes.Enabled = false;
-            this.grbRegimenes.Location = new System.Drawing.Point(12, 257);
+            this.grbRegimenes.Location = new System.Drawing.Point(13, 199);
             this.grbRegimenes.Name = "grbRegimenes";
-            this.grbRegimenes.Size = new System.Drawing.Size(221, 100);
+            this.grbRegimenes.Size = new System.Drawing.Size(221, 52);
             this.grbRegimenes.TabIndex = 2;
             this.grbRegimenes.TabStop = false;
             this.grbRegimenes.Text = "Administración de regímenes";
@@ -275,7 +280,7 @@
             this.grbEstadias.Enabled = false;
             this.grbEstadias.Location = new System.Drawing.Point(13, 140);
             this.grbEstadias.Name = "grbEstadias";
-            this.grbEstadias.Size = new System.Drawing.Size(220, 111);
+            this.grbEstadias.Size = new System.Drawing.Size(220, 53);
             this.grbEstadias.TabIndex = 6;
             this.grbEstadias.TabStop = false;
             this.grbEstadias.Text = "Administración de estadías";
@@ -296,7 +301,7 @@
             this.grbListado.Enabled = false;
             this.grbListado.Location = new System.Drawing.Point(507, 257);
             this.grbListado.Name = "grbListado";
-            this.grbListado.Size = new System.Drawing.Size(200, 100);
+            this.grbListado.Size = new System.Drawing.Size(200, 108);
             this.grbListado.TabIndex = 7;
             this.grbListado.TabStop = false;
             this.grbListado.Text = "Estadísticas";
@@ -328,7 +333,7 @@
             this.grbUsuarios.Enabled = false;
             this.grbUsuarios.Location = new System.Drawing.Point(264, 257);
             this.grbUsuarios.Name = "grbUsuarios";
-            this.grbUsuarios.Size = new System.Drawing.Size(218, 100);
+            this.grbUsuarios.Size = new System.Drawing.Size(218, 108);
             this.grbUsuarios.TabIndex = 9;
             this.grbUsuarios.TabStop = false;
             this.grbUsuarios.Text = "Administración de usuarios";
@@ -353,11 +358,52 @@
             this.btnNuevoUsuario.UseVisualStyleBackColor = true;
             this.btnNuevoUsuario.Click += new System.EventHandler(this.btnNuevoUsuario_Click);
             // 
+            // grbHoteles
+            // 
+            this.grbHoteles.Controls.Add(this.btnModificarHotel);
+            this.grbHoteles.Controls.Add(this.btnBajaHotel);
+            this.grbHoteles.Controls.Add(this.btnNuevoHotel);
+            this.grbHoteles.Enabled = false;
+            this.grbHoteles.Location = new System.Drawing.Point(12, 257);
+            this.grbHoteles.Name = "grbHoteles";
+            this.grbHoteles.Size = new System.Drawing.Size(221, 108);
+            this.grbHoteles.TabIndex = 10;
+            this.grbHoteles.TabStop = false;
+            this.grbHoteles.Text = "Administración de Hoteles";
+            // 
+            // btnBajaHotel
+            // 
+            this.btnBajaHotel.Location = new System.Drawing.Point(30, 48);
+            this.btnBajaHotel.Name = "btnBajaHotel";
+            this.btnBajaHotel.Size = new System.Drawing.Size(161, 23);
+            this.btnBajaHotel.TabIndex = 1;
+            this.btnBajaHotel.Text = "Inhabilitar un Hotel";
+            this.btnBajaHotel.UseVisualStyleBackColor = true;
+            // 
+            // btnNuevoHotel
+            // 
+            this.btnNuevoHotel.Location = new System.Drawing.Point(30, 19);
+            this.btnNuevoHotel.Name = "btnNuevoHotel";
+            this.btnNuevoHotel.Size = new System.Drawing.Size(161, 23);
+            this.btnNuevoHotel.TabIndex = 0;
+            this.btnNuevoHotel.Text = "Dar de alta un Hotel";
+            this.btnNuevoHotel.UseVisualStyleBackColor = true;
+            // 
+            // btnModificarHotel
+            // 
+            this.btnModificarHotel.Location = new System.Drawing.Point(30, 77);
+            this.btnModificarHotel.Name = "btnModificarHotel";
+            this.btnModificarHotel.Size = new System.Drawing.Size(161, 23);
+            this.btnModificarHotel.TabIndex = 2;
+            this.btnModificarHotel.Text = "Modificar un Hotel";
+            this.btnModificarHotel.UseVisualStyleBackColor = true;
+            // 
             // frmMenuEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 408);
+            this.ClientSize = new System.Drawing.Size(732, 406);
+            this.Controls.Add(this.grbHoteles);
             this.Controls.Add(this.grbUsuarios);
             this.Controls.Add(this.btnCerrarSesion);
             this.Controls.Add(this.grbReservas);
@@ -380,6 +426,7 @@
             this.grbEstadias.ResumeLayout(false);
             this.grbListado.ResumeLayout(false);
             this.grbUsuarios.ResumeLayout(false);
+            this.grbHoteles.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -413,5 +460,9 @@
         private System.Windows.Forms.Button butBajaHab;
         private System.Windows.Forms.Button btnNuevoUsuario;
         private System.Windows.Forms.Button btnRetocarUsuario;
+        private System.Windows.Forms.GroupBox grbHoteles;
+        private System.Windows.Forms.Button btnModificarHotel;
+        private System.Windows.Forms.Button btnBajaHotel;
+        private System.Windows.Forms.Button btnNuevoHotel;
     }
 }

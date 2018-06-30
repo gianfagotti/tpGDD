@@ -96,6 +96,8 @@ CREATE TABLE FAGD.Usuario(
 	usuario_mail nvarchar(255) UNIQUE,
 	usuario_telefono numeric(18),
 	usuario_fechaNacimiento datetime,
+	usuario_tipoDoc nvarchar (255),
+	usuario_nroDoc numeric(18),
 	usuario_estado bit NOT NULL default(1)
 )
 GO
@@ -528,17 +530,14 @@ INSERT INTO FAGD.RolXFuncionalidad(rol_codigo,funcionalidad_codigo)
 		values (3,1)
 GO
 
-INSERT INTO FAGD.Usuario (usuario_username,usuario_password, usuario_nombre, usuario_apellido, usuario_direccion, usuario_mail, usuario_telefono, usuario_fechaNacimiento, usuario_estado)
-		values ('IRAA','123','Ivan','Arnaudo','Calle Falsa 123','ivan.arnaudo@gmail.com','11111111','02/09/96',1),('MAGNO','123','Alvaro','Dati','Calle verdadera 345','alvarocuervo96@gmail.com','1550352388','02/09/96',1)
+INSERT INTO FAGD.Usuario (usuario_username,usuario_password, usuario_nombre, usuario_apellido, usuario_direccion, usuario_mail, usuario_telefono, usuario_fechaNacimiento, usuario_tipoDoc, usuario_nroDoc, usuario_estado)
+		values ('IRAA','123','Ivan','Arnaudo','Calle Falsa 123','ivan.arnaudo@gmail.com','11111111','02/09/96','DNI',39775257,1),('MAGNO','123','Alvaro','Dati','Calle verdadera 345','alvarocuervo96@gmail.com','1550352388','02/09/96','DNI',40648321,1)
 GO
 
 INSERT INTO FAGD.UsuarioXRolXHotel(usuario_username,rol_codigo,hotel_codigo)
 		values('IRAA',1,1),('IRAA',2,1),('IRAA',1,2),('IRAA',1,3),('IRAA',2,3),('MAGNO',1,1),('MAGNO',2,1),('MAGNO',1,2),('MAGNO',1,3),('MAGNO',2,3)
 GO
 
---INSERT INTO FAGD.UsuarioXHotel(usuario_username,hotel_codigo)
-		--values('IRAA',1),('IRAA',2),('IRAA',3),('IRAA',4),('IRAA',5),('IRAA',6)
---GO
 
 -----------------------	 CREACIÓN DE PROCEDURES PARA LA APLICACIÓN   ----------------------- 
 
@@ -1178,6 +1177,60 @@ DECLARE @resultado numeric(1)
 	END CATCH
 END
 GO
+
+
+
+CREATE PROCEDURE FAGD.guardarUsuario
+@nombre nvarchar (255),
+@apellido nvarchar (255),
+@username nvarchar (255),
+@password nvarchar (255),
+@tipoDoc nvarchar (255),
+@nroDoc numeric (18),
+@direccion nvarchar (255),
+@mail nvarchar (255),
+@hotelCalle nvarchar (255),
+@hotelNro numeric (18),
+@rol nvarchar (255),
+@telefono numeric (18),
+@fechaNac datetime
+
+AS 
+BEGIN
+	DECLARE @resultado numeric(1)
+	DECLARE @fechaNacimiento datetime
+	set @fechaNacimiento = CONVERT(datetime, @fechaNac, 121)
+	BEGIN TRAN usuario
+	BEGIN TRY
+		IF (NOT EXISTS(SELECT usuario_username FROM FAGD.Usuario WHERE usuario_nombre = @username))
+		BEGIN
+			INSERT INTO FAGD.Usuario (usuario_username, usuario_password, usuario_nombre, usuario_apellido, usuario_direccion,
+									  usuario_mail, usuario_telefono, usuario_fechaNacimiento, usuario_tipoDoc, usuario_nroDoc,
+									  usuario_estado) 
+			VALUES (@username, @password, @nombre, @apellido, @direccion, @mail, @telefono, @fechaNacimiento, @tipoDoc, @nroDoc, 1)
+			
+			INSERT INTO FAGD.UsuarioXRolXHotel (usuario_username, rol_codigo, hotel_codigo)
+			VALUES (@username,
+				   (SELECT rol_codigo FROM FAGD.Rol WHERE rol_nombre = @rol),
+				   (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_calle = @hotelCalle AND hotel_nroCalle = @hotelNro)
+				   )
+			SET @resultado = 1;
+		END
+		ELSE 
+		BEGIN
+			SET @resultado = 0;
+		END
+		SELECT @resultado AS resultado
+		COMMIT tran usuario
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN usuario
+		SET @resultado = 2;
+		SELECT @resultado AS resultado
+	END CATCH
+END
+GO
+
 
 ------------------------------------------------Alva-------------------------------------------------------
 

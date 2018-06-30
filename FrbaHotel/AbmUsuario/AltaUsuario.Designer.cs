@@ -55,14 +55,14 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.btnVaciar = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaNac = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // txtUsername
             // 
             this.txtUsername.Location = new System.Drawing.Point(121, 30);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(267, 20);
+            this.txtUsername.Size = new System.Drawing.Size(295, 20);
             this.txtUsername.TabIndex = 0;
             // 
             // label1
@@ -87,7 +87,7 @@
             // 
             this.txtContraseña.Location = new System.Drawing.Point(121, 56);
             this.txtContraseña.Name = "txtContraseña";
-            this.txtContraseña.Size = new System.Drawing.Size(267, 20);
+            this.txtContraseña.Size = new System.Drawing.Size(295, 20);
             this.txtContraseña.TabIndex = 2;
             // 
             // label3
@@ -129,7 +129,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(183, 163);
+            this.label7.Location = new System.Drawing.Point(210, 163);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(80, 13);
             this.label7.TabIndex = 8;
@@ -184,40 +184,40 @@
             // 
             this.txtApellido.Location = new System.Drawing.Point(121, 133);
             this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(267, 20);
+            this.txtApellido.Size = new System.Drawing.Size(295, 20);
             this.txtApellido.TabIndex = 15;
             // 
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(121, 108);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(267, 20);
+            this.txtNombre.Size = new System.Drawing.Size(295, 20);
             this.txtNombre.TabIndex = 14;
             // 
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(121, 210);
             this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(267, 20);
+            this.txtTelefono.Size = new System.Drawing.Size(295, 20);
             this.txtTelefono.TabIndex = 17;
             // 
             // txtMail
             // 
             this.txtMail.Location = new System.Drawing.Point(121, 185);
             this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(267, 20);
+            this.txtMail.Size = new System.Drawing.Size(295, 20);
             this.txtMail.TabIndex = 16;
             // 
             // txtDireccion
             // 
             this.txtDireccion.Location = new System.Drawing.Point(121, 235);
             this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new System.Drawing.Size(267, 20);
+            this.txtDireccion.Size = new System.Drawing.Size(295, 20);
             this.txtDireccion.TabIndex = 18;
             // 
             // txtDocumento
             // 
-            this.txtDocumento.Location = new System.Drawing.Point(269, 160);
+            this.txtDocumento.Location = new System.Drawing.Point(296, 160);
             this.txtDocumento.Name = "txtDocumento";
             this.txtDocumento.Size = new System.Drawing.Size(119, 20);
             this.txtDocumento.TabIndex = 19;
@@ -227,15 +227,22 @@
             this.cboRol.FormattingEnabled = true;
             this.cboRol.Location = new System.Drawing.Point(121, 81);
             this.cboRol.Name = "cboRol";
-            this.cboRol.Size = new System.Drawing.Size(267, 21);
+            this.cboRol.Size = new System.Drawing.Size(295, 21);
             this.cboRol.TabIndex = 20;
             // 
             // cboDocumento
             // 
             this.cboDocumento.FormattingEnabled = true;
+            this.cboDocumento.Items.AddRange(new object[] {
+            "DNI",
+            "PASAPORTE",
+            "CARNET EXT.",
+            "RUC",
+            "P. NACI.",
+            "OTROS"});
             this.cboDocumento.Location = new System.Drawing.Point(121, 160);
             this.cboDocumento.Name = "cboDocumento";
-            this.cboDocumento.Size = new System.Drawing.Size(56, 21);
+            this.cboDocumento.Size = new System.Drawing.Size(83, 21);
             this.cboDocumento.TabIndex = 21;
             // 
             // cboHotel
@@ -243,21 +250,22 @@
             this.cboHotel.FormattingEnabled = true;
             this.cboHotel.Location = new System.Drawing.Point(159, 285);
             this.cboHotel.Name = "cboHotel";
-            this.cboHotel.Size = new System.Drawing.Size(229, 21);
+            this.cboHotel.Size = new System.Drawing.Size(257, 21);
             this.cboHotel.TabIndex = 23;
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(313, 321);
+            this.btnGuardar.Location = new System.Drawing.Point(341, 322);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 24;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(232, 321);
+            this.btnVolver.Location = new System.Drawing.Point(260, 322);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
             this.btnVolver.TabIndex = 25;
@@ -285,23 +293,23 @@
             this.btnVaciar.UseVisualStyleBackColor = true;
             this.btnVaciar.Click += new System.EventHandler(this.btnVaciar_Click);
             // 
-            // dateTimePicker1
+            // dtpFechaNac
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(121, 261);
-            this.dateTimePicker1.MaxDate = new System.DateTime(2030, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(266, 20);
-            this.dateTimePicker1.TabIndex = 28;
-            this.dateTimePicker1.Value = new System.DateTime(2018, 6, 28, 0, 0, 0, 0);
+            this.dtpFechaNac.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaNac.Location = new System.Drawing.Point(121, 261);
+            this.dtpFechaNac.MaxDate = new System.DateTime(2018, 6, 30, 16, 18, 3, 0);
+            this.dtpFechaNac.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.dtpFechaNac.Name = "dtpFechaNac";
+            this.dtpFechaNac.Size = new System.Drawing.Size(294, 20);
+            this.dtpFechaNac.TabIndex = 28;
+            this.dtpFechaNac.Value = new System.DateTime(2018, 6, 28, 0, 0, 0, 0);
             // 
             // AltaUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(413, 357);
-            this.Controls.Add(this.dateTimePicker1);
+            this.ClientSize = new System.Drawing.Size(439, 357);
+            this.Controls.Add(this.dtpFechaNac);
             this.Controls.Add(this.btnVaciar);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.btnVolver);
@@ -366,6 +374,6 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btnVaciar;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpFechaNac;
     }
 }
