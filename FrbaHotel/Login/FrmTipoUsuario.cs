@@ -14,6 +14,7 @@ namespace FrbaHotel.Login
     public partial class FrmTipoUsuario : Form
     {
         public static Conector2 BD = new Conector2();
+        public static string usuario = "";
         public FrmTipoUsuario()
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace FrbaHotel.Login
             {
                 if (cmbTiposDeUsuario.SelectedItem.ToString() == "Cliente")
                 {
+                    usuario = "guest";
                     AbmRol.frmMenuCliente frmMenuCliente = new AbmRol.frmMenuCliente();
                     this.Hide();
                     frmMenuCliente.Show();

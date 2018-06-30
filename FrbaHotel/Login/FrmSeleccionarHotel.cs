@@ -18,7 +18,7 @@ namespace FrbaHotel.Login
         public static decimal codigoHotel;
         private decimal codigoRol;
         public string usuarioIngresado;
-        private String hotelSeleccionado;
+        public static String hotelSeleccionado;
         char guion = '-';
         public FrmSeleccionarHotel(String usuario)
         {
