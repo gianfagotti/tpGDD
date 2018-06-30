@@ -27,7 +27,7 @@ namespace FrbaHotel.AbmHabitacion
             frmMenuEmpleado = frm;
 
             codigoHotel = Login.FrmSeleccionarHotel.codigoHotel;
-
+            limpiarCampos();
             resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT habitacionTipo_descripcion FROM FAGD.HabitacionTipo");
             while (resultado.Read() == true)
             {
