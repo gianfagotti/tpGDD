@@ -138,9 +138,9 @@ CREATE TABLE FAGD.Factura(
 GO
 
 CREATE TABLE FAGD.ItemFactura(
+ itemFactura_codigo numeric(18) IDENTITY(1,1) NOT NULL,
  itemFactura_nroFactura numeric(18) NOT NULL,
- itemFactura_codigoEstadia numeric(18),
- itemFactura_codigoConsumible numeric(18),
+ itemFactura_descripcion nvarchar(255),
  itemFactura_consumibleCantidad numeric(5),
  itemFactura_itemTotal numeric (18,2)
 ) 
@@ -199,9 +199,12 @@ consumible_precio numeric (18,2)
 GO
 
 CREATE TABLE FAGD.ConsumibleXEstadia(
+consxEst_codigo numeric(18,0) identity(1,1) NOT NULL,
 estadia_codigo numeric(18) NOT NULL,
 consumible_codigo numeric(18) NOT NULL,
-consumible_cantidad numeric(3)
+consumible_cantidad numeric(3),
+habitacion_codigo numeric(18,0) NOT NULL,
+conxEst_itemFacturaCodigo numeric(18) NOT NULL,
 )
 GO
 
@@ -286,6 +289,15 @@ ALTER TABLE FAGD.BajaHotel ADD CONSTRAINT PK_BajaHotel
  PRIMARY KEY CLUSTERED (id_baja)
 GO
 
+ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT PK_ItemFactura
+ PRIMARY KEY CLUSTERED (itemFactura_codigo)
+GO
+
+ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT PK_ConsumibleXEstadia
+ PRIMARY KEY CLUSTERED (consXEst_codigo)
+GO
+
+
 
 ---------------------------------- CREACIÓN FOREIGN KEYS ---------------------------------------
 
@@ -309,7 +321,6 @@ ALTER TABLE FAGD.UsuarioXRolXHotel ADD CONSTRAINT FK_UsuarioXRolXHotel_2
  FOREIGN KEY (hotel_codigo) REFERENCES FAGD.Hotel(hotel_codigo)
 GO
 
---------------- TEMA FACTURA E ITEM FACTURA--------------
 ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT FK_ConsumibleXEstadia_Consumible
  FOREIGN KEY (consumible_codigo) REFERENCES FAGD.Consumible(consumible_codigo)
 GO
@@ -334,13 +345,14 @@ ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT FK_ItemFactura_Factura
  FOREIGN KEY (itemFactura_nroFactura) REFERENCES FAGD.Factura(factura_nro)
 GO
 
+/*
 ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT FK_ItemFactura_Estadia
  FOREIGN KEY (itemFactura_codigoEstadia) REFERENCES FAGD.Estadia(estadia_codigo)
 GO
 
 ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT FK_ItemFactura_Consumible
  FOREIGN KEY (itemFactura_codigoConsumible) REFERENCES FAGD.Consumible(consumible_codigo)
-GO
+GO*/
 
 ALTER TABLE FAGD.Pago ADD CONSTRAINT FK_Pago_Factura
  FOREIGN KEY (pagoFactura_nro) REFERENCES FAGD.Factura(factura_nro)
@@ -405,6 +417,15 @@ GO
 ALTER TABLE FAGD.ReservaXHabitacion ADD CONSTRAINT FK_ReservaXHabitacion_Habitacion
  FOREIGN KEY (habitacion_codigo) REFERENCES FAGD.Habitacion(habitacion_codigo)
 GO
+
+ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT FK_ConsumibleXEstadia_Habitacion
+ FOREIGN KEY (habitacion_codigo) REFERENCES FAGD.Habitacion(habitacion_codigo)
+GO
+
+ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT FK_ConsumibleXEstadia_ItemFactura
+ FOREIGN KEY (conxEst_itemFacturaCodigo) REFERENCES FAGD.ItemFactura(itemFactura_codigo)
+GO
+
 
 -----------------------	 CREACIÓN DE INSERTS DE MIGRACIÓN   ----------------------- 
 
@@ -487,23 +508,38 @@ INSERT INTO FAGD.HotelXRegimen (hotel_codigo,regimen_codigo)
 		ORDER BY Hotel.hotel_codigo
 GO
 
-INSERT INTO FAGD.ConsumibleXEstadia (estadia_codigo, consumible_codigo, consumible_cantidad)
-		SELECT DISTINCT E.estadia_codigo, C.consumible_codigo, M.Item_Factura_Cantidad
-		FROM gd_esquema.Maestra M, FAGD.Consumible C, FAGD.Estadia E
-		WHERE M.Consumible_Codigo =  C.consumible_codigo
-		 AND M.Consumible_Descripcion = C.consumible_descripcion
-		 AND E.estadia_cantNoches = M.Estadia_Cant_Noches
-		 AND E.estadia_codigoReserva = M.Reserva_Codigo 
-		 AND E.estadia_fechaInicio = M.Estadia_Fecha_Inicio
-ORDER BY E.estadia_codigo
+
+-------------------------------------Migracion ITEM FACTURAS
+
+--Insertar las estadias
+INSERT INTO  FAGD.ItemFactura (itemFactura_nroFactura,itemFactura_itemTotal,itemFactura_consumibleCantidad,itemFactura_descripcion)
+SELECT m.Factura_Nro, m.Item_Factura_Monto*m.Reserva_Cant_Noches,m.Item_Factura_Cantidad, 'Estadia'
+FROM gd_esquema.Maestra m
+	WHERE m.Consumible_Codigo IS NULL AND
+	m.Factura_Nro IS NOT NULL 
 GO
 
-INSERT INTO FAGD.ItemFactura (itemFactura_nroFactura,itemFactura_codigoEstadia,itemFactura_codigoConsumible,itemFactura_consumibleCantidad,itemFactura_itemTotal)
-		SELECT DISTINCT F.factura_nro, CxE.estadia_codigo, CxE.consumible_codigo, CxE.consumible_cantidad, (CxE.consumible_cantidad * C.consumible_precio)
-		FROM FAGD.ConsumibleXEstadia CxE, FAGD.Consumible C, FAGD.Factura F
-		WHERE CxE.estadia_codigo = F.factura_codigoEstadia AND C.consumible_codigo = CxE.consumible_codigo
-		ORDER BY F.factura_nro
+-- Insertar los consumibles agrupados
+INSERT INTO FAGD.ItemFactura (itemFactura_nroFactura,itemFactura_itemTotal,itemFactura_consumibleCantidad,itemFactura_descripcion)
+SELECT m.Factura_Nro, SUM(m.Item_Factura_Cantidad), SUM(m.Item_Factura_Monto), m.Consumible_Descripcion
+FROM gd_esquema.Maestra m
+	WHERE m.Consumible_Codigo IS NOT NULL
+GROUP BY m.Factura_Nro, m.Consumible_Descripcion
+ORDER BY m.Factura_Nro ASC
 GO
+
+
+INSERT INTO FAGD.ConsumibleXEstadia (estadia_codigo, consumible_codigo, conxEst_itemFacturaCodigo)
+		SELECT DISTINCT E.estadia_codigo, M.consumible_codigo , I.itemFactura_codigo
+		FROM gd_esquema.Maestra M, FAGD.Estadia E, FAGD.ItemFactura I
+		WHERE M.Consumible_Codigo IS NOT NULL
+		 AND  I.itemFactura_nroFactura = M.Factura_Nro
+		 AND  I.itemFactura_descripcion = M.Consumible_Descripcion
+		
+ORDER BY estadia_codigo
+GO
+
+
 
 -------------------------------- ROLES Y FUNCIONALIDADES INICIALES --------------------------------- 
 
@@ -541,7 +577,7 @@ GO
 --GO
 
 -----------------------	 CREACIÓN DE PROCEDURES PARA LA APLICACIÓN   ----------------------- 
-
+/*
 CREATE PROCEDURE FAGD.lista_hotel_maxResCancel @trimestre numeric(18,0), @anio numeric(18,0)
 AS	BEGIN
 		
@@ -1195,3 +1231,7 @@ BEGIN
 	SELECT @resultado AS resultado
 END
 GO
+
+
+
+*/
