@@ -13,6 +13,7 @@ namespace FrbaHotel.RegistrarEstadia
     public partial class FrmRegistrarEstadia : Form
     {
         AbmRol.frmMenuEmpleado frmMenuEmpleado;
+        
 
         public FrmRegistrarEstadia(AbmRol.frmMenuEmpleado form)
         {
@@ -66,6 +67,19 @@ namespace FrbaHotel.RegistrarEstadia
         {
             this.Close();            
             frmMenuEmpleado.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AbmCliente.FrmAltaCliente registrarHuesped = new AbmCliente.FrmAltaCliente(this);
+            registrarHuesped.ShowDialog();
+            this.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

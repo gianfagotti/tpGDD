@@ -33,6 +33,7 @@
             this.butBajaCliente = new System.Windows.Forms.Button();
             this.butAltaCliente = new System.Windows.Forms.Button();
             this.grbHabitaciones = new System.Windows.Forms.GroupBox();
+            this.butBajaHab = new System.Windows.Forms.Button();
             this.butModHab = new System.Windows.Forms.Button();
             this.butCrearHabitacion = new System.Windows.Forms.Button();
             this.grbRegimenes = new System.Windows.Forms.GroupBox();
@@ -52,9 +53,8 @@
             this.btnListadoEst = new System.Windows.Forms.Button();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.grbUsuarios = new System.Windows.Forms.GroupBox();
-            this.butBajaHab = new System.Windows.Forms.Button();
-            this.btnNuevoUsuario = new System.Windows.Forms.Button();
             this.btnRetocarUsuario = new System.Windows.Forms.Button();
+            this.btnNuevoUsuario = new System.Windows.Forms.Button();
             this.grbHuespedes.SuspendLayout();
             this.grbHabitaciones.SuspendLayout();
             this.grbRegimenes.SuspendLayout();
@@ -74,7 +74,7 @@
             this.grbHuespedes.Enabled = false;
             this.grbHuespedes.Location = new System.Drawing.Point(507, 140);
             this.grbHuespedes.Name = "grbHuespedes";
-            this.grbHuespedes.Size = new System.Drawing.Size(200, 100);
+            this.grbHuespedes.Size = new System.Drawing.Size(200, 111);
             this.grbHuespedes.TabIndex = 0;
             this.grbHuespedes.TabStop = false;
             this.grbHuespedes.Text = "Administración de huespedes";
@@ -117,10 +117,20 @@
             this.grbHabitaciones.Enabled = false;
             this.grbHabitaciones.Location = new System.Drawing.Point(264, 140);
             this.grbHabitaciones.Name = "grbHabitaciones";
-            this.grbHabitaciones.Size = new System.Drawing.Size(218, 100);
+            this.grbHabitaciones.Size = new System.Drawing.Size(218, 111);
             this.grbHabitaciones.TabIndex = 1;
             this.grbHabitaciones.TabStop = false;
             this.grbHabitaciones.Text = "Administración de habitaciones";
+            // 
+            // butBajaHab
+            // 
+            this.butBajaHab.Location = new System.Drawing.Point(30, 77);
+            this.butBajaHab.Name = "butBajaHab";
+            this.butBajaHab.Size = new System.Drawing.Size(161, 23);
+            this.butBajaHab.TabIndex = 2;
+            this.butBajaHab.Text = "Inhabilitar habitación";
+            this.butBajaHab.UseVisualStyleBackColor = true;
+            this.butBajaHab.Click += new System.EventHandler(this.butBajaHab_Click);
             // 
             // butModHab
             // 
@@ -170,7 +180,7 @@
             this.grbRoles.Enabled = false;
             this.grbRoles.Location = new System.Drawing.Point(264, 12);
             this.grbRoles.Name = "grbRoles";
-            this.grbRoles.Size = new System.Drawing.Size(218, 100);
+            this.grbRoles.Size = new System.Drawing.Size(218, 111);
             this.grbRoles.TabIndex = 3;
             this.grbRoles.TabStop = false;
             this.grbRoles.Text = "Administración de roles";
@@ -244,7 +254,7 @@
             this.grbConsumibles.Enabled = false;
             this.grbConsumibles.Location = new System.Drawing.Point(507, 12);
             this.grbConsumibles.Name = "grbConsumibles";
-            this.grbConsumibles.Size = new System.Drawing.Size(200, 100);
+            this.grbConsumibles.Size = new System.Drawing.Size(200, 111);
             this.grbConsumibles.TabIndex = 5;
             this.grbConsumibles.TabStop = false;
             this.grbConsumibles.Text = "Administración de consumibles";
@@ -265,7 +275,7 @@
             this.grbEstadias.Enabled = false;
             this.grbEstadias.Location = new System.Drawing.Point(13, 140);
             this.grbEstadias.Name = "grbEstadias";
-            this.grbEstadias.Size = new System.Drawing.Size(220, 100);
+            this.grbEstadias.Size = new System.Drawing.Size(220, 111);
             this.grbEstadias.TabIndex = 6;
             this.grbEstadias.TabStop = false;
             this.grbEstadias.Text = "Administración de estadías";
@@ -323,26 +333,6 @@
             this.grbUsuarios.TabStop = false;
             this.grbUsuarios.Text = "Administración de usuarios";
             // 
-            // butBajaHab
-            // 
-            this.butBajaHab.Location = new System.Drawing.Point(30, 77);
-            this.butBajaHab.Name = "butBajaHab";
-            this.butBajaHab.Size = new System.Drawing.Size(161, 23);
-            this.butBajaHab.TabIndex = 2;
-            this.butBajaHab.Text = "Inhabilitar habitación";
-            this.butBajaHab.UseVisualStyleBackColor = true;
-            this.butBajaHab.Click += new System.EventHandler(this.butBajaHab_Click);
-            //
-            // btnNuevoUsuario
-            // 
-            this.btnNuevoUsuario.Location = new System.Drawing.Point(30, 19);
-            this.btnNuevoUsuario.Name = "btnNuevoUsuario";
-            this.btnNuevoUsuario.Size = new System.Drawing.Size(161, 23);
-            this.btnNuevoUsuario.TabIndex = 0;
-            this.btnNuevoUsuario.Text = "Crear nuevo usuario";
-            this.btnNuevoUsuario.UseVisualStyleBackColor = true;
-            this.btnNuevoUsuario.Click += new System.EventHandler(this.btnNuevoUsuario_Click);
-            // 
             // btnRetocarUsuario
             // 
             this.btnRetocarUsuario.Location = new System.Drawing.Point(30, 48);
@@ -352,6 +342,16 @@
             this.btnRetocarUsuario.Text = "Modificar usuario";
             this.btnRetocarUsuario.UseVisualStyleBackColor = true;
             this.btnRetocarUsuario.Click += new System.EventHandler(this.btnRetocarUsuario_Click);
+            // 
+            // btnNuevoUsuario
+            // 
+            this.btnNuevoUsuario.Location = new System.Drawing.Point(30, 19);
+            this.btnNuevoUsuario.Name = "btnNuevoUsuario";
+            this.btnNuevoUsuario.Size = new System.Drawing.Size(161, 23);
+            this.btnNuevoUsuario.TabIndex = 0;
+            this.btnNuevoUsuario.Text = "Crear nuevo usuario";
+            this.btnNuevoUsuario.UseVisualStyleBackColor = true;
+            this.btnNuevoUsuario.Click += new System.EventHandler(this.btnNuevoUsuario_Click);
             // 
             // frmMenuEmpleado
             // 
