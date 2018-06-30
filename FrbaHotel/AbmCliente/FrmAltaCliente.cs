@@ -13,13 +13,22 @@ namespace FrbaHotel.AbmCliente
 {
     public partial class FrmAltaCliente : Form
     {
-        AbmRol.frmMenuEmpleado frmMenuEmpleado;
+        
         SqlDataReader resultado;
+        RegistrarEstadia.FrmRegistrarEstadia frmRegistrarEstadia;
+        AbmRol.frmMenuEmpleado frmMenuEmpleado;
+
 
         public FrmAltaCliente(AbmRol.frmMenuEmpleado form)
         {
             InitializeComponent();
             frmMenuEmpleado = form;
+        }
+
+        public FrmAltaCliente(RegistrarEstadia.FrmRegistrarEstadia frmRegistrarEstadia)
+        {
+            InitializeComponent();
+            this.frmRegistrarEstadia = frmRegistrarEstadia;
         }
 
         private void txtMail_Click(object sender, EventArgs e)
@@ -29,8 +38,7 @@ namespace FrbaHotel.AbmCliente
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            this.Close();
-            frmMenuEmpleado.Show();
+            this.DialogResult = DialogResult.OK;
         }
 
         private void txtNombre_TextChanged(object sender, EventArgs e)

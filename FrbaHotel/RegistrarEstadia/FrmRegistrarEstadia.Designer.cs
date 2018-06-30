@@ -32,8 +32,6 @@
             this.LblNumeroDeReserva = new System.Windows.Forms.Label();
             this.TxtNumeroDeRerserva = new System.Windows.Forms.TextBox();
             this.LblCheckIn = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.CmbSeleccioneHotel = new System.Windows.Forms.ComboBox();
             this.TxtCheckOut = new System.Windows.Forms.TextBox();
             this.TxtCheckIn = new System.Windows.Forms.TextBox();
             this.BtnFechaCheckInYOut = new System.Windows.Forms.Button();
@@ -43,7 +41,6 @@
             this.lblDiasEfectivos = new System.Windows.Forms.Label();
             this.TxtDiasEfectivos = new System.Windows.Forms.TextBox();
             this.LblAgregarHuésped = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.BtnRegistrar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -56,6 +53,7 @@
             this.LblAl = new System.Windows.Forms.Label();
             this.LblHuéspedes = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.PnlCheckInYOut.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -77,7 +75,7 @@
             // 
             this.LblNumeroDeReserva.AutoSize = true;
             this.LblNumeroDeReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblNumeroDeReserva.Location = new System.Drawing.Point(9, 85);
+            this.LblNumeroDeReserva.Location = new System.Drawing.Point(9, 71);
             this.LblNumeroDeReserva.Name = "LblNumeroDeReserva";
             this.LblNumeroDeReserva.Size = new System.Drawing.Size(145, 16);
             this.LblNumeroDeReserva.TabIndex = 2;
@@ -86,7 +84,7 @@
             // 
             // TxtNumeroDeRerserva
             // 
-            this.TxtNumeroDeRerserva.Location = new System.Drawing.Point(247, 81);
+            this.TxtNumeroDeRerserva.Location = new System.Drawing.Point(190, 70);
             this.TxtNumeroDeRerserva.Name = "TxtNumeroDeRerserva";
             this.TxtNumeroDeRerserva.Size = new System.Drawing.Size(100, 20);
             this.TxtNumeroDeRerserva.TabIndex = 3;
@@ -101,26 +99,6 @@
             this.LblCheckIn.TabIndex = 4;
             this.LblCheckIn.Text = "Check-In y Check-out:";
             this.LblCheckIn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 16);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Seleccione un hotel:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // CmbSeleccioneHotel
-            // 
-            this.CmbSeleccioneHotel.FormattingEnabled = true;
-            this.CmbSeleccioneHotel.Location = new System.Drawing.Point(247, 47);
-            this.CmbSeleccioneHotel.Name = "CmbSeleccioneHotel";
-            this.CmbSeleccioneHotel.Size = new System.Drawing.Size(121, 21);
-            this.CmbSeleccioneHotel.TabIndex = 9;
             // 
             // TxtCheckOut
             // 
@@ -206,15 +184,6 @@
             this.LblAgregarHuésped.Text = "Agregar Un Huésped:";
             this.LblAgregarHuésped.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(190, 229);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Seleccionar Cliente";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(306, 229);
@@ -223,12 +192,13 @@
             this.button2.TabIndex = 18;
             this.button2.Text = "Registrar Cliente";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // BtnRegistrar
             // 
-            this.BtnRegistrar.Location = new System.Drawing.Point(290, 475);
+            this.BtnRegistrar.Location = new System.Drawing.Point(242, 480);
             this.BtnRegistrar.Name = "BtnRegistrar";
-            this.BtnRegistrar.Size = new System.Drawing.Size(75, 23);
+            this.BtnRegistrar.Size = new System.Drawing.Size(103, 33);
             this.BtnRegistrar.TabIndex = 19;
             this.BtnRegistrar.Text = "Registrar";
             this.BtnRegistrar.UseVisualStyleBackColor = true;
@@ -244,7 +214,7 @@
             this.Tel,
             this.Nacionalidad,
             this.Mail});
-            this.dataGridView1.Location = new System.Drawing.Point(73, 319);
+            this.dataGridView1.Location = new System.Drawing.Point(73, 312);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(643, 150);
             this.dataGridView1.TabIndex = 20;
@@ -303,19 +273,29 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(408, 475);
+            this.btnVolver.Location = new System.Drawing.Point(395, 480);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(103, 33);
             this.btnVolver.TabIndex = 23;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(190, 229);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(110, 23);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Seleccionar Cliente";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FrmRegistrarEstadia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(783, 510);
+            this.ClientSize = new System.Drawing.Size(783, 529);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.LblHuéspedes);
             this.Controls.Add(this.LblAl);
@@ -328,10 +308,8 @@
             this.Controls.Add(this.lblDiasEfectivos);
             this.Controls.Add(this.PnlCheckInYOut);
             this.Controls.Add(this.BtnFechaCheckInYOut);
-            this.Controls.Add(this.CmbSeleccioneHotel);
             this.Controls.Add(this.TxtCheckOut);
             this.Controls.Add(this.TxtCheckIn);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.LblCheckIn);
             this.Controls.Add(this.TxtNumeroDeRerserva);
             this.Controls.Add(this.LblNumeroDeReserva);
@@ -353,8 +331,6 @@
         private System.Windows.Forms.Label LblNumeroDeReserva;
         private System.Windows.Forms.TextBox TxtNumeroDeRerserva;
         private System.Windows.Forms.Label LblCheckIn;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox CmbSeleccioneHotel;
         private System.Windows.Forms.TextBox TxtCheckOut;
         private System.Windows.Forms.TextBox TxtCheckIn;
         private System.Windows.Forms.Button BtnFechaCheckInYOut;
@@ -364,7 +340,6 @@
         private System.Windows.Forms.Label lblDiasEfectivos;
         private System.Windows.Forms.TextBox TxtDiasEfectivos;
         private System.Windows.Forms.Label LblAgregarHuésped;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button BtnRegistrar;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -377,5 +352,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Mail;
         private System.Windows.Forms.Label LblHuéspedes;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Button button1;
     }
 }
