@@ -45,6 +45,7 @@ GO
 CREATE TABLE FAGD.HabitacionTipo(
 	habitacionTipo_codigo numeric(18,0) NOT NULL,
 	habitacionTipo_descripcion nvarchar(255) NOT NULL,
+	habitacionTipo_cantHuespedes numeric(18),
 	habitacionTipo_porcentual numeric(18,2) NOT NULL
 )
 GO
@@ -443,6 +444,14 @@ GO
 INSERT INTO FAGD.HabitacionTipo(habitacionTipo_codigo, habitacionTipo_descripcion, habitacionTipo_porcentual)
 		SELECT DISTINCT Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual
 		FROM gd_esquema.Maestra 
+GO
+
+UPDATE FAGD.HabitacionTipo
+	set habitacionTipo_cantHuespedes = case when habitacionTipo_descripcion = 'Base Simple' Then 1
+							when habitacionTipo_descripcion = 'Base Doble' Then 2
+							when habitacionTipo_descripcion = 'Base Triple' Then 3
+							when habitacionTipo_descripcion = 'Base Cuadruple' Then 4
+							else 5 end
 GO
 
 INSERT INTO FAGD.Habitacion(habitacion_codigoHotel, habitacion_nro, habitacion_tipoCodigo, habitacion_piso, habitacion_ubicacion, habitacion_descripcion,habitacion_estado)
@@ -1332,4 +1341,49 @@ BEGIN
 	COMMIT TRAN ActualizarEstado
 	SELECT @resultado AS resultado
 END
+GO
+
+create procedure FAGD.BuscarHabitacionesDisponibles
+@codigoHotel numeric(18),
+@desde datetime,
+@hasta datetime,
+@regimen nvarchar(50),
+@tipoHab nvarchar(255)
+
+as
+begin
+	declare @fechaInicio datetime, @fechaFin datetime, @codigoTipoHab numeric(18)
+	set @fechaInicio = CONVERT(datetime,@desde,121)
+	set @fechaFin = CONVERT(datetime,@hasta,121)
+	set @codigoTipoHab = (select habitacionTipo_codigo from FAGD.HabitacionTipo where habitacionTipo_descripcion = @tipoHab)
+
+	if (@regimen is null)
+	begin
+		select distinct Ha.habitacion_codigo Codigo, Ha.habitacion_ubicacion Ubicacion, (R.regimen_precioBase*T.habitacionTipo_cantHuespedes) + (Ho.hotel_cantEstrellas*Ho.hotel_recarga_estrellas) PrecioPorNoche, R.regimen_descripcion
+		from FAGD.Habitacion Ha, FAGD.Hotel Ho, FAGD.HabitacionTipo T, FAGD.Regimen R
+		where
+		Ho.hotel_codigo = @codigoHotel and
+		T.habitacionTipo_codigo = @codigoTipoHab and
+		Ha.habitacion_codigoHotel = @codigoHotel and
+		Ha.habitacion_tipoCodigo = @codigoTipoHab and
+		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaInicio and fecha_fin >= @fechaInicio) and 
+		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaFin and fecha_fin >= @fechaFin)
+	end
+	else
+	begin
+		declare @codigoRegimen numeric(18)
+		set @regimen = (select regimen_codigo from FAGD.Regimen where regimen_descripcion = @regimen)
+
+		select distinct Ha.habitacion_codigo Codigo, Ha.habitacion_ubicacion Ubicacion, (R.regimen_precioBase*T.habitacionTipo_cantHuespedes) + (Ho.hotel_cantEstrellas*Ho.hotel_recarga_estrellas) PrecioPorNoche, R.regimen_descripcion
+		from FAGD.Habitacion Ha, FAGD.Hotel Ho, FAGD.HabitacionTipo T, FAGD.Regimen R
+		where
+		R.regimen_codigo = @codigoRegimen and
+		Ho.hotel_codigo = @codigoHotel and
+		T.habitacionTipo_codigo = @codigoTipoHab and
+		Ha.habitacion_codigoHotel = @codigoHotel and
+		Ha.habitacion_tipoCodigo = @codigoTipoHab and
+		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaInicio and fecha_fin >= @fechaInicio) and 
+		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaFin and fecha_fin >= @fechaFin)
+	end
+end
 GO
