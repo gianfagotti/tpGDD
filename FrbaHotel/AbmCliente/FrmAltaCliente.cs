@@ -15,20 +15,14 @@ namespace FrbaHotel.AbmCliente
     {
         
         SqlDataReader resultado;
-        RegistrarEstadia.FrmRegistrarEstadia frmRegistrarEstadia;
-        AbmRol.frmMenuEmpleado frmMenuEmpleado;
+        Form abmPadre;
 
 
-        public FrmAltaCliente(AbmRol.frmMenuEmpleado form)
+        public FrmAltaCliente(Form form)
         {
             InitializeComponent();
-            frmMenuEmpleado = form;
-        }
+            abmPadre = form;
 
-        public FrmAltaCliente(RegistrarEstadia.FrmRegistrarEstadia frmRegistrarEstadia)
-        {
-            InitializeComponent();
-            this.frmRegistrarEstadia = frmRegistrarEstadia;
         }
 
         private void txtMail_Click(object sender, EventArgs e)
@@ -38,7 +32,8 @@ namespace FrbaHotel.AbmCliente
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            abmPadre.Show();
+            this.Close();
         }
 
         private void txtNombre_TextChanged(object sender, EventArgs e)
@@ -85,6 +80,14 @@ namespace FrbaHotel.AbmCliente
                 if (resu == 1)
                 {
                     MessageBox.Show("El cliente fue guardado correctamente");
+                    if (abmPadre.Name == "GenerarReserva")
+                    {
+                        GenerarModificacionReserva.GenerarReserva.clienteSeleccionado = txtNroDocumento.Text;
+                        GenerarModificacionReserva.GenerarReserva.ActiveForm.Show();
+                        this.Close();
+                    }
+                    else if (abmPadre.Name == "FrmRegistrarEstadia")
+                        this.Close();
                     limpiarCampos();
                 }
                 else if (resu == 2)

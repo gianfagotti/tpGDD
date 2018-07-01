@@ -133,5 +133,11 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AbmCliente.FrmAltaCliente frmAltaCliente = new AbmCliente.FrmAltaCliente(this);
+            frmAltaCliente.Show();
+        }
+
     }
 }

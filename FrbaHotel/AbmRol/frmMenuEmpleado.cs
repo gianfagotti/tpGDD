@@ -110,8 +110,7 @@ namespace FrbaHotel.AbmRol
         {
             AbmCliente.FrmAltaCliente frmAltaCliente = new AbmCliente.FrmAltaCliente(this);
             this.Hide();
-            frmAltaCliente.ShowDialog();
-            this.Show();
+            frmAltaCliente.Show();
         }
 
         private void butCrearHabitacion_Click(object sender, EventArgs e)
