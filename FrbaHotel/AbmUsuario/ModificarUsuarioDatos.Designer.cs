@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaNac = new System.Windows.Forms.DateTimePicker();
             this.btnVaciar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -54,16 +54,16 @@
             this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // dateTimePicker1
+            // dtpFechaNac
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(116, 244);
-            this.dateTimePicker1.MaxDate = new System.DateTime(2030, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(266, 20);
-            this.dateTimePicker1.TabIndex = 51;
-            this.dateTimePicker1.Value = new System.DateTime(2018, 6, 28, 0, 0, 0, 0);
+            this.dtpFechaNac.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaNac.Location = new System.Drawing.Point(116, 244);
+            this.dtpFechaNac.MaxDate = new System.DateTime(2030, 1, 1, 0, 0, 0, 0);
+            this.dtpFechaNac.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.dtpFechaNac.Name = "dtpFechaNac";
+            this.dtpFechaNac.Size = new System.Drawing.Size(306, 20);
+            this.dtpFechaNac.TabIndex = 51;
+            this.dtpFechaNac.Value = new System.DateTime(2018, 6, 28, 0, 0, 0, 0);
             // 
             // btnVaciar
             // 
@@ -77,7 +77,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(227, 282);
+            this.btnVolver.Location = new System.Drawing.Point(267, 282);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
             this.btnVolver.TabIndex = 49;
@@ -87,24 +87,25 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(308, 282);
+            this.btnGuardar.Location = new System.Drawing.Point(348, 282);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 48;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // cboDocumento
             // 
             this.cboDocumento.FormattingEnabled = true;
             this.cboDocumento.Location = new System.Drawing.Point(116, 143);
             this.cboDocumento.Name = "cboDocumento";
-            this.cboDocumento.Size = new System.Drawing.Size(56, 21);
+            this.cboDocumento.Size = new System.Drawing.Size(95, 21);
             this.cboDocumento.TabIndex = 47;
             // 
             // txtDocumento
             // 
-            this.txtDocumento.Location = new System.Drawing.Point(264, 143);
+            this.txtDocumento.Location = new System.Drawing.Point(303, 143);
             this.txtDocumento.Name = "txtDocumento";
             this.txtDocumento.Size = new System.Drawing.Size(119, 20);
             this.txtDocumento.TabIndex = 46;
@@ -113,35 +114,35 @@
             // 
             this.txtDireccion.Location = new System.Drawing.Point(116, 218);
             this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new System.Drawing.Size(267, 20);
+            this.txtDireccion.Size = new System.Drawing.Size(307, 20);
             this.txtDireccion.TabIndex = 45;
             // 
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(116, 193);
             this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(267, 20);
+            this.txtTelefono.Size = new System.Drawing.Size(307, 20);
             this.txtTelefono.TabIndex = 44;
             // 
             // txtMail
             // 
             this.txtMail.Location = new System.Drawing.Point(116, 168);
             this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(267, 20);
+            this.txtMail.Size = new System.Drawing.Size(307, 20);
             this.txtMail.TabIndex = 43;
             // 
             // txtApellido
             // 
             this.txtApellido.Location = new System.Drawing.Point(116, 116);
             this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(267, 20);
+            this.txtApellido.Size = new System.Drawing.Size(307, 20);
             this.txtApellido.TabIndex = 42;
             // 
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(116, 91);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(267, 20);
+            this.txtNombre.Size = new System.Drawing.Size(307, 20);
             this.txtNombre.TabIndex = 41;
             // 
             // label12
@@ -183,7 +184,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(178, 146);
+            this.label7.Location = new System.Drawing.Point(217, 146);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(80, 13);
             this.label7.TabIndex = 36;
@@ -229,7 +230,7 @@
             // 
             this.txtContraseña.Location = new System.Drawing.Point(116, 65);
             this.txtContraseña.Name = "txtContraseña";
-            this.txtContraseña.Size = new System.Drawing.Size(267, 20);
+            this.txtContraseña.Size = new System.Drawing.Size(307, 20);
             this.txtContraseña.TabIndex = 31;
             // 
             // label1
@@ -243,9 +244,10 @@
             // 
             // txtUsername
             // 
+            this.txtUsername.Enabled = false;
             this.txtUsername.Location = new System.Drawing.Point(116, 39);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(267, 20);
+            this.txtUsername.Size = new System.Drawing.Size(307, 20);
             this.txtUsername.TabIndex = 29;
             // 
             // label6
@@ -262,9 +264,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 316);
+            this.ClientSize = new System.Drawing.Size(435, 315);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtpFechaNac);
             this.Controls.Add(this.btnVaciar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnGuardar);
@@ -297,7 +299,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpFechaNac;
         private System.Windows.Forms.Button btnVaciar;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnGuardar;

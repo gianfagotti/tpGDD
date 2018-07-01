@@ -1199,7 +1199,7 @@ AS
 BEGIN
 	DECLARE @resultado numeric(1)
 	DECLARE @fechaNacimiento datetime
-	set @fechaNacimiento = CONVERT(datetime, @fechaNac, 121)
+	SET @fechaNacimiento = CONVERT(datetime, @fechaNac, 121)
 	BEGIN TRAN usuario
 	BEGIN TRY
 		IF (NOT EXISTS(SELECT usuario_username FROM FAGD.Usuario WHERE usuario_nombre = @username))
@@ -1230,6 +1230,91 @@ BEGIN
 	END CATCH
 END
 GO
+
+CREATE PROCEDURE FAGD.cambiarEstadoUsuario @username nvarchar(255)
+AS 
+BEGIN
+	DECLARE @resultado numeric(1)
+	BEGIN TRAN estado
+	BEGIN TRY
+		IF ((SELECT usuario_estado FROM FAGD.Usuario WHERE usuario_username = @username) = 1)
+		BEGIN
+			UPDATE FAGD.Usuario
+			SET usuario_estado = 0
+			WHERE usuario_username = @username;
+			SET @resultado = 0;
+		END
+		ELSE
+		BEGIN
+			UPDATE FAGD.Usuario
+			SET usuario_estado = 1
+			WHERE usuario_username = @username;
+			SET @resultado = 1;
+		END
+		SELECT @resultado AS resultado
+		COMMIT TRAN estado
+	END TRY 
+	BEGIN CATCH
+		ROLLBACK TRAN estado
+		SET @resultado = 2;
+		SELECT @resultado AS resultado
+	END CATCH
+END
+GO
+
+
+CREATE PROCEDURE FAGD.updatearDatosUsuario
+@username nvarchar (255),
+@nombre nvarchar (255),
+@apellido nvarchar (255),
+@password nvarchar (255),
+@tipoDoc nvarchar (255),
+@nroDoc numeric (18),
+@direccion nvarchar (255),
+@mail nvarchar (255),
+@telefono numeric (18),
+@fechaNac datetime
+
+AS 
+BEGIN
+	DECLARE @resultado numeric(1)
+	DECLARE @fechaNacimiento datetime
+	SET @fechaNacimiento = CONVERT(datetime, @fechaNac, 121)
+	BEGIN TRAN upd
+	BEGIN TRY
+		IF ((SELECT usuario_mail FROM FAGD.Usuario WHERE usuario_username = @username) = @mail)
+		BEGIN
+			SET @resultado = 0;
+			SELECT @resultado as resultado
+		END
+		ELSE
+		BEGIN
+
+		UPDATE FAGD.Usuario
+			
+			SET usuario_nombre = @nombre,
+				usuario_apellido = @apellido,
+				usuario_password= @password,
+				usuario_tipoDoc= @tipoDoc,
+				usuario_nroDoc= @nroDoc,
+				usuario_direccion = @direccion,
+				usuario_mail = @mail,
+				usuario_telefono = @telefono,
+				usuario_fechaNacimiento = @fechaNacimiento
+
+			WHERE usuario_username = @username;
+			SET @resultado = 1;
+		SELECT @resultado AS resultado
+		COMMIT tran usuario
+		END
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN upd
+		SET @resultado = 2;
+		SELECT @resultado AS resultado
+	END CATCH
+END
+GO			
 
 
 ------------------------------------------------Alva-------------------------------------------------------
