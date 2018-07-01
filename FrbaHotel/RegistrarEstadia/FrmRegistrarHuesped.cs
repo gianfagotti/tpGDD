@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.RegistrarEstadia
 {
-    public partial class FrmRegistrarEstadia : Form
+    public partial class FrmRegistrarHuesped : Form
     {
         AbmRol.frmMenuEmpleado frmMenuEmpleado;
         
 
-        public FrmRegistrarEstadia(AbmRol.frmMenuEmpleado form)
+        public FrmRegistrarHuesped(AbmRol.frmMenuEmpleado form)
         {
             InitializeComponent();
             frmMenuEmpleado = form;
