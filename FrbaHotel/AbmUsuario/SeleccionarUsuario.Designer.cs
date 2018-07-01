@@ -33,8 +33,8 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnDatos = new System.Windows.Forms.Button();
             this.btnCambiarEstado = new System.Windows.Forms.Button();
-            this.btnRoles = new System.Windows.Forms.Button();
-            this.btnHoteles = new System.Windows.Forms.Button();
+            this.btnAñadir = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -86,34 +86,32 @@
             this.btnCambiarEstado.UseVisualStyleBackColor = true;
             this.btnCambiarEstado.Click += new System.EventHandler(this.btnCambiarEstado_Click);
             // 
-            // btnRoles
+            // btnAñadir
             // 
-            this.btnRoles.Location = new System.Drawing.Point(16, 165);
-            this.btnRoles.Name = "btnRoles";
-            this.btnRoles.Size = new System.Drawing.Size(305, 23);
-            this.btnRoles.TabIndex = 6;
-            this.btnRoles.Text = "Modificar roles que ejerce";
-            this.btnRoles.UseVisualStyleBackColor = true;
-            this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
+            this.btnAñadir.Location = new System.Drawing.Point(16, 136);
+            this.btnAñadir.Name = "btnAñadir";
+            this.btnAñadir.Size = new System.Drawing.Size(305, 23);
+            this.btnAñadir.TabIndex = 8;
+            this.btnAñadir.Text = "Añadir Rol en Hotel";
+            this.btnAñadir.UseVisualStyleBackColor = true;
             // 
-            // btnHoteles
+            // btnEliminar
             // 
-            this.btnHoteles.Location = new System.Drawing.Point(16, 136);
-            this.btnHoteles.Name = "btnHoteles";
-            this.btnHoteles.Size = new System.Drawing.Size(305, 23);
-            this.btnHoteles.TabIndex = 5;
-            this.btnHoteles.Text = "Modificar hoteles donde trabaja";
-            this.btnHoteles.UseVisualStyleBackColor = true;
-            this.btnHoteles.Click += new System.EventHandler(this.btnHoteles_Click);
+            this.btnEliminar.Location = new System.Drawing.Point(16, 163);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(305, 23);
+            this.btnEliminar.TabIndex = 10;
+            this.btnEliminar.Text = "Eliminar Rol en Hotel";
+            this.btnEliminar.UseVisualStyleBackColor = true;
             // 
             // SeleccionarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(341, 229);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.btnAñadir);
             this.Controls.Add(this.btnCambiarEstado);
-            this.Controls.Add(this.btnRoles);
-            this.Controls.Add(this.btnHoteles);
             this.Controls.Add(this.btnDatos);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.cboUsuarios);
@@ -133,7 +131,7 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnDatos;
         private System.Windows.Forms.Button btnCambiarEstado;
-        private System.Windows.Forms.Button btnRoles;
-        private System.Windows.Forms.Button btnHoteles;
+        private System.Windows.Forms.Button btnAñadir;
+        private System.Windows.Forms.Button btnEliminar;
     }
 }

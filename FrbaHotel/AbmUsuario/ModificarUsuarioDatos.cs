@@ -17,12 +17,14 @@ namespace FrbaHotel.AbmUsuario
         Form ultimoForm;
         String usuario;
         SqlDataReader reader;
+        DataTable tabla;
 
         public ModificarUsuarioDatos(Form formAnterior, String usuarioSeleccionado)
         {
             usuario = usuarioSeleccionado;
             ultimoForm = formAnterior;
             InitializeComponent();
+            llenarCampos();
         }
 
 
@@ -65,9 +67,7 @@ namespace FrbaHotel.AbmUsuario
             Boolean exito = chequearCampos();
             if (exito)
             {
-                DateTime fecha;
-
-                fecha = Convert.ToDateTime(dtpFechaNac.Value);
+                DateTime fecha = Convert.ToDateTime(dtpFechaNac.Value);
                 string fechaNacimiento = fecha.Date.ToString("yyyyMMdd HH:mm:ss");
 
                 string exe = "EXEC FAGD.updatearDatosUsuario ";
@@ -95,19 +95,15 @@ namespace FrbaHotel.AbmUsuario
                 {
                     MessageBox.Show("Ya existe un usuario con ese mail", "Error");
                 }
-                else if (resultado == 2)
-                {
-                    MessageBox.Show("Error al crear al usuario", "Error");
-                }
                 else
                 {
                     MessageBox.Show("Usuario guardado correctamente!", "Usuario Guardado");
+                    ultimoForm.Show();
+                    this.Close();
                 }
 
             }
 
-            ultimoForm.Show();
-            this.Close();
         }
 
 
@@ -148,5 +144,28 @@ namespace FrbaHotel.AbmUsuario
             else return true; 
 
         }
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void llenarCampos() {
+
+            String select = "SELECT * FROM FAGD.Usuario WHERE usuario_username = '"+usuario+"'";
+            tabla = Login.FrmTipoUsuario.BD.consulta(select);
+            txtUsername.Text = usuario;
+            txtContraseña.Text = tabla.Rows[0][1].ToString();
+            txtNombre.Text = tabla.Rows[0][2].ToString();
+            txtApellido.Text = tabla.Rows[0][3].ToString();
+            txtDireccion.Text = tabla.Rows[0][4].ToString();
+            txtMail.Text = tabla.Rows[0][5].ToString();
+            txtTelefono.Text = tabla.Rows[0][6].ToString();
+            dtpFechaNac.Value = Convert.ToDateTime(tabla.Rows[0][7].ToString());
+            cboDocumento.Text = tabla.Rows[0][8].ToString();
+            txtDocumento.Text = tabla.Rows[0][9].ToString();
+           
+        }
+
     }
 }

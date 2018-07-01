@@ -10,21 +10,16 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.AbmUsuario
 {
-    public partial class ModificarUsuarioRoles : Form
+    public partial class NuevoRolXHotel : Form
     {
-        String usuario;
         Form ultimoFormulario;
-        public ModificarUsuarioRoles(Form form, String usuarioSeleccionado)
+        String usuario;
+
+        public NuevoRolXHotel(Form formAnterior, String usuarioSeleccionado)
         {
-            ultimoFormulario = form;
+            ultimoFormulario = formAnterior;
             usuario = usuarioSeleccionado;
             InitializeComponent();
-        }
-
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            ultimoFormulario.Show();
-            this.Close();
         }
     }
 }

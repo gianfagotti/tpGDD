@@ -11,6 +11,8 @@
 
 -Las reservas sin datos de "Estadias" es posible que sean porque la persona no se presentó.
 
+-El administrador solo puede modificar usuarios de su hotel
+
 ----------------------------------------------------------
 Temas del enunciado a tener en cuenta:
 

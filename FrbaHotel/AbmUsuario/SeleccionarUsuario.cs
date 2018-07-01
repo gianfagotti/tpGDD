@@ -42,35 +42,6 @@ namespace FrbaHotel.AbmUsuario
         }
 
         
-        
-        private void btnHoteles_Click(object sender, EventArgs e)
-        {
-            if (checkearCbo())
-            {
-                usuario = cboUsuarios.Text;
-                ModificarUsuarioHoteles frm = new ModificarUsuarioHoteles(this, usuario);
-                this.Hide();
-                frm.Show();
-            }
-            else MessageBox.Show("Debe seleccionar un usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-
-   
-        
-        private void btnRoles_Click(object sender, EventArgs e)
-        {
-            if (checkearCbo())
-            {
-            usuario = cboUsuarios.Text;
-            ModificarUsuarioRoles frm = new ModificarUsuarioRoles(this, usuario);
-            this.Hide();
-            frm.Show();
-            }
-            else MessageBox.Show("Debe seleccionar un usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-
-      
-        
         private void btnVolver_Click(object sender, EventArgs e)
         {
             ultimoForm.Show();

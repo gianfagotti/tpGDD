@@ -1291,13 +1291,13 @@ BEGIN
 	SET @fechaNacimiento = CONVERT(datetime, @fechaNac, 121)
 	BEGIN TRAN upd
 	BEGIN TRY
-		IF ((SELECT usuario_mail FROM FAGD.Usuario WHERE usuario_username = @username) = @mail)
+/*		IF ((SELECT usuario_mail FROM FAGD.Usuario WHERE usuario_username = @username) = @mail)
 		BEGIN
 			SET @resultado = 0;
 			SELECT @resultado as resultado
 		END
 		ELSE
-		BEGIN
+		BEGIN*/
 
 		UPDATE FAGD.Usuario
 			
@@ -1315,11 +1315,11 @@ BEGIN
 			SET @resultado = 1;
 		SELECT @resultado AS resultado
 		COMMIT tran usuario
-		END
+		/*END*/
 	END TRY
 	BEGIN CATCH
 		ROLLBACK TRAN upd
-		SET @resultado = 2;
+		SET @resultado = 0;
 		SELECT @resultado AS resultado
 	END CATCH
 END
