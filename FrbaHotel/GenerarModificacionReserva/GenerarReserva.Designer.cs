@@ -288,6 +288,7 @@
             this.butSeleccionar.TabIndex = 26;
             this.butSeleccionar.Text = "Buscar habitaciones";
             this.butSeleccionar.UseVisualStyleBackColor = true;
+            this.butSeleccionar.Click += new System.EventHandler(this.butSeleccionar_Click);
             // 
             // button1
             // 
