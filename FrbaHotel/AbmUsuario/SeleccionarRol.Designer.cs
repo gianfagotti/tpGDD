@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.lblDescripcion = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cboRol = new System.Windows.Forms.ComboBox();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -43,42 +43,45 @@
             this.lblDescripcion.TabIndex = 0;
             this.lblDescripcion.Text = "Seleccionar Rol:";
             // 
-            // comboBox1
+            // cboRol
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(15, 35);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(358, 21);
-            this.comboBox1.TabIndex = 1;
+            this.cboRol.FormattingEnabled = true;
+            this.cboRol.Location = new System.Drawing.Point(15, 35);
+            this.cboRol.Name = "cboRol";
+            this.cboRol.Size = new System.Drawing.Size(358, 21);
+            this.cboRol.TabIndex = 1;
             // 
             // btnConfirmar
             // 
-            this.btnConfirmar.Location = new System.Drawing.Point(298, 68);
+            this.btnConfirmar.Location = new System.Drawing.Point(298, 62);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(75, 23);
             this.btnConfirmar.TabIndex = 2;
             this.btnConfirmar.Text = "Aceptar";
             this.btnConfirmar.UseVisualStyleBackColor = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(217, 68);
+            this.btnVolver.Location = new System.Drawing.Point(217, 62);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
             this.btnVolver.TabIndex = 3;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // SeleccionarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(385, 103);
+            this.ClientSize = new System.Drawing.Size(385, 92);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnConfirmar);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cboRol);
             this.Controls.Add(this.lblDescripcion);
             this.Name = "SeleccionarRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SeleccionarRol";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -88,7 +91,7 @@
         #endregion
 
         private System.Windows.Forms.Label lblDescripcion;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cboRol;
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.Button btnVolver;
     }
