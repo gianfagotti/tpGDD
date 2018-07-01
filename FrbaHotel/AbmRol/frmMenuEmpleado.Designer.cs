@@ -56,9 +56,9 @@
             this.btnRetocarUsuario = new System.Windows.Forms.Button();
             this.btnNuevoUsuario = new System.Windows.Forms.Button();
             this.grbHoteles = new System.Windows.Forms.GroupBox();
+            this.btnModificarHotel = new System.Windows.Forms.Button();
             this.btnBajaHotel = new System.Windows.Forms.Button();
             this.btnNuevoHotel = new System.Windows.Forms.Button();
-            this.btnModificarHotel = new System.Windows.Forms.Button();
             this.grbHuespedes.SuspendLayout();
             this.grbHabitaciones.SuspendLayout();
             this.grbRegimenes.SuspendLayout();
@@ -371,6 +371,15 @@
             this.grbHoteles.TabStop = false;
             this.grbHoteles.Text = "Administración de Hoteles";
             // 
+            // btnModificarHotel
+            // 
+            this.btnModificarHotel.Location = new System.Drawing.Point(30, 77);
+            this.btnModificarHotel.Name = "btnModificarHotel";
+            this.btnModificarHotel.Size = new System.Drawing.Size(161, 23);
+            this.btnModificarHotel.TabIndex = 2;
+            this.btnModificarHotel.Text = "Modificar un Hotel";
+            this.btnModificarHotel.UseVisualStyleBackColor = true;
+            // 
             // btnBajaHotel
             // 
             this.btnBajaHotel.Location = new System.Drawing.Point(30, 48);
@@ -388,15 +397,7 @@
             this.btnNuevoHotel.TabIndex = 0;
             this.btnNuevoHotel.Text = "Dar de alta un Hotel";
             this.btnNuevoHotel.UseVisualStyleBackColor = true;
-            // 
-            // btnModificarHotel
-            // 
-            this.btnModificarHotel.Location = new System.Drawing.Point(30, 77);
-            this.btnModificarHotel.Name = "btnModificarHotel";
-            this.btnModificarHotel.Size = new System.Drawing.Size(161, 23);
-            this.btnModificarHotel.TabIndex = 2;
-            this.btnModificarHotel.Text = "Modificar un Hotel";
-            this.btnModificarHotel.UseVisualStyleBackColor = true;
+            this.btnNuevoHotel.Click += new System.EventHandler(this.btnNuevoHotel_Click);
             // 
             // frmMenuEmpleado
             // 

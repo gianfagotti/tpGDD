@@ -26,10 +26,10 @@ namespace FrbaHotel.AbmHotel
         private String ciudadHotelIngresado;
         private String paisHotelIngresado;
         private DateTime fechaCreacionHotelIngresado;
-        public FrmAltaHotel(AbmRol.frmMenuEmpleado frmMenuEmpladoRecibido)
+        public FrmAltaHotel(AbmRol.frmMenuEmpleado frmMenuEmpleadoRecibido)
         {
             InitializeComponent();
-            frmMenuEmpleado = frmMenuEmpladoRecibido;
+            frmMenuEmpleado = frmMenuEmpleadoRecibido;
             regimenes = Login.FrmTipoUsuario.BD.comando("SELECT regimen_descripcion FROM FAGD.Regimen");
             while (regimenes.Read() == true)
             {
