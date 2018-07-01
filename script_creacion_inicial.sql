@@ -1343,18 +1343,36 @@ END
 GO
 
 
-CREATE PROCEDURE FAGD.insertarHotel @estrellas numeric(18,0), @pais nvarchar(255), @ciudad nvarchar(255), @calle nvarchar(255), @nroCalle numeric(18,0), @nombre nvarchar(255), @fechaDeCreacion datetime, @mail nvarchar(255), @telefono numeric(18,0)
+CREATE PROCEDURE FAGD.insertarHotel @estrellas numeric(18,0), @recargaEstrellas numeric(18,0), @pais nvarchar(255), @ciudad nvarchar(255), @calle nvarchar(255), @nroCalle numeric(18,0), @nombre nvarchar(255), @fechaDeCreacion datetime, @mail nvarchar(255), @telefono numeric(18,0)
 AS
 BEGIN
 	DECLARE @resultado numeric(1)
 	BEGIN TRAN insertarHotel
 		INSERT INTO FAGD.Hotel 
-		VALUES (@estrellas, 10, @pais, @ciudad, @calle, @nroCalle, @nombre, @fechaDeCreacion, @mail, @telefono, 1)
+		VALUES (@estrellas, @recargaEstrellas, @pais, @ciudad, @calle, @nroCalle, @nombre, @fechaDeCreacion, @mail, @telefono, 1)
 	COMMIT TRAN insertarHotel
 	SET @resultado = 0;
 	SELECT @resultado AS resultado
 END
 GO
+
+CREATE PROCEDURE FAGD.insertarRegimenDeHotelCreado @nombreHotel nvarchar(255), @descripcionRegimen varchar (50)
+AS
+BEGIN
+	DECLARE @resultado numeric(1)
+	DECLARE @codigoHotel numeric (18,0)
+	DECLARE @codigoRegimen numeric(18)
+	SET @codigoHotel = (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_nombre = @nombreHotel)
+	SET @codigoRegimen = (SELECT regimen_codigo FROM FAGD.Regimen WHERE regimen_descripcion = @descripcionRegimen)
+	BEGIN TRAN insertarRegimenDeHotelCreado
+		INSERT INTO FAGD.HotelXRegimen
+		VALUES (@codigoHotel, @codigoRegimen)
+	COMMIT TRAN insertarRegimenDeHotelCreado
+	SET @resultado = 0;
+	SELECT @resultado AS resultado
+END
+GO
+
 
 create procedure FAGD.BuscarHabitacionesDisponibles
 @codigoHotel numeric(18),

@@ -53,6 +53,8 @@
             this.clbRegimenes = new System.Windows.Forms.CheckedListBox();
             this.lblAlturaHotel = new System.Windows.Forms.Label();
             this.txtAlturaHotel = new System.Windows.Forms.TextBox();
+            this.lblRecargaPorEstrellas = new System.Windows.Forms.Label();
+            this.txtRecargaPorEstrellasHotel = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblDatosHotel
@@ -130,18 +132,18 @@
             // 
             this.lblCiudad.AutoSize = true;
             this.lblCiudad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCiudad.Location = new System.Drawing.Point(46, 356);
+            this.lblCiudad.Location = new System.Drawing.Point(46, 389);
             this.lblCiudad.Name = "lblCiudad";
-            this.lblCiudad.Size = new System.Drawing.Size(57, 16);
+            this.lblCiudad.Size = new System.Drawing.Size(61, 16);
             this.lblCiudad.TabIndex = 7;
-            this.lblCiudad.Text = "Ciudad";
+            this.lblCiudad.Text = "Ciudad:";
             this.lblCiudad.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblPais
             // 
             this.lblPais.AutoSize = true;
             this.lblPais.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPais.Location = new System.Drawing.Point(46, 398);
+            this.lblPais.Location = new System.Drawing.Point(46, 431);
             this.lblPais.Name = "lblPais";
             this.lblPais.Size = new System.Drawing.Size(43, 16);
             this.lblPais.TabIndex = 8;
@@ -153,7 +155,7 @@
             // 
             this.lblRegimenes.AutoSize = true;
             this.lblRegimenes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRegimenes.Location = new System.Drawing.Point(46, 439);
+            this.lblRegimenes.Location = new System.Drawing.Point(46, 472);
             this.lblRegimenes.Name = "lblRegimenes";
             this.lblRegimenes.Size = new System.Drawing.Size(91, 16);
             this.lblRegimenes.TabIndex = 9;
@@ -164,7 +166,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(46, 554);
+            this.label1.Location = new System.Drawing.Point(46, 587);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 16);
             this.label1.TabIndex = 10;
@@ -191,6 +193,8 @@
             this.txtTelefonoHotel.Name = "txtTelefonoHotel";
             this.txtTelefonoHotel.Size = new System.Drawing.Size(211, 20);
             this.txtTelefonoHotel.TabIndex = 13;
+            this.txtTelefonoHotel.TextChanged += new System.EventHandler(this.txtTelefonoHotel_TextChanged);
+            this.txtTelefonoHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefonoHotel_KeyPress);
             // 
             // txtCalleHotel
             // 
@@ -205,24 +209,25 @@
             this.txtCantidadDeEstrellasHotel.Name = "txtCantidadDeEstrellasHotel";
             this.txtCantidadDeEstrellasHotel.Size = new System.Drawing.Size(211, 20);
             this.txtCantidadDeEstrellasHotel.TabIndex = 15;
+            this.txtCantidadDeEstrellasHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidadDeEstrellasHotel_KeyPress);
             // 
             // txtCiudadHotel
             // 
-            this.txtCiudadHotel.Location = new System.Drawing.Point(312, 356);
+            this.txtCiudadHotel.Location = new System.Drawing.Point(312, 389);
             this.txtCiudadHotel.Name = "txtCiudadHotel";
             this.txtCiudadHotel.Size = new System.Drawing.Size(211, 20);
             this.txtCiudadHotel.TabIndex = 16;
             // 
             // txtPaisHotel
             // 
-            this.txtPaisHotel.Location = new System.Drawing.Point(312, 398);
+            this.txtPaisHotel.Location = new System.Drawing.Point(312, 431);
             this.txtPaisHotel.Name = "txtPaisHotel";
             this.txtPaisHotel.Size = new System.Drawing.Size(211, 20);
             this.txtPaisHotel.TabIndex = 17;
             // 
             // dtpFechaCreacionHotel
             // 
-            this.dtpFechaCreacionHotel.Location = new System.Drawing.Point(312, 554);
+            this.dtpFechaCreacionHotel.Location = new System.Drawing.Point(312, 583);
             this.dtpFechaCreacionHotel.Name = "dtpFechaCreacionHotel";
             this.dtpFechaCreacionHotel.Size = new System.Drawing.Size(211, 20);
             this.dtpFechaCreacionHotel.TabIndex = 18;
@@ -231,7 +236,7 @@
             // 
             this.btnCrearHotel.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnCrearHotel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCrearHotel.Location = new System.Drawing.Point(128, 599);
+            this.btnCrearHotel.Location = new System.Drawing.Point(127, 634);
             this.btnCrearHotel.Name = "btnCrearHotel";
             this.btnCrearHotel.Size = new System.Drawing.Size(75, 27);
             this.btnCrearHotel.TabIndex = 20;
@@ -243,7 +248,7 @@
             // 
             this.btnBorrarTextosHotel.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnBorrarTextosHotel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBorrarTextosHotel.Location = new System.Drawing.Point(238, 599);
+            this.btnBorrarTextosHotel.Location = new System.Drawing.Point(237, 634);
             this.btnBorrarTextosHotel.Name = "btnBorrarTextosHotel";
             this.btnBorrarTextosHotel.Size = new System.Drawing.Size(75, 27);
             this.btnBorrarTextosHotel.TabIndex = 21;
@@ -255,7 +260,7 @@
             // 
             this.btnVolverHotel.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnVolverHotel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVolverHotel.Location = new System.Drawing.Point(348, 599);
+            this.btnVolverHotel.Location = new System.Drawing.Point(347, 634);
             this.btnVolverHotel.Name = "btnVolverHotel";
             this.btnVolverHotel.Size = new System.Drawing.Size(75, 27);
             this.btnVolverHotel.TabIndex = 22;
@@ -266,7 +271,7 @@
             // clbRegimenes
             // 
             this.clbRegimenes.FormattingEnabled = true;
-            this.clbRegimenes.Location = new System.Drawing.Point(312, 439);
+            this.clbRegimenes.Location = new System.Drawing.Point(312, 472);
             this.clbRegimenes.Name = "clbRegimenes";
             this.clbRegimenes.Size = new System.Drawing.Size(211, 94);
             this.clbRegimenes.TabIndex = 23;
@@ -288,12 +293,34 @@
             this.txtAlturaHotel.Name = "txtAlturaHotel";
             this.txtAlturaHotel.Size = new System.Drawing.Size(211, 20);
             this.txtAlturaHotel.TabIndex = 25;
+            this.txtAlturaHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAlturaHotel_KeyPress);
+            // 
+            // lblRecargaPorEstrellas
+            // 
+            this.lblRecargaPorEstrellas.AutoSize = true;
+            this.lblRecargaPorEstrellas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRecargaPorEstrellas.Location = new System.Drawing.Point(46, 354);
+            this.lblRecargaPorEstrellas.Name = "lblRecargaPorEstrellas";
+            this.lblRecargaPorEstrellas.Size = new System.Drawing.Size(164, 16);
+            this.lblRecargaPorEstrellas.TabIndex = 26;
+            this.lblRecargaPorEstrellas.Text = "Recarga por Estrellas:";
+            this.lblRecargaPorEstrellas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtRecargaPorEstrellasHotel
+            // 
+            this.txtRecargaPorEstrellasHotel.Location = new System.Drawing.Point(312, 350);
+            this.txtRecargaPorEstrellasHotel.Name = "txtRecargaPorEstrellasHotel";
+            this.txtRecargaPorEstrellasHotel.Size = new System.Drawing.Size(211, 20);
+            this.txtRecargaPorEstrellasHotel.TabIndex = 27;
+            this.txtRecargaPorEstrellasHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRecargaPorEstrellasHotel_KeyPress);
             // 
             // FrmAltaHotel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(575, 663);
+            this.ClientSize = new System.Drawing.Size(575, 673);
+            this.Controls.Add(this.txtRecargaPorEstrellasHotel);
+            this.Controls.Add(this.lblRecargaPorEstrellas);
             this.Controls.Add(this.txtAlturaHotel);
             this.Controls.Add(this.lblAlturaHotel);
             this.Controls.Add(this.clbRegimenes);
@@ -354,5 +381,7 @@
         private System.Windows.Forms.CheckedListBox clbRegimenes;
         private System.Windows.Forms.Label lblAlturaHotel;
         private System.Windows.Forms.TextBox txtAlturaHotel;
+        private System.Windows.Forms.Label lblRecargaPorEstrellas;
+        private System.Windows.Forms.TextBox txtRecargaPorEstrellasHotel;
     }
 }

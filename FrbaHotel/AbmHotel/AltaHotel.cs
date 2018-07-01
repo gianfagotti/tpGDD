@@ -16,6 +16,7 @@ namespace FrbaHotel.AbmHotel
         AbmRol.frmMenuEmpleado frmMenuEmpleado;
         private SqlDataReader regimenes;
         private SqlDataReader resultadosCreacionDeHotel;
+        private SqlDataReader resultadosCreacionDeRegimen;
         private DataTable hoteles;
         private String nombreHotelIngresado;
         private String mailHotelIngresado;
@@ -23,6 +24,7 @@ namespace FrbaHotel.AbmHotel
         private String calleHotelIngresado;
         private String alturaHotelIngresado;
         private String estrellasHotelIngresado;
+        private String recargaEstrellasHotelIngresado;
         private String ciudadHotelIngresado;
         private String paisHotelIngresado;
         private DateTime fechaCreacionHotelIngresado;
@@ -108,11 +110,18 @@ namespace FrbaHotel.AbmHotel
                     calleHotelIngresado = this.txtCalleHotel.Text;
                     alturaHotelIngresado = this.txtAlturaHotel.Text;
                     estrellasHotelIngresado = this.txtCantidadDeEstrellasHotel.Text;
+                    recargaEstrellasHotelIngresado = this.txtRecargaPorEstrellasHotel.Text;
                     ciudadHotelIngresado =  this.txtCiudadHotel.Text;
                     paisHotelIngresado = this.txtPaisHotel.Text;
                     fechaCreacionHotelIngresado = Convert.ToDateTime(this.dtpFechaCreacionHotel.Value);
-                   // string consulta ="EXEC 
-                   // resultadosCreacionDeHotel = Login.FrmTipoUsuario.BD.comando("EXEC
+                    resultadosCreacionDeHotel = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.insertarHotel " + estrellasHotelIngresado + ", " + recargaEstrellasHotelIngresado + ", '" + paisHotelIngresado + "', '" + ciudadHotelIngresado + "', '" + calleHotelIngresado + "', " + alturaHotelIngresado + ", '" + nombreHotelIngresado + "', '" + fechaCreacionHotelIngresado + "', '" + mailHotelIngresado + "', " + telefonoHotelIngresado);
+                    resultadosCreacionDeHotel.Close();
+                    foreach(object itemChecked in clbRegimenes.CheckedItems)
+                    {
+                        resultadosCreacionDeRegimen = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.insertarRegimenDeHotelCreado '"+nombreHotelIngresado+"', '"+itemChecked.ToString()+"'");
+                        resultadosCreacionDeRegimen.Close();
+                    }
+                    MessageBox.Show("Hotel creado satisfactoriamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -126,5 +135,91 @@ namespace FrbaHotel.AbmHotel
         {
         
         }
+
+        private void txtTelefonoHotel_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+         private void txtTelefonoHotel_KeyPress(object sender, KeyPressEventArgs e)
+         {
+             if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+          }
+
+         private void txtCantidadDeEstrellasHotel_KeyPress(object sender, KeyPressEventArgs e)
+         {
+             if (Char.IsDigit(e.KeyChar))
+             {
+                 e.Handled = false;
+             }
+             else if (Char.IsControl(e.KeyChar))
+             {
+                 e.Handled = false;
+             }
+             else if (Char.IsSeparator(e.KeyChar))
+             {
+                 e.Handled = false;
+             }
+             else
+             {
+                 e.Handled = true;
+             }
+         }
+
+         private void txtRecargaPorEstrellasHotel_KeyPress(object sender, KeyPressEventArgs e)
+         {
+             if (Char.IsDigit(e.KeyChar))
+             {
+                 e.Handled = false;
+             }
+             else if (Char.IsControl(e.KeyChar))
+             {
+                 e.Handled = false;
+             }
+             else if (Char.IsSeparator(e.KeyChar))
+             {
+                 e.Handled = false;
+             }
+             else
+             {
+                 e.Handled = true;
+             }
+         }
+
+                 private void txtAlturaHotel_KeyPress(object sender, KeyPressEventArgs e)
+         {
+             if (Char.IsDigit(e.KeyChar))
+             {
+                 e.Handled = false;
+             }
+             else if (Char.IsControl(e.KeyChar))
+             {
+                 e.Handled = false;
+             }
+             else if (Char.IsSeparator(e.KeyChar))
+             {
+                 e.Handled = false;
+             }
+             else
+             {
+                 e.Handled = true;
+             }
+         }
+                
     }
 }

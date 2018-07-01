@@ -159,15 +159,21 @@
     <Compile Include="AbmUsuario\ModificarUsuarioDatos.Designer.cs">
       <DependentUpon>ModificarUsuarioDatos.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmUsuario\NuevoRolXHotel.cs" />
+    <Compile Include="AbmUsuario\NuevoRolXHotel.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="AbmUsuario\NuevoRolXHotel.Designer.cs">
       <DependentUpon>NuevoRolXHotel.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmUsuario\SeleccionarHotel.cs" />
+    <Compile Include="AbmUsuario\SeleccionarHotel.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="AbmUsuario\SeleccionarHotel.Designer.cs">
       <DependentUpon>SeleccionarHotel.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmUsuario\SeleccionarRol.cs" />
+    <Compile Include="AbmUsuario\SeleccionarRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="AbmUsuario\SeleccionarRol.Designer.cs">
       <DependentUpon>SeleccionarRol.cs</DependentUpon>
     </Compile>
