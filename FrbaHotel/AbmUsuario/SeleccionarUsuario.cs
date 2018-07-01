@@ -107,5 +107,21 @@ namespace FrbaHotel.AbmUsuario
             reader.Close();
         }
 
+        private void btnAñadir_Click(object sender, EventArgs e)
+        {
+            SeleccionarHotel frm = new SeleccionarHotel(this, usuario, true);
+            this.Hide();
+            frm.Show();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            SeleccionarHotel frm = new SeleccionarHotel(this, usuario, false);
+            this.Hide();
+            frm.Show();
+        }
+
+
+
     }
 }

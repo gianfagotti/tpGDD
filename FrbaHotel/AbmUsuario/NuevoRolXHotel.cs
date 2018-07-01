@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+
 
 namespace FrbaHotel.AbmUsuario
 {
@@ -14,12 +16,110 @@ namespace FrbaHotel.AbmUsuario
     {
         Form ultimoFormulario;
         String usuario;
+        DataTable tablaH;
+        SqlDataReader reader, reader2;
+        Char separacion = '-';
 
         public NuevoRolXHotel(Form formAnterior, String usuarioSeleccionado)
         {
             ultimoFormulario = formAnterior;
             usuario = usuarioSeleccionado;
             InitializeComponent();
+            llenarCboHotel();
+            llenarCboRol();
+
         }
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            ultimoFormulario.Show();
+            this.Close();
+        }
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        private void llenarCboHotel() {
+            String select = "SELECT hotel_calle, hotel_nroCalle FROM FAGD.Hotel WHERE hotel_codigo "
+                          + "NOT IN (SELECT hotel_codigo FROM FAGD.UsuarioXRolXHotel WHERE '" + usuario + "' = usuario_username)";
+            
+            int fila = 0;
+            tablaH = Login.FrmTipoUsuario.BD.consulta(select);
+            while (fila < tablaH.Rows.Count)
+            {
+                cboHotel.Items.Add(tablaH.Rows[fila][0].ToString() + "-" + tablaH.Rows[fila][1].ToString());
+                fila++;
+            }
+
+            tablaH.Clear();
+        }
+
+
+
+        private void llenarCboRol() {
+            String select = "SELECT rol_nombre FROM FAGD.Rol";
+
+            reader = Login.FrmTipoUsuario.BD.comando(select);
+
+            DataTable tabla = new DataTable();
+            tabla.Columns.Add("rol_nombre", typeof(string));
+            tabla.Load(reader);
+
+            cboRol.ValueMember = "rol_nombre";
+            cboRol.DisplayMember = "rol_nombre";
+            cboRol.DataSource = tabla;
+        
+        }
+
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            Boolean exito = checkearCampos();
+
+            if (exito) { 
+                String direccionHotelR = cboHotel.Text;
+                string[] direccionHotel = direccionHotelR.Split(separacion);
+                String calle = direccionHotel[0];
+                String nro = direccionHotel[1];
+                String rol = cboRol.Text;
+    
+                string exe = "EXEC FAGD.nuevoPuesto '" + usuario + "', '" + calle + "', '" + nro + "', '" + rol +"'";
+                
+                
+                decimal resultado = 0;
+                reader2 = Login.FrmTipoUsuario.BD.comando(exe);
+                if (reader2.Read())
+                {
+                    resultado = reader2.GetDecimal(0);
+                }
+                reader2.Close();
+                if (resultado == 0) MessageBox.Show("Hubo un error al crear el puesto.", "Error");
+                else MessageBox.Show("Puesto guardado correctamente!", "Usuario Guardado");
+                
+            }
+          }
+         
+
+
+        private Boolean checkearCampos() {
+
+            if (string.IsNullOrEmpty(cboHotel.Text) || string.IsNullOrEmpty(cboRol.Text)) {
+                MessageBox.Show("Debe seleccionar un hotel y un rol a cumplir", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            } else return true;
+
+        }
+
+
     }
 }

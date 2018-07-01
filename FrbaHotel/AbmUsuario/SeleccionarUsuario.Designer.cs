@@ -94,6 +94,7 @@
             this.btnAñadir.TabIndex = 8;
             this.btnAñadir.Text = "Añadir Rol en Hotel";
             this.btnAñadir.UseVisualStyleBackColor = true;
+            this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
             // 
             // btnEliminar
             // 
@@ -103,6 +104,7 @@
             this.btnEliminar.TabIndex = 10;
             this.btnEliminar.Text = "Eliminar Rol en Hotel";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // SeleccionarUsuario
             // 

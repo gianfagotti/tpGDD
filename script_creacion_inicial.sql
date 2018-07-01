@@ -1240,6 +1240,55 @@ BEGIN
 END
 GO
 
+
+
+CREATE PROCEDURE FAGD.nuevoPuesto @username nvarchar(255), @hotelCalle nvarchar (255), @hotelNro numeric (18), @rol nvarchar (255)
+AS 
+BEGIN
+	DECLARE @resultado numeric(1)
+	BEGIN TRAN puesto
+	BEGIN TRY
+		INSERT INTO FAGD.UsuarioXRolXHotel (usuario_username, rol_codigo, hotel_codigo)
+		VALUES (@username,
+			   (SELECT rol_codigo FROM FAGD.Rol WHERE rol_nombre = @rol),
+			   (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_calle = @hotelCalle AND hotel_nroCalle = @hotelNro)
+			   )
+		SET @resultado = 1;
+		SELECT @resultado AS resultado
+		COMMIT tran puesto
+	END TRY
+	BEGIN CATCH 
+		ROLLBACK TRAN puesto
+		SET @resultado = 0;
+		SELECT @resultado AS resultado
+	END CATCH
+END
+GO
+
+
+CREATE PROCEDURE FAGD.borrarPuesto @username nvarchar(255), @hotelCalle nvarchar (255), @hotelNro numeric (18), @rol nvarchar (255)
+AS 
+BEGIN
+	DECLARE @resultado numeric(1)
+	BEGIN TRAN borrar
+	BEGIN TRY
+		DELETE FROM FAGD.UsuarioXRolXHotel
+		WHERE usuario_username =  @username
+			  AND hotel_codigo = (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_calle = @hotelCalle AND hotel_nroCalle = @hotelNro)
+			  AND rol_codigo = (SELECT rol_codigo FROM FAGD.Rol WHERE rol_nombre = @rol)
+		SET @resultado = 1;
+		SELECT @resultado AS resultado
+		COMMIT tran borrar
+	END TRY
+	BEGIN CATCH 
+		ROLLBACK TRAN borrar
+		SET @resultado = 0;
+		SELECT @resultado AS resultado
+	END CATCH
+END
+GO
+
+
 CREATE PROCEDURE FAGD.cambiarEstadoUsuario @username nvarchar(255)
 AS 
 BEGIN

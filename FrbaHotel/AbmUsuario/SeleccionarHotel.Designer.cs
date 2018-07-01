@@ -61,6 +61,7 @@
             this.btnContinuar.TabIndex = 2;
             this.btnContinuar.Text = "Continuar";
             this.btnContinuar.UseVisualStyleBackColor = true;
+            this.btnContinuar.Click += new System.EventHandler(this.btnContinuar_Click);
             // 
             // btnVolver
             // 
@@ -70,15 +71,18 @@
             this.btnVolver.TabIndex = 3;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnHotel
             // 
+            this.btnHotel.Enabled = false;
             this.btnHotel.Location = new System.Drawing.Point(16, 69);
             this.btnHotel.Name = "btnHotel";
             this.btnHotel.Size = new System.Drawing.Size(120, 23);
             this.btnHotel.TabIndex = 4;
             this.btnHotel.Text = "Añadir nuevo hotel";
             this.btnHotel.UseVisualStyleBackColor = true;
+            this.btnHotel.Click += new System.EventHandler(this.btnHotel_Click);
             // 
             // SeleccionarHotel
             // 
@@ -91,6 +95,7 @@
             this.Controls.Add(this.cboHotel);
             this.Controls.Add(this.label1);
             this.Name = "SeleccionarHotel";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Seleccionar Hotel";
             this.ResumeLayout(false);
             this.PerformLayout();

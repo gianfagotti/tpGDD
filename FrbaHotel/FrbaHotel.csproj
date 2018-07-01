@@ -159,17 +159,23 @@
     <Compile Include="AbmUsuario\ModificarUsuarioDatos.Designer.cs">
       <DependentUpon>ModificarUsuarioDatos.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmUsuario\ModificarUsuarioHoteles.cs">
+    <Compile Include="AbmUsuario\NuevoRolXHotel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmUsuario\ModificarUsuarioHoteles.Designer.cs">
-      <DependentUpon>ModificarUsuarioHoteles.cs</DependentUpon>
+    <Compile Include="AbmUsuario\NuevoRolXHotel.Designer.cs">
+      <DependentUpon>NuevoRolXHotel.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmUsuario\ModificarUsuarioRoles.cs">
+    <Compile Include="AbmUsuario\SeleccionarHotel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmUsuario\ModificarUsuarioRoles.Designer.cs">
-      <DependentUpon>ModificarUsuarioRoles.cs</DependentUpon>
+    <Compile Include="AbmUsuario\SeleccionarHotel.Designer.cs">
+      <DependentUpon>SeleccionarHotel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmUsuario\SeleccionarRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmUsuario\SeleccionarRol.Designer.cs">
+      <DependentUpon>SeleccionarRol.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmUsuario\SeleccionarUsuario.cs">
       <SubType>Form</SubType>
@@ -321,11 +327,14 @@
     <EmbeddedResource Include="AbmUsuario\ModificarUsuarioDatos.resx">
       <DependentUpon>ModificarUsuarioDatos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmUsuario\ModificarUsuarioHoteles.resx">
-      <DependentUpon>ModificarUsuarioHoteles.cs</DependentUpon>
+    <EmbeddedResource Include="AbmUsuario\NuevoRolXHotel.resx">
+      <DependentUpon>NuevoRolXHotel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmUsuario\ModificarUsuarioRoles.resx">
-      <DependentUpon>ModificarUsuarioRoles.cs</DependentUpon>
+    <EmbeddedResource Include="AbmUsuario\SeleccionarHotel.resx">
+      <DependentUpon>SeleccionarHotel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmUsuario\SeleccionarRol.resx">
+      <DependentUpon>SeleccionarRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmUsuario\SeleccionarUsuario.resx">
       <DependentUpon>SeleccionarUsuario.cs</DependentUpon>
