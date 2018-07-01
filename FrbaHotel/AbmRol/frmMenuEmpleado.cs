@@ -137,9 +137,9 @@ namespace FrbaHotel.AbmRol
 
         private void btnRegistrarEstadiabtnRegistrarEstadia_Click(object sender, EventArgs e)
         {
-            RegistrarEstadia.FrmMenuRegEst frmRegistrarEst = new RegistrarEstadia.FrmMenuRegEst(this);
+            RegistrarEstadia.FrmMenuRegEst2 menuRegEst = new RegistrarEstadia.FrmMenuRegEst2(this);
             this.Hide();
-            frmRegistrarEst.Show();
+            menuRegEst.Show();
         }
 
         private void btnRegistrarConsumible_Click(object sender, EventArgs e)

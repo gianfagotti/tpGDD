@@ -12,13 +12,15 @@ namespace FrbaHotel.RegistrarEstadia
 {
     public partial class FrmRegistrarHuesped : Form
     {
-        AbmRol.frmMenuEmpleado frmMenuEmpleado;
-        
+        Form ultimoForm;
+        public static DataTable tabla;
+        public static decimal persDisp = 0;
 
-        public FrmRegistrarHuesped(AbmRol.frmMenuEmpleado form)
+        public FrmRegistrarHuesped(Form form)
         {
             InitializeComponent();
-            frmMenuEmpleado = form;
+            ultimoForm = form;
+
         }
 
         private void FrmRegistrarEstadia_Load(object sender, EventArgs e)
@@ -30,24 +32,7 @@ namespace FrbaHotel.RegistrarEstadia
         {
 
         }
-        /*
-        private void BtnFechaCheckOut_Click(object sender, EventArgs e)
-        {
-            this.PnlCheckInYOut.Show();
-        }
-        
-        private void BtnFechaCheckIn_Click(object sender, EventArgs e)
-        {
-            this.PnlCheckInYOut.Show();
-        }
-
-        private void BtnAceptarCheckInYOut_Click(object sender, EventArgs e)
-        {
-            this.PnlCheckInYOut.Hide();
-            this.TxtCheckIn.Text = this.McrCheckInYOut.SelectionRange.Start.ToShortDateString();
-            this.TxtCheckOut.Text = this.McrCheckInYOut.SelectionRange.End.ToShortDateString();
-        }
-        */
+       
         private void TxtCheckIn_TextChanged(object sender, EventArgs e)
         {
 
@@ -66,7 +51,7 @@ namespace FrbaHotel.RegistrarEstadia
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();            
-            frmMenuEmpleado.Show();
+            ultimoForm.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
