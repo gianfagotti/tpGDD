@@ -536,10 +536,6 @@ INSERT INTO FAGD.UsuarioXRolXHotel(usuario_username,rol_codigo,hotel_codigo)
 		values('IRAA',1,1),('IRAA',2,1),('IRAA',1,2),('IRAA',1,3),('IRAA',2,3),('MAGNO',1,1),('MAGNO',2,1),('MAGNO',1,2),('MAGNO',1,3),('MAGNO',2,3)
 GO
 
---INSERT INTO FAGD.UsuarioXHotel(usuario_username,hotel_codigo)
-		--values('IRAA',1),('IRAA',2),('IRAA',3),('IRAA',4),('IRAA',5),('IRAA',6)
---GO
-
 -----------------------	 CREACIÓN DE PROCEDURES PARA LA APLICACIÓN   ----------------------- 
 
 CREATE PROCEDURE FAGD.lista_hotel_maxResCancel @trimestre numeric(18,0), @anio numeric(18,0)
@@ -1184,14 +1180,55 @@ GO
 CREATE PROCEDURE FAGD.desactivarUsuario @username nvarchar (255)
 AS
 BEGIN
-	DECLARE @resultado numeric(1)
+	DECLARE @resultado numeric(18)
 	BEGIN TRAN actualizarEstado
 		UPDATE FAGD.Usuario
 		SET usuario_estado = 0
 		WHERE usuario_username = @username;
 		SET @resultado = 0;
-	SELECT @resultado AS resultado
 	COMMIT TRAN ActualizarEstado
 	SELECT @resultado AS resultado
 END
 GO
+
+CREATE PROCEDURE FAGD.insertarHotel @estrellas numeric(18,0), @pais nvarchar(255), @ciudad nvarchar(255), @calle nvarchar(255), @nroCalle numeric(18,0), @nombre nvarchar(255), @fechaDeCreacion datetime, @mail nvarchar(255), @telefono numeric(18,0)
+AS
+BEGIN
+	DECLARE @resultado numeric(1)
+	BEGIN TRAN insertarHotel
+		INSERT INTO FAGD.Hotel 
+		VALUES (@estrellas, 10, @pais, @ciudad, @calle, @nroCalle, @nombre, @fechaDeCreacion, @mail, @telefono, 1)
+	COMMIT TRAN insertarHotel
+	SET @resultado = 0;
+	SELECT @resultado AS resultado
+END
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	hotel_codigo numeric (18,0) IDENTITY (1,1) NOT NULL,
+	hotel_cantEstrellas numeric(18,0) NOT NULL,
+	hotel_recarga_estrellas numeric(18,0) NOT NULL ,
+	hotel_pais nvarchar(255) NULL,
+	hotel_ciudad nvarchar(255) NOT NULL,
+	hotel_calle nvarchar(255) NOT NULL,
+	hotel_nroCalle numeric(18,0) NOT NULL,
+	hotel_nombre nvarchar(255) NULL,
+	hotel_fechaDeCreacion datetime  NULL,
+	hotel_mail nvarchar(255) NULL,
+	hotel_telefono numeric(18,0) NULL,
+	hotel_estado bit NOT NULL default(1)
