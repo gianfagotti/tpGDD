@@ -45,6 +45,7 @@ GO
 CREATE TABLE FAGD.HabitacionTipo(
 	habitacionTipo_codigo numeric(18,0) NOT NULL,
 	habitacionTipo_descripcion nvarchar(255) NOT NULL,
+	habitacionTipo_cantHuespedes numeric(18),
 	habitacionTipo_porcentual numeric(18,2) NOT NULL
 )
 GO
@@ -96,6 +97,8 @@ CREATE TABLE FAGD.Usuario(
 	usuario_mail nvarchar(255) UNIQUE,
 	usuario_telefono numeric(18),
 	usuario_fechaNacimiento datetime,
+	usuario_tipoDoc nvarchar (255),
+	usuario_nroDoc numeric(18),
 	usuario_estado bit NOT NULL default(1)
 )
 GO
@@ -443,6 +446,14 @@ INSERT INTO FAGD.HabitacionTipo(habitacionTipo_codigo, habitacionTipo_descripcio
 		FROM gd_esquema.Maestra 
 GO
 
+UPDATE FAGD.HabitacionTipo
+	set habitacionTipo_cantHuespedes = case when habitacionTipo_descripcion = 'Base Simple' Then 1
+							when habitacionTipo_descripcion = 'Base Doble' Then 2
+							when habitacionTipo_descripcion = 'Base Triple' Then 3
+							when habitacionTipo_descripcion = 'Base Cuadruple' Then 4
+							else 5 end
+GO
+
 INSERT INTO FAGD.Habitacion(habitacion_codigoHotel, habitacion_nro, habitacion_tipoCodigo, habitacion_piso, habitacion_ubicacion, habitacion_descripcion,habitacion_estado)
 	SELECT DISTINCT Hotel.hotel_codigo, Maestra.Habitacion_Numero, Maestra.Habitacion_Tipo_Codigo,  Maestra.Habitacion_Piso, UPPER(Maestra.Habitacion_Frente), UPPER(Maestra.Habitacion_Tipo_Descripcion), 1
 	FROM gd_esquema.Maestra Maestra, FAGD.Hotel Hotel
@@ -528,13 +539,14 @@ INSERT INTO FAGD.RolXFuncionalidad(rol_codigo,funcionalidad_codigo)
 		values (3,1)
 GO
 
-INSERT INTO FAGD.Usuario (usuario_username,usuario_password, usuario_nombre, usuario_apellido, usuario_direccion, usuario_mail, usuario_telefono, usuario_fechaNacimiento, usuario_estado)
-		values ('IRAA','123','Ivan','Arnaudo','Calle Falsa 123','ivan.arnaudo@gmail.com','11111111','02/09/96',1),('MAGNO','123','Alvaro','Dati','Calle verdadera 345','alvarocuervo96@gmail.com','1550352388','02/09/96',1)
+INSERT INTO FAGD.Usuario (usuario_username,usuario_password, usuario_nombre, usuario_apellido, usuario_direccion, usuario_mail, usuario_telefono, usuario_fechaNacimiento, usuario_tipoDoc, usuario_nroDoc, usuario_estado)
+		values ('IRAA','123','Ivan','Arnaudo','Calle Falsa 123','ivan.arnaudo@gmail.com','11111111','02/09/96','DNI',39775257,1),('MAGNO','123','Alvaro','Dati','Calle verdadera 345','alvarocuervo96@gmail.com','1550352388','02/09/96','DNI',40648321,1)
 GO
 
 INSERT INTO FAGD.UsuarioXRolXHotel(usuario_username,rol_codigo,hotel_codigo)
 		values('IRAA',1,1),('IRAA',2,1),('IRAA',1,2),('IRAA',1,3),('IRAA',2,3),('MAGNO',1,1),('MAGNO',2,1),('MAGNO',1,2),('MAGNO',1,3),('MAGNO',2,3)
 GO
+
 
 -----------------------	 CREACIÓN DE PROCEDURES PARA LA APLICACIÓN   ----------------------- 
 
@@ -1175,6 +1187,145 @@ DECLARE @resultado numeric(1)
 END
 GO
 
+
+
+CREATE PROCEDURE FAGD.guardarUsuario
+@nombre nvarchar (255),
+@apellido nvarchar (255),
+@username nvarchar (255),
+@password nvarchar (255),
+@tipoDoc nvarchar (255),
+@nroDoc numeric (18),
+@direccion nvarchar (255),
+@mail nvarchar (255),
+@hotelCalle nvarchar (255),
+@hotelNro numeric (18),
+@rol nvarchar (255),
+@telefono numeric (18),
+@fechaNac datetime
+
+AS 
+BEGIN
+	DECLARE @resultado numeric(1)
+	DECLARE @fechaNacimiento datetime
+	SET @fechaNacimiento = CONVERT(datetime, @fechaNac, 121)
+	BEGIN TRAN usuario
+	BEGIN TRY
+		IF (NOT EXISTS(SELECT usuario_username FROM FAGD.Usuario WHERE usuario_nombre = @username))
+		BEGIN
+			INSERT INTO FAGD.Usuario (usuario_username, usuario_password, usuario_nombre, usuario_apellido, usuario_direccion,
+									  usuario_mail, usuario_telefono, usuario_fechaNacimiento, usuario_tipoDoc, usuario_nroDoc,
+									  usuario_estado) 
+			VALUES (@username, @password, @nombre, @apellido, @direccion, @mail, @telefono, @fechaNacimiento, @tipoDoc, @nroDoc, 1)
+			
+			INSERT INTO FAGD.UsuarioXRolXHotel (usuario_username, rol_codigo, hotel_codigo)
+			VALUES (@username,
+				   (SELECT rol_codigo FROM FAGD.Rol WHERE rol_nombre = @rol),
+				   (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_calle = @hotelCalle AND hotel_nroCalle = @hotelNro)
+				   )
+			SET @resultado = 1;
+		END
+		ELSE 
+		BEGIN
+			SET @resultado = 0;
+		END
+		SELECT @resultado AS resultado
+		COMMIT tran usuario
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN usuario
+		SET @resultado = 2;
+		SELECT @resultado AS resultado
+	END CATCH
+END
+GO
+
+CREATE PROCEDURE FAGD.cambiarEstadoUsuario @username nvarchar(255)
+AS 
+BEGIN
+	DECLARE @resultado numeric(1)
+	BEGIN TRAN estado
+	BEGIN TRY
+		IF ((SELECT usuario_estado FROM FAGD.Usuario WHERE usuario_username = @username) = 1)
+		BEGIN
+			UPDATE FAGD.Usuario
+			SET usuario_estado = 0
+			WHERE usuario_username = @username;
+			SET @resultado = 0;
+		END
+		ELSE
+		BEGIN
+			UPDATE FAGD.Usuario
+			SET usuario_estado = 1
+			WHERE usuario_username = @username;
+			SET @resultado = 1;
+		END
+		SELECT @resultado AS resultado
+		COMMIT TRAN estado
+	END TRY 
+	BEGIN CATCH
+		ROLLBACK TRAN estado
+		SET @resultado = 2;
+		SELECT @resultado AS resultado
+	END CATCH
+END
+GO
+
+
+CREATE PROCEDURE FAGD.updatearDatosUsuario
+@username nvarchar (255),
+@nombre nvarchar (255),
+@apellido nvarchar (255),
+@password nvarchar (255),
+@tipoDoc nvarchar (255),
+@nroDoc numeric (18),
+@direccion nvarchar (255),
+@mail nvarchar (255),
+@telefono numeric (18),
+@fechaNac datetime
+
+AS 
+BEGIN
+	DECLARE @resultado numeric(1)
+	DECLARE @fechaNacimiento datetime
+	SET @fechaNacimiento = CONVERT(datetime, @fechaNac, 121)
+	BEGIN TRAN upd
+	BEGIN TRY
+		IF ((SELECT usuario_mail FROM FAGD.Usuario WHERE usuario_username = @username) = @mail)
+		BEGIN
+			SET @resultado = 0;
+			SELECT @resultado as resultado
+		END
+		ELSE
+		BEGIN
+
+		UPDATE FAGD.Usuario
+			
+			SET usuario_nombre = @nombre,
+				usuario_apellido = @apellido,
+				usuario_password= @password,
+				usuario_tipoDoc= @tipoDoc,
+				usuario_nroDoc= @nroDoc,
+				usuario_direccion = @direccion,
+				usuario_mail = @mail,
+				usuario_telefono = @telefono,
+				usuario_fechaNacimiento = @fechaNacimiento
+
+			WHERE usuario_username = @username;
+			SET @resultado = 1;
+		SELECT @resultado AS resultado
+		COMMIT tran usuario
+		END
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN upd
+		SET @resultado = 2;
+		SELECT @resultado AS resultado
+	END CATCH
+END
+GO			
+
+
 ------------------------------------------------Alva-------------------------------------------------------
 
 CREATE PROCEDURE FAGD.desactivarUsuario @username nvarchar (255)
@@ -1191,6 +1342,7 @@ BEGIN
 END
 GO
 
+
 CREATE PROCEDURE FAGD.insertarHotel @estrellas numeric(18,0), @pais nvarchar(255), @ciudad nvarchar(255), @calle nvarchar(255), @nroCalle numeric(18,0), @nombre nvarchar(255), @fechaDeCreacion datetime, @mail nvarchar(255), @telefono numeric(18,0)
 AS
 BEGIN
@@ -1204,31 +1356,47 @@ BEGIN
 END
 GO
 
+create procedure FAGD.BuscarHabitacionesDisponibles
+@codigoHotel numeric(18),
+@desde datetime,
+@hasta datetime,
+@regimen nvarchar(50),
+@tipoHab nvarchar(255)
 
+as
+begin
+	declare @fechaInicio datetime, @fechaFin datetime, @codigoTipoHab numeric(18)
+	set @fechaInicio = CONVERT(datetime,@desde,121)
+	set @fechaFin = CONVERT(datetime,@hasta,121)
+	set @codigoTipoHab = (select habitacionTipo_codigo from FAGD.HabitacionTipo where habitacionTipo_descripcion = @tipoHab)
 
+	if (@regimen is null)
+	begin
+		select distinct Ha.habitacion_codigo Codigo, Ha.habitacion_ubicacion Ubicacion, (R.regimen_precioBase*T.habitacionTipo_cantHuespedes) + (Ho.hotel_cantEstrellas*Ho.hotel_recarga_estrellas) PrecioPorNoche, R.regimen_descripcion
+		from FAGD.Habitacion Ha, FAGD.Hotel Ho, FAGD.HabitacionTipo T, FAGD.Regimen R
+		where
+		Ho.hotel_codigo = @codigoHotel and
+		T.habitacionTipo_codigo = @codigoTipoHab and
+		Ha.habitacion_codigoHotel = @codigoHotel and
+		Ha.habitacion_tipoCodigo = @codigoTipoHab and
+		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaInicio and fecha_fin >= @fechaInicio) and 
+		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaFin and fecha_fin >= @fechaFin)
+	end
+	else
+	begin
+		declare @codigoRegimen numeric(18)
+		set @regimen = (select regimen_codigo from FAGD.Regimen where regimen_descripcion = @regimen)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-	hotel_codigo numeric (18,0) IDENTITY (1,1) NOT NULL,
-	hotel_cantEstrellas numeric(18,0) NOT NULL,
-	hotel_recarga_estrellas numeric(18,0) NOT NULL ,
-	hotel_pais nvarchar(255) NULL,
-	hotel_ciudad nvarchar(255) NOT NULL,
-	hotel_calle nvarchar(255) NOT NULL,
-	hotel_nroCalle numeric(18,0) NOT NULL,
-	hotel_nombre nvarchar(255) NULL,
-	hotel_fechaDeCreacion datetime  NULL,
-	hotel_mail nvarchar(255) NULL,
-	hotel_telefono numeric(18,0) NULL,
-	hotel_estado bit NOT NULL default(1)
+		select distinct Ha.habitacion_codigo Codigo, Ha.habitacion_ubicacion Ubicacion, (R.regimen_precioBase*T.habitacionTipo_cantHuespedes) + (Ho.hotel_cantEstrellas*Ho.hotel_recarga_estrellas) PrecioPorNoche, R.regimen_descripcion
+		from FAGD.Habitacion Ha, FAGD.Hotel Ho, FAGD.HabitacionTipo T, FAGD.Regimen R
+		where
+		R.regimen_codigo = @codigoRegimen and
+		Ho.hotel_codigo = @codigoHotel and
+		T.habitacionTipo_codigo = @codigoTipoHab and
+		Ha.habitacion_codigoHotel = @codigoHotel and
+		Ha.habitacion_tipoCodigo = @codigoTipoHab and
+		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaInicio and fecha_fin >= @fechaInicio) and 
+		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaFin and fecha_fin >= @fechaFin)
+	end
+end
+GO

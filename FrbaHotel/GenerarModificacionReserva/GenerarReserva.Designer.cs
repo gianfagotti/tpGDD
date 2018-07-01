@@ -117,6 +117,13 @@
             // 
             this.cboTipoHabitacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTipoHabitacion.FormattingEnabled = true;
+            this.cboTipoHabitacion.Items.AddRange(new object[] {
+            "DNI",
+            "PASAPORTE",
+            "CARNET EXT.",
+            "RUC",
+            "P. NACI.",
+            "OTROS"});
             this.cboTipoHabitacion.Location = new System.Drawing.Point(219, 48);
             this.cboTipoHabitacion.Name = "cboTipoHabitacion";
             this.cboTipoHabitacion.Size = new System.Drawing.Size(121, 26);
@@ -250,6 +257,7 @@
             this.button3.TabIndex = 23;
             this.button3.Text = "Dar de alta nuevo cliente";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label8
             // 
@@ -280,6 +288,7 @@
             this.butSeleccionar.TabIndex = 26;
             this.butSeleccionar.Text = "Buscar habitaciones";
             this.butSeleccionar.UseVisualStyleBackColor = true;
+            this.butSeleccionar.Click += new System.EventHandler(this.butSeleccionar_Click);
             // 
             // button1
             // 
@@ -322,8 +331,8 @@
             this.Name = "GenerarReserva";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generar reserva";
-            this.Load += new System.EventHandler(this.GenerarReserva_Load);
             this.Activated += new System.EventHandler(this.GenerarReserva_Activated);
+            this.Load += new System.EventHandler(this.GenerarReserva_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);

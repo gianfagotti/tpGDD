@@ -15,7 +15,7 @@ namespace FrbaHotel.GenerarModificacionReserva
     public partial class GenerarReserva : Form
     {
         Form ultimoFormulario;
-        private DataTable tabla;
+        private DataTable tabla, dTable;
         int Fila = 0;
         BindingSource bSource2;
         private SqlDataReader resultado;
@@ -131,6 +131,72 @@ namespace FrbaHotel.GenerarModificacionReserva
         private void txtCliente_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AbmCliente.FrmAltaCliente frmAltaCliente = new AbmCliente.FrmAltaCliente(this);
+            frmAltaCliente.Show();
+        }
+
+        private void butSeleccionar_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = null;
+
+
+            if (string.IsNullOrEmpty(cboTipoHabitacion.Text))
+            {
+                MessageBox.Show("Tiene que especificar un tipo de habitacion");
+                return;
+            }
+            if (string.IsNullOrEmpty(cboTipoHabitacion.Text))
+            {
+                MessageBox.Show("Tiene que especificar un tipo de habitacion");
+                return;
+            }
+            if (string.IsNullOrEmpty(cboHotel.Text))
+            {
+                MessageBox.Show("Tiene que especificar un hotel");
+                return;
+            }
+            DateTime fechaDesde = Convert.ToDateTime(dtpDesde.Value);
+            DateTime fechaHasta = Convert.ToDateTime(dtpHasta.Value);
+            DateTime fechaHoy = DateTime.Now;
+            int result = DateTime.Compare(fechaDesde, fechaHasta);
+            if (result >= 0)
+            {
+
+                MessageBox.Show("La fecha desde debe ser menor a la fecha hasta\n");
+                return;
+            }
+            result = DateTime.Compare(fechaDesde.Date, fechaHoy);
+            if (result < 0)
+            {
+                MessageBox.Show("La fecha desde debe ser mayor a la fecha actual\n");
+                return;
+            }
+            string query = "EXEC FAGD.BuscarHabitacionesDisponibles ";
+            query = query + cboHotel.Text.Split('-')[0] + ",";
+            query = query + "'" + dtpDesde.Value.Date.ToString("yyyyMMdd HH:mm:ss") + "',";
+            query = query + "'" + dtpHasta.Value.Date.ToString("yyyyMMdd HH:mm:ss") + "',";
+            if (string.IsNullOrEmpty(cboRegimen.Text))
+            {
+                query = query + "null,";
+            }
+            else
+            {
+                query = query + "'" + cboRegimen.Text + "',";
+            }
+            query = query + "'" + cboTipoHabitacion.Text + "'";
+
+            sAdapter = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
+            dTable = Login.FrmTipoUsuario.BD.dameDataTable(sAdapter);
+            //BindingSource to sync DataTable and DataGridView
+            BindingSource bSource = new BindingSource();
+            //set the BindingSource DataSource
+            bSource.DataSource = dTable;
+            //set the DataGridView DataSource
+            dataGridView1.DataSource = bSource;
         }
 
     }

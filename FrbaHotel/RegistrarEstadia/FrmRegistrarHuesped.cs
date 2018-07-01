@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.RegistrarEstadia
 {
-    public partial class FrmRegistrarEstadia : Form
+    public partial class FrmRegistrarHuesped : Form
     {
         AbmRol.frmMenuEmpleado frmMenuEmpleado;
         
 
-        public FrmRegistrarEstadia(AbmRol.frmMenuEmpleado form)
+        public FrmRegistrarHuesped(AbmRol.frmMenuEmpleado form)
         {
             InitializeComponent();
             frmMenuEmpleado = form;
@@ -30,12 +30,12 @@ namespace FrbaHotel.RegistrarEstadia
         {
 
         }
-
+        /*
         private void BtnFechaCheckOut_Click(object sender, EventArgs e)
         {
             this.PnlCheckInYOut.Show();
         }
-
+        
         private void BtnFechaCheckIn_Click(object sender, EventArgs e)
         {
             this.PnlCheckInYOut.Show();
@@ -47,7 +47,7 @@ namespace FrbaHotel.RegistrarEstadia
             this.TxtCheckIn.Text = this.McrCheckInYOut.SelectionRange.Start.ToShortDateString();
             this.TxtCheckOut.Text = this.McrCheckInYOut.SelectionRange.End.ToShortDateString();
         }
-
+        */
         private void TxtCheckIn_TextChanged(object sender, EventArgs e)
         {
 
@@ -71,10 +71,8 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
             AbmCliente.FrmAltaCliente registrarHuesped = new AbmCliente.FrmAltaCliente(this);
-            registrarHuesped.ShowDialog();
-            this.Show();
+            registrarHuesped.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -252,11 +252,23 @@
     <Compile Include="RegistrarConsumible\FrmAgregarConsumibles.Designer.cs">
       <DependentUpon>FrmAgregarConsumibles.cs</DependentUpon>
     </Compile>
-    <Compile Include="RegistrarEstadia\FrmRegistrarEstadia.cs">
+    <Compile Include="RegistrarEstadia\FrmCheckin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegistrarEstadia\FrmRegistrarEstadia.Designer.cs">
-      <DependentUpon>FrmRegistrarEstadia.cs</DependentUpon>
+    <Compile Include="RegistrarEstadia\FrmCheckin.Designer.cs">
+      <DependentUpon>FrmCheckin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrarEstadia\FrmMenuRegEst.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrarEstadia\FrmMenuRegEst.Designer.cs">
+      <DependentUpon>FrmMenuRegEst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrarEstadia\FrmRegistrarHuesped.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrarEstadia\FrmRegistrarHuesped.Designer.cs">
+      <DependentUpon>FrmRegistrarHuesped.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AbmCliente\FrmAltaCliente.resx">
       <DependentUpon>FrmAltaCliente.cs</DependentUpon>
@@ -369,8 +381,14 @@
     <EmbeddedResource Include="RegistrarConsumible\FrmAgregarConsumibles.resx">
       <DependentUpon>FrmAgregarConsumibles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RegistrarEstadia\FrmRegistrarEstadia.resx">
-      <DependentUpon>FrmRegistrarEstadia.cs</DependentUpon>
+    <EmbeddedResource Include="RegistrarEstadia\FrmCheckin.resx">
+      <DependentUpon>FrmCheckin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarEstadia\FrmMenuRegEst.resx">
+      <DependentUpon>FrmMenuRegEst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarEstadia\FrmRegistrarHuesped.resx">
+      <DependentUpon>FrmRegistrarHuesped.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

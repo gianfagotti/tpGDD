@@ -110,8 +110,7 @@ namespace FrbaHotel.AbmRol
         {
             AbmCliente.FrmAltaCliente frmAltaCliente = new AbmCliente.FrmAltaCliente(this);
             this.Hide();
-            frmAltaCliente.ShowDialog();
-            this.Show();
+            frmAltaCliente.Show();
         }
 
         private void butCrearHabitacion_Click(object sender, EventArgs e)
@@ -137,7 +136,7 @@ namespace FrbaHotel.AbmRol
 
         private void btnRegistrarEstadiabtnRegistrarEstadia_Click(object sender, EventArgs e)
         {
-            RegistrarEstadia.FrmRegistrarEstadia frmRegistrarEst = new RegistrarEstadia.FrmRegistrarEstadia(this);
+            RegistrarEstadia.FrmMenuRegEst frmRegistrarEst = new RegistrarEstadia.FrmMenuRegEst(this);
             this.Hide();
             frmRegistrarEst.Show();
         }
