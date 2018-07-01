@@ -99,11 +99,11 @@ namespace FrbaHotel.GenerarModificacionReserva
                 }
                 else
                 {
-                    string id = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-                    string nombre = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-                    string apellido = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+                    string nombre = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                    string apellido = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                    string dni = dataGridView1.CurrentRow.Cells[4].Value.ToString();
                     DataRow row = RegistrarEstadia.FrmRegistrarHuesped.tabla.NewRow();
-                    row["Id"] = id;
+                    row["dni"] = dni;
                     row["Nombre"] = nombre;
                     row["Apellido"] = apellido;
                     try
