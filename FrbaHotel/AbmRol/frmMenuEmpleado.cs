@@ -40,6 +40,7 @@ namespace FrbaHotel.AbmRol
                         grbHabitaciones.Enabled = true;
                         break;
                     case "ABM_Hoteles":
+                        grbHoteles.Enabled = true;
                         break;
                     case "ABM_Regimenes":
                         grbRegimenes.Enabled = true;
@@ -136,9 +137,9 @@ namespace FrbaHotel.AbmRol
 
         private void btnRegistrarEstadiabtnRegistrarEstadia_Click(object sender, EventArgs e)
         {
-            RegistrarEstadia.FrmMenuRegEst frmRegistrarEst = new RegistrarEstadia.FrmMenuRegEst(this);
+            RegistrarEstadia.FrmMenuRegEst2 menuRegEst = new RegistrarEstadia.FrmMenuRegEst2(this);
             this.Hide();
-            frmRegistrarEst.Show();
+            menuRegEst.Show();
         }
 
         private void btnRegistrarConsumible_Click(object sender, EventArgs e)
@@ -188,6 +189,13 @@ namespace FrbaHotel.AbmRol
             AbmUsuario.SeleccionarUsuario frm = new AbmUsuario.SeleccionarUsuario(this);
             this.Hide();
             frm.Show();
+        }
+
+        private void btnNuevoHotel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AbmHotel.FrmAltaHotel frmAltaHotel = new AbmHotel.FrmAltaHotel(this);
+            frmAltaHotel.Show();
         }
     }
 }

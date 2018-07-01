@@ -258,17 +258,17 @@
     <Compile Include="RegistrarConsumible\FrmAgregarConsumibles.Designer.cs">
       <DependentUpon>FrmAgregarConsumibles.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegistrarEstadia\FrmMenuRegEst2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrarEstadia\FrmMenuRegEst2.Designer.cs">
+      <DependentUpon>FrmMenuRegEst2.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegistrarEstadia\FrmCheckin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RegistrarEstadia\FrmCheckin.Designer.cs">
       <DependentUpon>FrmCheckin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="RegistrarEstadia\FrmMenuRegEst.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RegistrarEstadia\FrmMenuRegEst.Designer.cs">
-      <DependentUpon>FrmMenuRegEst.cs</DependentUpon>
     </Compile>
     <Compile Include="RegistrarEstadia\FrmRegistrarHuesped.cs">
       <SubType>Form</SubType>
@@ -393,8 +393,8 @@
     <EmbeddedResource Include="RegistrarEstadia\FrmCheckin.resx">
       <DependentUpon>FrmCheckin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RegistrarEstadia\FrmMenuRegEst.resx">
-      <DependentUpon>FrmMenuRegEst.cs</DependentUpon>
+    <EmbeddedResource Include="RegistrarEstadia\FrmMenuRegEst2.resx">
+      <DependentUpon>FrmMenuRegEst2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegistrarEstadia\FrmRegistrarHuesped.resx">
       <DependentUpon>FrmRegistrarHuesped.cs</DependentUpon>

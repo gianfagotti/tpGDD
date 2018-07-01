@@ -90,9 +90,35 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             if (e.ColumnIndex == 0)
             {
-                GenerarModificacionReserva.GenerarReserva.clienteSeleccionado = dataGridView1.CurrentRow.Cells[4].Value.ToString();
-                GenerarModificacionReserva.GenerarReserva.ActiveForm.Show();
-                this.Close();
+                Type t = abmPadre.GetType();
+                if (t.Equals(typeof(GenerarReserva)))
+                {
+                    GenerarModificacionReserva.GenerarReserva.clienteSeleccionado = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+                    GenerarModificacionReserva.GenerarReserva.ActiveForm.Show();
+                    this.Close();
+                }
+                else
+                {
+                    string nombre = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                    string apellido = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                    string dni = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+                    DataRow row = RegistrarEstadia.FrmRegistrarHuesped.tabla.NewRow();
+                    row["dni"] = dni;
+                    row["Nombre"] = nombre;
+                    row["Apellido"] = apellido;
+                    try
+                    {
+                        RegistrarEstadia.FrmRegistrarHuesped.tabla.Rows.Add(row);
+                        RegistrarEstadia.FrmRegistrarHuesped.persDisp--;
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Ese cliente ya esta agregado");
+                    }
+
+                    RegistrarEstadia.FrmRegistrarHuesped.ActiveForm.Show();
+                    this.Close();
+                }
             }
         }
     }
