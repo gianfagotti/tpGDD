@@ -15,8 +15,8 @@ namespace FrbaHotel.RegistrarEstadia
     {
 
         SqlDataReader resultadoQuery;
-        decimal resok;
-        decimal resmodif;
+  //      decimal resok;
+  //      decimal resmodif;
         decimal estadia = 0;
         DateTime diaActual = DateTime.Today;
 
@@ -42,6 +42,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void btnCheckin_Click(object sender, EventArgs e)
         {
+            
              if (string.IsNullOrEmpty(txtReserv.Text))
             {
                 MessageBox.Show("Debe ingresar un numero de reserva");
@@ -83,16 +84,16 @@ namespace FrbaHotel.RegistrarEstadia
                     MessageBox.Show("La reserva no tiene asignadas habitaciones.");
                     return;
                 }
-                /* Necesito tener bien el codigo del hotel traido del login
-                if (hotel.ToString() != Login.FrmSeleccionarHotel.hotelSeleccionado.ToString())
+                
+                if (hotel.ToString() != Login.FrmSeleccionarHotel.codigoHotel.ToString())
                 {
                     MessageBox.Show("Solo pueden hacer checks-in los empleados del hotel donde se hizo la reserva.");
                     return;
-                }*/
+                }
 
-                string confirmacion = "EXEC GESTION_DE_GATOS.registrarCheckinEstadia ";
+                string confirmacion = "EXEC FAGD.registrarCheckinEstadia ";
                 confirmacion = confirmacion + txtReserv.Text + ",";
-               /*confirmacion = confirmacion + Login.user + ",";         */
+              /*confirmacion = confirmacion + Login.user + ",";         */
                 confirmacion = confirmacion + "'" + diaActual.ToString("yyyyMMdd HH:mm:ss") + "'";
                 resultadoQuery = Login.FrmTipoUsuario.BD.comando(confirmacion);
                 resultadoQuery.Read();
@@ -101,7 +102,7 @@ namespace FrbaHotel.RegistrarEstadia
                   if (estadia != 0)
                 {
                     MessageBox.Show("Se ha realizado el check-in correctamente.");
-                    //generar factura
+                    //generamos la factura para despues
                     string fact = "EXEC FAGD.generarFactura " + estadia.ToString() + ",1,'" + diaActual.ToString("yyyyMMdd HH:mm:ss") + "'";
                     resultadoQuery = Login.FrmTipoUsuario.BD.comando(fact);
                     resultadoQuery.Read();
@@ -135,7 +136,9 @@ namespace FrbaHotel.RegistrarEstadia
             
         
 
-            }   
+            } 
+  
+            
         }
     }
 }

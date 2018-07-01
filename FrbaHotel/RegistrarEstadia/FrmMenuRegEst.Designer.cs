@@ -53,6 +53,7 @@
             this.btnCheckin.TabIndex = 1;
             this.btnCheckin.Text = "Realizar check-in";
             this.btnCheckin.UseVisualStyleBackColor = true;
+            this.btnCheckin.Click += new System.EventHandler(this.btnCheckin_Click);
             // 
             // btnCheckout
             // 
@@ -63,6 +64,7 @@
             this.btnCheckout.TabIndex = 2;
             this.btnCheckout.Text = "Realizar check-out";
             this.btnCheckout.UseVisualStyleBackColor = true;
+            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
             // 
             // btnVolver
             // 
@@ -72,6 +74,7 @@
             this.btnVolver.TabIndex = 3;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // FrmMenuRegEst
             // 

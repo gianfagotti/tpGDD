@@ -33,17 +33,17 @@
             this.BtnRegistrar = new System.Windows.Forms.Button();
             this.btnSeleCliente = new System.Windows.Forms.Button();
             this.LblRegistrarEstadia = new System.Windows.Forms.Label();
-            this.txtReserv = new System.Windows.Forms.TextBox();
             this.lblalgo = new System.Windows.Forms.Label();
             this.dgvHuesped = new System.Windows.Forms.DataGridView();
             this.borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnLimpiar = new System.Windows.Forms.Button();
-            this.txtLimit = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtReserv = new System.Windows.Forms.TextBox();
+            this.txtLimit = new System.Windows.Forms.TextBox();
+            this.txtRest = new System.Windows.Forms.TextBox();
             this.txtTitular = new System.Windows.Forms.TextBox();
-            this.txtRestant = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHuesped)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,13 +101,6 @@
             this.LblRegistrarEstadia.Text = "Ingrese los datos de la Estadia:";
             this.LblRegistrarEstadia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // txtReserv
-            // 
-            this.txtReserv.Location = new System.Drawing.Point(223, 70);
-            this.txtReserv.Name = "txtReserv";
-            this.txtReserv.Size = new System.Drawing.Size(142, 20);
-            this.txtReserv.TabIndex = 3;
-            // 
             // lblalgo
             // 
             this.lblalgo.AutoSize = true;
@@ -150,13 +143,6 @@
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             // 
-            // txtLimit
-            // 
-            this.txtLimit.Location = new System.Drawing.Point(223, 105);
-            this.txtLimit.Name = "txtLimit";
-            this.txtLimit.Size = new System.Drawing.Size(61, 20);
-            this.txtLimit.TabIndex = 27;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -190,38 +176,52 @@
             this.label3.Text = "Titular:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // txtReserv
+            // 
+            this.txtReserv.Location = new System.Drawing.Point(220, 70);
+            this.txtReserv.Name = "txtReserv";
+            this.txtReserv.Size = new System.Drawing.Size(150, 20);
+            this.txtReserv.TabIndex = 32;
+            // 
+            // txtLimit
+            // 
+            this.txtLimit.Location = new System.Drawing.Point(220, 105);
+            this.txtLimit.Name = "txtLimit";
+            this.txtLimit.Size = new System.Drawing.Size(150, 20);
+            this.txtLimit.TabIndex = 33;
+            // 
+            // txtRest
+            // 
+            this.txtRest.Location = new System.Drawing.Point(220, 140);
+            this.txtRest.Name = "txtRest";
+            this.txtRest.Size = new System.Drawing.Size(150, 20);
+            this.txtRest.TabIndex = 34;
+            // 
             // txtTitular
             // 
-            this.txtTitular.Location = new System.Drawing.Point(223, 174);
+            this.txtTitular.Location = new System.Drawing.Point(220, 173);
             this.txtTitular.Name = "txtTitular";
-            this.txtTitular.Size = new System.Drawing.Size(142, 20);
-            this.txtTitular.TabIndex = 32;
-            // 
-            // txtRestant
-            // 
-            this.txtRestant.Location = new System.Drawing.Point(223, 140);
-            this.txtRestant.Name = "txtRestant";
-            this.txtRestant.Size = new System.Drawing.Size(61, 20);
-            this.txtRestant.TabIndex = 33;
+            this.txtTitular.Size = new System.Drawing.Size(150, 20);
+            this.txtTitular.TabIndex = 35;
             // 
             // FrmRegistrarHuesped
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(516, 529);
-            this.Controls.Add(this.txtRestant);
             this.Controls.Add(this.txtTitular);
+            this.Controls.Add(this.txtRest);
+            this.Controls.Add(this.txtLimit);
+            this.Controls.Add(this.txtReserv);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtLimit);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.dgvHuesped);
             this.Controls.Add(this.BtnRegistrar);
             this.Controls.Add(this.btnRegiCliente);
             this.Controls.Add(this.btnSeleCliente);
             this.Controls.Add(this.LblAgregarHuésped);
-            this.Controls.Add(this.txtReserv);
             this.Controls.Add(this.lblalgo);
             this.Controls.Add(this.LblRegistrarEstadia);
             this.Name = "FrmRegistrarHuesped";
@@ -243,16 +243,16 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnSeleCliente;
         private System.Windows.Forms.Label LblRegistrarEstadia;
-        private System.Windows.Forms.TextBox txtReserv;
         private System.Windows.Forms.Label lblalgo;
         private System.Windows.Forms.DataGridView dgvHuesped;
         private System.Windows.Forms.DataGridViewButtonColumn borrar;
         private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.TextBox txtLimit;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtReserv;
+        private System.Windows.Forms.TextBox txtLimit;
+        private System.Windows.Forms.TextBox txtRest;
         private System.Windows.Forms.TextBox txtTitular;
-        private System.Windows.Forms.TextBox txtRestant;
     }
 }

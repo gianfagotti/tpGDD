@@ -30,12 +30,12 @@ namespace FrbaHotel.RegistrarEstadia
         {
 
         }
-
+        /*
         private void BtnFechaCheckOut_Click(object sender, EventArgs e)
         {
             this.PnlCheckInYOut.Show();
         }
-
+        
         private void BtnFechaCheckIn_Click(object sender, EventArgs e)
         {
             this.PnlCheckInYOut.Show();
@@ -47,7 +47,7 @@ namespace FrbaHotel.RegistrarEstadia
             this.TxtCheckIn.Text = this.McrCheckInYOut.SelectionRange.Start.ToShortDateString();
             this.TxtCheckOut.Text = this.McrCheckInYOut.SelectionRange.End.ToShortDateString();
         }
-
+        */
         private void TxtCheckIn_TextChanged(object sender, EventArgs e)
         {
 
