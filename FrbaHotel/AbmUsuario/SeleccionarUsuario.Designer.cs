@@ -54,6 +54,7 @@
             this.cboUsuarios.Name = "cboUsuarios";
             this.cboUsuarios.Size = new System.Drawing.Size(305, 21);
             this.cboUsuarios.TabIndex = 1;
+            this.cboUsuarios.SelectedIndexChanged += new System.EventHandler(this.cboUsuarios_SelectedIndexChanged);
             // 
             // btnVolver
             // 
@@ -83,6 +84,7 @@
             this.btnCambiarEstado.TabIndex = 7;
             this.btnCambiarEstado.Text = "Habilitar/Inhabilitar usuario";
             this.btnCambiarEstado.UseVisualStyleBackColor = true;
+            this.btnCambiarEstado.Click += new System.EventHandler(this.btnCambiarEstado_Click);
             // 
             // btnRoles
             // 
