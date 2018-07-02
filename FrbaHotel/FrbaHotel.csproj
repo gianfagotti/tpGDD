@@ -258,6 +258,12 @@
     <Compile Include="RegistrarConsumible\FrmAgregarConsumibles.Designer.cs">
       <DependentUpon>FrmAgregarConsumibles.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegistrarEstadia\FrmCheckout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrarEstadia\FrmCheckout.Designer.cs">
+      <DependentUpon>FrmCheckout.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegistrarEstadia\FrmMenuRegEst2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -392,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RegistrarEstadia\FrmCheckin.resx">
       <DependentUpon>FrmCheckin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarEstadia\FrmCheckout.resx">
+      <DependentUpon>FrmCheckout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegistrarEstadia\FrmMenuRegEst2.resx">
       <DependentUpon>FrmMenuRegEst2.cs</DependentUpon>
