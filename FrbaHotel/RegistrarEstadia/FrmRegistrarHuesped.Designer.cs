@@ -66,7 +66,7 @@
             this.btnRegiCliente.TabIndex = 18;
             this.btnRegiCliente.Text = "Registrar nuevo cliente";
             this.btnRegiCliente.UseVisualStyleBackColor = true;
-            this.btnRegiCliente.Click += new System.EventHandler(this.button2_Click);
+            this.btnRegiCliente.Click += new System.EventHandler(this.btnRegiCliente_Click);
             // 
             // BtnRegistrar
             // 
@@ -76,7 +76,7 @@
             this.BtnRegistrar.TabIndex = 19;
             this.BtnRegistrar.Text = "Registrar";
             this.BtnRegistrar.UseVisualStyleBackColor = true;
-            this.BtnRegistrar.Click += new System.EventHandler(this.BtnFacturar_Click);
+            this.BtnRegistrar.Click += new System.EventHandler(this.BtnRegistrar_Click);
             // 
             // btnSeleCliente
             // 
@@ -86,7 +86,7 @@
             this.btnSeleCliente.TabIndex = 17;
             this.btnSeleCliente.Text = "Seleccionar Cliente";
             this.btnSeleCliente.UseVisualStyleBackColor = true;
-            this.btnSeleCliente.Click += new System.EventHandler(this.button1_Click);
+            this.btnSeleCliente.Click += new System.EventHandler(this.btnSeleCliente_Click);
             // 
             // LblRegistrarEstadia
             // 
@@ -125,6 +125,7 @@
             this.dgvHuesped.ReadOnly = true;
             this.dgvHuesped.Size = new System.Drawing.Size(408, 160);
             this.dgvHuesped.TabIndex = 24;
+            this.dgvHuesped.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHuesped_CellContentClick);
             // 
             // borrar
             // 

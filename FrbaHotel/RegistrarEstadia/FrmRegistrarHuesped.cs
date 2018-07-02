@@ -47,7 +47,7 @@ namespace FrbaHotel.RegistrarEstadia
             bSource2 = new BindingSource();
             bSource2.DataSource = tabla;
             dgvHuesped.DataSource = bSource2;
-            consulta = "SELECT SUM(tipoHa.cantPersonas) FROM FAGD.ReservaXHabitacion resxh, FAGD.Habitacion ha, FAGD.TipoHabitacion tipoHa WHERE tipoHa.habitacion_codigo = ha.habitacion_codigo AND tipoHa.habitacionTipo_codigo=ha.tipo AND resxh.reserva_codigo = " + nroReserva;
+            consulta = "SELECT SUM(tipoHa.habitacionTipo_cantHuespedes) FROM FAGD.ReservaXHabitacion resxh, FAGD.Habitacion ha, FAGD.TipoHabitacion tipoHa WHERE tipoHa.habitacion_codigo = ha.habitacion_codigo AND tipoHa.habitacionTipo_codigo=ha.tipo AND resxh.reserva_codigo = " + nroReserva;
             resultado = Login.FrmTipoUsuario.BD.comando(consulta);
             if (resultado.Read())
             {
@@ -102,9 +102,30 @@ namespace FrbaHotel.RegistrarEstadia
 
         }
 
-        private void BtnFacturar_Click(object sender, EventArgs e)
+        private void BtnRegistrar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            /*
+            foreach (DataRow fila in tabla.Rows)
+            {
+                resultado = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarEstadiaXCliente " + fila["Dni"].ToString() + "," + nroEstadia);
+                if (resultado.Read())
+                {
+                    if (resultado.GetDecimal(0) == 0)
+                    {
+                        MessageBox.Show("Error. El cliente ya estaba agregado");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error. El cliente ya estaba agregado");
+                }
+                resultado.Close();
+            }
+            MessageBox.Show("El proceso de carga de clientes finalizo correctamente");
+            DistribClientes distri = new DistribClientes(tabla, nroReserva, nroEstadia);
+            distri.Show();
+            this.Close();
+              */
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -113,7 +134,7 @@ namespace FrbaHotel.RegistrarEstadia
             ultimoForm.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnRegiCliente_Click(object sender, EventArgs e)
         {
            
             if (persDisp > 0)
@@ -138,7 +159,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSeleCliente_Click(object sender, EventArgs e)
         {
             if (persDisp > 0)
             {
@@ -164,6 +185,22 @@ namespace FrbaHotel.RegistrarEstadia
             row["Apellido"] = apellido;
             tabla.Rows.Add(row);
 
+        }
+
+        private void dgvHuesped_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                int item = dgvHuesped.CurrentRow.Index;
+                if (dgvHuesped.CurrentRow.Cells[1].Value.ToString() == dniCli.ToString())
+                {
+                    MessageBox.Show("No se puede borrar el cliente que hizo la reserva");
+                    return;
+                }
+                persDisp++;
+                tabla.Rows.RemoveAt(item);
+                dgvHuesped.DataSource = tabla;
+            }
         }
     }
 }
