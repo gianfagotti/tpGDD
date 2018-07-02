@@ -50,6 +50,11 @@ CREATE TABLE FAGD.HabitacionTipo(
 )
 GO
 
+CREATE TABLE FAGD.Estado(
+	estado_codigo numeric(18,0) identity(1,1) NOT NULL,
+	estado_descripcion nvarchar(40) NOT NULL,
+)
+GO
 
 CREATE TABLE FAGD.Reserva(
 	reserva_codigo numeric(18,0) IDENTITY(10001,1) NOT NULL,
@@ -57,7 +62,7 @@ CREATE TABLE FAGD.Reserva(
 	reserva_fechaInicio datetime NOT NULL,
 	reserva_fechaFin datetime,
 	reserva_cantNoches numeric(5) NOT NULL,
-	reserva_estado nvarchar(255),
+	reserva_estado numeric(18),
 	reserva_codigoRegimen numeric(18),
 	reserva_clienteCodigo numeric(18,0),
 	reserva_errorCliente numeric(18,0),
@@ -261,6 +266,10 @@ ALTER TABLE FAGD.Funcionalidad ADD CONSTRAINT PK_Funcionalidad
 	PRIMARY KEY CLUSTERED (funcionalidad_codigo)
 GO
 
+ALTER TABLE FAGD.Estado ADD CONSTRAINT PK_Estado
+	PRIMARY KEY CLUSTERED (estado_codigo)
+GO
+
 ALTER TABLE FAGD.ReservaCancelada ADD CONSTRAINT PK_Reserva_cancelada
 	PRIMARY KEY CLUSTERED (reservaCancelada_codigo)
 GO
@@ -400,6 +409,10 @@ ALTER TABLE FAGD.Reserva ADD CONSTRAINT FK_Reserva_Cliente
  FOREIGN KEY (reserva_clienteCodigo) REFERENCES FAGD.Cliente(cliente_codigo)
 GO
 
+ALTER TABLE FAGD.Reserva ADD CONSTRAINT FK_Reserva_Estado
+ FOREIGN KEY (reserva_estado) REFERENCES FAGD.Estado(estado_codigo)
+GO
+
 ALTER TABLE FAGD.Reserva ADD CONSTRAINT FK_Reserva_ErrorCliente
  FOREIGN KEY (reserva_errorCliente) REFERENCES FAGD.ErrorCliente(errorCliente_codigo)
 GO
@@ -448,6 +461,27 @@ ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT FK_ClienteXEstadia_Estadia
 GO
 
 -----------------------	 CREACIÓN DE INSERTS DE MIGRACIÓN   ----------------------- 
+
+INSERT INTO FAGD.Estado (estado_descripcion)
+VALUES ('RESERVA CORRECTA');
+	
+INSERT INTO FAGD.Estado (estado_descripcion)
+VALUES ('RESERVA MODIFICADA');
+
+INSERT INTO FAGD.Estado (estado_descripcion)
+VALUES('RESERVA CANCELADA POR RECEPCION');
+
+INSERT INTO FAGD.Estado (estado_descripcion)
+VALUES ('RESERVA CANCELADA POR CLIENTE');
+
+INSERT INTO FAGD.Estado (estado_descripcion)
+VALUES ('RESERVA CANCELADA POR NO-SHOW');
+
+INSERT INTO FAGD.Estado (estado_descripcion)
+VALUES ('RESERVA EFECTIVIZADA');	
+
+INSERT INTO FAGD.Estado (estado_descripcion)
+VALUES ('RESERVA CANCELADA DESDE TABLA MAESTRA');	
 
 INSERT INTO FAGD.Hotel ([hotel_ciudad], [hotel_calle], [hotel_nroCalle], [hotel_cantEstrellas], [hotel_recarga_estrellas])
 	SELECT DISTINCT [Hotel_Ciudad],[Hotel_Calle],[Hotel_Nro_Calle],[Hotel_CantEstrella],[Hotel_Recarga_Estrella]
@@ -533,39 +567,63 @@ GO
 UPDATE FAGD.Reserva
 	SET reserva_fechaFin = (reserva_fechaInicio+reserva_cantNoches)
 
+UPDATE FAGD.Reserva
+	SET reserva_estado = CASE WHEN (reserva_codigo IN (SELECT DISTINCT M.Reserva_Codigo FROM gd_esquema.Maestra M
+						WHERE 	reserva_codigo = M.Reserva_Codigo AND M.Factura_Nro IS NOT NULL AND M.Estadia_Fecha_Inicio IS NOT NULL))
+				THEN
+					(SELECT estado_codigo FROM FAGD.Estado
+					 WHERE 	estado_descripcion = 'RESERVA EFECTIVIZADA')
+				ELSE 
+					(SELECT estado_codigo FROM FAGD.Estado
+					 WHERE 	estado_descripcion = 'RESERVA CANCELADA DESDE TABLA MAESTRA')
+				END
+
+GO
 
 
 INSERT INTO FAGD.ReservaxHabitacion(reserva_codigo, habitacion_codigo)
 		SELECT DISTINCT R.reserva_codigo, ha.habitacion_codigo
 		FROM gd_esquema.Maestra M, FAGD.Habitacion ha, FAGD.Reserva R, FAGD.Hotel ho
-		WHERE  M.Habitacion_Numero = ha.habitacion_nro AND
+		WHERE  M.Hotel_Calle = ho.hotel_calle AND
+		       M.Hotel_Ciudad = ho.hotel_ciudad AND
+			   M.Hotel_Nro_Calle = ho.hotel_nroCalle AND
+			   M.Hotel_CantEstrella = ho.hotel_cantEstrellas AND
+			   M.Habitacion_Numero = ha.habitacion_nro AND
 		       M.Habitacion_Piso = ha.habitacion_piso AND
 		       ha.habitacion_codigoHotel = ho.hotel_codigo AND
 			   M.Reserva_Codigo = R.reserva_codigo
 		ORDER BY reserva_codigo
 
-SET IDENTITY_INSERT FAGD.Reserva OFF
 
-/*
+
 UPDATE FAGD.Reserva
-	SET reserva_cantHuespedes = (SELECT tipoHa.habitacionTipo_cantHuespedes FROM FAGD.HabitacionTipo tipoHa, FAGD.Habitacion ha, FAGD.ReservaXHabitacion resxh
-					WHERE reserva_codigo = resxh.reserva_codigo AND
+	SET reserva_cantHuespedes = 
+	(SELECT tipoHa.habitacionTipo_cantHuespedes 
+	FROM FAGD.HabitacionTipo tipoHa, FAGD.Habitacion ha, FAGD.ReservaXHabitacion resxh, FAGD.Hotel ho
+					WHERE Reserva.reserva_codigo = resxh.reserva_codigo AND
 					resxh.habitacion_codigo = ha.habitacion_codigo AND
-					ha.habitacion_tipoCodigo = tipoHa.habitacionTipo_codigo)
+					ha.habitacion_tipoCodigo = tipoHa.habitacionTipo_codigo AND
+					ha.habitacion_codigoHotel = ho.hotel_codigo)
 	
 
 UPDATE FAGD.Reserva
-	SET reserva_costoTotal = ( (SELECT regimen_precioBase FROM FAGD.Regimen R where reserva_codigoRegimen = R.regimen_codigo) * 
-					(SELECT habitacion_tipoCodigo FROM FAGD.HabitacionTipo tipoHa, FAGD.Habitacion ha, FAGD.ReservaXHabitacion resxh 
-					WHERE reserva_codigo = resxh.reserva_codigo and
+	SET reserva_costoTotal = ((SELECT regimen_precioBase FROM FAGD.Regimen R WHERE reserva_codigoRegimen = R.regimen_codigo) * 
+					(SELECT habitacionTipo_porcentual FROM FAGD.HabitacionTipo tipoHa, FAGD.Habitacion ha, FAGD.ReservaXHabitacion resxh
+					WHERE Reserva.reserva_codigo = resxh.reserva_codigo AND
 					resxh.habitacion_codigo = ha.habitacion_codigo AND
 					ha.habitacion_tipoCodigo = tipoHa.habitacionTipo_codigo) +
-					((SELECT ho.hotel_cantEstrellas FROM FAGD.Hotel ho, FAGD.Habitacion ha, FAGD.ReservaXHabitacion resxh
-					WHERE reserva_codigo = resxh.reserva_codigo AND
-					resxh.habitacion_codigo = ha.habitacion_codigo AND
-					ho.hotel_codigo = ha.habitacion_codigoHotel) * 10) ) * reserva_cantNoches
 
-GO*/
+					((SELECT ho.hotel_cantEstrellas FROM FAGD.Hotel ho, FAGD.Habitacion ha, FAGD.ReservaXHabitacion resxh
+					WHERE Reserva.reserva_codigo = resxh.reserva_codigo AND
+					resxh.habitacion_codigo = ha.habitacion_codigo AND
+					ho.hotel_codigo = ha.habitacion_codigoHotel) * 
+					
+					((SELECT ho.hotel_recarga_estrellas FROM FAGD.Hotel ho,FAGD.Habitacion ha, FAGD.ReservaXHabitacion resxh
+					WHERE Reserva.reserva_codigo = resxh.reserva_codigo AND
+					resxh.habitacion_codigo = ha.habitacion_codigo AND
+					ho.hotel_codigo = ha.habitacion_codigoHotel)))) * reserva_cantNoches
+
+GO
 
 
 
@@ -709,6 +767,7 @@ GO
 INSERT INTO FAGD.UsuarioXRolXHotel(usuario_username,rol_codigo,hotel_codigo)
 		values('IRAA',1,1),('IRAA',2,1),('IRAA',1,2),('IRAA',1,3),('IRAA',2,3),('MAGNO',1,1),('MAGNO',2,1),('MAGNO',1,2),('MAGNO',1,3),('MAGNO',2,3)
 GO
+
 
 
 -----------------------	 CREACIÓN DE PROCEDURES PARA LA APLICACIÓN   ----------------------- 
