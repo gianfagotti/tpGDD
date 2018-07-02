@@ -177,6 +177,7 @@ CREATE TABLE FAGD.Cliente(
 GO
 
 CREATE TABLE FAGD.ErrorCliente(
+ errorCliente_codigo numeric(18,0) IDENTITY(1,1) NOT NULL,
  errorCliente_nroDocumento numeric(18) NOT NULL,
  errorCliente_apellido nvarchar(255),
  errorCliente_nombre nvarchar(255),
@@ -214,6 +215,15 @@ estadia_fechaInicio datetime,
 estadia_cantNoches numeric(18),
 estadia_clienteNroDocumento numeric (18) NOT NULL,
 estadia_codigoReserva numeric(18) NOT NULL
+)
+GO
+
+CREATE TABLE FAGD.ClienteXEstadia(
+	clieXEst_codigo numeric(18,0) IDENTITY(1,1) NOT NULL,
+	cliente_nroDocumento numeric(18,0),
+	errorCliente_codigo numeric(18,0),
+	estadia_codigo numeric(18,0) NOT NULL,
+	habitacion_codigo numeric(18,0)
 )
 GO
 
@@ -287,6 +297,10 @@ PRIMARY KEY CLUSTERED (reserva_codigo, habitacion_codigo)
 
 ALTER TABLE FAGD.BajaHotel ADD CONSTRAINT PK_BajaHotel
  PRIMARY KEY CLUSTERED (id_baja)
+GO
+
+ALTER TABLE FAGD.ErrorCliente ADD CONSTRAINT PK_ErrorCliente
+ PRIMARY KEY CLUSTERED (errorCliente_codigo)
 GO
 
 
@@ -409,6 +423,17 @@ ALTER TABLE FAGD.ReservaXHabitacion ADD CONSTRAINT FK_ReservaXHabitacion_Habitac
  FOREIGN KEY (habitacion_codigo) REFERENCES FAGD.Habitacion(habitacion_codigo)
 GO
 
+ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT FK_ClienteXEstadia_Cliente 
+ FOREIGN KEY(cliente_nroDocumento) REFERENCES FAGD.Cliente(cliente_nroDocumento)
+GO
+
+ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT FK_ClienteXEstadia_ErrorCliente 
+ FOREIGN KEY(errorCliente_codigo) REFERENCES FAGD.ErrorCliente(errorCliente_codigo)
+
+ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT FK_ClienteXEstadia_Estadia
+ FOREIGN KEY(estadia_codigo) REFERENCES FAGD.Estadia(estadia_codigo)
+GO
+
 -----------------------	 CREACIÓN DE INSERTS DE MIGRACIÓN   ----------------------- 
 
 INSERT INTO FAGD.Hotel ([hotel_ciudad], [hotel_calle], [hotel_nroCalle], [hotel_cantEstrellas], [hotel_recarga_estrellas])
@@ -515,6 +540,39 @@ INSERT INTO FAGD.ItemFactura (itemFactura_nroFactura,itemFactura_codigoEstadia,i
 		WHERE CxE.estadia_codigo = F.factura_codigoEstadia AND C.consumible_codigo = CxE.consumible_codigo
 		ORDER BY F.factura_nro
 GO
+
+------------------------------------------------------Probando cliexEst
+
+INSERT INTO FAGD.ClienteXEstadia (cliente_nroDocumento,errorCliente_codigo,estadia_codigo)
+	(SELECT DISTINCT cli.cliente_nroDocumento, NULL, est.estadia_codigo FROM gd_esquema.Maestra m, FAGD.Cliente cli, FAGD.Estadia est
+	 WHERE  m.Estadia_Fecha_Inicio IS NOT NULL AND
+			m.Cliente_Pasaporte_Nro = cli.cliente_nroDocumento AND
+			m.Cliente_Apellido = cli.cliente_apellido AND
+			m.Cliente_Nombre = cli.cliente_nombre AND
+			m.Estadia_Fecha_Inicio = est.estadia_fechaInicio AND
+			m.Estadia_Cant_Noches = est.estadia_cantNoches AND
+			m.Reserva_Codigo = est.estadia_codigoReserva
+	UNION ALL
+	 SELECT DISTINCT NULL, cliE.errorCliente_codigo, est.estadia_codigo
+		FROM gd_esquema.Maestra m, FAGD.ErrorCliente cliE, FAGD.Estadia est
+	 WHERE  m.Estadia_Fecha_Inicio IS NOT NULL AND
+			m.Cliente_Pasaporte_Nro = cliE.errorCliente_nroDocumento AND
+			m.Cliente_Apellido = cliE.errorCliente_apellido AND
+			m.Cliente_Nombre = cliE.errorCliente_nombre AND
+			m.Estadia_Fecha_Inicio = est.estadia_fechaInicio AND
+			m.Estadia_Cant_Noches = est.estadia_cantNoches AND
+			m.Reserva_Codigo = est.estadia_codigoReserva
+	)
+GO
+
+UPDATE FAGD.ClienteXEstadia
+SET habitacion_codigo = (SELECT DISTINCT ha.habitacion_codigo FROM FAGD.Estadia est, FAGD.Habitacion ha,gd_esquema.Maestra m, FAGD.Hotel ho
+	  WHERE ClienteXEstadia.estadia_codigo = est.estadia_codigo AND
+			est.estadia_codigoReserva = m.Reserva_Codigo AND
+			ho.hotel_nroCalle = M.Hotel_Nro_Calle AND
+			ha.habitacion_codigoHotel = ho.hotel_codigo AND
+			ha.habitacion_nro = M.Habitacion_Numero AND
+			ha.habitacion_piso = M.Habitacion_Piso)
 
 -------------------------------- ROLES Y FUNCIONALIDADES INICIALES --------------------------------- 
 
