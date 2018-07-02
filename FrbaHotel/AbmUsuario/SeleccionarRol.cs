@@ -35,16 +35,15 @@ namespace FrbaHotel.AbmUsuario
 
             InitializeComponent();
 
-           // llenarCboRol();
-            if (alta) lblDescripcion.Text = "Seleccione un rol a desempeñar en el hotel";
-            else lblDescripcion.Text = "Seleccione el rol que dejará de desempeñar en el hotel";
-
             String direccionHotelR = direccion;
             string[] direccionHotel = direccionHotelR.Split(separacion);
             calle = direccionHotel[0];
             nro = direccionHotel[1];
-            
 
+            llenarCboRol();
+            if (alta) lblDescripcion.Text = "Seleccione un rol a desempeñar en el hotel";
+            else lblDescripcion.Text = "Seleccione el rol que dejará de desempeñar en el hotel";
+            
         }
 
         private void btnVolver_Click(object sender, EventArgs e){
@@ -110,16 +109,16 @@ namespace FrbaHotel.AbmUsuario
                                 + usuario + "' AND hotel_codigo = (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_calle = '"
                                 + calle + "' AND hotel_nroCalle = '" + nro + "'))";
             }
-                
-                reader = Login.FrmTipoUsuario.BD.comando(select);
 
-                DataTable tabla = new DataTable();
-                tabla.Columns.Add("rol_nombre", typeof(string));
-                tabla.Load(reader);
+            reader = Login.FrmTipoUsuario.BD.comando(select);
 
-                cboRol.ValueMember = "rol_nombre";
-                cboRol.DisplayMember = "rol_nombre";
-                cboRol.DataSource = tabla;
+            DataTable tabla = new DataTable();
+            tabla.Columns.Add("rol_nombre", typeof(string));
+            tabla.Load(reader);
+
+            cboRol.ValueMember = "rol_nombre";
+            cboRol.DisplayMember = "rol_nombre";
+            cboRol.DataSource = tabla;
             
         }
     }

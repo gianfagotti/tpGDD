@@ -17,11 +17,13 @@ namespace FrbaHotel.AbmUsuario
         Form ultimoForm;
         String usuario;
         SqlDataReader reader;
+        decimal hotelLogin;
 
         public SeleccionarUsuario(Form form)
         {
             ultimoForm = form;
             InitializeComponent();
+            hotelLogin = Login.FrmSeleccionarHotel.codigoHotel;
             cargarComboUsuarios();
         }
 
@@ -66,7 +68,8 @@ namespace FrbaHotel.AbmUsuario
 
         private void cargarComboUsuarios()
         {
-            String select = "SELECT usuario_username FROM FAGD.Usuario";
+            String select = "SELECT usuario_username FROM FAGD.Usuario WHERE usuario_username IN (SELECT usuario_username FROM "
+                           +"FAGD.UsuarioXRolXHotel WHERE hotel_codigo = '" +hotelLogin+"')";
 
             reader = Login.FrmTipoUsuario.BD.comando(select);
 
