@@ -24,9 +24,9 @@ namespace FrbaHotel.RegistrarEstadia
             tabla = tablaP;
             estadia = nroEstadia;
             dgvDistri.DataSource = tabla;
-            consulta= "SELECT habitacion_codigo FROM FAGD.ReservaXHabitacion WHERE reserva_codigo = "+nroReserva;
+            consulta = "SELECT habitacion_codigo FROM FAGD.ReservaXHabitacion WHERE reserva_codigo = "+nroReserva;
             resultado = Login.FrmTipoUsuario.BD.comando(consulta);
-            while( resultado.Read())
+            while(resultado.Read())
             {
                 cbohab.Items.Add(resultado.GetDecimal(0));
             }
@@ -53,7 +53,7 @@ namespace FrbaHotel.RegistrarEstadia
             }
             else
             {
-                MessageBox.Show("Error la habitacion no existe");
+                MessageBox.Show("Error. La habitación no existe");
             }
             resultado.Close();
         }
@@ -84,9 +84,9 @@ namespace FrbaHotel.RegistrarEstadia
                 consulta = "SELECT COUNT(*) FROM FAGD.ClienteXEstadia WHERE estadia_codigo = " + estadia + " AND habitacion_codigo = " + cbohab.Text;
                 resultado = Login.FrmTipoUsuario.BD.comando(consulta);
                 resultado.Read();
-                int aux = resultado.GetInt32(0);
+                int cantAux = resultado.GetInt32(0);
                 resultado.Close();
-                if (aux < Convert.ToInt32(txtCant.Text))
+                if (cantAux < Convert.ToInt32(txtCant.Text))
                 {
                     consulta = "EXEC FAGD.ModificarClienteXEstadia " + cbohab.Text + "," + dgvDistri.CurrentRow.Cells[1].Value.ToString() + "," + estadia;
                     resultado = Login.FrmTipoUsuario.BD.comando(consulta);

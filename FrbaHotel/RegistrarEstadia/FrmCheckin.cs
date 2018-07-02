@@ -90,7 +90,7 @@ namespace FrbaHotel.RegistrarEstadia
 
                 string confirmacion = "EXEC FAGD.CheckinParaEstadia ";
                 confirmacion = confirmacion + txtReserv.Text + ",";
-                confirmacion = confirmacion + Login.FrmLoginUsuario.username + ",";        
+              //confirmacion = confirmacion + Login.FrmLoginUsuario.username + ",";        
                 confirmacion = confirmacion + "'" + diaActual.ToString("yyyyMMdd HH:mm:ss") + "'";
                 resultadoQuery = Login.FrmTipoUsuario.BD.comando(confirmacion);
                 resultadoQuery.Read();

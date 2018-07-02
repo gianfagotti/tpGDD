@@ -37,8 +37,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void FrmCheckout_Load(object sender, EventArgs e)
         {
-            //falta ajustar para DER
-            string query = "SELECT DISTINCT clieXEst.estadia_codigo idEstadia,  clieXEst.habitacion_codigo idHabitacion, ha.habitacion_numero Numero, ha.habitacion_piso Piso FROM FAGD.Estadia est, FAGD.ClienteXEstadia cliXEst, FAGD.Habitacion ha WHERE est.ingreso <= '" + diaActual + "' AND cliXEst.estadia_codigo = est.estadia_codigo AND cliXEst.habitacion_codigo = ha.habitacion_codigo AND ha.hotel_codigo = " + Login.FrmSeleccionarHotel.codigoHotel;
+            string query = "SELECT DISTINCT clieXEst.estadia_codigo estadiaCodigo,  clieXEst.habitacion_codigo habCodigo, ha.habitacion_numero habNumero, ha.habitacion_piso habPiso FROM FAGD.Estadia est, FAGD.ClienteXEstadia cliXEst, FAGD.Habitacion ha WHERE est.estadia_fechaInicio <= '" + diaActual + "' AND cliXEst.estadia_codigo = est.estadia_codigo AND cliXEst.habitacion_codigo = ha.habitacion_codigo AND ha.habitacion_codigoHotel = " + Login.FrmSeleccionarHotel.codigoHotel;
             sAdapter = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
             dTable = Login.FrmTipoUsuario.BD.dameDataTable(sAdapter);
             BindingSource bSource = new BindingSource(); 
@@ -50,10 +49,10 @@ namespace FrbaHotel.RegistrarEstadia
         {
             DataView dvData = new DataView(dTable);
             string query = "";
-            query = query + this.filtrarExactamentePor("idEstadia", txtEst.Text);
-            query = query + this.filtrarExactamentePor("idHabitacion", txthab.Text);
-            query = query + this.filtrarExactamentePor("Numero", txtNrohab.Text);
-            query = query + this.filtrarExactamentePor("Piso", txtPiso.Text);
+            query = query + this.filtrarExactamentePor("estadiaCodigo", txtEst.Text);
+            query = query + this.filtrarExactamentePor("habCodigo", txthab.Text);
+            query = query + this.filtrarExactamentePor("habNumero", txtNrohab.Text);
+            query = query + this.filtrarExactamentePor("habPiso", txtPiso.Text);
             if (query.Length > 0) { query = query.Remove(query.Length - 4); }
             dvData.RowFilter = query;
             dgvFinalizar.DataSource = dvData;

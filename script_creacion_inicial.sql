@@ -1183,46 +1183,45 @@ GO
 
 -----------------------------------------------------------
 
-create procedure FAGD.RegistrarEstadiaXCliente @clienteNro numeric(18,0), @estadiaNro numeric(18,0)
-as begin
+CREATE PROC FAGD.RegistrarEstadiaXCliente @clienteNro numeric(18,0), @estadiaNro numeric(18,0)
+AS BEGIN
 
-declare @respuesta numeric(18,0)
-begin tran ta
-begin try
-	insert into FAGD.ClienteXEstadia (cliente_codigo,estadia_codigo) values(@clienteNro,@estadiaNro);
-	set @respuesta = (select clieXEst_codigo from FAGD.ClienteXEstadia where estadia_codigo = @estadiaNro and cliente_codigo = @clienteNro)
-	select @respuesta as respuesta
-commit tran ta
-end try
-begin catch
-rollback tran ta
-set @respuesta=0
-select @respuesta as respuesta
-end catch
-end
+DECLARE @respuesta numeric(18,0)
+BEGIN TRAN ta
+BEGIN TRY
+	INSERT INTO FAGD.ClienteXEstadia (cliente_codigo,estadia_codigo) VALUES (@clienteNro,@estadiaNro);
+	SET @respuesta = (SELECT clieXEst_codigo FROM FAGD.ClienteXEstadia WHERE estadia_codigo = @estadiaNro AND cliente_codigo = @clienteNro)
+	SELECT @respuesta as respuesta
+COMMIT TRAN ta
+END TRY
+BEGIN CATCH
+ROLLBACK TRAN ta
+SET @respuesta=0
+SELECT @respuesta AS respuesta
+END CATCH
+END
 GO
 
 ------------------------------------------------------------------------------
 
-create procedure FAGD.ModificarClienteXEstadia @habitacion numeric(18,0), @cliente numeric(18,0), @estadia numeric(18,0)
-as begin
+CREATE PROC FAGD.ModificarClienteXEstadia @habitacion numeric(18,0), @cliente numeric(18,0), @estadia numeric(18,0)
+AS BEGIN
 
-declare @respuesta numeric(18,0)
-begin tran ta
-begin try
-	update FAGD.ClienteXEstadia
-	set habitacion_codigo = @habitacion
-	where estadia_codigo = @estadia and cliente_codigo = @cliente
-	set @respuesta = 1
-	select @respuesta as respuesta
-commit tran ta
-end try
-begin catch
-rollback tran ta
-set @respuesta=0
-select @respuesta as respuesta
-end catch
-end
+DECLARE @respuesta numeric(18,0)
+BEGIN TRAN ta
+BEGIN TRY
+	UPDATE FAGD.ClienteXEstadia
+	SET habitacion_codigo = @habitacion WHERE estadia_codigo = @estadia AND cliente_codigo = @cliente
+	SET @respuesta = 1
+	SELECT @respuesta AS respuesta
+COMMIT TRAN ta
+END TRY
+BEGIN CATCH
+ROLLBACK TRAN ta
+SET @respuesta=0
+select @respuesta AS respuesta
+END CATCH
+END
 GO
 
 ------------------------------------------------------------------------------

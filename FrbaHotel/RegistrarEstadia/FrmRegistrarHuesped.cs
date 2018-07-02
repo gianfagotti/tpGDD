@@ -19,7 +19,7 @@ namespace FrbaHotel.RegistrarEstadia
         string nroReserva;
         decimal totalPers = 0;
         string nroEstadia;
-        decimal dniCli = 0;
+        decimal codigoCli = 0;
         string nombre;
         string apellido;
         public static decimal persDisp = 0;
@@ -61,17 +61,18 @@ namespace FrbaHotel.RegistrarEstadia
                 MessageBox.Show("La reserva no tiene habitaciones");
                 this.Close();
             }
-            consulta = "SELECT cli.cliente_codigo, cli.cliente_nombre, cli.cliente_apellido FROM FAGD.Reserva res, FAGD.Cliente cli where res.reserva_clienteCodigo = cli.cliente_codigo and res.reserva_codigo = " + nroReserva;
+            consulta = "SELECT cli.cliente_codigo CodigoCli, cli.cliente_nombre Nombre, cli.cliente_apellido Apellido FROM FAGD.Reserva res, FAGD.Cliente cli where res.reserva_clienteCodigo = cli.cliente_codigo and res.reserva_codigo = " + nroReserva;
             resultado = Login.FrmTipoUsuario.BD.comando(consulta);
             resultado.Read();
             txtTitular.Text = resultado.GetString(2) + " " + resultado.GetString(3);
             persDisp = totalPers - 1;
             txtRest.Text = (persDisp).ToString();
-            dniCli = resultado.GetDecimal(0);
+            //Defino las variables de cada registro consulta
+            codigoCli = resultado.GetDecimal(0);
             nombre = resultado.GetString(1);
             apellido = resultado.GetString(2);
             DataRow row = tabla.NewRow();
-            row["Dni"] = dniCli;
+            row["CodigoCli"] = codigoCli;
             row["Nombre"] = nombre;
             row["Apellido"] = apellido;
             tabla.Rows.Add(row);
@@ -107,7 +108,7 @@ namespace FrbaHotel.RegistrarEstadia
             
             foreach (DataRow fila in tabla.Rows)
             {
-                resultado = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarEstadiaXCliente " + fila["Dni"].ToString() + "," + nroEstadia);
+                resultado = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarEstadiaXCliente " + fila["CodigoCli"].ToString() + "," + nroEstadia);
                 if (resultado.Read())
                 {
                     if (resultado.GetDecimal(0) == 0)
@@ -155,8 +156,6 @@ namespace FrbaHotel.RegistrarEstadia
         {
             bSource2.DataSource = tabla;
             txtRest.Text = persDisp.ToString();
-
-
         }
 
         private void btnSeleCliente_Click(object sender, EventArgs e)
@@ -180,7 +179,7 @@ namespace FrbaHotel.RegistrarEstadia
             tabla.Clear();
             persDisp = totalPers - 1;
             DataRow row = tabla.NewRow();
-            row["dni"] = dniCli;
+            row["CodigoCli"] = codigoCli;
             row["Nombre"] = nombre;
             row["Apellido"] = apellido;
             tabla.Rows.Add(row);
@@ -192,7 +191,7 @@ namespace FrbaHotel.RegistrarEstadia
             if (e.ColumnIndex == 0)
             {
                 int item = dgvHuesped.CurrentRow.Index;
-                if (dgvHuesped.CurrentRow.Cells[1].Value.ToString() == dniCli.ToString())
+                if (dgvHuesped.CurrentRow.Cells[1].Value.ToString() == codigoCli.ToString())
                 {
                     MessageBox.Show("No se puede borrar el cliente que hizo la reserva");
                     return;

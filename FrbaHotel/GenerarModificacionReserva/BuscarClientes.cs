@@ -15,7 +15,6 @@ namespace FrbaHotel.GenerarModificacionReserva
     {
         Form abmPadre;
         string consulta;
-        SqlDataReader resultado;
         SqlDataAdapter sAdapter;
         DataTable dTable;
 
@@ -75,7 +74,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void BuscarClientes_Load(object sender, EventArgs e)
         {
-            string query = "select cliente_nombre Nombre,cliente_apellido Apellido,cliente_tipoDocumento TipoDoc,cliente_nroDocumento NroDoc,cliente_mail Mail from FAGD.Cliente";
+            string query = "SELECT cliente_codigo CodigoCli, cliente_nombre Nombre,cliente_apellido Apellido,cliente_tipoDocumento TipoDoc,cliente_nroDocumento NroDoc,cliente_mail Mail from FAGD.Cliente";
             sAdapter = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
             dTable = Login.FrmTipoUsuario.BD.dameDataTable(sAdapter);
             //BindingSource to sync DataTable and DataGridView
@@ -97,13 +96,12 @@ namespace FrbaHotel.GenerarModificacionReserva
                     GenerarModificacionReserva.GenerarReserva.ActiveForm.Show();
                     this.Close();
                 }
-                else
-                {
+                else  {
                     string nombre = dataGridView1.CurrentRow.Cells[1].Value.ToString();
                     string apellido = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-                    string dni = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+                    string codigoCli = dataGridView1.CurrentRow.Cells[0].Value.ToString();
                     DataRow row = RegistrarEstadia.FrmRegistrarHuesped.tabla.NewRow();
-                    row["dni"] = dni;
+                    row["CodigoCli"] = codigoCli;
                     row["Nombre"] = nombre;
                     row["Apellido"] = apellido;
                     try
@@ -115,7 +113,6 @@ namespace FrbaHotel.GenerarModificacionReserva
                     {
                         MessageBox.Show("Ese cliente ya esta agregado");
                     }
-
                     RegistrarEstadia.FrmRegistrarHuesped.ActiveForm.Show();
                     this.Close();
                 }
