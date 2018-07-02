@@ -74,7 +74,7 @@ namespace FrbaHotel.RegistrarEstadia
             if (e.ColumnIndex == 0)
             {
                 //generar facturacion
-                consulta = "EXEC FAGD.registrarCheckoutEstadia ";
+                consulta = "EXEC FAGD.CheckoutParaEstadia ";
                 consulta = consulta + dgvFinalizar.CurrentRow.Cells[1].Value.ToString();
                 consulta = consulta + ",'" + diaActual.ToString("yyyyMMdd HH:mm:ss") + "',";
             //    consulta = consulta + Login.HomeLogin.idUsuario;

@@ -91,7 +91,7 @@ namespace FrbaHotel.RegistrarEstadia
                     return;
                 }
 
-                string confirmacion = "EXEC FAGD.registrarCheckinEstadia ";
+                string confirmacion = "EXEC FAGD.CheckinParaEstadia ";
                 confirmacion = confirmacion + txtReserv.Text + ",";
               /*confirmacion = confirmacion + Login.user + ",";         */
                 confirmacion = confirmacion + "'" + diaActual.ToString("yyyyMMdd HH:mm:ss") + "'";
@@ -110,7 +110,7 @@ namespace FrbaHotel.RegistrarEstadia
                     if (factura == 0)
                     {
                         resultadoQuery.Close();
-                        MessageBox.Show("Error al insertar factura, ya esta generada");
+                        MessageBox.Show("Error al crear factura, ya esta generada");
                         return;
                     }
                     resultadoQuery.Close();

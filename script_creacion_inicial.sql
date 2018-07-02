@@ -59,7 +59,7 @@ CREATE TABLE FAGD.Reserva(
 	reserva_cantNoches numeric(5) NOT NULL,
 	reserva_estado nvarchar(255),
 	reserva_codigoRegimen numeric(18),
-	reserva_clienteNroDocumento numeric(18,0),
+	reserva_clienteCodigo numeric(18,0),
 	reserva_nombreUsuario nvarchar(255),
 	reserva_codigoHotel numeric (18,0)
 )
@@ -135,7 +135,7 @@ CREATE TABLE FAGD.Factura(
  factura_codigoHotel numeric (18),
  factura_fecha datetime,
  factura_total numeric(18,2),
- factura_documentoCliente numeric(18),
+ factura_clienteCodigo numeric(18) NOT NULL,
  factura_estado numeric(1)
  )
 GO
@@ -159,6 +159,7 @@ GO
 
 
 CREATE TABLE FAGD.Cliente(
+ cliente_codigo numeric(18) IDENTITY (1,1) NOT NULL,
  cliente_nroDocumento numeric(18) NOT NULL,
  cliente_apellido nvarchar(255),
  cliente_nombre nvarchar(255),
@@ -213,14 +214,14 @@ CREATE TABLE FAGD.Estadia(
 estadia_codigo numeric(18) IDENTITY(1,1) NOT NULL,
 estadia_fechaInicio datetime,
 estadia_cantNoches numeric(18),
-estadia_clienteNroDocumento numeric (18) NOT NULL,
+estadia_clienteCodigo numeric (18) NOT NULL,
 estadia_codigoReserva numeric(18) NOT NULL
 )
 GO
 
 CREATE TABLE FAGD.ClienteXEstadia(
 	clieXEst_codigo numeric(18,0) IDENTITY(1,1) NOT NULL,
-	cliente_nroDocumento numeric(18,0),
+	cliente_codigo numeric(18,0) NOT NULL,
 	errorCliente_codigo numeric(18,0),
 	estadia_codigo numeric(18,0) NOT NULL,
 	habitacion_codigo numeric(18,0)
@@ -277,7 +278,7 @@ ALTER TABLE FAGD.Factura ADD CONSTRAINT PK_Factura
 GO
 
 ALTER TABLE FAGD.Cliente ADD CONSTRAINT PK_Cliente
- PRIMARY KEY CLUSTERED (cliente_nroDocumento)
+ PRIMARY KEY CLUSTERED (cliente_codigo)
 GO
 
 ALTER TABLE FAGD.Pago ADD CONSTRAINT PK_Pago
@@ -336,7 +337,7 @@ ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT FK_ConsumibleXEstadia_Estadia
 GO
 
 ALTER TABLE FAGD.Factura ADD CONSTRAINT FK_Factura_Cliente
- FOREIGN KEY (factura_documentoCliente) REFERENCES FAGD.Cliente(cliente_nroDocumento)
+ FOREIGN KEY (factura_clienteCodigo) REFERENCES FAGD.Cliente(cliente_codigo)
 GO
 
 ALTER TABLE FAGD.Factura ADD CONSTRAINT FK_Factura_Estadia
@@ -364,7 +365,7 @@ ALTER TABLE FAGD.Pago ADD CONSTRAINT FK_Pago_Factura
 GO
 
 ALTER TABLE FAGD.Estadia ADD CONSTRAINT FK_Estadia_Cliente
- FOREIGN KEY (estadia_clienteNroDocumento) REFERENCES FAGD.Cliente(cliente_nroDocumento)
+ FOREIGN KEY (estadia_clienteCodigo) REFERENCES FAGD.Cliente(cliente_codigo)
 GO
 
 ALTER TABLE FAGD.Estadia ADD CONSTRAINT FK_Estadia_Reserva
@@ -388,7 +389,7 @@ ALTER TABLE FAGD.Habitacion ADD CONSTRAINT FK_Habitacion_Hotel
 GO
 
 ALTER TABLE FAGD.Reserva ADD CONSTRAINT FK_Reserva_Cliente
- FOREIGN KEY (reserva_clienteNroDocumento) REFERENCES FAGD.Cliente(cliente_nroDocumento)
+ FOREIGN KEY (reserva_clienteCodigo) REFERENCES FAGD.Cliente(cliente_codigo)
 GO
 
 ALTER TABLE FAGD.Reserva ADD CONSTRAINT FK_Reserva_Regimen
@@ -424,7 +425,7 @@ ALTER TABLE FAGD.ReservaXHabitacion ADD CONSTRAINT FK_ReservaXHabitacion_Habitac
 GO
 
 ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT FK_ClienteXEstadia_Cliente 
- FOREIGN KEY(cliente_nroDocumento) REFERENCES FAGD.Cliente(cliente_nroDocumento)
+ FOREIGN KEY(cliente_codigo) REFERENCES FAGD.Cliente(cliente_codigo)
 GO
 
 ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT FK_ClienteXEstadia_ErrorCliente 
@@ -487,10 +488,10 @@ INSERT INTO FAGD.Habitacion(habitacion_codigoHotel, habitacion_nro, habitacion_t
 GO
 
 
-INSERT INTO FAGD.Reserva ([reserva_codigo],[reserva_fechaInicio],[reserva_cantNoches],[reserva_codigoRegimen],[reserva_clienteNroDocumento],[reserva_codigoHotel])
-		SELECT DISTINCT M.Reserva_codigo, M.Reserva_Fecha_Inicio, M.Reserva_Cant_Noches, R.regimen_codigo, C.cliente_nroDocumento, H.hotel_codigo
+INSERT INTO FAGD.Reserva ([reserva_codigo],[reserva_fechaInicio],[reserva_cantNoches],[reserva_codigoRegimen],[reserva_clienteCodigo],[reserva_codigoHotel])
+		SELECT DISTINCT M.Reserva_codigo, M.Reserva_Fecha_Inicio, M.Reserva_Cant_Noches, R.regimen_codigo, C.cliente_codigo, H.hotel_codigo
 		FROM FAGD.Regimen R, FAGD.Hotel H, FAGD.Cliente C, gd_esquema.Maestra M
-		WHERE M.Regimen_Descripcion = R.regimen_descripcion and M.Hotel_Calle = H.hotel_calle and M.Hotel_Nro_Calle = H.hotel_nroCalle AND M.Cliente_Pasaporte_Nro = C.cliente_NroDocumento
+		WHERE M.Regimen_Descripcion = R.regimen_descripcion and M.Hotel_Calle = H.hotel_calle and M.Hotel_Nro_Calle = H.hotel_nroCalle AND M.Cliente_Pasaporte_Nro = C.cliente_nroDocumento
 		ORDER BY M.Reserva_Codigo
 GO
 
@@ -500,21 +501,31 @@ INSERT INTO FAGD.ReservaxHabitacion(reserva_codigo, habitacion_codigo)
 		WHERE M.Habitacion_Numero = H.habitacion_nro and M.Reserva_Codigo = R.reserva_codigo
 		ORDER BY reserva_codigo
 
-INSERT INTO FAGD.Estadia (estadia_fechaInicio, estadia_cantNoches, estadia_clienteNroDocumento, estadia_codigoReserva)
-		SELECT DISTINCT M.Estadia_Fecha_Inicio, M.Estadia_Cant_Noches, M.Cliente_Pasaporte_Nro, M.Reserva_Codigo
-		FROM gd_esquema.Maestra M, FAGD.Reserva R
-		WHERE R.reserva_clienteNroDocumento = M.Cliente_Pasaporte_Nro AND R.reserva_codigo = M.Reserva_Codigo
+INSERT INTO FAGD.Estadia (estadia_fechaInicio, estadia_cantNoches, estadia_clienteCodigo, estadia_codigoReserva)
+		SELECT DISTINCT M.Estadia_Fecha_Inicio, M.Estadia_Cant_Noches, Cliente.cliente_codigo, M.Reserva_Codigo
+		FROM gd_esquema.Maestra M, FAGD.Reserva R, FAGD.Cliente Cliente
+		WHERE R.reserva_clienteCodigo = Cliente.cliente_codigo AND R.reserva_codigo = M.Reserva_Codigo
 		AND M.Estadia_Fecha_Inicio IS NOT NULL AND M.Estadia_Cant_Noches IS NOT NULL
 		ORDER BY M.Reserva_Codigo
 GO
 
-
-INSERT INTO FAGD.Factura(factura_nro, factura_codigoHotel, factura_codigoEstadia, factura_fecha, factura_total, factura_documentoCliente, factura_estado) 
-		SELECT DISTINCT Maestra.Factura_Nro, Hotel.hotel_codigo, Estadia.estadia_codigo, Maestra.Factura_Fecha, Maestra.Factura_Total,  Maestra.Cliente_Pasaporte_Nro, 1
-		FROM gd_esquema.Maestra Maestra, FAGD.Estadia Estadia, FAGD.Hotel Hotel
-		WHERE Maestra.Factura_Nro IS NOT NULL AND Estadia.estadia_codigoReserva = Maestra.Reserva_codigo AND  Estadia.estadia_clienteNroDocumento = Maestra.Cliente_Pasaporte_Nro AND Hotel.hotel_calle = Maestra.Hotel_Calle AND Hotel.hotel_nroCalle = Maestra.Hotel_Nro_Calle
+--Facturas cliente ok
+INSERT INTO FAGD.Factura(factura_nro, factura_codigoHotel, factura_codigoEstadia, factura_fecha, factura_total, factura_clienteCodigo, factura_estado) 
+		SELECT DISTINCT Maestra.Factura_Nro, Hotel.hotel_codigo, Estadia.estadia_codigo, Maestra.Factura_Fecha, Maestra.Factura_Total,  Cliente.cliente_codigo, 1
+		FROM gd_esquema.Maestra Maestra, FAGD.Estadia Estadia, FAGD.Hotel Hotel, FAGD.Cliente Cliente
+		WHERE Maestra.Factura_Nro IS NOT NULL AND Estadia.estadia_codigoReserva = Maestra.Reserva_codigo AND  Estadia.estadia_clienteCodigo = Cliente.cliente_codigo AND Hotel.hotel_calle = Maestra.Hotel_Calle AND Hotel.hotel_nroCalle = Maestra.Hotel_Nro_Calle
 		ORDER BY Maestra.Factura_Nro
 GO
+
+/*Facturas clienteError
+INSERT INTO FAGD.Factura(factura_nro, factura_codigoHotel, factura_codigoEstadia, factura_fecha, factura_total, factura_clienteCodigo, factura_estado) 
+		SELECT DISTINCT Maestra.Factura_Nro, Hotel.hotel_codigo, Estadia.estadia_codigo, Maestra.Factura_Fecha, Maestra.Factura_Total,  Cliente.cliente_codigo, 1
+		FROM gd_esquema.Maestra Maestra, FAGD.Estadia Estadia, FAGD.Hotel Hotel, FAGD.Cliente Cliente
+		WHERE Maestra.Factura_Nro IS NOT NULL AND Estadia.estadia_codigoReserva = Maestra.Reserva_codigo AND  Estadia.estadia_clienteCodigo = Cliente.cliente_codigo AND Hotel.hotel_calle = Maestra.Hotel_Calle AND Hotel.hotel_nroCalle = Maestra.Hotel_Nro_Calle
+		ORDER BY Maestra.Factura_Nro
+GO*/
+
+
 
 
 INSERT INTO FAGD.HotelXRegimen (hotel_codigo,regimen_codigo)
@@ -544,8 +555,8 @@ GO
 
 ------------------------------------------------------Probando cliexEst
 
-INSERT INTO FAGD.ClienteXEstadia (cliente_nroDocumento,errorCliente_codigo,estadia_codigo)
-	(SELECT DISTINCT cli.cliente_nroDocumento, NULL, est.estadia_codigo FROM gd_esquema.Maestra m, FAGD.Cliente cli, FAGD.Estadia est
+INSERT INTO FAGD.ClienteXEstadia (cliente_codigo,errorCliente_codigo,estadia_codigo)
+	(SELECT DISTINCT cli.cliente_codigo, NULL, est.estadia_codigo FROM gd_esquema.Maestra m, FAGD.Cliente cli, FAGD.Estadia est
 	 WHERE  m.Estadia_Fecha_Inicio IS NOT NULL AND
 			m.Cliente_Pasaporte_Nro = cli.cliente_nroDocumento AND
 			m.Cliente_Apellido = cli.cliente_apellido AND
@@ -883,14 +894,14 @@ AS	BEGIN
 		END
 
 
-SELECT TOP 5 cli.cliente_nroDocumento, cli.cliente_nombre AS Nombre, cli.cliente_apellido AS Apellido, puntosDeEstadia.Puntos+puntosDeConsumibles.Puntos AS Puntaje
+SELECT TOP 5 cli.cliente_codigo, cli.cliente_nombre AS Nombre, cli.cliente_apellido AS Apellido, puntosDeEstadia.Puntos+puntosDeConsumibles.Puntos AS Puntaje
 FROM 
-(SELECT clie.cliente_nroDocumento, est.estadia_codigo, SUM(fact.factura_total) AS Gasto, SUM(fact.factura_total)/10 AS Puntos
+(SELECT clie.cliente_codigo, est.estadia_codigo, SUM(fact.factura_total) AS Gasto, SUM(fact.factura_total)/10 AS Puntos
 	FROM FAGD.Cliente clie, FAGD.Estadia est, FAGD.Factura fact
-	WHERE clie.cliente_nroDocumento = estadia_clienteNroDocumento AND
+	WHERE clie.cliente_codigo = estadia_clienteCodigo AND
 		  factura_codigoEstadia = est.estadia_codigo AND
 		  fact.factura_fecha BETWEEN @inicioTrimestre AND @finTrimestre
-	GROUP BY clie.cliente_nroDocumento, est.estadia_codigo
+	GROUP BY clie.cliente_codigo, est.estadia_codigo
 	) AS puntosDeEstadia, 
 
 (SELECT consXEst.estadia_codigo, 
@@ -906,14 +917,16 @@ SUM(itemFactura_codigoConsumible*item.itemFactura_consumibleCantidad)/10 AS Punt
 	) AS puntosDeConsumibles,
 	
 FAGD.Cliente cli, FAGD.Estadia est, FAGD.Reserva res
-WHERE cli.cliente_nroDocumento = res.reserva_clienteNroDocumento AND
+WHERE cli.cliente_codigo = res.reserva_clienteCodigo AND
 		est.estadia_codigoReserva = res.reserva_codigo AND 
 		puntosDeConsumibles.estadia_codigo = est.estadia_codigo  AND
 		puntosDeEstadia.estadia_codigo = est.estadia_codigo 
 ORDER BY Puntaje DESC
 END
 GO
------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.CheckinParaEstadia @reservaNro numeric(18,0)/*, @username nvarchar(255)*/, @fechaInicio datetime
 AS BEGIN
@@ -927,11 +940,11 @@ DECLARE @respuestaTran numeric(18,0),
 		@estado numeric(18,0)
 BEGIN TRAN ta
 BEGIN TRY
---	SET @estado = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA EFECTIVIZADA')
-	SET @cantNoches = (SELECT reserva_cantNoches FROM FAGD.Reserva WHERE reserva_codigo = @reservaNro)
---	SET @precioNoche = (SELECT costoTotal FROM FAGD.Reserva WHERE reserva_codigo = @reservaNro)/@cantNoches
-	INSERT INTO FAGD.Estadia(estadia_codigoReserva,estadia_fechaInicio/*,usuario*/,precioPorNoche,estadia_cantNoches) VALUES(@reservaNro,@fecha/*,@userNro*/,@precioNoche,@cantNoches);
-	UPDATE FAGD.Reserva SET estado=@estado WHERE reserva_codigo = @reservaNro
+--  SET @estado = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA EFECTIVIZADA')
+--  SET @cantNoches = (SELECT reserva_cantNoches FROM FAGD.Reserva WHERE reserva_codigo = @reservaNro)
+--  SET @precioNoche = (SELECT costoTotal FROM FAGD.Reserva WHERE reserva_codigo = @reservaNro)/@cantNoches
+--	INSERT INTO FAGD.Estadia(estadia_codigoReserva,estadia_fechaInicio,usuario,precioPorNoche,estadia_cantNoches) VALUES(@reservaNro,@fecha/*,@userNro*/,@precioNoche,@cantNoches);
+--	UPDATE FAGD.Reserva SET estado=@estado WHERE reserva_codigo = @reservaNro
 	SET @respuestaTran =(SELECT estadia_codigo FROM FAGD.Estadia WHERE estadia_codigoReserva = @reservaNro and estadia_fechaInicio=@fecha)
 	SELECT @respuestaTran as respuesta
 COMMIT TRAN ta
@@ -945,7 +958,8 @@ END
 GO
 
 ------------------------------------------------------------------------------
-/*
+
+
 CREATE PROCEDURE FAGD.generarFactura  @estadia numeric(18,0), @formaPago numeric(18,0), @fechaInicio datetime
 AS BEGIN
 
@@ -959,17 +973,17 @@ DECLARE @resultado numeric(18,0),
 BEGIN TRAN ta
 BEGIN TRY
 		SET @reserva = (SELECT estadia_codigoReserva FROM FAGD.Estadia WHERE estadia_codigo = @estadia);
-		SET @cliente = (SELECT reserva_clienteNroDocumento FROM FAGD.Reserva WHERE reserva_codigo = @reserva);
+		SET @cliente = (SELECT reserva_clienteCodigo FROM FAGD.Reserva WHERE reserva_codigo = @reserva);
 		SET @regimen = (SELECT reserva_codigoRegimen FROM FAGD.Reserva WHERE reserva_codigo = @reserva);
 		if ( @regimen != 3 )
-		BEGIN
-			SET @totalPago = FAGD.calcPrecioEstadia(@estadia) + FAGD.calcPrecioConsumible(@estadia);
-			INSERT INTO FAGD.Factura(estadia,formaDePago,cliente,fecha,total) VALUES (@estadia,@formaPago,@cliente,@fecha,@totalPago);
-		END
-		ELSE BEGIN
-				SET @totalPago = FAGD.calcPrecioEstadia(@estadia);
-				INSERT INTO FAGD.Factura(estadia,formaDePago,cliente,fecha,total) VALUES (@estadia,@formaPago,@cliente,@fecha,@totalPago);
-			END
+	--	BEGIN
+	--		SET @totalPago = FAGD.calcPrecioEstadia(@estadia) + FAGD.calcPrecioConsumible(@estadia);
+	--		INSERT INTO FAGD.Factura(estadia,formaDePago,cliente,fecha,total) VALUES (@estadia,@formaPago,@cliente,@fecha,@totalPago);
+	--	END
+	--	ELSE BEGIN
+	--			SET @totalPago = FAGD.calcPrecioEstadia(@estadia);
+	--			INSERT INTO FAGD.Factura(estadia,formaDePago,cliente,fecha,total) VALUES (@estadia,@formaPago,@cliente,@fecha,@totalPago);
+	--		END
 		SET @resultado =(SELECT factura_nro FROM FAGD.Factura WHERE factura_codigoEstadia = @estadia and factura_fecha = @fecha)
 		SELECT @resultado as resultado
 COMMIT TRAN	ta
@@ -981,16 +995,17 @@ SELECT @resultado as resultado
 END CATCH
 END
 GO
-*/
-------------------------------------------------------------------------------
+
+-----------------------------------------------------------
 
 create procedure FAGD.RegistrarEstadiaXCliente @clienteNro numeric(18,0), @estadiaNro numeric(18,0)
 as begin
+
 declare @respuesta numeric(18,0)
 begin tran ta
 begin try
-	insert into FAGD.ClienteXEstadia (cliente_nroDocumento,estadia_codigo) values(@clienteNro,@estadiaNro);
-	set @respuesta = (select clieXEst_codigo from FAGD.ClienteXEstadia where estadia_codigo = @estadiaNro and cliente_nroDocumento = @clienteNro)
+	insert into FAGD.ClienteXEstadia (cliente_codigo,estadia_codigo) values(@clienteNro,@estadiaNro);
+	set @respuesta = (select clieXEst_codigo from FAGD.ClienteXEstadia where estadia_codigo = @estadiaNro and cliente_codigo = @clienteNro)
 	select @respuesta as respuesta
 commit tran ta
 end try
@@ -1012,7 +1027,7 @@ begin tran ta
 begin try
 	update FAGD.ClienteXEstadia
 	set habitacion_codigo = @habitacion
-	where estadia_codigo = @estadia and cliente_nroDocumento = @cliente
+	where estadia_codigo = @estadia and cliente_codigo = @cliente
 	set @respuesta = 1
 	select @respuesta as respuesta
 commit tran ta
@@ -1027,7 +1042,7 @@ GO
 
 ------------------------------------------------------------------------------
 
-create procedure FAGD.registrarCheckoutEstadia @nroEstadia numeric(18,0), @fechaEvaluada datetime/*, @usuario numeric(18,0)*/
+create procedure FAGD.CheckoutParaEstadia @nroEstadia numeric(18,0), @fechaEvaluada datetime/*, @usuario numeric(18,0)*/
 as begin
 
 declare @fecha datetime
