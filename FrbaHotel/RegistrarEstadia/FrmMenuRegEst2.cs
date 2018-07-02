@@ -45,12 +45,10 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void btnCheckout_Click(object sender, EventArgs e)
         {
-            /*
             this.Hide();
             FrmCheckout checkout = new FrmCheckout();
             checkout.ShowDialog();
-            this.Show();
-             * */
+            this.Show();    
         }
     }
 }

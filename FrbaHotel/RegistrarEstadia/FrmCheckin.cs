@@ -115,9 +115,9 @@ namespace FrbaHotel.RegistrarEstadia
                     }
                     resultadoQuery.Close();
                     //aca seria lo de clientesXEstadia que la vamos a crear
-                    /*ClientesEstadia cliest = new ClientesEstadia(textBox1.Text,estadia.ToString());
-                    cliest.Show();
-                    this.Close();*/
+                    FrmRegistrarHuesped regHue = new FrmRegistrarHuesped(txtReserv.Text,estadia.ToString());
+                    regHue.Show();
+                    this.Close();
                 }
                 else
                 {
@@ -133,9 +133,6 @@ namespace FrbaHotel.RegistrarEstadia
                 resultadoQuery.Close();
                 MessageBox.Show("Numero de reserva incorrecto.");
                 return;
-            
-        
-
             } 
   
             

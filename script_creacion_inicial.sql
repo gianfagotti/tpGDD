@@ -912,9 +912,168 @@ WHERE cli.cliente_nroDocumento = res.reserva_clienteNroDocumento AND
 ORDER BY Puntaje DESC
 END
 GO
+-----------------------------------------------------------------------------
 
+CREATE PROCEDURE FAGD.CheckinParaEstadia @reservaNro numeric(18,0)/*, @username nvarchar(255)*/, @fechaInicio datetime
+AS BEGIN
+
+DECLARE @fecha datetime
+SET @fecha = CONVERT(datetime,@fechaInicio,121)
+
+DECLARE @respuestaTran numeric(18,0),
+		@precioNoche numeric(18,0),
+		@cantNoches numeric(18,0),
+		@estado numeric(18,0)
+BEGIN TRAN ta
+BEGIN TRY
+--	SET @estado = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA EFECTIVIZADA')
+	SET @cantNoches = (SELECT reserva_cantNoches FROM FAGD.Reserva WHERE reserva_codigo = @reservaNro)
+--	SET @precioNoche = (SELECT costoTotal FROM FAGD.Reserva WHERE reserva_codigo = @reservaNro)/@cantNoches
+	INSERT INTO FAGD.Estadia(estadia_codigoReserva,estadia_fechaInicio/*,usuario*/,precioPorNoche,estadia_cantNoches) VALUES(@reservaNro,@fecha/*,@userNro*/,@precioNoche,@cantNoches);
+	UPDATE FAGD.Reserva SET estado=@estado WHERE reserva_codigo = @reservaNro
+	SET @respuestaTran =(SELECT estadia_codigo FROM FAGD.Estadia WHERE estadia_codigoReserva = @reservaNro and estadia_fechaInicio=@fecha)
+	SELECT @respuestaTran as respuesta
+COMMIT TRAN ta
+END TRY
+BEGIN CATCH
+ROLLBACK TRAN ta
+SET @respuestaTran=0
+SELECT @respuestaTran AS respuesta
+END CATCH
+END
+GO
 
 ------------------------------------------------------------------------------
+/*
+CREATE PROCEDURE FAGD.generarFactura  @estadia numeric(18,0), @formaPago numeric(18,0), @fechaInicio datetime
+AS BEGIN
+
+DECLARE @fecha datetime
+SET @fecha = CONVERT(datetime,@fechaInicio,121)
+DECLARE @resultado numeric(18,0),
+		@regimen numeric(18,0),
+		@reserva numeric(18,0),
+		@totalPago numeric(18,2),
+		@cliente numeric(18,0)
+BEGIN TRAN ta
+BEGIN TRY
+		SET @reserva = (SELECT estadia_codigoReserva FROM FAGD.Estadia WHERE estadia_codigo = @estadia);
+		SET @cliente = (SELECT reserva_clienteNroDocumento FROM FAGD.Reserva WHERE reserva_codigo = @reserva);
+		SET @regimen = (SELECT reserva_codigoRegimen FROM FAGD.Reserva WHERE reserva_codigo = @reserva);
+		if ( @regimen != 3 )
+		BEGIN
+			SET @totalPago = FAGD.calcPrecioEstadia(@estadia) + FAGD.calcPrecioConsumible(@estadia);
+			INSERT INTO FAGD.Factura(estadia,formaDePago,cliente,fecha,total) VALUES (@estadia,@formaPago,@cliente,@fecha,@totalPago);
+		END
+		ELSE BEGIN
+				SET @totalPago = FAGD.calcPrecioEstadia(@estadia);
+				INSERT INTO FAGD.Factura(estadia,formaDePago,cliente,fecha,total) VALUES (@estadia,@formaPago,@cliente,@fecha,@totalPago);
+			END
+		SET @resultado =(SELECT factura_nro FROM FAGD.Factura WHERE factura_codigoEstadia = @estadia and factura_fecha = @fecha)
+		SELECT @resultado as resultado
+COMMIT TRAN	ta
+END TRY
+BEGIN CATCH
+ROLLBACK TRAN ta
+SET @resultado=0
+SELECT @resultado as resultado
+END CATCH
+END
+GO
+*/
+------------------------------------------------------------------------------
+
+create procedure FAGD.RegistrarEstadiaXCliente @clienteNro numeric(18,0), @estadiaNro numeric(18,0)
+as begin
+declare @respuesta numeric(18,0)
+begin tran ta
+begin try
+	insert into FAGD.ClienteXEstadia (cliente_nroDocumento,estadia_codigo) values(@clienteNro,@estadiaNro);
+	set @respuesta = (select clieXEst_codigo from FAGD.ClienteXEstadia where estadia_codigo = @estadiaNro and cliente_nroDocumento = @clienteNro)
+	select @respuesta as respuesta
+commit tran ta
+end try
+begin catch
+rollback tran ta
+set @respuesta=0
+select @respuesta as respuesta
+end catch
+end
+GO
+
+------------------------------------------------------------------------------
+
+create procedure FAGD.ModificarClienteXEstadia @habitacion numeric(18,0), @cliente numeric(18,0), @estadia numeric(18,0)
+as begin
+
+declare @respuesta numeric(18,0)
+begin tran ta
+begin try
+	update FAGD.ClienteXEstadia
+	set habitacion_codigo = @habitacion
+	where estadia_codigo = @estadia and cliente_nroDocumento = @cliente
+	set @respuesta = 1
+	select @respuesta as respuesta
+commit tran ta
+end try
+begin catch
+rollback tran ta
+set @respuesta=0
+select @respuesta as respuesta
+end catch
+end
+GO
+
+------------------------------------------------------------------------------
+
+create procedure FAGD.registrarCheckoutEstadia @nroEstadia numeric(18,0), @fechaEvaluada datetime/*, @usuario numeric(18,0)*/
+as begin
+
+declare @fecha datetime
+Set @fecha = CONVERT(datetime,@fechaEvaluada,121)
+declare @respuesta numeric(18,0),
+		@cantDias numeric(18,0),
+		@diasSobrantes numeric(18,0),
+		@precioNoche numeric(18,0),
+		@nroReserva numeric(18,0),
+		@resHasta datetime,
+		@factura numeric(18,0),
+		@monto numeric(18,0)
+begin tran ta
+begin try
+	set @cantDias = DATEDIFF(day,( select estadia_fechaInicio from FAGD.Estadia where estadia_codigo = @nroEstadia ),@fecha);
+	set @nroReserva = (select estadia_codigoReserva from FAGD.Estadia where estadia_codigo = @nroEstadia);
+	set @resHasta = (select reserva_fechaFin from FAGD.Reserva where reserva_codigo = @nroReserva);
+	set @diasSobrantes = DATEDIFF(day,@fecha,@resHasta);
+	
+	UPDATE FAGD.Estadia
+	set
+	--	usuarioSalida = @usuario,
+		estadia_fechaInicio = @fecha
+	--	diasSobrantes = @diasSobrantes,
+	--	cantidadNoches =  @cantDias,
+		where estadia_codigo = @nroEstadia;
+	
+--	set @monto = (select costoTotal from FAGD.Reserva where reserva_codigo = @nroReserva)
+	set @factura = (select factura_nro from FAGD.Factura where factura_codigoEstadia = @nroEstadia)
+	/*
+	insert into FAGD.ItemFactura(itemFactura_fact,descripcion,cantidad,monto)
+	values(@factu,'Estadia',1, @monto)*/
+	set @respuesta = 1;
+	select @respuesta as respuesta;
+	
+commit tran ta
+end try
+begin catch
+rollback tran ta
+set @respuesta=0
+select @respuesta as respuesta
+end catch
+end
+GO
+
+------------------------------------------------------------------------------
+
 
 create proc FAGD.guardarNuevoCliente 
 @nombre nvarchar(255),
