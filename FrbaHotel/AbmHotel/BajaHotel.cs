@@ -12,8 +12,10 @@ namespace FrbaHotel.AbmHotel
 {
     public partial class FrmBajaHotel : Form
     {
-        public FrmBajaHotel()
+        AbmRol.frmMenuEmpleado frmMenuEmpleado;
+        public FrmBajaHotel(AbmRol.frmMenuEmpleado frmMenuEmpleadoRecibido)
         {
+            frmMenuEmpleado = frmMenuEmpleadoRecibido;
             InitializeComponent();
         }
     }

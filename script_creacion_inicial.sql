@@ -1422,6 +1422,37 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE FAGD.insertarAdministradorNuevoHotel @usuario nvarchar(255), @codigoHotel numeric (18,0)
+AS
+BEGIN
+	DECLARE @resultado numeric(1)
+	BEGIN TRAN insertarAdministradorNuevoHotel
+		INSERT INTO FAGD.UsuarioXRolXHotel
+		VALUES (@usuario, 1, @codigoHotel)
+	COMMIT TRAN insertarAdministradorNuevoHotel
+	SET @resultado = 0;
+	SELECT @resultado AS resultado;
+END
+GO
+
+--CREATE PROCEDURE FAGD.actualizarHotel @estrellas numeric(18,0), @recargaEstrellas numeric(18,0), @pais nvarchar(255), @ciudad nvarchar(255), @calle nvarchar(255), @nroCalle numeric(18,0), @nombre nvarchar(255), @fechaDeCreacion datetime, @mail nvarchar(255), @telefono numeric(18,0), @codigoHotel numeric (18,0)
+--AS
+--BEGIN
+	--DECLARE @resultado numeric(1)
+	--BEGIN TRAN actualizarHotel
+		--UPDATE FAGD.Hotel
+		--SET hotel_nombre = @nombre;
+		--SET hotel_cantEstrellas = @estrellas;
+		--SET hotel_pais = @pais;
+		--SET 
+		--WHERE hotel_codigo = @codigoHotel
+		--SET @resultado = 0;
+	--COMMIT TRAN ActualizarHotel
+	--SELECT @resultado AS resultado
+--END
+--GO
+
+------------------------------------------------------------------------------------------------------------------
 
 create procedure FAGD.BuscarHabitacionesDisponibles
 @codigoHotel numeric(18),

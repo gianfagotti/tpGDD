@@ -379,6 +379,7 @@
             this.btnModificarHotel.TabIndex = 2;
             this.btnModificarHotel.Text = "Modificar un Hotel";
             this.btnModificarHotel.UseVisualStyleBackColor = true;
+            this.btnModificarHotel.Click += new System.EventHandler(this.btnModificarHotel_Click);
             // 
             // btnBajaHotel
             // 
@@ -388,6 +389,7 @@
             this.btnBajaHotel.TabIndex = 1;
             this.btnBajaHotel.Text = "Inhabilitar un Hotel";
             this.btnBajaHotel.UseVisualStyleBackColor = true;
+            this.btnBajaHotel.Click += new System.EventHandler(this.btnBajaHotel_Click);
             // 
             // btnNuevoHotel
             // 

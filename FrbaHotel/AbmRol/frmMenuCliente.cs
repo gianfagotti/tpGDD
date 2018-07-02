@@ -44,7 +44,7 @@ namespace FrbaHotel.AbmRol
         {
             Login.FrmTipoUsuario frmTipoUsuario = new Login.FrmTipoUsuario();
             this.Hide();
-            frmTipoUsuario.ShowDialog();
+            frmTipoUsuario.Show();
         }
     }
 }

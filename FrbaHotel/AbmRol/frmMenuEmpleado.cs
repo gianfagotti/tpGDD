@@ -197,5 +197,19 @@ namespace FrbaHotel.AbmRol
             AbmHotel.FrmAltaHotel frmAltaHotel = new AbmHotel.FrmAltaHotel(this);
             frmAltaHotel.Show();
         }
+
+        private void btnModificarHotel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AbmHotel.FrmModificarHotel frmModificarHotel = new AbmHotel.FrmModificarHotel(this);
+            frmModificarHotel.Show();
+        }
+
+        private void btnBajaHotel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AbmHotel.FrmBajaHotel frmBajaHotel = new AbmHotel.FrmBajaHotel(this);
+            frmBajaHotel.Show();
+        }
     }
 }

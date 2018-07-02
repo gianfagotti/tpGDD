@@ -122,6 +122,9 @@ namespace FrbaHotel.AbmHotel
                         resultadosCreacionDeRegimen.Close();
                     }
                     MessageBox.Show("Hotel creado satisfactoriamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Hide();
+                    SeleccionarAdministrador frmSeleccionarAdministrador = new SeleccionarAdministrador(frmMenuEmpleado, nombreHotelIngresado);
+                    frmSeleccionarAdministrador.Show();
                 }
             }
         }
