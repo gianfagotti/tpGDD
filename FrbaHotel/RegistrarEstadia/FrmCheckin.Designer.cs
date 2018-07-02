@@ -84,6 +84,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FrmCheckin";
             this.Text = "Check-in";
+            this.Load += new System.EventHandler(this.FrmCheckin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

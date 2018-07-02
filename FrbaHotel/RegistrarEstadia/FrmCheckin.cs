@@ -147,6 +147,11 @@ namespace FrbaHotel.RegistrarEstadia
             FrmRegistrarHuesped regHue = new FrmRegistrarHuesped(this);
             regHue.Show();
         }
+
+        private void FrmCheckin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

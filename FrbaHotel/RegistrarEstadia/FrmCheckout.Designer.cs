@@ -32,6 +32,7 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.dgvFinalizar = new System.Windows.Forms.DataGridView();
+            this.columna = new System.Windows.Forms.DataGridViewButtonColumn();
             this.txtEst = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txthab = new System.Windows.Forms.TextBox();
@@ -41,7 +42,6 @@
             this.txtPiso = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.columna = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFinalizar)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -65,6 +65,7 @@
             this.btnBuscar.TabIndex = 8;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnLimpiar
             // 
@@ -75,6 +76,7 @@
             this.btnLimpiar.TabIndex = 7;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // dgvFinalizar
             // 
@@ -89,6 +91,15 @@
             this.dgvFinalizar.ReadOnly = true;
             this.dgvFinalizar.Size = new System.Drawing.Size(429, 214);
             this.dgvFinalizar.TabIndex = 6;
+            this.dgvFinalizar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFinalizar_CellContentClick);
+            // 
+            // columna
+            // 
+            this.columna.HeaderText = "EstadiasAFinalizar";
+            this.columna.Name = "columna";
+            this.columna.ReadOnly = true;
+            this.columna.Text = "CheckOut";
+            this.columna.UseColumnTextForButtonValue = true;
             // 
             // txtEst
             // 
@@ -175,14 +186,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de búsqueda";
             // 
-            // columna
-            // 
-            this.columna.HeaderText = "EstadiasAFinalizar";
-            this.columna.Name = "columna";
-            this.columna.ReadOnly = true;
-            this.columna.Text = "CheckOut";
-            this.columna.UseColumnTextForButtonValue = true;
-            // 
             // FrmCheckout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -195,6 +198,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmCheckout";
             this.Text = "Check-out";
+            this.Load += new System.EventHandler(this.FrmCheckout_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFinalizar)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
