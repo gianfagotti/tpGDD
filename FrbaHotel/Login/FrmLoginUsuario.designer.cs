@@ -107,6 +107,7 @@
             this.Name = "FrmLoginUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio de Sesión";
+            this.Load += new System.EventHandler(this.FrmLoginUsuario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

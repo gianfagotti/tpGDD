@@ -222,7 +222,10 @@ GO
 CREATE TABLE FAGD.Estadia(
 estadia_codigo numeric(18) IDENTITY(1,1) NOT NULL,
 estadia_fechaInicio datetime,
-estadia_cantNoches numeric(18),
+estadia_fechaFin datetime,
+estadia_cantNoches numeric(18,0) NOT NULL,
+estadia_diasSobrantes numeric (18,0) NOT NULL,
+estadia_precioNoche numeric(18,0) NOT NULL,
 estadia_clienteCodigo numeric (18) NOT NULL,
 estadia_codigoReserva numeric(18) NOT NULL
 )
@@ -460,6 +463,22 @@ ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT FK_ClienteXEstadia_Estadia
  FOREIGN KEY(estadia_codigo) REFERENCES FAGD.Estadia(estadia_codigo)
 GO
 
+-----------------------  CREACIÓN DE FUNCIONES PARA LA APLICACIÓN   ------------------------
+
+CREATE FUNCTION FAGD.calcularDiasSobrantesEstadia (@finRes datetime, @salidaEs datetime)
+
+RETURNS numeric(18,0)
+AS BEGIN
+
+	DECLARE @sobranDias numeric(18,0)
+
+	SET @sobranDias = DATEDIFF(day,@salidaEs,@finRes)
+
+	RETURN @sobranDias
+
+END
+GO
+
 -----------------------	 CREACIÓN DE INSERTS DE MIGRACIÓN   ----------------------- 
 
 INSERT INTO FAGD.Estado (estado_descripcion)
@@ -630,15 +649,26 @@ GO
 
 --Todo lo de estadia por aca
 
-INSERT INTO FAGD.Estadia (estadia_fechaInicio, estadia_cantNoches, estadia_clienteCodigo, estadia_codigoReserva)
-		SELECT DISTINCT M.Estadia_Fecha_Inicio, M.Estadia_Cant_Noches, Cliente.cliente_codigo, M.Reserva_Codigo
+INSERT INTO FAGD.Estadia (estadia_fechaInicio, estadia_fechaFin, estadia_cantNoches, estadia_precioNoche, estadia_diasSobrantes, estadia_codigoReserva, estadia_clienteCodigo)
+		SELECT DISTINCT 
+		M.Estadia_Fecha_Inicio, 
+		M.Estadia_Fecha_Inicio + M.Estadia_Cant_Noches, 
+		M.Estadia_Cant_Noches, R.reserva_costoTotal / R.reserva_cantNoches,
+		FAGD.calcularDiasSobrantesEstadia(R.reserva_fechaFin, M.Estadia_Fecha_Inicio + M.Estadia_Cant_Noches), 
+		M.Reserva_Codigo, 
+		Cliente.cliente_codigo
+
 		FROM gd_esquema.Maestra M, FAGD.Reserva R, FAGD.Cliente Cliente
-		WHERE R.reserva_clienteCodigo = Cliente.cliente_codigo AND R.reserva_codigo = M.Reserva_Codigo
-		AND M.Estadia_Fecha_Inicio IS NOT NULL AND M.Estadia_Cant_Noches IS NOT NULL
+		WHERE R.reserva_clienteCodigo = Cliente.cliente_codigo AND 
+		R.reserva_codigo = M.Reserva_Codigo AND
+		M.Estadia_Fecha_Inicio IS NOT NULL AND 
+		M.Estadia_Cant_Noches IS NOT NULL
 		ORDER BY M.Reserva_Codigo
 GO
 
 
+
+----------
 
 
 
@@ -767,6 +797,8 @@ GO
 INSERT INTO FAGD.UsuarioXRolXHotel(usuario_username,rol_codigo,hotel_codigo)
 		values('IRAA',1,1),('IRAA',2,1),('IRAA',1,2),('IRAA',1,3),('IRAA',2,3),('MAGNO',1,1),('MAGNO',2,1),('MAGNO',1,2),('MAGNO',1,3),('MAGNO',2,3)
 GO
+
+
 
 
 
@@ -1092,13 +1124,14 @@ DECLARE @respuestaTran numeric(18,0),
 		@estado numeric(18,0)
 BEGIN TRAN ta
 BEGIN TRY
---  SET @estado = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA EFECTIVIZADA')
---  SET @cantNoches = (SELECT reserva_cantNoches FROM FAGD.Reserva WHERE reserva_codigo = @reservaNro)
---  SET @precioNoche = (SELECT costoTotal FROM FAGD.Reserva WHERE reserva_codigo = @reservaNro)/@cantNoches
---	INSERT INTO FAGD.Estadia(estadia_codigoReserva,estadia_fechaInicio,usuario,precioPorNoche,estadia_cantNoches) VALUES(@reservaNro,@fecha/*,@userNro*/,@precioNoche,@cantNoches);
---	UPDATE FAGD.Reserva SET estado=@estado WHERE reserva_codigo = @reservaNro
-	SET @respuestaTran =(SELECT estadia_codigo FROM FAGD.Estadia WHERE estadia_codigoReserva = @reservaNro and estadia_fechaInicio=@fecha)
+    SET @estado = (SELECT E.estado_codigo FROM FAGD.Estado E WHERE E.estado_descripcion = 'RESERVA EFECTIVIZADA')
+    SET @cantNoches = (SELECT R.reserva_cantNoches FROM FAGD.Reserva R WHERE R.reserva_codigo = @reservaNro)
+    SET @precioNoche = (SELECT R.reserva_costoTotal FROM FAGD.Reserva R WHERE R.reserva_codigo = @reservaNro)/@cantNoches
+  	INSERT INTO FAGD.Estadia(estadia_codigoReserva, estadia_fechaInicio, estadia_precioNoche, estadia_cantNoches) VALUES(@reservaNro,@fecha/*,@userNro*/,@precioNoche,@cantNoches);
+  	UPDATE FAGD.Reserva SET Reserva.reserva_estado=@estado WHERE Reserva.reserva_codigo = @reservaNro
+	SET @respuestaTran =(SELECT E.estadia_codigo FROM FAGD.Estadia E WHERE E.estadia_codigoReserva = @reservaNro and E.estadia_fechaInicio=@fecha)
 	SELECT @respuestaTran as respuesta
+
 COMMIT TRAN ta
 END TRY
 BEGIN CATCH

@@ -39,8 +39,8 @@ namespace FrbaHotel.RegistrarEstadia
             nroReserva = nroRes;
             nroEstadia = nroEst;
             tabla = new DataTable();
-            tabla.Columns.Add("Dni");
-            DataColumn column = tabla.Columns["Dni"];
+            tabla.Columns.Add("codigoCli");
+            DataColumn column = tabla.Columns["codigoCli"];
             column.Unique = true;
             tabla.Columns.Add("Nombre");
             tabla.Columns.Add("Apellido");
@@ -61,7 +61,7 @@ namespace FrbaHotel.RegistrarEstadia
                 MessageBox.Show("La reserva no tiene habitaciones");
                 this.Close();
             }
-            consulta = "SELECT cli.cliente_nroDocumento, cli.cliente_nombre, cli.cliente_apellido FROM FAGD.Reserva res, FAGD.Cliente cli where res.reserva_clienteNroDocumento = cli.cliente_nroDocumento and res.reserva_codigo = " + nroReserva;
+            consulta = "SELECT cli.cliente_codigo, cli.cliente_nombre, cli.cliente_apellido FROM FAGD.Reserva res, FAGD.Cliente cli where res.reserva_clienteCodigo = cli.cliente_codigo and res.reserva_codigo = " + nroReserva;
             resultado = Login.FrmTipoUsuario.BD.comando(consulta);
             resultado.Read();
             txtTitular.Text = resultado.GetString(2) + " " + resultado.GetString(3);

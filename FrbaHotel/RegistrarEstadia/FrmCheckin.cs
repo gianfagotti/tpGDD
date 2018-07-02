@@ -15,8 +15,8 @@ namespace FrbaHotel.RegistrarEstadia
     {
 
         SqlDataReader resultadoQuery;
-  //      decimal resok;
-  //      decimal resmodif;
+        decimal resok;
+        decimal resmodif;
         decimal estadia = 0;
         DateTime diaActual = DateTime.Today;
 
@@ -25,18 +25,18 @@ namespace FrbaHotel.RegistrarEstadia
             InitializeComponent();
             txtReserv.Clear();
             txtReserv.Focus();
-            /*
+            
             resok = 0;
-            resultadoQuery = Login.FrmTipoUsuario.BD.comando("Select idEstado from FAGD.Estado where descripcion = 'RESERVA CORRECTA'");
+            resultadoQuery = Login.FrmTipoUsuario.BD.comando("SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA CORRECTA'");
             resultadoQuery.Read();
             resok = resultadoQuery.GetDecimal(0);
             resultadoQuery.Close();
             resmodif = 0;
-            resultadoQuery = Login.FrmTipoUsuario.BD.comando("Select idEstado from FAGD.Estado where descripcion = 'RESERVA MODIFICADA'");
+            resultadoQuery = Login.FrmTipoUsuario.BD.comando("SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA MODIFICADA'");
             resultadoQuery.Read();
             resmodif = resultadoQuery.GetDecimal(0);
             resultadoQuery.Close();
-             */
+        
 
         }
 
@@ -64,36 +64,33 @@ namespace FrbaHotel.RegistrarEstadia
                     MessageBox.Show("No se puede hacer el check-in, fecha temprana.");
                     return;
                 }
-                /*
-                if (estado != resmodif && estado != resok)
+                if (estadoDeReserva != resmodif && estadoDeReserva != resok)
                 {
                     MessageBox.Show("La reserva no tiene el estado Correcto. Posiblemente cancelada");
                     return;
-                } */
-                resultadoQuery = 
-                 Login.FrmTipoUsuario.BD.comando("SELECT hotel.hotel_codigo FROM FAGD.Habitacion ha, FAGD.Hotel hotel, FAGD.ReservaXHabitacion resxh  WHERE resxh.habitacion_codigo = ha.habitacion_codigo AND ha.hotel_codigo = hptel.hotel_codigo AND resxh.reserva_codigo = " + txtReserv.Text);
-                decimal hotel = 0;
+                } 
+
+                resultadoQuery = Login.FrmTipoUsuario.BD.comando("SELECT hotel.hotel_codigo FROM FAGD.Habitacion ha, FAGD.Hotel hotel, FAGD.ReservaXHabitacion resxh  WHERE resxh.habitacion_codigo = ha.habitacion_codigo AND ha.habitacion_codigoHotel = hotel.hotel_codigo AND resxh.reserva_codigo = " + txtReserv.Text);
+                decimal hotelDeLaQuery = 0;
                 if (resultadoQuery.Read())
                 {
-                    hotel = resultadoQuery.GetDecimal(0);
+                    hotelDeLaQuery = resultadoQuery.GetDecimal(0);
                     resultadoQuery.Close();
                 }
-                else
-                {
+                else{
                     resultadoQuery.Close();
                     MessageBox.Show("La reserva no tiene asignadas habitaciones.");
-                    return;
-                }
-                
-                if (hotel.ToString() != Login.FrmSeleccionarHotel.codigoHotel.ToString())
+                    return; }
+
+                if (hotelDeLaQuery.ToString() != Login.FrmSeleccionarHotel.codigoHotel.ToString())
                 {
-                    MessageBox.Show("Solo pueden hacer checks-in los empleados del hotel donde se hizo la reserva.");
+                    MessageBox.Show("Solo pueden hacer check-in los empleados del hotel donde se hizo la reserva.");
                     return;
                 }
 
                 string confirmacion = "EXEC FAGD.CheckinParaEstadia ";
                 confirmacion = confirmacion + txtReserv.Text + ",";
-              /*confirmacion = confirmacion + Login.user + ",";         */
+                confirmacion = confirmacion + Login.FrmLoginUsuario.username + ",";        
                 confirmacion = confirmacion + "'" + diaActual.ToString("yyyyMMdd HH:mm:ss") + "'";
                 resultadoQuery = Login.FrmTipoUsuario.BD.comando(confirmacion);
                 resultadoQuery.Read();

@@ -13,10 +13,15 @@ namespace FrbaHotel.Login
 {
     public partial class FrmLoginUsuario : Form
     {
+
+        public static string username;
+
         public FrmLoginUsuario(){
             InitializeComponent();
         }
+
         private DataTable tabla;
+      
         private void lblUsuario_Click(object sender, EventArgs e)
         {
 
@@ -57,6 +62,7 @@ namespace FrbaHotel.Login
                 tabla = Login.FrmTipoUsuario.BD.consulta("SELECT usuario_username, usuario_estado FROM FAGD.Usuario WHERE usuario_username = '"+usuarioIngresado+"'");
                 if (tabla.Rows.Count == 1 && (bool)tabla.Rows[0][1])
                 {
+                    username = tabla.Rows[0][0].ToString();
                     this.Close();
                     FrmLoginContraseña frmLoginContraseña = new FrmLoginContraseña(usuarioIngresado);
                     frmLoginContraseña.Show();
@@ -76,6 +82,11 @@ namespace FrbaHotel.Login
         }
 
         private void lblDatosUsuario_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FrmLoginUsuario_Load(object sender, EventArgs e)
         {
 
         }

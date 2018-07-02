@@ -18,7 +18,7 @@ namespace FrbaHotel.RegistrarEstadia
         DataTable tabla;
         string estadia;
 
-        public DistribClientes(DataTable tablaP,string nroReserva, string nroEstadia)
+        public DistribClientes(DataTable tablaP, string nroReserva, string nroEstadia)
         {
             InitializeComponent();
             tabla = tablaP;
