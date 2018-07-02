@@ -229,7 +229,7 @@
             this.Name = "FrmRegistrarHuesped";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrar huéspedes";
-            this.Load += new System.EventHandler(this.FrmRegistrarEstadia_Load);
+            this.Load += new System.EventHandler(this.FrmRegistrarHuesped_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHuesped)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -82,7 +82,7 @@ namespace FrbaHotel.RegistrarEstadia
 
 
 
-        private void FrmRegistrarEstadia_Load(object sender, EventArgs e)
+        private void FrmRegistrarHuesped_Load(object sender, EventArgs e)
         {
 
         }
@@ -104,7 +104,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void BtnRegistrar_Click(object sender, EventArgs e)
         {
-            /*
+            
             foreach (DataRow fila in tabla.Rows)
             {
                 resultado = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarEstadiaXCliente " + fila["Dni"].ToString() + "," + nroEstadia);
@@ -125,7 +125,7 @@ namespace FrbaHotel.RegistrarEstadia
             DistribClientes distri = new DistribClientes(tabla, nroReserva, nroEstadia);
             distri.Show();
             this.Close();
-              */
+              
         }
 
         private void btnVolver_Click(object sender, EventArgs e)

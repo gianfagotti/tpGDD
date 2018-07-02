@@ -516,6 +516,7 @@ INSERT INTO FAGD.Factura(factura_nro, factura_codigoHotel, factura_codigoEstadia
 		ORDER BY Maestra.Factura_Nro
 GO
 
+
 INSERT INTO FAGD.HotelXRegimen (hotel_codigo,regimen_codigo)
 		SELECT DISTINCT hotel_codigo, regimen_codigo
 		FROM gd_esquema.Maestra Maestra, FAGD.Hotel Hotel, FAGD.Regimen Regimen
@@ -1071,6 +1072,11 @@ select @respuesta as respuesta
 end catch
 end
 GO
+
+------------------------------------------------------------------------------
+
+
+
 
 ------------------------------------------------------------------------------
 
