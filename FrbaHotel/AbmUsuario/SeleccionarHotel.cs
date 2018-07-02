@@ -55,15 +55,15 @@ namespace FrbaHotel.AbmUsuario
         private void llenarCbo(Boolean alta) {
 
             String select = "SELECT hotel_calle, hotel_nroCalle FROM FAGD.Hotel ";
-            if (alta)
-            {
-                select = select + "WHERE hotel_codigo NOT IN (SELECT hotel_codigo FROM FAGD.UsuarioXRolXHotel WHERE '" + usuario + "' ="
-                                + "usuario_username)";
-            }
-            else {
+      //      if (alta)
+      //      {
+      //          select = select + "WHERE hotel_codigo NOT IN (SELECT hotel_codigo FROM FAGD.UsuarioXRolXHotel WHERE '" + usuario + "' ="
+      //                          + "usuario_username)";
+      //      }
+      //      else {
                 select = select + "WHERE hotel_codigo IN (SELECT hotel_codigo FROM FAGD.UsuarioXRolXHotel WHERE '" + usuario + "' = "
                                 + "usuario_username)";
-            }
+      //      }
 
             int fila = 0;
             tablaH = Login.FrmTipoUsuario.BD.consulta(select);

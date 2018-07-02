@@ -21,6 +21,9 @@ namespace FrbaHotel.AbmUsuario
         Boolean alta;
         Char separacion = '-';
         SqlDataReader reader;
+        String calle;
+        String nro;
+        String rol;
 
 
         public SeleccionarRol(Form formAnterior, String usuarioSeleccionado, String hotel, Boolean habilitarAlta)
@@ -29,10 +32,18 @@ namespace FrbaHotel.AbmUsuario
             usuario = usuarioSeleccionado;
             alta = habilitarAlta;
             direccion = hotel;
+
             InitializeComponent();
-            llenarCboRol();
+
+           // llenarCboRol();
             if (alta) lblDescripcion.Text = "Seleccione un rol a desempeñar en el hotel";
             else lblDescripcion.Text = "Seleccione el rol que dejará de desempeñar en el hotel";
+
+            String direccionHotelR = direccion;
+            string[] direccionHotel = direccionHotelR.Split(separacion);
+            calle = direccionHotel[0];
+            nro = direccionHotel[1];
+            
 
         }
 
@@ -59,22 +70,22 @@ namespace FrbaHotel.AbmUsuario
             if (alta){
                 if (resultado == 0) MessageBox.Show("Hubo un error al guardar el puesto.", "Error");
                 else MessageBox.Show("Puesto guardado correctamente!", "Usuario Guardado");
+                ultimoFormulario.Show();
+                this.Close();
             }
             else{
                 if (resultado == 0) MessageBox.Show("Hubo un error al borrar el puesto.", "Error");
-                else MessageBox.Show("Puesto borrado correctamente!", "Usuario Guardado");
+                else {
+                    MessageBox.Show("Puesto borrado correctamente!", "Usuario Guardado");
+                    ultimoFormulario.Show();
+                    this.Close();
+                }
             }
         }
 
         private String crearConsulta(){
-
+            rol = cboRol.Text;
             String consulta;
-            String direccionHotelR = direccion;
-            string[] direccionHotel = direccionHotelR.Split(separacion);
-            String calle = direccionHotel[0];
-            String nro = direccionHotel[1];
-            String rol = cboRol.Text;
-
             if (alta){
                 consulta = "EXEC FAGD.nuevoPuesto '" + usuario + "', '" + calle + "', '" + nro + "', '" + rol + "'";
                 return consulta;
@@ -87,16 +98,29 @@ namespace FrbaHotel.AbmUsuario
 
         private void llenarCboRol() {
 
-            String select = "SELECT rol_nombre FROM FAGD.Rol";
-            reader = Login.FrmTipoUsuario.BD.comando(select);
+            String select = "SELECT rol_nombre FROM FAGD.Rol ";
 
-            DataTable tabla = new DataTable();
-            tabla.Columns.Add("rol_nombre", typeof(string));
-            tabla.Load(reader);
+            if (alta){
+                select = select + "WHERE rol_codigo NOT IN (SELECT rol_codigo FROM FAGD.UsuarioXRolXHotel WHERE usuario_username = '"
+                                + usuario + "' AND hotel_codigo = (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_calle = '"
+                                + calle +"' AND hotel_nroCalle = '" + nro + "'))";
+            }
+            else {
+                select = select + "WHERE rol_codigo IN (SELECT rol_codigo FROM FAGD.UsuarioXRolXHotel WHERE usuario_username = '"
+                                + usuario + "' AND hotel_codigo = (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_calle = '"
+                                + calle + "' AND hotel_nroCalle = '" + nro + "'))";
+            }
+                
+                reader = Login.FrmTipoUsuario.BD.comando(select);
 
-            cboRol.ValueMember = "rol_nombre";
-            cboRol.DisplayMember = "rol_nombre";
-            cboRol.DataSource = tabla;
+                DataTable tabla = new DataTable();
+                tabla.Columns.Add("rol_nombre", typeof(string));
+                tabla.Load(reader);
+
+                cboRol.ValueMember = "rol_nombre";
+                cboRol.DisplayMember = "rol_nombre";
+                cboRol.DataSource = tabla;
+            
         }
     }
 }
