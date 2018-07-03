@@ -17,7 +17,7 @@ namespace FrbaHotel.AbmHotel
         private SqlDataReader regimenes;
         private SqlDataReader resultadosCreacionDeHotel;
         private SqlDataReader resultadosCreacionDeRegimen;
-        private DataTable hoteles;
+        private DataTable hoteles,datosHotel;
         private String nombreHotelIngresado;
         private String mailHotelIngresado;
         private String telefonoHotelIngresado;
@@ -29,6 +29,7 @@ namespace FrbaHotel.AbmHotel
         private String paisHotelIngresado;
         private DateTime fechaCreacionHotelIngresado;
         private Decimal codigoHotelIngreso = Login.FrmSeleccionarHotel.codigoHotel;
+
         public FrmModificarHotel(AbmRol.frmMenuEmpleado frmMenuEmpleadoRecibido)
         {
             frmMenuEmpleado = frmMenuEmpleadoRecibido;
@@ -39,6 +40,17 @@ namespace FrbaHotel.AbmHotel
                 this.clbRegimenes.Items.Add(regimenes.GetSqlString(0), true);
             }
             regimenes.Close();
+
+            datosHotel = Login.FrmTipoUsuario.BD.consulta("SELECT * FROM FAGD.Hotel WHERE hotel_codigo = " + codigoHotelIngreso);
+            this.txtCantidadDeEstrellasHotel.Text = datosHotel.Rows[0][1].ToString();
+            this.txtRecargaPorEstrellasHotel.Text = datosHotel.Rows[0][2].ToString();
+            this.txtPaisHotel.Text = datosHotel.Rows[0][3].ToString();
+            this.txtCiudadHotel.Text = datosHotel.Rows[0][4].ToString();
+            this.txtCalleHotel.Text = datosHotel.Rows[0][5].ToString();
+            this.txtAlturaHotel.Text = datosHotel.Rows[0][6].ToString();
+            this.txtNombreHotel.Text = datosHotel.Rows[0][7].ToString();
+            this.txtMailHotel.Text = datosHotel.Rows[0][9].ToString();
+            this.txtTelefonoHotel.Text = datosHotel.Rows[0][10].ToString();
         }
 
         private void btnBorrarTextosHotel_Click(object sender, EventArgs e)
@@ -63,7 +75,7 @@ namespace FrbaHotel.AbmHotel
             frmMenuEmpleado.Show();
         }
 
-        private void btnCrearHotel_Click(object sender, EventArgs e)
+        private void btnModificarHotel_Click(object sender, EventArgs e)
         {
             int txtsVacios = 0;
             Action<Control.ControlCollection> func = null;
@@ -85,7 +97,7 @@ namespace FrbaHotel.AbmHotel
             {
                 nombreHotelIngresado = this.txtNombreHotel.Text;
                 hoteles = Login.FrmTipoUsuario.BD.consulta("SELECT hotel_nombre FROM FAGD.Hotel WHERE hotel_nombre = '" + nombreHotelIngresado + "' AND hotel_nombre != (SELECT hotel_nombre FROM FAGD.Hotel WHERE hotel_codigo = " + codigoHotelIngreso + ")");
-                if (hoteles.Rows.Count == 1)
+                if (hoteles.Rows.Count != 0)
                 {
                     MessageBox.Show("Ya existe un hotel con ese nombre, ingrese un nombre válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -107,10 +119,7 @@ namespace FrbaHotel.AbmHotel
                         resultadosCreacionDeRegimen = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.insertarRegimenDeHotelCreado '" + nombreHotelIngresado + "', '" + itemChecked.ToString() + "'");
                         resultadosCreacionDeRegimen.Close();
                     }
-                    MessageBox.Show("Hotel creado satisfactoriamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Hide();
-                    SeleccionarAdministrador frmSeleccionarAdministrador = new SeleccionarAdministrador(frmMenuEmpleado, nombreHotelIngresado);
-                    frmSeleccionarAdministrador.Show();
+                    MessageBox.Show("Hotel actualizado satisfactoriamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -203,6 +212,28 @@ namespace FrbaHotel.AbmHotel
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnBorrarTextosHotel_Click_1(object sender, EventArgs e)
+        {
+            Action<Control.ControlCollection> func = null;
+
+            func = (controls) =>
+            {
+                foreach (Control control in controls)
+                    if (control is TextBox)
+                        (control as TextBox).Clear();
+                    else
+                        func(control.Controls);
+            };
+
+            func(Controls);
+        }
+
+        private void btnVolverHotel_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+            frmMenuEmpleado.Show();
         }
     }
 }

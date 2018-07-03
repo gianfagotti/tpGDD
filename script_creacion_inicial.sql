@@ -1274,12 +1274,6 @@ GO
 
 ------------------------------------------------------------------------------
 
-
-
-
-------------------------------------------------------------------------------
-
-
 create proc FAGD.guardarNuevoCliente 
 @nombre nvarchar(255),
 @apellido nvarchar(255),
@@ -1857,22 +1851,24 @@ BEGIN
 END
 GO
 
---CREATE PROCEDURE FAGD.actualizarHotel @estrellas numeric(18,0), @recargaEstrellas numeric(18,0), @pais nvarchar(255), @ciudad nvarchar(255), @calle nvarchar(255), @nroCalle numeric(18,0), @nombre nvarchar(255), @fechaDeCreacion datetime, @mail nvarchar(255), @telefono numeric(18,0), @codigoHotel numeric (18,0)
---AS
---BEGIN
-	--DECLARE @resultado numeric(1)
-	--BEGIN TRAN actualizarHotel
-		--UPDATE FAGD.Hotel
-		--SET hotel_nombre = @nombre;
-		--SET hotel_cantEstrellas = @estrellas;
-		--SET hotel_pais = @pais;
-		--SET 
-		--WHERE hotel_codigo = @codigoHotel
-		--SET @resultado = 0;
-	--COMMIT TRAN ActualizarHotel
-	--SELECT @resultado AS resultado
---END
---GO
+CREATE PROCEDURE FAGD.actualizarHotel @estrellas numeric(18,0), @recargaEstrellas numeric(18,0), @pais nvarchar(255), @ciudad nvarchar(255), @calle nvarchar(255), @nroCalle numeric(18,0), @nombre nvarchar(255), @fechaDeCreacion datetime, @mail nvarchar(255), @telefono numeric(18,0), @codigoHotel numeric (18,0)
+AS
+BEGIN
+	DECLARE @resultado numeric(1)
+	BEGIN TRAN actualizarHotel
+		UPDATE FAGD.Hotel
+		SET hotel_nombre = @nombre, hotel_cantEstrellas = @estrellas, hotel_pais = @pais, hotel_recarga_estrellas = @recargaEstrellas, hotel_ciudad = @ciudad, hotel_calle = @calle, hotel_nroCalle = @nroCalle, hotel_fechaDeCreacion = @fechaDeCreacion, hotel_mail = @mail, hotel_telefono = @telefono
+		WHERE hotel_codigo = @codigoHotel
+
+		DELETE
+		FROM FAGD.HotelXRegimen
+		WHERE hotel_codigo = @codigoHotel
+
+		SET @resultado = 0;
+	COMMIT TRAN ActualizarHotel
+	SELECT @resultado AS resultado
+END
+GO
 
 ------------------------------------------------------------------------------------------------------------------
 
