@@ -255,7 +255,8 @@ CREATE TABLE FAGD.BajaHotel(
 id_baja numeric(18) IDENTITY(1,1) NOT NULL,
 hotel_codigo numeric (18,0),
 fecha_inicio datetime,
-fecha_fin datetime
+fecha_fin datetime,
+motivo nvarchar(255)
 )
 GO
 ---------------------------------- CREACIÓN PRIMARY KEYS ---------------------------------------

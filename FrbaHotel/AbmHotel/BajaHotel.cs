@@ -18,5 +18,11 @@ namespace FrbaHotel.AbmHotel
             frmMenuEmpleado = frmMenuEmpleadoRecibido;
             InitializeComponent();
         }
+
+        private void btnVolverHotel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            frmMenuEmpleado.Show();
+        }
     }
 }

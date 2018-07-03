@@ -377,7 +377,7 @@
             this.btnModificarHotel.Name = "btnModificarHotel";
             this.btnModificarHotel.Size = new System.Drawing.Size(161, 23);
             this.btnModificarHotel.TabIndex = 2;
-            this.btnModificarHotel.Text = "Modificar un Hotel";
+            this.btnModificarHotel.Text = "Modificar el Hotel";
             this.btnModificarHotel.UseVisualStyleBackColor = true;
             this.btnModificarHotel.Click += new System.EventHandler(this.btnModificarHotel_Click);
             // 
@@ -387,7 +387,7 @@
             this.btnBajaHotel.Name = "btnBajaHotel";
             this.btnBajaHotel.Size = new System.Drawing.Size(161, 23);
             this.btnBajaHotel.TabIndex = 1;
-            this.btnBajaHotel.Text = "Inhabilitar un Hotel";
+            this.btnBajaHotel.Text = "Inhabilitar el Hotel";
             this.btnBajaHotel.UseVisualStyleBackColor = true;
             this.btnBajaHotel.Click += new System.EventHandler(this.btnBajaHotel_Click);
             // 
