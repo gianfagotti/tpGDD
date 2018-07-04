@@ -38,6 +38,7 @@ namespace FrbaHotel.AbmHotel
                 this.clbRegimenes.Items.Add(regimenes.GetSqlString(0), true);
             }
             regimenes.Close();
+            //dtpFechaCreacionHotel.Value = VarGlobales.getDate();
         }
 
         private void lblMail_Click(object sender, EventArgs e)
@@ -144,7 +145,7 @@ namespace FrbaHotel.AbmHotel
 
         }
 
-         private void txtTelefonoHotel_KeyPress(object sender, KeyPressEventArgs e)
+         private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
          {
              if (Char.IsDigit(e.KeyChar))
             {
@@ -162,67 +163,6 @@ namespace FrbaHotel.AbmHotel
             {
                 e.Handled = true;
             }
-          }
-
-         private void txtCantidadDeEstrellasHotel_KeyPress(object sender, KeyPressEventArgs e)
-         {
-             if (Char.IsDigit(e.KeyChar))
-             {
-                 e.Handled = false;
-             }
-             else if (Char.IsControl(e.KeyChar))
-             {
-                 e.Handled = false;
-             }
-             else if (Char.IsSeparator(e.KeyChar))
-             {
-                 e.Handled = false;
-             }
-             else
-             {
-                 e.Handled = true;
-             }
-         }
-
-         private void txtRecargaPorEstrellasHotel_KeyPress(object sender, KeyPressEventArgs e)
-         {
-             if (Char.IsDigit(e.KeyChar))
-             {
-                 e.Handled = false;
-             }
-             else if (Char.IsControl(e.KeyChar))
-             {
-                 e.Handled = false;
-             }
-             else if (Char.IsSeparator(e.KeyChar))
-             {
-                 e.Handled = false;
-             }
-             else
-             {
-                 e.Handled = true;
-             }
-         }
-
-                 private void txtAlturaHotel_KeyPress(object sender, KeyPressEventArgs e)
-         {
-             if (Char.IsDigit(e.KeyChar))
-             {
-                 e.Handled = false;
-             }
-             else if (Char.IsControl(e.KeyChar))
-             {
-                 e.Handled = false;
-             }
-             else if (Char.IsSeparator(e.KeyChar))
-             {
-                 e.Handled = false;
-             }
-             else
-             {
-                 e.Handled = true;
-             }
-         }
-                
+          }     
     }
 }

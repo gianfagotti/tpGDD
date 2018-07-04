@@ -211,5 +211,19 @@ namespace FrbaHotel.AbmRol
             AbmHotel.FrmBajaHotel frmBajaHotel = new AbmHotel.FrmBajaHotel(this);
             frmBajaHotel.Show();
         }
+
+        private void btnCambiarRol_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Login.FrmSeleccionarRol frmSeleccionarRol = new Login.FrmSeleccionarRol(Login.FrmSeleccionarHotel.codigoHotel, Login.FrmLoginUsuario.username);
+            frmSeleccionarRol.Show();
+        }
+
+        private void btnCambiarHotel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Login.FrmSeleccionarHotel frmSeleccionarHotel = new Login.FrmSeleccionarHotel(Login.FrmLoginUsuario.username);
+            frmSeleccionarHotel.Show();
+        }
     }
 }

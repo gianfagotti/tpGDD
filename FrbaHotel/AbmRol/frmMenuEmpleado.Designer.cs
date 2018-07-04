@@ -59,6 +59,8 @@
             this.btnModificarHotel = new System.Windows.Forms.Button();
             this.btnBajaHotel = new System.Windows.Forms.Button();
             this.btnNuevoHotel = new System.Windows.Forms.Button();
+            this.btnCambiarRol = new System.Windows.Forms.Button();
+            this.btnCambiarHotel = new System.Windows.Forms.Button();
             this.grbHuespedes.SuspendLayout();
             this.grbHabitaciones.SuspendLayout();
             this.grbRegimenes.SuspendLayout();
@@ -401,11 +403,33 @@
             this.btnNuevoHotel.UseVisualStyleBackColor = true;
             this.btnNuevoHotel.Click += new System.EventHandler(this.btnNuevoHotel_Click);
             // 
+            // btnCambiarRol
+            // 
+            this.btnCambiarRol.Location = new System.Drawing.Point(127, 371);
+            this.btnCambiarRol.Name = "btnCambiarRol";
+            this.btnCambiarRol.Size = new System.Drawing.Size(92, 23);
+            this.btnCambiarRol.TabIndex = 11;
+            this.btnCambiarRol.Text = "Cambiar rol";
+            this.btnCambiarRol.UseVisualStyleBackColor = true;
+            this.btnCambiarRol.Click += new System.EventHandler(this.btnCambiarRol_Click);
+            // 
+            // btnCambiarHotel
+            // 
+            this.btnCambiarHotel.Location = new System.Drawing.Point(29, 371);
+            this.btnCambiarHotel.Name = "btnCambiarHotel";
+            this.btnCambiarHotel.Size = new System.Drawing.Size(92, 23);
+            this.btnCambiarHotel.TabIndex = 12;
+            this.btnCambiarHotel.Text = "Cambiar hotel";
+            this.btnCambiarHotel.UseVisualStyleBackColor = true;
+            this.btnCambiarHotel.Click += new System.EventHandler(this.btnCambiarHotel_Click);
+            // 
             // frmMenuEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 406);
+            this.Controls.Add(this.btnCambiarHotel);
+            this.Controls.Add(this.btnCambiarRol);
             this.Controls.Add(this.grbHoteles);
             this.Controls.Add(this.grbUsuarios);
             this.Controls.Add(this.btnCerrarSesion);
@@ -467,5 +491,7 @@
         private System.Windows.Forms.Button btnModificarHotel;
         private System.Windows.Forms.Button btnBajaHotel;
         private System.Windows.Forms.Button btnNuevoHotel;
+        private System.Windows.Forms.Button btnCambiarRol;
+        private System.Windows.Forms.Button btnCambiarHotel;
     }
 }

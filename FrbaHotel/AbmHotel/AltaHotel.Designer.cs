@@ -194,7 +194,7 @@
             this.txtTelefonoHotel.Size = new System.Drawing.Size(211, 20);
             this.txtTelefonoHotel.TabIndex = 13;
             this.txtTelefonoHotel.TextChanged += new System.EventHandler(this.txtTelefonoHotel_TextChanged);
-            this.txtTelefonoHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefonoHotel_KeyPress);
+            this.txtTelefonoHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // txtCalleHotel
             // 
@@ -209,7 +209,7 @@
             this.txtCantidadDeEstrellasHotel.Name = "txtCantidadDeEstrellasHotel";
             this.txtCantidadDeEstrellasHotel.Size = new System.Drawing.Size(211, 20);
             this.txtCantidadDeEstrellasHotel.TabIndex = 15;
-            this.txtCantidadDeEstrellasHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidadDeEstrellasHotel_KeyPress);
+            this.txtCantidadDeEstrellasHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // txtCiudadHotel
             // 
@@ -293,7 +293,7 @@
             this.txtAlturaHotel.Name = "txtAlturaHotel";
             this.txtAlturaHotel.Size = new System.Drawing.Size(211, 20);
             this.txtAlturaHotel.TabIndex = 25;
-            this.txtAlturaHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAlturaHotel_KeyPress);
+            this.txtAlturaHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // lblRecargaPorEstrellas
             // 
@@ -312,7 +312,7 @@
             this.txtRecargaPorEstrellasHotel.Name = "txtRecargaPorEstrellasHotel";
             this.txtRecargaPorEstrellasHotel.Size = new System.Drawing.Size(211, 20);
             this.txtRecargaPorEstrellasHotel.TabIndex = 27;
-            this.txtRecargaPorEstrellasHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRecargaPorEstrellasHotel_KeyPress);
+            this.txtRecargaPorEstrellasHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // FrmAltaHotel
             // 

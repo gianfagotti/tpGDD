@@ -62,7 +62,7 @@
             this.txtRecargaPorEstrellasHotel.Name = "txtRecargaPorEstrellasHotel";
             this.txtRecargaPorEstrellasHotel.Size = new System.Drawing.Size(211, 20);
             this.txtRecargaPorEstrellasHotel.TabIndex = 53;
-            this.txtRecargaPorEstrellasHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRecargaPorEstrellasHotel_KeyPress);
+            this.txtRecargaPorEstrellasHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // lblRecargaPorEstrellas
             // 
@@ -81,7 +81,7 @@
             this.txtAlturaHotel.Name = "txtAlturaHotel";
             this.txtAlturaHotel.Size = new System.Drawing.Size(211, 20);
             this.txtAlturaHotel.TabIndex = 51;
-            this.txtAlturaHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAlturaHotel_KeyPress);
+            this.txtAlturaHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // lblAlturaHotel
             // 
@@ -165,7 +165,7 @@
             this.txtCantidadDeEstrellasHotel.Name = "txtCantidadDeEstrellasHotel";
             this.txtCantidadDeEstrellasHotel.Size = new System.Drawing.Size(211, 20);
             this.txtCantidadDeEstrellasHotel.TabIndex = 42;
-            this.txtCantidadDeEstrellasHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidadDeEstrellasHotel_KeyPress);
+            this.txtCantidadDeEstrellasHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // txtCalleHotel
             // 
@@ -180,7 +180,7 @@
             this.txtTelefonoHotel.Name = "txtTelefonoHotel";
             this.txtTelefonoHotel.Size = new System.Drawing.Size(211, 20);
             this.txtTelefonoHotel.TabIndex = 40;
-            this.txtTelefonoHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefonoHotel_KeyPress);
+            this.txtTelefonoHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // txtMailHotel
             // 
