@@ -503,14 +503,57 @@ CREATE FUNCTION FAGD.calcularDiasSobrantesEstadia (@finRes datetime, @salidaEs d
 RETURNS numeric(18,0)
 AS BEGIN
 
-	DECLARE @sobranDias numeric(18,0)
-
+DECLARE @sobranDias numeric(18,0)
 	SET @sobranDias = DATEDIFF(day,@salidaEs,@finRes)
 
 	RETURN @sobranDias
 
 END
 GO
+
+-------------------------------------------------------------------------------------------
+
+
+CREATE FUNCTION FAGD.calcularCostosConsumible (@estadia numeric(18,0))
+
+RETURNS numeric(18,2)
+AS BEGIN
+
+DECLARE @costoConsumiblesTotal numeric(18,0)
+	SET @costoConsumiblesTotal = (SELECT CostosConsumibles.Costo 
+	FROM (SELECT consXEst.estadia_codigo Estadia, SUM(cons.consumible_precio) Costo
+		   FROM FAGD.ConsumibleXEstadia consXEst, FAGD.Consumible cons
+				WHERE consXEst.consumible_codigo = cons.consumible_codigo
+			GROUP BY consXEst.estadia_codigo) AS CostosConsumibles
+				WHERE CostosConsumibles.Estadia = @estadia
+				)
+	IF(@costoConsumiblesTotal IS NULL)
+	BEGIN
+	SET @costoConsumiblesTotal=0
+	END
+RETURN @costoConsumiblesTotal
+END	
+GO
+
+-------------------------------------------------------------------------------------------
+
+CREATE FUNCTION FAGD.calcularCostosEstadia (@estadia numeric(18,0))
+
+	RETURNS numeric(18,2)
+AS BEGIN
+	DECLARE @total numeric(18,0)
+
+	set @total = (SELECT CostosEstadias.CostoEstadia 
+				FROM (SELECT E.estadia_codigo Estadia, SUM(R.reserva_costoTotal) CostoEstadia
+				       FROM FAGD.Estadia E, FAGD.Reserva R
+					WHERE E.estadia_codigoReserva = R.reserva_codigo
+							group by E.estadia_codigo) as CostosEstadias
+				WHERE CostosEstadias.Estadia = @estadia
+				)
+RETURN @total
+END	
+GO
+
 
 -----------------------	 CREACIÓN DE INSERTS DE MIGRACIÓN   ----------------------- 
 
@@ -1208,7 +1251,7 @@ GO
 ------------------------------------------------------------------------------
 
 
-CREATE PROCEDURE FAGD.generarFactura  @estadia numeric(18,0), @formaPago numeric(18,0), @fechaInicio datetime
+CREATE PROCEDURE FAGD.generarFactura  @estadia numeric(18,0), @modalidadPago numeric(18,0), @fechaInicio datetime
 AS BEGIN
 
 DECLARE @fecha datetime
@@ -1216,7 +1259,7 @@ SET @fecha = CONVERT(datetime,@fechaInicio,121)
 DECLARE @resultado numeric(18,0),
 		@regimen numeric(18,0),
 		@reserva numeric(18,0),
-		@totalPago numeric(18,2),
+		@totalAPagar numeric(18,2),
 		@cliente numeric(18,0)
 BEGIN TRAN ta
 BEGIN TRY
@@ -1224,14 +1267,16 @@ BEGIN TRY
 		SET @cliente = (SELECT reserva_clienteCodigo FROM FAGD.Reserva WHERE reserva_codigo = @reserva);
 		SET @regimen = (SELECT reserva_codigoRegimen FROM FAGD.Reserva WHERE reserva_codigo = @reserva);
 		if ( @regimen != 3 )
-	--	BEGIN
-	--		SET @totalPago = FAGD.calcPrecioEstadia(@estadia) + FAGD.calcPrecioConsumible(@estadia);
-	--		INSERT INTO FAGD.Factura(estadia,formaDePago,cliente,fecha,total) VALUES (@estadia,@formaPago,@cliente,@fecha,@totalPago);
-	--	END
-	--	ELSE BEGIN
-	--			SET @totalPago = FAGD.calcPrecioEstadia(@estadia);
-	--			INSERT INTO FAGD.Factura(estadia,formaDePago,cliente,fecha,total) VALUES (@estadia,@formaPago,@cliente,@fecha,@totalPago);
-	--		END
+	BEGIN
+	SET @totalAPagar = FAGD.calcularCostosEstadia(@estadia) + FAGD.calcularCostosConsumible(@estadia);
+	INSERT INTO FAGD.Factura(factura_codigoEstadia,factura_modalidadPago,factura_clienteCodigo,factura_fecha,factura_total)
+	 VALUES (@estadia,@modalidadPago,@cliente,@fecha,@totalAPagar);
+	END
+	ELSE BEGIN
+	SET @totalAPagar = FAGD.calcularCostosEstadia(@estadia);
+	INSERT INTO FAGD.Factura(factura_codigoEstadia,factura_modalidadPago,factura_clienteCodigo,factura_fecha,factura_total)
+	 VALUES (@estadia,@modalidadPago,@cliente,@fecha,@totalAPagar);
+	END
 		SET @resultado =(SELECT factura_nro FROM FAGD.Factura WHERE factura_codigoEstadia = @estadia and factura_fecha = @fecha)
 		SELECT @resultado as resultado
 COMMIT TRAN	ta

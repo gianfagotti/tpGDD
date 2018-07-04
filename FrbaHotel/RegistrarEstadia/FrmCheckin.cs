@@ -18,6 +18,7 @@ namespace FrbaHotel.RegistrarEstadia
         decimal resok;
         decimal resmodif;
         decimal estadia = 0;
+        DateTime diaActual2 = VarGlobales.getDate();
         DateTime diaActual = DateTime.Today;
 
         public FrmCheckin()
