@@ -92,7 +92,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                 Type t = abmPadre.GetType();
                 if (t.Equals(typeof(GenerarReserva)))
                 {
-                    GenerarModificacionReserva.GenerarReserva.clienteSeleccionado = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+                    GenerarModificacionReserva.GenerarReserva.clienteSeleccionado = dataGridView1.CurrentRow.Cells[5].Value.ToString();
                     GenerarModificacionReserva.GenerarReserva.ActiveForm.Show();
                     this.Close();
                 }

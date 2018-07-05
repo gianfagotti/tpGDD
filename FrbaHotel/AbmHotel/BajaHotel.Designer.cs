@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.lblBajaHotel = new System.Windows.Forms.Label();
-            this.dtpFechaIncicioBajaHotel = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaInicioBajaHotel = new System.Windows.Forms.DateTimePicker();
             this.dtpFechaFinBajaHotel = new System.Windows.Forms.DateTimePicker();
             this.lblFechaInicio = new System.Windows.Forms.Label();
             this.lblFechaFin = new System.Windows.Forms.Label();
             this.btnVolverBajaHotel = new System.Windows.Forms.Button();
             this.btnDarDeBajaHotel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtMotivoBajaHotel = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblBajaHotel
@@ -52,12 +52,12 @@
             this.lblBajaHotel.Text = "Ingrese los datos para dar de baja el hotel:";
             this.lblBajaHotel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // dtpFechaIncicioBajaHotel
+            // dtpFechaInicioBajaHotel
             // 
-            this.dtpFechaIncicioBajaHotel.Location = new System.Drawing.Point(174, 75);
-            this.dtpFechaIncicioBajaHotel.Name = "dtpFechaIncicioBajaHotel";
-            this.dtpFechaIncicioBajaHotel.Size = new System.Drawing.Size(211, 20);
-            this.dtpFechaIncicioBajaHotel.TabIndex = 19;
+            this.dtpFechaInicioBajaHotel.Location = new System.Drawing.Point(174, 75);
+            this.dtpFechaInicioBajaHotel.Name = "dtpFechaInicioBajaHotel";
+            this.dtpFechaInicioBajaHotel.Size = new System.Drawing.Size(211, 20);
+            this.dtpFechaInicioBajaHotel.TabIndex = 19;
             // 
             // dtpFechaFinBajaHotel
             // 
@@ -110,6 +110,7 @@
             this.btnDarDeBajaHotel.TabIndex = 23;
             this.btnDarDeBajaHotel.Text = "Dar de baja";
             this.btnDarDeBajaHotel.UseVisualStyleBackColor = false;
+            this.btnDarDeBajaHotel.Click += new System.EventHandler(this.btnDarDeBajaHotel_Click);
             // 
             // label1
             // 
@@ -122,26 +123,26 @@
             this.label1.Text = "Motivo:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // txtMotivoBajaHotel
             // 
-            this.textBox1.Location = new System.Drawing.Point(174, 161);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(211, 20);
-            this.textBox1.TabIndex = 26;
+            this.txtMotivoBajaHotel.Location = new System.Drawing.Point(174, 161);
+            this.txtMotivoBajaHotel.Name = "txtMotivoBajaHotel";
+            this.txtMotivoBajaHotel.Size = new System.Drawing.Size(211, 20);
+            this.txtMotivoBajaHotel.TabIndex = 26;
             // 
             // FrmBajaHotel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(412, 256);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtMotivoBajaHotel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnVolverBajaHotel);
             this.Controls.Add(this.btnDarDeBajaHotel);
             this.Controls.Add(this.lblFechaFin);
             this.Controls.Add(this.lblFechaInicio);
             this.Controls.Add(this.dtpFechaFinBajaHotel);
-            this.Controls.Add(this.dtpFechaIncicioBajaHotel);
+            this.Controls.Add(this.dtpFechaInicioBajaHotel);
             this.Controls.Add(this.lblBajaHotel);
             this.Name = "FrmBajaHotel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -154,13 +155,13 @@
         #endregion
 
         private System.Windows.Forms.Label lblBajaHotel;
-        private System.Windows.Forms.DateTimePicker dtpFechaIncicioBajaHotel;
+        private System.Windows.Forms.DateTimePicker dtpFechaInicioBajaHotel;
         private System.Windows.Forms.DateTimePicker dtpFechaFinBajaHotel;
         private System.Windows.Forms.Label lblFechaInicio;
         private System.Windows.Forms.Label lblFechaFin;
         private System.Windows.Forms.Button btnVolverBajaHotel;
         private System.Windows.Forms.Button btnDarDeBajaHotel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtMotivoBajaHotel;
     }
 }

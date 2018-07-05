@@ -12,7 +12,15 @@ namespace FrbaHotel
 
         internal static DateTime getDate()
         {
-            return Convert.ToDateTime(ConfigurationManager.AppSettings["current_date"]);
+            try
+            {
+                return Convert.ToDateTime(ConfigurationManager.AppSettings["current_date"]);
+            }
+            catch 
+            {
+                return DateTime.Now;          
+            }
+            
         }
     }
 }
