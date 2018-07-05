@@ -672,18 +672,27 @@ GO
 UPDATE FAGD.Reserva
 	SET reserva_fechaFin = (reserva_fechaInicio+reserva_cantNoches)
 
+
 UPDATE FAGD.Reserva
 	SET reserva_estado = CASE WHEN (reserva_codigo IN (SELECT DISTINCT M.Reserva_Codigo FROM gd_esquema.Maestra M
-						WHERE 	reserva_codigo = M.Reserva_Codigo AND M.Factura_Nro IS NOT NULL AND M.Estadia_Fecha_Inicio IS NOT NULL))
-				THEN
-					(SELECT estado_codigo FROM FAGD.Estado
-					 WHERE 	estado_descripcion = 'RESERVA EFECTIVIZADA')
-				ELSE 
-					(SELECT estado_codigo FROM FAGD.Estado
-					 WHERE 	estado_descripcion = 'RESERVA CANCELADA DESDE TABLA MAESTRA')
+						WHERE 	reserva_codigo = M.Reserva_Codigo AND M.Factura_Nro IS NOT NULL AND M.Estadia_Fecha_Inicio IS NOT NULL
+						AND M.Estadia_Fecha_Inicio < (SELECT GETDATE())))
+						THEN
+							(SELECT estado_codigo FROM FAGD.Estado
+						WHERE 	estado_descripcion = 'RESERVA EFECTIVIZADA')
+							  WHEN (reserva_codigo IN (SELECT DISTINCT M.Reserva_Codigo FROM gd_esquema.Maestra M
+						WHERE 	reserva_codigo = M.Reserva_Codigo AND M.Factura_Nro IS NOT NULL AND M.Estadia_Fecha_Inicio IS NOT NULL
+						AND M.Estadia_Fecha_Inicio > (SELECT GETDATE())))
+					    THEN
+							(SELECT estado_codigo FROM FAGD.Estado
+						WHERE 	estado_descripcion = 'RESERVA CORRECTA')
+                 ELSE
+					   (SELECT estado_codigo FROM FAGD.Estado
+					    WHERE 	estado_descripcion = 'RESERVA CANCELADA DESDE TABLA MAESTRA')
 				END
+				GO
 
-GO
+
 
 
 INSERT INTO FAGD.ReservaxHabitacion(reserva_codigo, habitacion_codigo)
@@ -1217,6 +1226,35 @@ GO
 
 ---------------------------------------------------------------------------------------------------
 
+/*
+CREATE PROCEDURE FAGD.SetearEstadosReservaSegunConfig @fechaDelSystem DATETIME
+AS BEGIN
+
+DECLARE @respuestaTran numeric(18,0),
+        @estado numeric(18,0)
+
+SET @fechaDelSystem = CONVERT(DATETIME,@fechaDelSystem,121)
+
+BEGIN TRAN ta
+BEGIN TRY
+UPDATE FAGD.Reserva
+	
+						
+				
+ SET @respuestaTran = 1
+	SELECT @respuestaTran AS respuesta
+COMMIT TRAN ta
+END TRY
+BEGIN CATCH
+ROLLBACK TRAN ta
+SET @respuestaTran=0
+SELECT @respuestaTran AS respuesta
+END CATCH
+END
+GO
+*/
+
+---------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.CheckinParaEstadia @reservaNro numeric(18,0), @username nvarchar(255), @fechaInicio datetime
 AS BEGIN
@@ -2009,7 +2047,7 @@ begin
 	else
 	begin
 		declare @codigoRegimen numeric(18)
-		set @regimen = (select regimen_codigo from FAGD.Regimen where regimen_descripcion = @regimen)
+		set @codigoRegimen = (select regimen_codigo from FAGD.Regimen where regimen_descripcion = @regimen)
 
 		select distinct Ha.habitacion_codigo Codigo, Ha.habitacion_ubicacion Ubicacion, (R.regimen_precioBase*T.habitacionTipo_cantHuespedes) + (Ho.hotel_cantEstrellas*Ho.hotel_recarga_estrellas) PrecioPorNoche, R.regimen_descripcion
 		from FAGD.Habitacion Ha, FAGD.Hotel Ho, FAGD.HabitacionTipo T, FAGD.Regimen R
