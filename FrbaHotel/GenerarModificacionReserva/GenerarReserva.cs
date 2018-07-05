@@ -15,7 +15,7 @@ namespace FrbaHotel.GenerarModificacionReserva
     public partial class GenerarReserva : Form
     {
         Form ultimoFormulario;
-        private DataTable tabla, dTable;
+        private DataTable tabla, dTable, table2;
         int Fila = 0;
         BindingSource bSource2;
         private SqlDataReader resultado;
@@ -23,11 +23,23 @@ namespace FrbaHotel.GenerarModificacionReserva
         string consulta;
         decimal codHotelSeleccionado;
         public static string clienteSeleccionado = "";
+        int cant = 0;
+        string habitaciones = "";
+        int dias = 0;
+        decimal total = 0;
 
         public GenerarReserva(Form form)
         {
             InitializeComponent();
             ultimoFormulario = form;
+            table2 = new DataTable();
+            table2.Columns.Add("Id");
+            DataColumn column = table2.Columns["Id"];
+            column.Unique = true;
+            table2.Columns.Add("Precio");
+            bSource2 = new BindingSource();
+            bSource2.DataSource = table2;
+            dataGridView2.DataSource = bSource2;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -197,6 +209,50 @@ namespace FrbaHotel.GenerarModificacionReserva
             bSource.DataSource = dTable;
             //set the DataGridView DataSource
             dataGridView1.DataSource = bSource;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                string id = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                string precio = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+                string regimen = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+
+                int item = dataGridView1.CurrentRow.Index;
+
+                DataRow row = table2.NewRow();
+                row["Id"] = id;
+                row["Precio"] = precio;
+                try
+                {
+                    tabla.Rows.Add(row);
+                    if (cant == 0)
+                    {
+                        habitaciones = habitaciones + id;
+                        cboRegimen.Text = regimen;
+                        cboTipoHabitacion.Enabled = false;
+                        cboHotel.Enabled = false;
+                        dtpDesde.Enabled = false;
+                        dtpHasta.Enabled = false;
+                        dias = dtpHasta.Value.Date.Subtract(dtpDesde.Value.Date).Days;
+                    }
+                    else
+                    {
+                        habitaciones = habitaciones + "," + id;
+                    }
+                    total = total + (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
+                    dataGridView1.Rows.RemoveAt(item);
+                    txtTotal.Text = total.ToString();
+                    cant++;
+                    dataGridView2.DataSource = bSource2;
+                    butSeleccionar_Click(null, null);
+                }
+                catch
+                {
+                    MessageBox.Show("Esa habitación ya fue agregada");
+                }
+            }
         }
 
     }

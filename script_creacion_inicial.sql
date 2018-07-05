@@ -2009,7 +2009,7 @@ begin
 	else
 	begin
 		declare @codigoRegimen numeric(18)
-		set @regimen = (select regimen_codigo from FAGD.Regimen where regimen_descripcion = @regimen)
+		set @codigoRegimen = (select regimen_codigo from FAGD.Regimen where regimen_descripcion = @regimen)
 
 		select distinct Ha.habitacion_codigo Codigo, Ha.habitacion_ubicacion Ubicacion, (R.regimen_precioBase*T.habitacionTipo_cantHuespedes) + (Ho.hotel_cantEstrellas*Ho.hotel_recarga_estrellas) PrecioPorNoche, R.regimen_descripcion
 		from FAGD.Habitacion Ha, FAGD.Hotel Ho, FAGD.HabitacionTipo T, FAGD.Regimen R
