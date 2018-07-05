@@ -28,6 +28,7 @@ namespace FrbaHotel.AbmHotel
         private String ciudadHotelIngresado;
         private String paisHotelIngresado;
         private DateTime fechaCreacionHotelIngresado;
+        private String fechaCreacionHotelIngresadoPosta;
         private Decimal codigoHotelIngreso = Login.FrmSeleccionarHotel.codigoHotel;
 
         public FrmModificarHotel(AbmRol.frmMenuEmpleado frmMenuEmpleadoRecibido)
@@ -112,7 +113,8 @@ namespace FrbaHotel.AbmHotel
                     ciudadHotelIngresado = this.txtCiudadHotel.Text;
                     paisHotelIngresado = this.txtPaisHotel.Text;
                     fechaCreacionHotelIngresado = Convert.ToDateTime(this.dtpFechaCreacionHotel.Value);
-                    resultadosCreacionDeHotel = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.actualizarHotel " + estrellasHotelIngresado + ", " + recargaEstrellasHotelIngresado + ", '" + paisHotelIngresado + "', '" + ciudadHotelIngresado + "', '" + calleHotelIngresado + "', " + alturaHotelIngresado + ", '" + nombreHotelIngresado + "', '" + fechaCreacionHotelIngresado + "', '" + mailHotelIngresado + "', " + telefonoHotelIngresado + ", " + codigoHotelIngreso);
+                    fechaCreacionHotelIngresadoPosta = fechaCreacionHotelIngresado.Date.ToString("yyyyMMdd HH:mm:ss");
+                    resultadosCreacionDeHotel = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.actualizarHotel " + estrellasHotelIngresado + ", " + recargaEstrellasHotelIngresado + ", '" + paisHotelIngresado + "', '" + ciudadHotelIngresado + "', '" + calleHotelIngresado + "', " + alturaHotelIngresado + ", '" + nombreHotelIngresado + "', '" + fechaCreacionHotelIngresadoPosta + "', '" + mailHotelIngresado + "', " + telefonoHotelIngresado + ", " + codigoHotelIngreso);
                     resultadosCreacionDeHotel.Close();
                     foreach (object itemChecked in clbRegimenes.CheckedItems)
                     {
