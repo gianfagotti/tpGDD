@@ -32,6 +32,8 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             InitializeComponent();
             ultimoFormulario = form;
+            dtpDesde.Value = VarGlobales.getDate();
+            dtpHasta.Value = VarGlobales.getDate();
             table2 = new DataTable();
             table2.Columns.Add("Id");
             DataColumn column = table2.Columns["Id"];
@@ -56,6 +58,20 @@ namespace FrbaHotel.GenerarModificacionReserva
             txtCliente.ResetText();
             dtpDesde.ResetText();
             dtpHasta.ResetText();
+            dataGridView1.DataSource = null;
+            dataGridView2.DataSource = bSource2;
+            cant = 0;
+            habitaciones = "";
+            table2.Clear();
+            total = 0;
+            txtTotal.Clear();
+            cboTipoHabitacion.Enabled = true;
+            cboRegimen.Enabled = true;
+            dtpDesde.Enabled = true;
+            dtpHasta.Enabled = true;
+            dtpDesde.Value = VarGlobales.getDate();
+            dtpHasta.Value = VarGlobales.getDate();
+
         }
 
         private void GenerarReserva_Load(object sender, EventArgs e)
@@ -173,7 +189,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
             DateTime fechaDesde = Convert.ToDateTime(dtpDesde.Value);
             DateTime fechaHasta = Convert.ToDateTime(dtpHasta.Value);
-            DateTime fechaHoy = DateTime.Now;
+            DateTime fechaHoy = VarGlobales.getDate();
             int result = DateTime.Compare(fechaDesde, fechaHasta);
             if (result >= 0)
             {
@@ -226,7 +242,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                 row["Precio"] = precio;
                 try
                 {
-                    tabla.Rows.Add(row);
+                    table2.Rows.Add(row);
                     if (cant == 0)
                     {
                         habitaciones = habitaciones + id;

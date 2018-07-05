@@ -319,7 +319,7 @@
             this.txtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotal.Location = new System.Drawing.Point(453, 533);
             this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(67, 30);
+            this.txtTotal.Size = new System.Drawing.Size(107, 30);
             this.txtTotal.TabIndex = 29;
             // 
             // GenerarReserva
