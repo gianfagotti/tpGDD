@@ -210,6 +210,7 @@
             this.Controls.Add(this.dgvFiltrado);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmListadoMod";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmListadoMod";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

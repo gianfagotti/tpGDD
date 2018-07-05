@@ -224,6 +224,7 @@
             this.Controls.Add(this.dgvBaja);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmBajaCliente";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmBajaCliente";
             this.Load += new System.EventHandler(this.Baja_Load);
             this.groupBox1.ResumeLayout(false);

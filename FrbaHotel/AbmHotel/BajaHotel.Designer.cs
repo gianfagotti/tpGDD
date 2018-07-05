@@ -144,6 +144,7 @@
             this.Controls.Add(this.dtpFechaIncicioBajaHotel);
             this.Controls.Add(this.lblBajaHotel);
             this.Name = "FrmBajaHotel";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Baja de hotel";
             this.ResumeLayout(false);
             this.PerformLayout();

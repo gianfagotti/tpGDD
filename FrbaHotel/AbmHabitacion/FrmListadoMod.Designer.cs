@@ -227,6 +227,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.butLimpiar);
             this.Name = "FrmListadoMod";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado Habitaciones";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

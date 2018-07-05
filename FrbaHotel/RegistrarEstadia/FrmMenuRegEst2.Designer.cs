@@ -87,6 +87,7 @@
             this.Controls.Add(this.btnCheckout);
             this.Controls.Add(this.label1);
             this.Name = "FrmMenuRegEst2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu registrar estadia";
             this.Load += new System.EventHandler(this.FrmMenuRegEst_Load);
             this.ResumeLayout(false);

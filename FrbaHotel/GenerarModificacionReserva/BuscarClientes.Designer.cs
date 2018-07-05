@@ -36,9 +36,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtNroDoc = new System.Windows.Forms.TextBox();
             this.txtMail = new System.Windows.Forms.TextBox();
             this.cboTipoDoc = new System.Windows.Forms.ComboBox();
+            this.txtNroDoc = new System.Windows.Forms.TextBox();
             this.butVolver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -134,13 +134,6 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Mail";
             // 
-            // txtNroDoc
-            // 
-            this.txtNroDoc.Location = new System.Drawing.Point(136, 28);
-            this.txtNroDoc.Name = "txtNroDoc";
-            this.txtNroDoc.Size = new System.Drawing.Size(149, 20);
-            this.txtNroDoc.TabIndex = 5;
-            // 
             // txtMail
             // 
             this.txtMail.Location = new System.Drawing.Point(350, 28);
@@ -155,6 +148,13 @@
             this.cboTipoDoc.Name = "cboTipoDoc";
             this.cboTipoDoc.Size = new System.Drawing.Size(149, 21);
             this.cboTipoDoc.TabIndex = 4;
+            // 
+            // txtNroDoc
+            // 
+            this.txtNroDoc.Location = new System.Drawing.Point(136, 28);
+            this.txtNroDoc.Name = "txtNroDoc";
+            this.txtNroDoc.Size = new System.Drawing.Size(149, 20);
+            this.txtNroDoc.TabIndex = 5;
             // 
             // butVolver
             // 
@@ -178,6 +178,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Name = "BuscarClientes";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BuscarClientes";
             this.Load += new System.EventHandler(this.BuscarClientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

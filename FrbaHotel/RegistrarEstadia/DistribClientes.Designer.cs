@@ -199,6 +199,7 @@
             this.Controls.Add(this.dgvDistri);
             this.Controls.Add(this.cbohab);
             this.Name = "DistribClientes";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DistribClientes";
             this.Load += new System.EventHandler(this.DistribClientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDistri)).EndInit();

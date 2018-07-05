@@ -342,6 +342,7 @@
             this.Controls.Add(this.lblMail);
             this.Controls.Add(this.lblDatosHotel);
             this.Name = "FrmModificarHotel";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificar hotel";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -149,6 +149,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FrmRegimen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmRegimen";
             this.Load += new System.EventHandler(this.FrmRegimen_Load);
             this.ResumeLayout(false);

@@ -226,9 +226,10 @@
             this.Controls.Add(this.butLimpiar);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmBajaHabitacion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dar de baja habitación";
-            this.Load += new System.EventHandler(this.FrmBajaHabitacion_Load);
             this.Activated += new System.EventHandler(this.FrmBajaHabitacion_Activated);
+            this.Load += new System.EventHandler(this.FrmBajaHabitacion_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltrado)).EndInit();

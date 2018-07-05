@@ -197,6 +197,7 @@
             this.Controls.Add(this.dgvFinalizar);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmCheckout";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Check-out";
             this.Load += new System.EventHandler(this.FrmCheckout_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFinalizar)).EndInit();
