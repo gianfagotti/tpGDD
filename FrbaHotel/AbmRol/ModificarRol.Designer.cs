@@ -37,6 +37,7 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.dgvFuncionalidades = new System.Windows.Forms.DataGridView();
             this.columnaHabilitar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.btnChk = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFuncionalidades)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,15 +121,28 @@
             // 
             // columnaHabilitar
             // 
+            this.columnaHabilitar.FalseValue = "true";
             this.columnaHabilitar.HeaderText = "Habilitar";
             this.columnaHabilitar.Name = "columnaHabilitar";
+            this.columnaHabilitar.TrueValue = "true";
             this.columnaHabilitar.Width = 51;
+            // 
+            // btnChk
+            // 
+            this.btnChk.Location = new System.Drawing.Point(16, 336);
+            this.btnChk.Name = "btnChk";
+            this.btnChk.Size = new System.Drawing.Size(202, 23);
+            this.btnChk.TabIndex = 11;
+            this.btnChk.Text = "Checkear funcionalidades actuales";
+            this.btnChk.UseVisualStyleBackColor = true;
+            this.btnChk.Click += new System.EventHandler(this.btnChk_Click);
             // 
             // ModificarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(392, 371);
+            this.Controls.Add(this.btnChk);
             this.Controls.Add(this.dgvFuncionalidades);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.chkRolActivo);
@@ -157,5 +171,6 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.DataGridView dgvFuncionalidades;
         private System.Windows.Forms.DataGridViewCheckBoxColumn columnaHabilitar;
+        private System.Windows.Forms.Button btnChk;
     }
 }
