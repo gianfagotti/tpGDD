@@ -40,12 +40,6 @@ namespace FrbaHotel.AbmRol
 
         /****************************************************************************************************************************/
 
-        private void btnChk_Click(object sender, EventArgs e)
-        {
-            checkearDGV(rolAModificar);
-        }
-
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -182,5 +176,11 @@ namespace FrbaHotel.AbmRol
 
         }
 
+        private void ModificarRol_Load(object sender, EventArgs e){
+            checkearDGV(rolAModificar);
+        }
+
     }
+            
+
 }

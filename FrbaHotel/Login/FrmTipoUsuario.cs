@@ -24,7 +24,8 @@ namespace FrbaHotel.Login
             BD.conectar();
             //Se actualiza el estado de la reserva segun la fecha del archivo config PODRIA CAPAZ IR EN OTRO FORM 
             string comandoReservas = "EXEC FAGD.SetearEstadosReservaSegunConfig '" + fechaApp + "'";
-            BD.comando(comandoReservas);
+            SqlDataReader resultado = BD.comando(comandoReservas);
+            resultado.Close();
         }
 
         private void btnAceptarTipoUsuario_Click(object sender, EventArgs e)
