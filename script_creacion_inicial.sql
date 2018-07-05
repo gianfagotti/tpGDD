@@ -1226,19 +1226,30 @@ GO
 
 ---------------------------------------------------------------------------------------------------
 
-/*
 CREATE PROCEDURE FAGD.SetearEstadosReservaSegunConfig @fechaDelSystem DATETIME
 AS BEGIN
 
 DECLARE @respuestaTran numeric(18,0),
-        @estado numeric(18,0)
+        @estadoCorrecto numeric(18,0),
+		@estadoEfectivo numeric(18,0)
 
 SET @fechaDelSystem = CONVERT(DATETIME,@fechaDelSystem,121)
 
 BEGIN TRAN ta
 BEGIN TRY
+
+SET @estadoCorrecto = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA CORRECTA')
 UPDATE FAGD.Reserva
-	
+SET reserva_estado = @estadoCorrecto WHERE reserva_codigo IN 
+	(SELECT DISTINCT R.reserva_codigo FROM FAGD.Reserva R
+		WHERE R.reserva_fechaInicio < @fechaDelSystem AND R.reserva_estado = 1 OR R.reserva_estado = 6)
+
+
+SET @estadoEfectivo = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA EFECTIVIZADA')
+UPDATE FAGD.Reserva
+SET reserva_estado = @estadoEfectivo WHERE reserva_codigo IN 
+	(SELECT DISTINCT R.reserva_codigo FROM FAGD.Reserva R
+		WHERE R.reserva_fechaInicio > @fechaDelSystem AND R.reserva_estado = 1 OR R.reserva_estado = 6)
 						
 				
  SET @respuestaTran = 1
@@ -1252,7 +1263,7 @@ SELECT @respuestaTran AS respuesta
 END CATCH
 END
 GO
-*/
+
 
 ---------------------------------------------------------------------------------------------------
 
