@@ -58,5 +58,21 @@ namespace FrbaHotel.Login
         {
 
         }
+
+        public static string encriptar(string clave)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(clave);
+
+            System.Security.Cryptography.SHA256Managed sha256hashstring = new System.Security.Cryptography.SHA256Managed();
+            byte[] hash = sha256hashstring.ComputeHash(bytes);
+            string hashstring = string.Empty;
+            foreach (byte x in hash)
+            {
+                hashstring += String.Format("{0:x2}", x);
+            }
+            return hashstring;
+        }
+
+
     }
 }

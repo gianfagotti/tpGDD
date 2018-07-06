@@ -200,6 +200,7 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(295, 20);
             this.txtTelefono.TabIndex = 17;
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // txtMail
             // 
@@ -221,6 +222,7 @@
             this.txtDocumento.Name = "txtDocumento";
             this.txtDocumento.Size = new System.Drawing.Size(119, 20);
             this.txtDocumento.TabIndex = 19;
+            this.txtDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDocumento_KeyPress);
             // 
             // cboRol
             // 
@@ -297,12 +299,12 @@
             // 
             this.dtpFechaNac.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFechaNac.Location = new System.Drawing.Point(121, 261);
-            this.dtpFechaNac.MaxDate = new System.DateTime(2018, 6, 30, 16, 18, 3, 0);
+            this.dtpFechaNac.MaxDate = new System.DateTime(2099, 12, 31, 0, 0, 0, 0);
             this.dtpFechaNac.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtpFechaNac.Name = "dtpFechaNac";
             this.dtpFechaNac.Size = new System.Drawing.Size(294, 20);
             this.dtpFechaNac.TabIndex = 28;
-            this.dtpFechaNac.Value = new System.DateTime(2018, 6, 28, 0, 0, 0, 0);
+            this.dtpFechaNac.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // AltaUsuario
             // 

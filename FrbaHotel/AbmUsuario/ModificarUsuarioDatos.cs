@@ -74,7 +74,7 @@ namespace FrbaHotel.AbmUsuario
                 exe = exe + "'" + usuario + "', ";
                 exe = exe + "'" + txtNombre.Text + "', ";
                 exe = exe + "'" + txtApellido.Text + "', ";
-                exe = exe + "'" + txtContraseña.Text + "', ";
+          //      exe = exe + "'" + Login.FrmTipoUsuario.encriptar(txtContraseña.Text) + "', ";
                 exe = exe + "'" + cboDocumento.Text + "', ";
                 exe = exe + "'" + txtDocumento.Text + "', ";
                 exe = exe + "'" + txtDireccion.Text + "', ";
@@ -114,23 +114,10 @@ namespace FrbaHotel.AbmUsuario
         private Boolean chequearCampos()
         {
 
-            DateTime hoy = DateTime.Now;
-            DateTime fechaIngresada;
-            fechaIngresada = Convert.ToDateTime(dtpFechaNac.Value);
-
-            hoy.AddYears(-16);
-
-            int resultado = DateTime.Compare(fechaIngresada, hoy);
-
-            if (resultado >= 0)
-            {
-                MessageBox.Show("El usuario debe ser mayor de edad", "Error");
-                return false;
-            }
-
             if (string.IsNullOrEmpty(txtNombre.Text) ||
                 string.IsNullOrEmpty(txtApellido.Text) ||
-                string.IsNullOrEmpty(txtContraseña.Text) ||
+                string.IsNullOrEmpty(txtUsername.Text) ||
+         //       string.IsNullOrEmpty(txtContraseña.Text) ||
                 string.IsNullOrEmpty(txtDireccion.Text) ||
                 string.IsNullOrEmpty(txtDocumento.Text) ||
                 string.IsNullOrEmpty(txtMail.Text) ||
@@ -141,7 +128,26 @@ namespace FrbaHotel.AbmUsuario
                 MessageBox.Show("Todos los campos son obligatorios y deben ser completados.", "Error");
                 return false;
             }
-            else return true; 
+            else
+            {
+                DateTime hoy = DateTime.Now;
+                DateTime fechaIngresada;
+                fechaIngresada = Convert.ToDateTime(dtpFechaNac.Value);
+
+                hoy.AddYears(-16);
+
+                int resultado = DateTime.Compare(hoy, fechaIngresada);
+                MessageBox.Show("Comparación de fechas " + resultado.ToString());
+
+
+                if (resultado >= 0)
+                {
+                    MessageBox.Show("El usuario debe ser mayor de 16 años", "Error");
+                    dtpFechaNac.Focus();
+                    return false;
+                }
+                return true;
+            }
 
         }
 
@@ -155,7 +161,7 @@ namespace FrbaHotel.AbmUsuario
             String select = "SELECT * FROM FAGD.Usuario WHERE usuario_username = '"+usuario+"'";
             tabla = Login.FrmTipoUsuario.BD.consulta(select);
             txtUsername.Text = usuario;
-            txtContraseña.Text = tabla.Rows[0][1].ToString();
+     //       txtContraseña.Text = tabla.Rows[0][1].ToString();
             txtNombre.Text = tabla.Rows[0][2].ToString();
             txtApellido.Text = tabla.Rows[0][3].ToString();
             txtDireccion.Text = tabla.Rows[0][4].ToString();
@@ -166,6 +172,24 @@ namespace FrbaHotel.AbmUsuario
             txtDocumento.Text = tabla.Rows[0][9].ToString();
            
         }
+
+
+        private void txtDocumento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
 
     }
 }

@@ -35,6 +35,7 @@
             this.btnCambiarEstado = new System.Windows.Forms.Button();
             this.btnAñadir = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnPass = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -58,7 +59,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(16, 192);
+            this.btnVolver.Location = new System.Drawing.Point(16, 221);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(305, 24);
             this.btnVolver.TabIndex = 3;
@@ -88,7 +89,7 @@
             // 
             // btnAñadir
             // 
-            this.btnAñadir.Location = new System.Drawing.Point(16, 136);
+            this.btnAñadir.Location = new System.Drawing.Point(16, 165);
             this.btnAñadir.Name = "btnAñadir";
             this.btnAñadir.Size = new System.Drawing.Size(305, 23);
             this.btnAñadir.TabIndex = 8;
@@ -98,7 +99,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(16, 163);
+            this.btnEliminar.Location = new System.Drawing.Point(16, 192);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(305, 23);
             this.btnEliminar.TabIndex = 10;
@@ -106,11 +107,22 @@
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
+            // btnPass
+            // 
+            this.btnPass.Location = new System.Drawing.Point(16, 136);
+            this.btnPass.Name = "btnPass";
+            this.btnPass.Size = new System.Drawing.Size(305, 23);
+            this.btnPass.TabIndex = 11;
+            this.btnPass.Text = "Cambiar contraseña";
+            this.btnPass.UseVisualStyleBackColor = true;
+            this.btnPass.Click += new System.EventHandler(this.btnPass_Click);
+            // 
             // SeleccionarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(341, 229);
+            this.ClientSize = new System.Drawing.Size(341, 254);
+            this.Controls.Add(this.btnPass);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnAñadir);
             this.Controls.Add(this.btnCambiarEstado);
@@ -135,5 +147,6 @@
         private System.Windows.Forms.Button btnCambiarEstado;
         private System.Windows.Forms.Button btnAñadir;
         private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnPass;
     }
 }

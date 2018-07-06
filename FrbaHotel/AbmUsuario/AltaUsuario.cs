@@ -15,7 +15,6 @@ namespace FrbaHotel.AbmUsuario
     {
         Form ultimoFormulario;
         SqlDataReader reader;
-        //SqlDataAdapter adapter;
         DataTable tabla, tablaH;
         Char separacion = '-';
 
@@ -59,10 +58,6 @@ namespace FrbaHotel.AbmUsuario
             cboHotel.ResetText();
             cboDocumento.ResetText();
 
-            //cboRol.SelectedIndex = -1;
-            //cboHotel.SelectedIndex = -1;
-            //cboDocumento.SelectedIndex = -1;
-
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,8 +69,8 @@ namespace FrbaHotel.AbmUsuario
             Boolean exito = chequearCampos();
             if (exito)
             {
-                DateTime fecha;
 
+                DateTime fecha;
                 fecha = Convert.ToDateTime(dtpFechaNac.Value);
                 string fechaNacimiento = fecha.Date.ToString("yyyyMMdd HH:mm:ss");
 
@@ -88,7 +83,7 @@ namespace FrbaHotel.AbmUsuario
                 exe = exe + "'" + txtNombre.Text + "',";
                 exe = exe + "'" + txtApellido.Text + "', ";
                 exe = exe + "'" + txtUsername.Text + "', ";
-                exe = exe + "'" + txtContraseña.Text + "', ";
+                exe = exe + "'" + Login.FrmTipoUsuario.encriptar(txtContraseña.Text) + "', ";
                 exe = exe + "'" + cboDocumento.Text + "', ";
                 exe = exe + "'" + txtDocumento.Text + "', ";
                 exe = exe + "'" + txtDireccion.Text + "', ";
@@ -111,6 +106,7 @@ namespace FrbaHotel.AbmUsuario
                 if (resultado == 0)
                 {
                     MessageBox.Show("Ya existe un usuario con ese nombre de usuario", "Error");
+                    txtUsername.Focus();
                 }
                 else if (resultado == 2)
                 {
@@ -120,11 +116,9 @@ namespace FrbaHotel.AbmUsuario
                 {
                     MessageBox.Show("Usuario guardado correctamente!", "Usuario Guardado");
                 }
-
+                ultimoFormulario.Show();
+                this.Close();
             }
-
-            ultimoFormulario.Show();
-            this.Close();
 
         }
 
@@ -135,22 +129,7 @@ namespace FrbaHotel.AbmUsuario
 
         private Boolean chequearCampos()
         {
-
-            DateTime hoy = DateTime.Now;
-            DateTime fechaIngresada;
-            fechaIngresada = Convert.ToDateTime(dtpFechaNac.Value);
-
-            hoy.AddYears(-16);
-
-            int resultado = DateTime.Compare(fechaIngresada, hoy);
-
-            if (resultado >= 0)
-            {
-                MessageBox.Show("El usuario debe ser mayor de edad", "Error");
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(txtNombre.Text) ||
+            if(string.IsNullOrEmpty(txtNombre.Text) ||
                 string.IsNullOrEmpty(txtApellido.Text) ||
                 string.IsNullOrEmpty(txtUsername.Text) ||
                 string.IsNullOrEmpty(txtContraseña.Text) ||
@@ -166,7 +145,25 @@ namespace FrbaHotel.AbmUsuario
                 MessageBox.Show("Todos los campos son obligatorios y deben ser completados.", "Error");
                 return false;
             }
-            else { return true; }
+            else {
+                DateTime hoy = DateTime.Now;
+                DateTime fechaIngresada;
+                fechaIngresada = Convert.ToDateTime(dtpFechaNac.Value);
+
+                hoy.AddYears(-16);
+
+                int resultado = DateTime.Compare(hoy, fechaIngresada);
+                MessageBox.Show("Comparación de fechas " + resultado.ToString());
+                
+
+                if (resultado >= 0)
+                {
+                    MessageBox.Show("El usuario debe ser mayor de 16 años", "Error");
+                    dtpFechaNac.Focus();
+                    return false;
+                }
+                return true;
+            }
 
         }
 
@@ -180,7 +177,6 @@ namespace FrbaHotel.AbmUsuario
         {
             String select = "SELECT rol_nombre FROM FAGD.Rol";
 
-            // adapter = Login.FrmTipoUsuario.BD.dameDataAdapter(select);
             reader = Login.FrmTipoUsuario.BD.comando(select);
 
             DataTable tabla = new DataTable();
@@ -204,7 +200,23 @@ namespace FrbaHotel.AbmUsuario
                 
             tablaH.Clear();
         }
-            
+
+        private void txtDocumento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
 
     }
 
