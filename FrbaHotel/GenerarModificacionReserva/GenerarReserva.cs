@@ -27,6 +27,7 @@ namespace FrbaHotel.GenerarModificacionReserva
         string habitaciones = "";
         int dias = 0;
         decimal total = 0;
+        decimal precio = 0;
 
         public GenerarReserva(Form form)
         {
@@ -34,6 +35,10 @@ namespace FrbaHotel.GenerarModificacionReserva
             ultimoFormulario = form;
             dtpDesde.Value = VarGlobales.getDate();
             dtpHasta.Value = VarGlobales.getDate();
+            dataGridView1.DataSource = null;
+            dataGridView2.DataSource = null;
+            total = 0;
+            txtTotal.Text = "0";
             table2 = new DataTable();
             table2.Columns.Add("Id");
             DataColumn column = table2.Columns["Id"];
@@ -52,7 +57,15 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void butLimpiar_Click(object sender, EventArgs e)
         {
-            cboHotel.ResetText();
+            if (Login.FrmTipoUsuario.usuario == "guest")
+            {
+                cboHotel.ResetText();
+                cboHotel.Enabled = true;
+            }
+            else 
+            {
+                cboHotel.Enabled = false;
+            }
             cboRegimen.ResetText();
             cboTipoHabitacion.ResetText();
             txtCliente.ResetText();
@@ -64,7 +77,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             habitaciones = "";
             table2.Clear();
             total = 0;
-            txtTotal.Clear();
+            txtTotal.Text = "0";
             cboTipoHabitacion.Enabled = true;
             cboRegimen.Enabled = true;
             dtpDesde.Enabled = true;
@@ -231,16 +244,20 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             if (e.ColumnIndex == 0)
             {
-                MessageBox.Show("Entreeeeeeeeeeeeeee");
                 string id = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-                string precio = dataGridView1.CurrentRow.Cells[3].Value.ToString();
                 string regimen = dataGridView1.CurrentRow.Cells[4].Value.ToString();
-
-                //int item = dataGridView1.CurrentRow.Index;
 
                 DataRow row = table2.NewRow();
                 row["Id"] = id;
-                row["Precio"] = precio;
+                try
+                {
+                    precio = (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * 1);
+                    precio *= dias;
+                    row["Precio"] = precio.ToString();
+
+                }
+                catch { return; }
+                
                 try
                 {
                     table2.Rows.Add(row);
@@ -258,18 +275,44 @@ namespace FrbaHotel.GenerarModificacionReserva
                     {
                         habitaciones = habitaciones + "," + id;
                     }
-                    total = total + (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
-                    dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+                    total += (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
                     txtTotal.Text = total.ToString();
                     cant++;
                     dataGridView2.DataSource = bSource2;
-                    //butSeleccionar_Click(null, null);
+                    butSeleccionar_Click(null, null);
                 }
                 catch
                 {
                     MessageBox.Show("Esa habitación ya fue agregada");
                 }
             }
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0) 
+            {
+                try
+                {
+                    int item = dataGridView2.CurrentRow.Index;
+                    dataGridView2.Rows.RemoveAt(item);
+                    cant--;
+
+                    if (cant == 0)
+                    {
+                        cboTipoHabitacion.Enabled = true;
+                        cboHotel.Enabled = true;
+                        dtpDesde.Enabled = true;
+                        dtpHasta.Enabled = true;
+                        dataGridView2.DataSource = bSource2;
+                    }
+                    decimal precio = (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
+                    total -= precio;
+                    txtTotal.Text = total.ToString();
+                }
+                catch { }
+            }
+
         }
 
     }
