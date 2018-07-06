@@ -29,7 +29,7 @@ namespace FrbaHotel.Login
             }
             else
             {
-                string contraseñaIngresada = this.txtContraseña.Text;
+                string contraseñaIngresada = Login.FrmTipoUsuario.encriptar(txtContraseña.Text);
                 tabla = Login.FrmTipoUsuario.BD.consulta("SELECT usuario_username, usuario_password, usuario_estado FROM FAGD.Usuario WHERE usuario_password = '"+contraseñaIngresada+"' AND usuario_username = '"+usuarioIngresado+"'");
                 if (tabla.Rows.Count == 1)
                 {
@@ -65,5 +65,18 @@ namespace FrbaHotel.Login
         }
 
         public object usuarioIngresado { get; set; }
+
+
+        private void btnPass_Click_1(object sender, EventArgs e)
+        {
+
+            AbmUsuario.CambiarPass frm = new AbmUsuario.CambiarPass(this, usuarioIngresado.ToString());
+            this.Hide();
+            frm.Show();
+        }
     }
+
+  
+
+
 }

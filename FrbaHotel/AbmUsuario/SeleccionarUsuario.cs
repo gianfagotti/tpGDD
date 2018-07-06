@@ -124,14 +124,6 @@ namespace FrbaHotel.AbmUsuario
             frm.Show();
         }
 
-        private void btnPass_Click(object sender, EventArgs e)
-        {
-            CambiarPass frm = new CambiarPass(this, usuario);
-            this.Hide();
-            frm.Show();
-        }
-
-
-
+        
     }
 }

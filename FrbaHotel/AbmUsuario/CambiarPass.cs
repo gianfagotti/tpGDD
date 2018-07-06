@@ -51,6 +51,7 @@ namespace FrbaHotel.AbmUsuario
                         reader.Read();
                         MessageBox.Show("Password cambiada correctamente!","Exito",MessageBoxButtons.OK,MessageBoxIcon.Information);
                         reader.Close();
+                        ultimoFormulario.Show();
                         this.Close();
                     }
                     else
