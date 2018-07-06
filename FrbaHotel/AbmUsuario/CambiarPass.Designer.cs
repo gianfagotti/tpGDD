@@ -49,6 +49,7 @@
             // 
             this.txtPassVieja.Location = new System.Drawing.Point(16, 30);
             this.txtPassVieja.Name = "txtPassVieja";
+            this.txtPassVieja.PasswordChar = '*';
             this.txtPassVieja.Size = new System.Drawing.Size(256, 20);
             this.txtPassVieja.TabIndex = 1;
             // 
@@ -56,6 +57,7 @@
             // 
             this.txtPassNueva.Location = new System.Drawing.Point(16, 81);
             this.txtPassNueva.Name = "txtPassNueva";
+            this.txtPassNueva.PasswordChar = '*';
             this.txtPassNueva.Size = new System.Drawing.Size(256, 20);
             this.txtPassNueva.TabIndex = 3;
             // 
