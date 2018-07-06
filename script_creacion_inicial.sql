@@ -1898,7 +1898,6 @@ CREATE PROCEDURE FAGD.updatearDatosUsuario
 @username nvarchar (255),
 @nombre nvarchar (255),
 @apellido nvarchar (255),
-@password nvarchar (255),
 @tipoDoc nvarchar (255),
 @nroDoc numeric (18),
 @direccion nvarchar (255),
@@ -1925,7 +1924,6 @@ BEGIN
 			
 			SET usuario_nombre = @nombre,
 				usuario_apellido = @apellido,
-				usuario_password= @password,
 				usuario_tipoDoc= @tipoDoc,
 				usuario_nroDoc= @nroDoc,
 				usuario_direccion = @direccion,
