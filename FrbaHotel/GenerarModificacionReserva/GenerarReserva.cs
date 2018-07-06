@@ -231,11 +231,12 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             if (e.ColumnIndex == 0)
             {
+                MessageBox.Show("Entreeeeeeeeeeeeeee");
                 string id = dataGridView1.CurrentRow.Cells[1].Value.ToString();
                 string precio = dataGridView1.CurrentRow.Cells[3].Value.ToString();
                 string regimen = dataGridView1.CurrentRow.Cells[4].Value.ToString();
 
-                int item = dataGridView1.CurrentRow.Index;
+                //int item = dataGridView1.CurrentRow.Index;
 
                 DataRow row = table2.NewRow();
                 row["Id"] = id;
@@ -258,11 +259,11 @@ namespace FrbaHotel.GenerarModificacionReserva
                         habitaciones = habitaciones + "," + id;
                     }
                     total = total + (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
-                    dataGridView1.Rows.RemoveAt(item);
+                    dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
                     txtTotal.Text = total.ToString();
                     cant++;
                     dataGridView2.DataSource = bSource2;
-                    butSeleccionar_Click(null, null);
+                    //butSeleccionar_Click(null, null);
                 }
                 catch
                 {
