@@ -37,7 +37,6 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.dgvFuncionalidades = new System.Windows.Forms.DataGridView();
             this.columnaHabilitar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.btnChk = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFuncionalidades)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,39 +109,24 @@
             // 
             this.dgvFuncionalidades.AllowUserToAddRows = false;
             this.dgvFuncionalidades.AllowUserToDeleteRows = false;
-            this.dgvFuncionalidades.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvFuncionalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFuncionalidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnaHabilitar});
-            this.dgvFuncionalidades.Location = new System.Drawing.Point(16, 91);
+            this.dgvFuncionalidades.Location = new System.Drawing.Point(13, 92);
             this.dgvFuncionalidades.Name = "dgvFuncionalidades";
-            this.dgvFuncionalidades.Size = new System.Drawing.Size(364, 239);
-            this.dgvFuncionalidades.TabIndex = 10;
+            this.dgvFuncionalidades.Size = new System.Drawing.Size(367, 238);
+            this.dgvFuncionalidades.TabIndex = 8;
             // 
             // columnaHabilitar
             // 
-            this.columnaHabilitar.FalseValue = "true";
             this.columnaHabilitar.HeaderText = "Habilitar";
             this.columnaHabilitar.Name = "columnaHabilitar";
-            this.columnaHabilitar.TrueValue = "true";
-            this.columnaHabilitar.Width = 51;
-            // 
-            // btnChk
-            // 
-            this.btnChk.Location = new System.Drawing.Point(16, 336);
-            this.btnChk.Name = "btnChk";
-            this.btnChk.Size = new System.Drawing.Size(202, 23);
-            this.btnChk.TabIndex = 11;
-            this.btnChk.Text = "Checkear funcionalidades actuales";
-            this.btnChk.UseVisualStyleBackColor = true;
-            this.btnChk.Click += new System.EventHandler(this.btnChk_Click);
             // 
             // ModificarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(392, 371);
-            this.Controls.Add(this.btnChk);
             this.Controls.Add(this.dgvFuncionalidades);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.chkRolActivo);
@@ -154,6 +138,7 @@
             this.Name = "ModificarRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificar Rol";
+            this.Load += new System.EventHandler(this.ModificarRol_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFuncionalidades)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -171,6 +156,5 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.DataGridView dgvFuncionalidades;
         private System.Windows.Forms.DataGridViewCheckBoxColumn columnaHabilitar;
-        private System.Windows.Forms.Button btnChk;
     }
 }
