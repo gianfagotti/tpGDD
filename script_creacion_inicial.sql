@@ -2025,6 +2025,19 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE FAGD.darDeBajaHotel @fechaInicio datetime, @fechaFin datetime, @motivo nvarchar(255), @codigoHotel numeric (18,0)
+AS
+BEGIN
+	DECLARE @resultado numeric(1)
+	BEGIN TRAN darDeBajaHotel
+		INSERT INTO FAGD.BajaHotel
+		VALUES (@codigoHotel,@fechaInicio,@fechaFin,@motivo)
+	COMMIT TRAN darDeBajaHotel
+SET @resultado = 0;
+SELECT @resultado AS resultado;
+END
+GO
+
 ------------------------------------------------------------------------------------------------------------------
 
 create procedure FAGD.BuscarHabitacionesDisponibles
