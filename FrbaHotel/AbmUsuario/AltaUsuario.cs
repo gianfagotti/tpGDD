@@ -146,16 +146,16 @@ namespace FrbaHotel.AbmUsuario
                 return false;
             }
             else {
-                DateTime hoy = DateTime.Now;
+
+                DateTime hoy = VarGlobales.getDate();
+                //DateTime hoy = DateTime.Now;
                 DateTime fechaIngresada;
                 fechaIngresada = Convert.ToDateTime(dtpFechaNac.Value);
 
                 hoy.AddYears(-16);
 
                 int resultado = DateTime.Compare(hoy, fechaIngresada);
-                MessageBox.Show("Comparación de fechas " + resultado.ToString());
-                
-
+               
                 if (resultado >= 0)
                 {
                     MessageBox.Show("El usuario debe ser mayor de 16 años", "Error");

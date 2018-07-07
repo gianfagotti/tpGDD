@@ -139,18 +139,26 @@ namespace FrbaHotel.AbmRol
                         {
 
                             String codigoFuncionalidad = row.Cells[1].Value.ToString();
-                            exe = "EXEC FAGD.funcionalidadesDelRol '" + txtNombreRol.Text + "', '" + codigoFuncionalidad + "'";
-                            resultado = Login.FrmTipoUsuario.BD.comando(exe);
-
-                            if (resultado.Read())
+                            if (codigoFuncionalidad == "8" && rolAModificar != "administrador")
                             {
-                                mensaje = resultado.GetDecimal(0);
+                                MessageBox.Show("El manejo de usuarios solo puede llevarse a cabo por los Administradores. Se procederá a guardar el resto de las funcionalidades seleccionadas", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             }
-                            resultado.Close();
-
-                            if (mensaje == 0)
+                            else
                             {
-                                MessageBox.Show("Error al linkear el rol con las funcionalidades.");
+
+                                exe = "EXEC FAGD.funcionalidadesDelRol '" + txtNombreRol.Text + "', '" + codigoFuncionalidad + "'";
+                                resultado = Login.FrmTipoUsuario.BD.comando(exe);
+
+                                if (resultado.Read())
+                                {
+                                    mensaje = resultado.GetDecimal(0);
+                                }
+                                resultado.Close();
+
+                                if (mensaje == 0)
+                                {
+                                    MessageBox.Show("Error al linkear el rol con las funcionalidades.");
+                                }
                             }
                         }
                     }

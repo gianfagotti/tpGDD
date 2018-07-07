@@ -72,9 +72,10 @@
             // chkHabilitado
             // 
             this.chkHabilitado.AutoSize = true;
+            this.chkHabilitado.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkHabilitado.Location = new System.Drawing.Point(174, 107);
             this.chkHabilitado.Name = "chkHabilitado";
-            this.chkHabilitado.Size = new System.Drawing.Size(73, 17);
+            this.chkHabilitado.Size = new System.Drawing.Size(92, 22);
             this.chkHabilitado.TabIndex = 1;
             this.chkHabilitado.Text = "Habilitado";
             this.chkHabilitado.UseVisualStyleBackColor = true;
@@ -105,9 +106,9 @@
             // 
             // txtPiso
             // 
-            this.txtPiso.Location = new System.Drawing.Point(50, 66);
+            this.txtPiso.Location = new System.Drawing.Point(73, 66);
             this.txtPiso.Name = "txtPiso";
-            this.txtPiso.Size = new System.Drawing.Size(57, 20);
+            this.txtPiso.Size = new System.Drawing.Size(79, 20);
             this.txtPiso.TabIndex = 6;
             this.txtPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPiso_KeyPress);
             // 
@@ -115,7 +116,7 @@
             // 
             this.txtNumero.Location = new System.Drawing.Point(74, 31);
             this.txtNumero.Name = "txtNumero";
-            this.txtNumero.Size = new System.Drawing.Size(56, 20);
+            this.txtNumero.Size = new System.Drawing.Size(78, 20);
             this.txtNumero.TabIndex = 5;
             this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero_KeyPress);
             // 

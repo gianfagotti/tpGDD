@@ -74,7 +74,6 @@ namespace FrbaHotel.AbmUsuario
                 exe = exe + "'" + usuario + "', ";
                 exe = exe + "'" + txtNombre.Text + "', ";
                 exe = exe + "'" + txtApellido.Text + "', ";
-          //      exe = exe + "'" + Login.FrmTipoUsuario.encriptar(txtContraseña.Text) + "', ";
                 exe = exe + "'" + cboDocumento.Text + "', ";
                 exe = exe + "'" + txtDocumento.Text + "', ";
                 exe = exe + "'" + txtDireccion.Text + "', ";
@@ -117,7 +116,6 @@ namespace FrbaHotel.AbmUsuario
             if (string.IsNullOrEmpty(txtNombre.Text) ||
                 string.IsNullOrEmpty(txtApellido.Text) ||
                 string.IsNullOrEmpty(txtUsername.Text) ||
-         //       string.IsNullOrEmpty(txtContraseña.Text) ||
                 string.IsNullOrEmpty(txtDireccion.Text) ||
                 string.IsNullOrEmpty(txtDocumento.Text) ||
                 string.IsNullOrEmpty(txtMail.Text) ||
@@ -161,7 +159,6 @@ namespace FrbaHotel.AbmUsuario
             String select = "SELECT * FROM FAGD.Usuario WHERE usuario_username = '"+usuario+"'";
             tabla = Login.FrmTipoUsuario.BD.consulta(select);
             txtUsername.Text = usuario;
-     //       txtContraseña.Text = tabla.Rows[0][1].ToString();
             txtNombre.Text = tabla.Rows[0][2].ToString();
             txtApellido.Text = tabla.Rows[0][3].ToString();
             txtDireccion.Text = tabla.Rows[0][4].ToString();

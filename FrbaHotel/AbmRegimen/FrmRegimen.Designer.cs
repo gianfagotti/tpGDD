@@ -94,7 +94,7 @@
             // 
             // butLimpiar
             // 
-            this.butLimpiar.Location = new System.Drawing.Point(12, 191);
+            this.butLimpiar.Location = new System.Drawing.Point(12, 158);
             this.butLimpiar.Name = "butLimpiar";
             this.butLimpiar.Size = new System.Drawing.Size(75, 23);
             this.butLimpiar.TabIndex = 8;
@@ -104,7 +104,7 @@
             // 
             // butVolver
             // 
-            this.butVolver.Location = new System.Drawing.Point(169, 191);
+            this.butVolver.Location = new System.Drawing.Point(111, 158);
             this.butVolver.Name = "butVolver";
             this.butVolver.Size = new System.Drawing.Size(75, 23);
             this.butVolver.TabIndex = 9;
@@ -114,7 +114,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(259, 191);
+            this.button3.Location = new System.Drawing.Point(201, 158);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 10;
@@ -126,7 +126,7 @@
             // 
             this.chkEstado.AutoSize = true;
             this.chkEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkEstado.Location = new System.Drawing.Point(13, 141);
+            this.chkEstado.Location = new System.Drawing.Point(15, 123);
             this.chkEstado.Name = "chkEstado";
             this.chkEstado.Size = new System.Drawing.Size(67, 22);
             this.chkEstado.TabIndex = 11;
@@ -137,7 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(341, 220);
+            this.ClientSize = new System.Drawing.Size(290, 191);
             this.Controls.Add(this.chkEstado);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.butVolver);
