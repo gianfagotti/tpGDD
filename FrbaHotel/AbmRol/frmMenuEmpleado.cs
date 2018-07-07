@@ -144,7 +144,7 @@ namespace FrbaHotel.AbmRol
 
         private void btnRegistrarConsumible_Click(object sender, EventArgs e)
         {
-            RegistrarConsumible.FrmAgregarConsumibles frmAgregarConsu = new RegistrarConsumible.FrmAgregarConsumibles(this);
+            RegistrarConsumible.FrmSeleccionEstadia frmAgregarConsu = new RegistrarConsumible.FrmSeleccionEstadia(this);
             this.Hide();            
             frmAgregarConsu.Show();
         }

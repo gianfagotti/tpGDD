@@ -14,15 +14,16 @@ namespace FrbaHotel.RegistrarConsumible
     public partial class FrmAgregarConsumibles : Form
     {
         private SqlDataReader resultadoDeOperacion;
-        AbmRol.frmMenuEmpleado frmMenuEmpleado;
         SqlDataAdapter adaptador;
         DataTable tablaConDatosConsum;
         BindingSource bSourceReg;
+        FrmAgregarConsumibles agregarConsum;
 
-        public FrmAgregarConsumibles(string estadiaCodigo, string habCodigo, string habNumero, string piso)
+        public FrmAgregarConsumibles(string estadiaCodigo, string habCodigo, string habNumero, string piso, FrmAgregarConsumibles agregarConsu)
         {
             
             InitializeComponent();
+            agregarConsum = agregarConsu;
             txtCodigoEst.Text = estadiaCodigo;
             txthab.Text = habCodigo;
             txtnroha.Text = habNumero;
@@ -36,12 +37,6 @@ namespace FrbaHotel.RegistrarConsumible
             dgvRegCons.DataSource = bSourceReg;
         }
 
-
-        public FrmAgregarConsumibles(AbmRol.frmMenuEmpleado form)
-        {
-            frmMenuEmpleado = form;
-            InitializeComponent();
-        }
 
           private void FrmAgregarConsumibles_Load(object sender, EventArgs e)
         {
@@ -66,8 +61,7 @@ namespace FrbaHotel.RegistrarConsumible
         private void BtnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
-            frmMenuEmpleado.ShowDialog();
-           
+            agregarConsum.Show();
         }
 
     
@@ -75,15 +69,16 @@ namespace FrbaHotel.RegistrarConsumible
         {
             if (e.ColumnIndex == 0)
             {
-                string codigoConsu = dgvCons.CurrentRow.Cells[1].Value.ToString();
-                string precioConsu = dgvCons.CurrentRow.Cells[2].Value.ToString();
-                string descripcionConsu = dgvCons.CurrentRow.Cells[3].Value.ToString();
-                DataRow row = tablaConDatosConsum.NewRow();
-                row["Codigo"] = codigoConsu;
-                row["Precio"] = precioConsu;
-                row["Descripcion"] = descripcionConsu;
-                tablaConDatosConsum.Rows.Add(row);
-                dgvRegCons.DataSource = bSourceReg;
+
+                    string codigoConsu = dgvCons.CurrentRow.Cells[1].Value.ToString();
+                    string precioConsu = dgvCons.CurrentRow.Cells[2].Value.ToString();
+                    string descripcionConsu = dgvCons.CurrentRow.Cells[3].Value.ToString();
+                    DataRow row = tablaConDatosConsum.NewRow();
+                    row["Codigo"] = codigoConsu;
+                    row["Precio"] = precioConsu;
+                    row["Descripcion"] = descripcionConsu;
+                    tablaConDatosConsum.Rows.Add(row);
+                    dgvRegCons.DataSource = bSourceReg;
             }
 
         }
@@ -116,7 +111,7 @@ namespace FrbaHotel.RegistrarConsumible
             }
             foreach (DataRow fila in tablaConDatosConsum.Rows)
             {
-                resultadoDeOperacion = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarConsXEstadiaXHab " + txtCodigoEst.Text + "," + fila["Codigo"].ToString() + "," + txthab.Text);
+                resultadoDeOperacion = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarConsuXEstXHabitacion " + txtCodigoEst.Text + "," + fila["Codigo"].ToString() + "," + txthab.Text);
                 if (resultadoDeOperacion.Read())
                 {
                     if (resultadoDeOperacion.GetDecimal(0) == 0)
@@ -134,7 +129,8 @@ namespace FrbaHotel.RegistrarConsumible
             this.Close();
 
         }
-      
+
+ 
 
         }
     }

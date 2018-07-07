@@ -1465,7 +1465,7 @@ BEGIN TRY
 		INSERT INTO FAGD.ItemFactura(itemFactura_nroFactura,itemFactura_cantidad,itemFactura_itemMonto,itemFactura_descripcion)
 		VALUES (@factura,1,@precio,@descripcionItem)
 
-		SET @itemFacturaAUpdatear = (select itemFactura_codigo FROM FAGD.ItemFactura WHERE itemFactura_descripcion = @descripcionItem AND itemFactura_nroFactura = @factura)
+		SET @itemFacturaAUpdatear = (SELECT itemFactura_codigo FROM FAGD.ItemFactura WHERE itemFactura_descripcion = @descripcionItem AND itemFactura_nroFactura = @factura)
 
 		INSERT INTO FAGD.ConsumibleXEstadia (estadia_codigo,consumible_codigo,habitacion_codigo,itemFactura_codigo) 
 		VALUES (@estadiaCodigo,@consumibleCodigo,@habCodigo,@itemFacturaAUpdatear)
