@@ -17,9 +17,9 @@ namespace FrbaHotel.RegistrarConsumible
         SqlDataAdapter adaptador;
         DataTable tablaConDatosConsum;
         BindingSource bSourceReg;
-        FrmAgregarConsumibles agregarConsum;
+        FrmSeleccionEstadia agregarConsum;
 
-        public FrmAgregarConsumibles(string estadiaCodigo, string habCodigo, string habNumero, string piso, FrmAgregarConsumibles agregarConsu)
+        public FrmAgregarConsumibles(string estadiaCodigo, string habCodigo, string habNumero, string piso, FrmSeleccionEstadia agregarConsu)
         {
             
             InitializeComponent();

@@ -76,7 +76,7 @@ namespace FrbaHotel.RegistrarConsumible
                 string habCodigo = dgvEstadias.CurrentRow.Cells[2].Value.ToString();
                 string habnumero = dgvEstadias.CurrentRow.Cells[3].Value.ToString();
                 string piso = dgvEstadias.CurrentRow.Cells[4].Value.ToString();
-                FrmAgregarConsumibles agregarConsu = new FrmAgregarConsumibles(estadiaCodigo, habCodigo, habnumero, piso);
+                FrmAgregarConsumibles agregarConsu = new FrmAgregarConsumibles(estadiaCodigo, habCodigo, habnumero, piso, this);
                 agregarConsu.Show();
                 this.Close();
             }
