@@ -1398,7 +1398,7 @@ DECLARE @respuesta numeric(18,0),
 		@factura numeric(18,0),
 		@monto numeric(18,0)
 BEGIN TRAN ta
-BEGIN try
+BEGIN TRY
 	SET @cantDias = DATEDIFF(day,(SELECT estadia_fechaInicio FROM FAGD.Estadia WHERE estadia_codigo = @nroEstadia ),@fecha);
 	SET @nroReserva = (SELECT estadia_codigoReserva FROM FAGD.Estadia WHERE estadia_codigo = @nroEstadia);
 	SET @resHasta = (SELECT reserva_fechaFin FROM FAGD.Reserva WHERE reserva_codigo = @nroReserva);
@@ -1429,6 +1429,61 @@ SELECT @respuesta AS respuesta
 END CATCH
 END
 GO
+
+------------------------------------------------------------------------------
+
+CREATE PROCEDURE FAGD.RegistrarConsuXEstXHabitacion @estadiaCodigo numeric(18,0), @consumibleCodigo numeric(18,0), @habCodigo numeric(18,0)
+AS BEGIN
+
+DECLARE @respuesta numeric(18,0)
+DECLARE @itemFacturaAUpdatear numeric(18,0)
+DECLARE @descripcionItem nvarchar(255)
+DECLARE @factura numeric(18,0)
+DECLARE @precio numeric(18,0)
+
+BEGIN TRAN transac
+BEGIN TRY
+
+		SET @precio = (SELECT consumible_precio FROM FAGD.Consumible WHERE consumible_codigo = @consumibleCodigo)
+		SET @descripcionItem = (SELECT consumible_descripcion FROM FAGD.Consumible WHERE consumible_codigo = @consumibleCodigo)
+		SET @factura = (SELECT factura_nro FROM FAGD.Factura WHERE factura_codigoEstadia = @estadiaCodigo)
+
+		IF(EXISTS(SELECT itemFactura_codigo FROM FAGD.ItemFactura WHERE itemFactura_descripcion = @descripcionItem AND itemFactura_nroFactura = @factura))
+		BEGIN
+			SET @itemFacturaAUpdatear = (SELECT itemFactura_codigo FROM FAGD.ItemFactura WHERE itemFactura_descripcion = @descripcionItem AND itemFactura_nroFactura = @factura)
+			UPDATE FAGD.ItemFactura 
+				SET itemFactura_itemMonto = itemFactura_itemMonto + @precio, itemFactura_cantidad = itemFactura_cantidad + 1
+		WHERE itemFactura_codigo = @itemFacturaAUpdatear
+
+		INSERT INTO FAGD.ConsumibleXEstadia (estadia_codigo,consumible_codigo,habitacion_codigo,itemFactura_codigo) 
+		VALUES (@estadiaCodigo,@consumibleCodigo,@habCodigo,@itemFacturaAUpdatear)
+
+		END
+
+		ELSE BEGIN
+
+		INSERT INTO FAGD.ItemFactura(itemFactura_nroFactura,itemFactura_cantidad,itemFactura_itemMonto,itemFactura_descripcion)
+		VALUES (@factura,1,@precio,@descripcionItem)
+
+		SET @itemFacturaAUpdatear = (select itemFactura_codigo FROM FAGD.ItemFactura WHERE itemFactura_descripcion = @descripcionItem AND itemFactura_nroFactura = @factura)
+
+		INSERT INTO FAGD.ConsumibleXEstadia (estadia_codigo,consumible_codigo,habitacion_codigo,itemFactura_codigo) 
+		VALUES (@estadiaCodigo,@consumibleCodigo,@habCodigo,@itemFacturaAUpdatear)
+
+		END
+		SET @respuesta = 1
+		SELECT @respuesta AS respuesta
+COMMIT TRAN transac
+END TRY
+BEGIN CATCH
+ROLLBACK TRAN transac
+SET @respuesta = 0
+SELECT @respuesta AS respuesta
+END CATCH
+END
+GO
+
+
 
 ------------------------------------------------------------------------------
 
