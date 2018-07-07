@@ -43,7 +43,7 @@
             // 
             this.chkRolActivo.AutoSize = true;
             this.chkRolActivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkRolActivo.Location = new System.Drawing.Point(325, 27);
+            this.chkRolActivo.Location = new System.Drawing.Point(340, 27);
             this.chkRolActivo.Name = "chkRolActivo";
             this.chkRolActivo.Size = new System.Drawing.Size(84, 17);
             this.chkRolActivo.TabIndex = 0;

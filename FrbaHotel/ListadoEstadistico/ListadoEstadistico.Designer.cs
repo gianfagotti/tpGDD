@@ -43,10 +43,10 @@
             // 
             // lblTitulo
             // 
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
-            this.lblTitulo.Location = new System.Drawing.Point(12, 13);
+            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.Location = new System.Drawing.Point(9, 9);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(597, 40);
+            this.lblTitulo.Size = new System.Drawing.Size(421, 40);
             this.lblTitulo.TabIndex = 2;
             this.lblTitulo.Text = "Elija según el tipo de resultados sobre los cuales desea filtrar los primeros 5 r" +
     "egistros:";
@@ -54,17 +54,17 @@
             // lblCateg
             // 
             this.lblCateg.AutoSize = true;
-            this.lblCateg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.lblCateg.Location = new System.Drawing.Point(29, 87);
+            this.lblCateg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCateg.Location = new System.Drawing.Point(12, 69);
             this.lblCateg.Name = "lblCateg";
-            this.lblCateg.Size = new System.Drawing.Size(83, 17);
+            this.lblCateg.Size = new System.Drawing.Size(67, 13);
             this.lblCateg.TabIndex = 3;
             this.lblCateg.Text = "Categoría:";
             // 
             // cboCateg
             // 
             this.cboCateg.FormattingEnabled = true;
-            this.cboCateg.Location = new System.Drawing.Point(129, 87);
+            this.cboCateg.Location = new System.Drawing.Point(85, 66);
             this.cboCateg.Name = "cboCateg";
             this.cboCateg.Size = new System.Drawing.Size(345, 21);
             this.cboCateg.TabIndex = 4;
@@ -72,7 +72,7 @@
             // btnMostrarEstadist
             // 
             this.btnMostrarEstadist.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.btnMostrarEstadist.Location = new System.Drawing.Point(211, 198);
+            this.btnMostrarEstadist.Location = new System.Drawing.Point(199, 106);
             this.btnMostrarEstadist.Name = "btnMostrarEstadist";
             this.btnMostrarEstadist.Size = new System.Drawing.Size(231, 42);
             this.btnMostrarEstadist.TabIndex = 8;
@@ -83,10 +83,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(29, 121);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 103);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 17);
+            this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Trimestre:";
             this.label1.Click += new System.EventHandler(this.label1_Click_1);
@@ -94,18 +94,18 @@
             // cboTrim
             // 
             this.cboTrim.FormattingEnabled = true;
-            this.cboTrim.Location = new System.Drawing.Point(129, 121);
+            this.cboTrim.Location = new System.Drawing.Point(85, 100);
             this.cboTrim.Name = "cboTrim";
-            this.cboTrim.Size = new System.Drawing.Size(62, 21);
+            this.cboTrim.Size = new System.Drawing.Size(96, 21);
             this.cboTrim.TabIndex = 12;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(30, 153);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(42, 135);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 17);
+            this.label2.Size = new System.Drawing.Size(33, 13);
             this.label2.TabIndex = 13;
             this.label2.Text = "Año:";
             // 
@@ -113,23 +113,23 @@
             // 
             this.dtpAnio.CustomFormat = "yyyy";
             this.dtpAnio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpAnio.Location = new System.Drawing.Point(129, 153);
+            this.dtpAnio.Location = new System.Drawing.Point(85, 132);
             this.dtpAnio.Name = "dtpAnio";
-            this.dtpAnio.Size = new System.Drawing.Size(62, 20);
+            this.dtpAnio.Size = new System.Drawing.Size(96, 20);
             this.dtpAnio.TabIndex = 14;
             // 
             // dgvEstadistico
             // 
             this.dgvEstadistico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEstadistico.Location = new System.Drawing.Point(12, 258);
+            this.dgvEstadistico.Location = new System.Drawing.Point(12, 167);
             this.dgvEstadistico.Name = "dgvEstadistico";
-            this.dgvEstadistico.Size = new System.Drawing.Size(613, 293);
+            this.dgvEstadistico.Size = new System.Drawing.Size(418, 293);
             this.dgvEstadistico.TabIndex = 15;
             // 
             // btnVolver
             // 
             this.btnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.btnVolver.Location = new System.Drawing.Point(391, 567);
+            this.btnVolver.Location = new System.Drawing.Point(196, 466);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(234, 42);
             this.btnVolver.TabIndex = 11;
@@ -141,7 +141,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(637, 621);
+            this.ClientSize = new System.Drawing.Size(445, 518);
             this.Controls.Add(this.dgvEstadistico);
             this.Controls.Add(this.dtpAnio);
             this.Controls.Add(this.label2);

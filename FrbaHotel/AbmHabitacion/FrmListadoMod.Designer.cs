@@ -64,7 +64,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(499, 154);
+            this.groupBox1.Size = new System.Drawing.Size(444, 141);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de búsqueda";
@@ -72,101 +72,101 @@
             // chkHabilitado
             // 
             this.chkHabilitado.AutoSize = true;
-            this.chkHabilitado.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkHabilitado.Location = new System.Drawing.Point(182, 86);
+            this.chkHabilitado.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkHabilitado.Location = new System.Drawing.Point(190, 110);
             this.chkHabilitado.Name = "chkHabilitado";
-            this.chkHabilitado.Size = new System.Drawing.Size(92, 22);
+            this.chkHabilitado.Size = new System.Drawing.Size(73, 17);
             this.chkHabilitado.TabIndex = 11;
             this.chkHabilitado.Text = "Habilitado";
             this.chkHabilitado.UseVisualStyleBackColor = true;
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(280, 26);
+            this.txtDescripcion.Location = new System.Drawing.Point(256, 19);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(208, 116);
+            this.txtDescripcion.Size = new System.Drawing.Size(166, 70);
             this.txtDescripcion.TabIndex = 10;
             // 
             // cboTipoHabitacion
             // 
             this.cboTipoHabitacion.FormattingEnabled = true;
-            this.cboTipoHabitacion.Location = new System.Drawing.Point(49, 121);
+            this.cboTipoHabitacion.Location = new System.Drawing.Point(57, 108);
             this.cboTipoHabitacion.Name = "cboTipoHabitacion";
-            this.cboTipoHabitacion.Size = new System.Drawing.Size(122, 21);
+            this.cboTipoHabitacion.Size = new System.Drawing.Size(105, 21);
             this.cboTipoHabitacion.TabIndex = 9;
             // 
             // cboUbicacion
             // 
             this.cboUbicacion.FormattingEnabled = true;
-            this.cboUbicacion.Location = new System.Drawing.Point(87, 83);
+            this.cboUbicacion.Location = new System.Drawing.Point(77, 79);
             this.cboUbicacion.Name = "cboUbicacion";
-            this.cboUbicacion.Size = new System.Drawing.Size(84, 21);
+            this.cboUbicacion.Size = new System.Drawing.Size(85, 21);
             this.cboUbicacion.TabIndex = 8;
             // 
             // txtPiso
             // 
-            this.txtPiso.Location = new System.Drawing.Point(74, 54);
+            this.txtPiso.Location = new System.Drawing.Point(66, 50);
             this.txtPiso.Name = "txtPiso";
-            this.txtPiso.Size = new System.Drawing.Size(51, 20);
+            this.txtPiso.Size = new System.Drawing.Size(96, 20);
             this.txtPiso.TabIndex = 7;
             this.txtPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPiso_KeyPress);
             // 
             // txtNroHab
             // 
-            this.txtNroHab.Location = new System.Drawing.Point(74, 26);
+            this.txtNroHab.Location = new System.Drawing.Point(66, 21);
             this.txtNroHab.Name = "txtNroHab";
-            this.txtNroHab.Size = new System.Drawing.Size(51, 20);
+            this.txtNroHab.Size = new System.Drawing.Size(96, 20);
             this.txtNroHab.TabIndex = 6;
             this.txtNroHab.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroHab_KeyPress);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(187, 25);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 18);
+            this.label5.Size = new System.Drawing.Size(63, 13);
             this.label5.TabIndex = 4;
             this.label5.Text = "Descripción";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 120);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(16, 111);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 18);
+            this.label4.Size = new System.Drawing.Size(28, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "Tipo";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 87);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(16, 82);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 18);
+            this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Ubicación";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 57);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(16, 53);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 18);
+            this.label2.Size = new System.Drawing.Size(27, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Piso";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 25);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(16, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 18);
+            this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Número";
             // 
@@ -175,9 +175,9 @@
             this.dgvFiltrado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFiltrado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Modificar});
-            this.dgvFiltrado.Location = new System.Drawing.Point(12, 212);
+            this.dgvFiltrado.Location = new System.Drawing.Point(12, 194);
             this.dgvFiltrado.Name = "dgvFiltrado";
-            this.dgvFiltrado.Size = new System.Drawing.Size(499, 226);
+            this.dgvFiltrado.Size = new System.Drawing.Size(444, 226);
             this.dgvFiltrado.TabIndex = 1;
             this.dgvFiltrado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFiltrado_CellContentClick);
             // 
@@ -188,7 +188,7 @@
             // 
             // butLimpiar
             // 
-            this.butLimpiar.Location = new System.Drawing.Point(12, 172);
+            this.butLimpiar.Location = new System.Drawing.Point(12, 159);
             this.butLimpiar.Name = "butLimpiar";
             this.butLimpiar.Size = new System.Drawing.Size(75, 23);
             this.butLimpiar.TabIndex = 2;
@@ -198,7 +198,7 @@
             // 
             // butVolver
             // 
-            this.butVolver.Location = new System.Drawing.Point(436, 461);
+            this.butVolver.Location = new System.Drawing.Point(381, 426);
             this.butVolver.Name = "butVolver";
             this.butVolver.Size = new System.Drawing.Size(75, 23);
             this.butVolver.TabIndex = 3;
@@ -208,7 +208,7 @@
             // 
             // butBuscar
             // 
-            this.butBuscar.Location = new System.Drawing.Point(433, 172);
+            this.butBuscar.Location = new System.Drawing.Point(381, 159);
             this.butBuscar.Name = "butBuscar";
             this.butBuscar.Size = new System.Drawing.Size(75, 23);
             this.butBuscar.TabIndex = 4;
@@ -220,7 +220,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 488);
+            this.ClientSize = new System.Drawing.Size(470, 462);
             this.Controls.Add(this.butBuscar);
             this.Controls.Add(this.butVolver);
             this.Controls.Add(this.dgvFiltrado);
