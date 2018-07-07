@@ -13,16 +13,30 @@ namespace FrbaHotel.RegistrarConsumible
 {
     public partial class FrmAgregarConsumibles : Form
     {
-        AbmRol.frmMenuEmpleado frmMenuEmpleado;
+        private SqlDataReader resultadoDeOperacion;
         SqlDataAdapter adaptador;
         DataTable tablaConDatosConsum;
+        BindingSource bSourceReg;
+        FrmSeleccionEstadia agregarConsum;
 
-
-        public FrmAgregarConsumibles(AbmRol.frmMenuEmpleado form)
+        public FrmAgregarConsumibles(string estadiaCodigo, string habCodigo, string habNumero, string piso, FrmSeleccionEstadia agregarConsu)
         {
-            frmMenuEmpleado = form;
+            
             InitializeComponent();
+            agregarConsum = agregarConsu;
+            txtCodigoEst.Text = estadiaCodigo;
+            txthab.Text = habCodigo;
+            txtnroha.Text = habNumero;
+            txtpiso.Text = piso;
+            tablaConDatosConsum = new DataTable();
+            tablaConDatosConsum.Columns.Add("Codigo");
+            tablaConDatosConsum.Columns.Add("Precio");
+            tablaConDatosConsum.Columns.Add("Descripcion");
+            bSourceReg = new BindingSource();
+            bSourceReg.DataSource = tablaConDatosConsum;
+            dgvRegCons.DataSource = bSourceReg;
         }
+
 
           private void FrmAgregarConsumibles_Load(object sender, EventArgs e)
         {
@@ -31,7 +45,7 @@ namespace FrbaHotel.RegistrarConsumible
             tablaConDatosConsum = Login.FrmTipoUsuario.BD.dameDataTable(adaptador);         
             BindingSource bSourceConsum = new BindingSource();
             bSourceConsum.DataSource = tablaConDatosConsum;    
-            dataGridView2.DataSource = bSourceConsum;
+            dgvCons.DataSource = bSourceConsum;
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -47,28 +61,77 @@ namespace FrbaHotel.RegistrarConsumible
         private void BtnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
-            frmMenuEmpleado.ShowDialog();
-           
+            agregarConsum.Show();
         }
 
     
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvCons_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex == 0)
+            {
+
+                    string codigoConsu = dgvCons.CurrentRow.Cells[1].Value.ToString();
+                    string precioConsu = dgvCons.CurrentRow.Cells[2].Value.ToString();
+                    string descripcionConsu = dgvCons.CurrentRow.Cells[3].Value.ToString();
+                    DataRow row = tablaConDatosConsum.NewRow();
+                    row["Codigo"] = codigoConsu;
+                    row["Precio"] = precioConsu;
+                    row["Descripcion"] = descripcionConsu;
+                    tablaConDatosConsum.Rows.Add(row);
+                    dgvRegCons.DataSource = bSourceReg;
+            }
+
         }
 
-        private void dataGridView2_SelectionChanged(object sender, DataGridViewCellEventArgs e)
+        private void dgvCons_SelectionChanged(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
         private void BtnAgregarConsumible_Click(object sender, EventArgs e)
         {
-            int total = int.Parse(TxtCantidad.Text) * int.Parse(TxtPrecioIndividual.Text);
-            dataGridView1.Rows.Add(txtCodigoEst.Text,txtCodigoConsu.Text, TxtPrecioIndividual.Text, txtCodigoEst.Text, TxtCantidad.Text, total);
+           
         }
 
+        private void dgvRegCons_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                int consuARemover = dgvRegCons.CurrentRow.Index;
+                tablaConDatosConsum.Rows.RemoveAt(consuARemover);
+            }
+        }
 
-      
+        private void BtnGuardarCambios_Click(object sender, EventArgs e)
+        {
+            if (tablaConDatosConsum.Rows.Count == 0)
+            {
+                MessageBox.Show("Es necesario que seleccione al menos un consumible para agregar.");
+                return;
+            }
+            foreach (DataRow fila in tablaConDatosConsum.Rows)
+            {
+                resultadoDeOperacion = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarConsuXEstXHabitacion " + txtCodigoEst.Text + "," + fila["Codigo"].ToString() + "," + txthab.Text);
+                if (resultadoDeOperacion.Read())
+                {
+                    if (resultadoDeOperacion.GetDecimal(0) == 0)
+                    {
+                        MessageBox.Show("Error. El consumible ya estaba agregado");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error. El consumible ya estaba agregado");
+                }
+                resultadoDeOperacion.Close();
+            }
+            MessageBox.Show("El proceso de carga de consumibles finalizo correctamente");
+            this.Close();
+
+        }
+
+ 
+
         }
     }
 
