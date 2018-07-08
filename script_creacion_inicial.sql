@@ -2246,11 +2246,11 @@ begin
 	begin tran re
 	begin try
 		set @codRegimen = (select regimen_codigo from FAGD.Regimen where regimen_descripcion = @regimen)
-		set @codEstado = 1	--(select estado_codigo from FAGD.Estado where estado_descripcion = 'RESERVA CORRECTA')
+		set @codEstado = (select estado_codigo from FAGD.Estado where estado_descripcion = 'RESERVA CORRECTA')
 
-		insert into FAGD.Reserva(reserva_fechaRealizada, reserva_fechaInicio, reserva_fechaFin, reserva_cantNoches, reserva_codigoRegimen, 
-					reserva_clienteCodigo, reserva_nombreUsuario, reserva_codigoHotel, reserva_costoTotal, reserva_estado)
-		values(@fechaRealizada, @fechaInicio, @fechaFin, @dias, @codRegimen, @cliente, @usuario, @hotel, @total, @codEstado)
+		insert into FAGD.Reserva(reserva_fechaRealizada, reserva_fechaInicio, reserva_fechaFin, reserva_cantNoches, reserva_estado, reserva_codigoRegimen, 
+					reserva_clienteCodigo, reserva_nombreUsuario, reserva_codigoHotel, reserva_costoTotal)
+		values(@fechaRealizada, @fechaInicio, @fechaFin, @dias, @codEstado, @codRegimen, @cliente, @usuario, @hotel, @total)
 
 		set @respuesta = (select SCOPE_IDENTITY());
 		select @respuesta as respuesta
