@@ -352,15 +352,6 @@ namespace FrbaHotel.GenerarModificacionReserva
                 return;
             }
             double ab = (dtpHasta.Value - dtpDesde.Value).TotalDays;
-            /*MessageBox.Show(VarGlobales.getDate().ToString("yyyyMMdd HH:mm:ss"));
-            MessageBox.Show(dtpDesde.Value.Date.ToString("yyyyMMdd HH:mm:ss"));
-            MessageBox.Show(dtpHasta.Value.Date.ToString("yyyyMMdd HH:mm:ss"));
-            MessageBox.Show(ab.ToString());
-            MessageBox.Show(cboRegimen.Text);
-            MessageBox.Show(txtCliente.Text);
-            MessageBox.Show(Login.FrmLoginUsuario.username);
-            MessageBox.Show(codHotelSeleccionado.ToString());
-            MessageBox.Show(Convert.ToInt32(total).ToString());*/
 
             string command = "EXEC FAGD.InsertarNuevaReserva ";
             command = command + "'" + VarGlobales.getDate().ToString("yyyyMMdd HH:mm:ss") + "',";
@@ -372,7 +363,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             command = command + txtCliente.Text + ",";
             if (Login.FrmTipoUsuario.usuario == "guest")
             {
-                command = command + "'guest',";
+                command = command + "'GUEST',";
                 command = command + codHotelSeleccionado + ",";
             }
             else
@@ -390,17 +381,10 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
             resultado.Close();
 
-            MessageBox.Show(id.ToString());
-
             if (id == 0)
             {
                 MessageBox.Show("No se pudo generar la reserva");
                 butLimpiar_Click(null, null);
-                return;
-            }
-            else
-            {
-                MessageBox.Show("Sos un boludo");
                 return;
             }
 

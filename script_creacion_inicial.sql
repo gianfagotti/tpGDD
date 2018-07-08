@@ -999,10 +999,18 @@ INSERT INTO FAGD.Usuario (usuario_username,usuario_password, usuario_nombre, usu
 		values ('IRAA','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','Ivan','Arnaudo','Calle Falsa 123','ivan.arnaudo@gmail.com','11111111','02/09/96','DNI',39775257,1),('MAGNO','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','Alvaro','Dati','Calle verdadera 345','alvarocuervo96@gmail.com','1550352388','02/09/96','DNI',40648321,1)
 GO
 
+INSERT INTO FAGD.Usuario (usuario_username,usuario_estado)
+		values ('GUEST', 1)
+GO
+
 INSERT INTO FAGD.UsuarioXRolXHotel(usuario_username,rol_codigo,hotel_codigo)
 		values('IRAA',1,1),('IRAA',2,1),('IRAA',1,2),('IRAA',1,3),('IRAA',2,3),('MAGNO',1,1),('MAGNO',2,1),('MAGNO',1,2),('MAGNO',1,3),('MAGNO',2,3)
 GO
 
+INSERT INTO FAGD.UsuarioXRolXHotel(usuario_username, rol_codigo, hotel_codigo)
+		select distinct U.usuario_username, R.rol_codigo, H.hotel_codigo from FAGD.Rol R, FAGD.Usuario U, FAGD.Hotel H
+			where R.rol_nombre = 'cliente' and U.usuario_username = 'GUEST';
+GO
 
 
 
