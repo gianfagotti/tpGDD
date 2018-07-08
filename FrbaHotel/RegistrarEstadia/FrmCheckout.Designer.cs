@@ -32,6 +32,7 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.dgvFinalizar = new System.Windows.Forms.DataGridView();
+            this.columna = new System.Windows.Forms.DataGridViewButtonColumn();
             this.txtEst = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txthab = new System.Windows.Forms.TextBox();
@@ -41,27 +42,26 @@
             this.txtPiso = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.columna = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFinalizar)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label5
             // 
-            this.label5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(21, 137);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(9, 130);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(441, 37);
+            this.label5.Size = new System.Drawing.Size(444, 33);
             this.label5.TabIndex = 9;
             this.label5.Text = "Aclaración: Es suficiente elegir una de las habitaciones que componen la estadia " +
     "para hacer el check-out de todas en simultáneo.";
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.Location = new System.Drawing.Point(361, 421);
+            this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.Location = new System.Drawing.Point(344, 392);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(101, 33);
+            this.btnBuscar.Size = new System.Drawing.Size(109, 29);
             this.btnBuscar.TabIndex = 8;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -69,10 +69,10 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLimpiar.Location = new System.Drawing.Point(24, 421);
+            this.btnLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.Location = new System.Drawing.Point(12, 392);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(101, 33);
+            this.btnLimpiar.Size = new System.Drawing.Size(109, 29);
             this.btnLimpiar.TabIndex = 7;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
@@ -86,78 +86,86 @@
             this.dgvFinalizar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFinalizar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columna});
-            this.dgvFinalizar.Location = new System.Drawing.Point(24, 188);
+            this.dgvFinalizar.Location = new System.Drawing.Point(12, 166);
             this.dgvFinalizar.Name = "dgvFinalizar";
             this.dgvFinalizar.ReadOnly = true;
-            this.dgvFinalizar.Size = new System.Drawing.Size(429, 214);
+            this.dgvFinalizar.Size = new System.Drawing.Size(441, 214);
             this.dgvFinalizar.TabIndex = 6;
             this.dgvFinalizar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFinalizar_CellContentClick);
             // 
+            // columna
+            // 
+            this.columna.HeaderText = "EstadiaAFinalizar";
+            this.columna.Name = "columna";
+            this.columna.ReadOnly = true;
+            this.columna.Text = "CheckOut";
+            this.columna.UseColumnTextForButtonValue = true;
+            // 
             // txtEst
             // 
-            this.txtEst.Location = new System.Drawing.Point(140, 32);
+            this.txtEst.Location = new System.Drawing.Point(119, 31);
             this.txtEst.Name = "txtEst";
-            this.txtEst.Size = new System.Drawing.Size(100, 20);
+            this.txtEst.Size = new System.Drawing.Size(131, 20);
             this.txtEst.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(16, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 18);
+            this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Código estadía:";
             // 
             // txthab
             // 
-            this.txthab.Location = new System.Drawing.Point(162, 60);
+            this.txthab.Location = new System.Drawing.Point(135, 59);
             this.txthab.Name = "txthab";
-            this.txthab.Size = new System.Drawing.Size(100, 20);
+            this.txthab.Size = new System.Drawing.Size(115, 20);
             this.txthab.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(16, 62);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 18);
+            this.label2.Size = new System.Drawing.Size(113, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Código habitación:";
             // 
             // txtNrohab
             // 
-            this.txtNrohab.Location = new System.Drawing.Point(354, 62);
+            this.txtNrohab.Location = new System.Drawing.Point(312, 59);
             this.txtNrohab.Name = "txtNrohab";
-            this.txtNrohab.Size = new System.Drawing.Size(73, 20);
+            this.txtNrohab.Size = new System.Drawing.Size(101, 20);
             this.txtNrohab.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(306, 64);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(271, 62);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 18);
+            this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Nro:";
             // 
             // txtPiso
             // 
-            this.txtPiso.Location = new System.Drawing.Point(354, 32);
+            this.txtPiso.Location = new System.Drawing.Point(312, 31);
             this.txtPiso.Name = "txtPiso";
-            this.txtPiso.Size = new System.Drawing.Size(51, 20);
+            this.txtPiso.Size = new System.Drawing.Size(101, 20);
             this.txtPiso.TabIndex = 6;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(306, 34);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(271, 34);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 18);
+            this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Piso:";
             // 
@@ -173,24 +181,16 @@
             this.groupBox1.Controls.Add(this.txtEst);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(441, 105);
+            this.groupBox1.Size = new System.Drawing.Size(441, 99);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de búsqueda";
-            // 
-            // columna
-            // 
-            this.columna.HeaderText = "EstadiaAFinalizar";
-            this.columna.Name = "columna";
-            this.columna.ReadOnly = true;
-            this.columna.Text = "CheckOut";
-            this.columna.UseColumnTextForButtonValue = true;
             // 
             // FrmCheckout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 466);
+            this.ClientSize = new System.Drawing.Size(467, 432);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnLimpiar);

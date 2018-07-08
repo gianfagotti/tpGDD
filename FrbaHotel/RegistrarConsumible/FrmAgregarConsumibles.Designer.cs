@@ -51,7 +51,7 @@
             this.LblRegistrarConsumibles.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.LblRegistrarConsumibles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblRegistrarConsumibles.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblRegistrarConsumibles.Location = new System.Drawing.Point(306, 23);
+            this.LblRegistrarConsumibles.Location = new System.Drawing.Point(169, 24);
             this.LblRegistrarConsumibles.Name = "LblRegistrarConsumibles";
             this.LblRegistrarConsumibles.Size = new System.Drawing.Size(219, 22);
             this.LblRegistrarConsumibles.TabIndex = 2;
@@ -60,10 +60,10 @@
             // 
             // BtnGuardarCambios
             // 
-            this.BtnGuardarCambios.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnGuardarCambios.Location = new System.Drawing.Point(419, 539);
+            this.BtnGuardarCambios.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnGuardarCambios.Location = new System.Drawing.Point(385, 451);
             this.BtnGuardarCambios.Name = "BtnGuardarCambios";
-            this.BtnGuardarCambios.Size = new System.Drawing.Size(143, 36);
+            this.BtnGuardarCambios.Size = new System.Drawing.Size(143, 30);
             this.BtnGuardarCambios.TabIndex = 18;
             this.BtnGuardarCambios.Text = "Guardar Cambios";
             this.BtnGuardarCambios.UseVisualStyleBackColor = true;
@@ -71,10 +71,10 @@
             // 
             // BtnVolver
             // 
-            this.BtnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnVolver.Location = new System.Drawing.Point(232, 539);
+            this.BtnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnVolver.Location = new System.Drawing.Point(19, 451);
             this.BtnVolver.Name = "BtnVolver";
-            this.BtnVolver.Size = new System.Drawing.Size(139, 36);
+            this.BtnVolver.Size = new System.Drawing.Size(74, 31);
             this.BtnVolver.TabIndex = 19;
             this.BtnVolver.Text = "Volver";
             this.BtnVolver.UseVisualStyleBackColor = true;
@@ -83,10 +83,10 @@
             // LblCodigoEstadia
             // 
             this.LblCodigoEstadia.AutoSize = true;
-            this.LblCodigoEstadia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblCodigoEstadia.Location = new System.Drawing.Point(97, 265);
+            this.LblCodigoEstadia.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblCodigoEstadia.Location = new System.Drawing.Point(32, 232);
             this.LblCodigoEstadia.Name = "LblCodigoEstadia";
-            this.LblCodigoEstadia.Size = new System.Drawing.Size(118, 16);
+            this.LblCodigoEstadia.Size = new System.Drawing.Size(97, 13);
             this.LblCodigoEstadia.TabIndex = 20;
             this.LblCodigoEstadia.Text = "Código estadía:";
             this.LblCodigoEstadia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -94,87 +94,87 @@
             // dgvCons
             // 
             this.dgvCons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCons.Location = new System.Drawing.Point(82, 77);
+            this.dgvCons.Location = new System.Drawing.Point(19, 61);
             this.dgvCons.Name = "dgvCons";
-            this.dgvCons.Size = new System.Drawing.Size(643, 150);
+            this.dgvCons.Size = new System.Drawing.Size(509, 150);
             this.dgvCons.TabIndex = 24;
             this.dgvCons.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCons_CellContentClick);
             // 
             // txtCodigoEst
             // 
-            this.txtCodigoEst.Location = new System.Drawing.Point(232, 265);
+            this.txtCodigoEst.Location = new System.Drawing.Point(135, 229);
             this.txtCodigoEst.Name = "txtCodigoEst";
-            this.txtCodigoEst.Size = new System.Drawing.Size(100, 20);
+            this.txtCodigoEst.Size = new System.Drawing.Size(155, 20);
             this.txtCodigoEst.TabIndex = 25;
             // 
             // dgvRegCons
             // 
             this.dgvRegCons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRegCons.Location = new System.Drawing.Point(82, 353);
+            this.dgvRegCons.Location = new System.Drawing.Point(19, 291);
             this.dgvRegCons.Name = "dgvRegCons";
-            this.dgvRegCons.Size = new System.Drawing.Size(643, 150);
+            this.dgvRegCons.Size = new System.Drawing.Size(509, 150);
             this.dgvRegCons.TabIndex = 30;
             this.dgvRegCons.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRegCons_CellContentClick);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(97, 296);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(16, 263);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 16);
+            this.label1.Size = new System.Drawing.Size(113, 13);
             this.label1.TabIndex = 31;
             this.label1.Text = "Código habitación:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txthab
             // 
-            this.txthab.Location = new System.Drawing.Point(241, 295);
+            this.txthab.Location = new System.Drawing.Point(135, 260);
             this.txthab.Name = "txthab";
-            this.txthab.Size = new System.Drawing.Size(100, 20);
+            this.txthab.Size = new System.Drawing.Size(155, 20);
             this.txthab.TabIndex = 32;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(468, 299);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(300, 263);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(142, 16);
+            this.label2.Size = new System.Drawing.Size(88, 13);
             this.label2.TabIndex = 33;
-            this.label2.Text = "Número habitación:";
+            this.label2.Text = "N° habitación:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtnroha
             // 
-            this.txtnroha.Location = new System.Drawing.Point(617, 298);
+            this.txtnroha.Location = new System.Drawing.Point(394, 260);
             this.txtnroha.Name = "txtnroha";
-            this.txtnroha.Size = new System.Drawing.Size(45, 20);
+            this.txtnroha.Size = new System.Drawing.Size(134, 20);
             this.txtnroha.TabIndex = 34;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(468, 266);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(353, 232);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 16);
+            this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 35;
             this.label3.Text = "Piso:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtpiso
             // 
-            this.txtpiso.Location = new System.Drawing.Point(517, 265);
+            this.txtpiso.Location = new System.Drawing.Point(394, 229);
             this.txtpiso.Name = "txtpiso";
-            this.txtpiso.Size = new System.Drawing.Size(45, 20);
+            this.txtpiso.Size = new System.Drawing.Size(134, 20);
             this.txtpiso.TabIndex = 37;
             // 
             // FrmAgregarConsumibles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(812, 587);
+            this.ClientSize = new System.Drawing.Size(554, 494);
             this.Controls.Add(this.txtpiso);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtnroha);

@@ -50,19 +50,19 @@
             // LblAgregarHuésped
             // 
             this.LblAgregarHuésped.AutoSize = true;
-            this.LblAgregarHuésped.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblAgregarHuésped.Location = new System.Drawing.Point(9, 229);
+            this.LblAgregarHuésped.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblAgregarHuésped.Location = new System.Drawing.Point(14, 216);
             this.LblAgregarHuésped.Name = "LblAgregarHuésped";
-            this.LblAgregarHuésped.Size = new System.Drawing.Size(158, 16);
+            this.LblAgregarHuésped.Size = new System.Drawing.Size(129, 13);
             this.LblAgregarHuésped.TabIndex = 16;
             this.LblAgregarHuésped.Text = "Agregar Un Huésped:";
             this.LblAgregarHuésped.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnRegiCliente
             // 
-            this.btnRegiCliente.Location = new System.Drawing.Point(306, 229);
+            this.btnRegiCliente.Location = new System.Drawing.Point(295, 207);
             this.btnRegiCliente.Name = "btnRegiCliente";
-            this.btnRegiCliente.Size = new System.Drawing.Size(159, 31);
+            this.btnRegiCliente.Size = new System.Drawing.Size(130, 31);
             this.btnRegiCliente.TabIndex = 18;
             this.btnRegiCliente.Text = "Registrar nuevo cliente";
             this.btnRegiCliente.UseVisualStyleBackColor = true;
@@ -70,9 +70,9 @@
             // 
             // BtnRegistrar
             // 
-            this.BtnRegistrar.Location = new System.Drawing.Point(349, 475);
+            this.BtnRegistrar.Location = new System.Drawing.Point(351, 422);
             this.BtnRegistrar.Name = "BtnRegistrar";
-            this.BtnRegistrar.Size = new System.Drawing.Size(103, 33);
+            this.BtnRegistrar.Size = new System.Drawing.Size(74, 31);
             this.BtnRegistrar.TabIndex = 19;
             this.BtnRegistrar.Text = "Registrar";
             this.BtnRegistrar.UseVisualStyleBackColor = true;
@@ -80,7 +80,7 @@
             // 
             // btnSeleCliente
             // 
-            this.btnSeleCliente.Location = new System.Drawing.Point(190, 229);
+            this.btnSeleCliente.Location = new System.Drawing.Point(179, 207);
             this.btnSeleCliente.Name = "btnSeleCliente";
             this.btnSeleCliente.Size = new System.Drawing.Size(110, 31);
             this.btnSeleCliente.TabIndex = 17;
@@ -94,7 +94,7 @@
             this.LblRegistrarEstadia.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.LblRegistrarEstadia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblRegistrarEstadia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblRegistrarEstadia.Location = new System.Drawing.Point(123, 19);
+            this.LblRegistrarEstadia.Location = new System.Drawing.Point(89, 19);
             this.LblRegistrarEstadia.Name = "LblRegistrarEstadia";
             this.LblRegistrarEstadia.Size = new System.Drawing.Size(265, 22);
             this.LblRegistrarEstadia.TabIndex = 1;
@@ -104,10 +104,10 @@
             // lblalgo
             // 
             this.lblalgo.AutoSize = true;
-            this.lblalgo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblalgo.Location = new System.Drawing.Point(9, 71);
+            this.lblalgo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblalgo.Location = new System.Drawing.Point(14, 71);
             this.lblalgo.Name = "lblalgo";
-            this.lblalgo.Size = new System.Drawing.Size(187, 16);
+            this.lblalgo.Size = new System.Drawing.Size(153, 13);
             this.lblalgo.TabIndex = 2;
             this.lblalgo.Text = "Clientes para reserva nro:";
             this.lblalgo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -120,7 +120,7 @@
             this.dgvHuesped.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHuesped.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.borrar});
-            this.dgvHuesped.Location = new System.Drawing.Point(44, 287);
+            this.dgvHuesped.Location = new System.Drawing.Point(17, 256);
             this.dgvHuesped.Name = "dgvHuesped";
             this.dgvHuesped.ReadOnly = true;
             this.dgvHuesped.Size = new System.Drawing.Size(408, 160);
@@ -137,9 +137,9 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(64, 475);
+            this.btnLimpiar.Location = new System.Drawing.Point(17, 422);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(103, 33);
+            this.btnLimpiar.Size = new System.Drawing.Size(74, 31);
             this.btnLimpiar.TabIndex = 25;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
@@ -148,10 +148,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 106);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(14, 105);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(156, 16);
+            this.label2.Size = new System.Drawing.Size(129, 13);
             this.label2.TabIndex = 29;
             this.label2.Text = "Límite de huéspedes:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -159,10 +159,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 140);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(14, 140);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(187, 16);
+            this.label1.Size = new System.Drawing.Size(150, 13);
             this.label1.TabIndex = 30;
             this.label1.Text = "Huéspedes para agregar:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -170,47 +170,47 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 174);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(14, 173);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 16);
+            this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 31;
             this.label3.Text = "Titular:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtReserv
             // 
-            this.txtReserv.Location = new System.Drawing.Point(220, 70);
+            this.txtReserv.Location = new System.Drawing.Point(179, 68);
             this.txtReserv.Name = "txtReserv";
-            this.txtReserv.Size = new System.Drawing.Size(150, 20);
+            this.txtReserv.Size = new System.Drawing.Size(246, 20);
             this.txtReserv.TabIndex = 32;
             // 
             // txtLimit
             // 
-            this.txtLimit.Location = new System.Drawing.Point(220, 105);
+            this.txtLimit.Location = new System.Drawing.Point(179, 102);
             this.txtLimit.Name = "txtLimit";
-            this.txtLimit.Size = new System.Drawing.Size(150, 20);
+            this.txtLimit.Size = new System.Drawing.Size(246, 20);
             this.txtLimit.TabIndex = 33;
             // 
             // txtRest
             // 
-            this.txtRest.Location = new System.Drawing.Point(220, 140);
+            this.txtRest.Location = new System.Drawing.Point(179, 137);
             this.txtRest.Name = "txtRest";
-            this.txtRest.Size = new System.Drawing.Size(150, 20);
+            this.txtRest.Size = new System.Drawing.Size(246, 20);
             this.txtRest.TabIndex = 34;
             // 
             // txtTitular
             // 
-            this.txtTitular.Location = new System.Drawing.Point(220, 173);
+            this.txtTitular.Location = new System.Drawing.Point(179, 170);
             this.txtTitular.Name = "txtTitular";
-            this.txtTitular.Size = new System.Drawing.Size(150, 20);
+            this.txtTitular.Size = new System.Drawing.Size(246, 20);
             this.txtTitular.TabIndex = 35;
             // 
             // FrmRegistrarHuesped
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 529);
+            this.ClientSize = new System.Drawing.Size(447, 460);
             this.Controls.Add(this.txtTitular);
             this.Controls.Add(this.txtRest);
             this.Controls.Add(this.txtLimit);

@@ -55,10 +55,10 @@
             this.dgvEstadias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEstadias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columna});
-            this.dgvEstadias.Location = new System.Drawing.Point(29, 205);
+            this.dgvEstadias.Location = new System.Drawing.Point(29, 170);
             this.dgvEstadias.Name = "dgvEstadias";
             this.dgvEstadias.ReadOnly = true;
-            this.dgvEstadias.Size = new System.Drawing.Size(554, 202);
+            this.dgvEstadias.Size = new System.Drawing.Size(518, 202);
             this.dgvEstadias.TabIndex = 9;
             this.dgvEstadias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEstadias_CellContentClick);
             // 
@@ -82,50 +82,50 @@
             this.groupBox1.Controls.Add(this.LblCodigoEstadia);
             this.groupBox1.Location = new System.Drawing.Point(29, 68);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(544, 122);
+            this.groupBox1.Size = new System.Drawing.Size(518, 96);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de búsqueda";
             // 
             // txtpiso
             // 
-            this.txtpiso.Location = new System.Drawing.Point(360, 40);
+            this.txtpiso.Location = new System.Drawing.Point(387, 28);
             this.txtpiso.Name = "txtpiso";
-            this.txtpiso.Size = new System.Drawing.Size(45, 20);
+            this.txtpiso.Size = new System.Drawing.Size(100, 20);
             this.txtpiso.TabIndex = 45;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(311, 41);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(346, 31);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 16);
+            this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 44;
             this.label3.Text = "Piso:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtnroha
             // 
-            this.txtnroha.Location = new System.Drawing.Point(460, 73);
+            this.txtnroha.Location = new System.Drawing.Point(387, 56);
             this.txtnroha.Name = "txtnroha";
-            this.txtnroha.Size = new System.Drawing.Size(45, 20);
+            this.txtnroha.Size = new System.Drawing.Size(100, 20);
             this.txtnroha.TabIndex = 43;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(311, 74);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(264, 59);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(142, 16);
+            this.label2.Size = new System.Drawing.Size(117, 13);
             this.label2.TabIndex = 42;
             this.label2.Text = "Número habitación:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txthab
             // 
-            this.txthab.Location = new System.Drawing.Point(183, 70);
+            this.txthab.Location = new System.Drawing.Point(143, 56);
             this.txthab.Name = "txthab";
             this.txthab.Size = new System.Drawing.Size(100, 20);
             this.txthab.TabIndex = 41;
@@ -133,17 +133,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(39, 71);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(24, 59);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 16);
+            this.label1.Size = new System.Drawing.Size(113, 13);
             this.label1.TabIndex = 40;
             this.label1.Text = "Código habitación:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtCodigoEst
             // 
-            this.txtCodigoEst.Location = new System.Drawing.Point(174, 40);
+            this.txtCodigoEst.Location = new System.Drawing.Point(143, 28);
             this.txtCodigoEst.Name = "txtCodigoEst";
             this.txtCodigoEst.Size = new System.Drawing.Size(100, 20);
             this.txtCodigoEst.TabIndex = 39;
@@ -151,10 +151,10 @@
             // LblCodigoEstadia
             // 
             this.LblCodigoEstadia.AutoSize = true;
-            this.LblCodigoEstadia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblCodigoEstadia.Location = new System.Drawing.Point(39, 40);
+            this.LblCodigoEstadia.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblCodigoEstadia.Location = new System.Drawing.Point(40, 31);
             this.LblCodigoEstadia.Name = "LblCodigoEstadia";
-            this.LblCodigoEstadia.Size = new System.Drawing.Size(118, 16);
+            this.LblCodigoEstadia.Size = new System.Drawing.Size(97, 13);
             this.LblCodigoEstadia.TabIndex = 38;
             this.LblCodigoEstadia.Text = "Código estadía:";
             this.LblCodigoEstadia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -163,7 +163,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 21);
+            this.label4.Location = new System.Drawing.Point(26, 29);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(521, 16);
             this.label4.TabIndex = 46;
@@ -172,10 +172,10 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVolver.Location = new System.Drawing.Point(12, 428);
+            this.btnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVolver.Location = new System.Drawing.Point(378, 387);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(139, 36);
+            this.btnVolver.Size = new System.Drawing.Size(74, 31);
             this.btnVolver.TabIndex = 47;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -183,10 +183,10 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLimpiar.Location = new System.Drawing.Point(286, 428);
+            this.btnLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.Location = new System.Drawing.Point(29, 387);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(139, 36);
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 31);
             this.btnLimpiar.TabIndex = 48;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
@@ -194,10 +194,10 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.Location = new System.Drawing.Point(444, 428);
+            this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.Location = new System.Drawing.Point(473, 387);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(139, 36);
+            this.btnBuscar.Size = new System.Drawing.Size(74, 31);
             this.btnBuscar.TabIndex = 49;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -207,7 +207,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(608, 476);
+            this.ClientSize = new System.Drawing.Size(571, 430);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnVolver);
