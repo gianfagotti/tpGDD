@@ -101,7 +101,7 @@ namespace FrbaHotel.FacturarEstadia
                 txtDescReg.Text = "-" + txtMontoConsu.Text;
                 txtTotalpago.Text = txtMontoAloj.Text;
             }
-            else //No tiene descuento
+            else //No tiene descuento total
             {    
                 txtDescReg.Text = 0.ToString();
                 decimal totalAlojyConsum = Convert.ToDecimal(txtMontoAloj.Text) + Convert.ToDecimal(txtMontoConsu.Text);
@@ -142,5 +142,6 @@ namespace FrbaHotel.FacturarEstadia
             MessageBox.Show("Se ha actualizado la factura correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
+
     }
 }

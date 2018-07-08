@@ -13,15 +13,13 @@ namespace FrbaHotel.RegistrarEstadia
     public partial class FrmMenuRegEst2 : Form
     {
         Form ultimoform;
+
         public FrmMenuRegEst2(Form form)
         {
             InitializeComponent();
             ultimoform = form;
         }
 
-
-
- 
 
 
         private void FrmMenuRegEst_Load(object sender, EventArgs e)

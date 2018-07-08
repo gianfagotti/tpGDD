@@ -1370,8 +1370,8 @@ GO
 CREATE PROCEDURE FAGD.CheckinParaEstadia @reservaNro numeric(18,0), @username nvarchar(255), @fechaInicio datetime
 AS BEGIN
 
-DECLARE @fecha datetime
-SET @fecha = CONVERT(datetime,@fechaInicio,121)
+DECLARE @fechaIngreso datetime
+SET @fechaIngreso = CONVERT(datetime,@fechaInicio,121)
 
 DECLARE @respuestaTran numeric(18,0),
 		@precioNoche numeric(18,0),
@@ -1382,9 +1382,9 @@ BEGIN TRY
     SET @estado = (SELECT E.estado_codigo FROM FAGD.Estado E WHERE E.estado_descripcion = 'RESERVA EFECTIVIZADA')
     SET @cantNoches = (SELECT R.reserva_cantNoches FROM FAGD.Reserva R WHERE R.reserva_codigo = @reservaNro)
     SET @precioNoche = (SELECT R.reserva_costoTotal FROM FAGD.Reserva R WHERE R.reserva_codigo = @reservaNro)/@cantNoches
-  	INSERT INTO FAGD.Estadia(estadia_codigoReserva, estadia_fechaInicio, estadia_usuarioRegistrador, estadia_precioNoche, estadia_cantNoches) VALUES(@reservaNro,@fecha,@username,@precioNoche,@cantNoches);
+  	INSERT INTO FAGD.Estadia(estadia_codigoReserva, estadia_fechaInicio, estadia_usuarioRegistrador, estadia_precioNoche, estadia_cantNoches) VALUES(@reservaNro,@fechaIngreso,@username,@precioNoche,@cantNoches);
   	UPDATE FAGD.Reserva SET Reserva.reserva_estado=@estado WHERE Reserva.reserva_codigo = @reservaNro
-	SET @respuestaTran =(SELECT E.estadia_codigo FROM FAGD.Estadia E WHERE E.estadia_codigoReserva = @reservaNro and E.estadia_fechaInicio=@fecha)
+	SET @respuestaTran =(SELECT E.estadia_codigo FROM FAGD.Estadia E WHERE E.estadia_codigoReserva = @reservaNro and E.estadia_fechaInicio=@fechaIngreso)
 	SELECT @respuestaTran as respuesta
 
 COMMIT TRAN ta
@@ -1486,8 +1486,8 @@ GO
 CREATE PROC FAGD.CheckoutParaEstadia @nroEstadia numeric(18,0), @fechaDelCheckout datetime, @username nvarchar(255)
 AS BEGIN
 
-DECLARE @fecha datetime
-SET @fechaDelCheckout = CONVERT(datetime,@fechaDelCheckout,121)
+DECLARE @nuevafechaEgreso datetime
+SET @nuevafechaEgreso = CONVERT(datetime,@fechaDelCheckout,121)
 DECLARE @respuesta numeric(18,0),
 		@cantDias numeric(18,0),
 		@diasSobrantes numeric(18,0),
@@ -1495,27 +1495,27 @@ DECLARE @respuesta numeric(18,0),
 		@nroReserva numeric(18,0),
 		@resHasta datetime,
 		@factura numeric(18,0),
-		@monto numeric(18,0)
+		@montoEstadia numeric(18,0)
 BEGIN TRAN ta
 BEGIN TRY
-	SET @cantDias = DATEDIFF(day,(SELECT estadia_fechaInicio FROM FAGD.Estadia WHERE estadia_codigo = @nroEstadia ),@fechaDelCheckout);
+	SET @cantDias = DATEDIFF(day,(SELECT estadia_fechaInicio FROM FAGD.Estadia WHERE estadia_codigo = @nroEstadia ),@nuevafechaEgreso);
 	SET @nroReserva = (SELECT estadia_codigoReserva FROM FAGD.Estadia WHERE estadia_codigo = @nroEstadia);
 	SET @resHasta = (SELECT reserva_fechaFin FROM FAGD.Reserva WHERE reserva_codigo = @nroReserva);
-	SET @diasSobrantes = DATEDIFF(day,@fecha,@resHasta);
+	SET @diasSobrantes = DATEDIFF(day,@nuevafechaEgreso,@resHasta);
 	
 	UPDATE FAGD.Estadia
 	SET
 	    Estadia.estadia_usuarioFinalizador = @username,
-		Estadia.estadia_fechaFin = @fechaDelCheckout,
+		Estadia.estadia_fechaFin = @nuevafechaEgreso,
 	    Estadia.estadia_diasSobrantes = @diasSobrantes,
 	    Estadia.estadia_cantNoches =  @cantDias
 		WHERE Estadia.estadia_codigo = @nroEstadia;
 	
-    SET @monto = (SELECT R.reserva_costoTotal FROM FAGD.Reserva R WHERE reserva_codigo = @nroReserva)
+    SET @montoEstadia = (SELECT R.reserva_costoTotal FROM FAGD.Reserva R WHERE reserva_codigo = @nroReserva)
 	SET @factura = (SELECT F.factura_nro FROM FAGD.Factura F WHERE factura_codigoEstadia = @nroEstadia)
 	
 	INSERT INTO FAGD.ItemFactura(itemFactura_nroFactura,itemFactura_descripcion,itemFactura_cantidad,itemFactura_itemMonto)
-	VALUES(@factura,'Estadia',1, @monto)
+	VALUES(@factura,'Estadia',1, @montoEstadia)
 	SET @respuesta = 1;
 	SELECT @respuesta AS respuesta;
 	

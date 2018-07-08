@@ -91,8 +91,8 @@ namespace FrbaHotel.RegistrarEstadia
 
                 string confirmacion = "EXEC FAGD.CheckinParaEstadia ";
                 confirmacion = confirmacion + txtReserv.Text + ",";
-              //confirmacion = confirmacion + Login.FrmLoginUsuario.username + ",";        
-                confirmacion = confirmacion + "'" + diaActual.ToString("yyyyMMdd HH:mm:ss") + "'";
+                confirmacion = confirmacion + Login.FrmLoginUsuario.username + ",";        
+                confirmacion = confirmacion + "'" + Login.FrmTipoUsuario.fechaApp.ToString("yyyyMMdd HH:mm:ss") + "'";
                 resultadoQuery = Login.FrmTipoUsuario.BD.comando(confirmacion);
                 resultadoQuery.Read();
                 estadia = resultadoQuery.GetDecimal(0);
@@ -101,7 +101,7 @@ namespace FrbaHotel.RegistrarEstadia
                 {
                     MessageBox.Show("Se ha realizado el check-in correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //generamos la factura para despues
-                    string fact = "EXEC FAGD.generarFactura " + estadia.ToString() + ",1,'" + diaActual.ToString("yyyyMMdd HH:mm:ss") + "'";
+                    string fact = "EXEC FAGD.generarFactura " + estadia.ToString() + ",1,'" + Login.FrmTipoUsuario.fechaApp.ToString("yyyyMMdd HH:mm:ss") + "'";
                     resultadoQuery = Login.FrmTipoUsuario.BD.comando(fact);
                     resultadoQuery.Read();
                     decimal factura = resultadoQuery.GetDecimal(0);

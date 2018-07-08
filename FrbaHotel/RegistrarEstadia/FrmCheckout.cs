@@ -84,15 +84,21 @@ namespace FrbaHotel.RegistrarEstadia
                     FacturarEstadia.FrmFacturarEstadia procesoDeFacturacion = new FacturarEstadia.FrmFacturarEstadia(dgvFinalizar.CurrentRow.Cells[1].Value.ToString());
                     MessageBox.Show("El checkout se ha realizado correctamente. Se procede a la facturación.","Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     procesoDeFacturacion.Show();
+                    this.Close();
                 }
                 else
                 {   //Se detiene
                     resultado.Close();
                     MessageBox.Show("El check-out no se pudo realizar correctamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                this.DialogResult = DialogResult.Abort;
+               
                 
             }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Abort;
         }
     }
 }

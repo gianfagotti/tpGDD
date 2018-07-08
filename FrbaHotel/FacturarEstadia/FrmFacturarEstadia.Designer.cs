@@ -51,7 +51,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtTotalpago = new System.Windows.Forms.TextBox();
             this.btnProceder = new System.Windows.Forms.Button();
-            this.btnVolver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlojamiento)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsumibles)).BeginInit();
             this.SuspendLayout();
@@ -285,22 +284,11 @@
             this.btnProceder.UseVisualStyleBackColor = true;
             this.btnProceder.Click += new System.EventHandler(this.btnProceder_Click);
             // 
-            // btnVolver
-            // 
-            this.btnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVolver.Location = new System.Drawing.Point(24, 659);
-            this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(110, 36);
-            this.btnVolver.TabIndex = 41;
-            this.btnVolver.Text = "Volver";
-            this.btnVolver.UseVisualStyleBackColor = true;
-            // 
             // FrmFacturarEstadia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(539, 704);
-            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnProceder);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtTotalpago);
@@ -359,6 +347,5 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtTotalpago;
         private System.Windows.Forms.Button btnProceder;
-        private System.Windows.Forms.Button btnVolver;
     }
 }
