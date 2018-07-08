@@ -904,7 +904,7 @@ GO
 
 --Migracion ITEM FACTURAS
 --Si es una estadia
-INSERT INTO FAGD.ItemFactura (itemFactura_nroFactura,itemFactura_cantidad, itemFactura_itemMonto, itemFactura_descripcion)
+INSERT INTO FAGD.ItemFactura (itemFactura_nroFactura, itemFactura_cantidad, itemFactura_itemMonto, itemFactura_descripcion)
 SELECT m.Factura_Nro, m.Item_Factura_Cantidad, m.Item_Factura_Monto*m.Reserva_Cant_Noches, 'Estadia'
 	FROM  gd_esquema.Maestra m, FAGD.Factura F
 	WHERE m.Consumible_Codigo IS NULL AND
@@ -913,8 +913,8 @@ SELECT m.Factura_Nro, m.Item_Factura_Cantidad, m.Item_Factura_Monto*m.Reserva_Ca
 
 -- Si es un consumible
 
-INSERT INTO FAGD.ItemFactura (itemFactura_nroFactura,itemFactura_itemMonto,itemFactura_cantidad,itemFactura_descripcion)
-SELECT m.Factura_Nro, SUM(m.Item_Factura_Monto), SUM(m.Item_Factura_Cantidad), m.Consumible_Descripcion
+INSERT INTO FAGD.ItemFactura (itemFactura_nroFactura, itemFactura_cantidad, itemFactura_itemMonto, itemFactura_descripcion)
+SELECT m.Factura_Nro, SUM(m.Item_Factura_Cantidad), SUM(m.Item_Factura_Cantidad*C.consumible_precio), m.Consumible_Descripcion
 	FROM gd_esquema.Maestra m, FAGD.Factura F, FAGD.Consumible C
 	WHERE m.Consumible_Codigo IS NOT NULL AND
 	      m.Factura_Nro = F.factura_nro AND
@@ -1475,11 +1475,11 @@ GO
 
 ------------------------------------------------------------------------------
 
-CREATE PROC FAGD.CheckoutParaEstadia @nroEstadia numeric(18,0), @fechaEvaluada datetime, @username nvarchar(255)
+CREATE PROC FAGD.CheckoutParaEstadia @nroEstadia numeric(18,0), @fechaDelCheckout datetime, @username nvarchar(255)
 AS BEGIN
 
 DECLARE @fecha datetime
-SET @fecha = CONVERT(datetime,@fechaEvaluada,121)
+SET @fechaDelCheckout = CONVERT(datetime,@fechaDelCheckout,121)
 DECLARE @respuesta numeric(18,0),
 		@cantDias numeric(18,0),
 		@diasSobrantes numeric(18,0),
@@ -1490,7 +1490,7 @@ DECLARE @respuesta numeric(18,0),
 		@monto numeric(18,0)
 BEGIN TRAN ta
 BEGIN TRY
-	SET @cantDias = DATEDIFF(day,(SELECT estadia_fechaInicio FROM FAGD.Estadia WHERE estadia_codigo = @nroEstadia ),@fecha);
+	SET @cantDias = DATEDIFF(day,(SELECT estadia_fechaInicio FROM FAGD.Estadia WHERE estadia_codigo = @nroEstadia ),@fechaDelCheckout);
 	SET @nroReserva = (SELECT estadia_codigoReserva FROM FAGD.Estadia WHERE estadia_codigo = @nroEstadia);
 	SET @resHasta = (SELECT reserva_fechaFin FROM FAGD.Reserva WHERE reserva_codigo = @nroReserva);
 	SET @diasSobrantes = DATEDIFF(day,@fecha,@resHasta);
@@ -1498,7 +1498,7 @@ BEGIN TRY
 	UPDATE FAGD.Estadia
 	SET
 	    Estadia.estadia_usuarioFinalizador = @username,
-		Estadia.estadia_fechaInicio = @fecha,
+		Estadia.estadia_fechaFin = @fechaDelCheckout,
 	    Estadia.estadia_diasSobrantes = @diasSobrantes,
 	    Estadia.estadia_cantNoches =  @cantDias
 		WHERE Estadia.estadia_codigo = @nroEstadia;

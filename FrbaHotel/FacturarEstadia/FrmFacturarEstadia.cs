@@ -42,12 +42,12 @@ namespace FrbaHotel.FacturarEstadia
             decimal precioNoche = infoQuery.GetDecimal(4);
             txtFechaInicio.Text = fechaInicioEstadia.ToShortDateString();
             txtEgreso.Text = fechaInicioEstadia.AddDays(Convert.ToDouble(cantNoches + diasSobrantes)).ToShortDateString();
-            txtCheckout.Text = fechaFinEstadia.ToShortDateString();
+            txtCheckout.Text = Login.FrmTipoUsuario.fechaAppConvertida;
             infoQuery.Close();
             tablaInfoAlojamiento = new DataTable();
             tablaInfoAlojamiento.Columns.Add("Fecha");
             tablaInfoAlojamiento.Columns.Add("Precio");
-            tablaInfoAlojamiento.Columns.Add("Descripcion del item");
+            tablaInfoAlojamiento.Columns.Add("Descripción del item");
             decimal auxCantNoches = cantNoches;
             decimal auxDiasSobrantes = diasSobrantes;
             DataRow row = tablaInfoAlojamiento.NewRow();
@@ -56,7 +56,7 @@ namespace FrbaHotel.FacturarEstadia
                 row = tablaInfoAlojamiento.NewRow();
                 row["Fecha"] = fechaInicioEstadia;
                 row["Precio"] = precioNoche;
-                row["Descripcion del item"] = "Costo de Alojamiento";
+                row["Descripción del item"] = "Costo de Alojamiento";
                 tablaInfoAlojamiento.Rows.Add(row);
                 fechaInicioEstadia = fechaInicioEstadia.AddDays(1);
                 cantNoches--;
@@ -66,7 +66,7 @@ namespace FrbaHotel.FacturarEstadia
                 row = tablaInfoAlojamiento.NewRow();
                 row["Fecha"] = fechaInicioEstadia;
                 row["Precio"] = precioNoche;
-                row["Descripcion"] = "Día no utilizado de la estadia";
+                row["Descripción del item"] = "Día no utilizado de la estadia";
                 tablaInfoAlojamiento.Rows.Add(row);
                 fechaInicioEstadia = fechaInicioEstadia.AddDays(1);
                 diasSobrantes--;
@@ -82,22 +82,15 @@ namespace FrbaHotel.FacturarEstadia
             BindingSource BindingSource2 = new BindingSource();
             BindingSource2.DataSource = tablaInfoConsumibles;    
             dgvConsumibles.DataSource = BindingSource2;
-
-            query = "select cons.consumible_precio FROM FAGD.ConsumibleXEstadia consXEst, FAGD.Consumible cons WHERE consXEst.consumible_codigo = cons.consumible_codigo AND consXEst.estadia_codigo = " + codigoEstadia;
-            infoQuery = Login.FrmTipoUsuario.BD.comando(query);
-            if (infoQuery.Read() == true)
+            int montoAux = 0;
+            foreach (DataRow fila in tablaInfoConsumibles.Rows)
             {
-                infoQuery.Close();
-                query = "SELECT SUM(con.consumible_precio) FROM FAGD.ConsumibleXEstadia consXEst, FAGD.Consumible cons WHERE consXEst.consumible_codigo = cons.consumible_codigo AND consXEst.estadia_codigo = " + codigoEstadia;
-                infoQuery.Read();
-                txtMontoConsu.Text = infoQuery.GetDecimal(0).ToString();
+                int montoDelConsDeLaFila = Convert.ToInt32(fila["Monto"]);
+                montoAux = montoAux + montoDelConsDeLaFila;
             }
-            else
-            {
-                txtMontoConsu.Text = 0.ToString();
-            }
-            infoQuery.Close();
+            txtMontoConsu.Text = montoAux.ToString();
 
+            //Se revisa el regimen de la estadia
             query = "SELECT res.reserva_codigoRegimen FROM FAGD.Reserva res, FAGD.Estadia est WHERE est.estadia_codigoReserva = res.reserva_codigo AND est.estadia_codigo = " + codigoEstadia;
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             infoQuery.Read();
