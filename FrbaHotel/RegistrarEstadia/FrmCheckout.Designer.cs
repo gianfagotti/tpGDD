@@ -32,7 +32,6 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.dgvFinalizar = new System.Windows.Forms.DataGridView();
-            this.columna = new System.Windows.Forms.DataGridViewButtonColumn();
             this.txtEst = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txthab = new System.Windows.Forms.TextBox();
@@ -42,24 +41,25 @@
             this.txtPiso = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.columna = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFinalizar)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(36, 420);
+            this.label5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(21, 137);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(393, 26);
+            this.label5.Size = new System.Drawing.Size(441, 37);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Aclaracion: Con solo elegir una habitacion de todas las que componen la estadia, " +
-    "\r\nse hace el checkout de todas juntas";
+            this.label5.Text = "Aclaración: Es suficiente elegir una de las habitaciones que componen la estadia " +
+    "para hacer el check-out de todas en simultáneo.";
             // 
             // btnBuscar
             // 
             this.btnBuscar.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.Location = new System.Drawing.Point(361, 369);
+            this.btnBuscar.Location = new System.Drawing.Point(361, 421);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(101, 33);
             this.btnBuscar.TabIndex = 8;
@@ -70,7 +70,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLimpiar.Location = new System.Drawing.Point(21, 369);
+            this.btnLimpiar.Location = new System.Drawing.Point(24, 421);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(101, 33);
             this.btnLimpiar.TabIndex = 7;
@@ -86,20 +86,12 @@
             this.dgvFinalizar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFinalizar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columna});
-            this.dgvFinalizar.Location = new System.Drawing.Point(24, 136);
+            this.dgvFinalizar.Location = new System.Drawing.Point(24, 188);
             this.dgvFinalizar.Name = "dgvFinalizar";
             this.dgvFinalizar.ReadOnly = true;
             this.dgvFinalizar.Size = new System.Drawing.Size(429, 214);
             this.dgvFinalizar.TabIndex = 6;
             this.dgvFinalizar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFinalizar_CellContentClick);
-            // 
-            // columna
-            // 
-            this.columna.HeaderText = "EstadiasAFinalizar";
-            this.columna.Name = "columna";
-            this.columna.ReadOnly = true;
-            this.columna.Text = "CheckOut";
-            this.columna.UseColumnTextForButtonValue = true;
             // 
             // txtEst
             // 
@@ -186,6 +178,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de búsqueda";
             // 
+            // columna
+            // 
+            this.columna.HeaderText = "EstadiaAFinalizar";
+            this.columna.Name = "columna";
+            this.columna.ReadOnly = true;
+            this.columna.Text = "CheckOut";
+            this.columna.UseColumnTextForButtonValue = true;
+            // 
             // FrmCheckout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -204,7 +204,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
