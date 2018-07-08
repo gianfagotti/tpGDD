@@ -351,27 +351,38 @@ namespace FrbaHotel.GenerarModificacionReserva
                 MessageBox.Show("El cliente esta inhabilitado para realizar reservas");
                 return;
             }
+            double ab = (dtpHasta.Value - dtpDesde.Value).TotalDays;
+            /*MessageBox.Show(VarGlobales.getDate().ToString("yyyyMMdd HH:mm:ss"));
+            MessageBox.Show(dtpDesde.Value.Date.ToString("yyyyMMdd HH:mm:ss"));
+            MessageBox.Show(dtpHasta.Value.Date.ToString("yyyyMMdd HH:mm:ss"));
+            MessageBox.Show(ab.ToString());
+            MessageBox.Show(cboRegimen.Text);
+            MessageBox.Show(txtCliente.Text);
+            MessageBox.Show(Login.FrmLoginUsuario.username);
+            MessageBox.Show(codHotelSeleccionado.ToString());
+            MessageBox.Show(Convert.ToInt32(total).ToString());*/
 
             string command = "EXEC FAGD.InsertarNuevaReserva ";
             command = command + "'" + VarGlobales.getDate().ToString("yyyyMMdd HH:mm:ss") + "',";
             command = command + "'" + dtpDesde.Value.Date.ToString("yyyyMMdd HH:mm:ss") + "',";
             command = command + "'" + dtpHasta.Value.Date.ToString("yyyyMMdd HH:mm:ss") + "',";
-            command = command + dias + ",";
+            
+            command = command + ab.ToString() + ",";
             command = command + "'" + cboRegimen.Text + "',";
             command = command + txtCliente.Text + ",";
             if (Login.FrmTipoUsuario.usuario == "guest")
             {
                 command = command + "'guest',";
-                command = command + Convert.ToDecimal(cboHotel.Text.Split('-')[0]) + ",";
+                command = command + codHotelSeleccionado + ",";
             }
             else
             {
                 command = command + "'" + Login.FrmLoginUsuario.username + "',";
-                command = command + codHotelSeleccionado + ",";
+                command = command + Login.FrmSeleccionarHotel.codigoHotel + ",";
             }
             command = command + Convert.ToInt32(total).ToString();
 
-            decimal id = 0;
+            decimal id = 12120;
             resultado = Login.FrmTipoUsuario.BD.comando(command);
             if (resultado.Read() == true)
             {
@@ -379,10 +390,17 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
             resultado.Close();
 
+            MessageBox.Show(id.ToString());
+
             if (id == 0)
             {
                 MessageBox.Show("No se pudo generar la reserva");
                 butLimpiar_Click(null, null);
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Sos un boludo");
                 return;
             }
 
