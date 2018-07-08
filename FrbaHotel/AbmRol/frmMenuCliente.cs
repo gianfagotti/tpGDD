@@ -28,7 +28,7 @@ namespace FrbaHotel.AbmRol
 
         private void btnModificarReserva_Click_1(object sender, EventArgs e)
         {
-            GenerarModificacionReserva.ModificarReserva frmModificarReserva = new GenerarModificacionReserva.ModificarReserva(this);
+            GenerarModificacionReserva.listadoModReserva frmModificarReserva = new GenerarModificacionReserva.listadoModReserva(this);
             this.Hide();
             frmModificarReserva.Show();
         }
