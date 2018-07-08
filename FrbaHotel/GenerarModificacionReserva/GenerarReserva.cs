@@ -24,10 +24,11 @@ namespace FrbaHotel.GenerarModificacionReserva
         decimal codHotelSeleccionado;
         public static string clienteSeleccionado = "";
         int cant = 0;
-        string habitaciones = "";
         int dias = 0;
         decimal total = 0;
         decimal precio = 0;
+        DateTime fechaDesde;
+        DateTime fechaHasta;
 
         public GenerarReserva(Form form)
         {
@@ -74,7 +75,6 @@ namespace FrbaHotel.GenerarModificacionReserva
             dataGridView1.DataSource = null;
             dataGridView2.DataSource = bSource2;
             cant = 0;
-            habitaciones = "";
             table2.Clear();
             total = 0;
             txtTotal.Text = "0";
@@ -200,9 +200,10 @@ namespace FrbaHotel.GenerarModificacionReserva
                 MessageBox.Show("Tiene que especificar un hotel");
                 return;
             }
-            DateTime fechaDesde = Convert.ToDateTime(dtpDesde.Value);
-            DateTime fechaHasta = Convert.ToDateTime(dtpHasta.Value);
-            DateTime fechaHoy = VarGlobales.getDate();
+
+            fechaDesde = Convert.ToDateTime(dtpDesde.Value);
+            fechaHasta = Convert.ToDateTime(dtpHasta.Value);
+
             int result = DateTime.Compare(fechaDesde, fechaHasta);
             if (result >= 0)
             {
@@ -210,7 +211,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                 MessageBox.Show("La fecha desde debe ser menor a la fecha hasta\n");
                 return;
             }
-            result = DateTime.Compare(fechaDesde.Date, fechaHoy);
+            result = DateTime.Compare(fechaDesde.Date, VarGlobales.getDate());
             if (result < 0)
             {
                 MessageBox.Show("La fecha desde debe ser mayor a la fecha actual\n");
@@ -238,53 +239,60 @@ namespace FrbaHotel.GenerarModificacionReserva
             bSource.DataSource = dTable;
             //set the DataGridView DataSource
             dataGridView1.DataSource = bSource;
+
+            dias = dtpHasta.Value.Date.Subtract(dtpDesde.Value.Date).Days;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
-                string id = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-                string regimen = dataGridView1.CurrentRow.Cells[4].Value.ToString();
-
-                DataRow row = table2.NewRow();
-                row["Id"] = id;
-                try
+                DateTime inicio = Convert.ToDateTime(dtpDesde.Value);
+                DateTime fin = Convert.ToDateTime(dtpHasta.Value);
+                if (DateTime.Compare(fechaDesde, inicio) == 0 && DateTime.Compare(fin, fechaHasta) == 0)
                 {
-                    precio = (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * 1);
-                    precio *= dias;
-                    row["Precio"] = precio.ToString();
+                    string id = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                    string regimen = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+                    
 
+                    DataRow row = table2.NewRow();
+                    row["Id"] = id;
+                    try
+                    {
+                        precio = (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * 1);
+                        precio *= dias;
+                        row["Precio"] = precio.ToString();
+
+                    }
+                    catch { return; }
+
+                    try
+                    {
+                        table2.Rows.Add(row);
+                        if (cant == 0)
+                        {
+                            cboHotel.Enabled = false;
+                            dtpDesde.Enabled = false;
+                            dtpHasta.Enabled = false;
+                        }
+                        
+                        total += (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
+                        txtTotal.Text = total.ToString();
+                        cant++;
+                        dataGridView2.DataSource = bSource2;
+                        butSeleccionar_Click(null, null);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Esa habitación ya fue agregada");
+                        return;
+                    }
                 }
-                catch { return; }
+                else 
+                {
+                    MessageBox.Show("Por favor, vuelva a buscar habitación si cambio la fecha");
+                }
                 
-                try
-                {
-                    table2.Rows.Add(row);
-                    if (cant == 0)
-                    {
-                        habitaciones = habitaciones + id;
-                        cboRegimen.Text = regimen;
-                        cboTipoHabitacion.Enabled = false;
-                        cboHotel.Enabled = false;
-                        dtpDesde.Enabled = false;
-                        dtpHasta.Enabled = false;
-                        dias = dtpHasta.Value.Date.Subtract(dtpDesde.Value.Date).Days;
-                    }
-                    else
-                    {
-                        habitaciones = habitaciones + "," + id;
-                    }
-                    total += (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
-                    txtTotal.Text = total.ToString();
-                    cant++;
-                    dataGridView2.DataSource = bSource2;
-                    butSeleccionar_Click(null, null);
-                }
-                catch
-                {
-                    MessageBox.Show("Esa habitación ya fue agregada");
-                }
             }
         }
 
@@ -300,7 +308,6 @@ namespace FrbaHotel.GenerarModificacionReserva
 
                     if (cant == 0)
                     {
-                        cboTipoHabitacion.Enabled = true;
                         cboHotel.Enabled = true;
                         dtpDesde.Enabled = true;
                         dtpHasta.Enabled = true;
@@ -310,8 +317,93 @@ namespace FrbaHotel.GenerarModificacionReserva
                     total -= precio;
                     txtTotal.Text = total.ToString();
                 }
-                catch { }
+                catch { return; }
             }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string codigoHabitacion = "";
+
+            if (cant == 0)
+            {
+                MessageBox.Show("Seleccione al menos una habitación");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(txtCliente.Text))
+            {
+                MessageBox.Show("Seleccione un cliente");
+                return;
+            }
+
+            bool habilitado = false;
+
+            resultado = Login.FrmTipoUsuario.BD.comando("select cliente_estado from FAGD.Cliente where cliente_codigo = " + txtCliente.Text);
+            if (resultado.Read())
+                habilitado = resultado.GetBoolean(0);
+
+            resultado.Close();
+
+            if (habilitado == false)
+            {
+                MessageBox.Show("El cliente esta inhabilitado para realizar reservas");
+                return;
+            }
+
+            string command = "EXEC FAGD.InsertarNuevaReserva ";
+            command = command + "'" + VarGlobales.getDate().ToString("yyyyMMdd HH:mm:ss") + "',";
+            command = command + "'" + dtpDesde.Value.Date.ToString("yyyyMMdd HH:mm:ss") + "',";
+            command = command + "'" + dtpHasta.Value.Date.ToString("yyyyMMdd HH:mm:ss") + "',";
+            command = command + dias + ",";
+            command = command + "'" + cboRegimen.Text + "',";
+            command = command + txtCliente.Text + ",";
+            if (Login.FrmTipoUsuario.usuario == "guest")
+            {
+                command = command + "'guest',";
+                command = command + Convert.ToDecimal(cboHotel.Text.Split('-')[0]) + ",";
+            }
+            else
+            {
+                command = command + "'" + Login.FrmLoginUsuario.username + "',";
+                command = command + codHotelSeleccionado + ",";
+            }
+            command = command + Convert.ToInt32(total).ToString();
+
+            decimal id = 0;
+            resultado = Login.FrmTipoUsuario.BD.comando(command);
+            if (resultado.Read() == true)
+            {
+                id = resultado.GetDecimal(0);
+            }
+            resultado.Close();
+
+            if (id == 0)
+            {
+                MessageBox.Show("No se pudo generar la reserva");
+                butLimpiar_Click(null, null);
+                return;
+            }
+
+            string insertar = "EXEC FAGD.InsertarReservaXHabitacion " + id.ToString() + ",";
+
+            for (int i = 0; i < cant; i++)
+            {
+                codigoHabitacion = dataGridView2.Rows[i].Cells[1].Value.ToString();
+                resultado = Login.FrmTipoUsuario.BD.comando(insertar + codigoHabitacion);
+
+                if (!resultado.Read() || resultado.GetDecimal(0) == 0)
+                {
+                    MessageBox.Show("No se pudo ingresar la habitación: " + codigoHabitacion.ToString());
+                    resultado.Close();
+                    return;
+                }
+                resultado.Close();
+            }
+
+            MessageBox.Show("Reserva generada con éxito, su número de reserva es: " + id.ToString());
+
 
         }
 

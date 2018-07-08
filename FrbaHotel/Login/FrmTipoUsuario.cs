@@ -41,6 +41,7 @@ namespace FrbaHotel.Login
                 }
                 else
                 {
+                    usuario = "empleado";
                     FrmLoginUsuario frmLoginUsuario = new FrmLoginUsuario();
                     this.Hide();
                     frmLoginUsuario.Show();

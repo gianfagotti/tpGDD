@@ -555,6 +555,84 @@ END
 GO
 
 
+------------------------------------------------------------------------------------------
+create function FAGD.habitacionDisponible
+( @desde datetime, @hasta datetime,@codigo numeric(18,0))
+
+	RETURNS bit
+as
+begin
+-- caso donde la fecha de inicio de la reserva, esta entre las pedidas
+if(exists 
+	(select RH.habitacion_codigo	
+	from FAGD.ReservaXHabitacion RH, FAGD.Reserva R
+	where 
+	R.reserva_fechaInicio > @desde and	
+	R.reserva_fechaInicio < @hasta and
+	R.reserva_codigo = RH.reserva_codigo and 
+	RH.habitacion_codigo = @codigo  and 
+	R.reserva_codigo not in (select reservaCancelada_codigoReserva from FAGD.ReservaCancelada C) ) )
+begin
+return 1
+end
+-- caso donde la fecha hasta de la reserva, esta entre las pedidas
+if(exists 
+	(select RH.habitacion_codigo	
+	from FAGD.ReservaXHabitacion RH, FAGD.Reserva R
+	where 
+	R.reserva_fechaFin > @desde and	
+	R.reserva_fechaFin < @hasta and
+	R.reserva_codigo = RH.reserva_codigo and 
+	RH.habitacion_codigo = @codigo  and 
+	R.reserva_codigo not in (select reservaCancelada_codigoReserva from FAGD.ReservaCancelada C) ) )
+begin
+return 2
+end
+-- caso donde la fecha de inicio de la reserva pedida, esta entre las fechas de la reserva
+if(exists 
+	(select RH.habitacion_codigo	
+	from FAGD.ReservaXHabitacion RH, FAGD.Reserva R
+	where 
+	R.reserva_fechaInicio < @desde and	
+	R.reserva_fechaFin > @desde and
+	R.reserva_codigo = RH.reserva_codigo and 
+	RH.habitacion_codigo = @codigo  and 
+	R.reserva_codigo not in (select reservaCancelada_codigoReserva from FAGD.ReservaCancelada C) ) )
+begin
+return 3
+end
+-- caso donde la fecha hasta de la reserva pedida, esta entre las fechas de la reserva
+if(exists 
+	(select RH.habitacion_codigo	
+	from FAGD.ReservaXHabitacion RH, FAGD.Reserva R
+	where 
+	R.reserva_fechaInicio < @hasta and	
+	R.reserva_fechaFin > @hasta and
+	R.reserva_codigo = RH.reserva_codigo and 
+	RH.habitacion_codigo = @codigo  and 
+	R.reserva_codigo not in (select reservaCancelada_codigoReserva from FAGD.ReservaCancelada C) ) )
+begin
+return 4
+end
+-- caso donde las fechas son iguales
+if(exists 
+	(select RH.habitacion_codigo	
+	from FAGD.ReservaXHabitacion RH, FAGD.Reserva R
+	where 
+	R.reserva_fechaInicio = @desde and	
+	R.reserva_fechaFin = @hasta and
+	R.reserva_codigo = RH.reserva_codigo and 
+	RH.habitacion_codigo = @codigo  and 
+	R.reserva_codigo not in (select reservaCancelada_codigoReserva from FAGD.ReservaCancelada C) ) )
+begin
+return 5
+end
+
+return 0
+
+end
+go
+
 -----------------------	 CREACIÓN DE INSERTS DE MIGRACIÓN   ----------------------- 
 
 INSERT INTO FAGD.Estado (estado_descripcion)
@@ -2120,7 +2198,8 @@ begin
 		Ha.habitacion_codigoHotel = @codigoHotel and
 		Ha.habitacion_tipoCodigo = @codigoTipoHab and
 		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaInicio and fecha_fin >= @fechaInicio) and 
-		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaFin and fecha_fin >= @fechaFin)
+		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaFin and fecha_fin >= @fechaFin) and
+		(FAGD.habitacionDisponible(@fechaInicio, @fechaFin, Ha.habitacion_codigo)) < 1
 	end
 	else
 	begin
@@ -2136,7 +2215,80 @@ begin
 		Ha.habitacion_codigoHotel = @codigoHotel and
 		Ha.habitacion_tipoCodigo = @codigoTipoHab and
 		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaInicio and fecha_fin >= @fechaInicio) and 
-		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaFin and fecha_fin >= @fechaFin)
+		not exists (select hotel_codigo from FAGD.BajaHotel where hotel_codigo = @codigoHotel and fecha_inicio <= @fechaFin and fecha_fin >= @fechaFin) and
+		(FAGD.habitacionDisponible(@fechaInicio, @fechaFin, Ha.habitacion_codigo)) < 1
 	end
+end
+GO
+
+---------------------------------------------------------------------------------------------------------
+
+create procedure FAGD.InsertarNuevaReserva
+@fecha_realizada datetime,
+@fecha_inicio datetime,
+@fecha_fin datetime,
+@dias numeric(5),
+@regimen nvarchar(50),
+@cliente numeric(18),
+@usuario nvarchar(255),
+@hotel numeric(18),
+@total numeric(18)
+
+as
+begin
+	declare @fechaRealizada datetime, @fechaInicio datetime, @fechaFin datetime
+	set @fechaRealizada = CONVERT(datetime, @fecha_realizada, 121)
+	set @fechaInicio = CONVERT(datetime, @fecha_inicio, 121)
+	set @fechaFin = CONVERT(datetime, @fecha_fin, 121)
+
+	declare @codRegimen numeric(18), @codEstado numeric(18), @respuesta numeric(18)
+
+	begin tran re
+	begin try
+		set @codRegimen = (select regimen_codigo from FAGD.Regimen where regimen_descripcion = @regimen)
+		set @codEstado = 1	--(select estado_codigo from FAGD.Estado where estado_descripcion = 'RESERVA CORRECTA')
+
+		insert into FAGD.Reserva(reserva_fechaRealizada, reserva_fechaInicio, reserva_fechaFin, reserva_cantNoches, reserva_codigoRegimen, 
+					reserva_clienteCodigo, reserva_nombreUsuario, reserva_codigoHotel, reserva_costoTotal, reserva_estado)
+		values(@fechaRealizada, @fechaInicio, @fechaFin, @dias, @codRegimen, @cliente, @usuario, @hotel, @total, @codEstado)
+
+		set @respuesta = (select SCOPE_IDENTITY());
+		select @respuesta as respuesta
+	commit tran re
+	end try
+
+	begin catch
+	rollback tran re
+	set @respuesta = 0
+	select @respuesta as respuesta
+	end catch
+end
+GO
+
+---------------------------------------------------------------------------------------------------------
+
+create procedure FAGD.InsertarReservaXHabitacion
+@reserva numeric(18),
+@habitacion numeric(18)
+
+as
+begin
+	declare @respuesta numeric(18)
+
+	begin tran rh
+	begin try
+		insert into FAGD.ReservaXHabitacion(reserva_codigo, habitacion_codigo)
+		values (@reserva, @habitacion)
+
+		set @respuesta = (select resXH_codigo from FAGD.ReservaXHabitacion where reserva_codigo = @reserva and habitacion_codigo = @habitacion)
+		select @respuesta as respuesta
+	commit tran rh
+	end try
+
+	begin catch
+	rollback tran rh
+	set @respuesta = 0
+	select @respuesta as respuesta
+	end catch
 end
 GO
