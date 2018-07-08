@@ -53,7 +53,7 @@ namespace FrbaHotel.RegistrarEstadia
             }
             else
             {
-                MessageBox.Show("Error. La habitación no existe");
+                MessageBox.Show("La habitación no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             resultado.Close();
         }
@@ -66,7 +66,7 @@ namespace FrbaHotel.RegistrarEstadia
             }
             else
             {
-                MessageBox.Show("Debe asignar los clientes restantes a una habitacion");
+                MessageBox.Show("Debe asignar los clientes restantes a una habitación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -76,7 +76,7 @@ namespace FrbaHotel.RegistrarEstadia
             {
                 if (Convert.ToInt32(cbohab.SelectedIndex) == -1)
                 {
-                    MessageBox.Show("Debe seleccionar una habitacion");
+                    MessageBox.Show("Debe seleccionar una habitación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
 
                 }
@@ -93,7 +93,7 @@ namespace FrbaHotel.RegistrarEstadia
                     resultado.Read();
                     if (resultado.GetDecimal(0) == 1)
                     {
-                        MessageBox.Show("El cliente se agrego correctamente");
+                        MessageBox.Show("El cliente se agregó correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         tabla.Rows.RemoveAt(index);
                         dgvDistri.DataSource = tabla;
                         resultado.Close();
@@ -101,13 +101,13 @@ namespace FrbaHotel.RegistrarEstadia
                     else
                     {
                         resultado.Close();
-                        MessageBox.Show("El cliente ya estaba agregado a esa estadia");
+                        MessageBox.Show("El cliente ya estaba agregado a esa estadía.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Esa habitacion ya esta llena");
+                    MessageBox.Show("Esa habitación ya se encuentra llena.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

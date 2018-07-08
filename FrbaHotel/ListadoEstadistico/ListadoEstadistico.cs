@@ -52,17 +52,17 @@ namespace FrbaHotel.ListadoEstadistico
         {
             if (string.IsNullOrEmpty(cboCateg.Text))
             {
-                MessageBox.Show("Debe seleccionar una categoria.");
+                MessageBox.Show("Debe seleccionar una categoria.","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (string.IsNullOrEmpty(cboTrim.Text))
             {
-                MessageBox.Show("Debe seleccionar un trimestre.");
+                MessageBox.Show("Debe seleccionar un trimestre.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (string.IsNullOrEmpty(dtpAnio.Text))
             {
-                MessageBox.Show("Debe seleccionar un anio");
+                MessageBox.Show("Debe seleccionar un anio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

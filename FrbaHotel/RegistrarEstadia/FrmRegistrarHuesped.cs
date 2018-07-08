@@ -58,7 +58,7 @@ namespace FrbaHotel.RegistrarEstadia
             else
             {
                 resultado.Close();
-                MessageBox.Show("La reserva no tiene habitaciones");
+                MessageBox.Show("La reserva no tiene habitaciones.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
             consulta = "SELECT cli.cliente_codigo CodigoCli, cli.cliente_nombre Nombre, cli.cliente_apellido Apellido FROM FAGD.Reserva res, FAGD.Cliente cli where res.reserva_clienteCodigo = cli.cliente_codigo and res.reserva_codigo = " + nroReserva;
@@ -113,16 +113,16 @@ namespace FrbaHotel.RegistrarEstadia
                 {
                     if (resultado.GetDecimal(0) == 0)
                     {
-                        MessageBox.Show("Error. El cliente ya estaba agregado");
+                        MessageBox.Show("El cliente ya estaba agregado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Error. El cliente ya estaba agregado");
+                    MessageBox.Show("El cliente ya estaba agregado.","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 resultado.Close();
             }
-            MessageBox.Show("El proceso de carga de clientes finalizo correctamente");
+            MessageBox.Show("El proceso de carga de clientes finalizó correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             DistribClientes distri = new DistribClientes(tabla, nroReserva, nroEstadia);
             distri.Show();
             this.Close();
@@ -146,7 +146,7 @@ namespace FrbaHotel.RegistrarEstadia
             }
             else
             {
-                MessageBox.Show("No se pueden agregar mas clientes para esta estadia");
+                MessageBox.Show("No se pueden agregar mas clientes para esta estadía.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -168,7 +168,7 @@ namespace FrbaHotel.RegistrarEstadia
             }
             else
             {
-                MessageBox.Show("No se pueden agregar mas clientes para esta estadia");
+                MessageBox.Show("No se pueden agregar mas clientes para esta estadía.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
            
             
@@ -193,7 +193,7 @@ namespace FrbaHotel.RegistrarEstadia
                 int item = dgvHuesped.CurrentRow.Index;
                 if (dgvHuesped.CurrentRow.Cells[1].Value.ToString() == codigoCli.ToString())
                 {
-                    MessageBox.Show("No se puede borrar el cliente que hizo la reserva");
+                    MessageBox.Show("No se puede borrar el cliente que hizo la reserva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 persDisp++;

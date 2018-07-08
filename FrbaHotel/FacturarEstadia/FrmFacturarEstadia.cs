@@ -83,12 +83,12 @@ namespace FrbaHotel.FacturarEstadia
             BindingSource2.DataSource = tablaInfoConsumibles;    
             dgvConsumibles.DataSource = BindingSource2;
 
-            query = "select cons.consumible_precio FROM FAGD.ConsumibleXEstadia consXEst, FAGD.Consumibles cons WHERE consXEst.consumible_codigo = cons.consumible_codigo AND consXEst.estadia_codigo = " + codigoEstadia;
+            query = "select cons.consumible_precio FROM FAGD.ConsumibleXEstadia consXEst, FAGD.Consumible cons WHERE consXEst.consumible_codigo = cons.consumible_codigo AND consXEst.estadia_codigo = " + codigoEstadia;
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             if (infoQuery.Read() == true)
             {
                 infoQuery.Close();
-                query = "SELECT SUM(con.consumible_precio) FROM FAGD.ConsumibleXEstadia consXEst, FAGD.Consumibles cons WHERE consXEst.consumible_codigo = cons.consumible_codigo AND consXEst.estadia_codigo = " + codigoEstadia;
+                query = "SELECT SUM(con.consumible_precio) FROM FAGD.ConsumibleXEstadia consXEst, FAGD.Consumible cons WHERE consXEst.consumible_codigo = cons.consumible_codigo AND consXEst.estadia_codigo = " + codigoEstadia;
                 infoQuery.Read();
                 txtMontoConsu.Text = infoQuery.GetDecimal(0).ToString();
             }

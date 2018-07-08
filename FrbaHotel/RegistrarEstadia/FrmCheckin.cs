@@ -46,7 +46,7 @@ namespace FrbaHotel.RegistrarEstadia
             
              if (string.IsNullOrEmpty(txtReserv.Text))
             {
-                MessageBox.Show("Debe ingresar un numero de reserva");
+                MessageBox.Show("Debe ingresar un numero de reserva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             resultadoQuery = Login.FrmTipoUsuario.BD.comando("SELECT reserva_codigo, reserva_estado, reserva_fechaInicio, reserva_fechaFin FROM FAGD.Reserva WHERE reserva_codigo = " + txtReserv.Text);
@@ -57,17 +57,17 @@ namespace FrbaHotel.RegistrarEstadia
 
                 if (fechaIni.Date < diaActual)
                 {
-                    MessageBox.Show("No se puede hacer el check-in, reserva vencida.");
+                    MessageBox.Show("No se puede hacer el check-in, reserva vencida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 if (fechaIni.Date > diaActual)
                 {
-                    MessageBox.Show("No se puede hacer el check-in, fecha temprana.");
+                    MessageBox.Show("No se puede hacer el check-in, fecha temprana.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 if (estadoDeReserva != resmodif && estadoDeReserva != resok)
                 {
-                    MessageBox.Show("La reserva no tiene el estado Correcto. Posiblemente cancelada");
+                    MessageBox.Show("La reserva no tiene el estado Correcto. Posiblemente cancelada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 } 
 
@@ -80,12 +80,12 @@ namespace FrbaHotel.RegistrarEstadia
                 }
                 else{
                     resultadoQuery.Close();
-                    MessageBox.Show("La reserva no tiene asignadas habitaciones.");
+                    MessageBox.Show("La reserva no tiene asignadas habitaciones.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return; }
 
                 if (hotelDeLaQuery.ToString() != Login.FrmSeleccionarHotel.codigoHotel.ToString())
                 {
-                    MessageBox.Show("Solo pueden hacer check-in los empleados del hotel donde se hizo la reserva.");
+                    MessageBox.Show("Solo pueden hacer check-in los empleados del hotel donde se hizo la reserva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -99,7 +99,7 @@ namespace FrbaHotel.RegistrarEstadia
                 resultadoQuery.Close();
                   if (estadia != 0)
                 {
-                    MessageBox.Show("Se ha realizado el check-in correctamente.");
+                    MessageBox.Show("Se ha realizado el check-in correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //generamos la factura para despues
                     string fact = "EXEC FAGD.generarFactura " + estadia.ToString() + ",1,'" + diaActual.ToString("yyyyMMdd HH:mm:ss") + "'";
                     resultadoQuery = Login.FrmTipoUsuario.BD.comando(fact);
@@ -108,7 +108,7 @@ namespace FrbaHotel.RegistrarEstadia
                     if (factura == 0)
                     {
                         resultadoQuery.Close();
-                        MessageBox.Show("Error al crear factura, ya esta generada");
+                        MessageBox.Show("Error al crear factura, ya esta generada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     resultadoQuery.Close();
@@ -119,7 +119,7 @@ namespace FrbaHotel.RegistrarEstadia
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo realizar la operacion, la estadia ya esta registrada");
+                    MessageBox.Show("No se pudo realizar la operacion, la estadia ya esta registrada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 
@@ -129,7 +129,7 @@ namespace FrbaHotel.RegistrarEstadia
             else
             {
                 resultadoQuery.Close();
-                MessageBox.Show("Numero de reserva incorrecto.");
+                MessageBox.Show("Número de reserva incorrecto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             } 
   
@@ -138,9 +138,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            FrmRegistrarHuesped regHue = new FrmRegistrarHuesped(this);
-            regHue.Show();
+            this.DialogResult = DialogResult.Abort;
         }
 
         private void FrmCheckin_Load(object sender, EventArgs e)

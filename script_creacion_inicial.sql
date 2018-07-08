@@ -337,6 +337,10 @@ ALTER TABLE FAGD.ErrorCliente ADD CONSTRAINT PK_ErrorCliente
  PRIMARY KEY CLUSTERED (errorCliente_codigo)
 GO
 
+ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT PK_ClienteXEstadia
+ PRIMARY KEY CLUSTERED (clieXEst_codigo)
+GO
+
 ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT PK_ConsumibleXEstadia
  PRIMARY KEY CLUSTERED (consXEst_codigo)
 GO
@@ -491,6 +495,15 @@ GO
 
 ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT FK_ClienteXEstadia_ErrorCliente 
  FOREIGN KEY(errorCliente_codigo) REFERENCES FAGD.ErrorCliente(errorCliente_codigo)
+GO
+
+ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT unique_registro_clieXEst 
+UNIQUE (cliente_codigo,estadia_codigo)
+GO
+
+ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT FK_ClienteXEstadia_Habitacion 
+ FOREIGN KEY(habitacion_codigo) REFERENCES FAGD.Habitacion(habitacion_codigo)
+GO
 
 ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT FK_ClienteXEstadia_Estadia
  FOREIGN KEY(estadia_codigo) REFERENCES FAGD.Estadia(estadia_codigo)
@@ -1561,6 +1574,50 @@ END CATCH
 END
 GO
 
+------------------------------------------------------------------------------
+
+CREATE PROC FAGD.ActualizarFactura @estadiaCodigo numeric(18,0), @modalidadPago numeric(18,0), @inicioDeEstadia datetime
+AS BEGIN
+
+DECLARE @fechaDeFacturacionDefinitiva datetime
+SET @fechaDeFacturacionDefinitiva = CONVERT(datetime,@inicioDeEstadia,121)
+DECLARE @regimenEstadia numeric(18,0),
+		@reservaAsociada numeric(18,0),
+		@totalAPagar numeric(18,2),
+		@clienteAsociado numeric(18,0),
+		@factura numeric(18,0),
+		@resultado numeric(18,0)
+
+BEGIN TRAN transacc
+BEGIN TRY
+          SET @reservaAsociada = (SELECT estadia_codigoReserva FROM FAGD.Estadia WHERE estadia_codigo = @estadiaCodigo)
+		  SET @regimenEstadia = (SELECT reserva_codigoRegimen FROM FAGD.Reserva WHERE reserva_codigo = @reservaAsociada)
+		  SET @factura = (SELECT factura_nro FROM FAGD.Factura WHERE factura_codigoEstadia = @estadiaCodigo)
+		  SET @clienteAsociado = (SELECT reserva_clienteCodigo FROM FAGD.Reserva WHERE reserva_codigo = @reservaAsociada)
+      IF ( @regimenEstadia != 3 )
+		  BEGIN
+		  SET @totalAPagar = FAGD.calcularCostosEstadia(@estadiaCodigo) + FAGD.calcularCostosConsumible(@estadiaCodigo);
+		UPDATE FAGD.Factura
+			SET factura_modalidadPago = @modalidadPago, factura_fecha = @fechaDeFacturacionDefinitiva, factura_total = @totalAPagar
+			WHERE factura_nro = @factura
+	      END
+		 ELSE BEGIN
+			SET @totalAPagar = FAGD.calcularCostosEstadia(@estadiaCodigo);
+			UPDATE FAGD.Factura
+			SET factura_modalidadPago = @modalidadPago, factura_fecha = @fechaDeFacturacionDefinitiva, factura_total = @totalAPagar
+			WHERE factura_nro = @factura
+		END
+	SET @resultado = (SELECT factura_nro FROM FAGD.Factura WHERE factura_codigoEstadia = @estadiaCodigo AND factura_fecha = @fechaDeFacturacionDefinitiva)
+	SELECT @resultado AS resultado
+COMMIT TRAN	transacc
+END TRY
+BEGIN CATCH
+ROLLBACK TRAN transacc
+	SET @resultado=0
+	SELECT @resultado AS resultado
+END CATCH
+END
+GO
 
 
 ------------------------------------------------------------------------------

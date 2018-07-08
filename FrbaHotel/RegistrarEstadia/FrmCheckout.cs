@@ -17,13 +17,11 @@ namespace FrbaHotel.RegistrarEstadia
         SqlDataReader resultado;
         SqlDataAdapter sAdapter;
         DataTable dTable;
-        DateTime diaActual = DateTime.Today;
-
+        FrmMenuRegEst2 menu;
 
         public FrmCheckout()
         {
             InitializeComponent();
-        
         }
 
         private string filtrarExactamentePor(string columna, string valor)
@@ -37,7 +35,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void FrmCheckout_Load(object sender, EventArgs e)
         {
-            string query = "SELECT DISTINCT clieXEst.estadia_codigo estadiaCodigo,  clieXEst.habitacion_codigo habCodigo, ha.habitacion_nro habNumero, ha.habitacion_piso habPiso FROM FAGD.Estadia est, FAGD.ClienteXEstadia cliXEst, FAGD.Habitacion ha WHERE est.estadia_fechaInicio <= '" + Login.FrmTipoUsuario.fechaApp + "' AND cliXEst.estadia_codigo = est.estadia_codigo AND cliXEst.habitacion_codigo = ha.habitacion_codigo AND ha.habitacion_codigoHotel = " + Login.FrmSeleccionarHotel.codigoHotel;
+            string query = "SELECT DISTINCT clieXEst.estadia_codigo estadiaCodigo,  clieXEst.habitacion_codigo habCodigo, ha.habitacion_nro habNumero, ha.habitacion_piso habPiso FROM FAGD.Estadia est, FAGD.ClienteXEstadia clieXEst, FAGD.Habitacion ha WHERE est.estadia_fechaInicio <= '" + Login.FrmTipoUsuario.fechaApp + "' AND clieXEst.estadia_codigo = est.estadia_codigo AND clieXEst.habitacion_codigo = ha.habitacion_codigo AND ha.habitacion_codigoHotel = " + Login.FrmSeleccionarHotel.codigoHotel;
             sAdapter = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
             dTable = Login.FrmTipoUsuario.BD.dameDataTable(sAdapter);
             BindingSource bSource = new BindingSource(); 
@@ -72,29 +70,28 @@ namespace FrbaHotel.RegistrarEstadia
         {
             if (e.ColumnIndex == 0)
             {
-                //generar facturacion
+                //Se intenta comenzar el proceso de facturación
                 consulta = "EXEC FAGD.CheckoutParaEstadia ";
                 consulta = consulta + dgvFinalizar.CurrentRow.Cells[1].Value.ToString();
-                consulta = consulta + ",'" + diaActual.ToString("yyyyMMdd HH:mm:ss") + "',";
-            //    consulta = consulta + Login.HomeLogin.idUsuario;
+                consulta = consulta + ",'" + Login.FrmTipoUsuario.fechaApp.ToString("yyyyMMdd HH:mm:ss") + "',";
+                consulta = consulta + Login.FrmLoginUsuario.username;
                 resultado = Login.FrmTipoUsuario.BD.comando(consulta);
                 resultado.Read();
                 if (resultado.GetDecimal(0) == 1)
                 {
-
+                    //Se procede
                     resultado.Close();
-                    //aca va lo de facturacion
-                    /*
-                    Facturar_Estadia.Facturacion factu = new FrbaHotel.Facturar_Estadia.Facturacion(dataGridView1.CurrentRow.Cells[1].Value.ToString());
-                    MessageBox.Show("El checkout se ha realizado correctamente. Se procede a la facturacion");
-                    factu.Show(); */
+                    FacturarEstadia.FrmFacturarEstadia procesoDeFacturacion = new FacturarEstadia.FrmFacturarEstadia(dgvFinalizar.CurrentRow.Cells[1].Value.ToString());
+                    MessageBox.Show("El checkout se ha realizado correctamente. Se procede a la facturación.","Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    procesoDeFacturacion.Show();
                 }
                 else
-                {
+                {   //Se detiene
                     resultado.Close();
-                    MessageBox.Show("El check-out no se pudo realizar correctamente");
+                    MessageBox.Show("El check-out no se pudo realizar correctamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                this.Close();
+                this.DialogResult = DialogResult.Abort;
+                
             }
         }
     }
