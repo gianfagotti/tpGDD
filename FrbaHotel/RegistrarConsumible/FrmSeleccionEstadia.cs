@@ -15,7 +15,7 @@ namespace FrbaHotel.RegistrarConsumible
     {
         SqlDataAdapter adaptadorSql;
         DataTable tablaConDatosEstadias;
-        AbmRol.frmMenuEmpleado frmMenuEmpleado;
+        AbmRol.frmMenuEmpleado menu;
        
 
         public FrmSeleccionEstadia()
@@ -25,7 +25,7 @@ namespace FrbaHotel.RegistrarConsumible
 
         public FrmSeleccionEstadia(AbmRol.frmMenuEmpleado form)
         {
-            frmMenuEmpleado = form;
+            menu = form;
             InitializeComponent();
         }
 
@@ -50,7 +50,7 @@ namespace FrbaHotel.RegistrarConsumible
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
-            frmMenuEmpleado.Show();
+            menu.Show();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -76,7 +76,7 @@ namespace FrbaHotel.RegistrarConsumible
                 string habCodigo = dgvEstadias.CurrentRow.Cells[2].Value.ToString();
                 string habnumero = dgvEstadias.CurrentRow.Cells[3].Value.ToString();
                 string piso = dgvEstadias.CurrentRow.Cells[4].Value.ToString();
-                FrmAgregarConsumibles agregarConsu = new FrmAgregarConsumibles(estadiaCodigo, habCodigo, habnumero, piso,this);
+                FrmAgregarConsumibles agregarConsu = new FrmAgregarConsumibles(estadiaCodigo, habCodigo, habnumero, piso,this,menu);
                 agregarConsu.Show();
                 this.Hide();
             }

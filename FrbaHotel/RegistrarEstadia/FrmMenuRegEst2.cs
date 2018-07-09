@@ -12,15 +12,13 @@ namespace FrbaHotel.RegistrarEstadia
 {
     public partial class FrmMenuRegEst2 : Form
     {
-        Form ultimoform;
+        AbmRol.frmMenuEmpleado menuAVolver;
 
-        public FrmMenuRegEst2(Form form)
+        public FrmMenuRegEst2(AbmRol.frmMenuEmpleado menu)
         {
             InitializeComponent();
-            ultimoform = form;
+            menuAVolver = menu;
         }
-
-
 
         private void FrmMenuRegEst_Load(object sender, EventArgs e)
         {
@@ -30,13 +28,13 @@ namespace FrbaHotel.RegistrarEstadia
         private void btnVolver_Click_1(object sender, EventArgs e)
         {
             this.Close();
-            ultimoform.Show();
+            menuAVolver.Show();
         }
 
         private void btnCheckin_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FrmCheckin checkin = new FrmCheckin();
+            FrmCheckin checkin = new FrmCheckin(menuAVolver);
             checkin.ShowDialog();
             this.Show();
         }
@@ -44,7 +42,7 @@ namespace FrbaHotel.RegistrarEstadia
         private void btnCheckout_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FrmCheckout checkout = new FrmCheckout();
+            FrmCheckout checkout = new FrmCheckout(this, menuAVolver);
             checkout.ShowDialog();
             this.Show();    
         }

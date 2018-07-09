@@ -19,13 +19,15 @@ namespace FrbaHotel.RegistrarConsumible
         DataTable tablaConDatosConsumARegis;
         BindingSource bSourceReg;
         FrmSeleccionEstadia formAnterior;
-     
-     
+        AbmRol.frmMenuEmpleado menuAVolver;
 
-        public FrmAgregarConsumibles(string estadiaCodigo, string habCodigo, string habNumero, string piso, FrmSeleccionEstadia selecEst)
+
+
+        public FrmAgregarConsumibles(string estadiaCodigo, string habCodigo, string habNumero, string piso, FrmSeleccionEstadia selecEst, AbmRol.frmMenuEmpleado menu)
         {
             
             InitializeComponent();
+            menuAVolver = menu;
             formAnterior = selecEst;
             txtCodigoEst.Text = estadiaCodigo;
             txthab.Text = habCodigo;
@@ -110,7 +112,7 @@ namespace FrbaHotel.RegistrarConsumible
             }
             MessageBox.Show("El proceso de carga de consumibles finalizo correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
-
+            menuAVolver.Show();
         }
 
         private void dgvConsReg_CellContentClick(object sender, DataGridViewCellEventArgs e)

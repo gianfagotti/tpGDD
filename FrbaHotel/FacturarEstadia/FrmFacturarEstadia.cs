@@ -20,10 +20,12 @@ namespace FrbaHotel.FacturarEstadia
         decimal modalidadDePagoElegida;
         decimal facturaParaActualizar;
         BindingSource bindingSource;
+        AbmRol.frmMenuEmpleado menuAVolver;
 
-        public FrmFacturarEstadia(string codigoEstadia)
+        public FrmFacturarEstadia(string codigoEstadia, AbmRol.frmMenuEmpleado menu)
         {
             InitializeComponent();
+            menuAVolver = menu;
             txtEst.Text = codigoEstadia;
             query = "SELECT DISTINCT modalidadPago_descripcion FROM FAGD.ModalidadPago";
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
@@ -137,7 +139,7 @@ namespace FrbaHotel.FacturarEstadia
             infoQuery.Close();
             if (modalidadDePagoElegida == 2)
             {
-                FrmPagoTarjeta pagoTarjeta = new FrmPagoTarjeta(facturaParaActualizar.ToString());
+                FrmPagoTarjeta pagoTarjeta = new FrmPagoTarjeta(facturaParaActualizar.ToString(),menuAVolver);
                 pagoTarjeta.Show();
             }
             MessageBox.Show("Se ha actualizado la factura correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -15,12 +15,17 @@ namespace FrbaHotel.FacturarEstadia
     public partial class FrmPagoTarjeta : Form
     {
         string facturaAsociada;
-        AbmRol.frmMenuEmpleado menuppal;
+        AbmRol.frmMenuEmpleado menuRetorno;
 
-        public FrmPagoTarjeta(string fact)
+        public FrmPagoTarjeta(string fact, AbmRol.frmMenuEmpleado menu)
         {
             InitializeComponent();
+            menuRetorno = menu;
             facturaAsociada = fact;
+            cboEntidad.Items.Add("Visa");
+            cboEntidad.Items.Add("Mastercard");
+            cboEntidad.Items.Add("American Express");
+            cboEntidad.Items.Add("Cabal");
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
@@ -52,7 +57,9 @@ namespace FrbaHotel.FacturarEstadia
             {
                 resultado.Close();
                 MessageBox.Show("La tarjeta fue asociada a la factura.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                menuRetorno.Show();
                 this.Close();
+                
                 
             }
             else
@@ -60,6 +67,7 @@ namespace FrbaHotel.FacturarEstadia
                 resultado.Close();
                 MessageBox.Show("La tarjeta ya estaba asociada previamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
+              
             }
         }
     }

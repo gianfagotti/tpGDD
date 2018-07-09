@@ -17,11 +17,13 @@ namespace FrbaHotel.RegistrarEstadia
         SqlDataReader resultado;
         SqlDataAdapter sAdapter;
         DataTable dTable;
-        FrmMenuRegEst2 menu;
+        Form formAnterior;
+        AbmRol.frmMenuEmpleado menuAVolver;
 
-        public FrmCheckout()
+        public FrmCheckout(AbmRol.frmMenuEmpleado menu)
         {
             InitializeComponent();
+            menuAVolver = menu;
         }
 
         private string filtrarExactamentePor(string columna, string valor)
@@ -81,7 +83,7 @@ namespace FrbaHotel.RegistrarEstadia
                 {
                     //Se procede
                     resultado.Close();
-                    FacturarEstadia.FrmFacturarEstadia procesoDeFacturacion = new FacturarEstadia.FrmFacturarEstadia(dgvFinalizar.CurrentRow.Cells[1].Value.ToString());
+                    FacturarEstadia.FrmFacturarEstadia procesoDeFacturacion = new FacturarEstadia.FrmFacturarEstadia(dgvFinalizar.CurrentRow.Cells[1].Value.ToString(),menuAVolver);
                     MessageBox.Show("El checkout se ha realizado correctamente. Se procede a la facturación.","Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     procesoDeFacturacion.Show();
                     this.Close();
