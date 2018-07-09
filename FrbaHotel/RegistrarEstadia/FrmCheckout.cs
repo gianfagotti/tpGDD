@@ -19,10 +19,12 @@ namespace FrbaHotel.RegistrarEstadia
         DataTable dTable;
         Form formAnterior;
         AbmRol.frmMenuEmpleado menuAVolver;
+        FrmMenuRegEst2 menuAnterior;
 
-        public FrmCheckout(AbmRol.frmMenuEmpleado menu)
+        public FrmCheckout(FrmMenuRegEst2 menuRegEst, AbmRol.frmMenuEmpleado menu)
         {
             InitializeComponent();
+            menuAnterior = menuRegEst;
             menuAVolver = menu;
         }
 

@@ -66,6 +66,7 @@ namespace FrbaHotel.FacturarEstadia
             {
                 resultado.Close();
                 MessageBox.Show("La tarjeta ya estaba asociada previamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                menuRetorno.Show();
                 this.Close();
               
             }
