@@ -18,8 +18,6 @@ namespace FrbaHotel.RegistrarEstadia
         decimal resok;
         decimal resmodif;
         decimal estadia = 0;
-        DateTime diaActual2 = VarGlobales.getDate();
-        DateTime diaActual = DateTime.Today;
 
         public FrmCheckin()
         {
@@ -55,19 +53,19 @@ namespace FrbaHotel.RegistrarEstadia
                 decimal estadoDeReserva = resultadoQuery.GetDecimal(1);
                 DateTime fechaIni = resultadoQuery.GetDateTime(2);
 
-                if (fechaIni.Date < diaActual)
+                if (fechaIni.Date < Login.FrmTipoUsuario.fechaApp)
                 {
                     MessageBox.Show("No se puede hacer el check-in, reserva vencida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (fechaIni.Date > diaActual)
+                if (fechaIni.Date > Login.FrmTipoUsuario.fechaApp)
                 {
                     MessageBox.Show("No se puede hacer el check-in, fecha temprana.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 if (estadoDeReserva != resmodif && estadoDeReserva != resok)
                 {
-                    MessageBox.Show("La reserva no tiene el estado Correcto. Posiblemente cancelada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("La reserva no tiene un estado válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 } 
 
