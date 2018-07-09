@@ -15,6 +15,7 @@ namespace FrbaHotel.FacturarEstadia
     public partial class FrmPagoTarjeta : Form
     {
         string facturaAsociada;
+        AbmRol.frmMenuEmpleado menuppal;
 
         public FrmPagoTarjeta(string fact)
         {
@@ -52,6 +53,7 @@ namespace FrbaHotel.FacturarEstadia
                 resultado.Close();
                 MessageBox.Show("La tarjeta fue asociada a la factura.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
+                
             }
             else
             {

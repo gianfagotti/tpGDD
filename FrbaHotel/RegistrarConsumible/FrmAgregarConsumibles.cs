@@ -16,36 +16,40 @@ namespace FrbaHotel.RegistrarConsumible
         private SqlDataReader resultadoDeOperacion;
         SqlDataAdapter adaptador;
         DataTable tablaConDatosConsum;
+        DataTable tablaConDatosConsumARegis;
         BindingSource bSourceReg;
-        FrmSeleccionEstadia agregarConsum;
+        FrmSeleccionEstadia formAnterior;
+     
+     
 
-        public FrmAgregarConsumibles(string estadiaCodigo, string habCodigo, string habNumero, string piso, FrmSeleccionEstadia agregarConsu)
+        public FrmAgregarConsumibles(string estadiaCodigo, string habCodigo, string habNumero, string piso, FrmSeleccionEstadia selecEst)
         {
             
             InitializeComponent();
-            agregarConsum = agregarConsu;
+            formAnterior = selecEst;
             txtCodigoEst.Text = estadiaCodigo;
             txthab.Text = habCodigo;
             txtnroha.Text = habNumero;
             txtpiso.Text = piso;
-            tablaConDatosConsum = new DataTable();
-            tablaConDatosConsum.Columns.Add("Codigo");
-            tablaConDatosConsum.Columns.Add("Precio");
-            tablaConDatosConsum.Columns.Add("Descripcion");
+            tablaConDatosConsumARegis = new DataTable();
+            tablaConDatosConsumARegis.Columns.Add("Codigo");
+            tablaConDatosConsumARegis.Columns.Add("Descripcion");
+            tablaConDatosConsumARegis.Columns.Add("Precio");
             bSourceReg = new BindingSource();
-            bSourceReg.DataSource = tablaConDatosConsum;
-            dgvRegCons.DataSource = bSourceReg;
+            bSourceReg.DataSource = tablaConDatosConsumARegis;
+            dgvConsReg.DataSource = bSourceReg;
         }
 
 
           private void FrmAgregarConsumibles_Load(object sender, EventArgs e)
         {
-            string consultaConsumible = "SELECT consumible_codigo,consumible_descripcion,consumible_precio FROM FAGD.Consumible";
+            string consultaConsumible = "SELECT consumible_codigo, consumible_descripcion, consumible_precio FROM FAGD.Consumible";
             adaptador = Login.FrmTipoUsuario.BD.dameDataAdapter(consultaConsumible);
             tablaConDatosConsum = Login.FrmTipoUsuario.BD.dameDataTable(adaptador);         
             BindingSource bSourceConsum = new BindingSource();
             bSourceConsum.DataSource = tablaConDatosConsum;    
             dgvCons.DataSource = bSourceConsum;
+            
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -61,74 +65,63 @@ namespace FrbaHotel.RegistrarConsumible
         private void BtnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
-            agregarConsum.Show();
+            formAnterior.Show();
         }
 
-    
-        private void dgvCons_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvCons_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
-
-                    string codigoConsu = dgvCons.CurrentRow.Cells[1].Value.ToString();
-                    string precioConsu = dgvCons.CurrentRow.Cells[2].Value.ToString();
-                    string descripcionConsu = dgvCons.CurrentRow.Cells[3].Value.ToString();
-                    DataRow row = tablaConDatosConsum.NewRow();
-                    row["Codigo"] = codigoConsu;
-                    row["Precio"] = precioConsu;
-                    row["Descripcion"] = descripcionConsu;
-                    tablaConDatosConsum.Rows.Add(row);
-                    dgvRegCons.DataSource = bSourceReg;
-            }
-
-        }
-
-        private void dgvCons_SelectionChanged(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void BtnAgregarConsumible_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void dgvRegCons_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 0)
-            {
-                int consuARemover = dgvRegCons.CurrentRow.Index;
-                tablaConDatosConsum.Rows.RemoveAt(consuARemover);
+                string codigoConsu = dgvCons.CurrentRow.Cells[1].Value.ToString();
+                string descripcionConsu = dgvCons.CurrentRow.Cells[2].Value.ToString();
+                string precioConsu = dgvCons.CurrentRow.Cells[3].Value.ToString();
+                DataRow row = tablaConDatosConsumARegis.NewRow();
+                row["Codigo"] = codigoConsu;
+                row["Descripcion"] = descripcionConsu;
+                row["Precio"] = precioConsu;
+                tablaConDatosConsumARegis.Rows.Add(row);
+                dgvConsReg.DataSource = bSourceReg;
             }
         }
+
 
         private void BtnGuardarCambios_Click(object sender, EventArgs e)
         {
-            if (tablaConDatosConsum.Rows.Count == 0)
+            if (tablaConDatosConsumARegis.Rows.Count == 0)
             {
-                MessageBox.Show("Es necesario que seleccione al menos un consumible para agregar.");
+                MessageBox.Show("Es necesario que seleccione al menos un consumible para agregar.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
-            foreach (DataRow fila in tablaConDatosConsum.Rows)
+            foreach (DataRow fila in tablaConDatosConsumARegis.Rows)
             {
                 resultadoDeOperacion = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarConsuXEstXHabitacion " + txtCodigoEst.Text + "," + fila["Codigo"].ToString() + "," + txthab.Text);
                 if (resultadoDeOperacion.Read())
                 {
                     if (resultadoDeOperacion.GetDecimal(0) == 0)
                     {
-                        MessageBox.Show("Error. El consumible ya estaba agregado");
+                        MessageBox.Show("El consumible ya estaba agregado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Error. El consumible ya estaba agregado");
+                    MessageBox.Show("El consumible ya estaba agregado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 resultadoDeOperacion.Close();
             }
-            MessageBox.Show("El proceso de carga de consumibles finalizo correctamente");
+            MessageBox.Show("El proceso de carga de consumibles finalizo correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
 
         }
+
+        private void dgvConsReg_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                int consuARemover = dgvConsReg.CurrentRow.Index;
+                tablaConDatosConsumARegis.Rows.RemoveAt(consuARemover);
+            }
+        }
+
 
  
 

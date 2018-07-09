@@ -1631,7 +1631,7 @@ GO
 
 ------------------------------------------------------------------------------
 
-CREATE PROC FAGD.AsociarTarjeta  @factura numeric(18), @entidad nvarchar(255), @numero numeric(18), @banco nvarchar(255) = NULL, @titular nvarchar(255)
+CREATE PROC FAGD.AsociarTarjeta  @factura numeric(18), @entidad nvarchar(255), @numero numeric(18), @banco nvarchar(255), @titular nvarchar(255)
 AS BEGIN
 
 DECLARE @resultadoTransacc numeric(18,0)
