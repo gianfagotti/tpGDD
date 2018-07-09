@@ -202,6 +202,12 @@
       <DependentUpon>CancelarReserva.cs</DependentUpon>
     </Compile>
     <Compile Include="Conector2.cs" />
+    <Compile Include="FacturarEstadia\FrmPagoTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FacturarEstadia\FrmPagoTarjeta.Designer.cs">
+      <DependentUpon>FrmPagoTarjeta.cs</DependentUpon>
+    </Compile>
     <Compile Include="FacturarEstadia\FrmFacturarEstadia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -387,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FacturarEstadia\FrmFacturarEstadia.resx">
       <DependentUpon>FrmFacturarEstadia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FacturarEstadia\FrmPagoTarjeta.resx">
+      <DependentUpon>FrmPagoTarjeta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GenerarModificacionReserva\BuscarClientes.resx">
       <DependentUpon>BuscarClientes.cs</DependentUpon>

@@ -142,6 +142,8 @@ CREATE TABLE FAGD.Tarjeta(
    tarjeta_codigo numeric(18) IDENTITY(1,1) NOT NULL,
    tarjeta_numero numeric(18) NOT NULL,
    tarjeta_banco nvarchar(255),
+   tarjeta_entidadFinanciera nvarchar(255),
+   tarjeta_titular nvarchar(255)
 )
 GO
 
@@ -1627,6 +1629,28 @@ END CATCH
 END
 GO
 
+------------------------------------------------------------------------------
+
+CREATE PROC FAGD.AsociarTarjeta  @factura numeric(18), @entidad nvarchar(255), @numero numeric(18), @banco nvarchar(255) = NULL, @titular nvarchar(255)
+AS BEGIN
+
+DECLARE @resultadoTransacc numeric(18,0)
+BEGIN TRAN transacc
+	BEGIN TRY
+			INSERT INTO FAGD.Tarjeta(tarjeta_numero, tarjeta_banco, tarjeta_entidadFinanciera, tarjeta_titular) 
+			VALUES (@numero, @banco, @entidad, @titular)
+			UPDATE FAGD.Factura SET factura_tarjeta = (SELECT SCOPE_IDENTITY()) WHERE factura_nro = @factura
+			SET @resultadoTransacc = 1;
+SELECT @resultadoTransacc AS resultado;
+COMMIT TRAN transacc
+END TRY
+BEGIN CATCH
+ROLLBACK TRAN transacc
+SET @resultadoTransacc = 0
+SELECT @resultadoTransacc AS resultado
+END CATCH
+END
+GO
 
 ------------------------------------------------------------------------------
 

@@ -137,7 +137,8 @@ namespace FrbaHotel.FacturarEstadia
             infoQuery.Close();
             if (modalidadDePagoElegida == 2)
             {
-                //ver para pagar con la tarjeta de credito/debito
+                FrmPagoTarjeta pagoTarjeta = new FrmPagoTarjeta(facturaParaActualizar.ToString());
+                pagoTarjeta.Show();
             }
             MessageBox.Show("Se ha actualizado la factura correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
