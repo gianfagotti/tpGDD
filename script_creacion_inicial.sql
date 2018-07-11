@@ -1341,6 +1341,10 @@ UPDATE FAGD.Reserva
 SET reserva_estado = @estadoEfectivo WHERE reserva_codigo IN 
 	(SELECT DISTINCT R.reserva_codigo FROM FAGD.Reserva R
 		WHERE R.reserva_fechaInicio > @fechaDelSystem AND R.reserva_estado = 1 OR R.reserva_estado = 6)
+
+insert into FAGD.ReservaCancelada(reservaCancelada_nombreUsuario,reservaCancelada_codigoReserva,reservaCancelada_motivo,reservaCancelada_fechaCancelacion)
+			select distinct 'GUEST',reserva_codigo,'Cancelada por no-show al inicio del sistema',reserva_fechaInicio 
+			from FAGD.Reserva where	reserva_estado = @estadoEfectivo
 						
 				
  SET @respuestaTran = 1
@@ -2467,46 +2471,6 @@ begin
 	end try
 	begin catch
 		rollback tran cr
-		set @respuesta=0
-		select @respuesta as respuesta
-	end catch
-end
-GO
-
----------------------------------------------------------------------------------------------------------
-
-create procedure FAGD.CancelarReservasAnteriores
-
-@fecha datetime
-
-as
-begin
-	declare @hoy datetime
-	set @hoy = CONVERT(datetime,@fecha,121)
-	declare @estado numeric(18)
-	declare @respuesta numeric(18)
-	begin tran ta
-	begin try
-	
-		set @estado=(select estado_codigo from FAGD.Estado where estado_descripcion = 'RESERVA CANCELADA POR NO-SHOW')
-		update FAGD.Reserva 
-			set reserva_estado = @estado 
-			where reserva_codigo in (
-				select distinct R.reserva_estado from FAGD.Reserva R
-				where
-				R.reserva_fechaInicio < @hoy and
-				R.reserva_codigo not in (select distinct estadia_codigoReserva from FAGD.Estadia))
-	
-		insert into FAGD.ReservaCancelada(reservaCancelada_nombreUsuario,reservaCancelada_codigoReserva,reservaCancelada_motivo,reservaCancelada_fechaCancelacion)
-			select distinct 'GUEST',reserva_codigo,'Cancelada por no-show al inicio del sistema',reserva_fechaInicio 
-			from FAGD.Reserva where	estado = @estado
-		set @respuesta = 1
-		select @respuesta as respuesta
-
-	commit tran ta
-	end try
-	begin catch
-		rollback tran ta
 		set @respuesta=0
 		select @respuesta as respuesta
 	end catch
