@@ -74,7 +74,6 @@ CREATE TABLE FAGD.Reserva(
 GO
 
 CREATE TABLE FAGD.ReservaXHabitacion(
-    resXH_codigo numeric (18) IDENTITY(1,1) NOT NULL,
 	reserva_codigo numeric(18,0) NOT NULL,
 	habitacion_codigo numeric(18,0) NOT NULL
 )
@@ -222,7 +221,6 @@ consumible_precio numeric (18,2)
 GO
 
 CREATE TABLE FAGD.ConsumibleXEstadia(
-consXEst_codigo numeric(18,0) IDENTITY(1,1) NOT NULL,
 estadia_codigo numeric(18) NOT NULL,
 consumible_codigo numeric(18) NOT NULL,
 habitacion_codigo numeric(18) NOT NULL,
@@ -245,7 +243,6 @@ estadia_usuarioFinalizador nvarchar(255),
 GO
 
 CREATE TABLE FAGD.ClienteXEstadia(
-clieXEst_codigo numeric(18,0) IDENTITY(1,1) NOT NULL,
 cliente_codigo numeric(18,0) NOT NULL,
 errorCliente_codigo numeric(18,0),
 estadia_codigo numeric(18,0) NOT NULL,
@@ -327,24 +324,12 @@ ALTER TABLE FAGD.Consumible ADD CONSTRAINT PK_Consumible
  PRIMARY KEY CLUSTERED (consumible_codigo)
 GO
 
-ALTER TABLE FAGD.ReservaXHabitacion ADD CONSTRAINT PK_ReservaXHabitacion
-PRIMARY KEY CLUSTERED (resXH_codigo)
-GO
-
 ALTER TABLE FAGD.BajaHotel ADD CONSTRAINT PK_BajaHotel
  PRIMARY KEY CLUSTERED (id_baja)
 GO
 
 ALTER TABLE FAGD.ErrorCliente ADD CONSTRAINT PK_ErrorCliente
  PRIMARY KEY CLUSTERED (errorCliente_codigo)
-GO
-
-ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT PK_ClienteXEstadia
- PRIMARY KEY CLUSTERED (clieXEst_codigo)
-GO
-
-ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT PK_ConsumibleXEstadia
- PRIMARY KEY CLUSTERED (consXEst_codigo)
 GO
 
 ALTER TABLE FAGD.Tarjeta ADD CONSTRAINT PK_Tarjeta
@@ -491,6 +476,10 @@ ALTER TABLE FAGD.ReservaXHabitacion ADD CONSTRAINT FK_ReservaXHabitacion_Habitac
  FOREIGN KEY (habitacion_codigo) REFERENCES FAGD.Habitacion(habitacion_codigo)
 GO
 
+ALTER TABLE FAGD.ReservaXHabitacion ADD CONSTRAINT UNIQUE_ResxH
+UNIQUE (reserva_codigo,habitacion_codigo)
+GO
+
 ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT FK_ClienteXEstadia_Cliente 
  FOREIGN KEY(cliente_codigo) REFERENCES FAGD.Cliente(cliente_codigo)
 GO
@@ -499,7 +488,7 @@ ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT FK_ClienteXEstadia_ErrorCliente
  FOREIGN KEY(errorCliente_codigo) REFERENCES FAGD.ErrorCliente(errorCliente_codigo)
 GO
 
-ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT unique_registro_clieXEst 
+ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT UNIQUE_CliexEst 
 UNIQUE (cliente_codigo,estadia_codigo)
 GO
 
@@ -1449,7 +1438,7 @@ DECLARE @respuesta numeric(18,0)
 BEGIN TRAN ta
 BEGIN TRY
 	INSERT INTO FAGD.ClienteXEstadia (cliente_codigo,estadia_codigo) VALUES (@clienteNro,@estadiaNro);
-	SET @respuesta = (SELECT clieXEst_codigo FROM FAGD.ClienteXEstadia WHERE estadia_codigo = @estadiaNro AND cliente_codigo = @clienteNro)
+	SET @respuesta = (SELECT estadia_codigo FROM FAGD.ClienteXEstadia WHERE estadia_codigo = @estadiaNro AND cliente_codigo = @clienteNro)
 	SELECT @respuesta as respuesta
 COMMIT TRAN ta
 END TRY
@@ -2369,7 +2358,7 @@ begin
 		insert into FAGD.ReservaXHabitacion(reserva_codigo, habitacion_codigo)
 		values (@reserva, @habitacion)
 
-		set @respuesta = (select resXH_codigo from FAGD.ReservaXHabitacion where reserva_codigo = @reserva and habitacion_codigo = @habitacion)
+		set @respuesta = (select reserva_codigo from FAGD.ReservaXHabitacion where reserva_codigo = @reserva and habitacion_codigo = @habitacion)
 		select @respuesta as respuesta
 	commit tran rh
 	end try
