@@ -1,12 +1,12 @@
 USE [GD1C2018];
 GO
 
------------------------	 CREACIÓN DE SCHEMA   -----------------------
+-----------------------	 CREACIï¿½N DE SCHEMA   -----------------------
  
 CREATE SCHEMA FAGD AUTHORIZATION gdHotel2018
 GO
 
------------------------	 CREACIÓN DE TABLAS   ----------------------- 
+-----------------------	 CREACIï¿½N DE TABLAS   ----------------------- 
 CREATE TABLE FAGD.Hotel(
 	hotel_codigo numeric (18,0) IDENTITY (1,1) NOT NULL,
 	hotel_cantEstrellas numeric(18,0) NOT NULL,
@@ -258,7 +258,7 @@ fecha_fin datetime,
 motivo nvarchar(255)
 )
 GO
----------------------------------- CREACIÓN PRIMARY KEYS ---------------------------------------
+---------------------------------- CREACIï¿½N PRIMARY KEYS ---------------------------------------
 
 ALTER TABLE FAGD.Hotel ADD CONSTRAINT PK_Hotel
 	PRIMARY KEY CLUSTERED (hotel_codigo)
@@ -337,7 +337,7 @@ ALTER TABLE FAGD.Tarjeta ADD CONSTRAINT PK_Tarjeta
 GO
 
 
----------------------------------- CREACIÓN FOREIGN KEYS ---------------------------------------
+---------------------------------- CREACIï¿½N FOREIGN KEYS ---------------------------------------
 
 ALTER TABLE FAGD.RolXFuncionalidad ADD CONSTRAINT FK_RolXFuncionalidad
  FOREIGN KEY (rol_codigo) REFERENCES FAGD.Rol(rol_codigo)
@@ -500,7 +500,7 @@ ALTER TABLE FAGD.ClienteXEstadia ADD CONSTRAINT FK_ClienteXEstadia_Estadia
  FOREIGN KEY(estadia_codigo) REFERENCES FAGD.Estadia(estadia_codigo)
 GO
 
------------------------  CREACIÓN DE FUNCIONES PARA LA APLICACIÓN   ------------------------
+-----------------------  CREACIï¿½N DE FUNCIONES PARA LA APLICACIï¿½N   ------------------------
 
 CREATE FUNCTION FAGD.calcularDiasSobrantesEstadia (@finRes datetime, @salidaEs datetime)
 
@@ -637,7 +637,7 @@ return 0
 end
 go
 
------------------------	 CREACIÓN DE INSERTS DE MIGRACIÓN   ----------------------- 
+-----------------------	 CREACIï¿½N DE INSERTS DE MIGRACIï¿½N   ----------------------- 
 
 INSERT INTO FAGD.Estado (estado_descripcion)
 VALUES ('RESERVA CORRECTA');
@@ -1006,7 +1006,7 @@ GO
 
 
 
------------------------	 CREACIÓN DE PROCEDURES PARA LA APLICACIÓN   ----------------------- 
+-----------------------	 CREACIï¿½N DE PROCEDURES PARA LA APLICACIï¿½N   ----------------------- 
 
 CREATE PROCEDURE FAGD.lista_hotel_maxResCancel @trimestre numeric(18,0), @anio numeric(18,0)
 AS	BEGIN
@@ -2467,6 +2467,46 @@ begin
 	end try
 	begin catch
 		rollback tran cr
+		set @respuesta=0
+		select @respuesta as respuesta
+	end catch
+end
+GO
+
+---------------------------------------------------------------------------------------------------------
+
+create procedure FAGD.CancelarReservasAnteriores
+
+@fecha datetime
+
+as
+begin
+	declare @hoy datetime
+	set @hoy = CONVERT(datetime,@fecha,121)
+	declare @estado numeric(18)
+	declare @respuesta numeric(18)
+	begin tran ta
+	begin try
+	
+		set @estado=(select estado_codigo from FAGD.Estado where estado_descripcion = 'RESERVA CANCELADA POR NO-SHOW')
+		update FAGD.Reserva 
+			set reserva_estado = @estado 
+			where reserva_codigo in (
+				select distinct R.reserva_estado from FAGD.Reserva R
+				where
+				R.reserva_fechaInicio < @hoy and
+				R.reserva_codigo not in (select distinct estadia_codigoReserva from FAGD.Estadia))
+	
+		insert into FAGD.ReservaCancelada(reservaCancelada_nombreUsuario,reservaCancelada_codigoReserva,reservaCancelada_motivo,reservaCancelada_fechaCancelacion)
+			select distinct 'GUEST',reserva_codigo,'Cancelada por no-show al inicio del sistema',reserva_fechaInicio 
+			from FAGD.Reserva where	estado = @estado
+		set @respuesta = 1
+		select @respuesta as respuesta
+
+	commit tran ta
+	end try
+	begin catch
+		rollback tran ta
 		set @respuesta=0
 		select @respuesta as respuesta
 	end catch
