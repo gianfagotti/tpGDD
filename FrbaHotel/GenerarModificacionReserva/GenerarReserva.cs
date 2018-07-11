@@ -95,7 +95,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             {
                 cboHotel.Enabled = true;
 
-                tabla = Login.FrmTipoUsuario.BD.consulta("SELECT DISTINCT [GD1C2018].[FAGD].[Hotel].[hotel_codigo] ,[hotel_calle],[hotel_nroCalle],[hotel_nombre],usuario_username  FROM [GD1C2018].[FAGD].[Hotel] JOIN [GD1C2018].[FAGD].[UsuarioXRolXHotel] ON([GD1C2018].[FAGD].[Hotel].hotel_codigo = [GD1C2018].[FAGD].[UsuarioXRolXHotel].hotel_codigo) where [GD1C2018].[FAGD].[Hotel].hotel_estado = 1");
+                tabla = Login.FrmTipoUsuario.BD.consulta("SELECT DISTINCT hotel_codigo, hotel_calle, hotel_nroCalle, hotel_nombre FROM FAGD.Hotel where hotel_estado = 1");
                 while (Fila < tabla.Rows.Count)
                 {
                     if (string.IsNullOrEmpty(tabla.Rows[Fila][3].ToString()))
@@ -259,8 +259,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                     row["Id"] = id;
                     try
                     {
-                        precio = (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * 1);
-                        precio *= dias;
+                        precio = (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
                         row["Precio"] = precio.ToString();
 
                     }
@@ -274,6 +273,8 @@ namespace FrbaHotel.GenerarModificacionReserva
                             cboHotel.Enabled = false;
                             dtpDesde.Enabled = false;
                             dtpHasta.Enabled = false;
+                            cboRegimen.Text = regimen;
+                            cboRegimen.Enabled = false;
                         }
                         
                         total += (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
@@ -311,6 +312,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                         cboHotel.Enabled = true;
                         dtpDesde.Enabled = true;
                         dtpHasta.Enabled = true;
+                        cboRegimen.Enabled = true;
                         dataGridView2.DataSource = bSource2;
                     }
                     decimal precio = (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
@@ -373,7 +375,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
             command = command + Convert.ToInt32(total).ToString();
 
-            decimal id = 12120;
+            decimal id = 0;
             resultado = Login.FrmTipoUsuario.BD.comando(command);
             if (resultado.Read() == true)
             {
@@ -405,6 +407,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
 
             MessageBox.Show("Reserva generada con éxito, su número de reserva es: " + id.ToString());
+            butLimpiar_Click(null, null);
 
 
         }
