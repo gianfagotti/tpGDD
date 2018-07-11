@@ -43,8 +43,7 @@ namespace FrbaHotel.RegistrarEstadia
         {
             this.Hide();
             FrmCheckout checkout = new FrmCheckout(this, menuAVolver);
-            checkout.ShowDialog();
-            this.Show();    
+            checkout.ShowDialog();  
         }
     }
 }
