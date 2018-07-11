@@ -107,7 +107,7 @@ namespace FrbaHotel.Login
             tablaHotelesDeBaja = Login.FrmTipoUsuario.BD.consulta("SELECT H.hotel_codigo FROM FAGD.Hotel H JOIN FAGD.BajaHotel B ON (H.hotel_codigo = B.hotel_codigo) WHERE H.hotel_estado = 1 AND (B.fecha_inicio <= '" + fecha + "' AND '" + fecha + "' <= B.fecha_fin)");
 
             MessageBox.Show("Fecha actual: " + fecha);
-            MessageBox.Show("Cant de hoteles a dar de baja: "+tablaHotelesDeBaja.Rows.Count);
+            MessageBox.Show("Cantidad de hoteles a dar de baja: "+tablaHotelesDeBaja.Rows.Count);
             
             if (tablaHotelesDeBaja.Rows.Count >= 1)
             {
@@ -124,7 +124,7 @@ namespace FrbaHotel.Login
             }
 
             tablaHotelesDeAlta = Login.FrmTipoUsuario.BD.consulta("SELECT H.hotel_codigo FROM FAGD.Hotel H JOIN FAGD.BajaHotel B ON (H.hotel_codigo = B.hotel_codigo) WHERE H.hotel_estado = 0 AND NOT (B.fecha_inicio <= '" + fecha + "') AND NOT ('" + fecha + "' <= B.fecha_fin)");
-            MessageBox.Show("Cant de hoteles a dar de alta: " + tablaHotelesDeAlta.Rows.Count);
+            MessageBox.Show("Cantidad de hoteles a dar de alta: " + tablaHotelesDeAlta.Rows.Count);
             if (tablaHotelesDeAlta.Rows.Count >= 1)
             {
                 int FilaHotelesAlta = 0;

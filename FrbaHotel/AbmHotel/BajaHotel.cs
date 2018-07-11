@@ -27,9 +27,8 @@ namespace FrbaHotel.AbmHotel
             InitializeComponent();
             dtpFechaFinBajaHotel.CustomFormat = "yyyy-MM-dd";
             dtpFechaInicioBajaHotel.CustomFormat = "yyyy-MM-dd";
-            dtpFechaFinBajaHotel.MinDate = new DateTime(2000,1,22);
-            dtpFechaInicioBajaHotel.MinDate = new DateTime(2000,1,22);
-
+            dtpFechaInicioBajaHotel.Value = Login.FrmTipoUsuario.fechaApp;
+            dtpFechaFinBajaHotel.Value = Login.FrmTipoUsuario.fechaApp;
         }
 
         private void btnVolverHotel_Click(object sender, EventArgs e)

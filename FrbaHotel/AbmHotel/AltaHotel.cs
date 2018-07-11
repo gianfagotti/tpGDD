@@ -39,7 +39,7 @@ namespace FrbaHotel.AbmHotel
                 this.clbRegimenes.Items.Add(regimenes.GetSqlString(0), true);
             }
             regimenes.Close();
-            //dtpFechaCreacionHotel.Value = VarGlobales.getDate();
+            dtpFechaCreacionHotel.Value = VarGlobales.getDate();
         }
 
         private void lblMail_Click(object sender, EventArgs e)

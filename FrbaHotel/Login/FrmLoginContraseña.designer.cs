@@ -40,19 +40,20 @@
             // 
             this.lblContraseña.AutoSize = true;
             this.lblContraseña.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblContraseña.Location = new System.Drawing.Point(33, 85);
+            this.lblContraseña.Location = new System.Drawing.Point(34, 98);
             this.lblContraseña.Name = "lblContraseña";
             this.lblContraseña.Size = new System.Drawing.Size(91, 16);
             this.lblContraseña.TabIndex = 6;
             this.lblContraseña.Text = "Contraseña:";
             this.lblContraseña.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblContraseña.Click += new System.EventHandler(this.lblContraseña_Click);
             // 
             // txtContraseña
             // 
-            this.txtContraseña.Location = new System.Drawing.Point(134, 85);
+            this.txtContraseña.Location = new System.Drawing.Point(164, 98);
             this.txtContraseña.Name = "txtContraseña";
             this.txtContraseña.PasswordChar = '*';
-            this.txtContraseña.Size = new System.Drawing.Size(100, 20);
+            this.txtContraseña.Size = new System.Drawing.Size(172, 20);
             this.txtContraseña.TabIndex = 5;
             this.txtContraseña.UseSystemPasswordChar = true;
             // 
@@ -62,7 +63,7 @@
             this.lblContraseñaUsuario.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.lblContraseñaUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblContraseñaUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblContraseñaUsuario.Location = new System.Drawing.Point(36, 18);
+            this.lblContraseñaUsuario.Location = new System.Drawing.Point(89, 23);
             this.lblContraseñaUsuario.Name = "lblContraseñaUsuario";
             this.lblContraseñaUsuario.Size = new System.Drawing.Size(196, 22);
             this.lblContraseñaUsuario.TabIndex = 7;
@@ -73,7 +74,7 @@
             // 
             this.btnIngresarContraseña.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnIngresarContraseña.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIngresarContraseña.Location = new System.Drawing.Point(159, 171);
+            this.btnIngresarContraseña.Location = new System.Drawing.Point(101, 171);
             this.btnIngresarContraseña.Name = "btnIngresarContraseña";
             this.btnIngresarContraseña.Size = new System.Drawing.Size(75, 27);
             this.btnIngresarContraseña.TabIndex = 8;
@@ -85,7 +86,7 @@
             // 
             this.BtnVolverContraseña.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BtnVolverContraseña.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnVolverContraseña.Location = new System.Drawing.Point(36, 171);
+            this.BtnVolverContraseña.Location = new System.Drawing.Point(20, 171);
             this.BtnVolverContraseña.Name = "BtnVolverContraseña";
             this.BtnVolverContraseña.Size = new System.Drawing.Size(75, 27);
             this.BtnVolverContraseña.TabIndex = 9;
@@ -97,9 +98,9 @@
             // 
             this.btnPass.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPass.Location = new System.Drawing.Point(52, 138);
+            this.btnPass.Location = new System.Drawing.Point(182, 171);
             this.btnPass.Name = "btnPass";
-            this.btnPass.Size = new System.Drawing.Size(162, 27);
+            this.btnPass.Size = new System.Drawing.Size(172, 27);
             this.btnPass.TabIndex = 10;
             this.btnPass.Text = "Cambiar contraseña";
             this.btnPass.UseVisualStyleBackColor = false;
@@ -109,7 +110,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 210);
+            this.ClientSize = new System.Drawing.Size(371, 210);
             this.Controls.Add(this.btnPass);
             this.Controls.Add(this.BtnVolverContraseña);
             this.Controls.Add(this.btnIngresarContraseña);

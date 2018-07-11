@@ -41,7 +41,7 @@
             this.lblDatosUsuario.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.lblDatosUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDatosUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDatosUsuario.Location = new System.Drawing.Point(47, 20);
+            this.lblDatosUsuario.Location = new System.Drawing.Point(61, 22);
             this.lblDatosUsuario.Name = "lblDatosUsuario";
             this.lblDatosUsuario.Size = new System.Drawing.Size(165, 22);
             this.lblDatosUsuario.TabIndex = 0;
@@ -73,7 +73,7 @@
             // 
             this.btnIngresarUsuario.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnIngresarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIngresarUsuario.Location = new System.Drawing.Point(30, 148);
+            this.btnIngresarUsuario.Location = new System.Drawing.Point(61, 162);
             this.btnIngresarUsuario.Name = "btnIngresarUsuario";
             this.btnIngresarUsuario.Size = new System.Drawing.Size(75, 27);
             this.btnIngresarUsuario.TabIndex = 5;
@@ -85,7 +85,7 @@
             // 
             this.btnVolverUsuario.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnVolverUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVolverUsuario.Location = new System.Drawing.Point(150, 148);
+            this.btnVolverUsuario.Location = new System.Drawing.Point(142, 162);
             this.btnVolverUsuario.Name = "btnVolverUsuario";
             this.btnVolverUsuario.Size = new System.Drawing.Size(75, 27);
             this.btnVolverUsuario.TabIndex = 6;

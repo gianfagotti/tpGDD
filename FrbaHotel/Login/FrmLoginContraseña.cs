@@ -74,6 +74,11 @@ namespace FrbaHotel.Login
             this.Hide();
             frm.Show();
         }
+
+        private void lblContraseña_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
   

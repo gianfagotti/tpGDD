@@ -50,6 +50,12 @@ namespace FrbaHotel.AbmHotel
             this.txtCalleHotel.Text = datosHotel.Rows[0][5].ToString();
             this.txtAlturaHotel.Text = datosHotel.Rows[0][6].ToString();
             this.txtNombreHotel.Text = datosHotel.Rows[0][7].ToString();
+            if(String.IsNullOrEmpty(datosHotel.Rows[0][8].ToString())){
+                this.dtpFechaCreacionHotel.Value = Login.FrmTipoUsuario.fechaApp;
+            }
+            else{
+                this.dtpFechaCreacionHotel.Value = Convert.ToDateTime(datosHotel.Rows[0][8]);
+            }
             this.txtMailHotel.Text = datosHotel.Rows[0][9].ToString();
             this.txtTelefonoHotel.Text = datosHotel.Rows[0][10].ToString();
         }
