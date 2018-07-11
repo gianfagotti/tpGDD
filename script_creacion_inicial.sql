@@ -761,7 +761,7 @@ UPDATE FAGD.Reserva
 						AND M.Estadia_Fecha_Inicio < (SELECT GETDATE())))
 						THEN
 							(SELECT estado_codigo FROM FAGD.Estado
-						WHERE 	estado_descripcion = 'RESERVA EFECTIVIZADA')
+						WHERE 	estado_descripcion = 'RESERVA CANCELADA POR NO-SHOW')
 							  WHEN (reserva_codigo IN (SELECT DISTINCT M.Reserva_Codigo FROM gd_esquema.Maestra M
 						WHERE 	reserva_codigo = M.Reserva_Codigo AND M.Factura_Nro IS NOT NULL AND M.Estadia_Fecha_Inicio IS NOT NULL
 						AND M.Estadia_Fecha_Inicio > (SELECT GETDATE())))
@@ -1321,30 +1321,33 @@ CREATE PROCEDURE FAGD.SetearEstadosReservaSegunConfig @fechaDelSystem DATETIME
 AS BEGIN
 
 DECLARE @respuestaTran numeric(18,0),
-        @estadoCorrecto numeric(18,0),
-		@estadoEfectivo numeric(18,0)
+        @estadoExpirado numeric(18,0),
+		@estadoVigente numeric(18,0),
+        @fechaAux DATETIME
 
-SET @fechaDelSystem = CONVERT(DATETIME,@fechaDelSystem,121)
+SET @fechaAux = CONVERT(DATETIME,@fechaDelSystem,121)
 
 BEGIN TRAN ta
 BEGIN TRY
 
-SET @estadoCorrecto = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA CORRECTA')
+DELETE FROM FAGD.ReservaCancelada WHERE reservaCancelada_motivo = 'Cancelada por no-show al inicio del sistema'
+
+SET @estadoExpirado = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA CANCELADA POR NO-SHOW')
 UPDATE FAGD.Reserva
-SET reserva_estado = @estadoCorrecto WHERE reserva_codigo IN 
+SET reserva_estado = @estadoExpirado WHERE reserva_codigo IN 
 	(SELECT DISTINCT R.reserva_codigo FROM FAGD.Reserva R
-		WHERE R.reserva_fechaInicio < @fechaDelSystem AND R.reserva_estado = 1 OR R.reserva_estado = 6)
+		WHERE R.reserva_fechaInicio < @fechaAux AND (R.reserva_estado = 1 OR R.reserva_estado = 5))
 
 
-SET @estadoEfectivo = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA CANCELADA POR NO-SHOW')
+SET @estadoVigente = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA CORRECTA')
 UPDATE FAGD.Reserva
-SET reserva_estado = @estadoEfectivo WHERE reserva_codigo IN 
+SET reserva_estado = @estadoVigente WHERE reserva_codigo IN 
 	(SELECT DISTINCT R.reserva_codigo FROM FAGD.Reserva R
-		WHERE R.reserva_fechaInicio > @fechaDelSystem AND R.reserva_estado = 1 OR R.reserva_estado = 6)
+		WHERE R.reserva_fechaInicio > @fechaAux AND (R.reserva_estado = 1 OR R.reserva_estado = 5))
 
 insert into FAGD.ReservaCancelada(reservaCancelada_nombreUsuario,reservaCancelada_codigoReserva,reservaCancelada_motivo,reservaCancelada_fechaCancelacion)
 			select distinct 'GUEST',reserva_codigo,'Cancelada por no-show al inicio del sistema',reserva_fechaInicio 
-			from FAGD.Reserva where	reserva_estado = @estadoEfectivo
+			from FAGD.Reserva where	reserva_estado = @estadoExpirado
 						
 				
  SET @respuestaTran = 1
