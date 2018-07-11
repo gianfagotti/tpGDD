@@ -2381,3 +2381,69 @@ begin
 	end catch
 end
 GO
+
+---------------------------------------------------------------------------------------------------------
+
+create procedure FAGD.BuscarHabitacionesReservadas
+@reserva numeric(18)
+
+as
+begin
+	select Ha.habitacion_codigo, (R.regimen_precioBase*T.habitacionTipo_cantHuespedes) + (Ho.hotel_cantEstrellas*Ho.hotel_recarga_estrellas)
+	from FAGD.Reserva Re join FAGD.Regimen R on (Re.reserva_codigoRegimen = R.regimen_codigo) join FAGD.Hotel Ho on (Re.reserva_codigoHotel = Ho.hotel_codigo) join
+		 FAGD.ReservaXHabitacion RH on (Re.reserva_codigo = RH.reserva_codigo) join FAGD.Habitacion Ha on (RH.habitacion_codigo = Ha.habitacion_codigo) join
+		 FAGD.HabitacionTipo T on (Ha.habitacion_tipoCodigo = T.habitacionTipo_codigo)
+	where Re.reserva_codigo = @reserva
+end
+GO
+
+---------------------------------------------------------------------------------------------------------
+
+create procedure FAGD.ModificarReserva
+@reserva numeric(18),
+@fecha_realizada datetime,
+@fecha_inicio datetime,
+@fecha_fin datetime,
+@dias numeric(5),
+@regimen nvarchar(50),
+@usuario nvarchar(255),
+@total numeric(18)
+
+as
+begin
+	declare @fechaRealizada datetime, @fechaInicio datetime, @fechaFin datetime
+	set @fechaRealizada = CONVERT(datetime, @fecha_realizada, 121)
+	set @fechaInicio = CONVERT(datetime, @fecha_inicio, 121)
+	set @fechaFin = CONVERT(datetime, @fecha_fin, 121)
+
+	declare @codRegimen numeric(18), @codEstado numeric(18), @respuesta numeric(18)
+
+	begin tran re
+	begin try
+		set @codRegimen = (select regimen_codigo from FAGD.Regimen where regimen_descripcion = @regimen)
+		set @codEstado = (select estado_codigo from FAGD.Estado where estado_descripcion = 'RESERVA MODIFICADA')
+
+		update FAGD.Reserva set
+		reserva_fechaRealizada = @fechaRealizada, 
+		reserva_fechaInicio = @fechaInicio, 
+		reserva_fechaFin = @fechaFin, 
+		reserva_cantNoches = @dias, 
+		reserva_estado = @codEstado, 
+		reserva_codigoRegimen = @codRegimen, 
+		reserva_nombreUsuario = @usuario, 
+		reserva_costoTotal = @total
+		where
+		reserva_codigo = @reserva
+
+		set @respuesta = 1;
+		select @respuesta as respuesta
+	commit tran re
+	end try
+
+	begin catch
+	rollback tran re
+	set @respuesta = 0
+	select @respuesta as respuesta
+	end catch
+end
+GO

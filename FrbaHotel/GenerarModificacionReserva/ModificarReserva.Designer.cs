@@ -34,11 +34,8 @@
             this.butSeleccionar = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.butClienteExistente = new System.Windows.Forms.Button();
             this.txtCliente = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.butLimpiar = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.Sacar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -55,6 +52,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.butLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -87,6 +85,7 @@
             this.button1.TabIndex = 52;
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // butSeleccionar
             // 
@@ -97,6 +96,7 @@
             this.butSeleccionar.TabIndex = 51;
             this.butSeleccionar.Text = "Buscar habitaciones";
             this.butSeleccionar.UseVisualStyleBackColor = true;
+            this.butSeleccionar.Click += new System.EventHandler(this.butSeleccionar_Click);
             // 
             // label9
             // 
@@ -118,24 +118,6 @@
             this.label8.TabIndex = 49;
             this.label8.Text = "Habitaciones disponibles";
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(309, 123);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(88, 39);
-            this.button3.TabIndex = 48;
-            this.button3.Text = "Dar de alta nuevo cliente";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // butClienteExistente
-            // 
-            this.butClienteExistente.Location = new System.Drawing.Point(215, 123);
-            this.butClienteExistente.Name = "butClienteExistente";
-            this.butClienteExistente.Size = new System.Drawing.Size(88, 39);
-            this.butClienteExistente.TabIndex = 47;
-            this.butClienteExistente.Text = "Seleccionar cliente exisente";
-            this.butClienteExistente.UseVisualStyleBackColor = true;
-            // 
             // txtCliente
             // 
             this.txtCliente.Enabled = false;
@@ -155,16 +137,6 @@
             this.label1.TabIndex = 45;
             this.label1.Text = "Cliente:";
             // 
-            // butLimpiar
-            // 
-            this.butLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.butLimpiar.Location = new System.Drawing.Point(12, 178);
-            this.butLimpiar.Name = "butLimpiar";
-            this.butLimpiar.Size = new System.Drawing.Size(84, 29);
-            this.butLimpiar.TabIndex = 44;
-            this.butLimpiar.Text = "Limpiar";
-            this.butLimpiar.UseVisualStyleBackColor = true;
-            // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -174,6 +146,7 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(328, 266);
             this.dataGridView2.TabIndex = 43;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
             // Sacar
             // 
@@ -189,6 +162,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(328, 266);
             this.dataGridView1.TabIndex = 42;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Elegir
             // 
@@ -204,6 +178,7 @@
             this.cboHotel.Name = "cboHotel";
             this.cboHotel.Size = new System.Drawing.Size(231, 26);
             this.cboHotel.TabIndex = 41;
+            this.cboHotel.SelectedIndexChanged += new System.EventHandler(this.cboHotel_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -232,9 +207,11 @@
             this.btnVolver.TabIndex = 38;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // cboRegimen
             // 
+            this.cboRegimen.Enabled = false;
             this.cboRegimen.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboRegimen.FormattingEnabled = true;
             this.cboRegimen.Location = new System.Drawing.Point(88, 87);
@@ -246,13 +223,6 @@
             // 
             this.cboTipoHabitacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTipoHabitacion.FormattingEnabled = true;
-            this.cboTipoHabitacion.Items.AddRange(new object[] {
-            "DNI",
-            "PASAPORTE",
-            "CARNET EXT.",
-            "RUC",
-            "P. NACI.",
-            "OTROS"});
             this.cboTipoHabitacion.Location = new System.Drawing.Point(219, 51);
             this.cboTipoHabitacion.Name = "cboTipoHabitacion";
             this.cboTipoHabitacion.Size = new System.Drawing.Size(121, 26);
@@ -260,6 +230,7 @@
             // 
             // dtpHasta
             // 
+            this.dtpHasta.Enabled = false;
             this.dtpHasta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpHasta.Location = new System.Drawing.Point(503, 52);
             this.dtpHasta.Name = "dtpHasta";
@@ -268,6 +239,7 @@
             // 
             // dtpDesde
             // 
+            this.dtpDesde.Enabled = false;
             this.dtpDesde.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDesde.Location = new System.Drawing.Point(503, 14);
             this.dtpDesde.Name = "dtpDesde";
@@ -314,22 +286,30 @@
             this.label2.TabIndex = 30;
             this.label2.Text = "Reservar Desde:";
             // 
+            // butLimpiar
+            // 
+            this.butLimpiar.Location = new System.Drawing.Point(7, 179);
+            this.butLimpiar.Name = "butLimpiar";
+            this.butLimpiar.Size = new System.Drawing.Size(75, 29);
+            this.butLimpiar.TabIndex = 55;
+            this.butLimpiar.Text = "Limpiar";
+            this.butLimpiar.UseVisualStyleBackColor = true;
+            this.butLimpiar.Click += new System.EventHandler(this.butLimpiar_Click);
+            // 
             // ModificarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 579);
+            this.Controls.Add(this.butLimpiar);
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.butSeleccionar);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.butClienteExistente);
             this.Controls.Add(this.txtCliente);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.butLimpiar);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cboHotel);
@@ -362,11 +342,8 @@
         private System.Windows.Forms.Button butSeleccionar;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button butClienteExistente;
         private System.Windows.Forms.TextBox txtCliente;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button butLimpiar;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sacar;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -383,6 +360,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button butLimpiar;
 
     }
 }

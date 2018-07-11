@@ -34,9 +34,10 @@ namespace FrbaHotel.GenerarModificacionReserva
                 if ((comando.GetDecimal(0).ToString() == txtNroReserva.Text) && (comando.GetDateTime(1).Date >= VarGlobales.getDate().Date))
                 {
                     comando.Close();
-                    //ModificarReserva modificar = new ModificarReserva(this, txtNroReserva.Text);
-                    //modificar.Show();
                     this.Hide();
+                    ModificarReserva modificar = new ModificarReserva(this, txtNroReserva.Text);
+                    modificar.Show();
+
                 }
                 else
                 {
@@ -44,6 +45,12 @@ namespace FrbaHotel.GenerarModificacionReserva
                     MessageBox.Show("El plazo para modificar la reserva ha vencido");
                     return;
                 }
+            }
+            else
+            {
+                comando.Close();
+                MessageBox.Show("La reserva no existe");
+                return;
             }
 
         }
