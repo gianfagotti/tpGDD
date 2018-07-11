@@ -44,7 +44,6 @@
             this.label1.Size = new System.Drawing.Size(149, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Código de reserva a cancelar:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label4
             // 
@@ -61,6 +60,7 @@
             this.txtCodigoReserva.Name = "txtCodigoReserva";
             this.txtCodigoReserva.Size = new System.Drawing.Size(100, 20);
             this.txtCodigoReserva.TabIndex = 4;
+            this.txtCodigoReserva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigoReserva_KeyPress);
             // 
             // txtMotivo
             // 
@@ -78,6 +78,7 @@
             this.btnAceptar.TabIndex = 6;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnVolver
             // 

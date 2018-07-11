@@ -2436,3 +2436,39 @@ begin
 	end catch
 end
 GO
+
+---------------------------------------------------------------------------------------------------------
+
+create procedure FAGD.CancelarReserva
+@reserva numeric(18),
+@motivo nvarchar(255),
+@fechaI datetime,
+@usuario nvarchar(255),
+@estado numeric(18)
+
+as
+begin
+	declare @fecha datetime
+	set @fecha = CONVERT(datetime,@fechaI,121)
+
+	declare @respuesta numeric(18)
+	begin tran cr
+	begin try
+		update FAGD.Reserva 
+		set reserva_estado = @estado
+		where reserva_codigo = @reserva;
+	
+		insert into FAGD.ReservaCancelada(reservaCancelada_nombreUsuario, reservaCancelada_codigoReserva,reservaCancelada_motivo, reservaCancelada_fechaCancelacion)
+		values(@usuario,@reserva,@motivo,@fecha)
+	
+		set @respuesta =1
+		select @respuesta as respuesta
+	commit tran cr
+	end try
+	begin catch
+		rollback tran cr
+		set @respuesta=0
+		select @respuesta as respuesta
+	end catch
+end
+GO
