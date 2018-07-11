@@ -1347,7 +1347,7 @@ SET reserva_estado = @estadoCorrecto WHERE reserva_codigo IN
 		WHERE R.reserva_fechaInicio < @fechaDelSystem AND R.reserva_estado = 1 OR R.reserva_estado = 6)
 
 
-SET @estadoEfectivo = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA EFECTIVIZADA')
+SET @estadoEfectivo = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA CANCELADA POR NO-SHOW')
 UPDATE FAGD.Reserva
 SET reserva_estado = @estadoEfectivo WHERE reserva_codigo IN 
 	(SELECT DISTINCT R.reserva_codigo FROM FAGD.Reserva R
