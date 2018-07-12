@@ -152,6 +152,7 @@ namespace FrbaHotel.RegistrarEstadia
         private void FrmRegistrarHuesped_Activated(object sender, EventArgs e)
         {
             bSource2.DataSource = tablaConInfoClientes;
+
         }
 
         private void btnSeleCliente_Click(object sender, EventArgs e)

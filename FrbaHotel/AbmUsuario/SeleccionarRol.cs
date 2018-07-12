@@ -16,6 +16,7 @@ namespace FrbaHotel.AbmUsuario
     public partial class SeleccionarRol : Form
     {
         Form ultimoFormulario;
+        Form menu;
         String usuario;
         String direccion;
         Boolean alta;
@@ -26,9 +27,10 @@ namespace FrbaHotel.AbmUsuario
         String rol;
 
 
-        public SeleccionarRol(Form formAnterior, String usuarioSeleccionado, String hotel, Boolean habilitarAlta)
+        public SeleccionarRol(Form seleccionarUsuario ,Form formAnterior, String usuarioSeleccionado, String hotel, Boolean habilitarAlta)
         {
             ultimoFormulario = formAnterior;
+            menu = seleccionarUsuario;
             usuario = usuarioSeleccionado;
             alta = habilitarAlta;
             direccion = hotel;
@@ -55,29 +57,35 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            String exe = crearConsulta();
-
-            decimal resultado = 0;
-            reader = Login.FrmTipoUsuario.BD.comando(exe);
-
-            if (reader.Read())
+            if (String.IsNullOrEmpty(cboRol.Text)) MessageBox.Show("Seleccione un rol!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            else
             {
-                resultado = reader.GetDecimal(0);
-            }
-            reader.Close();
+                String exe = crearConsulta();
+                decimal resultado = 0;
+                reader = Login.FrmTipoUsuario.BD.comando(exe);
 
-            if (alta){
-                if (resultado == 0) MessageBox.Show("Hubo un error al guardar el puesto.", "Error");
-                else MessageBox.Show("Puesto guardado correctamente!", "Usuario Guardado");
-                ultimoFormulario.Show();
-                this.Close();
-            }
-            else{
-                if (resultado == 0) MessageBox.Show("Hubo un error al borrar el puesto.", "Error");
-                else {
-                    MessageBox.Show("Puesto borrado correctamente!", "Usuario Guardado");
-                    ultimoFormulario.Show();
+                if (reader.Read())
+                {
+                    resultado = reader.GetDecimal(0);
+                }
+                reader.Close();
+
+                if (alta)
+                {
+                    if (resultado == 0) MessageBox.Show("Hubo un error al guardar el puesto.", "Error");
+                    else MessageBox.Show("Puesto guardado correctamente!", "Usuario Guardado");
+                    menu.Show();
                     this.Close();
+                }
+                else
+                {
+                    if (resultado == 0) MessageBox.Show("Hubo un error al borrar el puesto.", "Error");
+                    else
+                    {
+                        MessageBox.Show("Puesto borrado correctamente!", "Usuario Guardado");
+                        menu.Show();
+                        this.Close();
+                    }
                 }
             }
         }

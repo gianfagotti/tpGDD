@@ -47,6 +47,7 @@
             // 
             // cboHotel
             // 
+            this.cboHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboHotel.FormattingEnabled = true;
             this.cboHotel.Location = new System.Drawing.Point(12, 36);
             this.cboHotel.Name = "cboHotel";
@@ -64,6 +65,7 @@
             // 
             // cboRol
             // 
+            this.cboRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRol.FormattingEnabled = true;
             this.cboRol.Location = new System.Drawing.Point(15, 91);
             this.cboRol.Name = "cboRol";

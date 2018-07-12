@@ -23,6 +23,8 @@ namespace FrbaHotel.AbmCliente
             InitializeComponent();
             abmPadre = form;
 
+            dtpFechaNacimiento.Value = VarGlobales.getDate();
+
         }
 
         private void txtMail_Click(object sender, EventArgs e)
@@ -77,23 +79,25 @@ namespace FrbaHotel.AbmCliente
                     resu = resultado.GetDecimal(0);
                 }
                 resultado.Close();
-                if (resu == 1)
+                if (resu == 0)
+                {
+                    MessageBox.Show("Error al guardar, el cliente con ese mail ya existe");
+                }
+                else if (resu == 2)
+                    MessageBox.Show("Error al guardar, el cliente con ese tipo y número de documento ya existe");
+                else
                 {
                     MessageBox.Show("El cliente fue guardado correctamente");
                     if (abmPadre.Name == "GenerarReserva")
                     {
-                        GenerarModificacionReserva.GenerarReserva.clienteSeleccionado = txtNroDocumento.Text;
+                        GenerarModificacionReserva.GenerarReserva.clienteSeleccionado = resu.ToString();
                         GenerarModificacionReserva.GenerarReserva.ActiveForm.Show();
                         this.Close();
                     }
                     else if (abmPadre.Name == "FrmRegistrarEstadia")
                         this.Close();
-                    limpiarCampos();
+                    //limpiarCampos();
                 }
-                else if (resu == 2)
-                    MessageBox.Show("Error al guardar, el cliente con ese mail ya existe");
-                else
-                    MessageBox.Show("Error al guardar, el cliente con ese documento ya existe");
                 
             }
         }
@@ -190,7 +194,7 @@ namespace FrbaHotel.AbmCliente
             DateTime fecha;
             fecha = Convert.ToDateTime(dtpFechaNacimiento.Value);
 
-            DateTime s = DateTime.Now;
+            DateTime s = VarGlobales.getDate();
 
             int result = DateTime.Compare(fecha, s);
 

@@ -68,7 +68,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void cargarComboUsuarios()
         {
-            String select = "SELECT usuario_username FROM FAGD.Usuario WHERE usuario_username IN (SELECT usuario_username FROM "
+            String select = "SELECT usuario_username FROM FAGD.Usuario WHERE usuario_username <> 'GUEST' AND usuario_username IN (SELECT usuario_username FROM "
                            +"FAGD.UsuarioXRolXHotel WHERE hotel_codigo = '" +hotelLogin+"')";
 
             reader = Login.FrmTipoUsuario.BD.comando(select);
@@ -80,6 +80,7 @@ namespace FrbaHotel.AbmUsuario
             cboUsuarios.ValueMember = "usuario_username";
             cboUsuarios.DisplayMember = "usuario_username";
             cboUsuarios.DataSource = tabla;
+            reader.Close();
         }
 
 

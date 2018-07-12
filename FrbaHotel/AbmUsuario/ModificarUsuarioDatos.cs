@@ -93,6 +93,7 @@ namespace FrbaHotel.AbmUsuario
                 if (resultado == 0)
                 {
                     MessageBox.Show("Ya existe un usuario con ese mail", "Error");
+                    txtMail.Focus();
                 }
                 else
                 {
@@ -126,28 +127,24 @@ namespace FrbaHotel.AbmUsuario
                 MessageBox.Show("Todos los campos son obligatorios y deben ser completados.", "Error");
                 return false;
             }
-            else
-            {
-                DateTime hoy = DateTime.Now;
-                DateTime fechaIngresada;
-                fechaIngresada = Convert.ToDateTime(dtpFechaNac.Value);
+            else {
 
-                hoy.AddYears(-16);
-
-                int resultado = DateTime.Compare(hoy, fechaIngresada);
-                MessageBox.Show("Comparación de fechas " + resultado.ToString());
-
-
-                if (resultado >= 0)
+                DateTime fechaMinima = VarGlobales.getDate().AddYears(-16);
+                DateTime fechaIngresada = Convert.ToDateTime(dtpFechaNac.Value);
+                int resultado = DateTime.Compare(fechaMinima, fechaIngresada);
+                
+                if (resultado < 0)
                 {
                     MessageBox.Show("El usuario debe ser mayor de 16 años", "Error");
                     dtpFechaNac.Focus();
                     return false;
                 }
-                return true;
+                else
+                {
+                    return true;
+                }
             }
-
-        }
+            }
 
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
