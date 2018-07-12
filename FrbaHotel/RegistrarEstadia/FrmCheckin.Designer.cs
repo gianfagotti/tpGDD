@@ -50,6 +50,7 @@
             this.txtReserv.Name = "txtReserv";
             this.txtReserv.Size = new System.Drawing.Size(226, 20);
             this.txtReserv.TabIndex = 2;
+            this.txtReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // btnCheckin
             // 

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label5 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.dgvFinalizar = new System.Windows.Forms.DataGridView();
@@ -43,23 +42,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFinalizar)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(9, 130);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(444, 33);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Aclaración: Es suficiente elegir una de las habitaciones que componen la estadia " +
-    "para hacer el check-out de todas en simultáneo.";
-            // 
             // btnBuscar
             // 
-            this.btnBuscar.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuscar.Location = new System.Drawing.Point(344, 392);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(109, 29);
@@ -70,7 +60,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiar.Location = new System.Drawing.Point(229, 392);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(109, 29);
@@ -108,6 +98,7 @@
             this.txtEst.Name = "txtEst";
             this.txtEst.Size = new System.Drawing.Size(131, 20);
             this.txtEst.TabIndex = 0;
+            this.txtEst.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // label1
             // 
@@ -125,6 +116,7 @@
             this.txthab.Name = "txthab";
             this.txthab.Size = new System.Drawing.Size(115, 20);
             this.txthab.TabIndex = 2;
+            this.txthab.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // label2
             // 
@@ -142,6 +134,7 @@
             this.txtNrohab.Name = "txtNrohab";
             this.txtNrohab.Size = new System.Drawing.Size(101, 20);
             this.txtNrohab.TabIndex = 4;
+            this.txtNrohab.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // label3
             // 
@@ -159,6 +152,7 @@
             this.txtPiso.Name = "txtPiso";
             this.txtPiso.Size = new System.Drawing.Size(101, 20);
             this.txtPiso.TabIndex = 6;
+            this.txtPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // label4
             // 
@@ -189,7 +183,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVolver.Location = new System.Drawing.Point(12, 392);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(109, 29);
@@ -197,6 +191,17 @@
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(9, 130);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(444, 33);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Seleccione en la lista debajo la celda a la izquierda que corresponde a la estadi" +
+    "a que desea dar por concluida (se incluyen automaticamente todas las habitacione" +
+    "s que la componen):";
             // 
             // FrmCheckout
             // 
@@ -222,7 +227,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.DataGridView dgvFinalizar;
@@ -237,5 +241,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridViewButtonColumn columna;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Label label5;
     }
 }

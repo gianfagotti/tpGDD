@@ -97,9 +97,9 @@ namespace FrbaHotel.GenerarModificacionReserva
                     this.Close();
                 }
                 else  {
-                    string nombre = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-                    string apellido = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-                    string codigoCli = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                    string nombre = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                    string apellido = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+                    string codigoCli = dataGridView1.CurrentRow.Cells[1].Value.ToString();
                     DataRow row = RegistrarEstadia.FrmRegistrarHuesped.tablaConInfoClientes.NewRow();
                     row["CodigoCli"] = codigoCli;
                     row["Nombre"] = nombre;
@@ -113,7 +113,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                     {
                         MessageBox.Show("Ese cliente ya esta agregado");
                     }
-                    RegistrarEstadia.FrmRegistrarHuesped.ActiveForm.Show();
+                    abmPadre.Show();
                     this.Close();
                 }
             }
