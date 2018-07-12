@@ -39,7 +39,6 @@
             this.dtpFechaCreacionHotel = new System.Windows.Forms.DateTimePicker();
             this.txtPaisHotel = new System.Windows.Forms.TextBox();
             this.txtCiudadHotel = new System.Windows.Forms.TextBox();
-            this.txtCantidadDeEstrellasHotel = new System.Windows.Forms.TextBox();
             this.txtCalleHotel = new System.Windows.Forms.TextBox();
             this.txtTelefonoHotel = new System.Windows.Forms.TextBox();
             this.txtMailHotel = new System.Windows.Forms.TextBox();
@@ -54,6 +53,7 @@
             this.lblDatosHotel = new System.Windows.Forms.Label();
             this.lblNombreHotel = new System.Windows.Forms.Label();
             this.txtNombreHotel = new System.Windows.Forms.TextBox();
+            this.cboCantidadDeEstrellas = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // txtRecargaPorEstrellasHotel
@@ -158,14 +158,6 @@
             this.txtCiudadHotel.Name = "txtCiudadHotel";
             this.txtCiudadHotel.Size = new System.Drawing.Size(211, 20);
             this.txtCiudadHotel.TabIndex = 43;
-            // 
-            // txtCantidadDeEstrellasHotel
-            // 
-            this.txtCantidadDeEstrellasHotel.Location = new System.Drawing.Point(309, 289);
-            this.txtCantidadDeEstrellasHotel.Name = "txtCantidadDeEstrellasHotel";
-            this.txtCantidadDeEstrellasHotel.Size = new System.Drawing.Size(211, 20);
-            this.txtCantidadDeEstrellasHotel.TabIndex = 42;
-            this.txtCantidadDeEstrellasHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // txtCalleHotel
             // 
@@ -310,11 +302,29 @@
             this.txtNombreHotel.Size = new System.Drawing.Size(211, 20);
             this.txtNombreHotel.TabIndex = 55;
             // 
+            // cboCantidadDeEstrellas
+            // 
+            this.cboCantidadDeEstrellas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCantidadDeEstrellas.FormattingEnabled = true;
+            this.cboCantidadDeEstrellas.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"});
+            this.cboCantidadDeEstrellas.Location = new System.Drawing.Point(307, 288);
+            this.cboCantidadDeEstrellas.Name = "cboCantidadDeEstrellas";
+            this.cboCantidadDeEstrellas.Size = new System.Drawing.Size(213, 21);
+            this.cboCantidadDeEstrellas.TabIndex = 56;
+            // 
             // FrmModificarHotel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(561, 665);
+            this.Controls.Add(this.cboCantidadDeEstrellas);
             this.Controls.Add(this.txtNombreHotel);
             this.Controls.Add(this.lblNombreHotel);
             this.Controls.Add(this.txtRecargaPorEstrellasHotel);
@@ -328,7 +338,6 @@
             this.Controls.Add(this.dtpFechaCreacionHotel);
             this.Controls.Add(this.txtPaisHotel);
             this.Controls.Add(this.txtCiudadHotel);
-            this.Controls.Add(this.txtCantidadDeEstrellasHotel);
             this.Controls.Add(this.txtCalleHotel);
             this.Controls.Add(this.txtTelefonoHotel);
             this.Controls.Add(this.txtMailHotel);
@@ -362,7 +371,6 @@
         private System.Windows.Forms.DateTimePicker dtpFechaCreacionHotel;
         private System.Windows.Forms.TextBox txtPaisHotel;
         private System.Windows.Forms.TextBox txtCiudadHotel;
-        private System.Windows.Forms.TextBox txtCantidadDeEstrellasHotel;
         private System.Windows.Forms.TextBox txtCalleHotel;
         private System.Windows.Forms.TextBox txtTelefonoHotel;
         private System.Windows.Forms.TextBox txtMailHotel;
@@ -377,5 +385,6 @@
         private System.Windows.Forms.Label lblDatosHotel;
         private System.Windows.Forms.Label lblNombreHotel;
         private System.Windows.Forms.TextBox txtNombreHotel;
+        private System.Windows.Forms.ComboBox cboCantidadDeEstrellas;
     }
 }

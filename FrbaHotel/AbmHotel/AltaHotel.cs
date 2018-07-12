@@ -17,7 +17,7 @@ namespace FrbaHotel.AbmHotel
         private SqlDataReader regimenes;
         private SqlDataReader resultadosCreacionDeHotel;
         private SqlDataReader resultadosCreacionDeRegimen;
-        private DataTable hoteles;
+        private DataTable hoteles,callesYAlturas;
         private String nombreHotelIngresado;
         private String mailHotelIngresado;
         private String telefonoHotelIngresado;
@@ -39,7 +39,7 @@ namespace FrbaHotel.AbmHotel
                 this.clbRegimenes.Items.Add(regimenes.GetSqlString(0), true);
             }
             regimenes.Close();
-            dtpFechaCreacionHotel.Value = VarGlobales.getDate();
+            dtpFechaCreacionHotel.Value = Login.FrmTipoUsuario.fechaApp;
         }
 
         private void lblMail_Click(object sender, EventArgs e)
@@ -71,6 +71,8 @@ namespace FrbaHotel.AbmHotel
             };
 
             func(Controls);
+
+            dtpFechaCreacionHotel.Value = Login.FrmTipoUsuario.fechaApp;
         }
 
         private void btnVolverHotel_Click(object sender, EventArgs e)
@@ -93,9 +95,14 @@ namespace FrbaHotel.AbmHotel
                         func(control.Controls);
             };
             func(Controls);
-            if (txtsVacios != 0)
+            if (txtsVacios != 0 || this.cboCantidadDeEstrellas.SelectedIndex == -1)
             {
                 MessageBox.Show("Debe completar todos los datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (validarEmail(this.txtMailHotel.Text) != true)
+            {
+                MessageBox.Show("Ingrese un email válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -104,14 +111,20 @@ namespace FrbaHotel.AbmHotel
                 if (hoteles.Rows.Count == 1)
                 {
                     MessageBox.Show("Ya existe un hotel con ese nombre, ingrese un nombre válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                calleHotelIngresado = this.txtCalleHotel.Text;
+                alturaHotelIngresado = this.txtAlturaHotel.Text;
+                callesYAlturas = Login.FrmTipoUsuario.BD.consulta("SELECT hotel_calle, hotel_nroCalle FROM FAGD.Hotel WHERE hotel_calle = '" + calleHotelIngresado + "' AND hotel_nroCalle = " + alturaHotelIngresado);
+                if (callesYAlturas.Rows.Count != 0)
+                {
+                    MessageBox.Show("Ya existe un hotel con esa dirección, ingrese un dirección válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     mailHotelIngresado = this.txtMailHotel.Text;
                     telefonoHotelIngresado = this.txtTelefonoHotel.Text;
-                    calleHotelIngresado = this.txtCalleHotel.Text;
-                    alturaHotelIngresado = this.txtAlturaHotel.Text;
-                    estrellasHotelIngresado = this.txtCantidadDeEstrellasHotel.Text;
+                    estrellasHotelIngresado = this.cboCantidadDeEstrellas.SelectedItem.ToString();
                     recargaEstrellasHotelIngresado = this.txtRecargaPorEstrellasHotel.Text;
                     ciudadHotelIngresado =  this.txtCiudadHotel.Text;
                     paisHotelIngresado = this.txtPaisHotel.Text;
@@ -165,6 +178,19 @@ namespace FrbaHotel.AbmHotel
             {
                 e.Handled = true;
             }
-          }     
+          }
+
+         private static bool validarEmail(string email)
+         {
+             try
+             {
+                 new System.Net.Mail.MailAddress(email);
+                 return true;
+             }
+             catch (FormatException)
+             {
+                 return false;
+             }
+         }
     }
 }

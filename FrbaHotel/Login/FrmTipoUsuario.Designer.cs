@@ -60,15 +60,15 @@
             // 
             // cmbTiposDeUsuario
             // 
+            this.cmbTiposDeUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTiposDeUsuario.FormattingEnabled = true;
             this.cmbTiposDeUsuario.Items.AddRange(new object[] {
             "Cliente",
             "Empleado"});
-            this.cmbTiposDeUsuario.Location = new System.Drawing.Point(51, 104);
+            this.cmbTiposDeUsuario.Location = new System.Drawing.Point(51, 103);
             this.cmbTiposDeUsuario.Name = "cmbTiposDeUsuario";
             this.cmbTiposDeUsuario.Size = new System.Drawing.Size(171, 21);
             this.cmbTiposDeUsuario.TabIndex = 3;
-            this.cmbTiposDeUsuario.Text = "Seleccione su tipo de usuario...";
             // 
             // btnAceptarTipoUsuario
             // 
@@ -87,7 +87,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(279, 223);
             this.Controls.Add(this.btnAceptarTipoUsuario);
             this.Controls.Add(this.cmbTiposDeUsuario);
             this.Controls.Add(this.lblTiposDeUsuario);

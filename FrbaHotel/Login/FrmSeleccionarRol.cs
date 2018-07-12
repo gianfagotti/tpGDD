@@ -51,22 +51,22 @@ namespace FrbaHotel.Login
 
         private void btnAceptarRol_Click(object sender, EventArgs e)
         {
-
-            resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT rol_codigo FROM FAGD.Rol where rol_nombre = '" + cmbRolesRegistrados.SelectedItem.ToString() + "'");
-            if (resultado.Read() == true)
+            if (string.IsNullOrEmpty(cmbRolesRegistrados.Text))
             {
-                codigoRol = resultado.GetDecimal(0);
-                resultado.Close();
-            }
-            if (codigoRol != 0)
-            {
-
-                AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado(codigoRol);
-                this.Close();
-                frmMenuEmpleado.Show();
+                MessageBox.Show("Por favor, seleccione uno de sus roles registrados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
-                MessageBox.Show("Seleccione un rol", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT rol_codigo FROM FAGD.Rol where rol_nombre = '" + cmbRolesRegistrados.SelectedItem.ToString() + "'");
+                if (resultado.Read() == true)
+                {
+                    codigoRol = resultado.GetDecimal(0);
+                    resultado.Close();
+                    AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado(codigoRol);
+                    this.Close();
+                    frmMenuEmpleado.Show();
+                }
+            }
         }
     }
 }

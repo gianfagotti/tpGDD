@@ -17,7 +17,7 @@ namespace FrbaHotel.AbmHotel
         private SqlDataReader regimenes;
         private SqlDataReader resultadosCreacionDeHotel;
         private SqlDataReader resultadosCreacionDeRegimen;
-        private DataTable hoteles,datosHotel;
+        private DataTable hoteles,datosHotel,callesYAlturas;
         private String nombreHotelIngresado;
         private String mailHotelIngresado;
         private String telefonoHotelIngresado;
@@ -43,13 +43,15 @@ namespace FrbaHotel.AbmHotel
             regimenes.Close();
 
             datosHotel = Login.FrmTipoUsuario.BD.consulta("SELECT * FROM FAGD.Hotel WHERE hotel_codigo = " + codigoHotelIngreso);
-            this.txtCantidadDeEstrellasHotel.Text = datosHotel.Rows[0][1].ToString();
+
+            this.cboCantidadDeEstrellas.SelectedIndex = Convert.ToInt32(datosHotel.Rows[0][1].ToString()) - 1;
             this.txtRecargaPorEstrellasHotel.Text = datosHotel.Rows[0][2].ToString();
             this.txtPaisHotel.Text = datosHotel.Rows[0][3].ToString();
             this.txtCiudadHotel.Text = datosHotel.Rows[0][4].ToString();
             this.txtCalleHotel.Text = datosHotel.Rows[0][5].ToString();
             this.txtAlturaHotel.Text = datosHotel.Rows[0][6].ToString();
             this.txtNombreHotel.Text = datosHotel.Rows[0][7].ToString();
+
             if(String.IsNullOrEmpty(datosHotel.Rows[0][8].ToString())){
                 this.dtpFechaCreacionHotel.Value = Login.FrmTipoUsuario.fechaApp;
             }
@@ -96,9 +98,14 @@ namespace FrbaHotel.AbmHotel
                         func(control.Controls);
             };
             func(Controls);
-            if (txtsVacios != 0)
+            if (txtsVacios != 0 || this.cboCantidadDeEstrellas.SelectedIndex == -1)
             {
                 MessageBox.Show("Debe completar todos los datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (validarEmail(this.txtMailHotel.Text) != true)
+            {
+                MessageBox.Show("Ingrese un email válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -107,14 +114,20 @@ namespace FrbaHotel.AbmHotel
                 if (hoteles.Rows.Count != 0)
                 {
                     MessageBox.Show("Ya existe un hotel con ese nombre, ingrese un nombre válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                calleHotelIngresado = this.txtCalleHotel.Text;
+                alturaHotelIngresado = this.txtAlturaHotel.Text;
+                callesYAlturas = Login.FrmTipoUsuario.BD.consulta("SELECT hotel_calle, hotel_nroCalle FROM FAGD.Hotel WHERE hotel_calle = '" + calleHotelIngresado + "' AND hotel_nroCalle = " + alturaHotelIngresado + " AND hotel_calle != (SELECT hotel_calle FROM FAGD.Hotel WHERE hotel_codigo = " + codigoHotelIngreso + ") AND hotel_nroCalle != (SELECT hotel_nroCalle FROM FAGD.Hotel WHERE hotel_codigo = " + codigoHotelIngreso + ")");
+                if (callesYAlturas.Rows.Count != 0) 
+                {
+                    MessageBox.Show("Ya existe un hotel con esa dirección, ingrese un dirección válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     mailHotelIngresado = this.txtMailHotel.Text;
                     telefonoHotelIngresado = this.txtTelefonoHotel.Text;
-                    calleHotelIngresado = this.txtCalleHotel.Text;
-                    alturaHotelIngresado = this.txtAlturaHotel.Text;
-                    estrellasHotelIngresado = this.txtCantidadDeEstrellasHotel.Text;
+                    estrellasHotelIngresado = this.cboCantidadDeEstrellas.SelectedItem.ToString();
                     recargaEstrellasHotelIngresado = this.txtRecargaPorEstrellasHotel.Text;
                     ciudadHotelIngresado = this.txtCiudadHotel.Text;
                     paisHotelIngresado = this.txtPaisHotel.Text;
@@ -176,6 +189,15 @@ namespace FrbaHotel.AbmHotel
             };
 
             func(Controls);
+
+            if (String.IsNullOrEmpty(datosHotel.Rows[0][8].ToString()))
+            {
+                this.dtpFechaCreacionHotel.Value = Login.FrmTipoUsuario.fechaApp;
+            }
+            else
+            {
+                this.dtpFechaCreacionHotel.Value = Convert.ToDateTime(datosHotel.Rows[0][8]);
+            }
         }
 
         private void btnVolverHotel_Click_1(object sender, EventArgs e)
@@ -183,5 +205,19 @@ namespace FrbaHotel.AbmHotel
             this.Close();
             frmMenuEmpleado.Show();
         }
+
+        private static bool validarEmail(string email)
+        {
+            try
+            {
+                new System.Net.Mail.MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
     }
 }

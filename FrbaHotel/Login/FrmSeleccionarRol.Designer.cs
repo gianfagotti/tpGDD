@@ -32,13 +32,14 @@
             this.cmbRolesRegistrados = new System.Windows.Forms.ComboBox();
             this.lblTipoUsuario = new System.Windows.Forms.Label();
             this.btnVolverATipoUsuario = new System.Windows.Forms.Button();
+            this.lblRol = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnAceptarRol
             // 
             this.btnAceptarRol.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnAceptarRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAceptarRol.Location = new System.Drawing.Point(58, 185);
+            this.btnAceptarRol.Location = new System.Drawing.Point(58, 188);
             this.btnAceptarRol.Name = "btnAceptarRol";
             this.btnAceptarRol.Size = new System.Drawing.Size(75, 27);
             this.btnAceptarRol.TabIndex = 8;
@@ -48,12 +49,12 @@
             // 
             // cmbRolesRegistrados
             // 
+            this.cmbRolesRegistrados.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRolesRegistrados.FormattingEnabled = true;
-            this.cmbRolesRegistrados.Location = new System.Drawing.Point(48, 103);
+            this.cmbRolesRegistrados.Location = new System.Drawing.Point(48, 111);
             this.cmbRolesRegistrados.Name = "cmbRolesRegistrados";
             this.cmbRolesRegistrados.Size = new System.Drawing.Size(184, 21);
             this.cmbRolesRegistrados.TabIndex = 7;
-            this.cmbRolesRegistrados.Text = "Elija uno de sus roles registrados...";
             this.cmbRolesRegistrados.SelectedIndexChanged += new System.EventHandler(this.cmbRolesRegistrados_SelectedIndexChanged);
             // 
             // lblTipoUsuario
@@ -74,7 +75,7 @@
             // 
             this.btnVolverATipoUsuario.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnVolverATipoUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVolverATipoUsuario.Location = new System.Drawing.Point(144, 185);
+            this.btnVolverATipoUsuario.Location = new System.Drawing.Point(144, 188);
             this.btnVolverATipoUsuario.Name = "btnVolverATipoUsuario";
             this.btnVolverATipoUsuario.Size = new System.Drawing.Size(75, 27);
             this.btnVolverATipoUsuario.TabIndex = 10;
@@ -82,11 +83,23 @@
             this.btnVolverATipoUsuario.UseVisualStyleBackColor = false;
             this.btnVolverATipoUsuario.Click += new System.EventHandler(this.btnVolverATipoUsuario_Click);
             // 
+            // lblRol
+            // 
+            this.lblRol.AutoSize = true;
+            this.lblRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRol.Location = new System.Drawing.Point(68, 68);
+            this.lblRol.Name = "lblRol";
+            this.lblRol.Size = new System.Drawing.Size(138, 16);
+            this.lblRol.TabIndex = 11;
+            this.lblRol.Text = "Roles disponibles:";
+            this.lblRol.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FrmSeleccionarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(284, 227);
+            this.Controls.Add(this.lblRol);
             this.Controls.Add(this.btnVolverATipoUsuario);
             this.Controls.Add(this.lblTipoUsuario);
             this.Controls.Add(this.btnAceptarRol);
@@ -105,5 +118,6 @@
         private System.Windows.Forms.ComboBox cmbRolesRegistrados;
         private System.Windows.Forms.Label lblTipoUsuario;
         private System.Windows.Forms.Button btnVolverATipoUsuario;
+        private System.Windows.Forms.Label lblRol;
     }
 }
