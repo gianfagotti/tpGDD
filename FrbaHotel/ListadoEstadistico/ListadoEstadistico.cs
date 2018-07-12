@@ -71,29 +71,27 @@ namespace FrbaHotel.ListadoEstadistico
             switch (cboCateg.SelectedIndex)
             {
                 case 0:
-                    categoriaSeleccionada = "EXEC FAGD.lista_hotel_maxResCancel " + cboTrim.Text + ", " + dtpAnio.Text;
+                    categoriaSeleccionada = "EXEC FAGD.ListadoHotelesMayorCantidadReservasCanceladas " + cboTrim.Text + ", " + dtpAnio.Text;
                     break;
                 case 1:
-                    categoriaSeleccionada = "EXEC FAGD.lista_hotel_maxConFacturados " + cboTrim.Text + ", " + dtpAnio.Text;
+                    categoriaSeleccionada = "EXEC FAGD.ListadoHotelesMayorCantidadConsumFacturados " + cboTrim.Text + ", " + dtpAnio.Text;
                     break;
                 case 2:
-                    categoriaSeleccionada = "EXEC FAGD.lista_hotel_diasFueraServ " + cboTrim.Text + ", " + dtpAnio.Text;
+                    categoriaSeleccionada = "EXEC FAGD.ListadoHotelesMayorCantidadDiasDeBaja " + cboTrim.Text + ", " + dtpAnio.Text;
                     break;
                 case 3:
-                    categoriaSeleccionada = "EXEC FAGD.lista_habitacion_maxVecesOcup " + (cboTrim.Text) + ", " + dtpAnio.Text;
+                    categoriaSeleccionada = "EXEC FAGD.ListadoHabitacionesMasVecesUtilizadas " + cboTrim.Text + ", " + dtpAnio.Text;
                     break;
                 case 4:
-                    categoriaSeleccionada = "EXEC FAGD.lista_cliente_maxPuntajes " + (cboTrim.Text) + ", " + dtpAnio.Text;
+                    categoriaSeleccionada = "EXEC FAGD.ListadoClientesConMayoresPuntajes " + cboTrim.Text + ", " + dtpAnio.Text;
                     break;
 
             }
 
             adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(categoriaSeleccionada);
             tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
-
             //Establezo que la dataGridView va a ser alimentada por la tabla virtual del adaptador, siendo la bindSource el puente que las une
             BindingSource bindSource = new BindingSource();
-
             //Seteo la fuente de la bindSource, la tabla del adaptador
             bindSource.DataSource = tablaConDatos;
             //Seteo la fuente de la dataGridView, la bindSource

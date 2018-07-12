@@ -15,25 +15,29 @@ namespace FrbaHotel.RegistrarEstadia
     {
 
         SqlDataReader resultadoQuery;
-        decimal resok;
-        decimal resmodif;
-        decimal estadia = 0;
+        decimal estadoReservaCorrecto;
+        decimal estadoReservaModificado;
+        decimal codigoEstadiaQueSeAcabaDeCrear = 0;
+        AbmRol.frmMenuEmpleado menuAVolver;
+        FrmMenuRegEst menuAnterior;
 
-        public FrmCheckin()
+        public FrmCheckin(FrmMenuRegEst menuReg, AbmRol.frmMenuEmpleado menuppal)
         {
             InitializeComponent();
             txtReserv.Clear();
             txtReserv.Focus();
-            
-            resok = 0;
+            menuAVolver = menuppal;
+            menuAnterior = menuReg;
+
+            estadoReservaCorrecto = 0;
             resultadoQuery = Login.FrmTipoUsuario.BD.comando("SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA CORRECTA'");
             resultadoQuery.Read();
-            resok = resultadoQuery.GetDecimal(0);
+            estadoReservaCorrecto = resultadoQuery.GetDecimal(0);
             resultadoQuery.Close();
-            resmodif = 0;
+            estadoReservaModificado = 0;
             resultadoQuery = Login.FrmTipoUsuario.BD.comando("SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA MODIFICADA'");
             resultadoQuery.Read();
-            resmodif = resultadoQuery.GetDecimal(0);
+            estadoReservaModificado = resultadoQuery.GetDecimal(0);
             resultadoQuery.Close();
         
 
@@ -52,7 +56,7 @@ namespace FrbaHotel.RegistrarEstadia
             {
                 decimal estadoDeReserva = resultadoQuery.GetDecimal(1);
                 DateTime fechaIni = resultadoQuery.GetDateTime(2);
-
+                resultadoQuery.Close();
                 if (fechaIni.Date < Login.FrmTipoUsuario.fechaApp)
                 {
                     MessageBox.Show("No se puede hacer el check-in, reserva vencida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -63,9 +67,9 @@ namespace FrbaHotel.RegistrarEstadia
                     MessageBox.Show("No se puede hacer el check-in, fecha temprana.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (estadoDeReserva != resmodif && estadoDeReserva != resok)
+                if (estadoDeReserva != estadoReservaCorrecto && estadoDeReserva != estadoReservaModificado)
                 {
-                    MessageBox.Show("La reserva no tiene un estado válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("La reserva ingresada no tiene un estado correcto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 } 
 
@@ -87,19 +91,16 @@ namespace FrbaHotel.RegistrarEstadia
                     return;
                 }
 
-                string confirmacion = "EXEC FAGD.CheckinParaEstadia ";
-                confirmacion = confirmacion + txtReserv.Text + ",";
-                confirmacion = confirmacion + Login.FrmLoginUsuario.username + ",";        
-                confirmacion = confirmacion + "'" + Login.FrmTipoUsuario.fechaApp.ToString("yyyyMMdd HH:mm:ss") + "'";
-                resultadoQuery = Login.FrmTipoUsuario.BD.comando(confirmacion);
+                string confirmacion2 = "EXEC FAGD.CheckinParaEstadia " + txtReserv.Text + ",'" + Login.FrmLoginUsuario.username + "','" + Login.FrmTipoUsuario.fechaAppConvertida + "'";
+                resultadoQuery = Login.FrmTipoUsuario.BD.comando(confirmacion2);
                 resultadoQuery.Read();
-                estadia = resultadoQuery.GetDecimal(0);
+                codigoEstadiaQueSeAcabaDeCrear = resultadoQuery.GetDecimal(0);
                 resultadoQuery.Close();
-                  if (estadia != 0)
+                if (codigoEstadiaQueSeAcabaDeCrear != 0)
                 {
-                    MessageBox.Show("Se ha realizado el check-in correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //generamos la factura para despues
-                    string fact = "EXEC FAGD.generarFactura " + estadia.ToString() + ",1,'" + Login.FrmTipoUsuario.fechaApp.ToString("yyyyMMdd HH:mm:ss") + "'";
+                    MessageBox.Show("El check-in ha concluido correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                     string fact = "EXEC FAGD.RegistrarDatosInicialesFactura " + codigoEstadiaQueSeAcabaDeCrear.ToString() + ",'" + Login.FrmTipoUsuario.fechaAppConvertida + "'";
                     resultadoQuery = Login.FrmTipoUsuario.BD.comando(fact);
                     resultadoQuery.Read();
                     decimal factura = resultadoQuery.GetDecimal(0);
@@ -108,21 +109,16 @@ namespace FrbaHotel.RegistrarEstadia
                         resultadoQuery.Close();
                         MessageBox.Show("Error al crear factura, ya esta generada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
-                    }
-                    resultadoQuery.Close();
-                    //aca seria lo de clientesXEstadia que la vamos a crear
-                    FrmRegistrarHuesped regHue = new FrmRegistrarHuesped(txtReserv.Text,estadia.ToString());
+
+                    FrmRegistrarHuesped regHue = new FrmRegistrarHuesped(txtReserv.Text, codigoEstadiaQueSeAcabaDeCrear.ToString(),menuAVolver);
                     regHue.Show();
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo realizar la operacion, la estadia ya esta registrada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No se pudo realizar la operación, la estadia ya esta registrada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
-                }
-                
-                
-                
+                }     
             }
             else
             {

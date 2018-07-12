@@ -19,9 +19,9 @@ namespace FrbaHotel.RegistrarEstadia
         DataTable dTable;
         Form formAnterior;
         AbmRol.frmMenuEmpleado menuAVolver;
-        FrmMenuRegEst2 menuAnterior;
+        FrmMenuRegEst menuAnterior;
 
-        public FrmCheckout(FrmMenuRegEst2 menuRegEst, AbmRol.frmMenuEmpleado menu)
+        public FrmCheckout(FrmMenuRegEst menuRegEst, AbmRol.frmMenuEmpleado menu)
         {
             InitializeComponent();
             menuAnterior = menuRegEst;
@@ -77,7 +77,7 @@ namespace FrbaHotel.RegistrarEstadia
                 //Se intenta comenzar el proceso de facturación
                 consulta = "EXEC FAGD.CheckoutParaEstadia ";
                 consulta = consulta + dgvFinalizar.CurrentRow.Cells[1].Value.ToString();
-                consulta = consulta + ",'" + Login.FrmTipoUsuario.fechaApp.ToString("yyyyMMdd HH:mm:ss") + "',";
+                consulta = consulta + ",'" + Login.FrmTipoUsuario.fechaAppConvertida + "',";
                 consulta = consulta + Login.FrmLoginUsuario.username;
                 resultado = Login.FrmTipoUsuario.BD.comando(consulta);
                 resultado.Read();

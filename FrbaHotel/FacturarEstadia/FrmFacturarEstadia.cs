@@ -18,7 +18,7 @@ namespace FrbaHotel.FacturarEstadia
         DataTable tablaInfoAlojamiento;
         DataTable tablaInfoConsumibles;
         decimal modalidadDePagoElegida;
-        decimal facturaParaActualizar;
+        decimal facturaEmitida;
         BindingSource bindingSource;
         AbmRol.frmMenuEmpleado menuAVolver;
 
@@ -42,41 +42,41 @@ namespace FrbaHotel.FacturarEstadia
             decimal diasSobrantes = infoQuery.GetDecimal(2);
             decimal cantNoches = infoQuery.GetDecimal(3);
             decimal precioNoche = infoQuery.GetDecimal(4);
-            txtFechaInicio.Text = fechaInicioEstadia.ToShortDateString();
-            txtEgreso.Text = fechaInicioEstadia.AddDays(Convert.ToDouble(cantNoches + diasSobrantes)).ToShortDateString();
+            txtFechaInicio.Text = fechaInicioEstadia.ToString("yyyy-MM-dd HH:mm:ss");
+            txtEgreso.Text = fechaInicioEstadia.AddDays(Convert.ToDouble(cantNoches + diasSobrantes)).ToString("yyyy-MM-dd HH:mm:ss");
             txtCheckout.Text = Login.FrmTipoUsuario.fechaAppConvertida;
             infoQuery.Close();
             tablaInfoAlojamiento = new DataTable();
             tablaInfoAlojamiento.Columns.Add("Fecha");
             tablaInfoAlojamiento.Columns.Add("Precio");
             tablaInfoAlojamiento.Columns.Add("Descripción del item");
-            decimal auxCantNoches = cantNoches;
-            decimal auxDiasSobrantes = diasSobrantes;
-            DataRow row = tablaInfoAlojamiento.NewRow();
-            while (cantNoches > 0) //Se registran cada uno de los dias que los clientes efectivamente usaron de la estadia
+            decimal contadorCantNoches = cantNoches;
+            decimal contadorDiasSobrantes = diasSobrantes;
+            DataRow fila = tablaInfoAlojamiento.NewRow();
+            while (cantNoches > 0) //Se registran cada uno de los dias que los huéspedes efectivamente usaron de la estadia
             {
-                row = tablaInfoAlojamiento.NewRow();
-                row["Fecha"] = fechaInicioEstadia;
-                row["Precio"] = precioNoche;
-                row["Descripción del item"] = "Costo de Alojamiento";
-                tablaInfoAlojamiento.Rows.Add(row);
+                fila = tablaInfoAlojamiento.NewRow();
+                fila["Fecha"] = fechaInicioEstadia;
+                fila["Precio"] = precioNoche;
+                fila["Descripción del item"] = "Costo de Alojamiento";
+                tablaInfoAlojamiento.Rows.Add(fila);
                 fechaInicioEstadia = fechaInicioEstadia.AddDays(1);
                 cantNoches--;
             }
             while (diasSobrantes > 0) //Se registran cada uno de los dias que los clientes no utilizaran al retirarse tempranamente del hotel, de ser así el suceso
             {
-                row = tablaInfoAlojamiento.NewRow();
-                row["Fecha"] = fechaInicioEstadia;
-                row["Precio"] = precioNoche;
-                row["Descripción del item"] = "Día no utilizado de la estadia";
-                tablaInfoAlojamiento.Rows.Add(row);
+                fila = tablaInfoAlojamiento.NewRow();
+                fila["Fecha"] = fechaInicioEstadia;
+                fila["Precio"] = precioNoche;
+                fila["Descripción del item"] = "Día no utilizado de la estadia";
+                tablaInfoAlojamiento.Rows.Add(fila);
                 fechaInicioEstadia = fechaInicioEstadia.AddDays(1);
                 diasSobrantes--;
             }
             bindingSource = new BindingSource();
             bindingSource.DataSource = tablaInfoAlojamiento;
             dgvAlojamiento.DataSource = bindingSource;
-            txtMontoAloj.Text = (precioNoche * (auxDiasSobrantes + auxCantNoches)).ToString();
+            txtMontoAloj.Text = (precioNoche * (contadorDiasSobrantes + contadorCantNoches)).ToString();
             //Se registran cada uno de los costos de consumibles almacenados en los item de Factura para luego revisar si se deducen en su totalidad por el regimen de estadía que el cliente contrató
             query = "SELECT item.itemFactura_cantidad Cantidad, item.itemFactura_descripcion Descripcion, item.itemFactura_itemMonto Monto FROM FAGD.ItemFactura item, FAGD.Factura fact WHERE item.itemFactura_nroFactura = fact.factura_nro AND item.itemFactura_descripcion != 'Estadia' AND fact.factura_codigoEstadia = " + codigoEstadia;
             SqlDataAdapter sAdapter = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
@@ -84,16 +84,18 @@ namespace FrbaHotel.FacturarEstadia
             BindingSource BindingSource2 = new BindingSource();
             BindingSource2.DataSource = tablaInfoConsumibles;    
             dgvConsumibles.DataSource = BindingSource2;
+
             int montoAux = 0;
-            foreach (DataRow fila in tablaInfoConsumibles.Rows)
+            foreach (DataRow otraFila in tablaInfoConsumibles.Rows)
             {
-                int montoDelConsDeLaFila = Convert.ToInt32(fila["Monto"]);
+                int montoDelConsDeLaFila = Convert.ToInt32(otraFila["Monto"]);
                 montoAux = montoAux + montoDelConsDeLaFila;
             }
             txtMontoConsu.Text = montoAux.ToString();
 
+
             //Se revisa el regimen de la estadia
-            query = "SELECT res.reserva_codigoRegimen FROM FAGD.Reserva res, FAGD.Estadia est WHERE est.estadia_codigoReserva = res.reserva_codigo AND est.estadia_codigo = " + codigoEstadia;
+            query = "SELECT R.reserva_codigoRegimen FROM FAGD.Reserva R, FAGD.Estadia est WHERE est.estadia_codigoReserva = R.reserva_codigo AND est.estadia_codigo = " + codigoEstadia;
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             infoQuery.Read();
             decimal regimen = infoQuery.GetDecimal(0);
@@ -105,7 +107,7 @@ namespace FrbaHotel.FacturarEstadia
             }
             else //No tiene descuento total
             {    
-                txtDescReg.Text = 0.ToString();
+                txtDescReg.Text = "0";
                 decimal totalAlojyConsum = Convert.ToDecimal(txtMontoAloj.Text) + Convert.ToDecimal(txtMontoConsu.Text);
                 txtTotalpago.Text = (totalAlojyConsum).ToString();
             }
@@ -118,7 +120,7 @@ namespace FrbaHotel.FacturarEstadia
         {
             if (string.IsNullOrEmpty(cboMode.Text))
             {
-                MessageBox.Show("Para proceder al pago es necesario que primero seleccione la modalidad con la que el cliente va a efectuarlo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Para concretar la facturación es necesario que seleccione la modalidad con la que el cliente va a pagar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             query = "SELECT modalidadPago_codigo FROM FAGD.ModalidadPago WHERE modalidadPago_descripcion = '" + cboMode.Text + "'";
@@ -126,23 +128,23 @@ namespace FrbaHotel.FacturarEstadia
             infoQuery.Read();
             modalidadDePagoElegida = infoQuery.GetDecimal(0);
             infoQuery.Close();
-            query = "EXEC FAGD.ActualizarFactura " + txtEst.Text + "," + modalidadDePagoElegida.ToString() + ",'" + Login.FrmTipoUsuario.fechaApp + "'";
+            query = "EXEC FAGD.EmitirFacturaActualizada " + txtEst.Text + "," + modalidadDePagoElegida.ToString() + ",'" + Login.FrmTipoUsuario.fechaAppConvertida + "'";
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             infoQuery.Read();
-            facturaParaActualizar = infoQuery.GetDecimal(0);
-            if (facturaParaActualizar == 0)
+            facturaEmitida = infoQuery.GetDecimal(0);
+            if (facturaEmitida == 0)
             {
                 infoQuery.Close();
-                MessageBox.Show("La factura ya está generada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("La factura no pudo ser emitida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             infoQuery.Close();
             if (modalidadDePagoElegida == 2)
             {
-                FrmPagoTarjeta pagoTarjeta = new FrmPagoTarjeta(facturaParaActualizar.ToString(),menuAVolver);
+                FrmPagoTarjeta pagoTarjeta = new FrmPagoTarjeta(facturaEmitida.ToString(), menuAVolver);
                 pagoTarjeta.Show();
             }
-            MessageBox.Show("Se ha actualizado la factura correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Se ha emitido la factura correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
 

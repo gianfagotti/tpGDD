@@ -60,7 +60,7 @@ namespace FrbaHotel.RegistrarConsumible
 
         private void FrmSeleccionEstadia_Load(object sender, EventArgs e)
         {
-            string query = "SELECT DISTINCT clieXEst.estadia_codigo CodigoEstadia, clieXEst.habitacion_codigo CodigoHab, ha.habitacion_nro HabNumero, ha.habitacion_piso Piso FROM FAGD.Estadia est, FAGD.ClienteXEstadia clieXEst, FAGD.Habitacion ha WHERE est.estadia_fechaFin >= '" + Login.FrmTipoUsuario.fechaApp + "' AND est.estadia_fechaInicio <= '" + Login.FrmTipoUsuario.fechaApp + "' AND clieXEst.estadia_codigo = est.estadia_codigo AND clieXEst.habitacion_codigo = ha.habitacion_codigo AND ha.habitacion_codigoHotel = " + Login.FrmSeleccionarHotel.codigoHotel;
+            string query = "SELECT DISTINCT clieXEst.estadia_codigo CodigoEstadia, clieXEst.habitacion_codigo CodigoHab, ha.habitacion_nro HabNumero, ha.habitacion_piso Piso FROM FAGD.Estadia est, FAGD.ClienteXEstadia clieXEst, FAGD.Habitacion ha WHERE est.estadia_fechaFin >= '" + Login.FrmTipoUsuario.fechaAppConvertida + "' AND est.estadia_fechaInicio <= '" + Login.FrmTipoUsuario.fechaAppConvertida + "' AND clieXEst.estadia_codigo = est.estadia_codigo AND clieXEst.habitacion_codigo = ha.habitacion_codigo AND ha.habitacion_codigoHotel = " + Login.FrmSeleccionarHotel.codigoHotel;
             adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
             tablaConDatosEstadias = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
             BindingSource bSource = new BindingSource();

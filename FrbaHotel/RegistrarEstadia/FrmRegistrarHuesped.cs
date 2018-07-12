@@ -13,9 +13,9 @@ namespace FrbaHotel.RegistrarEstadia
 {
     public partial class FrmRegistrarHuesped : Form
     {
-        Form ultimoForm;
-        private SqlDataReader resultado;
-        public static DataTable tabla;
+        Form menuAVolver;
+        private SqlDataReader infoQuery;
+        public static DataTable tablaConInfoClientes;
         string nroReserva;
         decimal totalPers = 0;
         string nroEstadia;
@@ -23,62 +23,62 @@ namespace FrbaHotel.RegistrarEstadia
         string nombre;
         string apellido;
         public static decimal persDisp = 0;
-        string consulta;
+        string query;
         BindingSource bSource2;
 
         public FrmRegistrarHuesped(Form form)
         {
             InitializeComponent();
-            ultimoForm = form;
+            menuAVolver = form;
 
         }
 
-        public FrmRegistrarHuesped(string nroRes, string nroEst)
+        public FrmRegistrarHuesped(string nroRes, string nroEst, Form form)
         {
             InitializeComponent();
             nroReserva = nroRes;
             nroEstadia = nroEst;
-            tabla = new DataTable();
-            tabla.Columns.Add("codigoCli");
-            DataColumn column = tabla.Columns["codigoCli"];
+            menuAVolver = form;
+            tablaConInfoClientes = new DataTable();
+            tablaConInfoClientes.Columns.Add("codigoCli");
+            DataColumn column = tablaConInfoClientes.Columns["codigoCli"];
             column.Unique = true;
-            tabla.Columns.Add("Nombre");
-            tabla.Columns.Add("Apellido");
+            tablaConInfoClientes.Columns.Add("Nombre");
+            tablaConInfoClientes.Columns.Add("Apellido");
             bSource2 = new BindingSource();
-            bSource2.DataSource = tabla;
+            bSource2.DataSource = tablaConInfoClientes;
             dgvHuesped.DataSource = bSource2;
-            consulta = "SELECT SUM(tipoHa.habitacionTipo_cantHuespedes) FROM FAGD.ReservaXHabitacion resxh, FAGD.Habitacion ha, FAGD.TipoHabitacion tipoHa WHERE tipoHa.habitacion_codigo = ha.habitacion_codigo AND tipoHa.habitacionTipo_codigo=ha.tipo AND resxh.reserva_codigo = " + nroReserva;
-            resultado = Login.FrmTipoUsuario.BD.comando(consulta);
-            if (resultado.Read())
+            query = "SELECT SUM(tipoHa.habitacionTipo_cantHuespedes) FROM FAGD.ReservaXHabitacion resxh, FAGD.Habitacion ha, FAGD.TipoHabitacion tipoHa WHERE tipoHa.habitacion_codigo = ha.habitacion_codigo AND tipoHa.habitacionTipo_codigo=ha.tipo AND resxh.reserva_codigo = " + nroReserva;
+            infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+            if (infoQuery.Read())
             {
-                txtLimit.Text = resultado.GetDecimal(0).ToString();
-                totalPers = resultado.GetDecimal(0);
-                resultado.Close();
+                txtLimit.Text = infoQuery.GetDecimal(0).ToString();
+                totalPers = infoQuery.GetDecimal(0);
+                infoQuery.Close();
             }
             else
             {
-                resultado.Close();
+                infoQuery.Close();
                 MessageBox.Show("La reserva no tiene habitaciones.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
-            consulta = "SELECT cli.cliente_codigo CodigoCli, cli.cliente_nombre Nombre, cli.cliente_apellido Apellido FROM FAGD.Reserva res, FAGD.Cliente cli where res.reserva_clienteCodigo = cli.cliente_codigo and res.reserva_codigo = " + nroReserva;
-            resultado = Login.FrmTipoUsuario.BD.comando(consulta);
-            resultado.Read();
-            txtTitular.Text = resultado.GetString(2) + " " + resultado.GetString(3);
+            query = "SELECT cli.cliente_codigo CodigoCli, cli.cliente_nombre Nombre, cli.cliente_apellido Apellido FROM FAGD.Reserva res, FAGD.Cliente cli where res.reserva_clienteCodigo = cli.cliente_codigo and res.reserva_codigo = " + nroReserva;
+            infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+            infoQuery.Read();
+            txtTitular.Text = infoQuery.GetString(2) + " " + infoQuery.GetString(3);
             persDisp = totalPers - 1;
             txtRest.Text = (persDisp).ToString();
             //Defino las variables de cada registro consulta
-            codigoCli = resultado.GetDecimal(0);
-            nombre = resultado.GetString(1);
-            apellido = resultado.GetString(2);
-            DataRow row = tabla.NewRow();
-            row["CodigoCli"] = codigoCli;
-            row["Nombre"] = nombre;
-            row["Apellido"] = apellido;
-            tabla.Rows.Add(row);
+            codigoCli = infoQuery.GetDecimal(0);
+            nombre = infoQuery.GetString(1);
+            apellido = infoQuery.GetString(2);
+            DataRow fila = tablaConInfoClientes.NewRow();
+            fila["CodigoCli"] = codigoCli;
+            fila["Nombre"] = nombre;
+            fila["Apellido"] = apellido;
+            tablaConInfoClientes.Rows.Add(fila);
             txtReserv.Text = nroReserva;
-            resultado.Close();
-
+            infoQuery.Close();
         }
 
 
@@ -106,12 +106,12 @@ namespace FrbaHotel.RegistrarEstadia
         private void BtnRegistrar_Click(object sender, EventArgs e)
         {
             
-            foreach (DataRow fila in tabla.Rows)
+            foreach (DataRow fila in tablaConInfoClientes.Rows)
             {
-                resultado = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarEstadiaXCliente " + fila["CodigoCli"].ToString() + "," + nroEstadia);
-                if (resultado.Read())
+                infoQuery = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarEstadiaXCliente " + fila["CodigoCli"].ToString() + "," + nroEstadia);
+                if (infoQuery.Read())
                 {
-                    if (resultado.GetDecimal(0) == 0)
+                    if (infoQuery.GetDecimal(0) == 0)
                     {
                         MessageBox.Show("El cliente ya estaba agregado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -120,20 +120,15 @@ namespace FrbaHotel.RegistrarEstadia
                 {
                     MessageBox.Show("El cliente ya estaba agregado.","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                resultado.Close();
+                infoQuery.Close();
             }
             MessageBox.Show("El proceso de carga de clientes finalizó correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            DistribClientes distri = new DistribClientes(tabla, nroReserva, nroEstadia);
-            distri.Show();
+            FrmHuespedxHabitacion organizarClientes = new FrmHuespedxHabitacion(tablaConInfoClientes, nroReserva, nroEstadia, menuAVolver);
+            organizarClientes.Show();
             this.Close();
               
         }
 
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            this.Close();            
-            ultimoForm.Show();
-        }
 
         private void btnRegiCliente_Click(object sender, EventArgs e)
         {
@@ -154,7 +149,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void FrmRegistrarHuesped_Activated(object sender, EventArgs e)
         {
-            bSource2.DataSource = tabla;
+            bSource2.DataSource = tablaConInfoClientes;
             txtRest.Text = persDisp.ToString();
         }
 
@@ -176,14 +171,13 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            tabla.Clear();
+            tablaConInfoClientes.Clear();
             persDisp = totalPers - 1;
-            DataRow row = tabla.NewRow();
+            DataRow row = tablaConInfoClientes.NewRow();
             row["CodigoCli"] = codigoCli;
             row["Nombre"] = nombre;
             row["Apellido"] = apellido;
-            tabla.Rows.Add(row);
-
+            tablaConInfoClientes.Rows.Add(row);
         }
 
         private void dgvHuesped_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -197,8 +191,8 @@ namespace FrbaHotel.RegistrarEstadia
                     return;
                 }
                 persDisp++;
-                tabla.Rows.RemoveAt(item);
-                dgvHuesped.DataSource = tabla;
+                tablaConInfoClientes.Rows.RemoveAt(item);
+                dgvHuesped.DataSource = tablaConInfoClientes;
             }
         }
     }

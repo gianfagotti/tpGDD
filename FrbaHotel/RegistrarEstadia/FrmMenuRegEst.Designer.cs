@@ -1,6 +1,6 @@
 ﻿namespace FrbaHotel.RegistrarEstadia
 {
-    partial class FrmMenuRegEst2
+    partial class FrmMenuRegEst
     {
         /// <summary>
         /// Required designer variable.

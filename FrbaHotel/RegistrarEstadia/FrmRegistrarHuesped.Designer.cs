@@ -35,7 +35,6 @@
             this.LblRegistrarEstadia = new System.Windows.Forms.Label();
             this.lblalgo = new System.Windows.Forms.Label();
             this.dgvHuesped = new System.Windows.Forms.DataGridView();
-            this.borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,25 +43,27 @@
             this.txtLimit = new System.Windows.Forms.TextBox();
             this.txtRest = new System.Windows.Forms.TextBox();
             this.txtTitular = new System.Windows.Forms.TextBox();
+            this.borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHuesped)).BeginInit();
             this.SuspendLayout();
             // 
             // LblAgregarHuésped
             // 
             this.LblAgregarHuésped.AutoSize = true;
-            this.LblAgregarHuésped.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblAgregarHuésped.Location = new System.Drawing.Point(14, 216);
+            this.LblAgregarHuésped.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblAgregarHuésped.Location = new System.Drawing.Point(275, 81);
             this.LblAgregarHuésped.Name = "LblAgregarHuésped";
-            this.LblAgregarHuésped.Size = new System.Drawing.Size(129, 13);
+            this.LblAgregarHuésped.Size = new System.Drawing.Size(127, 15);
             this.LblAgregarHuésped.TabIndex = 16;
             this.LblAgregarHuésped.Text = "Agregar Un Huésped:";
             this.LblAgregarHuésped.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnRegiCliente
             // 
-            this.btnRegiCliente.Location = new System.Drawing.Point(295, 207);
+            this.btnRegiCliente.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegiCliente.Location = new System.Drawing.Point(258, 103);
             this.btnRegiCliente.Name = "btnRegiCliente";
-            this.btnRegiCliente.Size = new System.Drawing.Size(130, 31);
+            this.btnRegiCliente.Size = new System.Drawing.Size(166, 31);
             this.btnRegiCliente.TabIndex = 18;
             this.btnRegiCliente.Text = "Registrar nuevo cliente";
             this.btnRegiCliente.UseVisualStyleBackColor = true;
@@ -70,7 +71,8 @@
             // 
             // BtnRegistrar
             // 
-            this.BtnRegistrar.Location = new System.Drawing.Point(351, 422);
+            this.BtnRegistrar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnRegistrar.Location = new System.Drawing.Point(355, 366);
             this.BtnRegistrar.Name = "BtnRegistrar";
             this.BtnRegistrar.Size = new System.Drawing.Size(74, 31);
             this.BtnRegistrar.TabIndex = 19;
@@ -80,9 +82,10 @@
             // 
             // btnSeleCliente
             // 
-            this.btnSeleCliente.Location = new System.Drawing.Point(179, 207);
+            this.btnSeleCliente.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSeleCliente.Location = new System.Drawing.Point(257, 141);
             this.btnSeleCliente.Name = "btnSeleCliente";
-            this.btnSeleCliente.Size = new System.Drawing.Size(110, 31);
+            this.btnSeleCliente.Size = new System.Drawing.Size(166, 31);
             this.btnSeleCliente.TabIndex = 17;
             this.btnSeleCliente.Text = "Seleccionar Cliente";
             this.btnSeleCliente.UseVisualStyleBackColor = true;
@@ -94,7 +97,7 @@
             this.LblRegistrarEstadia.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.LblRegistrarEstadia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblRegistrarEstadia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblRegistrarEstadia.Location = new System.Drawing.Point(89, 19);
+            this.LblRegistrarEstadia.Location = new System.Drawing.Point(93, 12);
             this.LblRegistrarEstadia.Name = "LblRegistrarEstadia";
             this.LblRegistrarEstadia.Size = new System.Drawing.Size(265, 22);
             this.LblRegistrarEstadia.TabIndex = 1;
@@ -104,12 +107,12 @@
             // lblalgo
             // 
             this.lblalgo.AutoSize = true;
-            this.lblalgo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblalgo.Location = new System.Drawing.Point(14, 71);
+            this.lblalgo.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblalgo.Location = new System.Drawing.Point(14, 54);
             this.lblalgo.Name = "lblalgo";
-            this.lblalgo.Size = new System.Drawing.Size(153, 13);
+            this.lblalgo.Size = new System.Drawing.Size(196, 15);
             this.lblalgo.TabIndex = 2;
-            this.lblalgo.Text = "Clientes para reserva nro:";
+            this.lblalgo.Text = "Número de reserva en operación:";
             this.lblalgo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dgvHuesped
@@ -120,24 +123,17 @@
             this.dgvHuesped.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHuesped.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.borrar});
-            this.dgvHuesped.Location = new System.Drawing.Point(17, 256);
+            this.dgvHuesped.Location = new System.Drawing.Point(17, 189);
             this.dgvHuesped.Name = "dgvHuesped";
             this.dgvHuesped.ReadOnly = true;
             this.dgvHuesped.Size = new System.Drawing.Size(408, 160);
             this.dgvHuesped.TabIndex = 24;
             this.dgvHuesped.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHuesped_CellContentClick);
             // 
-            // borrar
-            // 
-            this.borrar.HeaderText = "borrar";
-            this.borrar.Name = "borrar";
-            this.borrar.ReadOnly = true;
-            this.borrar.Text = "borrar";
-            this.borrar.UseColumnTextForButtonValue = true;
-            // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(17, 422);
+            this.btnLimpiar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.Location = new System.Drawing.Point(17, 366);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(74, 31);
             this.btnLimpiar.TabIndex = 25;
@@ -148,10 +144,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(14, 105);
+            this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(14, 108);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 13);
+            this.label2.Size = new System.Drawing.Size(128, 15);
             this.label2.TabIndex = 29;
             this.label2.Text = "Límite de huéspedes:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -159,58 +155,66 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(14, 140);
+            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(14, 80);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(150, 13);
+            this.label1.Size = new System.Drawing.Size(111, 15);
             this.label1.TabIndex = 30;
-            this.label1.Text = "Huéspedes para agregar:";
+            this.label1.Text = "Cantidad restante:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(14, 173);
+            this.label3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(17, 139);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 13);
+            this.label3.Size = new System.Drawing.Size(46, 15);
             this.label3.TabIndex = 31;
             this.label3.Text = "Titular:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtReserv
             // 
-            this.txtReserv.Location = new System.Drawing.Point(179, 68);
+            this.txtReserv.Location = new System.Drawing.Point(216, 51);
             this.txtReserv.Name = "txtReserv";
-            this.txtReserv.Size = new System.Drawing.Size(246, 20);
+            this.txtReserv.Size = new System.Drawing.Size(155, 20);
             this.txtReserv.TabIndex = 32;
             // 
             // txtLimit
             // 
-            this.txtLimit.Location = new System.Drawing.Point(179, 102);
+            this.txtLimit.Location = new System.Drawing.Point(154, 105);
             this.txtLimit.Name = "txtLimit";
-            this.txtLimit.Size = new System.Drawing.Size(246, 20);
+            this.txtLimit.Size = new System.Drawing.Size(42, 20);
             this.txtLimit.TabIndex = 33;
             // 
             // txtRest
             // 
-            this.txtRest.Location = new System.Drawing.Point(179, 137);
+            this.txtRest.Location = new System.Drawing.Point(154, 76);
             this.txtRest.Name = "txtRest";
-            this.txtRest.Size = new System.Drawing.Size(246, 20);
+            this.txtRest.Size = new System.Drawing.Size(42, 20);
             this.txtRest.TabIndex = 34;
             // 
             // txtTitular
             // 
-            this.txtTitular.Location = new System.Drawing.Point(179, 170);
+            this.txtTitular.Location = new System.Drawing.Point(102, 139);
             this.txtTitular.Name = "txtTitular";
-            this.txtTitular.Size = new System.Drawing.Size(246, 20);
+            this.txtTitular.Size = new System.Drawing.Size(94, 20);
             this.txtTitular.TabIndex = 35;
+            // 
+            // borrar
+            // 
+            this.borrar.HeaderText = "Quitar";
+            this.borrar.Name = "borrar";
+            this.borrar.ReadOnly = true;
+            this.borrar.Text = "Quitar";
+            this.borrar.UseColumnTextForButtonValue = true;
             // 
             // FrmRegistrarHuesped
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 460);
+            this.ClientSize = new System.Drawing.Size(441, 408);
             this.Controls.Add(this.txtTitular);
             this.Controls.Add(this.txtRest);
             this.Controls.Add(this.txtLimit);
@@ -247,7 +251,6 @@
         private System.Windows.Forms.Label LblRegistrarEstadia;
         private System.Windows.Forms.Label lblalgo;
         private System.Windows.Forms.DataGridView dgvHuesped;
-        private System.Windows.Forms.DataGridViewButtonColumn borrar;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -256,5 +259,6 @@
         private System.Windows.Forms.TextBox txtLimit;
         private System.Windows.Forms.TextBox txtRest;
         private System.Windows.Forms.TextBox txtTitular;
+        private System.Windows.Forms.DataGridViewButtonColumn borrar;
     }
 }

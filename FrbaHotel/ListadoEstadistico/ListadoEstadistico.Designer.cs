@@ -129,9 +129,9 @@
             // btnVolver
             // 
             this.btnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.btnVolver.Location = new System.Drawing.Point(196, 466);
+            this.btnVolver.Location = new System.Drawing.Point(288, 467);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(234, 42);
+            this.btnVolver.Size = new System.Drawing.Size(145, 42);
             this.btnVolver.TabIndex = 11;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;

@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace FrbaHotel.RegistrarEstadia
 {
-    public partial class FrmMenuRegEst2 : Form
+    public partial class FrmMenuRegEst : Form
     {
         AbmRol.frmMenuEmpleado menuAVolver;
 
-        public FrmMenuRegEst2(AbmRol.frmMenuEmpleado menu)
+        public FrmMenuRegEst(AbmRol.frmMenuEmpleado menu)
         {
             InitializeComponent();
             menuAVolver = menu;
@@ -34,7 +34,7 @@ namespace FrbaHotel.RegistrarEstadia
         private void btnCheckin_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FrmCheckin checkin = new FrmCheckin();
+            FrmCheckin checkin = new FrmCheckin(this, menuAVolver);
             checkin.ShowDialog();
             this.Show();
         }

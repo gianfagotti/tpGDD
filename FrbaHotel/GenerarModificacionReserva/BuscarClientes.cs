@@ -100,13 +100,13 @@ namespace FrbaHotel.GenerarModificacionReserva
                     string nombre = dataGridView1.CurrentRow.Cells[1].Value.ToString();
                     string apellido = dataGridView1.CurrentRow.Cells[2].Value.ToString();
                     string codigoCli = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                    DataRow row = RegistrarEstadia.FrmRegistrarHuesped.tabla.NewRow();
+                    DataRow row = RegistrarEstadia.FrmRegistrarHuesped.tablaConInfoClientes.NewRow();
                     row["CodigoCli"] = codigoCli;
                     row["Nombre"] = nombre;
                     row["Apellido"] = apellido;
                     try
                     {
-                        RegistrarEstadia.FrmRegistrarHuesped.tabla.Rows.Add(row);
+                        RegistrarEstadia.FrmRegistrarHuesped.tablaConInfoClientes.Rows.Add(row);
                         RegistrarEstadia.FrmRegistrarHuesped.persDisp--;
                     }
                     catch

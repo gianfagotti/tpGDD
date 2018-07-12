@@ -155,7 +155,7 @@ CREATE TABLE FAGD.Factura(
  factura_tarjeta numeric(18),
  factura_clienteCodigo numeric(18),
  factura_errorCliente numeric(18),
- factura_estado numeric(1) NOT NULL
+ factura_estado numeric(1)
  )
 GO
 
@@ -233,9 +233,9 @@ estadia_codigo numeric(18) IDENTITY(1,1) NOT NULL,
 estadia_fechaInicio datetime,
 estadia_fechaFin datetime,
 estadia_cantNoches numeric(18,0) NOT NULL,
-estadia_diasSobrantes numeric (18,0) NOT NULL,
+estadia_diasSobrantes numeric (18,0),
 estadia_precioNoche numeric(18,0) NOT NULL,
-estadia_clienteCodigo numeric (18) NOT NULL,
+estadia_clienteCodigo numeric (18),
 estadia_codigoReserva numeric(18) NOT NULL,
 estadia_usuarioRegistrador nvarchar(255),
 estadia_usuarioFinalizador nvarchar(255),
@@ -1008,38 +1008,38 @@ GO
 
 -----------------------	 CREACI�N DE PROCEDURES PARA LA APLICACI�N   ----------------------- 
 
-CREATE PROCEDURE FAGD.lista_hotel_maxResCancel @trimestre numeric(18,0), @anio numeric(18,0)
+CREATE PROCEDURE FAGD.ListadoHotelesMayorCantidadReservasCanceladas @trimestre numeric(18,0), @anio numeric(18,0)
 AS	BEGIN
 		
 	DECLARE @inicioTrimestre DATETIME
 	DECLARE @finTrimestre DATETIME
-	DECLARE @anioAux CHAR(4)
-		SET @anioAux = CAST(@anio AS CHAR(4))
+	DECLARE @anioEvaluado CHAR(4)
+		SET @anioEvaluado = CAST(@anio AS CHAR(4))
 		
-		IF (@trimestre = 1)
+	IF (@trimestre = 1)
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-01-01'
-			SET @finTrimestre = @anioAux+'-03-31'
+			SET @inicioTrimestre = @anioEvaluado+'-01-01'
+			SET @finTrimestre = @anioEvaluado+'-03-31'
 		END
-		ELSE IF (@trimestre = 2)
+	ELSE IF (@trimestre = 2)
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-04-01'
-			SET @finTrimestre = @anioAux+'-06-30'
+			SET @inicioTrimestre = @anioEvaluado+'-04-01'
+			SET @finTrimestre = @anioEvaluado+'-06-30'
 		END
-		ELSE IF (@trimestre = 3)
+	ELSE IF (@trimestre = 3)
 		BEGIN 
-			SET @inicioTrimestre = @anioAux+'-07-01'
-			SET @finTrimestre = @anioAux+'-09-30'
+			SET @inicioTrimestre = @anioEvaluado+'-07-01'
+			SET @finTrimestre = @anioEvaluado+'-09-30'
 		END
-		ELSE IF (@trimestre = 4)
+	ELSE IF (@trimestre = 4)
 		BEGIN 
-			SET @inicioTrimestre = @anioAux+'-10-01'
-			SET @finTrimestre = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioEvaluado+'-10-01'
+			SET @finTrimestre = @anioEvaluado+'-12-31'
 		END
-		ELSE
+	ELSE
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-01-01'
-			SET @finTrimestre = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioEvaluado+'-01-01'
+			SET @finTrimestre = @anioEvaluado+'-12-31'
 		END
 
 SELECT TOP 5 hotel.hotel_codigo, COUNT(resCancel.reservaCancelada_codigoReserva) AS totalCancelaciones 
@@ -1062,41 +1062,41 @@ GO
 
 
 
-CREATE PROCEDURE FAGD.lista_hotel_maxConFacturados @trimestre numeric(18,0), @anio numeric(18,0)
+CREATE PROCEDURE FAGD.ListadoHotelesMayorCantidadConsumFacturados @trimestre numeric(18,0), @anio numeric(18,0)
 AS BEGIN
 		
 	DECLARE @inicioTrimestre DATETIME
 	DECLARE @finTrimestre DATETIME
-	DECLARE @anioAux CHAR(4)
-		SET @anioAux = CAST(@anio AS CHAR(4))
+	DECLARE @anioEvaluado CHAR(4)
+		SET @anioEvaluado = CAST(@anio AS CHAR(4))
 		
-		IF (@trimestre = 1)
+	IF (@trimestre = 1)
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-01-01'
-			SET @finTrimestre = @anioAux+'-03-31'
+			SET @inicioTrimestre = @anioEvaluado+'-01-01'
+			SET @finTrimestre = @anioEvaluado+'-03-31'
 		END
-		ELSE IF (@trimestre = 2)
+	ELSE IF (@trimestre = 2)
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-04-01'
-			SET @finTrimestre = @anioAux+'-06-30'
+			SET @inicioTrimestre = @anioEvaluado+'-04-01'
+			SET @finTrimestre = @anioEvaluado+'-06-30'
 		END
-		ELSE IF (@trimestre = 3)
+	ELSE IF (@trimestre = 3)
 		BEGIN 
-			SET @inicioTrimestre = @anioAux+'-07-01'
-			SET @finTrimestre = @anioAux+'-09-30'
+			SET @inicioTrimestre = @anioEvaluado+'-07-01'
+			SET @finTrimestre = @anioEvaluado+'-09-30'
 		END
-		ELSE IF (@trimestre = 4)
+	ELSE IF (@trimestre = 4)
 		BEGIN 
-			SET @inicioTrimestre = @anioAux+'-10-01'
-			SET @finTrimestre = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioEvaluado+'-10-01'
+			SET @finTrimestre = @anioEvaluado+'-12-31'
 		END
-		ELSE
+	ELSE
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-01-01'
-			SET @finTrimestre = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioEvaluado+'-01-01'
+			SET @finTrimestre = @anioEvaluado+'-12-31'
 		END
 
-SELECT TOP 5 hotel.hotel_codigo, COUNT(C.consumible_codigo) AS Cant_Facturada
+SELECT TOP 5 hotel.hotel_codigo, COUNT(C.consumible_codigo) AS CantidadFacturada
 FROM FAGD.Consumible C, FAGD.ConsumibleXEstadia consxEst, FAGD.Factura F, FAGD.Reserva R, FAGD.ReservaXHabitacion resxh, FAGD.Hotel hotel, FAGD.Habitacion ha, FAGD. Estadia E
 WHERE
      F.factura_codigoEstadia = E.estadia_codigo AND
@@ -1108,45 +1108,45 @@ WHERE
 	 ha.habitacion_codigoHotel = hotel.hotel_codigo AND
 	 F.factura_fecha BETWEEN @inicioTrimestre AND @finTrimestre
 GROUP BY hotel.hotel_codigo
-ORDER BY Cant_Facturada desc
+ORDER BY CantidadFacturada desc
 END
 GO
 
 ---------------------------------------------------------------------------------------------------
 
 
-CREATE PROCEDURE FAGD.lista_hotel_diasFueraServ @trimestre numeric(18,0), @anio numeric(18,0)
+CREATE PROCEDURE FAGD.ListadoHotelesMayorCantidadDiasDeBaja @trimestre numeric(18,0), @anio numeric(18,0)
 AS BEGIN
 		
 	DECLARE @inicioTrimestre DATETIME
 	DECLARE @finTrimestre DATETIME
-	DECLARE @anioAux CHAR(4)
-		SET @anioAux = CAST(@anio AS CHAR(4))
+	DECLARE @anioEvaluado CHAR(4)
+		SET @anioEvaluado = CAST(@anio AS CHAR(4))
 		
-		IF (@trimestre = 1)
+	IF (@trimestre = 1)
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-01-01'
-			SET @finTrimestre = @anioAux+'-03-31'
+			SET @inicioTrimestre = @anioEvaluado+'-01-01'
+			SET @finTrimestre = @anioEvaluado+'-03-31'
 		END
-		ELSE IF (@trimestre = 2)
+	ELSE IF (@trimestre = 2)
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-04-01'
-			SET @finTrimestre = @anioAux+'-06-30'
+			SET @inicioTrimestre = @anioEvaluado+'-04-01'
+			SET @finTrimestre = @anioEvaluado+'-06-30'
 		END
-		ELSE IF (@trimestre = 3)
+	ELSE IF (@trimestre = 3)
 		BEGIN 
-			SET @inicioTrimestre = @anioAux+'-07-01'
-			SET @finTrimestre = @anioAux+'-09-30'
+			SET @inicioTrimestre = @anioEvaluado+'-07-01'
+			SET @finTrimestre = @anioEvaluado+'-09-30'
 		END
-		ELSE IF (@trimestre = 4)
+	ELSE IF (@trimestre = 4)
 		BEGIN 
-			SET @inicioTrimestre = @anioAux+'-10-01'
-			SET @finTrimestre = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioEvaluado+'-10-01'
+			SET @finTrimestre = @anioEvaluado+'-12-31'
 		END
-		ELSE
+	ELSE
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-01-01'
-			SET @finTrimestre = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioEvaluado+'-01-01'
+			SET @finTrimestre = @anioEvaluado+'-12-31'
 		END
 
 
@@ -1179,38 +1179,38 @@ GO
 
 ---------------------------------------------------------------------------------------------------
 
-CREATE PROCEDURE FAGD.lista_habitacion_maxVecesOcup @trimestre numeric(18,0), @Anio numeric(18,0) 
+CREATE PROCEDURE FAGD.ListadoHabitacionesMasVecesUtilizadas @trimestre numeric(18,0), @Anio numeric(18,0) 
 AS BEGIN
 
 DECLARE @inicioTrimestre DATETIME
 	DECLARE @finTrimestre DATETIME
-	DECLARE @anioAux CHAR(4)
-		SET @anioAux = CAST(@anio AS CHAR(4))
+	DECLARE @anioEvaluado CHAR(4)
+		SET @anioEvaluado = CAST(@anio AS CHAR(4))
 		
-		IF (@trimestre = 1)
+	IF (@trimestre = 1)
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-01-01'
-			SET @finTrimestre = @anioAux+'-03-31'
+			SET @inicioTrimestre = @anioEvaluado+'-01-01'
+			SET @finTrimestre = @anioEvaluado+'-03-31'
 		END
-		ELSE IF (@trimestre = 2)
+	ELSE IF (@trimestre = 2)
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-04-01'
-			SET @finTrimestre = @anioAux+'-06-30'
+			SET @inicioTrimestre = @anioEvaluado+'-04-01'
+			SET @finTrimestre = @anioEvaluado+'-06-30'
 		END
-		ELSE IF (@trimestre = 3)
+	ELSE IF (@trimestre = 3)
 		BEGIN 
-			SET @inicioTrimestre = @anioAux+'-07-01'
-			SET @finTrimestre = @anioAux+'-09-30'
+			SET @inicioTrimestre = @anioEvaluado+'-07-01'
+			SET @finTrimestre = @anioEvaluado+'-09-30'
 		END
-		ELSE IF (@trimestre = 4)
+	ELSE IF (@trimestre = 4)
 		BEGIN 
-			SET @inicioTrimestre = @anioAux+'-10-01'
-			SET @finTrimestre = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioEvaluado+'-10-01'
+			SET @finTrimestre = @anioEvaluado+'-12-31'
 		END
-		ELSE
+	ELSE
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-01-01'
-			SET @finTrimestre = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioEvaluado+'-01-01'
+			SET @finTrimestre = @anioEvaluado+'-12-31'
 		END
 
 
@@ -1248,68 +1248,63 @@ GO
 ---------------------------------------------------------------------------------------------------
 
 
-CREATE PROCEDURE FAGD.lista_cliente_maxPuntajes @trimestre numeric(18,0), @anio numeric(18,0)
+CREATE PROCEDURE FAGD.ListadoClientesConMayoresPuntajes @trimestre numeric(18,0), @anio numeric(18,0)
 AS	BEGIN
 		
 	DECLARE @inicioTrimestre DATETIME
 	DECLARE @finTrimestre DATETIME
-	DECLARE @anioAux CHAR(4)
-		SET @anioAux = CAST(@anio AS CHAR(4))
+	DECLARE @anioEvaluado CHAR(4)
+		SET @anioEvaluado = CAST(@anio AS CHAR(4))
 		
-		IF (@trimestre = 1)
+	IF (@trimestre = 1)
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-01-01'
-			SET @finTrimestre = @anioAux+'-03-31'
+			SET @inicioTrimestre = @anioEvaluado+'-01-01'
+			SET @finTrimestre = @anioEvaluado+'-03-31'
 		END
-		ELSE IF (@trimestre = 2)
+	ELSE IF (@trimestre = 2)
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-04-01'
-			SET @finTrimestre = @anioAux+'-06-30'
+			SET @inicioTrimestre = @anioEvaluado+'-04-01'
+			SET @finTrimestre = @anioEvaluado+'-06-30'
 		END
-		ELSE IF (@trimestre = 3)
+	ELSE IF (@trimestre = 3)
 		BEGIN 
-			SET @inicioTrimestre = @anioAux+'-07-01'
-			SET @finTrimestre = @anioAux+'-09-30'
+			SET @inicioTrimestre = @anioEvaluado+'-07-01'
+			SET @finTrimestre = @anioEvaluado+'-09-30'
 		END
-		ELSE IF (@trimestre = 4)
+	ELSE IF (@trimestre = 4)
 		BEGIN 
-			SET @inicioTrimestre = @anioAux+'-10-01'
-			SET @finTrimestre = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioEvaluado+'-10-01'
+			SET @finTrimestre = @anioEvaluado+'-12-31'
 		END
-		ELSE
+	ELSE
 		BEGIN
-			SET @inicioTrimestre = @anioAux+'-01-01'
-			SET @finTrimestre = @anioAux+'-12-31'
+			SET @inicioTrimestre = @anioEvaluado+'-01-01'
+			SET @finTrimestre = @anioEvaluado+'-12-31'
 		END
 
 
-SELECT TOP 5 cli.cliente_codigo, cli.cliente_nombre AS Nombre, cli.cliente_apellido AS Apellido, puntosDeEstadia.Puntos+puntosDeConsumibles.Puntos AS Puntaje
+SELECT TOP 5 cli.cliente_codigo, cli.cliente_nombre AS Nombre, cli.cliente_apellido AS Apellido, puntosPorLaEstadia.Puntos+puntosPorConsumibles.Puntos AS Puntaje
 FROM 
 (SELECT clie.cliente_codigo, est.estadia_codigo, SUM(fact.factura_total) AS Gasto, SUM(fact.factura_total)/10 AS Puntos
 	FROM FAGD.Cliente clie, FAGD.Estadia est, FAGD.Factura fact
 	WHERE clie.cliente_codigo = estadia_clienteCodigo AND
 		  factura_codigoEstadia = est.estadia_codigo AND
 		  fact.factura_fecha BETWEEN @inicioTrimestre AND @finTrimestre
-	GROUP BY clie.cliente_codigo, est.estadia_codigo
-	) AS puntosDeEstadia, 
+	GROUP BY clie.cliente_codigo, est.estadia_codigo) AS puntosPorLaEstadia, 
 
-(SELECT consXEst.estadia_codigo, 
-SUM(I.itemFactura_itemMonto) AS Gasto, 
-SUM(I.itemFactura_itemMonto)/10 AS Puntos
-
+(SELECT consXEst.estadia_codigo,  SUM(I.itemFactura_itemMonto) AS Gasto,  SUM(I.itemFactura_itemMonto)/10 AS Puntos
 	FROM FAGD.ConsumibleXEstadia consXEst, FAGD.Factura F, FAGD.ItemFactura I
 	WHERE consXEst.itemFactura_codigo = I.itemFactura_codigo AND
 		  I.itemFactura_nroFactura = F.factura_nro AND
 		  I.itemFactura_descripcion <> 'Estadia' AND
 		  F.factura_fecha BETWEEN @inicioTrimestre AND @finTrimestre
-	GROUP BY consXEst.estadia_codigo
-	) AS puntosDeConsumibles,
+	GROUP BY consXEst.estadia_codigo) AS puntosPorConsumibles,
 	
 FAGD.Cliente cli, FAGD.Estadia est, FAGD.Reserva res
 WHERE cli.cliente_codigo = res.reserva_clienteCodigo AND
 		est.estadia_codigoReserva = res.reserva_codigo AND 
-		puntosDeConsumibles.estadia_codigo = est.estadia_codigo  AND
-		puntosDeEstadia.estadia_codigo = est.estadia_codigo 
+		puntosPorConsumibles.estadia_codigo = est.estadia_codigo  AND
+		puntosPorLaEstadia.estadia_codigo = est.estadia_codigo 
 ORDER BY Puntaje DESC
 END
 GO
@@ -1317,15 +1312,15 @@ GO
 
 ---------------------------------------------------------------------------------------------------
 
-CREATE PROCEDURE FAGD.SetearEstadosReservaSegunConfig @fechaDelSystem DATETIME
+CREATE PROCEDURE FAGD.SetearEstadosReservaSegunConfig @fechaDelConfig DATETIME
 AS BEGIN
 
 DECLARE @respuestaTran numeric(18,0),
         @estadoExpirado numeric(18,0),
 		@estadoVigente numeric(18,0),
-        @fechaAux DATETIME
+        @fechaArchivo DATETIME
 
-SET @fechaAux = CONVERT(DATETIME,@fechaDelSystem,121)
+SET @fechaArchivo = CONVERT(DATETIME,@fechaDelConfig,121)
 
 BEGIN TRAN ta
 BEGIN TRY
@@ -1334,30 +1329,28 @@ DELETE FROM FAGD.ReservaCancelada WHERE reservaCancelada_motivo = 'Cancelada por
 
 SET @estadoExpirado = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA CANCELADA POR NO-SHOW')
 UPDATE FAGD.Reserva
-SET reserva_estado = @estadoExpirado WHERE reserva_codigo IN 
-	(SELECT DISTINCT R.reserva_codigo FROM FAGD.Reserva R
-		WHERE R.reserva_fechaInicio < @fechaAux AND (R.reserva_estado = 1 OR R.reserva_estado = 5))
+SET reserva_estado = @estadoExpirado WHERE reserva_codigo IN (SELECT DISTINCT R.reserva_codigo FROM FAGD.Reserva R
+		WHERE R.reserva_fechaInicio < @fechaArchivo AND (R.reserva_estado = 1 OR R.reserva_estado = 5))
 
 
 SET @estadoVigente = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA CORRECTA')
 UPDATE FAGD.Reserva
-SET reserva_estado = @estadoVigente WHERE reserva_codigo IN 
-	(SELECT DISTINCT R.reserva_codigo FROM FAGD.Reserva R
-		WHERE R.reserva_fechaInicio > @fechaAux AND (R.reserva_estado = 1 OR R.reserva_estado = 5))
+SET reserva_estado = @estadoVigente WHERE reserva_codigo IN (SELECT DISTINCT R.reserva_codigo FROM FAGD.Reserva R
+		WHERE R.reserva_fechaInicio >= @fechaArchivo AND (R.reserva_estado = 1 OR R.reserva_estado = 5))
 
-insert into FAGD.ReservaCancelada(reservaCancelada_nombreUsuario,reservaCancelada_codigoReserva,reservaCancelada_motivo,reservaCancelada_fechaCancelacion)
-			select distinct 'GUEST',reserva_codigo,'Cancelada por no-show al inicio del sistema',reserva_fechaInicio 
-			from FAGD.Reserva where	reserva_estado = @estadoExpirado
+INSERT INTO FAGD.ReservaCancelada(reservaCancelada_nombreUsuario,reservaCancelada_codigoReserva,reservaCancelada_motivo,reservaCancelada_fechaCancelacion)
+			SELECT DISTINCT 'GUEST',reserva_codigo,'Cancelada por no-show al inicio del sistema',reserva_fechaInicio 
+			FROM FAGD.Reserva WHERE	reserva_estado = @estadoExpirado
 						
 				
  SET @respuestaTran = 1
-	SELECT @respuestaTran AS respuesta
+	SELECT @respuestaTran
 COMMIT TRAN ta
 END TRY
 BEGIN CATCH
 ROLLBACK TRAN ta
 SET @respuestaTran=0
-SELECT @respuestaTran AS respuesta
+SELECT @respuestaTran
 END CATCH
 END
 GO
@@ -1365,94 +1358,63 @@ GO
 
 ---------------------------------------------------------------------------------------------------
 
-CREATE PROCEDURE FAGD.CheckinParaEstadia @reservaNro numeric(18,0), @username nvarchar(255), @fechaInicio datetime
+CREATE PROCEDURE FAGD.CheckinParaEstadia @reservaNro numeric(18,0), @username nvarchar(255), @fechaInicio DATETIME
 AS BEGIN
 
-DECLARE @fechaIngreso datetime
-SET @fechaIngreso = CONVERT(datetime,@fechaInicio,121)
+
 
 DECLARE @respuestaTran numeric(18,0),
 		@precioNoche numeric(18,0),
 		@cantNoches numeric(18,0),
-		@estado numeric(18,0)
-BEGIN TRAN ta
-BEGIN TRY
-    SET @estado = (SELECT E.estado_codigo FROM FAGD.Estado E WHERE E.estado_descripcion = 'RESERVA EFECTIVIZADA')
-    SET @cantNoches = (SELECT R.reserva_cantNoches FROM FAGD.Reserva R WHERE R.reserva_codigo = @reservaNro)
-    SET @precioNoche = (SELECT R.reserva_costoTotal FROM FAGD.Reserva R WHERE R.reserva_codigo = @reservaNro)/@cantNoches
-  	INSERT INTO FAGD.Estadia(estadia_codigoReserva, estadia_fechaInicio, estadia_usuarioRegistrador, estadia_precioNoche, estadia_cantNoches) VALUES(@reservaNro,@fechaIngreso,@username,@precioNoche,@cantNoches);
-  	UPDATE FAGD.Reserva SET Reserva.reserva_estado=@estado WHERE Reserva.reserva_codigo = @reservaNro
-	SET @respuestaTran =(SELECT E.estadia_codigo FROM FAGD.Estadia E WHERE E.estadia_codigoReserva = @reservaNro and E.estadia_fechaInicio=@fechaIngreso)
-	SELECT @respuestaTran as respuesta
+		@fechaIngreso DATETIME,
+		@estadoEfectivo numeric(18,0)
 
-COMMIT TRAN ta
+SET @fechaIngreso = CONVERT(DATETIME,@fechaInicio,121)
+
+BEGIN TRAN transacc
+BEGIN TRY
+
+	SET @estadoEfectivo = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA EFECTIVIZADA')
+    SET @cantNoches = (SELECT reserva_cantNoches FROM FAGD.Reserva WHERE reserva_codigo = @reservaNro)
+    SET @precioNoche = (SELECT (reserva_costoTotal)/@cantNoches FROM FAGD.Reserva WHERE reserva_codigo = @reservaNro)
+
+  	INSERT INTO FAGD.Estadia(estadia_codigoReserva, estadia_fechaInicio, estadia_usuarioRegistrador, estadia_precioNoche, estadia_cantNoches)
+	VALUES(@reservaNro,@fechaIngreso,@username,@precioNoche,@cantNoches);
+
+  	UPDATE FAGD.Reserva SET reserva_estado = @estadoEfectivo WHERE reserva_codigo = @reservaNro
+	SET @respuestaTran = (SELECT SCOPE_IDENTITY())
+	
+	SELECT @respuestaTran AS respuestaDeLaTransacc
+COMMIT TRAN transacc
 END TRY
 BEGIN CATCH
-ROLLBACK TRAN ta
-SET @respuestaTran=0
-SELECT @respuestaTran AS respuesta
+ROLLBACK TRAN transacc
+SET @respuestaTran = 0
+SELECT @respuestaTran AS respuestaDeLaTransacc
 END CATCH
 END
 GO
+
 
 ------------------------------------------------------------------------------
 
 
-CREATE PROCEDURE FAGD.generarFactura  @estadia numeric(18,0), @modalidadPago numeric(18,0), @fechaInicio datetime
+CREATE PROC FAGD.RegistrarEstadiaXCliente @clienteCodigo numeric(18,0), @estadiaCodigo numeric(18,0)
 AS BEGIN
 
-DECLARE @fecha datetime
-SET @fecha = CONVERT(datetime,@fechaInicio,121)
-DECLARE @resultado numeric(18,0),
-		@regimen numeric(18,0),
-		@reserva numeric(18,0),
-		@totalAPagar numeric(18,2),
-		@cliente numeric(18,0)
-BEGIN TRAN ta
+DECLARE @respuestatran numeric(18,0)
+BEGIN TRAN transacc
 BEGIN TRY
-		SET @reserva = (SELECT estadia_codigoReserva FROM FAGD.Estadia WHERE estadia_codigo = @estadia);
-		SET @cliente = (SELECT reserva_clienteCodigo FROM FAGD.Reserva WHERE reserva_codigo = @reserva);
-		SET @regimen = (SELECT reserva_codigoRegimen FROM FAGD.Reserva WHERE reserva_codigo = @reserva);
-		if ( @regimen != 3 )
-	BEGIN
-	SET @totalAPagar = FAGD.calcularCostosEstadia(@estadia) + FAGD.calcularCostosConsumible(@estadia);
-	INSERT INTO FAGD.Factura(factura_codigoEstadia,factura_modalidadPago,factura_clienteCodigo,factura_fecha,factura_total)
-	 VALUES (@estadia,@modalidadPago,@cliente,@fecha,@totalAPagar);
-	END
-	ELSE BEGIN
-	SET @totalAPagar = FAGD.calcularCostosEstadia(@estadia);
-	INSERT INTO FAGD.Factura(factura_codigoEstadia,factura_modalidadPago,factura_clienteCodigo,factura_fecha,factura_total)
-	 VALUES (@estadia,@modalidadPago,@cliente,@fecha,@totalAPagar);
-	END
-		SET @resultado =(SELECT factura_nro FROM FAGD.Factura WHERE factura_codigoEstadia = @estadia and factura_fecha = @fecha)
-		SELECT @resultado as resultado
-COMMIT TRAN	ta
+	INSERT INTO FAGD.ClienteXEstadia (cliente_codigo,estadia_codigo) 
+	VALUES (@clienteCodigo,@estadiaCodigo);
+	SET @respuestatran = (SELECT estadia_codigo FROM FAGD.ClienteXEstadia WHERE estadia_codigo = @estadiaCodigo AND cliente_codigo = @clienteCodigo)
+	SELECT @respuestatran
+COMMIT TRAN transacc
 END TRY
 BEGIN CATCH
-ROLLBACK TRAN ta
-SET @resultado=0
-SELECT @resultado as resultado
-END CATCH
-END
-GO
-
------------------------------------------------------------
-
-CREATE PROC FAGD.RegistrarEstadiaXCliente @clienteNro numeric(18,0), @estadiaNro numeric(18,0)
-AS BEGIN
-
-DECLARE @respuesta numeric(18,0)
-BEGIN TRAN ta
-BEGIN TRY
-	INSERT INTO FAGD.ClienteXEstadia (cliente_codigo,estadia_codigo) VALUES (@clienteNro,@estadiaNro);
-	SET @respuesta = (SELECT estadia_codigo FROM FAGD.ClienteXEstadia WHERE estadia_codigo = @estadiaNro AND cliente_codigo = @clienteNro)
-	SELECT @respuesta as respuesta
-COMMIT TRAN ta
-END TRY
-BEGIN CATCH
-ROLLBACK TRAN ta
-SET @respuesta=0
-SELECT @respuesta AS respuesta
+ROLLBACK TRAN transacc
+SET @respuestatran=0
+SELECT @respuestatran
 END CATCH
 END
 GO
@@ -1462,39 +1424,42 @@ GO
 CREATE PROC FAGD.ModificarClienteXEstadia @habitacion numeric(18,0), @cliente numeric(18,0), @estadia numeric(18,0)
 AS BEGIN
 
-DECLARE @respuesta numeric(18,0)
-BEGIN TRAN ta
+DECLARE @respuestaTran numeric(18,0)
+BEGIN TRAN transacc
 BEGIN TRY
 	UPDATE FAGD.ClienteXEstadia
 	SET habitacion_codigo = @habitacion WHERE estadia_codigo = @estadia AND cliente_codigo = @cliente
-	SET @respuesta = 1
-	SELECT @respuesta AS respuesta
-COMMIT TRAN ta
+	SET @respuestaTran = 1
+	SELECT @respuestaTran
+COMMIT TRAN transacc
 END TRY
 BEGIN CATCH
-ROLLBACK TRAN ta
-SET @respuesta=0
-SELECT @respuesta AS respuesta
+ROLLBACK TRAN transacc
+SET @respuestaTran=0
+SELECT @respuestaTran
 END CATCH
 END
 GO
 
 ------------------------------------------------------------------------------
 
-CREATE PROC FAGD.CheckoutParaEstadia @nroEstadia numeric(18,0), @fechaDelCheckout datetime, @username nvarchar(255)
+CREATE PROC FAGD.CheckoutParaEstadia @nroEstadia numeric(18,0), @fechaDelCheckout DATETIME, @username nvarchar(255)
 AS BEGIN
+ 
 
-DECLARE @nuevafechaEgreso datetime
-SET @nuevafechaEgreso = CONVERT(datetime,@fechaDelCheckout,121)
-DECLARE @respuesta numeric(18,0),
+DECLARE @respuestaTran numeric(18,0),
 		@cantDias numeric(18,0),
 		@diasSobrantes numeric(18,0),
 		@precioNoche numeric(18,0),
 		@nroReserva numeric(18,0),
 		@resHasta datetime,
+		@nuevafechaEgreso DATETIME,
 		@factura numeric(18,0),
 		@montoEstadia numeric(18,0)
-BEGIN TRAN ta
+
+SET @nuevafechaEgreso = CONVERT(DATETIME,@fechaDelCheckout,121)
+
+BEGIN TRAN transacc
 BEGIN TRY
 	SET @cantDias = DATEDIFF(day,(SELECT estadia_fechaInicio FROM FAGD.Estadia WHERE estadia_codigo = @nroEstadia ),@nuevafechaEgreso);
 	SET @nroReserva = (SELECT estadia_codigoReserva FROM FAGD.Estadia WHERE estadia_codigo = @nroEstadia);
@@ -1514,15 +1479,15 @@ BEGIN TRY
 	
 	INSERT INTO FAGD.ItemFactura(itemFactura_nroFactura,itemFactura_descripcion,itemFactura_cantidad,itemFactura_itemMonto)
 	VALUES(@factura,'Estadia',1, @montoEstadia)
-	SET @respuesta = 1;
-	SELECT @respuesta AS respuesta;
+	SET @respuestaTran = 1;
+	SELECT @respuestaTran
 	
-COMMIT TRAN ta
+COMMIT TRAN transacc
 END TRY
 BEGIN CATCH
-ROLLBACK TRAN ta
-SET @respuesta=0
-SELECT @respuesta AS respuesta
+ROLLBACK TRAN transacc
+SET @respuestaTran=0
+SELECT @respuestaTran 
 END CATCH
 END
 GO
@@ -1532,13 +1497,13 @@ GO
 CREATE PROCEDURE FAGD.RegistrarConsuXEstXHabitacion @estadiaCodigo numeric(18,0), @consumibleCodigo numeric(18,0), @habCodigo numeric(18,0)
 AS BEGIN
 
-DECLARE @respuesta numeric(18,0)
+DECLARE @respuestaTran numeric(18,0)
 DECLARE @itemFacturaAUpdatear numeric(18,0)
 DECLARE @descripcionItem nvarchar(255)
 DECLARE @factura numeric(18,0)
 DECLARE @precio numeric(18,0)
 
-BEGIN TRAN transac
+BEGIN TRAN transacc
 BEGIN TRY
 
 		SET @precio = (SELECT consumible_precio FROM FAGD.Consumible WHERE consumible_codigo = @consumibleCodigo)
@@ -1568,31 +1533,79 @@ BEGIN TRY
 		VALUES (@estadiaCodigo,@consumibleCodigo,@habCodigo,@itemFacturaAUpdatear)
 
 		END
-		SET @respuesta = 1
-		SELECT @respuesta AS respuesta
-COMMIT TRAN transac
+		SET @respuestaTran = 1
+		SELECT @respuestaTran
+COMMIT TRAN transacc
 END TRY
 BEGIN CATCH
-ROLLBACK TRAN transac
-SET @respuesta = 0
-SELECT @respuesta AS respuesta
+ROLLBACK TRAN transacc
+SET @respuestaTran = 0
+SELECT @respuestaTran
 END CATCH
 END
 GO
 
-------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
-CREATE PROC FAGD.ActualizarFactura @estadiaCodigo numeric(18,0), @modalidadPago numeric(18,0), @inicioDeEstadia datetime
+CREATE PROCEDURE FAGD.RegistrarDatosInicialesFactura  @estadia numeric(18,0), @fechaActual DATETIME
 AS BEGIN
 
-DECLARE @fechaDeFacturacionDefinitiva datetime
-SET @fechaDeFacturacionDefinitiva = CONVERT(datetime,@inicioDeEstadia,121)
+
+
+DECLARE @respuestaTran numeric(18,0),
+		@regimenEstadia numeric(18,0),
+		@reservaAsociada numeric(18,0),
+		@fechaEmision DATETIME,
+		@totalAPagar numeric(18,2),
+		@cliente numeric(18,0)
+
+SET @fechaEmision = CONVERT(DATETIME,@fechaActual,121)
+
+BEGIN TRAN transacc
+BEGIN TRY
+		SET @reservaAsociada = (SELECT estadia_codigoReserva FROM FAGD.Estadia WHERE estadia_codigo = @estadia);
+		SET @cliente = (SELECT reserva_clienteCodigo FROM FAGD.Reserva WHERE reserva_codigo = @reservaAsociada);
+		SET @regimenEstadia = (SELECT reserva_codigoRegimen FROM FAGD.Reserva WHERE reserva_codigo = @reservaAsociada);
+	IF (@regimenEstadia != 3)
+	BEGIN
+	--Si hubieron consumiciones
+	SET @totalAPagar = FAGD.calcularCostosEstadia(@estadia) + FAGD.calcularCostosConsumible(@estadia);
+	INSERT INTO FAGD.Factura(factura_codigoEstadia,factura_modalidadPago,factura_clienteCodigo,factura_fecha,factura_total)
+	 VALUES (@estadia,@cliente,@fechaEmision,@totalAPagar);
+	END
+	ELSE BEGIN
+	--Si no las hubieron
+	SET @totalAPagar = FAGD.calcularCostosEstadia(@estadia);
+	INSERT INTO FAGD.Factura(factura_codigoEstadia,factura_modalidadPago,factura_clienteCodigo,factura_fecha,factura_total)
+	 VALUES (@estadia,@cliente,@fechaEmision,@totalAPagar);
+	END
+		SET @respuestaTran = (SELECT SCOPE_IDENTITY())
+		SELECT @respuestaTran
+COMMIT TRAN	transacc
+END TRY
+BEGIN CATCH
+ROLLBACK TRAN transacc
+SET @respuestaTran = 0
+SELECT @respuestaTran
+END CATCH
+END
+GO
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE PROC FAGD.EmitirFacturaActualizada @estadiaCodigo numeric(18,0), @modalidadPago numeric(18,0), @inicioDeEstadia DATETIME
+AS BEGIN
+
 DECLARE @regimenEstadia numeric(18,0),
 		@reservaAsociada numeric(18,0),
 		@totalAPagar numeric(18,2),
 		@clienteAsociado numeric(18,0),
 		@factura numeric(18,0),
-		@resultado numeric(18,0)
+		@respuestaTran numeric(18,0),
+		@fechaDeFacturacionDefinitiva DATETIME
+
+SET @fechaDeFacturacionDefinitiva = CONVERT(DATETIME,@inicioDeEstadia,121)
 
 BEGIN TRAN transacc
 BEGIN TRY
@@ -1600,7 +1613,7 @@ BEGIN TRY
 		  SET @regimenEstadia = (SELECT reserva_codigoRegimen FROM FAGD.Reserva WHERE reserva_codigo = @reservaAsociada)
 		  SET @factura = (SELECT factura_nro FROM FAGD.Factura WHERE factura_codigoEstadia = @estadiaCodigo)
 		  SET @clienteAsociado = (SELECT reserva_clienteCodigo FROM FAGD.Reserva WHERE reserva_codigo = @reservaAsociada)
-      IF ( @regimenEstadia != 3 )
+      IF (@regimenEstadia != 3)
 		  BEGIN
 		  SET @totalAPagar = FAGD.calcularCostosEstadia(@estadiaCodigo) + FAGD.calcularCostosConsumible(@estadiaCodigo);
 		UPDATE FAGD.Factura
@@ -1609,41 +1622,43 @@ BEGIN TRY
 	      END
 		 ELSE BEGIN
 			SET @totalAPagar = FAGD.calcularCostosEstadia(@estadiaCodigo);
-			UPDATE FAGD.Factura
+		UPDATE FAGD.Factura
 			SET factura_modalidadPago = @modalidadPago, factura_fecha = @fechaDeFacturacionDefinitiva, factura_total = @totalAPagar
 			WHERE factura_nro = @factura
 		END
-	SET @resultado = (SELECT factura_nro FROM FAGD.Factura WHERE factura_codigoEstadia = @estadiaCodigo AND factura_fecha = @fechaDeFacturacionDefinitiva)
-	SELECT @resultado AS resultado
+	SET @respuestaTran = (SELECT SCOPE_IDENTITY())
+	SELECT @respuestaTran
 COMMIT TRAN	transacc
 END TRY
 BEGIN CATCH
 ROLLBACK TRAN transacc
-	SET @resultado=0
-	SELECT @resultado AS resultado
+	SET @respuestaTran=0
+	SELECT @respuestaTran
 END CATCH
 END
 GO
 
-------------------------------------------------------------------------------
 
-CREATE PROC FAGD.AsociarTarjeta  @factura numeric(18), @entidad nvarchar(255), @numero numeric(18), @banco nvarchar(255), @titular nvarchar(255)
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE PROC FAGD.AsociarTarjetaParaPago  @factura numeric(18), @entidadFinanc nvarchar(255), @numeroTarj numeric(18), @banco nvarchar(255), @titular nvarchar(255)
 AS BEGIN
 
-DECLARE @resultadoTransacc numeric(18,0)
+DECLARE @resultadoTran numeric(18,0)
 BEGIN TRAN transacc
 	BEGIN TRY
 			INSERT INTO FAGD.Tarjeta(tarjeta_numero, tarjeta_banco, tarjeta_entidadFinanciera, tarjeta_titular) 
-			VALUES (@numero, @banco, @entidad, @titular)
-			UPDATE FAGD.Factura SET factura_tarjeta = (SELECT SCOPE_IDENTITY()) WHERE factura_nro = @factura
-			SET @resultadoTransacc = 1;
-SELECT @resultadoTransacc AS resultado;
+			VALUES (@numeroTarj, @banco, @entidadFinanc, @titular)
+			UPDATE FAGD.Factura SET factura_tarjeta = (SELECT SCOPE_IDENTITY())
+			WHERE factura_nro = @factura
+			SET @resultadoTran = 1;
+SELECT @resultadoTran
 COMMIT TRAN transacc
 END TRY
 BEGIN CATCH
 ROLLBACK TRAN transacc
-SET @resultadoTransacc = 0
-SELECT @resultadoTransacc AS resultado
+SET @resultadoTran = 0
+SELECT @resultadoTran
 END CATCH
 END
 GO
