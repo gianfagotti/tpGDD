@@ -1042,39 +1042,14 @@ GO
 
 -----------------------	 CREACI�N DE PROCEDURES PARA LA APLICACI�N   ----------------------- 
 
-CREATE PROCEDURE FAGD.ListadoHotelesMayorCantidadReservasCanceladas @trimestre numeric(18,0), @anio numeric(18,0)
+CREATE PROCEDURE FAGD.ListadoHotelesMayorCantidadReservasCanceladas @trimestreInicio DATETIME, @trimestreFin DATETIME
 AS	BEGIN
 		
 	DECLARE @inicioTrimestre DATETIME
 	DECLARE @finTrimestre DATETIME
-	DECLARE @anioEvaluado CHAR(4)
-		SET @anioEvaluado = CAST(@anio AS CHAR(4))
-		
-	IF (@trimestre = 1)
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-01-01'
-			SET @finTrimestre = @anioEvaluado+'-03-31'
-		END
-	ELSE IF (@trimestre = 2)
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-04-01'
-			SET @finTrimestre = @anioEvaluado+'-06-30'
-		END
-	ELSE IF (@trimestre = 3)
-		BEGIN 
-			SET @inicioTrimestre = @anioEvaluado+'-07-01'
-			SET @finTrimestre = @anioEvaluado+'-09-30'
-		END
-	ELSE IF (@trimestre = 4)
-		BEGIN 
-			SET @inicioTrimestre = @anioEvaluado+'-10-01'
-			SET @finTrimestre = @anioEvaluado+'-12-31'
-		END
-	ELSE
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-01-01'
-			SET @finTrimestre = @anioEvaluado+'-12-31'
-		END
+	
+	SET @inicioTrimestre = CONVERT(DATETIME,@trimestreInicio,121)
+	SET @finTrimestre = CONVERT(DATETIME,@trimestreFin,121)
 
 SELECT TOP 5 hotel.hotel_codigo AS CodigoDelHotel, COUNT(resCancel.reservaCancelada_codigoReserva) AS totalCancelaciones 
 
@@ -1096,39 +1071,14 @@ GO
 
 
 
-CREATE PROCEDURE FAGD.ListadoHotelesMayorCantidadConsumFacturados @trimestre numeric(18,0), @anio numeric(18,0)
+CREATE PROCEDURE FAGD.ListadoHotelesMayorCantidadConsumFacturados @trimestreInicio DATETIME, @trimestreFin DATETIME
 AS BEGIN
 		
 	DECLARE @inicioTrimestre DATETIME
 	DECLARE @finTrimestre DATETIME
-	DECLARE @anioEvaluado CHAR(4)
-		SET @anioEvaluado = CAST(@anio AS CHAR(4))
-		
-	IF (@trimestre = 1)
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-01-01'
-			SET @finTrimestre = @anioEvaluado+'-03-31'
-		END
-	ELSE IF (@trimestre = 2)
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-04-01'
-			SET @finTrimestre = @anioEvaluado+'-06-30'
-		END
-	ELSE IF (@trimestre = 3)
-		BEGIN 
-			SET @inicioTrimestre = @anioEvaluado+'-07-01'
-			SET @finTrimestre = @anioEvaluado+'-09-30'
-		END
-	ELSE IF (@trimestre = 4)
-		BEGIN 
-			SET @inicioTrimestre = @anioEvaluado+'-10-01'
-			SET @finTrimestre = @anioEvaluado+'-12-31'
-		END
-	ELSE
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-01-01'
-			SET @finTrimestre = @anioEvaluado+'-12-31'
-		END
+
+	SET @inicioTrimestre = CONVERT(DATETIME,@trimestreInicio,121)
+	SET @finTrimestre = CONVERT(DATETIME,@trimestreFin,121)
 
 SELECT TOP 5 hotel.hotel_codigo AS CodigoDelHotel, COUNT(C.consumible_codigo) AS CantidadFacturada
 FROM FAGD.Consumible C, FAGD.ConsumibleXEstadia consxEst, FAGD.Factura F, FAGD.Reserva R, FAGD.ReservaXHabitacion resxh, FAGD.Hotel hotel, FAGD.Habitacion ha, FAGD. Estadia E
@@ -1149,40 +1099,14 @@ GO
 ---------------------------------------------------------------------------------------------------
 
 
-CREATE PROCEDURE FAGD.ListadoHotelesMayorCantidadDiasDeBaja @trimestre numeric(18,0), @anio numeric(18,0)
+CREATE PROCEDURE FAGD.ListadoHotelesMayorCantidadDiasDeBaja @trimestreInicio DATETIME, @trimestreFin DATETIME
 AS BEGIN
 		
 	DECLARE @inicioTrimestre DATETIME
 	DECLARE @finTrimestre DATETIME
-	DECLARE @anioEvaluado CHAR(4)
-		SET @anioEvaluado = CAST(@anio AS CHAR(4))
-		
-	IF (@trimestre = 1)
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-01-01'
-			SET @finTrimestre = @anioEvaluado+'-03-31'
-		END
-	ELSE IF (@trimestre = 2)
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-04-01'
-			SET @finTrimestre = @anioEvaluado+'-06-30'
-		END
-	ELSE IF (@trimestre = 3)
-		BEGIN 
-			SET @inicioTrimestre = @anioEvaluado+'-07-01'
-			SET @finTrimestre = @anioEvaluado+'-09-30'
-		END
-	ELSE IF (@trimestre = 4)
-		BEGIN 
-			SET @inicioTrimestre = @anioEvaluado+'-10-01'
-			SET @finTrimestre = @anioEvaluado+'-12-31'
-		END
-	ELSE
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-01-01'
-			SET @finTrimestre = @anioEvaluado+'-12-31'
-		END
 
+	SET @inicioTrimestre = CONVERT(DATETIME,@trimestreInicio,121)
+	SET @finTrimestre = CONVERT(DATETIME,@trimestreFin,121)
 
 SELECT TOP 5 bajaTotal.CodigoDelHotel AS CodigoDelHotel, hotel.hotel_calle ,SUM(bajaTotal.Dias) AS DiasDeBaja 
 FROM
@@ -1213,40 +1137,14 @@ GO
 
 ---------------------------------------------------------------------------------------------------
 
-CREATE PROCEDURE FAGD.ListadoHabitacionesMasVecesUtilizadas @trimestre numeric(18,0), @Anio numeric(18,0) 
+CREATE PROCEDURE FAGD.ListadoHabitacionesMasVecesUtilizadas @trimestreInicio DATETIME, @trimestreFin DATETIME 
 AS BEGIN
 
-DECLARE @inicioTrimestre DATETIME
+	DECLARE @inicioTrimestre DATETIME
 	DECLARE @finTrimestre DATETIME
-	DECLARE @anioEvaluado CHAR(4)
-		SET @anioEvaluado = CAST(@anio AS CHAR(4))
-		
-	IF (@trimestre = 1)
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-01-01'
-			SET @finTrimestre = @anioEvaluado+'-03-31'
-		END
-	ELSE IF (@trimestre = 2)
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-04-01'
-			SET @finTrimestre = @anioEvaluado+'-06-30'
-		END
-	ELSE IF (@trimestre = 3)
-		BEGIN 
-			SET @inicioTrimestre = @anioEvaluado+'-07-01'
-			SET @finTrimestre = @anioEvaluado+'-09-30'
-		END
-	ELSE IF (@trimestre = 4)
-		BEGIN 
-			SET @inicioTrimestre = @anioEvaluado+'-10-01'
-			SET @finTrimestre = @anioEvaluado+'-12-31'
-		END
-	ELSE
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-01-01'
-			SET @finTrimestre = @anioEvaluado+'-12-31'
-		END
-
+	
+	SET @inicioTrimestre = CONVERT(DATETIME,@trimestreInicio,121)
+	SET @finTrimestre = CONVERT(DATETIME,@trimestreFin,121)
 
 SELECT DISTINCT TOP 5 ha.habitacion_codigoHotel AS CodigoDelHotel, ha.habitacion_codigo AS CodigoDeLaHabitacion, consultaOcupacionHab.cantEstadias AS VecesOcupada
 
@@ -1274,40 +1172,14 @@ GO
 ---------------------------------------------------------------------------------------------------
 
 
-CREATE PROCEDURE FAGD.ListadoClientesConMayoresPuntajes @trimestre numeric(18,0), @anio numeric(18,0)
+CREATE PROCEDURE FAGD.ListadoClientesConMayoresPuntajes @trimestreInicio DATETIME, @trimestreFin DATETIME
 AS	BEGIN
 		
 	DECLARE @inicioTrimestre DATETIME
 	DECLARE @finTrimestre DATETIME
-	DECLARE @anioEvaluado CHAR(4)
-		SET @anioEvaluado = CAST(@anio AS CHAR(4))
-		
-	IF (@trimestre = 1)
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-01-01'
-			SET @finTrimestre = @anioEvaluado+'-03-31'
-		END
-	ELSE IF (@trimestre = 2)
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-04-01'
-			SET @finTrimestre = @anioEvaluado+'-06-30'
-		END
-	ELSE IF (@trimestre = 3)
-		BEGIN 
-			SET @inicioTrimestre = @anioEvaluado+'-07-01'
-			SET @finTrimestre = @anioEvaluado+'-09-30'
-		END
-	ELSE IF (@trimestre = 4)
-		BEGIN 
-			SET @inicioTrimestre = @anioEvaluado+'-10-01'
-			SET @finTrimestre = @anioEvaluado+'-12-31'
-		END
-	ELSE
-		BEGIN
-			SET @inicioTrimestre = @anioEvaluado+'-01-01'
-			SET @finTrimestre = @anioEvaluado+'-12-31'
-		END
-
+	
+	SET @inicioTrimestre = CONVERT(DATETIME,@trimestreInicio,121)
+	SET @finTrimestre = CONVERT(DATETIME,@trimestreFin,121)
 
 SELECT TOP 5 cli.cliente_codigo, cli.cliente_nombre AS Nombre, cli.cliente_apellido AS Apellido, puntosPorLaEstadia.Puntos+puntosPorConsumibles.Puntos AS Puntaje
 FROM 

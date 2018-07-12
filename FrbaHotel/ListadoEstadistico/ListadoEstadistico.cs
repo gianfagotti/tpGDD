@@ -26,10 +26,10 @@ namespace FrbaHotel.ListadoEstadistico
             cboCateg.Items.Insert(2, "Hotel con mas dias fuera de servicio");
             cboCateg.Items.Insert(3, "Habitacion mayor cantidad de veces ocupada");
             cboCateg.Items.Insert(4, "Cliente con mayor cantidad de puntos");
-            cboTrim.Items.Add("1");
-            cboTrim.Items.Add("2");
-            cboTrim.Items.Add("3");
-            cboTrim.Items.Add("4");
+            cboTrim.Items.Insert(0,"1");
+            cboTrim.Items.Insert(1,"2");
+            cboTrim.Items.Insert(2,"3");
+            cboTrim.Items.Insert(3,"4");
 
         }
 
@@ -65,25 +65,46 @@ namespace FrbaHotel.ListadoEstadistico
                 MessageBox.Show("Falta seleccionar el año de evaluación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            string trimestreInicio = "";
+            string trimestreFin = "";
+                switch (cboTrim.SelectedIndex)
+            {
+                case 0:
+                    trimestreInicio = dtpAnio.Text + "-01-01";
+                    trimestreFin = dtpAnio.Text + "-03-31";
+                    break;
+                case 1:
+                    trimestreInicio = dtpAnio.Text + "-04-01";
+                    trimestreFin = dtpAnio.Text + "-06-30";
+                    break;
+                case 2:
+                    trimestreInicio = dtpAnio.Text + "-07-01";
+                    trimestreFin = dtpAnio.Text + "-09-30";
+                    break;
+                case 3:
+                    trimestreInicio = dtpAnio.Text + "-10-01";
+                    trimestreFin = dtpAnio.Text + "-12-31";
+                    break;
+             
 
-
-            String categoriaSeleccionada = "";
+            }
+            string categoriaSeleccionada = "";
             switch (cboCateg.SelectedIndex)
             {
                 case 0:
-                    categoriaSeleccionada = "EXEC FAGD.ListadoHotelesMayorCantidadReservasCanceladas " + cboTrim.Text + ", " + dtpAnio.Text;
+                    categoriaSeleccionada = "EXEC FAGD.ListadoHotelesMayorCantidadReservasCanceladas '" + trimestreInicio + "','" + trimestreFin + "'";
                     break;
                 case 1:
-                    categoriaSeleccionada = "EXEC FAGD.ListadoHotelesMayorCantidadConsumFacturados " + cboTrim.Text + ", " + dtpAnio.Text;
+                    categoriaSeleccionada = "EXEC FAGD.ListadoHotelesMayorCantidadConsumFacturados '" + trimestreInicio + "','" + trimestreFin + "'";
                     break;
                 case 2:
-                    categoriaSeleccionada = "EXEC FAGD.ListadoHotelesMayorCantidadDiasDeBaja " + cboTrim.Text + ", " + dtpAnio.Text;
+                    categoriaSeleccionada = "EXEC FAGD.ListadoHotelesMayorCantidadDiasDeBaja '" + trimestreInicio + "','" + trimestreFin + "'";
                     break;
                 case 3:
-                    categoriaSeleccionada = "EXEC FAGD.ListadoHabitacionesMasVecesUtilizadas " + cboTrim.Text + ", " + dtpAnio.Text;
+                    categoriaSeleccionada = "EXEC FAGD.ListadoHabitacionesMasVecesUtilizadas '" + trimestreInicio + "','" + trimestreFin + "'";
                     break;
                 case 4:
-                    categoriaSeleccionada = "EXEC FAGD.ListadoClientesConMayoresPuntajes " + cboTrim.Text + ", " + dtpAnio.Text;
+                    categoriaSeleccionada = "EXEC FAGD.ListadoClientesConMayoresPuntajes '" + trimestreInicio + "','" + trimestreFin + "'";
                     break;
 
             }
