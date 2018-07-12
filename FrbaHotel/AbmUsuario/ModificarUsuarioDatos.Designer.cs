@@ -95,7 +95,15 @@
             // 
             // cboDocumento
             // 
+            this.cboDocumento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDocumento.FormattingEnabled = true;
+            this.cboDocumento.Items.AddRange(new object[] {
+            "DNI",
+            "PASAPORTE",
+            "CARNET EXT.",
+            "RUC",
+            "P. NACI.",
+            "OTROS"});
             this.cboDocumento.Location = new System.Drawing.Point(116, 117);
             this.cboDocumento.Name = "cboDocumento";
             this.cboDocumento.Size = new System.Drawing.Size(95, 21);

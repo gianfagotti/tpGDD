@@ -43,6 +43,27 @@ namespace FrbaHotel.RegistrarEstadia
 
         }
 
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        } 
+
+
         private void btnCheckin_Click(object sender, EventArgs e)
         {
             
@@ -134,7 +155,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Abort;
+            menuAnterior.Show();
         }
 
         private void FrmCheckin_Load(object sender, EventArgs e)

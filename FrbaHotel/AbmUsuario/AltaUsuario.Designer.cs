@@ -87,8 +87,10 @@
             // 
             this.txtContraseña.Location = new System.Drawing.Point(121, 56);
             this.txtContraseña.Name = "txtContraseña";
+            this.txtContraseña.PasswordChar = '*';
             this.txtContraseña.Size = new System.Drawing.Size(295, 20);
             this.txtContraseña.TabIndex = 2;
+            this.txtContraseña.UseSystemPasswordChar = true;
             // 
             // label3
             // 
@@ -226,6 +228,7 @@
             // 
             // cboRol
             // 
+            this.cboRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRol.FormattingEnabled = true;
             this.cboRol.Location = new System.Drawing.Point(121, 81);
             this.cboRol.Name = "cboRol";
@@ -234,6 +237,7 @@
             // 
             // cboDocumento
             // 
+            this.cboDocumento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDocumento.FormattingEnabled = true;
             this.cboDocumento.Items.AddRange(new object[] {
             "DNI",
@@ -249,6 +253,7 @@
             // 
             // cboHotel
             // 
+            this.cboHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboHotel.FormattingEnabled = true;
             this.cboHotel.Location = new System.Drawing.Point(159, 285);
             this.cboHotel.Name = "cboHotel";

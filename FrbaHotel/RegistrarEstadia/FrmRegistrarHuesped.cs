@@ -48,7 +48,8 @@ namespace FrbaHotel.RegistrarEstadia
             bSource2 = new BindingSource();
             bSource2.DataSource = tablaConInfoClientes;
             dgvHuesped.DataSource = bSource2;
-            query = "SELECT SUM(tipoHa.habitacionTipo_cantHuespedes) FROM FAGD.ReservaXHabitacion resxh, FAGD.Habitacion ha, FAGD.HabitacionTipo tipoHa WHERE tipoHa.habitacion_codigo = ha.habitacion_codigo AND tipoHa.habitacionTipo_codigo=ha.tipo AND resxh.reserva_codigo = " + nroReserva;
+            //Para tener disponible la cantidad de clientes a hospedar
+            query = "SELECT SUM(tipoHa.habitacionTipo_cantHuespedes) FROM FAGD.ReservaXHabitacion resxh, FAGD.Habitacion ha, FAGD.HabitacionTipo tipoHa WHERE resxh.habitacion_codigo = ha.habitacion_codigo AND tipoHa.habitacionTipo_codigo = ha.habitacion_tipoCodigo AND resxh.reserva_codigo = " + nroReserva;
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             if (infoQuery.Read())
             {
@@ -65,7 +66,7 @@ namespace FrbaHotel.RegistrarEstadia
             query = "SELECT cli.cliente_codigo CodigoCli, cli.cliente_nombre Nombre, cli.cliente_apellido Apellido FROM FAGD.Reserva res, FAGD.Cliente cli where res.reserva_clienteCodigo = cli.cliente_codigo and res.reserva_codigo = " + nroReserva;
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             infoQuery.Read();
-            txtTitular.Text = infoQuery.GetString(2) + " " + infoQuery.GetString(3);
+            txtTitular.Text = infoQuery.GetString(1) + " " + infoQuery.GetString(2);
             persDisp = totalPers - 1;
             txtRest.Text = (persDisp).ToString();
             //Defino las variables de cada registro consulta
@@ -79,6 +80,9 @@ namespace FrbaHotel.RegistrarEstadia
             tablaConInfoClientes.Rows.Add(fila);
             txtReserv.Text = nroReserva;
             infoQuery.Close();
+            dgvHuesped.Columns[1].ReadOnly = true;
+            dgvHuesped.Columns[2].ReadOnly = true;
+            dgvHuesped.Columns[3].ReadOnly = true;
         }
 
 
@@ -135,7 +139,6 @@ namespace FrbaHotel.RegistrarEstadia
            
             if (persDisp > 0)
             {
-                this.Hide();
                 AbmCliente.FrmAltaCliente registrarHuesped = new AbmCliente.FrmAltaCliente(this);
                 registrarHuesped.Show();
             }

@@ -80,6 +80,7 @@
             // 
             // cboMode
             // 
+            this.cboMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMode.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboMode.FormattingEnabled = true;
             this.cboMode.Location = new System.Drawing.Point(347, 76);

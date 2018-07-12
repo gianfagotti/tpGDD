@@ -40,6 +40,9 @@ namespace FrbaHotel.RegistrarConsumible
             bSourceReg = new BindingSource();
             bSourceReg.DataSource = tablaConDatosConsumARegis;
             dgvConsReg.DataSource = bSourceReg;
+            dgvConsReg.Columns[1].ReadOnly = true;
+            dgvConsReg.Columns[2].ReadOnly = true;
+            dgvConsReg.Columns[3].ReadOnly = true;
         }
 
 
@@ -51,6 +54,9 @@ namespace FrbaHotel.RegistrarConsumible
             BindingSource bSourceConsum = new BindingSource();
             bSourceConsum.DataSource = tablaConDatosConsum;    
             dgvCons.DataSource = bSourceConsum;
+            dgvCons.Columns[1].ReadOnly = true;
+            dgvCons.Columns[2].ReadOnly = true;
+            dgvCons.Columns[3].ReadOnly = true;
             
         }
 
@@ -70,21 +76,6 @@ namespace FrbaHotel.RegistrarConsumible
             formAnterior.Show();
         }
 
-        private void dgvCons_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 0)
-            {
-                string codigoConsu = dgvCons.CurrentRow.Cells[1].Value.ToString();
-                string descripcionConsu = dgvCons.CurrentRow.Cells[2].Value.ToString();
-                string precioConsu = dgvCons.CurrentRow.Cells[3].Value.ToString();
-                DataRow row = tablaConDatosConsumARegis.NewRow();
-                row["Codigo"] = codigoConsu;
-                row["Descripcion"] = descripcionConsu;
-                row["Precio"] = precioConsu;
-                tablaConDatosConsumARegis.Rows.Add(row);
-                dgvConsReg.DataSource = bSourceReg;
-            }
-        }
 
 
         private void BtnGuardarCambios_Click(object sender, EventArgs e)
@@ -115,7 +106,44 @@ namespace FrbaHotel.RegistrarConsumible
             menuAVolver.Show();
         }
 
-        private void dgvConsReg_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void txthab_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCodigoEst_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtnroha_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtpiso_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvCons_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                string codigoConsu = dgvCons.CurrentRow.Cells[1].Value.ToString();
+                string descripcionConsu = dgvCons.CurrentRow.Cells[2].Value.ToString();
+                string precioConsu = dgvCons.CurrentRow.Cells[3].Value.ToString();
+                DataRow row = tablaConDatosConsumARegis.NewRow();
+                row["Codigo"] = codigoConsu;
+                row["Descripcion"] = descripcionConsu;
+                row["Precio"] = precioConsu;
+                tablaConDatosConsumARegis.Rows.Add(row);
+                dgvConsReg.DataSource = bSourceReg;
+            }
+        }
+
+        private void dgvConsReg_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
