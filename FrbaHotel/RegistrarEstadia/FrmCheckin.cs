@@ -109,7 +109,7 @@ namespace FrbaHotel.RegistrarEstadia
                         resultadoQuery.Close();
                         MessageBox.Show("Error al crear factura, ya esta generada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
-
+                    }
                     FrmRegistrarHuesped regHue = new FrmRegistrarHuesped(txtReserv.Text, codigoEstadiaQueSeAcabaDeCrear.ToString(),menuAVolver);
                     regHue.Show();
                     this.Close();

@@ -288,11 +288,11 @@
     <Compile Include="RegistrarConsumible\FrmAgregarConsumibles.Designer.cs">
       <DependentUpon>FrmAgregarConsumibles.cs</DependentUpon>
     </Compile>
-    <Compile Include="RegistrarEstadia\DistribClientes.cs">
+    <Compile Include="RegistrarEstadia\FrmHuespedxHabitacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegistrarEstadia\DistribClientes.Designer.cs">
-      <DependentUpon>DistribClientes.cs</DependentUpon>
+    <Compile Include="RegistrarEstadia\FrmHuespedxHabitacion.Designer.cs">
+      <DependentUpon>FrmHuespedxHabitacion.cs</DependentUpon>
     </Compile>
     <Compile Include="RegistrarEstadia\FrmCheckout.cs">
       <SubType>Form</SubType>
@@ -300,11 +300,11 @@
     <Compile Include="RegistrarEstadia\FrmCheckout.Designer.cs">
       <DependentUpon>FrmCheckout.cs</DependentUpon>
     </Compile>
-    <Compile Include="RegistrarEstadia\FrmMenuRegEst2.cs">
+    <Compile Include="RegistrarEstadia\FrmMenuRegEst.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegistrarEstadia\FrmMenuRegEst2.Designer.cs">
-      <DependentUpon>FrmMenuRegEst2.cs</DependentUpon>
+    <Compile Include="RegistrarEstadia\FrmMenuRegEst.Designer.cs">
+      <DependentUpon>FrmMenuRegEst.cs</DependentUpon>
     </Compile>
     <Compile Include="RegistrarEstadia\FrmCheckin.cs">
       <SubType>Form</SubType>
@@ -448,17 +448,17 @@
     <EmbeddedResource Include="RegistrarConsumible\FrmSeleccionEstadia.resx">
       <DependentUpon>FrmSeleccionEstadia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RegistrarEstadia\DistribClientes.resx">
-      <DependentUpon>DistribClientes.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RegistrarEstadia\FrmCheckin.resx">
       <DependentUpon>FrmCheckin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegistrarEstadia\FrmCheckout.resx">
       <DependentUpon>FrmCheckout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RegistrarEstadia\FrmMenuRegEst2.resx">
-      <DependentUpon>FrmMenuRegEst2.cs</DependentUpon>
+    <EmbeddedResource Include="RegistrarEstadia\FrmHuespedxHabitacion.resx">
+      <DependentUpon>FrmHuespedxHabitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarEstadia\FrmMenuRegEst.resx">
+      <DependentUpon>FrmMenuRegEst.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegistrarEstadia\FrmRegistrarHuesped.resx">
       <DependentUpon>FrmRegistrarHuesped.cs</DependentUpon>
