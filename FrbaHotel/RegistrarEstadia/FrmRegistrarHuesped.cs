@@ -68,7 +68,7 @@ namespace FrbaHotel.RegistrarEstadia
             infoQuery.Read();
             txtTitular.Text = infoQuery.GetString(1) + " " + infoQuery.GetString(2);
             persDisp = totalPers - 1;
-            txtRest.Text = (persDisp).ToString();
+            txtReserv.Text = (persDisp).ToString();
             //Defino las variables de cada registro consulta
             codigoCli = infoQuery.GetDecimal(0);
             nombre = infoQuery.GetString(1);
@@ -153,7 +153,7 @@ namespace FrbaHotel.RegistrarEstadia
         private void FrmRegistrarHuesped_Activated(object sender, EventArgs e)
         {
             bSource2.DataSource = tablaConInfoClientes;
-            txtRest.Text = persDisp.ToString();
+            txtReserv.Text = persDisp.ToString();
         }
 
         private void btnSeleCliente_Click(object sender, EventArgs e)
