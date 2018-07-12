@@ -89,10 +89,6 @@ namespace FrbaHotel.Login
             }
         }
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         private void BtnVolverHotel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -104,11 +100,7 @@ namespace FrbaHotel.Login
 
             string fecha = fechaArchivoConfiguracion.ToString("yyyy-MM-dd");
 
-            tablaHotelesDeBaja = Login.FrmTipoUsuario.BD.consulta("SELECT H.hotel_codigo FROM FAGD.Hotel H JOIN FAGD.BajaHotel B ON (H.hotel_codigo = B.hotel_codigo) WHERE H.hotel_estado = 1 AND (B.fecha_inicio <= '" + fecha + "' AND '" + fecha + "' <= B.fecha_fin)");
-
-            MessageBox.Show("Fecha actual: " + fecha);
-            MessageBox.Show("Cantidad de hoteles a dar de baja: "+tablaHotelesDeBaja.Rows.Count);
-            
+            tablaHotelesDeBaja = Login.FrmTipoUsuario.BD.consulta("SELECT H.hotel_codigo FROM FAGD.Hotel H JOIN FAGD.BajaHotel B ON (H.hotel_codigo = B.hotel_codigo) WHERE H.hotel_estado = 1 AND (B.fecha_inicio <= '" + fecha + "' AND '" + fecha + "' <= B.fecha_fin)");    
             if (tablaHotelesDeBaja.Rows.Count >= 1)
             {
                 int FilaHotelesBaja = 0;
@@ -117,14 +109,12 @@ namespace FrbaHotel.Login
                     codigoHotelBaja = Convert.ToDecimal(tablaHotelesDeBaja.Rows[FilaHotelesBaja][0]);
                     resultado2 = Login.FrmTipoUsuario.BD.comando("UPDATE FAGD.Hotel SET hotel_estado = 0 WHERE hotel_codigo = " + codigoHotelBaja);
                     resultado2.Read();
-                    MessageBox.Show("Hotel " + codigoHotelBaja +" inhabilitado según la programación.", "Hotel inhabilitado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     resultado2.Close();
                     FilaHotelesBaja++;
                 }
             }
 
             tablaHotelesDeAlta = Login.FrmTipoUsuario.BD.consulta("SELECT H.hotel_codigo FROM FAGD.Hotel H JOIN FAGD.BajaHotel B ON (H.hotel_codigo = B.hotel_codigo) WHERE H.hotel_estado = 0 AND NOT (B.fecha_inicio <= '" + fecha + "') AND NOT ('" + fecha + "' <= B.fecha_fin)");
-            MessageBox.Show("Cantidad de hoteles a dar de alta: " + tablaHotelesDeAlta.Rows.Count);
             if (tablaHotelesDeAlta.Rows.Count >= 1)
             {
                 int FilaHotelesAlta = 0;
@@ -134,7 +124,6 @@ namespace FrbaHotel.Login
                     codigoHotelAlta = Convert.ToDecimal(tablaHotelesDeAlta.Rows[FilaHotelesAlta][0]);
                     resultado = Login.FrmTipoUsuario.BD.comando("UPDATE FAGD.Hotel SET hotel_estado = 1 WHERE hotel_codigo = " + codigoHotelAlta);
                     resultado.Read();
-                    MessageBox.Show("Hotel " + codigoHotelAlta + " habilitado según la programación.", "Hotel habilitado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     resultado.Close();
                     FilaHotelesAlta++;
                 }
