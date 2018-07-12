@@ -15,14 +15,16 @@ namespace FrbaHotel.AbmUsuario
     public partial class NuevoRolXHotel : Form
     {
         Form ultimoFormulario;
+        Form menu;
         String usuario;
         DataTable tablaH;
         SqlDataReader reader, reader2;
         Char separacion = '-';
 
-        public NuevoRolXHotel(Form formAnterior, String usuarioSeleccionado)
+        public NuevoRolXHotel(Form seleccionarUsuario, Form formAnterior, String usuarioSeleccionado)
         {
             ultimoFormulario = formAnterior;
+            menu = seleccionarUsuario;
             usuario = usuarioSeleccionado;
             InitializeComponent();
             llenarCboHotel();
@@ -104,7 +106,12 @@ namespace FrbaHotel.AbmUsuario
                 }
                 reader2.Close();
                 if (resultado == 0) MessageBox.Show("Hubo un error al crear el puesto.", "Error");
-                else MessageBox.Show("Puesto guardado correctamente!", "Usuario Guardado");
+                else{
+                    MessageBox.Show("Puesto guardado correctamente!", "Usuario Guardado");
+                    menu.Show();
+                    ultimoFormulario.Close();
+                    this.Close();
+                }
                 
             }
           }

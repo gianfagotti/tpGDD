@@ -47,6 +47,7 @@
             // 
             // cboHotel
             // 
+            this.cboHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboHotel.FormattingEnabled = true;
             this.cboHotel.Location = new System.Drawing.Point(16, 39);
             this.cboHotel.Name = "cboHotel";

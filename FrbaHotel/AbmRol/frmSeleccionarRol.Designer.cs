@@ -36,6 +36,7 @@
             // 
             // cboSeleccion
             // 
+            this.cboSeleccion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSeleccion.FormattingEnabled = true;
             this.cboSeleccion.Location = new System.Drawing.Point(15, 25);
             this.cboSeleccion.Name = "cboSeleccion";

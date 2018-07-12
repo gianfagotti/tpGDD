@@ -115,9 +115,10 @@ namespace FrbaHotel.AbmUsuario
                 else
                 {
                     MessageBox.Show("Usuario guardado correctamente!", "Usuario Guardado");
+                    ultimoFormulario.Show();
+                    this.Close();
                 }
-                ultimoFormulario.Show();
-                this.Close();
+                
             }
 
         }
@@ -145,24 +146,23 @@ namespace FrbaHotel.AbmUsuario
                 MessageBox.Show("Todos los campos son obligatorios y deben ser completados.", "Error");
                 return false;
             }
-            else {
+            else
+            {
 
-                DateTime hoy = VarGlobales.getDate();
-                //DateTime hoy = DateTime.Now;
-                DateTime fechaIngresada;
-                fechaIngresada = Convert.ToDateTime(dtpFechaNac.Value);
+                DateTime fechaMinima = VarGlobales.getDate().AddYears(-16);
+                DateTime fechaIngresada = Convert.ToDateTime(dtpFechaNac.Value);
+                int resultado = DateTime.Compare(fechaMinima, fechaIngresada);
 
-                hoy.AddYears(-16);
-
-                int resultado = DateTime.Compare(hoy, fechaIngresada);
-               
-                if (resultado >= 0)
+                if (resultado < 0)
                 {
                     MessageBox.Show("El usuario debe ser mayor de 16 años", "Error");
                     dtpFechaNac.Focus();
                     return false;
                 }
-                return true;
+                else
+                {
+                    return true;
+                }
             }
 
         }
@@ -176,10 +176,10 @@ namespace FrbaHotel.AbmUsuario
         private void cargarComboRol()
         {
             String select = "SELECT rol_nombre FROM FAGD.Rol";
+            DataTable tabla = new DataTable();
 
             reader = Login.FrmTipoUsuario.BD.comando(select);
-
-            DataTable tabla = new DataTable();
+            
             tabla.Columns.Add("rol_nombre", typeof(string));
             tabla.Load(reader);
 
