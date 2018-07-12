@@ -119,7 +119,7 @@ namespace FrbaHotel.RegistrarEstadia
                 resultadoQuery.Close();
                 if (codigoEstadiaQueSeAcabaDeCrear != 0)
                 {
-                    MessageBox.Show("El check-in ha concluido correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("El check-in ha concluido correctamente. El código de la estadia generada es: "+codigoEstadiaQueSeAcabaDeCrear.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                      string fact = "EXEC FAGD.RegistrarDatosInicialesFactura " + codigoEstadiaQueSeAcabaDeCrear.ToString() + ",'" + Login.FrmTipoUsuario.fechaAppConvertida + "'";
                     resultadoQuery = Login.FrmTipoUsuario.BD.comando(fact);

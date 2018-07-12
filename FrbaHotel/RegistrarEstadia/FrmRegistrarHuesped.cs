@@ -68,7 +68,6 @@ namespace FrbaHotel.RegistrarEstadia
             infoQuery.Read();
             txtTitular.Text = infoQuery.GetString(1) + " " + infoQuery.GetString(2);
             persDisp = totalPers - 1;
-            txtRest.Text = (persDisp).ToString();
             //Defino las variables de cada registro consulta
             codigoCli = infoQuery.GetDecimal(0);
             nombre = infoQuery.GetString(1);
@@ -112,7 +111,7 @@ namespace FrbaHotel.RegistrarEstadia
             
             foreach (DataRow fila in tablaConInfoClientes.Rows)
             {
-                infoQuery = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarEstadiaXCliente " + fila["CodigoCli"].ToString() + "," + nroEstadia);
+                infoQuery = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.ConfirmarEstadiaXCliente " + fila["CodigoCli"].ToString() + "," + nroEstadia);
                 if (infoQuery.Read())
                 {
                     if (infoQuery.GetDecimal(0) == 0)
@@ -153,7 +152,6 @@ namespace FrbaHotel.RegistrarEstadia
         private void FrmRegistrarHuesped_Activated(object sender, EventArgs e)
         {
             bSource2.DataSource = tablaConInfoClientes;
-            txtRest.Text = persDisp.ToString();
         }
 
         private void btnSeleCliente_Click(object sender, EventArgs e)

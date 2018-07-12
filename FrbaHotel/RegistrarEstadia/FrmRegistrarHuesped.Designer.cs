@@ -83,7 +83,7 @@
             this.LblRegistrarEstadia.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.LblRegistrarEstadia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblRegistrarEstadia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblRegistrarEstadia.Location = new System.Drawing.Point(93, 12);
+            this.LblRegistrarEstadia.Location = new System.Drawing.Point(129, 9);
             this.LblRegistrarEstadia.Name = "LblRegistrarEstadia";
             this.LblRegistrarEstadia.Size = new System.Drawing.Size(265, 22);
             this.LblRegistrarEstadia.TabIndex = 1;

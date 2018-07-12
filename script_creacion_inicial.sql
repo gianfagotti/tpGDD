@@ -1214,32 +1214,24 @@ DECLARE @inicioTrimestre DATETIME
 		END
 
 
-SELECT DISTINCT TOP 5 hab.habitacion_codigoHotel AS CodigoDelHotel, hab.habitacion_nro AS NumeroDeLaHabitacion, consultaCantXHab.cantEstadias AS VecesOcupada,
-consultaCantDias.Dias AS cantDias
+SELECT DISTINCT TOP 5 ha.habitacion_codigoHotel AS CodigoDelHotel, ha.habitacion_codigo AS CodigoDeLaHabitacion, consultaOcupacionHab.cantEstadias AS VecesOcupada
 
 FROM
-	(SELECT  hab.habitacion_codigo, hab.habitacion_codigoHotel, COUNT(hab.habitacion_codigo) AS cantEstadias
-	  FROM FAGD.ReservaXHabitacion resXHab, FAGD.Habitacion hab, FAGD.Reserva res, FAGD.Hotel hotel, FAGD.Estadia est
-	  WHERE resXHab.habitacion_codigo = hab.habitacion_codigo AND
+	(SELECT  ha.habitacion_codigo, ha.habitacion_codigoHotel, COUNT(resXHab.habitacion_codigo) AS cantEstadias
+	  FROM FAGD.ReservaXHabitacion resXHab, FAGD.Habitacion ha, FAGD.Reserva res, FAGD.Hotel hotel, FAGD.Estadia est
+	  WHERE resXHab.habitacion_codigo = ha.habitacion_codigo AND
 		    resXHab.reserva_codigo = res.reserva_codigo AND
-		    hotel.hotel_codigo = hab.habitacion_codigoHotel AND
-		    est.estadia_codigoReserva = res.reserva_codigo
-      GROUP BY hab.habitacion_codigo, hab.habitacion_codigoHotel) AS consultaCantXHab,
+		    res.reserva_codigoHotel = hotel.hotel_codigo AND
+		    est.estadia_codigoReserva = res.reserva_codigo AND
+			est.estadia_fechaInicio >= @inicioTrimestre AND
+			est.estadia_fechaFin <= @finTrimestre
+      GROUP BY ha.habitacion_codigo, ha.habitacion_codigoHotel) AS consultaOcupacionHab,
 					
-	(SELECT  hab.habitacion_codigo,	hab.habitacion_codigoHotel, SUM(est.estadia_cantNoches) AS Dias
-	  FROM FAGD.ReservaXHabitacion resXHab, FAGD.Habitacion hab, FAGD.Reserva res, FAGD.Hotel hotel, FAGD.Estadia est
-	  WHERE resXHab.habitacion_codigo = hab.habitacion_codigo AND
-		    resXHab.reserva_codigo = res.reserva_codigo AND
-		    hotel.hotel_codigo = hab.habitacion_codigoHotel AND
-		    est.estadia_codigoReserva = res.reserva_codigo
-	   GROUP BY hab.habitacion_codigo, hab.habitacion_codigoHotel) AS consultaCantDias,
 
-	FAGD.Hotel hotel, FAGD.Habitacion hab,	FAGD.Estadia est
+	FAGD.Hotel hotel, FAGD.Habitacion ha,	FAGD.Estadia est
 
-WHERE consultaCantXHab.habitacion_codigoHotel = hotel.hotel_codigo AND
-	  hab.habitacion_codigo = consultaCantXHab.habitacion_codigo AND
-		consultaCantXHab.habitacion_codigo = consultaCantDias.habitacion_codigo	AND
-		est.estadia_fechaInicio BETWEEN @inicioTrimestre AND @finTrimestre
+WHERE consultaOcupacionHab.habitacion_codigoHotel = hotel.hotel_codigo AND
+	  ha.habitacion_codigo = consultaOcupacionHab.habitacion_codigo
 ORDER BY cantEstadias desc
 	
 END
@@ -1367,7 +1359,8 @@ DECLARE @respuestaTran numeric(18,0),
 		@precioNoche numeric(18,0),
 		@cantNoches numeric(18,0),
 		@fechaIngreso DATETIME,
-		@estadoEfectivo numeric(18,0)
+		@estadoEfectivo numeric(18,0),
+		@fechaPactadaDeEgreso DATETIME
 
 SET @fechaIngreso = CONVERT(DATETIME,@fechaInicio,121)
 
@@ -1377,9 +1370,9 @@ BEGIN TRY
 	SET @estadoEfectivo = (SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA EFECTIVIZADA')
     SET @cantNoches = (SELECT reserva_cantNoches FROM FAGD.Reserva WHERE reserva_codigo = @reservaNro)
     SET @precioNoche = (SELECT (reserva_costoTotal)/@cantNoches FROM FAGD.Reserva WHERE reserva_codigo = @reservaNro)
-
-  	INSERT INTO FAGD.Estadia(estadia_codigoReserva, estadia_fechaInicio, estadia_usuarioRegistrador, estadia_precioNoche, estadia_cantNoches)
-	VALUES(@reservaNro,@fechaIngreso,@username,@precioNoche,@cantNoches);
+	SET @fechaPactadaDeEgreso = (SELECT reserva_fechaFin FROM FAGD.Reserva where reserva_codigo = @reservaNro)
+  	INSERT INTO FAGD.Estadia(estadia_codigoReserva, estadia_fechaInicio, estadia_fechaFin, estadia_usuarioRegistrador, estadia_precioNoche, estadia_cantNoches)
+	VALUES(@reservaNro,@fechaIngreso,@fechaPactadaDeEgreso ,@username,@precioNoche,@cantNoches);
 
   	UPDATE FAGD.Reserva SET reserva_estado = @estadoEfectivo WHERE reserva_codigo = @reservaNro
 	SET @respuestaTran = (SELECT SCOPE_IDENTITY())
@@ -1399,7 +1392,7 @@ GO
 ------------------------------------------------------------------------------
 
 
-CREATE PROC FAGD.RegistrarEstadiaXCliente @clienteCodigo numeric(18,0), @estadiaCodigo numeric(18,0)
+CREATE PROC FAGD.ConfirmarEstadiaXCliente @clienteCodigo numeric(18,0), @estadiaCodigo numeric(18,0)
 AS BEGIN
 
 DECLARE @respuestatran numeric(18,0)
@@ -1421,7 +1414,7 @@ GO
 
 ------------------------------------------------------------------------------
 
-CREATE PROC FAGD.ModificarClienteXEstadia @habitacion numeric(18,0), @cliente numeric(18,0), @estadia numeric(18,0)
+CREATE PROC FAGD.SeleccionarHabitacionDeCliente @habitacion numeric(18,0), @cliente numeric(18,0), @estadia numeric(18,0)
 AS BEGIN
 
 DECLARE @respuestaTran numeric(18,0)

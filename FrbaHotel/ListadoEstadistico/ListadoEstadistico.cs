@@ -21,11 +21,11 @@ namespace FrbaHotel.ListadoEstadistico
         {
             InitializeComponent();
             frmMenuEmpleado = form;
-            cboCateg.Items.Insert(0, "Hotel con mas reservas canceladas");
-            cboCateg.Items.Insert(1, "Hotel con mas consumibles  facturados");
+            cboCateg.Items.Insert(0, "Hotel con mayor cantidad de reservas canceladas");
+            cboCateg.Items.Insert(1, "Hotel con mayor cantidad de consumibles facturados");
             cboCateg.Items.Insert(2, "Hotel con mas dias fuera de servicio");
-            cboCateg.Items.Insert(3, "Habitacion mayor cantidad de dias ocupada");
-            cboCateg.Items.Insert(4, "Cliente con mas puntos");
+            cboCateg.Items.Insert(3, "Habitacion mayor cantidad de veces ocupada");
+            cboCateg.Items.Insert(4, "Cliente con mayor cantidad de puntos");
             cboTrim.Items.Add("1");
             cboTrim.Items.Add("2");
             cboTrim.Items.Add("3");
