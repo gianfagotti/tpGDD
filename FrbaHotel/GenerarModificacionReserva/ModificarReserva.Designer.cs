@@ -171,6 +171,7 @@
             // 
             // cboHotel
             // 
+            this.cboHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboHotel.Enabled = false;
             this.cboHotel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboHotel.FormattingEnabled = true;
@@ -211,6 +212,7 @@
             // 
             // cboRegimen
             // 
+            this.cboRegimen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRegimen.Enabled = false;
             this.cboRegimen.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboRegimen.FormattingEnabled = true;
@@ -221,6 +223,7 @@
             // 
             // cboTipoHabitacion
             // 
+            this.cboTipoHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTipoHabitacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTipoHabitacion.FormattingEnabled = true;
             this.cboTipoHabitacion.Location = new System.Drawing.Point(219, 51);

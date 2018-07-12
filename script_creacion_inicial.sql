@@ -1570,13 +1570,13 @@ BEGIN TRY
 	BEGIN
 	--Si hubieron consumiciones
 	SET @totalAPagar = FAGD.calcularCostosEstadia(@estadia) + FAGD.calcularCostosConsumible(@estadia);
-	INSERT INTO FAGD.Factura(factura_codigoEstadia,factura_modalidadPago,factura_clienteCodigo,factura_fecha,factura_total)
+	INSERT INTO FAGD.Factura(factura_codigoEstadia,factura_clienteCodigo,factura_fecha,factura_total)
 	 VALUES (@estadia,@cliente,@fechaEmision,@totalAPagar);
 	END
 	ELSE BEGIN
 	--Si no las hubieron
 	SET @totalAPagar = FAGD.calcularCostosEstadia(@estadia);
-	INSERT INTO FAGD.Factura(factura_codigoEstadia,factura_modalidadPago,factura_clienteCodigo,factura_fecha,factura_total)
+	INSERT INTO FAGD.Factura(factura_codigoEstadia,factura_clienteCodigo,factura_fecha,factura_total)
 	 VALUES (@estadia,@cliente,@fechaEmision,@totalAPagar);
 	END
 		SET @respuestaTran = (SELECT SCOPE_IDENTITY())
