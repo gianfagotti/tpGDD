@@ -21,6 +21,7 @@ namespace FrbaHotel.AbmHabitacion
         {
             InitializeComponent();
             abm = abmPadre;
+            codigoHotel = Login.FrmSeleccionarHotel.codigoHotel;
 
             resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT habitacionTipo_descripcion FROM FAGD.HabitacionTipo");
             while (resultado.Read() == true)
@@ -103,7 +104,7 @@ namespace FrbaHotel.AbmHabitacion
                 resultado.Close();
                 if (resu == 1)
                 {
-                    MessageBox.Show("La habitacion a sido guardada correctamente");
+                    MessageBox.Show("La habitacion ha sido guardada correctamente");
                     limpiarCampos();
                 }
                 else if (resu == 2)

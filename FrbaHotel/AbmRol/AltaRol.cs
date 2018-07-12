@@ -30,6 +30,8 @@ namespace FrbaHotel.AbmRol
             BindingSource bindSource = new BindingSource();
             bindSource.DataSource = tabla;
             dgvFuncionalidades.DataSource = bindSource;
+            dgvFuncionalidades.Columns[1].ReadOnly = true;
+            dgvFuncionalidades.Columns[2].ReadOnly = true;
         }
 
         private void label1_Click(object sender, EventArgs e) { }

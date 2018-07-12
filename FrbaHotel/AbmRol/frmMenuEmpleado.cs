@@ -160,8 +160,9 @@ namespace FrbaHotel.AbmRol
         private void butBajaCliente_Click(object sender, EventArgs e)
         {
             AbmCliente.FrmBajaCliente frm = new AbmCliente.FrmBajaCliente(this);
-            this.Hide();
             frm.Show();
+            this.Hide();
+            
         }
 
         private void butModHab_Click(object sender, EventArgs e)

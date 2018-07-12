@@ -49,7 +49,6 @@
             this.btnCrearHotel = new System.Windows.Forms.Button();
             this.btnBorrarTextosHotel = new System.Windows.Forms.Button();
             this.btnVolverHotel = new System.Windows.Forms.Button();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.clbRegimenes = new System.Windows.Forms.CheckedListBox();
             this.lblAlturaHotel = new System.Windows.Forms.Label();
             this.txtAlturaHotel = new System.Windows.Forms.TextBox();
@@ -178,21 +177,21 @@
             this.txtNombreHotel.Location = new System.Drawing.Point(312, 77);
             this.txtNombreHotel.Name = "txtNombreHotel";
             this.txtNombreHotel.Size = new System.Drawing.Size(211, 20);
-            this.txtNombreHotel.TabIndex = 11;
+            this.txtNombreHotel.TabIndex = 1;
             // 
             // txtMailHotel
             // 
             this.txtMailHotel.Location = new System.Drawing.Point(312, 127);
             this.txtMailHotel.Name = "txtMailHotel";
             this.txtMailHotel.Size = new System.Drawing.Size(211, 20);
-            this.txtMailHotel.TabIndex = 12;
+            this.txtMailHotel.TabIndex = 2;
             // 
             // txtTelefonoHotel
             // 
             this.txtTelefonoHotel.Location = new System.Drawing.Point(312, 176);
             this.txtTelefonoHotel.Name = "txtTelefonoHotel";
             this.txtTelefonoHotel.Size = new System.Drawing.Size(211, 20);
-            this.txtTelefonoHotel.TabIndex = 13;
+            this.txtTelefonoHotel.TabIndex = 3;
             this.txtTelefonoHotel.TextChanged += new System.EventHandler(this.txtTelefonoHotel_TextChanged);
             this.txtTelefonoHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
@@ -201,14 +200,14 @@
             this.txtCalleHotel.Location = new System.Drawing.Point(312, 223);
             this.txtCalleHotel.Name = "txtCalleHotel";
             this.txtCalleHotel.Size = new System.Drawing.Size(211, 20);
-            this.txtCalleHotel.TabIndex = 14;
+            this.txtCalleHotel.TabIndex = 4;
             // 
             // txtCantidadDeEstrellasHotel
             // 
             this.txtCantidadDeEstrellasHotel.Location = new System.Drawing.Point(312, 310);
             this.txtCantidadDeEstrellasHotel.Name = "txtCantidadDeEstrellasHotel";
             this.txtCantidadDeEstrellasHotel.Size = new System.Drawing.Size(211, 20);
-            this.txtCantidadDeEstrellasHotel.TabIndex = 15;
+            this.txtCantidadDeEstrellasHotel.TabIndex = 6;
             this.txtCantidadDeEstrellasHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // txtCiudadHotel
@@ -216,14 +215,14 @@
             this.txtCiudadHotel.Location = new System.Drawing.Point(312, 389);
             this.txtCiudadHotel.Name = "txtCiudadHotel";
             this.txtCiudadHotel.Size = new System.Drawing.Size(211, 20);
-            this.txtCiudadHotel.TabIndex = 16;
+            this.txtCiudadHotel.TabIndex = 8;
             // 
             // txtPaisHotel
             // 
             this.txtPaisHotel.Location = new System.Drawing.Point(312, 431);
             this.txtPaisHotel.Name = "txtPaisHotel";
             this.txtPaisHotel.Size = new System.Drawing.Size(211, 20);
-            this.txtPaisHotel.TabIndex = 17;
+            this.txtPaisHotel.TabIndex = 9;
             // 
             // dtpFechaCreacionHotel
             // 
@@ -239,7 +238,7 @@
             this.btnCrearHotel.Location = new System.Drawing.Point(127, 634);
             this.btnCrearHotel.Name = "btnCrearHotel";
             this.btnCrearHotel.Size = new System.Drawing.Size(75, 27);
-            this.btnCrearHotel.TabIndex = 20;
+            this.btnCrearHotel.TabIndex = 10;
             this.btnCrearHotel.Text = "Crear";
             this.btnCrearHotel.UseVisualStyleBackColor = false;
             this.btnCrearHotel.Click += new System.EventHandler(this.btnCrearHotel_Click);
@@ -292,7 +291,7 @@
             this.txtAlturaHotel.Location = new System.Drawing.Point(312, 264);
             this.txtAlturaHotel.Name = "txtAlturaHotel";
             this.txtAlturaHotel.Size = new System.Drawing.Size(211, 20);
-            this.txtAlturaHotel.TabIndex = 25;
+            this.txtAlturaHotel.TabIndex = 5;
             this.txtAlturaHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // lblRecargaPorEstrellas
@@ -311,7 +310,7 @@
             this.txtRecargaPorEstrellasHotel.Location = new System.Drawing.Point(312, 350);
             this.txtRecargaPorEstrellasHotel.Name = "txtRecargaPorEstrellasHotel";
             this.txtRecargaPorEstrellasHotel.Size = new System.Drawing.Size(211, 20);
-            this.txtRecargaPorEstrellasHotel.TabIndex = 27;
+            this.txtRecargaPorEstrellasHotel.TabIndex = 7;
             this.txtRecargaPorEstrellasHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // FrmAltaHotel
@@ -377,7 +376,6 @@
         private System.Windows.Forms.Button btnCrearHotel;
         private System.Windows.Forms.Button btnBorrarTextosHotel;
         private System.Windows.Forms.Button btnVolverHotel;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.CheckedListBox clbRegimenes;
         private System.Windows.Forms.Label lblAlturaHotel;
         private System.Windows.Forms.TextBox txtAlturaHotel;

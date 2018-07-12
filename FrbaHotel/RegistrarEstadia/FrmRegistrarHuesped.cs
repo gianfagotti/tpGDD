@@ -48,7 +48,7 @@ namespace FrbaHotel.RegistrarEstadia
             bSource2 = new BindingSource();
             bSource2.DataSource = tablaConInfoClientes;
             dgvHuesped.DataSource = bSource2;
-            query = "SELECT SUM(tipoHa.habitacionTipo_cantHuespedes) FROM FAGD.ReservaXHabitacion resxh, FAGD.Habitacion ha, FAGD.TipoHabitacion tipoHa WHERE tipoHa.habitacion_codigo = ha.habitacion_codigo AND tipoHa.habitacionTipo_codigo=ha.tipo AND resxh.reserva_codigo = " + nroReserva;
+            query = "SELECT SUM(tipoHa.habitacionTipo_cantHuespedes) FROM FAGD.ReservaXHabitacion resxh, FAGD.Habitacion ha, FAGD.HabitacionTipo tipoHa WHERE tipoHa.habitacion_codigo = ha.habitacion_codigo AND tipoHa.habitacionTipo_codigo=ha.tipo AND resxh.reserva_codigo = " + nroReserva;
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             if (infoQuery.Read())
             {

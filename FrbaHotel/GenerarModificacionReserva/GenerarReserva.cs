@@ -112,7 +112,8 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
             else
             {
-                cboHotel.Text = Login.FrmSeleccionarHotel.hotelSeleccionado;
+                cboHotel.Items.Add(Login.FrmSeleccionarHotel.hotelSeleccionado);
+                cboHotel.SelectedIndex = 0;
 
                 consulta = "select distinct habitacionTipo_descripcion from FAGD.HabitacionTipo, FAGD.Habitacion, FAGD.Hotel where habitacionTipo_codigo = habitacion_tipoCodigo AND habitacion_codigoHotel = hotel_codigo AND hotel_codigo = " + Login.FrmSeleccionarHotel.codigoHotel;
                 resultado = Login.FrmTipoUsuario.BD.comando(consulta);
