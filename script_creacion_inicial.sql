@@ -1076,7 +1076,7 @@ AS	BEGIN
 			SET @finTrimestre = @anioEvaluado+'-12-31'
 		END
 
-SELECT TOP 5 hotel.hotel_codigo, COUNT(resCancel.reservaCancelada_codigoReserva) AS totalCancelaciones 
+SELECT TOP 5 hotel.hotel_codigo AS CodigoDelHotel, COUNT(resCancel.reservaCancelada_codigoReserva) AS totalCancelaciones 
 
 FROM FAGD.Hotel hotel, FAGD.Habitacion hab, FAGD.ReservaXHabitacion resXHab,
 	 FAGD.Reserva res, FAGD.ReservaCancelada resCancel
@@ -1130,7 +1130,7 @@ AS BEGIN
 			SET @finTrimestre = @anioEvaluado+'-12-31'
 		END
 
-SELECT TOP 5 hotel.hotel_codigo, COUNT(C.consumible_codigo) AS CantidadFacturada
+SELECT TOP 5 hotel.hotel_codigo AS CodigoDelHotel, COUNT(C.consumible_codigo) AS CantidadFacturada
 FROM FAGD.Consumible C, FAGD.ConsumibleXEstadia consxEst, FAGD.Factura F, FAGD.Reserva R, FAGD.ReservaXHabitacion resxh, FAGD.Hotel hotel, FAGD.Habitacion ha, FAGD. Estadia E
 WHERE
      F.factura_codigoEstadia = E.estadia_codigo AND
@@ -1184,7 +1184,7 @@ AS BEGIN
 		END
 
 
-SELECT TOP 5 bajaTotal.CodigoDelHotel, hotel.hotel_calle ,SUM(bajaTotal.Dias) DiasDeBaja 
+SELECT TOP 5 bajaTotal.CodigoDelHotel AS CodigoDelHotel, hotel.hotel_calle ,SUM(bajaTotal.Dias) AS DiasDeBaja 
 FROM
 	(SELECT * FROM
 			(SELECT hotel.hotel_codigo AS CodigoDelHotel, SUM(DATEDIFF(day,hotelDeBaja.fecha_inicio,hotelDeBaja.fecha_fin)) AS Dias
