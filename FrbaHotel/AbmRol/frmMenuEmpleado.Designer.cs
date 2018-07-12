@@ -272,7 +272,7 @@
             this.btnRegistrarConsumible.Name = "btnRegistrarConsumible";
             this.btnRegistrarConsumible.Size = new System.Drawing.Size(149, 23);
             this.btnRegistrarConsumible.TabIndex = 11;
-            this.btnRegistrarConsumible.Text = "Agregar consumible";
+            this.btnRegistrarConsumible.Text = "Registrar consumición";
             this.btnRegistrarConsumible.UseVisualStyleBackColor = true;
             this.btnRegistrarConsumible.Click += new System.EventHandler(this.btnRegistrarConsumible_Click);
             // 
