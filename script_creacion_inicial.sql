@@ -686,18 +686,37 @@ INSERT INTO FAGD.Consumible (consumible_codigo,consumible_descripcion,consumible
 		WHERE Consumible_Codigo IS NOT NULL
 GO
 
-INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellido],[errorCliente_nombre],[errorCliente_fechaNac],[errorCliente_mail],[errorCliente_calle],[errorCliente_nroCalle],[errorCliente_piso],[errorCliente_dpto], [errorCliente_nacionalidad], [errorCliente_tipoDocumento], [errorCliente_telefono], [errorCliente_estado], [errorCliente_localidad])
-		SELECT DISTINCT A.[Cliente_Pasaporte_Nro],A.[Cliente_Apellido], A.[Cliente_Nombre], A.[Cliente_Fecha_Nac], A.[Cliente_Mail], A.[Cliente_Dom_Calle], A.[Cliente_Nro_Calle],A.[Cliente_Piso],A.[Cliente_Depto],A.[Cliente_Nacionalidad],'Pasaporte', 000, 0, NULL
-		FROM gd_esquema.Maestra A JOIN gd_esquema.Maestra B ON (A.[Cliente_Pasaporte_Nro] = B.Cliente_Pasaporte_Nro AND A.Cliente_Apellido <> B.Cliente_Apellido AND A.Cliente_Nombre <> B.Cliente_Nombre)
-		ORDER BY Cliente_Pasaporte_Nro, Cliente_Apellido, Cliente_Nombre
-GO
-
 INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
 		[cliente_nroCalle],[cliente_piso],[cliente_dpto], [cliente_nacionalidad], [cliente_tipoDocumento], [cliente_telefono], [cliente_estado], [cliente_localidad])
 		SELECT DISTINCT [Cliente_Pasaporte_Nro],[Cliente_Apellido],[Cliente_Nombre],[Cliente_Fecha_Nac],[Cliente_Mail],[Cliente_Dom_Calle],
 		[Cliente_Nro_Calle],[Cliente_Piso],[Cliente_Depto],[Cliente_Nacionalidad],'Pasaporte', 000, 1, NULL
 		FROM gd_esquema.Maestra
-		WHERE [Cliente_Pasaporte_Nro] NOT IN(SELECT [errorCliente_nroDocumento] FROM FAGD.ErrorCliente)
+
+INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellido],[errorCliente_nombre],[errorCliente_fechaNac],[errorCliente_mail],[errorCliente_calle],
+							   [errorCliente_nroCalle],[errorCliente_piso],[errorCliente_dpto], [errorCliente_nacionalidad], [errorCliente_tipoDocumento], [errorCliente_telefono], 
+							   [errorCliente_estado], [errorCliente_localidad])
+		SELECT DISTINCT [cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
+		[cliente_nroCalle],[cliente_piso],[cliente_dpto], [cliente_nacionalidad], [cliente_tipoDocumento], [cliente_telefono], [cliente_estado], [cliente_localidad]
+		FROM FAGD.Cliente
+		WHERE cliente_codigo > (SELECT MIN(cliente_codigo) FROM FAGD.Cliente C WHERE cliente_mail = C.cliente_mail)
+
+DELETE FROM FAGD.Cliente
+WHERE cliente_codigo > (SELECT MIN(cliente_codigo) FROM FAGD.Cliente C WHERE cliente_mail = C.cliente_mail)
+
+
+ALTER TABLE FAGD.Cliente ADD CONSTRAINT Unique_mail UNIQUE (cliente_mail);
+
+INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellido],[errorCliente_nombre],[errorCliente_fechaNac],[errorCliente_mail],[errorCliente_calle],
+							   [errorCliente_nroCalle],[errorCliente_piso],[errorCliente_dpto], [errorCliente_nacionalidad], [errorCliente_tipoDocumento], [errorCliente_telefono], 
+							   [errorCliente_estado], [errorCliente_localidad])
+		SELECT DISTINCT [cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
+		[cliente_nroCalle],[cliente_piso],[cliente_dpto], [cliente_nacionalidad], [cliente_tipoDocumento], [cliente_telefono], [cliente_estado], [cliente_localidad]
+		FROM FAGD.Cliente
+		WHERE cliente_codigo > (SELECT MIN(cliente_codigo) FROM FAGD.Cliente C WHERE cliente_nroDocumento = C.cliente_nroDocumento and cliente_tipoDocumento = C.cliente_tipoDocumento)
+
+DELETE FROM FAGD.Cliente
+WHERE cliente_codigo > (SELECT MIN(cliente_codigo) FROM FAGD.Cliente C WHERE cliente_nroDocumento = C.cliente_nroDocumento and cliente_tipoDocumento = C.cliente_tipoDocumento)
+
 GO
 
 INSERT INTO FAGD.HabitacionTipo(habitacionTipo_codigo, habitacionTipo_descripcion, habitacionTipo_porcentual)
@@ -727,7 +746,6 @@ INSERT INTO FAGD.Reserva ([reserva_codigo],[reserva_fechaInicio],[reserva_cantNo
 		SELECT DISTINCT M.Reserva_codigo, M.Reserva_Fecha_Inicio, M.Reserva_Cant_Noches, R.regimen_codigo, C.cliente_codigo, H.hotel_codigo
 		FROM FAGD.Regimen R, FAGD.Hotel H, FAGD.Cliente C, gd_esquema.Maestra M
 		WHERE M.Regimen_Descripcion = R.regimen_descripcion AND 
-		      M.Cliente_Mail = C.cliente_mail AND
 			  M.Cliente_Apellido = C.cliente_apellido AND
 			  M.Cliente_Nombre = C.cliente_nombre AND
 			  M.Hotel_Calle = H.hotel_calle AND 
@@ -739,7 +757,6 @@ INSERT INTO FAGD.Reserva ([reserva_codigo],[reserva_fechaInicio],[reserva_cantNo
 		SELECT DISTINCT M.Reserva_codigo, M.Reserva_Fecha_Inicio, M.Reserva_Cant_Noches, R.regimen_codigo, clieE.errorCliente_codigo, H.hotel_codigo
 		FROM FAGD.Regimen R, FAGD.Hotel H, FAGD.errorCliente clieE, gd_esquema.Maestra M
 		WHERE M.Regimen_Descripcion = R.regimen_descripcion AND
-		      M.Cliente_Mail = clieE.errorCliente_mail AND
 			  M.Cliente_Apellido = clieE.errorCliente_apellido AND
 			  M.Cliente_Nombre = clieE.errorCliente_nombre AND 
 			  M.Hotel_Calle = H.hotel_calle AND 
@@ -1689,7 +1706,7 @@ begin
 	begin tran cl
 	begin try
 		if (not exists(select * from FAGD.Cliente 
-						where cliente_mail = @mail))
+						where cliente_tipoDocumento = @tipoDocumento and cliente_nroDocumento = @nroDocumento))
 		begin
 			if (@piso = '-')
 				set @piso = null
@@ -1700,7 +1717,7 @@ begin
 									 cliente_tipoDocumento, cliente_telefono, cliente_localidad, cliente_estado)
 			values(@nroDocumento, @apellido, @nombre, @fechaNacimiento, @mail, @nacionalidad, @calle, @nroCalle, @piso, @dpto,
 					@tipoDocumento, @telefono, @localidad, @estado)
-			set @respuesta = 1;
+			set @respuesta = (SELECT SCOPE_IDENTITY());
 		end
 		else
 		begin
@@ -1994,8 +2011,6 @@ DECLARE @resultado numeric(1)
 END
 GO
 
-
-
 CREATE PROCEDURE FAGD.guardarUsuario
 @nombre nvarchar (255),
 @apellido nvarchar (255),
@@ -2018,7 +2033,7 @@ BEGIN
 	SET @fechaNacimiento = CONVERT(datetime, @fechaNac, 121)
 	BEGIN TRAN usuario
 	BEGIN TRY
-		IF (NOT EXISTS(SELECT usuario_username FROM FAGD.Usuario WHERE usuario_nombre = @username))
+		IF (@username NOT IN (SELECT usuario_username FROM FAGD.Usuario WHERE usuario_nombre = @username))
 		BEGIN
 			INSERT INTO FAGD.Usuario (usuario_username, usuario_password, usuario_nombre, usuario_apellido, usuario_direccion,
 									  usuario_mail, usuario_telefono, usuario_fechaNacimiento, usuario_tipoDoc, usuario_nroDoc,
@@ -2028,8 +2043,7 @@ BEGIN
 			INSERT INTO FAGD.UsuarioXRolXHotel (usuario_username, rol_codigo, hotel_codigo)
 			VALUES (@username,
 				   (SELECT rol_codigo FROM FAGD.Rol WHERE rol_nombre = @rol),
-				   (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_calle = @hotelCalle AND hotel_nroCalle = @hotelNro)
-				   )
+				   (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_calle = @hotelCalle AND hotel_nroCalle = @hotelNro))
 			SET @resultado = 1;
 		END
 		ELSE 
@@ -2046,7 +2060,6 @@ BEGIN
 	END CATCH
 END
 GO
-
 
 
 CREATE PROCEDURE FAGD.nuevoPuesto @username nvarchar(255), @hotelCalle nvarchar (255), @hotelNro numeric (18), @rol nvarchar (255)
