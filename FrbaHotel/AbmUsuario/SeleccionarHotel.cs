@@ -38,7 +38,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnHotel_Click(object sender, EventArgs e)
         {
-            NuevoRolXHotel frm = new NuevoRolXHotel(this, usuario);
+            NuevoRolXHotel frm = new NuevoRolXHotel(ultimoFormulario,this, usuario);
             this.Hide();
             frm.Show();
 
@@ -46,10 +46,13 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnContinuar_Click(object sender, EventArgs e)
         {
-            String hotel = cboHotel.Text;
-            SeleccionarRol frm = new SeleccionarRol(this, usuario, hotel, alta);
-            this.Hide();
-            frm.Show();
+            if (String.IsNullOrEmpty(cboHotel.Text)) MessageBox.Show("Seleccione un hotel!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else{
+                String hotel = cboHotel.Text;
+                SeleccionarRol frm = new SeleccionarRol(ultimoFormulario, this, usuario, hotel, alta);
+                this.Hide();
+                frm.Show();
+            }
         }
 
         private void llenarCbo(Boolean alta) {

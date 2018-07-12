@@ -17,7 +17,6 @@ namespace FrbaHotel.RegistrarEstadia
         SqlDataReader resultado;
         SqlDataAdapter sAdapter;
         DataTable dTable;
-        Form formAnterior;
         AbmRol.frmMenuEmpleado menuAVolver;
         FrmMenuRegEst menuAnterior;
 
@@ -27,6 +26,26 @@ namespace FrbaHotel.RegistrarEstadia
             menuAnterior = menuRegEst;
             menuAVolver = menu;
         }
+
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        } 
 
         private string filtrarExactamentePor(string columna, string valor)
         {
@@ -45,6 +64,10 @@ namespace FrbaHotel.RegistrarEstadia
             BindingSource bSource = new BindingSource(); 
             bSource.DataSource = dTable;  
             dgvFinalizar.DataSource = bSource;
+            dgvFinalizar.Columns[1].ReadOnly = true;
+            dgvFinalizar.Columns[2].ReadOnly = true;
+            dgvFinalizar.Columns[3].ReadOnly = true;
+            dgvFinalizar.Columns[4].ReadOnly = true;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)

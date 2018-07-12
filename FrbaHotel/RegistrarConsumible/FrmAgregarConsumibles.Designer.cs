@@ -40,9 +40,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtpiso = new System.Windows.Forms.TextBox();
             this.dgvCons = new System.Windows.Forms.DataGridView();
-            this.Elegir = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvConsReg = new System.Windows.Forms.DataGridView();
-            this.Quitar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columna = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.dataGridViewButtonColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsReg)).BeginInit();
             this.SuspendLayout();
@@ -97,8 +97,10 @@
             // 
             this.txtCodigoEst.Location = new System.Drawing.Point(136, 224);
             this.txtCodigoEst.Name = "txtCodigoEst";
-            this.txtCodigoEst.Size = new System.Drawing.Size(155, 20);
+            this.txtCodigoEst.ReadOnly = true;
+            this.txtCodigoEst.Size = new System.Drawing.Size(116, 20);
             this.txtCodigoEst.TabIndex = 25;
+            this.txtCodigoEst.TextChanged += new System.EventHandler(this.txtCodigoEst_TextChanged);
             // 
             // label1
             // 
@@ -115,8 +117,10 @@
             // 
             this.txthab.Location = new System.Drawing.Point(136, 255);
             this.txthab.Name = "txthab";
-            this.txthab.Size = new System.Drawing.Size(155, 20);
+            this.txthab.ReadOnly = true;
+            this.txthab.Size = new System.Drawing.Size(116, 20);
             this.txthab.TabIndex = 32;
+            this.txthab.TextChanged += new System.EventHandler(this.txthab_TextChanged);
             // 
             // label2
             // 
@@ -133,8 +137,10 @@
             // 
             this.txtnroha.Location = new System.Drawing.Point(395, 255);
             this.txtnroha.Name = "txtnroha";
-            this.txtnroha.Size = new System.Drawing.Size(134, 20);
+            this.txtnroha.ReadOnly = true;
+            this.txtnroha.Size = new System.Drawing.Size(101, 20);
             this.txtnroha.TabIndex = 34;
+            this.txtnroha.TextChanged += new System.EventHandler(this.txtnroha_TextChanged);
             // 
             // label3
             // 
@@ -151,40 +157,56 @@
             // 
             this.txtpiso.Location = new System.Drawing.Point(395, 224);
             this.txtpiso.Name = "txtpiso";
-            this.txtpiso.Size = new System.Drawing.Size(134, 20);
+            this.txtpiso.ReadOnly = true;
+            this.txtpiso.Size = new System.Drawing.Size(101, 20);
             this.txtpiso.TabIndex = 37;
+            this.txtpiso.TextChanged += new System.EventHandler(this.txtpiso_TextChanged);
             // 
             // dgvCons
             // 
+            this.dgvCons.AllowUserToAddRows = false;
+            this.dgvCons.AllowUserToDeleteRows = false;
+            this.dgvCons.AllowUserToOrderColumns = true;
             this.dgvCons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCons.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Elegir});
+            this.columna});
             this.dgvCons.Location = new System.Drawing.Point(20, 75);
             this.dgvCons.Name = "dgvCons";
-            this.dgvCons.Size = new System.Drawing.Size(508, 121);
-            this.dgvCons.TabIndex = 42;
-            this.dgvCons.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCons_CellContentClick_1);
-            // 
-            // Elegir
-            // 
-            this.Elegir.HeaderText = "Elegir";
-            this.Elegir.Name = "Elegir";
+            this.dgvCons.ReadOnly = true;
+            this.dgvCons.Size = new System.Drawing.Size(508, 118);
+            this.dgvCons.TabIndex = 44;
+            this.dgvCons.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCons_CellContentClick);
             // 
             // dgvConsReg
             // 
+            this.dgvConsReg.AllowUserToAddRows = false;
+            this.dgvConsReg.AllowUserToDeleteRows = false;
+            this.dgvConsReg.AllowUserToOrderColumns = true;
             this.dgvConsReg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvConsReg.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Quitar});
-            this.dgvConsReg.Location = new System.Drawing.Point(20, 294);
+            this.dataGridViewButtonColumn1});
+            this.dgvConsReg.Location = new System.Drawing.Point(20, 298);
             this.dgvConsReg.Name = "dgvConsReg";
-            this.dgvConsReg.Size = new System.Drawing.Size(508, 129);
-            this.dgvConsReg.TabIndex = 43;
-            this.dgvConsReg.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConsReg_CellContentClick);
+            this.dgvConsReg.ReadOnly = true;
+            this.dgvConsReg.Size = new System.Drawing.Size(508, 127);
+            this.dgvConsReg.TabIndex = 45;
+            this.dgvConsReg.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConsReg_CellContentClick_1);
             // 
-            // Quitar
+            // columna
             // 
-            this.Quitar.HeaderText = "Quitar";
-            this.Quitar.Name = "Quitar";
+            this.columna.HeaderText = "Acción";
+            this.columna.Name = "columna";
+            this.columna.ReadOnly = true;
+            this.columna.Text = "Agregar";
+            this.columna.UseColumnTextForButtonValue = true;
+            // 
+            // dataGridViewButtonColumn1
+            // 
+            this.dataGridViewButtonColumn1.HeaderText = "Acción";
+            this.dataGridViewButtonColumn1.Name = "dataGridViewButtonColumn1";
+            this.dataGridViewButtonColumn1.ReadOnly = true;
+            this.dataGridViewButtonColumn1.Text = "Quitar";
+            this.dataGridViewButtonColumn1.UseColumnTextForButtonValue = true;
             // 
             // FrmAgregarConsumibles
             // 
@@ -229,8 +251,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtpiso;
         private System.Windows.Forms.DataGridView dgvCons;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Elegir;
         private System.Windows.Forms.DataGridView dgvConsReg;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Quitar;
+        private System.Windows.Forms.DataGridViewButtonColumn columna;
+        private System.Windows.Forms.DataGridViewButtonColumn dataGridViewButtonColumn1;
     }
 }

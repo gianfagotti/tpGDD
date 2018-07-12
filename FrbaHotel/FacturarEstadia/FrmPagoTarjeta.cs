@@ -26,7 +26,36 @@ namespace FrbaHotel.FacturarEstadia
             cboEntidad.Items.Add("Mastercard");
             cboEntidad.Items.Add("American Express");
             cboEntidad.Items.Add("Cabal");
+            cboBank.Items.Add("Banco Francés");
+            cboBank.Items.Add("Santander Río");
+            cboBank.Items.Add("Banco Comafi");
+            cboBank.Items.Add("Supervielle");
+            cboBank.Items.Add("Banco Itaú");
+            cboBank.Items.Add("Banco Ciudad");
+            cboBank.Items.Add("Banco Nación");
+            cboBank.Items.Add("HSBC");
+            cboBank.Items.Add("Otro");
         }
+
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        } 
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
@@ -35,7 +64,7 @@ namespace FrbaHotel.FacturarEstadia
                 MessageBox.Show("Falta ingresar el número de tarjeta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (string.IsNullOrEmpty(txtBanco.Text))
+            if (string.IsNullOrEmpty(cboBank.Text))
             {
                 MessageBox.Show("Falta ingresar el banco emisor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -50,7 +79,7 @@ namespace FrbaHotel.FacturarEstadia
                 MessageBox.Show("Falta ingresar al titular de la tarjeta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string query = "EXEC FAGD.AsociarTarjeta " + facturaAsociada + ",'" + cboEntidad.Text + "'," + txtnroTarj + ",'" + txtBanco.Text + "','" + txtTitu.Text + "'"; 
+            string query = "EXEC FAGD.AsociarTarjeta " + facturaAsociada + ",'" + cboEntidad.Text + "'," + txtnroTarj + ",'" + cboBank.Text + "','" + txtTitu.Text + "'"; 
             SqlDataReader resultado = Login.FrmTipoUsuario.BD.comando(query);
             resultado.Read();
             if (resultado.GetDecimal(0) != 0)
@@ -65,7 +94,7 @@ namespace FrbaHotel.FacturarEstadia
             else
             {
                 resultado.Close();
-                MessageBox.Show("La tarjeta ya estaba asociada previamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("La tarjeta especificada ya se encontrabba asociada manualmente, concluye la facturación.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 menuRetorno.Show();
                 this.Close();
               

@@ -156,6 +156,7 @@
             // 
             // cbohab
             // 
+            this.cbohab.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbohab.FormattingEnabled = true;
             this.cbohab.Location = new System.Drawing.Point(105, 79);
             this.cbohab.Name = "cbohab";

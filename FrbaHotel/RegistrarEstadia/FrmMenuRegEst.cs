@@ -35,8 +35,7 @@ namespace FrbaHotel.RegistrarEstadia
         {
             this.Hide();
             FrmCheckin checkin = new FrmCheckin(this, menuAVolver);
-            checkin.ShowDialog();
-            this.Show();
+            checkin.Show();
         }
 
         private void btnCheckout_Click(object sender, EventArgs e)

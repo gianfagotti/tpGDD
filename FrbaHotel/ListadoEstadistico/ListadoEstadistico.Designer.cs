@@ -63,6 +63,7 @@
             // 
             // cboCateg
             // 
+            this.cboCateg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCateg.FormattingEnabled = true;
             this.cboCateg.Location = new System.Drawing.Point(85, 66);
             this.cboCateg.Name = "cboCateg";
@@ -93,6 +94,7 @@
             // 
             // cboTrim
             // 
+            this.cboTrim.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTrim.FormattingEnabled = true;
             this.cboTrim.Location = new System.Drawing.Point(85, 100);
             this.cboTrim.Name = "cboTrim";

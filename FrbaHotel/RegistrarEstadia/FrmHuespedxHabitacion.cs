@@ -45,7 +45,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void cbohab_SelectedIndexChanged(object sender, EventArgs e)
         {
-            query = "SELECT ha.habitacion_numero, ha.habitacion_piso, tipoHa.habitacionTipo_descripcion, tipoHa.habitacionTipo_cantHuespedes FROM FAGD.Habitacion ha, FAGD.HabitacionTipo tipoHa WHERE ha.habitacion_tipoCodigo = tipoHa.habitacionTipo_codigo AND ha.habitacion_codigo = " + cbohab.Text;
+            query = "SELECT ha.habitacion_nro, ha.habitacion_piso, tipoHa.habitacionTipo_descripcion, tipoHa.habitacionTipo_cantHuespedes FROM FAGD.Habitacion ha, FAGD.HabitacionTipo tipoHa WHERE ha.habitacion_tipoCodigo = tipoHa.habitacionTipo_codigo AND ha.habitacion_codigo = " + cbohab.Text;
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             if (infoQuery.Read())
             {
@@ -88,16 +88,16 @@ namespace FrbaHotel.RegistrarEstadia
                 query = "SELECT COUNT(*) FROM FAGD.ClienteXEstadia WHERE estadia_codigo = " + estadia + " AND habitacion_codigo = " + cbohab.Text;
                 infoQuery = Login.FrmTipoUsuario.BD.comando(query);
                 infoQuery.Read();
-                int cantRestante = infoQuery.GetInt32(0);
+                int cantLimite = infoQuery.GetInt32(0);
                 infoQuery.Close();
-                if (cantRestante < Convert.ToInt32(txtCantHab.Text))
+                if (cantLimite < Convert.ToInt32(txtCantHab.Text))
                 {
-                    query = "EXEC FAGD.ModificarClienteXEstadia " + cbohab.Text + "," + dgvDistri.CurrentRow.Cells[1].Value.ToString() + "," + estadia;
+                    query = "EXEC FAGD.SeleccionarHabitacionDeCliente " + cbohab.Text + "," + dgvDistri.CurrentRow.Cells[1].Value.ToString() + "," + estadia;
                     infoQuery = Login.FrmTipoUsuario.BD.comando(query);
                     infoQuery.Read();
                     if (infoQuery.GetDecimal(0) == 1)
                     {
-                        MessageBox.Show("Los huéspedes se han registrado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("El huésped se ha registrado correctamente a la habitación.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         tablaConInfoHuespedes.Rows.RemoveAt(index);
                         dgvDistri.DataSource = tablaConInfoHuespedes;
                         infoQuery.Close();

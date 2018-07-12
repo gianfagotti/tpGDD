@@ -76,6 +76,9 @@ namespace FrbaHotel.FacturarEstadia
             bindingSource = new BindingSource();
             bindingSource.DataSource = tablaInfoAlojamiento;
             dgvAlojamiento.DataSource = bindingSource;
+            dgvAlojamiento.Columns[0].ReadOnly = true;
+            dgvAlojamiento.Columns[1].ReadOnly = true;
+            dgvAlojamiento.Columns[2].ReadOnly = true;
             txtMontoAloj.Text = (precioNoche * (contadorDiasSobrantes + contadorCantNoches)).ToString();
             //Se registran cada uno de los costos de consumibles almacenados en los item de Factura para luego revisar si se deducen en su totalidad por el regimen de estadía que el cliente contrató
             query = "SELECT item.itemFactura_cantidad Cantidad, item.itemFactura_descripcion Descripcion, item.itemFactura_itemMonto Monto FROM FAGD.ItemFactura item, FAGD.Factura fact WHERE item.itemFactura_nroFactura = fact.factura_nro AND item.itemFactura_descripcion != 'Estadia' AND fact.factura_codigoEstadia = " + codigoEstadia;
@@ -84,7 +87,9 @@ namespace FrbaHotel.FacturarEstadia
             BindingSource BindingSource2 = new BindingSource();
             BindingSource2.DataSource = tablaInfoConsumibles;    
             dgvConsumibles.DataSource = BindingSource2;
-
+            dgvConsumibles.Columns[0].ReadOnly = true;
+            dgvConsumibles.Columns[1].ReadOnly = true;
+            dgvConsumibles.Columns[2].ReadOnly = true;
             int montoAux = 0;
             foreach (DataRow otraFila in tablaInfoConsumibles.Rows)
             {

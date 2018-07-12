@@ -43,6 +43,27 @@ namespace FrbaHotel.RegistrarEstadia
 
         }
 
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        } 
+
+
         private void btnCheckin_Click(object sender, EventArgs e)
         {
             
@@ -98,7 +119,7 @@ namespace FrbaHotel.RegistrarEstadia
                 resultadoQuery.Close();
                 if (codigoEstadiaQueSeAcabaDeCrear != 0)
                 {
-                    MessageBox.Show("El check-in ha concluido correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("El check-in ha concluido correctamente. El código de la estadia generada es: "+codigoEstadiaQueSeAcabaDeCrear.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                      string fact = "EXEC FAGD.RegistrarDatosInicialesFactura " + codigoEstadiaQueSeAcabaDeCrear.ToString() + ",'" + Login.FrmTipoUsuario.fechaAppConvertida + "'";
                     resultadoQuery = Login.FrmTipoUsuario.BD.comando(fact);
@@ -134,7 +155,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Abort;
+            menuAnterior.Show();
         }
 
         private void FrmCheckin_Load(object sender, EventArgs e)
