@@ -33,7 +33,7 @@ namespace FrbaHotel.AbmHabitacion
             resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT habitacion_ubicacion FROM FAGD.Habitacion");
             while (resultado.Read() == true)
             {
-                cboTipoHabitacion.Items.Add(resultado.GetSqlString(0));
+                cboUbicacion.Items.Add(resultado.GetSqlString(0));
             }
             resultado.Close();
             txtNroHab.Focus();
@@ -66,8 +66,8 @@ namespace FrbaHotel.AbmHabitacion
             txtNroHab.Text = string.Empty;
             txtPiso.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
-            cboTipoHabitacion.ResetText();
-            cboUbicacion.ResetText();
+            cboTipoHabitacion.Text = string.Empty;
+            cboUbicacion.Text = string.Empty;
             chkHabilitado.Checked = false;
             txtNroHab.Focus();
         }

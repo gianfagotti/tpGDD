@@ -40,11 +40,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvFiltrado = new System.Windows.Forms.DataGridView();
-            this.Modificar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.butLimpiar = new System.Windows.Forms.Button();
             this.butVolver = new System.Windows.Forms.Button();
             this.butBuscar = new System.Windows.Forms.Button();
+            this.dgvFiltrado = new System.Windows.Forms.DataGridView();
+            this.Elegir = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltrado)).BeginInit();
             this.SuspendLayout();
@@ -170,22 +170,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Número";
             // 
-            // dgvFiltrado
-            // 
-            this.dgvFiltrado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFiltrado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Modificar});
-            this.dgvFiltrado.Location = new System.Drawing.Point(12, 194);
-            this.dgvFiltrado.Name = "dgvFiltrado";
-            this.dgvFiltrado.Size = new System.Drawing.Size(444, 226);
-            this.dgvFiltrado.TabIndex = 1;
-            this.dgvFiltrado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFiltrado_CellContentClick);
-            // 
-            // Modificar
-            // 
-            this.Modificar.HeaderText = "Modificar";
-            this.Modificar.Name = "Modificar";
-            // 
             // butLimpiar
             // 
             this.butLimpiar.Location = new System.Drawing.Point(12, 159);
@@ -216,14 +200,37 @@
             this.butBuscar.UseVisualStyleBackColor = true;
             this.butBuscar.Click += new System.EventHandler(this.butBuscar_Click);
             // 
+            // dgvFiltrado
+            // 
+            this.dgvFiltrado.AllowUserToAddRows = false;
+            this.dgvFiltrado.AllowUserToDeleteRows = false;
+            this.dgvFiltrado.AllowUserToOrderColumns = true;
+            this.dgvFiltrado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFiltrado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Elegir});
+            this.dgvFiltrado.Location = new System.Drawing.Point(12, 188);
+            this.dgvFiltrado.Name = "dgvFiltrado";
+            this.dgvFiltrado.ReadOnly = true;
+            this.dgvFiltrado.Size = new System.Drawing.Size(444, 232);
+            this.dgvFiltrado.TabIndex = 17;
+            this.dgvFiltrado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFiltrado_CellContentClick_1);
+            // 
+            // Elegir
+            // 
+            this.Elegir.HeaderText = "";
+            this.Elegir.Name = "Elegir";
+            this.Elegir.ReadOnly = true;
+            this.Elegir.Text = "Seleccionar";
+            this.Elegir.UseColumnTextForButtonValue = true;
+            // 
             // FrmListadoMod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(470, 462);
+            this.Controls.Add(this.dgvFiltrado);
             this.Controls.Add(this.butBuscar);
             this.Controls.Add(this.butVolver);
-            this.Controls.Add(this.dgvFiltrado);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.butLimpiar);
             this.Name = "FrmListadoMod";
@@ -250,10 +257,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgvFiltrado;
         private System.Windows.Forms.Button butBuscar;
         private System.Windows.Forms.Button butVolver;
         private System.Windows.Forms.Button butLimpiar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Modificar;
+        private System.Windows.Forms.DataGridView dgvFiltrado;
+        private System.Windows.Forms.DataGridViewButtonColumn Elegir;
     }
 }

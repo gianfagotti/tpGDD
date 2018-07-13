@@ -116,7 +116,7 @@ namespace FrbaHotel.AbmCliente
             txtLocalidad.Text = string.Empty;
             txtNacionalidad.Text = string.Empty;
             cboTipoDoc.ResetText();
-            dtpFechaNacimiento.ResetText();
+            dtpFechaNacimiento.Value = VarGlobales.getDate();
             txtNombre.Focus();
         }
 

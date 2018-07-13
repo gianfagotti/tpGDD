@@ -46,10 +46,8 @@
             // 
             // cboUbicacion
             // 
+            this.cboUbicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboUbicacion.FormattingEnabled = true;
-            this.cboUbicacion.Items.AddRange(new object[] {
-            "Exterior",
-            "Interior"});
             this.cboUbicacion.Location = new System.Drawing.Point(90, 39);
             this.cboUbicacion.Name = "cboUbicacion";
             this.cboUbicacion.Size = new System.Drawing.Size(217, 21);
@@ -57,13 +55,9 @@
             // 
             // cboTipoHabitacion
             // 
+            this.cboTipoHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipoHabitacion.Enabled = false;
             this.cboTipoHabitacion.FormattingEnabled = true;
-            this.cboTipoHabitacion.Items.AddRange(new object[] {
-            "Simple",
-            "Doble",
-            "Doble twin",
-            "Triple",
-            "Cuadruple"});
             this.cboTipoHabitacion.Location = new System.Drawing.Point(90, 69);
             this.cboTipoHabitacion.Name = "cboTipoHabitacion";
             this.cboTipoHabitacion.Size = new System.Drawing.Size(217, 21);

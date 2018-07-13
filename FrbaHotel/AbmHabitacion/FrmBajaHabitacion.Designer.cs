@@ -42,9 +42,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.butLimpiar = new System.Windows.Forms.Button();
             this.butBuscar = new System.Windows.Forms.Button();
-            this.dgvFiltrado = new System.Windows.Forms.DataGridView();
-            this.Inhabilitar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.butVolver = new System.Windows.Forms.Button();
+            this.dgvFiltrado = new System.Windows.Forms.DataGridView();
+            this.Elegir = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiltrado)).BeginInit();
             this.SuspendLayout();
@@ -90,6 +90,7 @@
             // 
             // cboTipo
             // 
+            this.cboTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTipo.FormattingEnabled = true;
             this.cboTipo.Location = new System.Drawing.Point(57, 113);
             this.cboTipo.Name = "cboTipo";
@@ -98,6 +99,7 @@
             // 
             // cboUbicacion
             // 
+            this.cboUbicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboUbicacion.FormattingEnabled = true;
             this.cboUbicacion.Location = new System.Drawing.Point(75, 82);
             this.cboUbicacion.Name = "cboUbicacion";
@@ -190,22 +192,6 @@
             this.butBuscar.UseVisualStyleBackColor = true;
             this.butBuscar.Click += new System.EventHandler(this.butBuscar_Click);
             // 
-            // dgvFiltrado
-            // 
-            this.dgvFiltrado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFiltrado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Inhabilitar});
-            this.dgvFiltrado.Location = new System.Drawing.Point(12, 192);
-            this.dgvFiltrado.Name = "dgvFiltrado";
-            this.dgvFiltrado.Size = new System.Drawing.Size(434, 222);
-            this.dgvFiltrado.TabIndex = 3;
-            this.dgvFiltrado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFiltrado_CellContentClick);
-            // 
-            // Inhabilitar
-            // 
-            this.Inhabilitar.HeaderText = "Inhabilitar";
-            this.Inhabilitar.Name = "Inhabilitar";
-            // 
             // butVolver
             // 
             this.butVolver.Location = new System.Drawing.Point(371, 420);
@@ -216,13 +202,36 @@
             this.butVolver.UseVisualStyleBackColor = true;
             this.butVolver.Click += new System.EventHandler(this.butVolver_Click);
             // 
+            // dgvFiltrado
+            // 
+            this.dgvFiltrado.AllowUserToAddRows = false;
+            this.dgvFiltrado.AllowUserToDeleteRows = false;
+            this.dgvFiltrado.AllowUserToOrderColumns = true;
+            this.dgvFiltrado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFiltrado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Elegir});
+            this.dgvFiltrado.Location = new System.Drawing.Point(12, 192);
+            this.dgvFiltrado.Name = "dgvFiltrado";
+            this.dgvFiltrado.ReadOnly = true;
+            this.dgvFiltrado.Size = new System.Drawing.Size(434, 222);
+            this.dgvFiltrado.TabIndex = 18;
+            this.dgvFiltrado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFiltrado_CellContentClick_1);
+            // 
+            // Elegir
+            // 
+            this.Elegir.HeaderText = "";
+            this.Elegir.Name = "Elegir";
+            this.Elegir.ReadOnly = true;
+            this.Elegir.Text = "Inhabilitar";
+            this.Elegir.UseColumnTextForButtonValue = true;
+            // 
             // FrmBajaHabitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(458, 450);
-            this.Controls.Add(this.butVolver);
             this.Controls.Add(this.dgvFiltrado);
+            this.Controls.Add(this.butVolver);
             this.Controls.Add(this.butBuscar);
             this.Controls.Add(this.butLimpiar);
             this.Controls.Add(this.groupBox1);
@@ -254,8 +263,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button butLimpiar;
         private System.Windows.Forms.Button butBuscar;
-        private System.Windows.Forms.DataGridView dgvFiltrado;
         private System.Windows.Forms.Button butVolver;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Inhabilitar;
+        private System.Windows.Forms.DataGridView dgvFiltrado;
+        private System.Windows.Forms.DataGridViewButtonColumn Elegir;
     }
 }
