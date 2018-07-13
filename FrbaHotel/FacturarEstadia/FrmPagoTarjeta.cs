@@ -79,13 +79,13 @@ namespace FrbaHotel.FacturarEstadia
                 MessageBox.Show("Falta ingresar al titular de la tarjeta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string query = "EXEC FAGD.AsociarTarjetaParaPago '" + facturaAsociada + "','" + cboEntidad.Text + "','" + txtnroTarj + "','" + cboBank.Text + "','" + txtTitu.Text + "'"; 
+            string query = "EXEC FAGD.AsociarTarjetaParaPago " + facturaAsociada + ",'" + cboEntidad.Text + "','" + txtnroTarj.Text + "','" + cboBank.Text + "','" + txtTitu.Text + "'"; 
             SqlDataReader resultado = Login.FrmTipoUsuario.BD.comando(query);
             resultado.Read();
             if (resultado.GetDecimal(0) != 0)
             {
                 resultado.Close();
-                MessageBox.Show("La tarjeta fue asociada a la factura.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("La tarjeta fue asociada al pago de la factura.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 menuRetorno.Show();
                 this.Close();
                 

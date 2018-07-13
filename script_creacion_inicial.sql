@@ -181,7 +181,7 @@ CREATE TABLE FAGD.Cliente(
  cliente_apellido nvarchar(255),
  cliente_nombre nvarchar(255),
  cliente_fechaNac datetime,
- cliente_mail varchar(50) UNIQUE,
+ cliente_mail varchar(50),
  cliente_nacionalidad nvarchar(255),
  cliente_calle nvarchar(255),
  cliente_nroCalle numeric(18),
@@ -235,7 +235,6 @@ estadia_fechaFin datetime,
 estadia_cantNoches numeric(18,0) NOT NULL,
 estadia_diasSobrantes numeric (18,0),
 estadia_precioNoche numeric(18,0) NOT NULL,
-estadia_clienteCodigo numeric (18),
 estadia_codigoReserva numeric(18) NOT NULL,
 estadia_usuarioRegistrador nvarchar(255),
 estadia_usuarioFinalizador nvarchar(255),
@@ -243,7 +242,7 @@ estadia_usuarioFinalizador nvarchar(255),
 GO
 
 CREATE TABLE FAGD.ClienteXEstadia(
-cliente_codigo numeric(18,0) NOT NULL,
+cliente_codigo numeric(18,0),
 errorCliente_codigo numeric(18,0),
 estadia_codigo numeric(18,0) NOT NULL,
 habitacion_codigo numeric(18,0)
@@ -398,10 +397,6 @@ GO
 
 ALTER TABLE FAGD.ItemFactura ADD CONSTRAINT FK_ItemFactura_Factura
  FOREIGN KEY (itemFactura_nroFactura) REFERENCES FAGD.Factura(factura_nro)
-GO
-
-ALTER TABLE FAGD.Estadia ADD CONSTRAINT FK_Estadia_Cliente
- FOREIGN KEY (estadia_clienteCodigo) REFERENCES FAGD.Cliente(cliente_codigo)
 GO
 
 ALTER TABLE FAGD.Estadia ADD CONSTRAINT FK_Estadia_Reserva
@@ -725,19 +720,12 @@ INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellid
   ORDER BY Cliente_Pasaporte_Nro, Cliente_Apellido, Cliente_Nombre
 GO
 
-INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellido],[errorCliente_nombre],[errorCliente_fechaNac],[errorCliente_mail],[errorCliente_calle],[errorCliente_nroCalle],[errorCliente_piso],[errorCliente_dpto], [errorCliente_nacionalidad], [errorCliente_tipoDocumento], [errorCliente_telefono], [errorCliente_estado], [errorCliente_localidad])
-  SELECT DISTINCT A.[Cliente_Pasaporte_Nro],A.[Cliente_Apellido], A.[Cliente_Nombre], A.[Cliente_Fecha_Nac], A.[Cliente_Mail], A.[Cliente_Dom_Calle], A.[Cliente_Nro_Calle],A.[Cliente_Piso],A.[Cliente_Depto],A.[Cliente_Nacionalidad],'Pasaporte', 000, 0, NULL
-  FROM gd_esquema.Maestra A JOIN gd_esquema.Maestra B ON (A.[Cliente_Mail] = B.[Cliente_Mail] AND (A.Cliente_Apellido <> B.Cliente_Apellido OR A.Cliente_Nombre <> B.Cliente_Nombre OR A.[Cliente_Pasaporte_Nro] <> B.Cliente_Pasaporte_Nro) AND A.[Cliente_Mail] NOT IN (SELECT errorCliente_mail FROM FAGD.ErrorCliente))
-  ORDER BY Cliente_Mail
-GO
-
 INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
   [cliente_nroCalle],[cliente_piso],[cliente_dpto], [cliente_nacionalidad], [cliente_tipoDocumento], [cliente_telefono], [cliente_estado], [cliente_localidad])
   SELECT DISTINCT [Cliente_Pasaporte_Nro],[Cliente_Apellido],[Cliente_Nombre],[Cliente_Fecha_Nac],[Cliente_Mail],[Cliente_Dom_Calle],
   [Cliente_Nro_Calle],[Cliente_Piso],[Cliente_Depto],[Cliente_Nacionalidad],'Pasaporte', 000, 1, NULL
   FROM gd_esquema.Maestra
   WHERE [Cliente_Pasaporte_Nro] NOT IN(SELECT [errorCliente_nroDocumento] FROM FAGD.ErrorCliente)
-    AND [Cliente_Mail] NOT IN (SELECT [errorCliente_mail] FROM FAGD.ErrorCliente)
 GO
 
 
@@ -867,18 +855,16 @@ GO
 
 --Todo lo de estadia por aca
 
-INSERT INTO FAGD.Estadia (estadia_fechaInicio, estadia_fechaFin, estadia_cantNoches, estadia_precioNoche, estadia_diasSobrantes, estadia_codigoReserva, estadia_clienteCodigo)
+INSERT INTO FAGD.Estadia (estadia_fechaInicio, estadia_fechaFin, estadia_cantNoches, estadia_precioNoche, estadia_diasSobrantes, estadia_codigoReserva)
 		SELECT DISTINCT 
 		M.Estadia_Fecha_Inicio, 
 		M.Estadia_Fecha_Inicio + M.Estadia_Cant_Noches, 
 		M.Estadia_Cant_Noches, R.reserva_costoTotal / R.reserva_cantNoches,
 		FAGD.calcularDiasSobrantesEstadia(R.reserva_fechaFin, M.Estadia_Fecha_Inicio + M.Estadia_Cant_Noches), 
-		M.Reserva_Codigo, 
-		Cliente.cliente_codigo
+		M.Reserva_Codigo
 
-		FROM gd_esquema.Maestra M, FAGD.Reserva R, FAGD.Cliente Cliente
-		WHERE R.reserva_clienteCodigo = Cliente.cliente_codigo AND 
-		R.reserva_codigo = M.Reserva_Codigo AND
+		FROM gd_esquema.Maestra M, FAGD.Reserva R
+		WHERE R.reserva_codigo = M.Reserva_Codigo AND
 		M.Estadia_Fecha_Inicio IS NOT NULL AND 
 		M.Estadia_Cant_Noches IS NOT NULL
 		ORDER BY M.Reserva_Codigo
@@ -1625,7 +1611,6 @@ GO
 
 
 create proc FAGD.modificarCliente
-@codigo numeric(18),
 @nombre nvarchar(255),
 @apellido nvarchar(255),
 @tipoDocumento nvarchar(255),
@@ -1648,45 +1633,37 @@ begin
 	declare @respuesta numeric(18)
 	begin tran modcl
 	begin try
-			if (not exists(select * from FAGD.Cliente 
-						where cliente_tipoDocumento = @tipoDocumento and cliente_nroDocumento = @nroDocumento))
-			begin
-				if (@piso = '-')
+			if (@piso = '-')
 				set @piso = null
-				if (@dpto = '-')
+			if (@dpto = '-')
 				set @dpto = null
 			
-				UPDATE FAGD.Cliente
+			UPDATE FAGD.Cliente
 
-				set
-				cliente_nroDocumento = @nroDocumento,
-				cliente_nombre = @nombre,
-				cliente_apellido = @apellido,
-				cliente_tipoDocumento = @tipoDocumento,
-				cliente_mail = @mail,
-				cliente_telefono = @telefono,
-				cliente_calle = @calle,
-				cliente_nroCalle = @nroCalle,
-				cliente_piso = @piso,
-				cliente_dpto = @dpto,
-				cliente_localidad = @localidad,
-				cliente_nacionalidad = @nacionalidad,
-				cliente_fechaNac = @fechaNacimiento,
-				cliente_estado = @estado
+			set cliente_nombre = @nombre,
+			cliente_apellido = @apellido,
+			cliente_tipoDocumento = @tipoDocumento,
+			cliente_mail = @mail,
+			cliente_telefono = @telefono,
+			cliente_calle = @calle,
+			cliente_nroCalle = @nroCalle,
+			cliente_piso = @piso,
+			cliente_dpto = @dpto,
+			cliente_localidad = @localidad,
+			cliente_nacionalidad = @nacionalidad,
+			cliente_fechaNac = @fechaNacimiento,
+			cliente_estado = @estado
 
-				where cliente_codigo = @codigo;
+			where cliente_nroDocumento = @nroDocumento;
 
-				set @respuesta = 1;
-			end
-			else
-			begin
-				set @respuesta = 2;
-			end
+
+			set @respuesta = 1;
+
 		select @respuesta as respuesta;
-		commit tran modcl
+	commit tran modcl
 	end try
 	begin catch
-		rollback tran modcl
+	rollback tran modcl
 		set @respuesta = 0;
 		select @respuesta as respuesta;
 	end catch
