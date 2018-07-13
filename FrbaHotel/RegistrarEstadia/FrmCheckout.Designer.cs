@@ -199,9 +199,9 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(444, 33);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Seleccione en la lista debajo la celda a la izquierda que corresponde a la estadi" +
-    "a que desea dar por concluida (se incluyen automaticamente todas las habitacione" +
-    "s que la componen):";
+            this.label5.Text = "Seleccione en la lista bajo la celda a la izquierda que corresponde a la estadia " +
+    "que desea dar por concluida (se incluyen automaticamente todas las habitaciones " +
+    "que la componen):";
             // 
             // FrmCheckout
             // 

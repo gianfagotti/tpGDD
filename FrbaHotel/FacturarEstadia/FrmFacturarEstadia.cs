@@ -42,9 +42,9 @@ namespace FrbaHotel.FacturarEstadia
             decimal diasSobrantes = infoQuery.GetDecimal(2);
             decimal cantNoches = infoQuery.GetDecimal(3);
             decimal precioNoche = infoQuery.GetDecimal(4);
-            txtFechaInicio.Text = fechaInicioEstadia.ToString("yyyy-MM-dd HH:mm:ss");
-            txtEgreso.Text = fechaInicioEstadia.AddDays(Convert.ToDouble(cantNoches + diasSobrantes)).ToString("yyyy-MM-dd HH:mm:ss");
-            txtCheckout.Text = Login.FrmTipoUsuario.fechaAppConvertida;
+            txtFechaInicio.Text = fechaInicioEstadia.ToString("yyyy-MM-dd");
+            txtEgreso.Text = fechaInicioEstadia.AddDays(Convert.ToDouble(cantNoches + diasSobrantes)).ToString("yyyy-MM-dd");
+            txtCheckout.Text = Login.FrmTipoUsuario.fechaApp.ToString("yyyy-MM-dd");
             infoQuery.Close();
             tablaInfoAlojamiento = new DataTable();
             tablaInfoAlojamiento.Columns.Add("Fecha");
