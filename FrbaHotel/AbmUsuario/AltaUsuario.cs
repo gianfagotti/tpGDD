@@ -15,7 +15,7 @@ namespace FrbaHotel.AbmUsuario
     {
         Form ultimoFormulario;
         SqlDataReader reader;
-        DataTable tabla, tablaH;
+        DataTable tablaH;
         Char separacion = '-';
 
         public AltaUsuario(Form formAnterior)

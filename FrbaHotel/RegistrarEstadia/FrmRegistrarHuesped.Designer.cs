@@ -212,8 +212,6 @@
 
         private System.Windows.Forms.Button btnRegiCliente;
         private System.Windows.Forms.Button BtnRegistrar;
-        private System.Windows.Forms.Label LblHuéspedes;
-        private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnSeleCliente;
         private System.Windows.Forms.Label LblRegistrarEstadia;
         private System.Windows.Forms.Label lblalgo;

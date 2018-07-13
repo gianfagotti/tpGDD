@@ -14,7 +14,6 @@ namespace FrbaHotel.GenerarModificacionReserva
     public partial class BuscarClientes : Form
     {
         Form abmPadre;
-        string consulta;
         SqlDataAdapter sAdapter;
         DataTable dTable;
 
