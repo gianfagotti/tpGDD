@@ -89,7 +89,7 @@
             this.txtContraseña.Name = "txtContraseña";
             this.txtContraseña.PasswordChar = '*';
             this.txtContraseña.Size = new System.Drawing.Size(295, 20);
-            this.txtContraseña.TabIndex = 2;
+            this.txtContraseña.TabIndex = 1;
             this.txtContraseña.UseSystemPasswordChar = true;
             // 
             // label3
@@ -187,21 +187,21 @@
             this.txtApellido.Location = new System.Drawing.Point(121, 133);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(295, 20);
-            this.txtApellido.TabIndex = 15;
+            this.txtApellido.TabIndex = 4;
             // 
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(121, 108);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(295, 20);
-            this.txtNombre.TabIndex = 14;
+            this.txtNombre.TabIndex = 3;
             // 
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(121, 210);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(295, 20);
-            this.txtTelefono.TabIndex = 17;
+            this.txtTelefono.TabIndex = 8;
             this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // txtMail
@@ -209,21 +209,21 @@
             this.txtMail.Location = new System.Drawing.Point(121, 185);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(295, 20);
-            this.txtMail.TabIndex = 16;
+            this.txtMail.TabIndex = 7;
             // 
             // txtDireccion
             // 
             this.txtDireccion.Location = new System.Drawing.Point(121, 235);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(295, 20);
-            this.txtDireccion.TabIndex = 18;
+            this.txtDireccion.TabIndex = 9;
             // 
             // txtDocumento
             // 
             this.txtDocumento.Location = new System.Drawing.Point(296, 160);
             this.txtDocumento.Name = "txtDocumento";
             this.txtDocumento.Size = new System.Drawing.Size(119, 20);
-            this.txtDocumento.TabIndex = 19;
+            this.txtDocumento.TabIndex = 6;
             this.txtDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDocumento_KeyPress);
             // 
             // cboRol
@@ -233,7 +233,7 @@
             this.cboRol.Location = new System.Drawing.Point(121, 81);
             this.cboRol.Name = "cboRol";
             this.cboRol.Size = new System.Drawing.Size(295, 21);
-            this.cboRol.TabIndex = 20;
+            this.cboRol.TabIndex = 2;
             // 
             // cboDocumento
             // 
@@ -249,12 +249,13 @@
             this.cboDocumento.Location = new System.Drawing.Point(121, 160);
             this.cboDocumento.Name = "cboDocumento";
             this.cboDocumento.Size = new System.Drawing.Size(83, 21);
-            this.cboDocumento.TabIndex = 21;
+            this.cboDocumento.TabIndex = 5;
             // 
             // cboHotel
             // 
             this.cboHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboHotel.FormattingEnabled = true;
+            this.cboHotel.ItemHeight = 13;
             this.cboHotel.Location = new System.Drawing.Point(159, 285);
             this.cboHotel.Name = "cboHotel";
             this.cboHotel.Size = new System.Drawing.Size(257, 21);
@@ -308,7 +309,7 @@
             this.dtpFechaNac.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtpFechaNac.Name = "dtpFechaNac";
             this.dtpFechaNac.Size = new System.Drawing.Size(294, 20);
-            this.dtpFechaNac.TabIndex = 28;
+            this.dtpFechaNac.TabIndex = 10;
             this.dtpFechaNac.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // AltaUsuario

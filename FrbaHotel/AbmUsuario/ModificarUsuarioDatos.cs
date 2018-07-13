@@ -24,6 +24,7 @@ namespace FrbaHotel.AbmUsuario
             usuario = usuarioSeleccionado;
             ultimoForm = formAnterior;
             InitializeComponent();
+            //dtpFechaNac.Value = VarGlobales.getDate();
             llenarCampos();
         }
 
@@ -53,6 +54,7 @@ namespace FrbaHotel.AbmUsuario
                 };
 
             func(Controls);
+            cboDocumento.SelectedIndex = -1;
 
         }
 
@@ -121,18 +123,19 @@ namespace FrbaHotel.AbmUsuario
                 string.IsNullOrEmpty(txtDocumento.Text) ||
                 string.IsNullOrEmpty(txtMail.Text) ||
                 string.IsNullOrEmpty(txtTelefono.Text) ||
-                string.IsNullOrEmpty(cboDocumento.Text) 
+                string.IsNullOrEmpty(cboDocumento.Text)
                 )
             {
                 MessageBox.Show("Todos los campos son obligatorios y deben ser completados.", "Error");
                 return false;
             }
-            else {
+            else
+            {
 
                 DateTime fechaMinima = VarGlobales.getDate().AddYears(-16);
                 DateTime fechaIngresada = Convert.ToDateTime(dtpFechaNac.Value);
                 int resultado = DateTime.Compare(fechaMinima, fechaIngresada);
-                
+
                 if (resultado < 0)
                 {
                     MessageBox.Show("El usuario debe ser mayor de 16 años", "Error");
@@ -141,10 +144,14 @@ namespace FrbaHotel.AbmUsuario
                 }
                 else
                 {
-                    return true;
+                    if (validarEmail(txtMail.Text))
+                    {
+                        return true;
+                    }
+                    else return false;
                 }
             }
-            }
+        }
 
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -181,6 +188,20 @@ namespace FrbaHotel.AbmUsuario
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+         private static bool validarEmail(string email)
+        {
+            try
+            {
+                new System.Net.Mail.MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Ingrese un mail válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
         }
 

@@ -21,6 +21,7 @@ namespace FrbaHotel.AbmUsuario
         public AltaUsuario(Form formAnterior)
         {
             InitializeComponent();
+            dtpFechaNac.Value = VarGlobales.getDate();
             ultimoFormulario = formAnterior;
             cargarComboRol();
             cargarComboHotel();
@@ -54,9 +55,9 @@ namespace FrbaHotel.AbmUsuario
 
             func(Controls);
 
-            cboRol.ResetText();
-            cboHotel.ResetText();
-            cboDocumento.ResetText();
+            cboRol.SelectedIndex = -1;
+            cboHotel.SelectedIndex = -1;
+            cboDocumento.SelectedIndex = -1;
 
         }
 
@@ -161,7 +162,11 @@ namespace FrbaHotel.AbmUsuario
                 }
                 else
                 {
-                    return true;
+                    if (validarEmail(txtMail.Text))
+                    {
+                        return true;
+                    }
+                    else return false;
                 }
             }
 
@@ -214,6 +219,20 @@ namespace FrbaHotel.AbmUsuario
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private static bool validarEmail(string email)
+        {
+            try
+            {
+                new System.Net.Mail.MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Ingrese un mail válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
         }
 

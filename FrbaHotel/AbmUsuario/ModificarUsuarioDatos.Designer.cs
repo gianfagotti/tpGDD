@@ -60,7 +60,7 @@
             this.dtpFechaNac.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtpFechaNac.Name = "dtpFechaNac";
             this.dtpFechaNac.Size = new System.Drawing.Size(306, 20);
-            this.dtpFechaNac.TabIndex = 51;
+            this.dtpFechaNac.TabIndex = 8;
             this.dtpFechaNac.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // btnVaciar
@@ -88,7 +88,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(348, 256);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardar.TabIndex = 48;
+            this.btnGuardar.TabIndex = 9;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -107,14 +107,14 @@
             this.cboDocumento.Location = new System.Drawing.Point(116, 117);
             this.cboDocumento.Name = "cboDocumento";
             this.cboDocumento.Size = new System.Drawing.Size(95, 21);
-            this.cboDocumento.TabIndex = 47;
+            this.cboDocumento.TabIndex = 3;
             // 
             // txtDocumento
             // 
             this.txtDocumento.Location = new System.Drawing.Point(303, 117);
             this.txtDocumento.Name = "txtDocumento";
             this.txtDocumento.Size = new System.Drawing.Size(119, 20);
-            this.txtDocumento.TabIndex = 46;
+            this.txtDocumento.TabIndex = 4;
             this.txtDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDocumento_KeyPress);
             // 
             // txtDireccion
@@ -122,14 +122,14 @@
             this.txtDireccion.Location = new System.Drawing.Point(116, 192);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(307, 20);
-            this.txtDireccion.TabIndex = 45;
+            this.txtDireccion.TabIndex = 7;
             // 
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(116, 167);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(307, 20);
-            this.txtTelefono.TabIndex = 44;
+            this.txtTelefono.TabIndex = 6;
             this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // txtMail
@@ -137,21 +137,21 @@
             this.txtMail.Location = new System.Drawing.Point(116, 142);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(307, 20);
-            this.txtMail.TabIndex = 43;
+            this.txtMail.TabIndex = 5;
             // 
             // txtApellido
             // 
             this.txtApellido.Location = new System.Drawing.Point(116, 90);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(307, 20);
-            this.txtApellido.TabIndex = 42;
+            this.txtApellido.TabIndex = 2;
             // 
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(116, 65);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(307, 20);
-            this.txtNombre.TabIndex = 41;
+            this.txtNombre.TabIndex = 1;
             // 
             // label12
             // 
@@ -240,7 +240,7 @@
             this.txtUsername.Location = new System.Drawing.Point(116, 39);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(307, 20);
-            this.txtUsername.TabIndex = 29;
+            this.txtUsername.TabIndex = 0;
             // 
             // label6
             // 
