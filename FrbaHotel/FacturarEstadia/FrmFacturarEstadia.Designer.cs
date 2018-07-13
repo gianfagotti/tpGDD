@@ -170,7 +170,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(34, 155);
+            this.label3.Location = new System.Drawing.Point(34, 152);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(118, 15);
@@ -180,7 +180,7 @@
             // txtEgreso
             // 
             this.txtEgreso.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEgreso.Location = new System.Drawing.Point(188, 153);
+            this.txtEgreso.Location = new System.Drawing.Point(188, 151);
             this.txtEgreso.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtEgreso.Name = "txtEgreso";
             this.txtEgreso.ReadOnly = true;
@@ -256,7 +256,7 @@
             this.dgvAlojamiento.AllowUserToDeleteRows = false;
             this.dgvAlojamiento.AllowUserToOrderColumns = true;
             this.dgvAlojamiento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAlojamiento.Location = new System.Drawing.Point(37, 395);
+            this.dgvAlojamiento.Location = new System.Drawing.Point(37, 179);
             this.dgvAlojamiento.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgvAlojamiento.Name = "dgvAlojamiento";
             this.dgvAlojamiento.ReadOnly = true;
@@ -269,11 +269,11 @@
             this.dgvConsumibles.AllowUserToDeleteRows = false;
             this.dgvConsumibles.AllowUserToOrderColumns = true;
             this.dgvConsumibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvConsumibles.Location = new System.Drawing.Point(37, 180);
+            this.dgvConsumibles.Location = new System.Drawing.Point(37, 395);
             this.dgvConsumibles.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgvConsumibles.Name = "dgvConsumibles";
             this.dgvConsumibles.ReadOnly = true;
-            this.dgvConsumibles.Size = new System.Drawing.Size(647, 182);
+            this.dgvConsumibles.Size = new System.Drawing.Size(653, 182);
             this.dgvConsumibles.TabIndex = 36;
             // 
             // label4
@@ -311,6 +311,7 @@
             // 
             // btnProcederPago
             // 
+            this.btnProcederPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProcederPago.Location = new System.Drawing.Point(598, 616);
             this.btnProcederPago.Name = "btnProcederPago";
             this.btnProcederPago.Size = new System.Drawing.Size(92, 37);

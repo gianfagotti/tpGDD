@@ -165,6 +165,26 @@ namespace FrbaHotel.AbmHotel
             }
         }
 
+        private void txtsSoloLetras_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsLetter(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
         private void lblDatosHotel_Click(object sender, EventArgs e)
         {
 
@@ -198,6 +218,7 @@ namespace FrbaHotel.AbmHotel
             {
                 this.dtpFechaCreacionHotel.Value = Convert.ToDateTime(datosHotel.Rows[0][8]);
             }
+            this.cboCantidadDeEstrellas.SelectedIndex = - 1;
         }
 
         private void btnVolverHotel_Click_1(object sender, EventArgs e)

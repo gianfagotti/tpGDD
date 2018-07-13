@@ -18,6 +18,7 @@ namespace FrbaHotel.AbmRol
         {
             InitializeComponent();
             habilitarGroupsBoxs(rol);
+            txtfechinia.Text = Login.FrmTipoUsuario.fechaApp.ToString("dd/MM/yyyy");
         }
 
         private void habilitarGroupsBoxs(decimal codigoRol)

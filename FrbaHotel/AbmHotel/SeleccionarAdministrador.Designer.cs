@@ -49,6 +49,7 @@
             // 
             // cboSeleccionarAdministrador
             // 
+            this.cboSeleccionarAdministrador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSeleccionarAdministrador.FormattingEnabled = true;
             this.cboSeleccionarAdministrador.Location = new System.Drawing.Point(139, 91);
             this.cboSeleccionarAdministrador.Name = "cboSeleccionarAdministrador";
