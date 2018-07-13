@@ -86,6 +86,7 @@
             // cboEntidad
             // 
             this.cboEntidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEntidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboEntidad.FormattingEnabled = true;
             this.cboEntidad.Location = new System.Drawing.Point(179, 192);
             this.cboEntidad.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -95,6 +96,7 @@
             // 
             // txtnroTarj
             // 
+            this.txtnroTarj.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtnroTarj.Location = new System.Drawing.Point(179, 94);
             this.txtnroTarj.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtnroTarj.Name = "txtnroTarj";
@@ -127,6 +129,7 @@
             // 
             // txtTitu
             // 
+            this.txtTitu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTitu.Location = new System.Drawing.Point(179, 244);
             this.txtTitu.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtTitu.Name = "txtTitu";
@@ -136,6 +139,7 @@
             // cboBank
             // 
             this.cboBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboBank.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboBank.FormattingEnabled = true;
             this.cboBank.Location = new System.Drawing.Point(179, 139);
             this.cboBank.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
