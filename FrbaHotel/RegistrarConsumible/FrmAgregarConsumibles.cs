@@ -106,7 +106,7 @@ namespace FrbaHotel.RegistrarConsumible
                     }
                     resultadoDeOperacion.Close();
                 }
-                MessageBox.Show("El proceso de carga de consumibles finalizo correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("El proceso de carga de consumibles finalizó correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
                 menuAVolver.Show();
             }

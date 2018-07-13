@@ -1147,10 +1147,10 @@ AS BEGIN
 	SET @inicioTrimestre = CONVERT(DATETIME,@trimestreInicio,121)
 	SET @finTrimestre = CONVERT(DATETIME,@trimestreFin,121)
 
-SELECT DISTINCT TOP 5 ha.habitacion_codigoHotel AS CodigoDelHotel, ha.habitacion_codigo AS CodigoDeLaHabitacion, consultaOcupacionHab.cantEstadias AS VecesOcupada
+SELECT DISTINCT TOP 5  ha.habitacion_codigo AS CodigoDeLaHabitacion, ha.habitacion_codigoHotel AS CodigoDelHotel, consultaOcupacionHab.cantidadDias AS CantidadDeDiasUsada, consultaOcupacionHab.cantidadEstadias AS VecesOcupada
 
 FROM
-	(SELECT  ha.habitacion_codigo, ha.habitacion_codigoHotel, COUNT(resXHab.habitacion_codigo) AS cantEstadias
+	(SELECT  ha.habitacion_codigo, ha.habitacion_codigoHotel, SUM(res.reserva_cantNoches) AS cantidadDias, COUNT(resXHab.habitacion_codigo) AS cantidadEstadias
 	  FROM FAGD.ReservaXHabitacion resXHab, FAGD.Habitacion ha, FAGD.Reserva res, FAGD.Hotel hotel, FAGD.Estadia est
 	  WHERE resXHab.habitacion_codigo = ha.habitacion_codigo AND
 		    resXHab.reserva_codigo = res.reserva_codigo AND
@@ -1159,13 +1159,13 @@ FROM
 			est.estadia_fechaInicio >= @inicioTrimestre AND
 			est.estadia_fechaFin <= @finTrimestre
       GROUP BY ha.habitacion_codigo, ha.habitacion_codigoHotel) AS consultaOcupacionHab,
-					
+		
 
 	FAGD.Hotel hotel, FAGD.Habitacion ha,	FAGD.Estadia est
 
 WHERE consultaOcupacionHab.habitacion_codigoHotel = hotel.hotel_codigo AND
 	  ha.habitacion_codigo = consultaOcupacionHab.habitacion_codigo
-ORDER BY cantEstadias desc
+ORDER BY cantidadDias DESC
 	
 END
 GO
