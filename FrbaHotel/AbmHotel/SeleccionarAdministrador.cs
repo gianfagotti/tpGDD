@@ -35,7 +35,7 @@ namespace FrbaHotel.AbmHotel
 
         private void btnAceptarAdministrador_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cboSeleccionarAdministrador.Text))
+            if (this.cboSeleccionarAdministrador.SelectedIndex == -1)
             {
                 MessageBox.Show("Por favor, seleccione un administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

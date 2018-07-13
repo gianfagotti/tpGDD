@@ -122,7 +122,7 @@
             this.btnBorrarTextosHotel.Name = "btnBorrarTextosHotel";
             this.btnBorrarTextosHotel.Size = new System.Drawing.Size(75, 27);
             this.btnBorrarTextosHotel.TabIndex = 47;
-            this.btnBorrarTextosHotel.Text = "Borrar";
+            this.btnBorrarTextosHotel.Text = "Limpiar";
             this.btnBorrarTextosHotel.UseVisualStyleBackColor = false;
             this.btnBorrarTextosHotel.Click += new System.EventHandler(this.btnBorrarTextosHotel_Click_1);
             // 
@@ -151,6 +151,7 @@
             this.txtPaisHotel.Name = "txtPaisHotel";
             this.txtPaisHotel.Size = new System.Drawing.Size(211, 20);
             this.txtPaisHotel.TabIndex = 44;
+            this.txtPaisHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // txtCiudadHotel
             // 
@@ -158,6 +159,7 @@
             this.txtCiudadHotel.Name = "txtCiudadHotel";
             this.txtCiudadHotel.Size = new System.Drawing.Size(211, 20);
             this.txtCiudadHotel.TabIndex = 43;
+            this.txtCiudadHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // txtCalleHotel
             // 
@@ -165,6 +167,7 @@
             this.txtCalleHotel.Name = "txtCalleHotel";
             this.txtCalleHotel.Size = new System.Drawing.Size(211, 20);
             this.txtCalleHotel.TabIndex = 41;
+            this.txtCalleHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // txtTelefonoHotel
             // 
@@ -301,6 +304,7 @@
             this.txtNombreHotel.Name = "txtNombreHotel";
             this.txtNombreHotel.Size = new System.Drawing.Size(211, 20);
             this.txtNombreHotel.TabIndex = 55;
+            this.txtNombreHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // cboCantidadDeEstrellas
             // 

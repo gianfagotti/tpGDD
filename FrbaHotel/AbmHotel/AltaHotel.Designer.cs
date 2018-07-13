@@ -178,6 +178,7 @@
             this.txtNombreHotel.Name = "txtNombreHotel";
             this.txtNombreHotel.Size = new System.Drawing.Size(211, 20);
             this.txtNombreHotel.TabIndex = 1;
+            this.txtNombreHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // txtMailHotel
             // 
@@ -201,6 +202,7 @@
             this.txtCalleHotel.Name = "txtCalleHotel";
             this.txtCalleHotel.Size = new System.Drawing.Size(211, 20);
             this.txtCalleHotel.TabIndex = 4;
+            this.txtCalleHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // txtCiudadHotel
             // 
@@ -208,6 +210,7 @@
             this.txtCiudadHotel.Name = "txtCiudadHotel";
             this.txtCiudadHotel.Size = new System.Drawing.Size(211, 20);
             this.txtCiudadHotel.TabIndex = 8;
+            this.txtCiudadHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // txtPaisHotel
             // 
@@ -215,6 +218,7 @@
             this.txtPaisHotel.Name = "txtPaisHotel";
             this.txtPaisHotel.Size = new System.Drawing.Size(211, 20);
             this.txtPaisHotel.TabIndex = 9;
+            this.txtPaisHotel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // dtpFechaCreacionHotel
             // 
@@ -243,7 +247,7 @@
             this.btnBorrarTextosHotel.Name = "btnBorrarTextosHotel";
             this.btnBorrarTextosHotel.Size = new System.Drawing.Size(75, 27);
             this.btnBorrarTextosHotel.TabIndex = 21;
-            this.btnBorrarTextosHotel.Text = "Borrar";
+            this.btnBorrarTextosHotel.Text = "Limpiar";
             this.btnBorrarTextosHotel.UseVisualStyleBackColor = false;
             this.btnBorrarTextosHotel.Click += new System.EventHandler(this.btnBorrarTextosHotel_Click);
             // 
