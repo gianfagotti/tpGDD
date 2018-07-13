@@ -36,10 +36,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtCliente = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.Sacar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Elegir = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cboHotel = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -53,8 +49,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.butLimpiar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dgvAgregar = new System.Windows.Forms.DataGridView();
+            this.Baja = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.dgvSacar = new System.Windows.Forms.DataGridView();
+            this.dataGridViewButtonColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAgregar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSacar)).BeginInit();
             this.SuspendLayout();
             // 
             // txtTotal
@@ -136,38 +136,6 @@
             this.label1.Size = new System.Drawing.Size(57, 18);
             this.label1.TabIndex = 45;
             this.label1.Text = "Cliente:";
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Sacar});
-            this.dataGridView2.Location = new System.Drawing.Point(387, 250);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(328, 266);
-            this.dataGridView2.TabIndex = 43;
-            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
-            // 
-            // Sacar
-            // 
-            this.Sacar.HeaderText = "Sacar";
-            this.Sacar.Name = "Sacar";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Elegir});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 250);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(328, 266);
-            this.dataGridView1.TabIndex = 42;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Elegir
-            // 
-            this.Elegir.HeaderText = "Elegir";
-            this.Elegir.Name = "Elegir";
             // 
             // cboHotel
             // 
@@ -299,11 +267,59 @@
             this.butLimpiar.UseVisualStyleBackColor = true;
             this.butLimpiar.Click += new System.EventHandler(this.butLimpiar_Click);
             // 
+            // dgvAgregar
+            // 
+            this.dgvAgregar.AllowUserToAddRows = false;
+            this.dgvAgregar.AllowUserToDeleteRows = false;
+            this.dgvAgregar.AllowUserToOrderColumns = true;
+            this.dgvAgregar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAgregar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Baja});
+            this.dgvAgregar.Location = new System.Drawing.Point(18, 250);
+            this.dgvAgregar.Name = "dgvAgregar";
+            this.dgvAgregar.ReadOnly = true;
+            this.dgvAgregar.Size = new System.Drawing.Size(328, 266);
+            this.dgvAgregar.TabIndex = 56;
+            this.dgvAgregar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAgregar_CellContentClick);
+            // 
+            // Baja
+            // 
+            this.Baja.HeaderText = "";
+            this.Baja.Name = "Baja";
+            this.Baja.ReadOnly = true;
+            this.Baja.Text = "Agregar";
+            this.Baja.UseColumnTextForButtonValue = true;
+            // 
+            // dgvSacar
+            // 
+            this.dgvSacar.AllowUserToAddRows = false;
+            this.dgvSacar.AllowUserToDeleteRows = false;
+            this.dgvSacar.AllowUserToOrderColumns = true;
+            this.dgvSacar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSacar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewButtonColumn1});
+            this.dgvSacar.Location = new System.Drawing.Point(374, 250);
+            this.dgvSacar.Name = "dgvSacar";
+            this.dgvSacar.ReadOnly = true;
+            this.dgvSacar.Size = new System.Drawing.Size(328, 266);
+            this.dgvSacar.TabIndex = 57;
+            this.dgvSacar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSacar_CellContentClick);
+            // 
+            // dataGridViewButtonColumn1
+            // 
+            this.dataGridViewButtonColumn1.HeaderText = "";
+            this.dataGridViewButtonColumn1.Name = "dataGridViewButtonColumn1";
+            this.dataGridViewButtonColumn1.ReadOnly = true;
+            this.dataGridViewButtonColumn1.Text = "Sacar";
+            this.dataGridViewButtonColumn1.UseColumnTextForButtonValue = true;
+            // 
             // ModificarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 579);
+            this.Controls.Add(this.dgvSacar);
+            this.Controls.Add(this.dgvAgregar);
             this.Controls.Add(this.butLimpiar);
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.label10);
@@ -313,8 +329,6 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtCliente);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cboHotel);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -330,8 +344,8 @@
             this.Name = "ModificarReserva";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificar reserva";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAgregar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSacar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,10 +361,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtCliente;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sacar;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Elegir;
         private System.Windows.Forms.ComboBox cboHotel;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -364,6 +374,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button butLimpiar;
+        private System.Windows.Forms.DataGridView dgvAgregar;
+        private System.Windows.Forms.DataGridViewButtonColumn Baja;
+        private System.Windows.Forms.DataGridView dgvSacar;
+        private System.Windows.Forms.DataGridViewButtonColumn dataGridViewButtonColumn1;
 
     }
 }

@@ -14,7 +14,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 {
     public partial class GenerarReserva : Form
     {
-        Form ultimoFormulario;
+        Form abmPadre;
         private DataTable tabla, dTable, table2;
         int Fila = 0;
         BindingSource bSource2;
@@ -33,7 +33,7 @@ namespace FrbaHotel.GenerarModificacionReserva
         public GenerarReserva(Form form)
         {
             InitializeComponent();
-            ultimoFormulario = form;
+            abmPadre = form;
             dtpDesde.Value = VarGlobales.getDate();
             dtpHasta.Value = VarGlobales.getDate();
             dataGridView1.DataSource = null;
@@ -53,7 +53,7 @@ namespace FrbaHotel.GenerarModificacionReserva
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
-            ultimoFormulario.Show();
+            abmPadre.Show();
         }
 
         private void butLimpiar_Click(object sender, EventArgs e)
@@ -244,87 +244,6 @@ namespace FrbaHotel.GenerarModificacionReserva
             dias = dtpHasta.Value.Date.Subtract(dtpDesde.Value.Date).Days;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 0)
-            {
-                DateTime inicio = Convert.ToDateTime(dtpDesde.Value);
-                DateTime fin = Convert.ToDateTime(dtpHasta.Value);
-                if (DateTime.Compare(fechaDesde, inicio) == 0 && DateTime.Compare(fin, fechaHasta) == 0)
-                {
-                    string id = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-                    string regimen = dataGridView1.CurrentRow.Cells[4].Value.ToString();
-                    
-
-                    DataRow row = table2.NewRow();
-                    row["Id"] = id;
-                    try
-                    {
-                        precio = (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
-                        row["Precio"] = precio.ToString();
-
-                    }
-                    catch { return; }
-
-                    try
-                    {
-                        table2.Rows.Add(row);
-                        if (cant == 0)
-                        {
-                            cboHotel.Enabled = false;
-                            dtpDesde.Enabled = false;
-                            dtpHasta.Enabled = false;
-                            cboRegimen.Text = regimen;
-                            cboRegimen.Enabled = false;
-                        }
-                        
-                        total += (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
-                        txtTotal.Text = total.ToString();
-                        cant++;
-                        dataGridView2.DataSource = bSource2;
-                        butSeleccionar_Click(null, null);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Esa habitación ya fue agregada");
-                        return;
-                    }
-                }
-                else 
-                {
-                    MessageBox.Show("Por favor, vuelva a buscar habitación si cambio la fecha");
-                }
-                
-            }
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 0) 
-            {
-                try
-                {
-                    int item = dataGridView2.CurrentRow.Index;
-                    dataGridView2.Rows.RemoveAt(item);
-                    cant--;
-
-                    if (cant == 0)
-                    {
-                        cboHotel.Enabled = true;
-                        dtpDesde.Enabled = true;
-                        dtpHasta.Enabled = true;
-                        cboRegimen.Enabled = true;
-                        dataGridView2.DataSource = bSource2;
-                    }
-                    decimal precio = (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
-                    total -= precio;
-                    txtTotal.Text = total.ToString();
-                }
-                catch { return; }
-            }
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             string codigoHabitacion = "";
@@ -408,9 +327,92 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
 
             MessageBox.Show("Reserva generada con éxito, su número de reserva es: " + id.ToString());
-            butLimpiar_Click(null, null);
+            abmPadre.Show();
+            this.Close();
 
 
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                DateTime inicio = Convert.ToDateTime(dtpDesde.Value);
+                DateTime fin = Convert.ToDateTime(dtpHasta.Value);
+                if (DateTime.Compare(fechaDesde, inicio) == 0 && DateTime.Compare(fin, fechaHasta) == 0)
+                {
+                    string id = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                    string regimen = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+
+
+                    DataRow row = table2.NewRow();
+                    row["Id"] = id;
+                    try
+                    {
+                        precio = (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
+                        row["Precio"] = precio.ToString();
+
+                    }
+                    catch { return; }
+
+                    try
+                    {
+                        table2.Rows.Add(row);
+                        if (cant == 0)
+                        {
+                            cboHotel.Enabled = false;
+                            dtpDesde.Enabled = false;
+                            dtpHasta.Enabled = false;
+                            cboRegimen.Text = regimen;
+                            cboRegimen.Enabled = false;
+                        }
+
+                        total += (((decimal)dataGridView1.CurrentRow.Cells[3].Value) * dias);
+                        txtTotal.Text = total.ToString();
+                        cant++;
+                        dataGridView2.DataSource = bSource2;
+                        butSeleccionar_Click(null, null);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Esa habitación ya fue agregada");
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, vuelva a buscar habitación si cambio la fecha");
+                }
+
+            }
+        }
+
+        private void dataGridView2_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                try
+                {
+                    string prec = dataGridView2.CurrentRow.Cells[2].Value.ToString();
+                    decimal precio = Decimal.Parse(prec);
+                    int item = dataGridView2.CurrentRow.Index;
+                    dataGridView2.Rows.RemoveAt(item);
+                    cant--;
+
+                    if (cant == 0)
+                    {
+                        cboHotel.Enabled = true;
+                        dtpDesde.Enabled = true;
+                        dtpHasta.Enabled = true;
+                        cboRegimen.Enabled = true;
+                        dataGridView2.DataSource = bSource2;
+                    }
+
+                    total -= precio;
+                    txtTotal.Text = total.ToString();
+                }
+                catch { return; }
+            }
         }
 
     }

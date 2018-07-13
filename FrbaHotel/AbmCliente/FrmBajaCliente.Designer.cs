@@ -39,14 +39,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvBaja = new System.Windows.Forms.DataGridView();
-            this.Elegir = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Baja = new System.Windows.Forms.DataGridViewButtonColumn();
             this.butLimpiar = new System.Windows.Forms.Button();
             this.butVolver = new System.Windows.Forms.Button();
             this.butBuscar = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Elegir = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBaja)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -162,28 +161,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre";
             // 
-            // dgvBaja
-            // 
-            this.dgvBaja.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBaja.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Elegir,
-            this.Baja});
-            this.dgvBaja.Location = new System.Drawing.Point(12, 159);
-            this.dgvBaja.Name = "dgvBaja";
-            this.dgvBaja.Size = new System.Drawing.Size(413, 195);
-            this.dgvBaja.TabIndex = 1;
-            this.dgvBaja.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBaja_CellContentClick);
-            // 
-            // Elegir
-            // 
-            this.Elegir.HeaderText = "Elegir";
-            this.Elegir.Name = "Elegir";
-            // 
-            // Baja
-            // 
-            this.Baja.HeaderText = "Baja";
-            this.Baja.Name = "Baja";
-            // 
             // butLimpiar
             // 
             this.butLimpiar.Location = new System.Drawing.Point(12, 372);
@@ -214,23 +191,46 @@
             this.butBuscar.UseVisualStyleBackColor = true;
             this.butBuscar.Click += new System.EventHandler(this.butBuscar_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Elegir});
+            this.dataGridView1.Location = new System.Drawing.Point(12, 159);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(413, 207);
+            this.dataGridView1.TabIndex = 15;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Elegir
+            // 
+            this.Elegir.HeaderText = "";
+            this.Elegir.Name = "Elegir";
+            this.Elegir.ReadOnly = true;
+            this.Elegir.Text = "Inhabilitar";
+            this.Elegir.UseColumnTextForButtonValue = true;
+            // 
             // FrmBajaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(437, 401);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.butBuscar);
             this.Controls.Add(this.butVolver);
             this.Controls.Add(this.butLimpiar);
-            this.Controls.Add(this.dgvBaja);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmBajaCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmBajaCliente";
+            this.Text = "Inhabilitar cliente";
             this.Load += new System.EventHandler(this.Baja_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBaja)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -248,11 +248,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgvBaja;
-        private System.Windows.Forms.DataGridViewButtonColumn Elegir;
-        private System.Windows.Forms.DataGridViewButtonColumn Baja;
         private System.Windows.Forms.Button butLimpiar;
         private System.Windows.Forms.Button butVolver;
         private System.Windows.Forms.Button butBuscar;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewButtonColumn Elegir;
     }
 }

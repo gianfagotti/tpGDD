@@ -27,7 +27,7 @@ namespace FrbaHotel.AbmCliente
 
         private void Baja_Load(object sender, EventArgs e)
         {
-            string query = "select * from FAGD.Cliente";
+            string query = "select cliente_codigo Código, cliente_tipoDocumento as 'Tipo Documento', cliente_nroDocumento Documento, cliente_nombre Nombre, cliente_apellido Apellido, cliente_mail Mail, cliente_estado Estado from FAGD.Cliente";
             adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
             tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
             //BindingSource to sync DataTable and DataGridView
@@ -35,7 +35,7 @@ namespace FrbaHotel.AbmCliente
             //set the BindingSource DataSource
             bSource.DataSource = tablaConDatos;
             //set the DataGridView DataSource
-            dgvBaja.DataSource = bSource;
+            dataGridView1.DataSource = bSource;
         }
 
         private void butVolver_Click(object sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace FrbaHotel.AbmCliente
             txtMail.Text = string.Empty;
             txtNroDoc.Text = string.Empty;
             cboTipoDoc.ResetText();
-            dgvBaja.DataSource = null;
+            dataGridView1.DataSource = null;
             txtNombre.Focus();
         }
 
@@ -78,30 +78,30 @@ namespace FrbaHotel.AbmCliente
             DataView dvData = new DataView(tablaConDatos);
             string query = "";
 
-            query = query + this.filtrarAproximadamentePor("cliente_nombre", txtNombre.Text);
-            query = query + this.filtrarExactamentePor("cliente_tipoDocumento", cboTipoDoc.Text);
-            query = query + this.filtrarAproximadamentePor("cliente_apellido", txtApellido.Text);
-            query = query + this.filtrarExactamentePor("cliente_nroDocumento", txtNroDoc.Text);
-            query = query + this.filtrarAproximadamentePor("cliente_mail", txtMail.Text);
+            query = query + this.filtrarAproximadamentePor("Nombre", txtNombre.Text);
+            query = query + this.filtrarExactamentePor("Tipo Documento", cboTipoDoc.Text);
+            query = query + this.filtrarAproximadamentePor("Apellido", txtApellido.Text);
+            query = query + this.filtrarExactamentePor("Documento", txtNroDoc.Text);
+            query = query + this.filtrarAproximadamentePor("Mail", txtMail.Text);
             if (query.Length > 0) { query = query.Remove(query.Length - 4); }
             dvData.RowFilter = query;
-            dgvBaja.DataSource = dvData;
+            dataGridView1.DataSource = dvData;
         }
 
-        private void dgvBaja_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 1)
+            if (e.ColumnIndex == 0)
             {
-                if (dgvBaja.CurrentRow.Cells[15].Value.ToString() == "False")
+                if (dataGridView1.CurrentRow.Cells[7].Value.ToString() == "False")
                 {
                     MessageBox.Show("El cliente ya esta dado de baja");
                     return;
                 }
-                string nroDocumento = dgvBaja.CurrentRow.Cells[2].Value.ToString();
+                string codigo = dataGridView1.CurrentRow.Cells[1].Value.ToString();
 
                 if (MessageBox.Show("Estas seguro que desea inhabilitar al cliente?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    consulta = "update FAGD.Cliente set cliente_estado=0 where cliente_nroDocumento = " + nroDocumento;
+                    consulta = "update FAGD.Cliente set cliente_estado=0 where cliente_codigo = " + codigo;
 
                     resultado = Login.FrmTipoUsuario.BD.comando(consulta);
                     if (resultado.Read() == true)
@@ -115,7 +115,7 @@ namespace FrbaHotel.AbmCliente
                 //set the BindingSource DataSource
                 bSource.DataSource = tablaConDatos;
                 //set the DataGridView DataSource
-                dgvBaja.DataSource = bSource;
+                dataGridView1.DataSource = bSource;
             }
         }
     }

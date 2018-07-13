@@ -181,7 +181,7 @@ CREATE TABLE FAGD.Cliente(
  cliente_apellido nvarchar(255),
  cliente_nombre nvarchar(255),
  cliente_fechaNac datetime,
- cliente_mail varchar(50),
+ cliente_mail varchar(50) UNIQUE,
  cliente_nacionalidad nvarchar(255),
  cliente_calle nvarchar(255),
  cliente_nroCalle numeric(18),
@@ -1625,6 +1625,7 @@ GO
 
 
 create proc FAGD.modificarCliente
+@codigo numeric(18),
 @nombre nvarchar(255),
 @apellido nvarchar(255),
 @tipoDocumento nvarchar(255),
@@ -1647,37 +1648,45 @@ begin
 	declare @respuesta numeric(18)
 	begin tran modcl
 	begin try
-			if (@piso = '-')
+			if (not exists(select * from FAGD.Cliente 
+						where cliente_tipoDocumento = @tipoDocumento and cliente_nroDocumento = @nroDocumento))
+			begin
+				if (@piso = '-')
 				set @piso = null
-			if (@dpto = '-')
+				if (@dpto = '-')
 				set @dpto = null
 			
-			UPDATE FAGD.Cliente
+				UPDATE FAGD.Cliente
 
-			set cliente_nombre = @nombre,
-			cliente_apellido = @apellido,
-			cliente_tipoDocumento = @tipoDocumento,
-			cliente_mail = @mail,
-			cliente_telefono = @telefono,
-			cliente_calle = @calle,
-			cliente_nroCalle = @nroCalle,
-			cliente_piso = @piso,
-			cliente_dpto = @dpto,
-			cliente_localidad = @localidad,
-			cliente_nacionalidad = @nacionalidad,
-			cliente_fechaNac = @fechaNacimiento,
-			cliente_estado = @estado
+				set
+				cliente_nroDocumento = @nroDocumento,
+				cliente_nombre = @nombre,
+				cliente_apellido = @apellido,
+				cliente_tipoDocumento = @tipoDocumento,
+				cliente_mail = @mail,
+				cliente_telefono = @telefono,
+				cliente_calle = @calle,
+				cliente_nroCalle = @nroCalle,
+				cliente_piso = @piso,
+				cliente_dpto = @dpto,
+				cliente_localidad = @localidad,
+				cliente_nacionalidad = @nacionalidad,
+				cliente_fechaNac = @fechaNacimiento,
+				cliente_estado = @estado
 
-			where cliente_nroDocumento = @nroDocumento;
+				where cliente_codigo = @codigo;
 
-
-			set @respuesta = 1;
-
+				set @respuesta = 1;
+			end
+			else
+			begin
+				set @respuesta = 2;
+			end
 		select @respuesta as respuesta;
-	commit tran modcl
+		commit tran modcl
 	end try
 	begin catch
-	rollback tran modcl
+		rollback tran modcl
 		set @respuesta = 0;
 		select @respuesta as respuesta;
 	end catch

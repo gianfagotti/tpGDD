@@ -35,7 +35,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                 {
                     comando.Close();
                     this.Hide();
-                    ModificarReserva modificar = new ModificarReserva(this, txtNroReserva.Text);
+                    ModificarReserva modificar = new ModificarReserva(abmPadre, txtNroReserva.Text);
                     modificar.Show();
 
                 }

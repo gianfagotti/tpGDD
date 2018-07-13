@@ -57,14 +57,14 @@ namespace FrbaHotel.AbmCliente
 
         private void butBuscar_Click(object sender, EventArgs e)
         {
-            string consulta = "select * from FAGD.Cliente";
+            string consulta = "select cliente_codigo Código, cliente_nroDocumento Documento, cliente_apellido Apellido, cliente_nombre Nombre, cliente_fechaNac as 'Fecha nacimiento', cliente_mail Mail, cliente_nacionalidad Nacionalidad, cliente_calle Calle, cliente_nroCalle Número, cliente_piso Piso, cliente_dpto Dpto, cliente_tipoDocumento as 'Tipo Documento', cliente_telefono Telefono, cliente_localidad Localidad, cliente_estado Estado from FAGD.Cliente";
             string query = "";
 
-            query = query + this.filtrarAproximadamentePor("cliente_nombre", txtNombre.Text);
-            query = query + this.filtrarExactamentePor("cliente_tipoDocumento", cboTipoDoc.Text);
-            query = query + this.filtrarAproximadamentePor("cliente_apellido", txtApellido.Text);
-            query = query + this.filtrarExactamentePor("cliente_nroDocumento", txtNroDoc.Text);
-            query = query + this.filtrarAproximadamentePor("cliente_mail", txtMail.Text);
+            query = query + this.filtrarAproximadamentePor("Nombre", txtNombre.Text);
+            query = query + this.filtrarExactamentePor("Tipo documento", cboTipoDoc.Text);
+            query = query + this.filtrarAproximadamentePor("Apellido", txtApellido.Text);
+            query = query + this.filtrarExactamentePor("Documento", txtNroDoc.Text);
+            query = query + this.filtrarAproximadamentePor("Mail", txtMail.Text);
             if (query.Length > 0) 
             {
                 query = query.Remove(query.Length - 4);
@@ -91,26 +91,30 @@ namespace FrbaHotel.AbmCliente
             txtNombre.Focus();
         }
 
-        private void dgvFiltrado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvFiltrado_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            string nroDoc = dgvFiltrado.CurrentRow.Cells[1].Value.ToString();
-            string apellido = dgvFiltrado.CurrentRow.Cells[2].Value.ToString();
-            string nombre = dgvFiltrado.CurrentRow.Cells[3].Value.ToString();
-            string fecha_nac = dgvFiltrado.CurrentRow.Cells[4].Value.ToString();
-            string mail = dgvFiltrado.CurrentRow.Cells[5].Value.ToString();
-            string nacionalidad = dgvFiltrado.CurrentRow.Cells[6].Value.ToString();
-            string calle = dgvFiltrado.CurrentRow.Cells[7].Value.ToString();
-            string nroCalle = dgvFiltrado.CurrentRow.Cells[8].Value.ToString();
-            string piso = dgvFiltrado.CurrentRow.Cells[9].Value.ToString();
-            string dpto = dgvFiltrado.CurrentRow.Cells[10].Value.ToString();
-            string tipoDoc = dgvFiltrado.CurrentRow.Cells[11].Value.ToString();
-            string telefono = dgvFiltrado.CurrentRow.Cells[12].Value.ToString();
-            string localidad = dgvFiltrado.CurrentRow.Cells[13].Value.ToString();
-            string estado = dgvFiltrado.CurrentRow.Cells[14].Value.ToString();
+            if (e.ColumnIndex == 0)
+            {
+                string codigo = dgvFiltrado.CurrentRow.Cells[1].Value.ToString();
+                string nroDoc = dgvFiltrado.CurrentRow.Cells[2].Value.ToString();
+                string apellido = dgvFiltrado.CurrentRow.Cells[3].Value.ToString();
+                string nombre = dgvFiltrado.CurrentRow.Cells[4].Value.ToString();
+                string fecha_nac = dgvFiltrado.CurrentRow.Cells[5].Value.ToString();
+                string mail = dgvFiltrado.CurrentRow.Cells[6].Value.ToString();
+                string nacionalidad = dgvFiltrado.CurrentRow.Cells[7].Value.ToString();
+                string calle = dgvFiltrado.CurrentRow.Cells[8].Value.ToString();
+                string nroCalle = dgvFiltrado.CurrentRow.Cells[9].Value.ToString();
+                string piso = dgvFiltrado.CurrentRow.Cells[10].Value.ToString();
+                string dpto = dgvFiltrado.CurrentRow.Cells[11].Value.ToString();
+                string tipoDoc = dgvFiltrado.CurrentRow.Cells[12].Value.ToString();
+                string telefono = dgvFiltrado.CurrentRow.Cells[13].Value.ToString();
+                string localidad = dgvFiltrado.CurrentRow.Cells[14].Value.ToString();
+                string estado = dgvFiltrado.CurrentRow.Cells[15].Value.ToString();
 
-            FrmModificarCliente mod = new FrmModificarCliente(this, nroDoc, apellido, nombre, fecha_nac, mail, nacionalidad, calle, nroCalle, piso, dpto, tipoDoc, telefono, localidad, estado);
-            this.Hide();
-            mod.Show();
+                FrmModificarCliente mod = new FrmModificarCliente(abm, codigo, nroDoc, apellido, nombre, fecha_nac, mail, nacionalidad, calle, nroCalle, piso, dpto, tipoDoc, telefono, localidad, estado);
+                mod.Show();
+                this.Close();
+            }
         }
 
     }

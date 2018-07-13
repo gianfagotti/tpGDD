@@ -15,8 +15,9 @@ namespace FrbaHotel.AbmCliente
     {
         Form frmMenuEmpleado;
         SqlDataReader resultado;
+        string codigoCliente;
 
-        public FrmModificarCliente(Form form, string nroDoc, string apellido, string nombre, string fecha_nac, string mail, string nacionalidad, string calle, string nroCalle, string piso, string dpto, string tipoDoc, string tel, string localidad, string estado)
+        public FrmModificarCliente(Form form,string codigo, string nroDoc, string apellido, string nombre, string fecha_nac, string mail, string nacionalidad, string calle, string nroCalle, string piso, string dpto, string tipoDoc, string tel, string localidad, string estado)
         {
             InitializeComponent();
             frmMenuEmpleado = form;
@@ -33,6 +34,7 @@ namespace FrbaHotel.AbmCliente
             cboTipoDocMod.Text = tipoDoc;
             txtTelefonoMod.Text = tel;
             txtLocalidadMod.Text = localidad;
+            codigoCliente = codigo;
 
             if (estado == "True")
                 chkHabilitadoMod.Checked = true;
@@ -180,6 +182,7 @@ namespace FrbaHotel.AbmCliente
             if (a == 0)
             {
                 string comando = "EXEC FAGD.modificarCliente ";
+                comando = comando + codigoCliente + ",";
                 comando = comando + "'" + txtNombreMod.Text + "',";
                 comando = comando + "'" + txtApellidoMod.Text + "',";
                 comando = comando + "'" + cboTipoDocMod.Text + "',";
@@ -212,13 +215,16 @@ namespace FrbaHotel.AbmCliente
                     resu = resultado.GetDecimal(0);
                 }
                 resultado.Close();
-                if (resu != 0)
+                if (resu == 1)
                 {
                     MessageBox.Show("Los cambios fueron guardados correctamente");
-                    limpiarCampos();
+                    frmMenuEmpleado.Show();
+                    this.Close();
                 }
+                else if (resu == 2)
+                    MessageBox.Show("No se pudieron guardar los cambios, el cliente con ese tipo y numero de documento ya existe");
                 else
-                    MessageBox.Show("No se pudieron guardar los cambios correctamentes");
+                    MessageBox.Show("No se pudieron guardar los cambios, el cliente con ese mail ya existe");
 
             }
         }

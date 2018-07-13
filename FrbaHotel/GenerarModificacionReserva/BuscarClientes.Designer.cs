@@ -31,7 +31,6 @@
             this.butBuscar = new System.Windows.Forms.Button();
             this.butLimpiar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Elegir = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -40,6 +39,7 @@
             this.cboTipoDoc = new System.Windows.Forms.ComboBox();
             this.txtNroDoc = new System.Windows.Forms.TextBox();
             this.butVolver = new System.Windows.Forms.Button();
+            this.Baja = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -73,21 +73,13 @@
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Elegir});
+            this.Baja});
             this.dataGridView1.Location = new System.Drawing.Point(12, 120);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(496, 172);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Elegir
-            // 
-            this.Elegir.HeaderText = "Elegir";
-            this.Elegir.Name = "Elegir";
-            this.Elegir.ReadOnly = true;
-            this.Elegir.Text = "Seleccionar";
-            this.Elegir.UseColumnTextForButtonValue = true;
             // 
             // groupBox1
             // 
@@ -168,6 +160,14 @@
             this.butVolver.UseVisualStyleBackColor = true;
             this.butVolver.Click += new System.EventHandler(this.butVolver_Click);
             // 
+            // Baja
+            // 
+            this.Baja.HeaderText = "";
+            this.Baja.Name = "Baja";
+            this.Baja.ReadOnly = true;
+            this.Baja.Text = "Seleccionar";
+            this.Baja.UseColumnTextForButtonValue = true;
+            // 
             // BuscarClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,7 +194,6 @@
         private System.Windows.Forms.Button butBuscar;
         private System.Windows.Forms.Button butLimpiar;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewButtonColumn Elegir;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -203,5 +202,6 @@
         private System.Windows.Forms.TextBox txtMail;
         private System.Windows.Forms.ComboBox cboTipoDoc;
         private System.Windows.Forms.Button butVolver;
+        private System.Windows.Forms.DataGridViewButtonColumn Baja;
     }
 }
