@@ -132,7 +132,7 @@
             // btnVolver
             // 
             this.btnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.btnVolver.Location = new System.Drawing.Point(209, 472);
+            this.btnVolver.Location = new System.Drawing.Point(224, 472);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(145, 42);
             this.btnVolver.TabIndex = 11;

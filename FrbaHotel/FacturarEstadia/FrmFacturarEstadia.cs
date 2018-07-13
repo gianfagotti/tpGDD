@@ -136,6 +136,10 @@ namespace FrbaHotel.FacturarEstadia
                 MessageBox.Show("Para concretar la facturación es necesario que seleccione la modalidad con la que el cliente va a pagar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (MessageBox.Show("¿Está seguro que desea continuar?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+    MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                {
+
             query = "SELECT modalidadPago_codigo FROM FAGD.ModalidadPago WHERE modalidadPago_descripcion = '" + cboMode.Text + "'";
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             infoQuery.Read();
@@ -159,6 +163,9 @@ namespace FrbaHotel.FacturarEstadia
             }
             MessageBox.Show("Se ha emitido la factura correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
+            menuAVolver.Show();
+        }
+            return;
         }
 
     }

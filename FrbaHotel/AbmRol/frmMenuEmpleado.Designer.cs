@@ -61,6 +61,9 @@
             this.btnNuevoHotel = new System.Windows.Forms.Button();
             this.btnCambiarRol = new System.Windows.Forms.Button();
             this.btnCambiarHotel = new System.Windows.Forms.Button();
+            this.lbltitulo = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtfechinia = new System.Windows.Forms.TextBox();
             this.grbHuespedes.SuspendLayout();
             this.grbHabitaciones.SuspendLayout();
             this.grbRegimenes.SuspendLayout();
@@ -79,7 +82,7 @@
             this.grbHuespedes.Controls.Add(this.butBajaCliente);
             this.grbHuespedes.Controls.Add(this.butAltaCliente);
             this.grbHuespedes.Enabled = false;
-            this.grbHuespedes.Location = new System.Drawing.Point(507, 140);
+            this.grbHuespedes.Location = new System.Drawing.Point(514, 203);
             this.grbHuespedes.Name = "grbHuespedes";
             this.grbHuespedes.Size = new System.Drawing.Size(200, 111);
             this.grbHuespedes.TabIndex = 0;
@@ -122,7 +125,7 @@
             this.grbHabitaciones.Controls.Add(this.butModHab);
             this.grbHabitaciones.Controls.Add(this.butCrearHabitacion);
             this.grbHabitaciones.Enabled = false;
-            this.grbHabitaciones.Location = new System.Drawing.Point(264, 140);
+            this.grbHabitaciones.Location = new System.Drawing.Point(271, 203);
             this.grbHabitaciones.Name = "grbHabitaciones";
             this.grbHabitaciones.Size = new System.Drawing.Size(218, 111);
             this.grbHabitaciones.TabIndex = 1;
@@ -163,7 +166,7 @@
             // 
             this.grbRegimenes.Controls.Add(this.butCrearRegimen);
             this.grbRegimenes.Enabled = false;
-            this.grbRegimenes.Location = new System.Drawing.Point(13, 199);
+            this.grbRegimenes.Location = new System.Drawing.Point(20, 262);
             this.grbRegimenes.Name = "grbRegimenes";
             this.grbRegimenes.Size = new System.Drawing.Size(221, 52);
             this.grbRegimenes.TabIndex = 2;
@@ -185,7 +188,7 @@
             this.grbRoles.Controls.Add(this.btnModificarRol);
             this.grbRoles.Controls.Add(this.btnAltaRol);
             this.grbRoles.Enabled = false;
-            this.grbRoles.Location = new System.Drawing.Point(264, 12);
+            this.grbRoles.Location = new System.Drawing.Point(271, 75);
             this.grbRoles.Name = "grbRoles";
             this.grbRoles.Size = new System.Drawing.Size(218, 111);
             this.grbRoles.TabIndex = 3;
@@ -218,7 +221,7 @@
             this.grbReservas.Controls.Add(this.btnModificarReserva);
             this.grbReservas.Controls.Add(this.btnNuevaReserva);
             this.grbReservas.Enabled = false;
-            this.grbReservas.Location = new System.Drawing.Point(12, 12);
+            this.grbReservas.Location = new System.Drawing.Point(19, 75);
             this.grbReservas.Name = "grbReservas";
             this.grbReservas.Size = new System.Drawing.Size(221, 111);
             this.grbReservas.TabIndex = 4;
@@ -259,7 +262,7 @@
             // 
             this.grbConsumibles.Controls.Add(this.btnRegistrarConsumible);
             this.grbConsumibles.Enabled = false;
-            this.grbConsumibles.Location = new System.Drawing.Point(507, 12);
+            this.grbConsumibles.Location = new System.Drawing.Point(514, 75);
             this.grbConsumibles.Name = "grbConsumibles";
             this.grbConsumibles.Size = new System.Drawing.Size(200, 111);
             this.grbConsumibles.TabIndex = 5;
@@ -280,7 +283,7 @@
             // 
             this.grbEstadias.Controls.Add(this.btnRegistrarEstadiabtnRegistrarEstadia);
             this.grbEstadias.Enabled = false;
-            this.grbEstadias.Location = new System.Drawing.Point(13, 140);
+            this.grbEstadias.Location = new System.Drawing.Point(20, 203);
             this.grbEstadias.Name = "grbEstadias";
             this.grbEstadias.Size = new System.Drawing.Size(220, 53);
             this.grbEstadias.TabIndex = 6;
@@ -293,7 +296,7 @@
             this.btnRegistrarEstadiabtnRegistrarEstadia.Name = "btnRegistrarEstadiabtnRegistrarEstadia";
             this.btnRegistrarEstadiabtnRegistrarEstadia.Size = new System.Drawing.Size(161, 23);
             this.btnRegistrarEstadiabtnRegistrarEstadia.TabIndex = 10;
-            this.btnRegistrarEstadiabtnRegistrarEstadia.Text = "Registrar estadía";
+            this.btnRegistrarEstadiabtnRegistrarEstadia.Text = "Menú de estadía";
             this.btnRegistrarEstadiabtnRegistrarEstadia.UseVisualStyleBackColor = true;
             this.btnRegistrarEstadiabtnRegistrarEstadia.Click += new System.EventHandler(this.btnRegistrarEstadiabtnRegistrarEstadia_Click);
             // 
@@ -301,7 +304,7 @@
             // 
             this.grbListado.Controls.Add(this.btnListadoEst);
             this.grbListado.Enabled = false;
-            this.grbListado.Location = new System.Drawing.Point(507, 257);
+            this.grbListado.Location = new System.Drawing.Point(514, 320);
             this.grbListado.Name = "grbListado";
             this.grbListado.Size = new System.Drawing.Size(200, 108);
             this.grbListado.TabIndex = 7;
@@ -320,7 +323,7 @@
             // 
             // btnCerrarSesion
             // 
-            this.btnCerrarSesion.Location = new System.Drawing.Point(615, 372);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(622, 435);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(92, 23);
             this.btnCerrarSesion.TabIndex = 8;
@@ -333,7 +336,7 @@
             this.grbUsuarios.Controls.Add(this.btnRetocarUsuario);
             this.grbUsuarios.Controls.Add(this.btnNuevoUsuario);
             this.grbUsuarios.Enabled = false;
-            this.grbUsuarios.Location = new System.Drawing.Point(264, 257);
+            this.grbUsuarios.Location = new System.Drawing.Point(271, 320);
             this.grbUsuarios.Name = "grbUsuarios";
             this.grbUsuarios.Size = new System.Drawing.Size(218, 108);
             this.grbUsuarios.TabIndex = 9;
@@ -366,7 +369,7 @@
             this.grbHoteles.Controls.Add(this.btnBajaHotel);
             this.grbHoteles.Controls.Add(this.btnNuevoHotel);
             this.grbHoteles.Enabled = false;
-            this.grbHoteles.Location = new System.Drawing.Point(12, 257);
+            this.grbHoteles.Location = new System.Drawing.Point(19, 320);
             this.grbHoteles.Name = "grbHoteles";
             this.grbHoteles.Size = new System.Drawing.Size(221, 108);
             this.grbHoteles.TabIndex = 10;
@@ -405,7 +408,7 @@
             // 
             // btnCambiarRol
             // 
-            this.btnCambiarRol.Location = new System.Drawing.Point(127, 371);
+            this.btnCambiarRol.Location = new System.Drawing.Point(134, 434);
             this.btnCambiarRol.Name = "btnCambiarRol";
             this.btnCambiarRol.Size = new System.Drawing.Size(92, 23);
             this.btnCambiarRol.TabIndex = 11;
@@ -415,7 +418,7 @@
             // 
             // btnCambiarHotel
             // 
-            this.btnCambiarHotel.Location = new System.Drawing.Point(29, 371);
+            this.btnCambiarHotel.Location = new System.Drawing.Point(36, 434);
             this.btnCambiarHotel.Name = "btnCambiarHotel";
             this.btnCambiarHotel.Size = new System.Drawing.Size(92, 23);
             this.btnCambiarHotel.TabIndex = 12;
@@ -423,11 +426,47 @@
             this.btnCambiarHotel.UseVisualStyleBackColor = true;
             this.btnCambiarHotel.Click += new System.EventHandler(this.btnCambiarHotel_Click);
             // 
+            // lbltitulo
+            // 
+            this.lbltitulo.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.lbltitulo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbltitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltitulo.Location = new System.Drawing.Point(242, 9);
+            this.lbltitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbltitulo.Name = "lbltitulo";
+            this.lbltitulo.Size = new System.Drawing.Size(277, 49);
+            this.lbltitulo.TabIndex = 13;
+            this.lbltitulo.Text = "Sistema de gestión hotelera FRBA-Hotel";
+            this.lbltitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(54, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(128, 15);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Fecha del sistema:";
+            // 
+            // txtfechinia
+            // 
+            this.txtfechinia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtfechinia.Location = new System.Drawing.Point(36, 25);
+            this.txtfechinia.Name = "txtfechinia";
+            this.txtfechinia.ReadOnly = true;
+            this.txtfechinia.Size = new System.Drawing.Size(166, 22);
+            this.txtfechinia.TabIndex = 15;
+            this.txtfechinia.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // frmMenuEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 406);
+            this.ClientSize = new System.Drawing.Size(732, 481);
+            this.Controls.Add(this.txtfechinia);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbltitulo);
             this.Controls.Add(this.btnCambiarHotel);
             this.Controls.Add(this.btnCambiarRol);
             this.Controls.Add(this.grbHoteles);
@@ -455,6 +494,7 @@
             this.grbUsuarios.ResumeLayout(false);
             this.grbHoteles.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -493,5 +533,8 @@
         private System.Windows.Forms.Button btnNuevoHotel;
         private System.Windows.Forms.Button btnCambiarRol;
         private System.Windows.Forms.Button btnCambiarHotel;
+        private System.Windows.Forms.Label lbltitulo;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtfechinia;
     }
 }

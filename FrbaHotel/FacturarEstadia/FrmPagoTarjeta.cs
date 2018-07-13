@@ -79,26 +79,32 @@ namespace FrbaHotel.FacturarEstadia
                 MessageBox.Show("Falta ingresar al titular de la tarjeta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string query = "EXEC FAGD.AsociarTarjetaParaPago " + facturaAsociada + ",'" + cboEntidad.Text + "','" + txtnroTarj.Text + "','" + cboBank.Text + "','" + txtTitu.Text + "'"; 
-            SqlDataReader resultado = Login.FrmTipoUsuario.BD.comando(query);
-            resultado.Read();
-            if (resultado.GetDecimal(0) != 0)
+            if (MessageBox.Show("¿Está seguro que ha ingresado los datos correctos?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+    MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
-                resultado.Close();
-                MessageBox.Show("La tarjeta fue asociada al pago de la factura.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                menuRetorno.Show();
-                this.Close();
-                
-                
+
+                string query = "EXEC FAGD.AsociarTarjetaParaPago " + facturaAsociada + ",'" + cboEntidad.Text + "','" + txtnroTarj.Text + "','" + cboBank.Text + "','" + txtTitu.Text + "'";
+                SqlDataReader resultado = Login.FrmTipoUsuario.BD.comando(query);
+                resultado.Read();
+                if (resultado.GetDecimal(0) != 0)
+                {
+                    resultado.Close();
+                    MessageBox.Show("La tarjeta fue asociada al pago de la factura.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    menuRetorno.Show();
+                    this.Close();
+
+
+                }
+                else
+                {
+                    resultado.Close();
+                    MessageBox.Show("La tarjeta especificada ya se encontraba asociada manualmente, concluye la facturación.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    menuRetorno.Show();
+                    this.Close();
+
+                }
             }
-            else
-            {
-                resultado.Close();
-                MessageBox.Show("La tarjeta especificada ya se encontraba asociada manualmente, concluye la facturación.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                menuRetorno.Show();
-                this.Close();
-              
-            }
+            return;
         }
     }
 }
