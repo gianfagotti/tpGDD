@@ -76,10 +76,8 @@
             // 
             // cboUbicacion
             // 
+            this.cboUbicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboUbicacion.FormattingEnabled = true;
-            this.cboUbicacion.Items.AddRange(new object[] {
-            "Exterior",
-            "Interior"});
             this.cboUbicacion.Location = new System.Drawing.Point(87, 40);
             this.cboUbicacion.Name = "cboUbicacion";
             this.cboUbicacion.Size = new System.Drawing.Size(218, 21);
@@ -97,6 +95,7 @@
             // 
             // cboTipoHabitacion
             // 
+            this.cboTipoHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTipoHabitacion.FormattingEnabled = true;
             this.cboTipoHabitacion.Location = new System.Drawing.Point(87, 70);
             this.cboTipoHabitacion.Name = "cboTipoHabitacion";

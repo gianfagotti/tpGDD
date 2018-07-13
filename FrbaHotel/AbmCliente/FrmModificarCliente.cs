@@ -61,7 +61,7 @@ namespace FrbaHotel.AbmCliente
             txtLocalidadMod.Text = string.Empty;
             txtNacionalidadMod.Text = string.Empty;
             cboTipoDocMod.ResetText();
-            dtpFechaNacimientoMod.ResetText();
+            dtpFechaNacimientoMod.Value = VarGlobales.getDate();
             txtNombreMod.Focus();
         }
 

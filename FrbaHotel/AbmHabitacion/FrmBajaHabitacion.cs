@@ -47,7 +47,7 @@ namespace FrbaHotel.AbmHabitacion
 
         private void FrmBajaHabitacion_Load(object sender, EventArgs e)
         {
-            consulta = "SELECT H.habitacion_nro Numero, H.habitacion_piso Piso, H.habitacion_ubicacion Ubicacion, H.habitacion_descripcion Descripcion, H.habitacion_estado Estado, T.habitacionTipo_descripcion Tipo FROM FAGD.Habitacion H, FAGD.HabitacionTipo T, FAGD.Hotel Ho WHERE Ho.hotel_codigo = H.habitacion_codigoHotel AND H.habitacion_tipoCodigo = T.habitacionTipo_codigo AND H.habitacion_codigoHotel = " + codigoHotel;
+            consulta = "SELECT H.habitacion_nro Numero, H.habitacion_piso Piso, H.habitacion_ubicacion Ubicacion, H.habitacion_descripcion Descripcion, H.habitacion_estado Estado, T.habitacionTipo_descripcion Tipo FROM FAGD.Habitacion H, FAGD.HabitacionTipo T, FAGD.Hotel Ho WHERE Ho.hotel_codigo = H.habitacion_codigoHotel AND H.habitacion_tipoCodigo = T.habitacionTipo_codigo AND H.habitacion_codigoHotel = " + codigoHotel + "order by H.habitacion_nro";
 
             adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(consulta);
             tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
@@ -60,7 +60,7 @@ namespace FrbaHotel.AbmHabitacion
 
         private void FrmBajaHabitacion_Activated(object sender, EventArgs e)
         {
-            consulta = "SELECT H.habitacion_nro Numero, H.habitacion_piso Piso, H.habitacion_ubicacion Ubicacion, H.habitacion_descripcion Descripcion, H.habitacion_estado Estado, T.habitacionTipo_descripcion Tipo FROM FAGD.Habitacion H, FAGD.HabitacionTipo T, FAGD.Hotel Ho WHERE Ho.hotel_codigo = H.habitacion_codigoHotel AND H.habitacion_tipoCodigo = T.habitacionTipo_codigo AND H.habitacion_codigoHotel = " + codigoHotel;
+            consulta = "SELECT H.habitacion_nro Numero, H.habitacion_piso Piso, H.habitacion_ubicacion Ubicacion, H.habitacion_descripcion Descripcion, H.habitacion_estado Estado, T.habitacionTipo_descripcion Tipo FROM FAGD.Habitacion H, FAGD.HabitacionTipo T, FAGD.Hotel Ho WHERE Ho.hotel_codigo = H.habitacion_codigoHotel AND H.habitacion_tipoCodigo = T.habitacionTipo_codigo AND H.habitacion_codigoHotel = " + codigoHotel + "order by H.habitacion_nro";
 
 
             adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(consulta);
@@ -145,7 +145,7 @@ namespace FrbaHotel.AbmHabitacion
             dgvFiltrado.DataSource = dvData;
         }
 
-        private void dgvFiltrado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvFiltrado_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {

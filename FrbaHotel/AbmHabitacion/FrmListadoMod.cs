@@ -136,7 +136,7 @@ namespace FrbaHotel.AbmHabitacion
             dgvFiltrado.DataSource = bSource;
         }
 
-        private void dgvFiltrado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvFiltrado_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {

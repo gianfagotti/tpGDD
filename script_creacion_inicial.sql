@@ -1779,7 +1779,7 @@ begin
 	set @idTipoHab = (select habitacionTipo_codigo from FAGD.HabitacionTipo where habitacionTipo_descripcion = @tipoHab)
 	begin tran nuHab
 	begin try
-		if (not exists(select habitacion_nro from FAGD.Habitacion where habitacion_nro = @numero and habitacion_codigoHotel = @idHotel))
+		if (not exists(select habitacion_nro from FAGD.Habitacion where habitacion_nro = @numero and habitacion_codigoHotel = @idHotel and habitacion_codigo <> @idHabitacion))
 			begin
 				UPDATE FAGD.Habitacion
 
