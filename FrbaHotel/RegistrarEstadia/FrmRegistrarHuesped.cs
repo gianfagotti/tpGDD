@@ -108,7 +108,9 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void BtnRegistrar_Click(object sender, EventArgs e)
         {
-            
+             if (MessageBox.Show("¿Está seguro que desea continuar a organizar los clientes?.", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+    MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                {
             foreach (DataRow fila in tablaConInfoClientes.Rows)
             {
                 infoQuery = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.ConfirmarEstadiaXCliente " + fila["CodigoCli"].ToString() + "," + nroEstadia);
@@ -124,12 +126,14 @@ namespace FrbaHotel.RegistrarEstadia
                     MessageBox.Show("El cliente ya estaba agregado.","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 infoQuery.Close();
-            }
+            
             MessageBox.Show("El proceso de carga de clientes finalizó correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             FrmHuespedxHabitacion organizarClientes = new FrmHuespedxHabitacion(tablaConInfoClientes, nroReserva, nroEstadia, menuAVolver);
             organizarClientes.Show();
             this.Close();
-              
+             }
+                 return;
+                }
         }
 
 

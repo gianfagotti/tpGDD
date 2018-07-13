@@ -48,7 +48,8 @@ namespace FrbaHotel.RegistrarConsumible
 
           private void FrmAgregarConsumibles_Load(object sender, EventArgs e)
         {
-            string consultaConsumible = "SELECT consumible_codigo, consumible_descripcion, consumible_precio FROM FAGD.Consumible";
+               
+            string consultaConsumible = "SELECT consumible_codigo Codigo, consumible_descripcion Descripcion, consumible_precio Precio FROM FAGD.Consumible";
             adaptador = Login.FrmTipoUsuario.BD.dameDataAdapter(consultaConsumible);
             tablaConDatosConsum = Login.FrmTipoUsuario.BD.dameDataTable(adaptador);         
             BindingSource bSourceConsum = new BindingSource();
@@ -57,7 +58,7 @@ namespace FrbaHotel.RegistrarConsumible
             dgvCons.Columns[1].ReadOnly = true;
             dgvCons.Columns[2].ReadOnly = true;
             dgvCons.Columns[3].ReadOnly = true;
-            
+         
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -85,25 +86,31 @@ namespace FrbaHotel.RegistrarConsumible
                 MessageBox.Show("Es necesario que seleccione al menos un consumible para agregar.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
-            foreach (DataRow fila in tablaConDatosConsumARegis.Rows)
+            if (MessageBox.Show("¿Está seguro que desea continuar?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+    MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
-                resultadoDeOperacion = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarConsuXEstXHabitacion " + txtCodigoEst.Text + "," + fila["Codigo"].ToString() + "," + txthab.Text);
-                if (resultadoDeOperacion.Read())
+
+                foreach (DataRow fila in tablaConDatosConsumARegis.Rows)
                 {
-                    if (resultadoDeOperacion.GetDecimal(0) == 0)
+                    resultadoDeOperacion = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarConsuXEstXHabitacion " + txtCodigoEst.Text + "," + fila["Codigo"].ToString() + "," + txthab.Text);
+                    if (resultadoDeOperacion.Read())
+                    {
+                        if (resultadoDeOperacion.GetDecimal(0) == 0)
+                        {
+                            MessageBox.Show("El consumible ya estaba agregado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
                     {
                         MessageBox.Show("El consumible ya estaba agregado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                    resultadoDeOperacion.Close();
                 }
-                else
-                {
-                    MessageBox.Show("El consumible ya estaba agregado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                resultadoDeOperacion.Close();
+                MessageBox.Show("El proceso de carga de consumibles finalizo correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+                menuAVolver.Show();
             }
-            MessageBox.Show("El proceso de carga de consumibles finalizo correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
-            menuAVolver.Show();
+            return;
         }
 
 
