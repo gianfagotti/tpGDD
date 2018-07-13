@@ -1044,7 +1044,7 @@ AS	BEGIN
 	SET @inicioTrimestre = CONVERT(DATETIME,@trimestreInicio,121)
 	SET @finTrimestre = CONVERT(DATETIME,@trimestreFin,121)
 
-SELECT TOP 5 hotel.hotel_codigo AS CodigoDelHotel, COUNT(resCancel.reservaCancelada_codigoReserva) AS totalCancelaciones 
+SELECT TOP 5 hotel.hotel_codigo AS CodigoDelHotel, COUNT(resCancel.reservaCancelada_codigoReserva) AS TotalCancelaciones 
 
 FROM FAGD.Hotel hotel, FAGD.Habitacion hab, FAGD.ReservaXHabitacion resXHab,
 	 FAGD.Reserva res, FAGD.ReservaCancelada resCancel
@@ -1174,11 +1174,12 @@ AS	BEGIN
 	SET @inicioTrimestre = CONVERT(DATETIME,@trimestreInicio,121)
 	SET @finTrimestre = CONVERT(DATETIME,@trimestreFin,121)
 
-SELECT TOP 5 cli.cliente_codigo, cli.cliente_nombre AS Nombre, cli.cliente_apellido AS Apellido, puntosPorLaEstadia.Puntos+puntosPorConsumibles.Puntos AS Puntaje
+SELECT TOP 5 cli.cliente_codigo, cli.cliente_nombre AS Nombre, cli.cliente_apellido AS Apellido, CAST(puntosPorLaEstadia.Puntos+puntosPorConsumibles.Puntos AS decimal(18,2)) AS Puntaje
 FROM 
 (SELECT clie.cliente_codigo, est.estadia_codigo, SUM(fact.factura_total) AS Gasto, SUM(fact.factura_total)/10 AS Puntos
-	FROM FAGD.Cliente clie, FAGD.Estadia est, FAGD.Factura fact
-	WHERE clie.cliente_codigo = estadia_clienteCodigo AND
+	FROM FAGD.Cliente clie, FAGD.ClienteXEstadia clieXEst, FAGD.Estadia est, FAGD.Factura fact
+	WHERE clie.cliente_codigo = clieXEst.cliente_codigo AND
+          clieXEst.estadia_codigo = est.estadia_codigo AND
 		  factura_codigoEstadia = est.estadia_codigo AND
 		  fact.factura_fecha BETWEEN @inicioTrimestre AND @finTrimestre
 	GROUP BY clie.cliente_codigo, est.estadia_codigo) AS puntosPorLaEstadia, 
