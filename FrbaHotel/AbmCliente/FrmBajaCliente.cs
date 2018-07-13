@@ -108,6 +108,7 @@ namespace FrbaHotel.AbmCliente
                     {
                     }
                     resultado.Close();
+                    MessageBox.Show("El cliente fue inhabilitado satisfactoriamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
                 //BindingSource to sync DataTable and DataGridView

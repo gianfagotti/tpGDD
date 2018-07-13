@@ -60,11 +60,11 @@ namespace FrbaHotel.AbmCliente
             string consulta = "select cliente_codigo Código, cliente_nroDocumento Documento, cliente_apellido Apellido, cliente_nombre Nombre, cliente_fechaNac as 'Fecha nacimiento', cliente_mail Mail, cliente_nacionalidad Nacionalidad, cliente_calle Calle, cliente_nroCalle Número, cliente_piso Piso, cliente_dpto Dpto, cliente_tipoDocumento as 'Tipo Documento', cliente_telefono Telefono, cliente_localidad Localidad, cliente_estado Estado from FAGD.Cliente";
             string query = "";
 
-            query = query + this.filtrarAproximadamentePor("Nombre", txtNombre.Text);
-            query = query + this.filtrarExactamentePor("Tipo documento", cboTipoDoc.Text);
-            query = query + this.filtrarAproximadamentePor("Apellido", txtApellido.Text);
-            query = query + this.filtrarExactamentePor("Documento", txtNroDoc.Text);
-            query = query + this.filtrarAproximadamentePor("Mail", txtMail.Text);
+            query = query + this.filtrarAproximadamentePor("cliente_nombre", txtNombre.Text);
+            query = query + this.filtrarExactamentePor("cliente_tipoDocumento", cboTipoDoc.Text);
+            query = query + this.filtrarAproximadamentePor("cliente_apellido", txtApellido.Text);
+            query = query + this.filtrarExactamentePor("cliente_nroDocumento", txtNroDoc.Text);
+            query = query + this.filtrarAproximadamentePor("cliente_mail", txtMail.Text);
             if (query.Length > 0) 
             {
                 query = query.Remove(query.Length - 4);

@@ -121,7 +121,15 @@ namespace FrbaHotel.FacturarEstadia
 
         }
 
-        private void btnProceder_Click(object sender, EventArgs e)
+        private void btnContinuar_Click(object sender, EventArgs e) { }
+       
+
+        private void btnContinuar_Click_1(object sender, EventArgs e)
+         {
+           
+        }
+
+        private void btnProcederPago_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cboMode.Text))
             {

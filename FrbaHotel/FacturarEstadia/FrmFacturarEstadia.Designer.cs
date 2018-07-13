@@ -51,6 +51,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtTotalpago = new System.Windows.Forms.TextBox();
             this.btnProceder = new System.Windows.Forms.Button();
+            this.btnProcederPago = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlojamiento)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsumibles)).BeginInit();
             this.SuspendLayout();
@@ -183,14 +184,14 @@
             this.txtEgreso.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtEgreso.Name = "txtEgreso";
             this.txtEgreso.ReadOnly = true;
-            this.txtEgreso.Size = new System.Drawing.Size(156, 21);
+            this.txtEgreso.Size = new System.Drawing.Size(169, 21);
             this.txtEgreso.TabIndex = 23;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(387, 685);
+            this.label13.Location = new System.Drawing.Point(393, 585);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(176, 15);
@@ -200,18 +201,18 @@
             // txtMontoConsu
             // 
             this.txtMontoConsu.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMontoConsu.Location = new System.Drawing.Point(609, 681);
+            this.txtMontoConsu.Location = new System.Drawing.Point(577, 583);
             this.txtMontoConsu.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtMontoConsu.Name = "txtMontoConsu";
             this.txtMontoConsu.ReadOnly = true;
-            this.txtMontoConsu.Size = new System.Drawing.Size(75, 21);
+            this.txtMontoConsu.Size = new System.Drawing.Size(113, 21);
             this.txtMontoConsu.TabIndex = 34;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(16, 685);
+            this.label12.Location = new System.Drawing.Point(40, 585);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(232, 15);
@@ -221,18 +222,18 @@
             // txtDescReg
             // 
             this.txtDescReg.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescReg.Location = new System.Drawing.Point(297, 681);
+            this.txtDescReg.Location = new System.Drawing.Point(280, 583);
             this.txtDescReg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtDescReg.Name = "txtDescReg";
             this.txtDescReg.ReadOnly = true;
-            this.txtDescReg.Size = new System.Drawing.Size(75, 21);
+            this.txtDescReg.Size = new System.Drawing.Size(101, 21);
             this.txtDescReg.TabIndex = 32;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(365, 423);
+            this.label11.Location = new System.Drawing.Point(387, 370);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(156, 15);
@@ -242,7 +243,7 @@
             // txtMontoAloj
             // 
             this.txtMontoAloj.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMontoAloj.Location = new System.Drawing.Point(552, 419);
+            this.txtMontoAloj.Location = new System.Drawing.Point(552, 368);
             this.txtMontoAloj.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtMontoAloj.Name = "txtMontoAloj";
             this.txtMontoAloj.ReadOnly = true;
@@ -255,11 +256,11 @@
             this.dgvAlojamiento.AllowUserToDeleteRows = false;
             this.dgvAlojamiento.AllowUserToOrderColumns = true;
             this.dgvAlojamiento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAlojamiento.Location = new System.Drawing.Point(32, 202);
+            this.dgvAlojamiento.Location = new System.Drawing.Point(37, 395);
             this.dgvAlojamiento.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgvAlojamiento.Name = "dgvAlojamiento";
             this.dgvAlojamiento.ReadOnly = true;
-            this.dgvAlojamiento.Size = new System.Drawing.Size(653, 204);
+            this.dgvAlojamiento.Size = new System.Drawing.Size(653, 182);
             this.dgvAlojamiento.TabIndex = 27;
             // 
             // dgvConsumibles
@@ -268,18 +269,18 @@
             this.dgvConsumibles.AllowUserToDeleteRows = false;
             this.dgvConsumibles.AllowUserToOrderColumns = true;
             this.dgvConsumibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvConsumibles.Location = new System.Drawing.Point(32, 458);
+            this.dgvConsumibles.Location = new System.Drawing.Point(37, 180);
             this.dgvConsumibles.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgvConsumibles.Name = "dgvConsumibles";
             this.dgvConsumibles.ReadOnly = true;
-            this.dgvConsumibles.Size = new System.Drawing.Size(653, 204);
+            this.dgvConsumibles.Size = new System.Drawing.Size(647, 182);
             this.dgvConsumibles.TabIndex = 36;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(345, 723);
+            this.label4.Location = new System.Drawing.Point(41, 610);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(112, 18);
@@ -289,11 +290,11 @@
             // txtTotalpago
             // 
             this.txtTotalpago.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalpago.Location = new System.Drawing.Point(501, 722);
+            this.txtTotalpago.Location = new System.Drawing.Point(162, 610);
             this.txtTotalpago.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtTotalpago.Name = "txtTotalpago";
             this.txtTotalpago.ReadOnly = true;
-            this.txtTotalpago.Size = new System.Drawing.Size(183, 21);
+            this.txtTotalpago.Size = new System.Drawing.Size(219, 21);
             this.txtTotalpago.TabIndex = 37;
             // 
             // btnProceder
@@ -306,13 +307,24 @@
             this.btnProceder.TabIndex = 40;
             this.btnProceder.Text = "Proceder al pago";
             this.btnProceder.UseVisualStyleBackColor = true;
-            this.btnProceder.Click += new System.EventHandler(this.btnProceder_Click);
+            this.btnProceder.Click += new System.EventHandler(this.btnContinuar_Click);
+            // 
+            // btnProcederPago
+            // 
+            this.btnProcederPago.Location = new System.Drawing.Point(598, 616);
+            this.btnProcederPago.Name = "btnProcederPago";
+            this.btnProcederPago.Size = new System.Drawing.Size(92, 37);
+            this.btnProcederPago.TabIndex = 42;
+            this.btnProcederPago.Text = "Proceder";
+            this.btnProcederPago.UseVisualStyleBackColor = true;
+            this.btnProcederPago.Click += new System.EventHandler(this.btnProcederPago_Click);
             // 
             // FrmFacturarEstadia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 812);
+            this.ClientSize = new System.Drawing.Size(722, 665);
+            this.Controls.Add(this.btnProcederPago);
             this.Controls.Add(this.btnProceder);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtTotalpago);
@@ -373,5 +385,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtTotalpago;
         private System.Windows.Forms.Button btnProceder;
+        private System.Windows.Forms.Button btnProcederPago;
     }
 }

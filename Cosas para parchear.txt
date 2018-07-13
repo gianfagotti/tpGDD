@@ -47,8 +47,3 @@ se informará el costo total de la reserva, expresado en dólares."
 
 -"Todo proceso de generación o modificación de reserva deberá almacenar el usuario que la
 produce"
-
-ESTRATEGIAS
--Hay repetidos en errorCliente, pero solucionarlo atentaría contra la performance
-
-
