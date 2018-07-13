@@ -725,12 +725,19 @@ INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellid
   ORDER BY Cliente_Pasaporte_Nro, Cliente_Apellido, Cliente_Nombre
 GO
 
+INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellido],[errorCliente_nombre],[errorCliente_fechaNac],[errorCliente_mail],[errorCliente_calle],[errorCliente_nroCalle],[errorCliente_piso],[errorCliente_dpto], [errorCliente_nacionalidad], [errorCliente_tipoDocumento], [errorCliente_telefono], [errorCliente_estado], [errorCliente_localidad])
+  SELECT DISTINCT A.[Cliente_Pasaporte_Nro],A.[Cliente_Apellido], A.[Cliente_Nombre], A.[Cliente_Fecha_Nac], A.[Cliente_Mail], A.[Cliente_Dom_Calle], A.[Cliente_Nro_Calle],A.[Cliente_Piso],A.[Cliente_Depto],A.[Cliente_Nacionalidad],'Pasaporte', 000, 0, NULL
+  FROM gd_esquema.Maestra A JOIN gd_esquema.Maestra B ON (A.[Cliente_Mail] = B.[Cliente_Mail] AND (A.Cliente_Apellido <> B.Cliente_Apellido OR A.Cliente_Nombre <> B.Cliente_Nombre OR A.[Cliente_Pasaporte_Nro] <> B.Cliente_Pasaporte_Nro) AND A.[Cliente_Mail] NOT IN (SELECT errorCliente_mail FROM FAGD.ErrorCliente))
+  ORDER BY Cliente_Mail
+GO
+
 INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
   [cliente_nroCalle],[cliente_piso],[cliente_dpto], [cliente_nacionalidad], [cliente_tipoDocumento], [cliente_telefono], [cliente_estado], [cliente_localidad])
   SELECT DISTINCT [Cliente_Pasaporte_Nro],[Cliente_Apellido],[Cliente_Nombre],[Cliente_Fecha_Nac],[Cliente_Mail],[Cliente_Dom_Calle],
   [Cliente_Nro_Calle],[Cliente_Piso],[Cliente_Depto],[Cliente_Nacionalidad],'Pasaporte', 000, 1, NULL
   FROM gd_esquema.Maestra
   WHERE [Cliente_Pasaporte_Nro] NOT IN(SELECT [errorCliente_nroDocumento] FROM FAGD.ErrorCliente)
+    AND [Cliente_Mail] NOT IN (SELECT [errorCliente_mail] FROM FAGD.ErrorCliente)
 GO
 
 
