@@ -25,10 +25,10 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             if (string.IsNullOrEmpty(txtNroReserva.Text))
             {
-                MessageBox.Show("Debe ingresar un numero de reserva");
+                MessageBox.Show("Debe ingresar un numero de reserva", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            SqlDataReader comando = Login.FrmTipoUsuario.BD.comando("select reserva_codigo, reserva_fechaInicio from FAGD.Reserva where reserva_codigo = " + txtNroReserva.Text);
+            SqlDataReader comando = Login.FrmTipoUsuario.BD.comando("select reserva_codigo, reserva_fechaInicio from FAGD.Reserva where reserva_codigo = " + txtNroReserva.Text + " AND reserva_codigo not in (select reservaCancelada_codigoReserva from FAGD.ReservaCancelada)");
             if (comando.Read())
             {
                 if ((comando.GetDecimal(0).ToString() == txtNroReserva.Text) && (comando.GetDateTime(1).Date >= VarGlobales.getDate().Date))
@@ -42,14 +42,14 @@ namespace FrbaHotel.GenerarModificacionReserva
                 else
                 {
                     comando.Close();
-                    MessageBox.Show("El plazo para modificar la reserva ha vencido");
+                    MessageBox.Show("El plazo para modificar la reserva ha vencido", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
             else
             {
                 comando.Close();
-                MessageBox.Show("La reserva no existe");
+                MessageBox.Show("La reserva no existe o fue cancelada", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -61,13 +61,27 @@ namespace FrbaHotel.GenerarModificacionReserva
             this.Close();
         }
 
-        private void txtNroReserva_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
             {
                 e.Handled = true;
             }
         }
+
+
 
 
     }

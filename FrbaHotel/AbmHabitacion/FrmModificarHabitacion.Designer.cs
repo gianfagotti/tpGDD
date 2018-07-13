@@ -118,6 +118,7 @@
             this.txtNroHab.Name = "txtNroHab";
             this.txtNroHab.Size = new System.Drawing.Size(88, 20);
             this.txtNroHab.TabIndex = 14;
+            this.txtNroHab.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // txtPiso
             // 
@@ -125,6 +126,7 @@
             this.txtPiso.Name = "txtPiso";
             this.txtPiso.Size = new System.Drawing.Size(90, 20);
             this.txtPiso.TabIndex = 15;
+            this.txtPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // lblDescripcion
             // 

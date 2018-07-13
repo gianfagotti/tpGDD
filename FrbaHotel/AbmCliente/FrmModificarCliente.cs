@@ -47,6 +47,7 @@ namespace FrbaHotel.AbmCliente
             this.Close();
             frmMenuEmpleado.Show();
         }
+
         private void limpiarCampos()
         {
             txtNombreMod.Text = string.Empty;
@@ -60,7 +61,7 @@ namespace FrbaHotel.AbmCliente
             txtDptoMod.Text = string.Empty;
             txtLocalidadMod.Text = string.Empty;
             txtNacionalidadMod.Text = string.Empty;
-            cboTipoDocMod.ResetText();
+            cboTipoDocMod.SelectedIndex = -1;
             dtpFechaNacimientoMod.Value = VarGlobales.getDate();
             txtNombreMod.Focus();
         }
@@ -69,27 +70,7 @@ namespace FrbaHotel.AbmCliente
         {
             limpiarCampos();
         }
-        private void txtTelefonoMod_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-        private void txtNroDocumentoMod_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-        private void txtNumeroMod_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
+
         private int checkearCamposVacios()
         {
             int a = 0;
@@ -131,6 +112,14 @@ namespace FrbaHotel.AbmCliente
                 a = 1;
                 mensaje = mensaje + "El campo mail es obligatorio\n";
             }
+            else
+            {
+                if (!VarGlobales.validarEmail(txtMailMod.Text))
+                {
+                    a = 1;
+                    mensaje = mensaje + "El campo mail es invalido\n";
+                }
+            }
             if (string.IsNullOrEmpty(txtCalleMod.Text))
             {
                 a = 1;
@@ -171,7 +160,7 @@ namespace FrbaHotel.AbmCliente
 
             if (a == 1)
             {
-                MessageBox.Show(mensaje);
+                MessageBox.Show(mensaje, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return a;
         }
@@ -217,15 +206,55 @@ namespace FrbaHotel.AbmCliente
                 resultado.Close();
                 if (resu == 1)
                 {
-                    MessageBox.Show("Los cambios fueron guardados correctamente");
+                    MessageBox.Show("Los cambios fueron guardados correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frmMenuEmpleado.Show();
                     this.Close();
                 }
                 else if (resu == 2)
-                    MessageBox.Show("No se pudieron guardar los cambios, el cliente con ese tipo y numero de documento ya existe");
+                    MessageBox.Show("No se pudieron guardar los cambios, el cliente con ese tipo y numero de documento ya existe", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else
-                    MessageBox.Show("No se pudieron guardar los cambios, el cliente con ese mail ya existe");
+                    MessageBox.Show("No se pudieron guardar los cambios, el cliente con ese mail ya existe", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+            }
+        }
+
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtsSoloLetras_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsLetter(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
             }
         }
     }

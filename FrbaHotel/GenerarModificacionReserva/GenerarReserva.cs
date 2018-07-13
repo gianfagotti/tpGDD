@@ -34,6 +34,7 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             InitializeComponent();
             abmPadre = form;
+            txtCliente.ResetText();
             dtpDesde.Value = VarGlobales.getDate();
             dtpHasta.Value = VarGlobales.getDate();
             dataGridView1.DataSource = null;
@@ -67,8 +68,8 @@ namespace FrbaHotel.GenerarModificacionReserva
             {
                 cboHotel.Enabled = false;
             }
-            cboRegimen.ResetText();
-            cboTipoHabitacion.ResetText();
+            cboRegimen.SelectedIndex = -1;
+            cboTipoHabitacion.SelectedIndex = -1;
             txtCliente.ResetText();
             dtpDesde.ResetText();
             dtpHasta.ResetText();
@@ -89,7 +90,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void GenerarReserva_Load(object sender, EventArgs e)
         {
-            //clienteSeleccionado = "";
+            clienteSeleccionado = "";
 
             if (Login.FrmTipoUsuario.usuario == "guest")
             {
@@ -170,11 +171,6 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
         }
 
-        private void txtCliente_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             AbmCliente.FrmAltaCliente frmAltaCliente = new AbmCliente.FrmAltaCliente(this);
@@ -188,12 +184,12 @@ namespace FrbaHotel.GenerarModificacionReserva
 
             if (string.IsNullOrEmpty(cboTipoHabitacion.Text))
             {
-                MessageBox.Show("Tiene que especificar un tipo de habitacion");
+                MessageBox.Show("Tiene que especificar un tipo de habitacion", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (string.IsNullOrEmpty(cboTipoHabitacion.Text))
             {
-                MessageBox.Show("Tiene que especificar un tipo de habitacion");
+                MessageBox.Show("Tiene que especificar un tipo de habitacion", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (string.IsNullOrEmpty(cboHotel.Text))
@@ -209,13 +205,13 @@ namespace FrbaHotel.GenerarModificacionReserva
             if (result >= 0)
             {
 
-                MessageBox.Show("La fecha desde debe ser menor a la fecha hasta\n");
+                MessageBox.Show("La fecha desde debe ser menor a la fecha hasta\n", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             result = DateTime.Compare(fechaDesde.Date, VarGlobales.getDate());
             if (result < 0)
             {
-                MessageBox.Show("La fecha desde debe ser mayor a la fecha actual\n");
+                MessageBox.Show("La fecha desde debe ser mayor a la fecha actual\n", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             string query = "EXEC FAGD.BuscarHabitacionesDisponibles ";
@@ -250,13 +246,13 @@ namespace FrbaHotel.GenerarModificacionReserva
 
             if (cant == 0)
             {
-                MessageBox.Show("Seleccione al menos una habitación");
+                MessageBox.Show("Seleccione al menos una habitación", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (string.IsNullOrEmpty(txtCliente.Text))
             {
-                MessageBox.Show("Seleccione un cliente");
+                MessageBox.Show("Seleccione un cliente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -270,7 +266,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
             if (habilitado == false)
             {
-                MessageBox.Show("El cliente esta inhabilitado para realizar reservas");
+                MessageBox.Show("El cliente esta inhabilitado para realizar reservas", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             double ab = (dtpHasta.Value - dtpDesde.Value).TotalDays;
@@ -305,7 +301,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
             if (id == 0)
             {
-                MessageBox.Show("No se pudo generar la reserva");
+                MessageBox.Show("No se pudo generar la reserva", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 butLimpiar_Click(null, null);
                 return;
             }
@@ -319,14 +315,14 @@ namespace FrbaHotel.GenerarModificacionReserva
 
                 if (!resultado.Read() || resultado.GetDecimal(0) == 0)
                 {
-                    MessageBox.Show("No se pudo ingresar la habitación: " + codigoHabitacion.ToString());
+                    MessageBox.Show("No se pudo ingresar la habitación: " + codigoHabitacion.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     resultado.Close();
                     return;
                 }
                 resultado.Close();
             }
 
-            MessageBox.Show("Reserva generada con éxito, su número de reserva es: " + id.ToString());
+            MessageBox.Show("Reserva generada con éxito, su número de reserva es: " + id.ToString(), "ÉXITO", MessageBoxButtons.OK, MessageBoxIcon.Information);
             abmPadre.Show();
             this.Close();
 
@@ -415,5 +411,44 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
         }
 
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtsSoloLetras_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsLetter(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

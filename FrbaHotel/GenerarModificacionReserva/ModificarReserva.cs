@@ -59,7 +59,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             else
             {
                 resultado.Close();
-                MessageBox.Show("Error en la reserva");
+                MessageBox.Show("Error en la reserva", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 abmPadre.Show();
                 this.Shown += new EventHandler(ModificarReserva_CloseOnStart);
             }
@@ -69,7 +69,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             {
                 if (Login.FrmSeleccionarHotel.codigoHotel.ToString() != hotel)
                 {
-                    MessageBox.Show("No puedes modificar una reserva para un hotel que no trabajas");
+                    MessageBox.Show("No puedes modificar una reserva para un hotel que no trabajas", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     abmPadre.Show();
                     this.Shown += new EventHandler(ModificarReserva_CloseOnStart);
                 }
@@ -171,17 +171,17 @@ namespace FrbaHotel.GenerarModificacionReserva
 
             if (string.IsNullOrEmpty(cboTipoHabitacion.Text))
             {
-                MessageBox.Show("Tiene que especificar un tipo de habitacion");
+                MessageBox.Show("Tiene que especificar un tipo de habitacion", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (string.IsNullOrEmpty(cboTipoHabitacion.Text))
             {
-                MessageBox.Show("Tiene que especificar un tipo de habitacion");
+                MessageBox.Show("Tiene que especificar un tipo de habitacion", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (string.IsNullOrEmpty(cboHotel.Text))
             {
-                MessageBox.Show("Tiene que especificar un hotel");
+                MessageBox.Show("Tiene que especificar un hotel", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -192,13 +192,13 @@ namespace FrbaHotel.GenerarModificacionReserva
             if (result >= 0)
             {
 
-                MessageBox.Show("La fecha desde debe ser menor a la fecha hasta\n");
+                MessageBox.Show("La fecha desde debe ser menor a la fecha hasta\n", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             result = DateTime.Compare(fechaDesde.Date, VarGlobales.getDate());
             if (result < 0)
             {
-                MessageBox.Show("La fecha desde debe ser mayor a la fecha actual\n");
+                MessageBox.Show("La fecha desde debe ser mayor a la fecha actual\n", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             string query = "EXEC FAGD.BuscarHabitacionesDisponibles ";
@@ -233,7 +233,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
             if (cant == 0)
             {
-                MessageBox.Show("Seleccione al menos una habitación");
+                MessageBox.Show("Seleccione al menos una habitación", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -247,7 +247,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
             if (habilitado == false)
             {
-                MessageBox.Show("El cliente esta inhabilitado para realizar reservas");
+                MessageBox.Show("El cliente esta inhabilitado para realizar reservas", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             double ab = (dtpHasta.Value - dtpDesde.Value).TotalDays;
@@ -280,7 +280,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
             if (id == 0)
             {
-                MessageBox.Show("No se pudo modificar la reserva");
+                MessageBox.Show("No se pudo modificar la reserva", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 butLimpiar_Click(null, null);
                 return;
             }
@@ -296,14 +296,14 @@ namespace FrbaHotel.GenerarModificacionReserva
 
                 if (!resultado.Read() || resultado.GetDecimal(0) == 0)
                 {
-                    MessageBox.Show("No se pudo ingresar la habitación: " + codigoHabitacion.ToString());
+                    MessageBox.Show("No se pudo ingresar la habitación: " + codigoHabitacion.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     resultado.Close();
                     return;
                 }
                 resultado.Close();
             }
 
-            MessageBox.Show("Reserva modificada con éxito, su número de reserva es: " + reservaMod);
+            MessageBox.Show("Reserva modificada con éxito, su número de reserva es: " + reservaMod, "ÉXITO", MessageBoxButtons.OK, MessageBoxIcon.Information);
             abmPadre.Show();
             this.Close();
 
@@ -320,8 +320,8 @@ namespace FrbaHotel.GenerarModificacionReserva
             {
                 cboHotel.Enabled = false;
             }
-            cboRegimen.ResetText();
-            cboTipoHabitacion.ResetText();
+            cboRegimen.SelectedIndex = -1;
+            cboTipoHabitacion.SelectedIndex = -1;
             txtCliente.ResetText();
             dtpDesde.ResetText();
             dtpHasta.ResetText();
@@ -381,13 +381,13 @@ namespace FrbaHotel.GenerarModificacionReserva
                     }
                     catch
                     {
-                        MessageBox.Show("Esa habitación ya fue agregada");
+                        MessageBox.Show("Esa habitación ya fue agregada", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Por favor, vuelva a buscar habitación si cambio la fecha");
+                    MessageBox.Show("Por favor, vuelva a buscar habitación si cambio la fecha", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
             }

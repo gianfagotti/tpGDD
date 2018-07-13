@@ -23,14 +23,6 @@ namespace FrbaHotel.AbmCliente
             abm = abmPadre;
         }
 
-        private void txtNroDoc_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
         private void butVolver_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -86,7 +78,7 @@ namespace FrbaHotel.AbmCliente
             txtApellido.Text = string.Empty;
             txtMail.Text = string.Empty;
             txtNroDoc.Text = string.Empty;
-            cboTipoDoc.ResetText();
+            cboTipoDoc.SelectedIndex = -1;
             dgvFiltrado.DataSource = null;
             txtNombre.Focus();
         }
@@ -114,6 +106,46 @@ namespace FrbaHotel.AbmCliente
                 FrmModificarCliente mod = new FrmModificarCliente(abm, codigo, nroDoc, apellido, nombre, fecha_nac, mail, nacionalidad, calle, nroCalle, piso, dpto, tipoDoc, telefono, localidad, estado);
                 mod.Show();
                 this.Close();
+            }
+        }
+
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtsSoloLetras_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsLetter(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
             }
         }
 

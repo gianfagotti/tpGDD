@@ -43,22 +43,6 @@ namespace FrbaHotel.AbmHabitacion
             txtNroHab.Focus();
         }
 
-        private void txtNroHab_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtPiso_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
         private void butVolver_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -70,8 +54,8 @@ namespace FrbaHotel.AbmHabitacion
             txtNroHab.Text = string.Empty;
             txtPiso.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
-            cboTipoHabitacion.ResetText();
-            cboUbicacion.ResetText();
+            cboTipoHabitacion.SelectedIndex = -1;
+            cboUbicacion.SelectedIndex = -1;
             chkHabilitado.Checked = false;
             txtNroHab.Focus();
         }
@@ -164,6 +148,24 @@ namespace FrbaHotel.AbmHabitacion
             }
         }
 
-        
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }        
     }
 }

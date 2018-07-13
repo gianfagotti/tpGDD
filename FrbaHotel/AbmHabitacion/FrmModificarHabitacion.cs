@@ -52,22 +52,6 @@ namespace FrbaHotel.AbmHabitacion
 
         }
 
-        private void txtNroHab_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtPiso_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -79,8 +63,8 @@ namespace FrbaHotel.AbmHabitacion
             txtNroHab.Text = string.Empty;
             txtPiso.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
-            cboTipoHabitacion.ResetText();
-            cboUbicacion.ResetText();
+            cboTipoHabitacion.SelectedIndex = -1;
+            cboUbicacion.SelectedIndex = -1;
             chkHabilitado.Checked = true;
             txtNroHab.Focus();
         }
@@ -118,13 +102,13 @@ namespace FrbaHotel.AbmHabitacion
                 resultado.Close();
                 if (resu == 1)
                 {
-                    MessageBox.Show("La habitacion a sido guardada correctamente");
+                    MessageBox.Show("La habitacion a sido guardada correctamente", "ÉXITO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     limpiarCampos();
                 }
                 else if (resu == 2)
-                    MessageBox.Show("Error al guardar, la habitacion con ese numero ya existe en este hotel");
+                    MessageBox.Show("Error al guardar, la habitacion con ese numero ya existe en este hotel", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
-                    MessageBox.Show("Error al guardar la habitacion");
+                    MessageBox.Show("Error al guardar la habitacion", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -154,9 +138,29 @@ namespace FrbaHotel.AbmHabitacion
             }
             if (a == 1)
             {
-                MessageBox.Show(mensaje);
+                MessageBox.Show(mensaje, "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             return a;
+        }
+
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }

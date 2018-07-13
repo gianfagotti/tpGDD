@@ -77,8 +77,8 @@ namespace FrbaHotel.AbmHabitacion
             txtNumero.Text = string.Empty;
             txtPiso.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
-            cboTipo.ResetText();
-            cboUbicacion.ResetText();
+            cboTipo.SelectedIndex = -1;
+            cboUbicacion.SelectedIndex = -1;
             chkHabilitado.Checked = false;
             txtNumero.Focus();
         }
@@ -86,22 +86,6 @@ namespace FrbaHotel.AbmHabitacion
         private void butLimpiar_Click(object sender, EventArgs e)
         {
             limpiarCampos();
-        }
-
-        private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtPiso_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
         }
 
         private void butVolver_Click(object sender, EventArgs e)
@@ -151,7 +135,7 @@ namespace FrbaHotel.AbmHabitacion
             {
                 if (dgvFiltrado.CurrentRow.Cells[5].Value.ToString() == "False")
                 {
-                    MessageBox.Show("La habitación ya esta inhabilitada");
+                    MessageBox.Show("La habitación ya esta inhabilitada", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 string nroHabitacion = dgvFiltrado.CurrentRow.Cells[1].Value.ToString();
@@ -165,6 +149,7 @@ namespace FrbaHotel.AbmHabitacion
                     {
                     }
                     resultado.Close();
+                    MessageBox.Show("La habitación fue modificada satisfactoriamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
                 //BindingSource to sync DataTable and DataGridView
@@ -176,6 +161,25 @@ namespace FrbaHotel.AbmHabitacion
             }
         }
 
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
         
         
     }

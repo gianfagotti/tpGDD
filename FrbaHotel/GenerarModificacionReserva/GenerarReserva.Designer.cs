@@ -205,7 +205,6 @@
             this.txtCliente.Name = "txtCliente";
             this.txtCliente.Size = new System.Drawing.Size(121, 24);
             this.txtCliente.TabIndex = 21;
-            this.txtCliente.TextChanged += new System.EventHandler(this.txtCliente_TextChanged);
             // 
             // butClienteExistente
             // 

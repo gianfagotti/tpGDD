@@ -75,7 +75,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(372, 20);
             this.txtNombre.TabIndex = 1;
-            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
+            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // lblApellido
             // 
@@ -92,6 +92,7 @@
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(372, 20);
             this.txtApellido.TabIndex = 3;
+            this.txtApellido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // lblTipoDocumento
             // 
@@ -117,7 +118,7 @@
             this.txtNroDocumento.Name = "txtNroDocumento";
             this.txtNroDocumento.Size = new System.Drawing.Size(131, 20);
             this.txtNroDocumento.TabIndex = 7;
-            this.txtNroDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroDocumento_KeyPress);
+            this.txtNroDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // lblMail
             // 
@@ -127,7 +128,6 @@
             this.lblMail.Size = new System.Drawing.Size(26, 13);
             this.lblMail.TabIndex = 8;
             this.lblMail.Text = "Mail";
-            this.lblMail.Click += new System.EventHandler(this.txtMail_Click);
             // 
             // txtMail
             // 
@@ -151,7 +151,7 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(372, 20);
             this.txtTelefono.TabIndex = 11;
-            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // lblCalle
             // 
@@ -168,6 +168,7 @@
             this.txtCalle.Name = "txtCalle";
             this.txtCalle.Size = new System.Drawing.Size(100, 20);
             this.txtCalle.TabIndex = 13;
+            this.txtCalle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // lblNumero
             // 
@@ -184,7 +185,7 @@
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(46, 20);
             this.txtNumero.TabIndex = 15;
-            this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero_KeyPress);
+            this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // lblLocalidad
             // 
@@ -201,6 +202,7 @@
             this.txtLocalidad.Name = "txtLocalidad";
             this.txtLocalidad.Size = new System.Drawing.Size(372, 20);
             this.txtLocalidad.TabIndex = 17;
+            this.txtLocalidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // lblNacionalidad
             // 
@@ -217,6 +219,7 @@
             this.txtNacionalidad.Name = "txtNacionalidad";
             this.txtNacionalidad.Size = new System.Drawing.Size(372, 20);
             this.txtNacionalidad.TabIndex = 21;
+            this.txtNacionalidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // lblFechaNacimiento
             // 
@@ -290,6 +293,7 @@
             this.txtPiso.Name = "txtPiso";
             this.txtPiso.Size = new System.Drawing.Size(36, 20);
             this.txtPiso.TabIndex = 29;
+            this.txtPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // lblDpto
             // 
@@ -306,6 +310,7 @@
             this.txtDpto.Name = "txtDpto";
             this.txtDpto.Size = new System.Drawing.Size(53, 20);
             this.txtDpto.TabIndex = 31;
+            this.txtDpto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // cboTipoDoc
             // 

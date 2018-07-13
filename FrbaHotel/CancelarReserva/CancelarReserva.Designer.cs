@@ -60,7 +60,7 @@
             this.txtCodigoReserva.Name = "txtCodigoReserva";
             this.txtCodigoReserva.Size = new System.Drawing.Size(100, 20);
             this.txtCodigoReserva.TabIndex = 4;
-            this.txtCodigoReserva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigoReserva_KeyPress);
+            this.txtCodigoReserva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // txtMotivo
             // 

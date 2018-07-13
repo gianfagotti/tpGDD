@@ -38,14 +38,6 @@ namespace FrbaHotel.CancelarReserva
             resultado.Close();
         }
 
-        private void txtCodigoReserva_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -56,13 +48,13 @@ namespace FrbaHotel.CancelarReserva
         {
             if (string.IsNullOrEmpty(txtCodigoReserva.Text))
             {
-                MessageBox.Show("Debe ingresar un numero de reserva");
+                MessageBox.Show("Debe ingresar un numero de reserva", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (string.IsNullOrEmpty(txtMotivo.Text))
             {
-                MessageBox.Show("Debe ingresar el motivo de la cancelación");
+                MessageBox.Show("Debe ingresar el motivo de la cancelación", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -75,13 +67,13 @@ namespace FrbaHotel.CancelarReserva
 
                 if (fechaIncio.Date <= VarGlobales.getDate().Date)
                 {
-                    MessageBox.Show("La reserva no se puede cancelar porque ya paso el plazo para cancelar");
+                    MessageBox.Show("La reserva no se puede cancelar porque ya paso el plazo para cancelar", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 if (estado == noShow || estado == xUser || estado == xGuest)
                 {
-                    MessageBox.Show("La reserva ya se encuentra cancelada");
+                    MessageBox.Show("La reserva ya se encuentra cancelada", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -106,14 +98,14 @@ namespace FrbaHotel.CancelarReserva
                 {
                     if (resultado.GetDecimal(0) == 1)
                     {
-                        MessageBox.Show("La reserva se cancelo correctamente");
+                        MessageBox.Show("La reserva se cancelo correctamente", "ÉXITO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         resultado.Close();
                         abmPadre.Show();
                         this.Close();
                     }
                     else
                     {
-                        MessageBox.Show("Erro al cancelar la reserva, ya se encontraba cancelada");
+                        MessageBox.Show("Erro al cancelar la reserva, ya se encontraba cancelada", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         resultado.Close();
                     }
                 }
@@ -121,10 +113,30 @@ namespace FrbaHotel.CancelarReserva
             else
             {
                 resultado.Close();
-                MessageBox.Show("Número de reserva invalido");
+                MessageBox.Show("Número de reserva invalido", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+        }
+
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }

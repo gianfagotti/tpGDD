@@ -26,5 +26,18 @@ namespace FrbaHotel
             }
             
         }
+
+        internal static bool validarEmail(string email)
+        {
+            try
+            {
+                new System.Net.Mail.MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
     }
 }

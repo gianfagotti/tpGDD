@@ -28,7 +28,7 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             txtMail.Clear();
             txtNroDoc.Clear();
-            cboTipoDoc.ResetText();
+            cboTipoDoc.SelectedIndex = -1;
             txtNroDoc.Focus();
             this.butBuscar_Click(null, null);
         }
@@ -110,11 +110,31 @@ namespace FrbaHotel.GenerarModificacionReserva
                     }
                     catch
                     {
-                        MessageBox.Show("Ese cliente ya esta agregado");
+                        MessageBox.Show("Ese cliente ya esta agregado", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     abmPadre.Show();
                     this.Close();
                 }
+            }
+        }
+
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
             }
         }
     }

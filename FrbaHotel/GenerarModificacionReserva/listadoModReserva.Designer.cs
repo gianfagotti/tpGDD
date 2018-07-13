@@ -51,7 +51,7 @@
             this.txtNroReserva.Name = "txtNroReserva";
             this.txtNroReserva.Size = new System.Drawing.Size(239, 38);
             this.txtNroReserva.TabIndex = 1;
-            this.txtNroReserva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroReserva_KeyPress);
+            this.txtNroReserva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // butVolver
             // 

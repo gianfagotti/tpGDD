@@ -31,6 +31,7 @@
             this.butBuscar = new System.Windows.Forms.Button();
             this.butLimpiar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Baja = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -39,7 +40,6 @@
             this.cboTipoDoc = new System.Windows.Forms.ComboBox();
             this.txtNroDoc = new System.Windows.Forms.TextBox();
             this.butVolver = new System.Windows.Forms.Button();
-            this.Baja = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -80,6 +80,14 @@
             this.dataGridView1.Size = new System.Drawing.Size(496, 172);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Baja
+            // 
+            this.Baja.HeaderText = "";
+            this.Baja.Name = "Baja";
+            this.Baja.ReadOnly = true;
+            this.Baja.Text = "Seleccionar";
+            this.Baja.UseColumnTextForButtonValue = true;
             // 
             // groupBox1
             // 
@@ -148,6 +156,7 @@
             this.txtNroDoc.Name = "txtNroDoc";
             this.txtNroDoc.Size = new System.Drawing.Size(149, 20);
             this.txtNroDoc.TabIndex = 5;
+            this.txtNroDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // butVolver
             // 
@@ -159,14 +168,6 @@
             this.butVolver.Text = "Volver";
             this.butVolver.UseVisualStyleBackColor = true;
             this.butVolver.Click += new System.EventHandler(this.butVolver_Click);
-            // 
-            // Baja
-            // 
-            this.Baja.HeaderText = "";
-            this.Baja.Name = "Baja";
-            this.Baja.ReadOnly = true;
-            this.Baja.Text = "Seleccionar";
-            this.Baja.UseColumnTextForButtonValue = true;
             // 
             // BuscarClientes
             // 

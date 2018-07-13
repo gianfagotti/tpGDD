@@ -27,20 +27,10 @@ namespace FrbaHotel.AbmCliente
 
         }
 
-        private void txtMail_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
             abmPadre.Show();
             this.Close();
-        }
-
-        private void txtNombre_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void butGuardar_Click(object sender, EventArgs e)
@@ -81,13 +71,13 @@ namespace FrbaHotel.AbmCliente
                 resultado.Close();
                 if (resu == 0)
                 {
-                    MessageBox.Show("Error al guardar, el cliente con ese mail ya existe");
+                    MessageBox.Show("Error al guardar, el cliente con ese mail ya existe", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else if (resu == 2)
-                    MessageBox.Show("Error al guardar, el cliente con ese tipo y número de documento ya existe");
+                    MessageBox.Show("Error al guardar, el cliente con ese tipo y número de documento ya existe", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
-                    MessageBox.Show("El cliente fue guardado correctamente");
+                    MessageBox.Show("El cliente fue guardado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (abmPadre.Name == "GenerarReserva")
                     {
                         GenerarModificacionReserva.GenerarReserva.clienteSeleccionado = resu.ToString();
@@ -96,7 +86,7 @@ namespace FrbaHotel.AbmCliente
                     }
                     else if (abmPadre.Name == "FrmRegistrarEstadia")
                         this.Close();
-                    //limpiarCampos();
+                    limpiarCampos();
                 }
                 
             }
@@ -115,7 +105,7 @@ namespace FrbaHotel.AbmCliente
             txtDpto.Text = string.Empty;
             txtLocalidad.Text = string.Empty;
             txtNacionalidad.Text = string.Empty;
-            cboTipoDoc.ResetText();
+            cboTipoDoc.SelectedIndex = -1;
             dtpFechaNacimiento.Value = VarGlobales.getDate();
             txtNombre.Focus();
         }
@@ -166,6 +156,14 @@ namespace FrbaHotel.AbmCliente
                 a = 1;
                 mensaje = mensaje + "El campo mail es obligatorio\n";
             }
+            else
+            {
+                if (!VarGlobales.validarEmail(txtMail.Text))
+                {
+                    a = 1;
+                    mensaje = mensaje + "El campo mail es invalido\n";
+                }
+            }
             if (string.IsNullOrEmpty(txtCalle.Text))
             {
                 a = 1;
@@ -206,28 +204,46 @@ namespace FrbaHotel.AbmCliente
 
             if (a == 1)
             {
-                MessageBox.Show(mensaje);
+                MessageBox.Show(mensaje, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return a;
         }
 
-        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
             {
                 e.Handled = true;
             }
         }
-        private void txtNroDocumento_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void txtsSoloLetras_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (Char.IsLetter(e.KeyChar))
             {
-                e.Handled = true;
+                e.Handled = false;
             }
-        }
-        private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
             {
                 e.Handled = true;
             }

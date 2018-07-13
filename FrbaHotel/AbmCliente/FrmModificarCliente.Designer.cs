@@ -75,6 +75,7 @@
             this.txtNombreMod.Name = "txtNombreMod";
             this.txtNombreMod.Size = new System.Drawing.Size(353, 20);
             this.txtNombreMod.TabIndex = 1;
+            this.txtNombreMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // lblApellidoMod
             // 
@@ -91,6 +92,7 @@
             this.txtApellidoMod.Name = "txtApellidoMod";
             this.txtApellidoMod.Size = new System.Drawing.Size(353, 20);
             this.txtApellidoMod.TabIndex = 3;
+            this.txtApellidoMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // lblTipoDocumentoMod
             // 
@@ -116,7 +118,7 @@
             this.txtNroDocumentoMod.Name = "txtNroDocumentoMod";
             this.txtNroDocumentoMod.Size = new System.Drawing.Size(129, 20);
             this.txtNroDocumentoMod.TabIndex = 7;
-            this.txtNroDocumentoMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroDocumentoMod_KeyPress);
+            this.txtNroDocumentoMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // lblMailMod
             // 
@@ -149,6 +151,7 @@
             this.txtTelefonoMod.Name = "txtTelefonoMod";
             this.txtTelefonoMod.Size = new System.Drawing.Size(354, 20);
             this.txtTelefonoMod.TabIndex = 11;
+            this.txtTelefonoMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // lblCalleMod
             // 
@@ -165,6 +168,7 @@
             this.txtCalleMod.Name = "txtCalleMod";
             this.txtCalleMod.Size = new System.Drawing.Size(100, 20);
             this.txtCalleMod.TabIndex = 13;
+            this.txtCalleMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // lblNumeroMod
             // 
@@ -181,7 +185,7 @@
             this.txtNumeroMod.Name = "txtNumeroMod";
             this.txtNumeroMod.Size = new System.Drawing.Size(53, 20);
             this.txtNumeroMod.TabIndex = 15;
-            this.txtNumeroMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroMod_KeyPress);
+            this.txtNumeroMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // lblLocalidadMod
             // 
@@ -198,6 +202,7 @@
             this.txtLocalidadMod.Name = "txtLocalidadMod";
             this.txtLocalidadMod.Size = new System.Drawing.Size(354, 20);
             this.txtLocalidadMod.TabIndex = 17;
+            this.txtLocalidadMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // lblNacionalidadMod
             // 
@@ -271,6 +276,7 @@
             this.txtNacionalidadMod.Name = "txtNacionalidadMod";
             this.txtNacionalidadMod.Size = new System.Drawing.Size(354, 20);
             this.txtNacionalidadMod.TabIndex = 21;
+            this.txtNacionalidadMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // lblPisoMod
             // 
@@ -296,6 +302,7 @@
             this.txtPisoMod.Name = "txtPisoMod";
             this.txtPisoMod.Size = new System.Drawing.Size(32, 20);
             this.txtPisoMod.TabIndex = 30;
+            this.txtPisoMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // txtDptoMod
             // 
@@ -303,6 +310,7 @@
             this.txtDptoMod.Name = "txtDptoMod";
             this.txtDptoMod.Size = new System.Drawing.Size(39, 20);
             this.txtDptoMod.TabIndex = 31;
+            this.txtDptoMod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloLetras_KeyPress);
             // 
             // cboTipoDocMod
             // 

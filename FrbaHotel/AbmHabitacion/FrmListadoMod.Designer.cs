@@ -90,6 +90,7 @@
             // 
             // cboTipoHabitacion
             // 
+            this.cboTipoHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTipoHabitacion.FormattingEnabled = true;
             this.cboTipoHabitacion.Location = new System.Drawing.Point(57, 108);
             this.cboTipoHabitacion.Name = "cboTipoHabitacion";
@@ -98,6 +99,7 @@
             // 
             // cboUbicacion
             // 
+            this.cboUbicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboUbicacion.FormattingEnabled = true;
             this.cboUbicacion.Location = new System.Drawing.Point(77, 79);
             this.cboUbicacion.Name = "cboUbicacion";
@@ -110,7 +112,7 @@
             this.txtPiso.Name = "txtPiso";
             this.txtPiso.Size = new System.Drawing.Size(96, 20);
             this.txtPiso.TabIndex = 7;
-            this.txtPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPiso_KeyPress);
+            this.txtPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // txtNroHab
             // 
@@ -118,7 +120,7 @@
             this.txtNroHab.Name = "txtNroHab";
             this.txtNroHab.Size = new System.Drawing.Size(96, 20);
             this.txtNroHab.TabIndex = 6;
-            this.txtNroHab.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroHab_KeyPress);
+            this.txtNroHab.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // label5
             // 
