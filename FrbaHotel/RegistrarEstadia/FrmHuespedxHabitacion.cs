@@ -84,34 +84,46 @@ namespace FrbaHotel.RegistrarEstadia
                     return;
 
                 }
-                int index = dgvDistri.CurrentRow.Index;
-                query = "SELECT COUNT(*) FROM FAGD.ClienteXEstadia WHERE estadia_codigo = " + estadia + " AND habitacion_codigo = " + cbohab.Text;
-                infoQuery = Login.FrmTipoUsuario.BD.comando(query);
-                infoQuery.Read();
-                int cantLimite = infoQuery.GetInt32(0);
-                infoQuery.Close();
-                if (cantLimite < Convert.ToInt32(txtCantHab.Text))
+
+                if (MessageBox.Show("¿Está seguro de agregar el cliente a la habitación seleccionada? Esta acción no se puede deshacer.", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+    MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
                 {
-                    query = "EXEC FAGD.SeleccionarHabitacionDeCliente " + cbohab.Text + "," + dgvDistri.CurrentRow.Cells[1].Value.ToString() + "," + estadia;
+
+                    int index = dgvDistri.CurrentRow.Index;
+                    query = "SELECT COUNT(*) FROM FAGD.ClienteXEstadia WHERE estadia_codigo = " + estadia + " AND habitacion_codigo = " + cbohab.Text;
                     infoQuery = Login.FrmTipoUsuario.BD.comando(query);
                     infoQuery.Read();
-                    if (infoQuery.GetDecimal(0) == 1)
+                    int cantLimite = infoQuery.GetInt32(0);
+                    infoQuery.Close();
+                    if (cantLimite < Convert.ToInt32(txtCantHab.Text))
                     {
-                        MessageBox.Show("El huésped se ha registrado correctamente a la habitación.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        tablaConInfoHuespedes.Rows.RemoveAt(index);
-                        dgvDistri.DataSource = tablaConInfoHuespedes;
-                        infoQuery.Close();
+                        query = "EXEC FAGD.SeleccionarHabitacionDeCliente " + cbohab.Text + "," + dgvDistri.CurrentRow.Cells[1].Value.ToString() + "," + estadia;
+                        infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+                        infoQuery.Read();
+                        if (infoQuery.GetDecimal(0) == 1)
+                        {
+                            MessageBox.Show("El huésped se ha registrado correctamente a la habitación.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            tablaConInfoHuespedes.Rows.RemoveAt(index);
+                            dgvDistri.DataSource = tablaConInfoHuespedes;
+                            infoQuery.Close();
+                        }
+                        else
+                        {
+                            infoQuery.Close();
+                            MessageBox.Show("El cliente elegido ya se encuentra agregado a esta estadía.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                     }
                     else
                     {
-                        infoQuery.Close();
-                        MessageBox.Show("El cliente elegido ya se encuentra agregado a esta estadía.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Esa habitación ya se encuentra llena.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+
                 }
                 else
                 {
-                    MessageBox.Show("Esa habitación ya se encuentra llena.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
         }

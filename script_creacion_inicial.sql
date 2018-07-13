@@ -1525,7 +1525,7 @@ BEGIN TRY
 			SET factura_modalidadPago = @modalidadPago, factura_fecha = @fechaDeFacturacionDefinitiva, factura_total = @totalAPagar
 			WHERE factura_nro = @factura
 		END
-	SET @respuestaTran = (SELECT SCOPE_IDENTITY())
+	SET @respuestaTran = (SELECT factura_nro FROM FAGD.Factura WHERE factura_codigoEstadia = @estadiaCodigo AND factura_fecha = @fechaDeFacturacionDefinitiva)
 	SELECT @respuestaTran
 COMMIT TRAN	transacc
 END TRY

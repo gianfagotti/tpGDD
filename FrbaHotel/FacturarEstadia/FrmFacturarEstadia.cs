@@ -133,7 +133,7 @@ namespace FrbaHotel.FacturarEstadia
             infoQuery.Read();
             modalidadDePagoElegida = infoQuery.GetDecimal(0);
             infoQuery.Close();
-            query = "EXEC FAGD.EmitirFacturaActualizada " + txtEst.Text + "," + modalidadDePagoElegida.ToString() + ",'" + Login.FrmTipoUsuario.fechaAppConvertida + "'";
+            query = "EXEC FAGD.EmitirFacturaActualizada '" + txtEst.Text + "','" + modalidadDePagoElegida.ToString() + "','" + Login.FrmTipoUsuario.fechaAppConvertida + "'";
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             infoQuery.Read();
             facturaEmitida = infoQuery.GetDecimal(0);
