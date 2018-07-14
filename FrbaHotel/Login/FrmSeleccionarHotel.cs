@@ -97,7 +97,7 @@ namespace FrbaHotel.Login
         }
 
         private void checkearHoteles(){                                                                                                                                                              //Funcion que se encarga de actualizar los estados de todos los hoteles para la fecha actual.
-
+                                                                                                                                                                                                     //Si en la fecha actual esta dado de baja, cambia su estado a 0, de no ser asi, lo popne en 1.
             string fecha = fechaArchivoConfiguracion.ToString("yyyy-MM-dd");
 
             tablaHotelesDeBaja = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT H.hotel_codigo FROM FAGD.Hotel H JOIN FAGD.BajaHotel B ON (H.hotel_codigo = B.hotel_codigo) WHERE H.hotel_estado = 1 AND (B.fecha_inicio <= '" + fecha + "' AND '" + fecha + "' <= B.fecha_fin)");    

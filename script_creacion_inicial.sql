@@ -359,6 +359,7 @@ ALTER TABLE FAGD.UsuarioXRolXHotel ADD CONSTRAINT FK_UsuarioXRolXHotel_2
 GO
 
 --------------- TEMA FACTURA E ITEM FACTURA--------------
+
 ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT FK_ConsumibleXEstadia_Consumible
  FOREIGN KEY (consumible_codigo) REFERENCES FAGD.Consumible(consumible_codigo)
 GO
@@ -681,39 +682,6 @@ INSERT INTO FAGD.Consumible (consumible_codigo,consumible_descripcion,consumible
 		WHERE Consumible_Codigo IS NOT NULL
 GO
 
-/*INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
-		[cliente_nroCalle],[cliente_piso],[cliente_dpto], [cliente_nacionalidad], [cliente_tipoDocumento], [cliente_telefono], [cliente_estado], [cliente_localidad])
-		SELECT DISTINCT [Cliente_Pasaporte_Nro],[Cliente_Apellido],[Cliente_Nombre],[Cliente_Fecha_Nac],[Cliente_Mail],[Cliente_Dom_Calle],
-		[Cliente_Nro_Calle],[Cliente_Piso],[Cliente_Depto],[Cliente_Nacionalidad],'Pasaporte', 000, 1, NULL
-		FROM gd_esquema.Maestra
-
-INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellido],[errorCliente_nombre],[errorCliente_fechaNac],[errorCliente_mail],[errorCliente_calle],
-							   [errorCliente_nroCalle],[errorCliente_piso],[errorCliente_dpto], [errorCliente_nacionalidad], [errorCliente_tipoDocumento], [errorCliente_telefono], 
-							   [errorCliente_estado], [errorCliente_localidad])
-		SELECT DISTINCT [cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
-		[cliente_nroCalle],[cliente_piso],[cliente_dpto], [cliente_nacionalidad], [cliente_tipoDocumento], [cliente_telefono], [cliente_estado], [cliente_localidad]
-		FROM FAGD.Cliente
-		WHERE cliente_codigo in (SELECT MIN(C.cliente_codigo) FROM FAGD.Cliente C WHERE cliente_mail = C.cliente_mail)
-
-DELETE FROM FAGD.Cliente
-WHERE cliente_codigo in (SELECT MIN(C.cliente_codigo) FROM FAGD.Cliente C WHERE cliente_mail = C.cliente_mail)
-
-
-ALTER TABLE FAGD.Cliente ADD CONSTRAINT Unique_mail UNIQUE (cliente_mail);
-
-INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellido],[errorCliente_nombre],[errorCliente_fechaNac],[errorCliente_mail],[errorCliente_calle],
-							   [errorCliente_nroCalle],[errorCliente_piso],[errorCliente_dpto], [errorCliente_nacionalidad], [errorCliente_tipoDocumento], [errorCliente_telefono], 
-							   [errorCliente_estado], [errorCliente_localidad])
-		SELECT DISTINCT [cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
-		[cliente_nroCalle],[cliente_piso],[cliente_dpto], [cliente_nacionalidad], [cliente_tipoDocumento], [cliente_telefono], [cliente_estado], [cliente_localidad]
-		FROM FAGD.Cliente
-		WHERE cliente_codigo in (SELECT MIN(C.cliente_codigo) FROM FAGD.Cliente C WHERE cliente_nroDocumento = C.cliente_nroDocumento and cliente_tipoDocumento = C.cliente_tipoDocumento)
-
-DELETE FROM FAGD.Cliente
-WHERE cliente_codigo in (SELECT MIN(C.cliente_codigo) FROM FAGD.Cliente C WHERE cliente_nroDocumento = C.cliente_nroDocumento and cliente_tipoDocumento = C.cliente_tipoDocumento)
-
-GO*/
-
 INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellido],[errorCliente_nombre],[errorCliente_fechaNac],[errorCliente_mail],[errorCliente_calle],[errorCliente_nroCalle],[errorCliente_piso],[errorCliente_dpto], [errorCliente_nacionalidad], [errorCliente_tipoDocumento], [errorCliente_telefono], [errorCliente_estado], [errorCliente_localidad])
   SELECT DISTINCT A.[Cliente_Pasaporte_Nro],A.[Cliente_Apellido], A.[Cliente_Nombre], A.[Cliente_Fecha_Nac], A.[Cliente_Mail], A.[Cliente_Dom_Calle], A.[Cliente_Nro_Calle],A.[Cliente_Piso],A.[Cliente_Depto],A.[Cliente_Nacionalidad],'Pasaporte', 000, 0, NULL
   FROM gd_esquema.Maestra A JOIN gd_esquema.Maestra B ON (A.[Cliente_Pasaporte_Nro] = B.Cliente_Pasaporte_Nro AND A.Cliente_Apellido <> B.Cliente_Apellido AND A.Cliente_Nombre <> B.Cliente_Nombre)
@@ -726,7 +694,6 @@ INSERT INTO FAGD.ErrorCliente ([errorCliente_nroDocumento],[errorCliente_apellid
   ORDER BY Cliente_Mail
 GO
 
-
 INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nombre],[cliente_fechaNac],[cliente_mail],[cliente_calle],
   [cliente_nroCalle],[cliente_piso],[cliente_dpto], [cliente_nacionalidad], [cliente_tipoDocumento], [cliente_telefono], [cliente_estado], [cliente_localidad])
   SELECT DISTINCT [Cliente_Pasaporte_Nro],[Cliente_Apellido],[Cliente_Nombre],[Cliente_Fecha_Nac],[Cliente_Mail],[Cliente_Dom_Calle],
@@ -735,7 +702,6 @@ INSERT INTO FAGD.Cliente ([cliente_nroDocumento],[cliente_apellido],[cliente_nom
   WHERE [Cliente_Pasaporte_Nro] NOT IN(SELECT [errorCliente_nroDocumento] FROM FAGD.ErrorCliente)
     AND [Cliente_Mail] NOT IN (SELECT [errorCliente_mail] FROM FAGD.ErrorCliente)
 GO
-
 
 INSERT INTO FAGD.HabitacionTipo(habitacionTipo_codigo, habitacionTipo_descripcion, habitacionTipo_porcentual)
 		SELECT DISTINCT Habitacion_Tipo_Codigo, Habitacion_Tipo_Descripcion, Habitacion_Tipo_Porcentual
@@ -810,9 +776,6 @@ UPDATE FAGD.Reserva
 					    WHERE 	estado_descripcion = 'RESERVA CANCELADA DESDE TABLA MAESTRA')
 				END
 				GO
-
-
-
 
 INSERT INTO FAGD.ReservaxHabitacion(reserva_codigo, habitacion_codigo)
 		SELECT DISTINCT R.reserva_codigo, ha.habitacion_codigo
@@ -1627,6 +1590,7 @@ begin
 end
 GO
 
+---------------------------------------------------------------------------------------------------------------------------------
 
 create proc FAGD.modificarCliente
 @codigo numeric(18),
@@ -1698,6 +1662,8 @@ begin
 end
 GO
 
+-------------------------------------------------------------------------------------------------------------------------
+
 create proc FAGD.crearRegimen
 @precio numeric(18),
 @descripcion nvarchar(255),
@@ -1726,6 +1692,8 @@ begin
 	end catch
 end
 GO
+
+-----------------------------------------------------------------------------------------------------------------------------------------
 
 create proc FAGD.GuardarNuevaHabitacion
 @numero numeric(18),
@@ -1763,6 +1731,8 @@ begin
 	end catch
 end
 GO
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 create proc FAGD.ModificarHabitacion
 @idHabitacion numeric(18),
@@ -1810,7 +1780,7 @@ begin
 end
 GO
 				
-------------------------------------------------IRAA-------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 
 CREATE PROC FAGD.nuevoRol @nombreRol nvarchar (255), @estado bit
 AS
@@ -1839,6 +1809,7 @@ BEGIN
 END
 GO
 
+-------------------------------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.funcionalidadesDelRol @nombreRol nvarchar (255), @codigoFuncionalidad numeric (18)
 AS 
@@ -1859,6 +1830,8 @@ BEGIN
 	END CATCH
 END
 GO
+
+--------------------------------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.updatearRol @nombreViejo nvarchar (255), @nombreNuevo nvarchar(255), @estado bit
 AS
@@ -1890,6 +1863,7 @@ BEGIN
 END
 GO
 
+-------------------------------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.limpiarFuncionalidades @nombreRol nvarchar (255)
 AS
@@ -1912,6 +1886,8 @@ DECLARE @resultado numeric(1)
 	END CATCH
 END
 GO
+
+--------------------------------------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.guardarUsuario
 @nombre nvarchar (255),
@@ -1963,6 +1939,7 @@ BEGIN
 END
 GO
 
+------------------------------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.nuevoPuesto @username nvarchar(255), @hotelCalle nvarchar (255), @hotelNro numeric (18), @rol nvarchar (255)
 AS 
@@ -1987,6 +1964,7 @@ BEGIN
 END
 GO
 
+---------------------------------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.borrarPuesto @username nvarchar(255), @hotelCalle nvarchar (255), @hotelNro numeric (18), @rol nvarchar (255)
 AS 
@@ -2010,6 +1988,7 @@ BEGIN
 END
 GO
 
+-----------------------------------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.cambiarEstadoUsuario @username nvarchar(255)
 AS 
@@ -2061,13 +2040,6 @@ BEGIN
 	SET @fechaNacimiento = CONVERT(datetime, @fechaNac, 121)
 	BEGIN TRAN upd
 	BEGIN TRY
-/*		IF ((SELECT usuario_mail FROM FAGD.Usuario WHERE usuario_username = @username) = @mail)
-		BEGIN
-			SET @resultado = 0;
-			SELECT @resultado as resultado
-		END
-		ELSE
-		BEGIN*/
 
 		UPDATE FAGD.Usuario
 			
@@ -2084,7 +2056,6 @@ BEGIN
 			SET @resultado = 1;
 		SELECT @resultado AS resultado
 		COMMIT tran usuario
-		/*END*/
 	END TRY
 	BEGIN CATCH
 		ROLLBACK TRAN upd
@@ -2095,13 +2066,14 @@ END
 GO			
 
 
-------------------------------------------------Alva-------------------------------------------------------
+-------------------------------------------------------------------ABM Login------------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.desactivarUsuario @username nvarchar (255)
 AS
 BEGIN
 	DECLARE @resultado numeric(18)
-	BEGIN TRAN actualizarEstado
+	BEGIN TRAN actualizarEstado																										/*Procedimiento utilizado por el formulario loginContraseña para desactivar un usuario luego de pasados los 3 intentos de ingresar la contraseña
+																																	y que esta no fuera valida. Se procede a updatear el estado del usuario recibido como parametro a 0 (inhabilitado)*/
 		UPDATE FAGD.Usuario
 		SET usuario_estado = 0
 		WHERE usuario_username = @username;
@@ -2111,6 +2083,7 @@ BEGIN
 END
 GO
 
+-------------------------------------------------------------------ABM Hotel-----------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.insertarHotel @estrellas numeric(18,0), @recargaEstrellas numeric(18,0), @pais nvarchar(255), @ciudad nvarchar(255), @calle nvarchar(255), @nroCalle numeric(18,0), @nombre nvarchar(255), @fechaDeCreacion datetime, @mail nvarchar(255), @telefono numeric(18,0)
 AS
@@ -2118,12 +2091,15 @@ BEGIN
 	DECLARE @resultado numeric(1)
 	BEGIN TRAN insertarHotel
 		INSERT INTO FAGD.Hotel 
-		VALUES (@estrellas, @recargaEstrellas, @pais, @ciudad, @calle, @nroCalle, @nombre, @fechaDeCreacion, @mail, @telefono, 1)
+		VALUES (@estrellas, @recargaEstrellas, @pais, @ciudad, @calle, @nroCalle, @nombre, @fechaDeCreacion, @mail, @telefono, 1) /*Con este procedimiento se realiza la carga de un hotel a la tabla FAGD.Hotel, segun los datos cargados en el formulario AltaHotel
+																																	los cuales recibe como parametros.*/
 	COMMIT TRAN insertarHotel
 	SET @resultado = 0;
 	SELECT @resultado AS resultado
 END
 GO
+
+-------------------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.insertarRegimenDeHotelCreado @nombreHotel nvarchar(255), @descripcionRegimen varchar (50)
 AS
@@ -2132,7 +2108,8 @@ BEGIN
 	DECLARE @codigoHotel numeric (18,0)
 	DECLARE @codigoRegimen numeric(18)
 	SET @codigoHotel = (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_nombre = @nombreHotel)
-	SET @codigoRegimen = (SELECT regimen_codigo FROM FAGD.Regimen WHERE regimen_descripcion = @descripcionRegimen)
+	SET @codigoRegimen = (SELECT regimen_codigo FROM FAGD.Regimen WHERE regimen_descripcion = @descripcionRegimen)				/*Este Stored Procedure es utilizado en el abmHotel, en los fomrularios de alta y modificacion de un hotel, con el fin de ir insertando
+																																de a uno por vez los regimenes seleccionados para un hotel. Recibe un hotel y un regimen, y lo inserta en la tabla FAGD.HotelXRegimen.*/
 	BEGIN TRAN insertarRegimenDeHotelCreado
 		INSERT INTO FAGD.HotelXRegimen
 		VALUES (@codigoHotel, @codigoRegimen)
@@ -2142,18 +2119,23 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE FAGD.insertarAdministradorNuevoHotel @usuario nvarchar(255), @codigoHotel numeric (18,0)
+-------------------------------------------------------------------------------------------------------------
+
+CREATE PROCEDURE FAGD.insertarAdministradorNuevoHotel @usuario nvarchar(255), @codigoHotel numeric (18,0)						
 AS
 BEGIN
 	DECLARE @resultado numeric(1)
 	BEGIN TRAN insertarAdministradorNuevoHotel
-		INSERT INTO FAGD.UsuarioXRolXHotel
+		INSERT INTO FAGD.UsuarioXRolXHotel																							/*Este procedimiento es utilizado en el abm hotel, en el formulario SeleccionarAdministrador. Recibe un codigo de hotel y un nombre
+																																	de usuario, con el fin de asignar el rol de administrador para dicho hotel, a dicho usuario, insertandolo en la tabla FAGD.UsuarioXRolXHotel.*/
 		VALUES (@usuario, 1, @codigoHotel)
 	COMMIT TRAN insertarAdministradorNuevoHotel
 	SET @resultado = 0;
 	SELECT @resultado AS resultado;
 END
 GO
+
+-------------------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.actualizarHotel @estrellas numeric(18,0), @recargaEstrellas numeric(18,0), @pais nvarchar(255), @ciudad nvarchar(255), @calle nvarchar(255), @nroCalle numeric(18,0), @nombre nvarchar(255), @fechaDeCreacion datetime, @mail nvarchar(255), @telefono numeric(18,0), @codigoHotel numeric (18,0)
 AS
@@ -2166,13 +2148,16 @@ BEGIN
 
 		DELETE
 		FROM FAGD.HotelXRegimen
-		WHERE hotel_codigo = @codigoHotel
-
+		WHERE hotel_codigo = @codigoHotel																							/*Este procedimiento es utilizado por el formulario ModificarHotel, y se lo utiliza con el fin de realizar los cambios para un hotel ya creado (recibidos como parametros),
+																																	según lo seleccionado por el usuario en dicho formulario, para lo que se updatea la tabla FAGD.Hotel. Además, se borran todos los regimenes de la tabla FAGD.Regimen, 
+																																	los cuales volverán a ser cargados luego con el procedimiento FAGD.InsertarRegimenDeHotelCreado segun lo que el usuario haya ingresado en el formulario.*/
 		SET @resultado = 0;
 	COMMIT TRAN ActualizarHotel
 	SELECT @resultado AS resultado
 END
 GO
+
+---------------------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE FAGD.darDeBajaHotel @fechaInicio datetime, @fechaFin datetime, @motivo nvarchar(255), @codigoHotel numeric (18,0)
 AS
@@ -2180,14 +2165,15 @@ BEGIN
 	DECLARE @resultado numeric(1)
 	BEGIN TRAN darDeBajaHotel
 		INSERT INTO FAGD.BajaHotel
-		VALUES (@codigoHotel,@fechaInicio,@fechaFin,@motivo)
+		VALUES (@codigoHotel,@fechaInicio,@fechaFin,@motivo)																		/*Procedimiento utilizado por el formulario BajaHotel con el fin de dar de baja el hotel , para un rango de fechas, que recibe como parámetro al igual que el hotel. 
+																																	Se inserta dicha informacion en la tabla FAGD.BajaHotel*/ 
 	COMMIT TRAN darDeBajaHotel
 SET @resultado = 0;
 SELECT @resultado AS resultado;
 END
 GO
 
-------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 
 create procedure FAGD.BuscarHabitacionesDisponibles
 @codigoHotel numeric(18),
