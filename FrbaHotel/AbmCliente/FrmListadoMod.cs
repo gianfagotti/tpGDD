@@ -20,6 +20,7 @@ namespace FrbaHotel.AbmCliente
         public FrmListadoMod(Form abmPadre)
         {
             InitializeComponent();
+            //Asigno el formulario anterior
             abm = abmPadre;
         }
 
@@ -29,34 +30,16 @@ namespace FrbaHotel.AbmCliente
             abm.Show();
         }
 
-        private string filtrarExactamentePor(string columna, string valor)
-        {
-            if (!string.IsNullOrEmpty(valor))
-            {
-                return columna + " = '" + valor + "' AND ";
-            }
-            return "";
-        }
-
-        private string filtrarAproximadamentePor(string columna, string valor)
-        {
-            if (!string.IsNullOrEmpty(valor))
-            {
-                return columna + " LIKE '%" + valor + "%' AND ";
-            }
-            return "";
-        }
-
         private void butBuscar_Click(object sender, EventArgs e)
         {
             string consulta = "select cliente_codigo Código, cliente_nroDocumento Documento, cliente_apellido Apellido, cliente_nombre Nombre, cliente_fechaNac as 'Fecha nacimiento', cliente_mail Mail, cliente_nacionalidad Nacionalidad, cliente_calle Calle, cliente_nroCalle Número, cliente_piso Piso, cliente_dpto Dpto, cliente_tipoDocumento as 'Tipo Documento', cliente_telefono Telefono, cliente_localidad Localidad, cliente_estado Estado from FAGD.Cliente";
             string query = "";
 
-            query = query + this.filtrarAproximadamentePor("cliente_nombre", txtNombre.Text);
-            query = query + this.filtrarExactamentePor("cliente_tipoDocumento", cboTipoDoc.Text);
-            query = query + this.filtrarAproximadamentePor("cliente_apellido", txtApellido.Text);
-            query = query + this.filtrarExactamentePor("cliente_nroDocumento", txtNroDoc.Text);
-            query = query + this.filtrarAproximadamentePor("cliente_mail", txtMail.Text);
+            query = query + funcionesGlobales.filtrarAproximadamentePor("cliente_nombre", txtNombre.Text);
+            query = query + funcionesGlobales.filtrarExactamentePor("cliente_tipoDocumento", cboTipoDoc.Text);
+            query = query + funcionesGlobales.filtrarAproximadamentePor("cliente_apellido", txtApellido.Text);
+            query = query + funcionesGlobales.filtrarExactamentePor("cliente_nroDocumento", txtNroDoc.Text);
+            query = query + funcionesGlobales.filtrarAproximadamentePor("cliente_mail", txtMail.Text);
             if (query.Length > 0) 
             {
                 query = query.Remove(query.Length - 4);
@@ -74,6 +57,7 @@ namespace FrbaHotel.AbmCliente
 
         private void butLimpiar_Click(object sender, EventArgs e)
         {
+            //Vacio todos los campos
             txtNombre.Text = string.Empty;
             txtApellido.Text = string.Empty;
             txtMail.Text = string.Empty;
@@ -85,8 +69,10 @@ namespace FrbaHotel.AbmCliente
 
         private void dgvFiltrado_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
+            //Cuando se selecciona un cliente
             if (e.ColumnIndex == 0)
             {
+                //Obtengo todos los datos del cliente y creo un nuevo formulario de modificación para ese cliente
                 string codigo = dgvFiltrado.CurrentRow.Cells[1].Value.ToString();
                 string nroDoc = dgvFiltrado.CurrentRow.Cells[2].Value.ToString();
                 string apellido = dgvFiltrado.CurrentRow.Cells[3].Value.ToString();

@@ -24,6 +24,7 @@ namespace FrbaHotel.CancelarReserva
 
             txtCodigoReserva.Focus();
 
+            //Obtengo los codigos de los estados de cancelación
             resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("Select estado_codigo from FAGD.Estado where estado_descripcion = 'RESERVA CANCELADA POR NO-SHOW'");
             resultado.Read();
             noShow = resultado.GetDecimal(0);
@@ -46,12 +47,14 @@ namespace FrbaHotel.CancelarReserva
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            //Valido que haya ingresado una reserva
             if (string.IsNullOrEmpty(txtCodigoReserva.Text))
             {
                 MessageBox.Show("Debe ingresar un numero de reserva", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            //Valido que haya ingresado un motivo
             if (string.IsNullOrEmpty(txtMotivo.Text))
             {
                 MessageBox.Show("Debe ingresar el motivo de la cancelación", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);

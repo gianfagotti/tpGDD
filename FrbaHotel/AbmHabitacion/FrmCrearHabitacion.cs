@@ -20,12 +20,15 @@ namespace FrbaHotel.AbmHabitacion
         public FrmCrearHabitacion(Form abmPadre)
         {
             InitializeComponent();
+            //Asigno el formulario anterior
             abm = abmPadre;
+            //Obtengo el codigo del hotel del que se inicio sesión
             codigoHotel = Login.FrmSeleccionarHotel.codigoHotel;
 
             resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT DISTINCT habitacionTipo_descripcion FROM FAGD.HabitacionTipo");
             while (resultado.Read() == true)
             {
+                //Cargo todos los tipos de habitación al combo box
                 cboTipoHabitacion.Items.Add(resultado.GetSqlString(0));
             }
             resultado.Close();
@@ -33,6 +36,7 @@ namespace FrbaHotel.AbmHabitacion
             resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT DISTINCT habitacion_ubicacion FROM FAGD.Habitacion");
             while (resultado.Read() == true)
             {
+                //Cargo todas las ubicaciones al combo box
                 cboUbicacion.Items.Add(resultado.GetSqlString(0));
             }
             resultado.Close();
@@ -47,6 +51,7 @@ namespace FrbaHotel.AbmHabitacion
 
         private void limpiarCampos()
         {
+            //Vacio todos los campos
             txtNroHab.Text = string.Empty;
             txtPiso.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
@@ -63,8 +68,10 @@ namespace FrbaHotel.AbmHabitacion
 
         private void butGuardar_Click(object sender, EventArgs e)
         {
+            //Chequeo que todos los campos esten completos
             if (checkearCamposVacios() == 0)
             {
+                //Completo el store procedure a ejecutar con los datos ingresados
                 string comando = "EXEC FAGD.GuardarNuevaHabitacion ";
                 comando = comando + txtNroHab.Text + ",";
                 comando = comando + txtPiso.Text + ",";
@@ -98,6 +105,7 @@ namespace FrbaHotel.AbmHabitacion
             }
         }
 
+        //Función que chequea que todos los campos esten completos
         private int checkearCamposVacios()
         {
             int a = 0;

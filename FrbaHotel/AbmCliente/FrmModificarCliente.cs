@@ -20,7 +20,9 @@ namespace FrbaHotel.AbmCliente
         public FrmModificarCliente(Form form,string codigo, string nroDoc, string apellido, string nombre, string fecha_nac, string mail, string nacionalidad, string calle, string nroCalle, string piso, string dpto, string tipoDoc, string tel, string localidad, string estado)
         {
             InitializeComponent();
+            //Asigno el formulario del menú
             frmMenuEmpleado = form;
+            //Completo todos los campos con los datos del cliente
             txtNroDocumentoMod.Text = nroDoc;
             txtApellidoMod.Text = apellido;
             txtNombreMod.Text = nombre;
@@ -50,6 +52,7 @@ namespace FrbaHotel.AbmCliente
 
         private void limpiarCampos()
         {
+            //Vacio todos los campos
             txtNombreMod.Text = string.Empty;
             txtApellidoMod.Text = string.Empty;
             txtNroDocumentoMod.Text = string.Empty;
@@ -71,6 +74,7 @@ namespace FrbaHotel.AbmCliente
             limpiarCampos();
         }
 
+        //Función para chequear que haya completado todos los campos
         private int checkearCamposVacios()
         {
             int a = 0;
@@ -114,7 +118,8 @@ namespace FrbaHotel.AbmCliente
             }
             else
             {
-                if (!FechaConfig.validarEmail(txtMailMod.Text))
+                //Valido que lo que ingreso sea un mail
+                if (!funcionesGlobales.validarEmail(txtMailMod.Text))
                 {
                     a = 1;
                     mensaje = mensaje + "El campo mail es invalido\n";
@@ -148,10 +153,10 @@ namespace FrbaHotel.AbmCliente
             DateTime fecha;
             fecha = Convert.ToDateTime(dtpFechaNacimientoMod.Value);
 
-            DateTime s = DateTime.Now;
+            DateTime s = FechaConfig.getDate();
 
             int result = DateTime.Compare(fecha, s);
-
+            //Comparo la fecha ingresada
             if (result >= 0)
             {
                 a = 1;
@@ -167,6 +172,7 @@ namespace FrbaHotel.AbmCliente
 
         private void butGuardarMod_Click(object sender, EventArgs e)
         {
+            //Chequeo que todos los campos esten completos
             int a = checkearCamposVacios();
             if (a == 0)
             {

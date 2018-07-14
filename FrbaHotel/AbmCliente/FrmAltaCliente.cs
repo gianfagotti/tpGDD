@@ -21,10 +21,10 @@ namespace FrbaHotel.AbmCliente
         public FrmAltaCliente(Form form)
         {
             InitializeComponent();
+            //Asigno a una variable el formulario anterior
             abmPadre = form;
-
+            //Asigno por default la fecha ingresada como hoy
             dtpFechaNacimiento.Value = FechaConfig.getDate();
-
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -35,8 +35,11 @@ namespace FrbaHotel.AbmCliente
 
         private void butGuardar_Click(object sender, EventArgs e)
         {
+            //Checkeo que todos los campos obligatorios esten completos
             int a = checkearCamposVacios();
-            if (a == 0) {
+            if (a == 0)
+            {
+                //Armo la consulta con todos los campos completados
                 string comando = "EXEC FAGD.guardarNuevoCliente ";
                 comando = comando + "'" + txtNombre.Text + "',";
                 comando = comando + "'" + txtApellido.Text + "',";
@@ -94,6 +97,7 @@ namespace FrbaHotel.AbmCliente
 
         private void limpiarCampos()
         {
+            //Vacio todos los campos
             txtNombre.Text = string.Empty;
             txtApellido.Text = string.Empty;
             txtNroDocumento.Text = string.Empty;
@@ -158,7 +162,7 @@ namespace FrbaHotel.AbmCliente
             }
             else
             {
-                if (!FechaConfig.validarEmail(txtMail.Text))
+                if (!funcionesGlobales.validarEmail(txtMail.Text))
                 {
                     a = 1;
                     mensaje = mensaje + "El campo mail es invalido\n";
@@ -209,6 +213,7 @@ namespace FrbaHotel.AbmCliente
             return a;
         }
 
+        //Función que solo permite tipiar números en los text box  
         private void txtsSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Char.IsDigit(e.KeyChar))
@@ -228,7 +233,7 @@ namespace FrbaHotel.AbmCliente
                 e.Handled = true;
             }
         }
-
+        //Función que solo NO permite tipiar números en los text box
         private void txtsSoloLetras_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Char.IsLetter(e.KeyChar))
