@@ -105,15 +105,15 @@ namespace FrbaHotel.AbmUsuario
 
         private void llenarCboRol() {
 
-            String select = "SELECT rol_nombre FROM FAGD.Rol ";
+            String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador General' AND ";
 
             if (alta){
-                select = select + "WHERE rol_codigo NOT IN (SELECT rol_codigo FROM FAGD.UsuarioXRolXHotel WHERE usuario_username = '"
+                select = select + "rol_codigo NOT IN (SELECT rol_codigo FROM FAGD.UsuarioXRolXHotel WHERE usuario_username = '"
                                 + usuario + "' AND hotel_codigo = (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_calle = '"
                                 + calle +"' AND hotel_nroCalle = '" + nro + "'))";
             }
             else {
-                select = select + "WHERE rol_codigo IN (SELECT rol_codigo FROM FAGD.UsuarioXRolXHotel WHERE usuario_username = '"
+                select = select + "rol_codigo IN (SELECT rol_codigo FROM FAGD.UsuarioXRolXHotel WHERE usuario_username = '"
                                 + usuario + "' AND hotel_codigo = (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_calle = '"
                                 + calle + "' AND hotel_nroCalle = '" + nro + "'))";
             }

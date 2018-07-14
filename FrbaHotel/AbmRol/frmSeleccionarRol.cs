@@ -14,7 +14,6 @@ namespace FrbaHotel.AbmRol
     public partial class frmSeleccionarRol : Form
     {
         AbmRol.frmMenuEmpleado frmMenuEmpleado;
-     // SqlDataAdapter adapter;
         SqlDataReader reader;
         String rolSeleccionado;
 
@@ -23,9 +22,8 @@ namespace FrbaHotel.AbmRol
         {
             InitializeComponent();
             frmMenuEmpleado = form;
-            String select = "SELECT rol_nombre FROM FAGD.Rol";
+            String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador general'";
             
-           // adapter = Login.FrmTipoUsuario.BD.dameDataAdapter(select);
             reader = Login.FrmTipoUsuario.BD.comando(select);
             
             DataTable tabla = new DataTable();

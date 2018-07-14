@@ -68,7 +68,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void cargarComboUsuarios()
         {
-            String select = "SELECT usuario_username FROM FAGD.Usuario WHERE usuario_username <> 'GUEST' AND usuario_username IN (SELECT usuario_username FROM "
+            String select = "SELECT usuario_username FROM FAGD.Usuario WHERE usuario_username <> 'GUEST' AND usuario_username <> 'admin' AND usuario_username IN (SELECT usuario_username FROM "
                            +"FAGD.UsuarioXRolXHotel WHERE hotel_codigo = '" +hotelLogin+"')";
 
             reader = Login.FrmTipoUsuario.BD.comando(select);
@@ -99,30 +99,43 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnCambiarEstado_Click(object sender, EventArgs e)
         {
-            String exe = "EXEC FAGD.cambiarEstadoUsuario '"+usuario+"'";
-            decimal resultado = 0;
-            reader = Login.FrmTipoUsuario.BD.comando(exe);
-            if (reader.Read()){
-                resultado = reader.GetDecimal(0);
+            if (checkearCbo())
+            {
+                String exe = "EXEC FAGD.cambiarEstadoUsuario '"+usuario+"'";
+                decimal resultado = 0;
+                reader = Login.FrmTipoUsuario.BD.comando(exe);
+                if (reader.Read()){
+                    resultado = reader.GetDecimal(0);
+                 }
+                if (resultado == 1) MessageBox.Show("El usuario se encuentra ahora HABILITADO.", "Estado cambiado");
+                if (resultado == 0) MessageBox.Show("El usuario se encuentra ahora INHABILITADO.", "Estado cambiado");
+                if (resultado == 2) MessageBox.Show("Se produjo un error al cambiar el estado del usuario.", "Error");
+                reader.Close();
             }
-            if (resultado == 1) MessageBox.Show("El usuario se encuentra ahora HABILITADO.", "Estado cambiado");
-            if (resultado == 0) MessageBox.Show("El usuario se encuentra ahora INHABILITADO.", "Estado cambiado");
-            if (resultado == 2) MessageBox.Show("Se produjo un error al cambiar el estado del usuario.", "Error");
-            reader.Close();
+            else MessageBox.Show("Debe seleccionar un usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
         }
 
         private void btnAñadir_Click(object sender, EventArgs e)
         {
-            SeleccionarHotel frm = new SeleccionarHotel(this, usuario, true);
-            this.Hide();
-            frm.Show();
+            if (checkearCbo())
+            {
+                SeleccionarHotel frm = new SeleccionarHotel(this, usuario, true);
+                this.Hide();
+                frm.Show();
+            }
+            else MessageBox.Show("Debe seleccionar un usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            SeleccionarHotel frm = new SeleccionarHotel(this, usuario, false);
-            this.Hide();
-            frm.Show();
+            if (checkearCbo())
+            {
+                SeleccionarHotel frm = new SeleccionarHotel(this, usuario, false);
+                this.Hide();
+                frm.Show();
+            }
+            else MessageBox.Show("Debe seleccionar un usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         
