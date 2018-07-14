@@ -123,6 +123,12 @@
     <Compile Include="AbmRegimen\FrmRegimen.Designer.cs">
       <DependentUpon>FrmRegimen.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmRegimen\frmSeleccionarRegimen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRegimen\frmSeleccionarRegimen.Designer.cs">
+      <DependentUpon>frmSeleccionarRegimen.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmRol\AltaRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -358,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRegimen\FrmRegimen.resx">
       <DependentUpon>FrmRegimen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRegimen\frmSeleccionarRegimen.resx">
+      <DependentUpon>frmSeleccionarRegimen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\frmMenuCliente.resx">
       <DependentUpon>frmMenuCliente.cs</DependentUpon>

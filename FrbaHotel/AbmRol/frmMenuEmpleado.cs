@@ -230,5 +230,19 @@ namespace FrbaHotel.AbmRol
             Login.FrmSeleccionarHotel frmSeleccionarHotel = new Login.FrmSeleccionarHotel(Login.FrmLoginUsuario.username);
             frmSeleccionarHotel.Show();
         }
+
+        private void butModReg_Click(object sender, EventArgs e)
+        {
+            AbmRegimen.frmSeleccionarRegimen frm = new AbmRegimen.frmSeleccionarRegimen(this, true);
+            frm.Show();
+            this.Hide();
+        }
+
+        private void butBajaReg_Click(object sender, EventArgs e)
+        {
+            AbmRegimen.frmSeleccionarRegimen frm = new AbmRegimen.frmSeleccionarRegimen(this, false);
+            frm.Show();
+            this.Hide();
+        }
     }
 }
