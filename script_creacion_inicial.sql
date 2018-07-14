@@ -1071,7 +1071,8 @@ WHERE hotel.hotel_codigo = hab.habitacion_codigoHotel AND
 	  res.reserva_codigo = resCancel.reservaCancelada_codigoReserva AND
 	  res.reserva_codigoHotel = hotel.hotel_codigo AND
 	  resCancel.reservaCancelada_fechaCancelacion BETWEEN @inicioTrimestre AND @finTrimestre
-GROUP BY hotel.hotel_codigo			
+GROUP BY hotel.hotel_codigo	
+ORDER BY TotalCancelaciones DESC		
 END
 GO
 
