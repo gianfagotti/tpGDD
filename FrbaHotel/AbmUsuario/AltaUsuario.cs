@@ -180,7 +180,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void cargarComboRol()
         {
-            String select = "SELECT rol_nombre FROM FAGD.Rol";
+            String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador general'";
             DataTable tabla = new DataTable();
 
             reader = Login.FrmTipoUsuario.BD.comando(select);
