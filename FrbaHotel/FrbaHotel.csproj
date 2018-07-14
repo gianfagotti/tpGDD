@@ -201,7 +201,7 @@
     <Compile Include="CancelarReserva\CancelarReserva.Designer.cs">
       <DependentUpon>CancelarReserva.cs</DependentUpon>
     </Compile>
-    <Compile Include="Conector2.cs" />
+    <Compile Include="ConectorBaseDeDatos.cs" />
     <Compile Include="FacturarEstadia\FrmPagoTarjeta.cs">
       <SubType>Form</SubType>
     </Compile>
