@@ -37,25 +37,25 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(99, 9);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(245, 31);
+            this.label1.Size = new System.Drawing.Size(234, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Número de reserva";
+            this.label1.Text = "Ingrese el número de reserva a modificar:";
             // 
             // txtNroReserva
             // 
-            this.txtNroReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNroReserva.Location = new System.Drawing.Point(105, 57);
+            this.txtNroReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNroReserva.Location = new System.Drawing.Point(9, 27);
             this.txtNroReserva.Name = "txtNroReserva";
-            this.txtNroReserva.Size = new System.Drawing.Size(239, 38);
+            this.txtNroReserva.Size = new System.Drawing.Size(231, 21);
             this.txtNroReserva.TabIndex = 1;
             this.txtNroReserva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsSoloNumeros_KeyPress);
             // 
             // butVolver
             // 
-            this.butVolver.Location = new System.Drawing.Point(12, 139);
+            this.butVolver.Location = new System.Drawing.Point(9, 54);
             this.butVolver.Name = "butVolver";
             this.butVolver.Size = new System.Drawing.Size(75, 23);
             this.butVolver.TabIndex = 2;
@@ -65,7 +65,7 @@
             // 
             // butBuscar
             // 
-            this.butBuscar.Location = new System.Drawing.Point(355, 139);
+            this.butBuscar.Location = new System.Drawing.Point(165, 54);
             this.butBuscar.Name = "butBuscar";
             this.butBuscar.Size = new System.Drawing.Size(75, 23);
             this.butBuscar.TabIndex = 4;
@@ -77,12 +77,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(442, 174);
+            this.ClientSize = new System.Drawing.Size(249, 87);
             this.Controls.Add(this.butBuscar);
             this.Controls.Add(this.butVolver);
             this.Controls.Add(this.txtNroReserva);
             this.Controls.Add(this.label1);
             this.Name = "listadoModReserva";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elegir Reserva";
             this.ResumeLayout(false);
             this.PerformLayout();
