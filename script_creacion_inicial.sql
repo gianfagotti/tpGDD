@@ -358,7 +358,6 @@ ALTER TABLE FAGD.UsuarioXRolXHotel ADD CONSTRAINT FK_UsuarioXRolXHotel_2
  FOREIGN KEY (hotel_codigo) REFERENCES FAGD.Hotel(hotel_codigo)
 GO
 
---------------- TEMA FACTURA E ITEM FACTURA--------------
 
 ALTER TABLE FAGD.ConsumibleXEstadia ADD CONSTRAINT FK_ConsumibleXEstadia_Consumible
  FOREIGN KEY (consumible_codigo) REFERENCES FAGD.Consumible(consumible_codigo)
@@ -723,7 +722,6 @@ INSERT INTO FAGD.Habitacion(habitacion_codigoHotel, habitacion_nro, habitacion_t
 	ORDER BY Hotel.hotel_codigo
 GO
 
---Todo lo de reserva por aca
 SET IDENTITY_INSERT FAGD.Reserva ON
 
 INSERT INTO FAGD.Reserva ([reserva_codigo],[reserva_fechaInicio],[reserva_cantNoches],[reserva_codigoRegimen],[reserva_clienteCodigo],[reserva_codigoHotel])
@@ -821,10 +819,6 @@ UPDATE FAGD.Reserva
 
 GO
 
-
-
-
---Todo lo de estadia por aca
 
 INSERT INTO FAGD.Estadia (estadia_fechaInicio, estadia_fechaFin, estadia_cantNoches, estadia_precioNoche, estadia_diasSobrantes, estadia_codigoReserva)
 		SELECT DISTINCT 
@@ -927,7 +921,7 @@ INSERT INTO FAGD.ConsumibleXEstadia (estadia_codigo, consumible_codigo, habitaci
 ORDER BY E.estadia_codigo
 GO
 
-------------------------------------------------------Probando cliexEst
+-----------------------------CLIENTE X ESTADIA---------------------------------------------------
 
 INSERT INTO FAGD.ClienteXEstadia (cliente_codigo,errorCliente_codigo,estadia_codigo)
 	(SELECT DISTINCT cli.cliente_codigo, NULL, est.estadia_codigo FROM gd_esquema.Maestra m, FAGD.Cliente cli, FAGD.Estadia est
@@ -960,6 +954,7 @@ SET habitacion_codigo = (SELECT DISTINCT ha.habitacion_codigo FROM FAGD.Estadia 
 			ha.habitacion_nro = M.Habitacion_Numero AND
 			ha.habitacion_piso = M.Habitacion_Piso)
 
+
 -------------------------------- ROLES Y FUNCIONALIDADES INICIALES --------------------------------- 
 
 INSERT INTO FAGD.Rol (rol_nombre,rol_estado)	
@@ -991,7 +986,7 @@ INSERT INTO FAGD.RolXFuncionalidad(rol_codigo,funcionalidad_codigo)
 		values (4,1)
 GO
 
-
+/*Creación del Usuario 'admin'*/
 INSERT INTO FAGD.Usuario (usuario_username,usuario_password,usuario_estado)
 		values ('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1)
 GO
@@ -1013,6 +1008,9 @@ GO
 
 
 -----------------------	 CREACI�N DE PROCEDURES PARA LA APLICACI�N   ----------------------- 
+
+
+-----------------------	  PROCEDIMIENTOS PARA LISTADO ESTADÍSTICO    -----------------------
 
 CREATE PROCEDURE FAGD.ListadoHotelesMayorCantidadReservasCanceladas @trimestreInicio DATETIME, @trimestreFin DATETIME
 AS	BEGIN
@@ -1782,6 +1780,13 @@ GO
 				
 ------------------------------------------------------------------------------------------------------------------------
 
+
+----------------------------------- ABM ROL -----------------------------------------------------------------
+
+/*'nuevoRol' recibe el nombre del rol a crear y su estado (activo/inactivo). Verifica que no exista otro rol con el nombre ingresado,
+ * devolviendo 0 si ya existe. Si no es el caso, continúa a insertar los datos recibidos em la tabla Rol y devuelve 1 en caso de éxito
+ * y 2 si hubo algún error
+*/
 CREATE PROC FAGD.nuevoRol @nombreRol nvarchar (255), @estado bit
 AS
 BEGIN
@@ -1811,6 +1816,10 @@ GO
 
 -------------------------------------------------------------------------------------------------------------------------
 
+/* 'funcionalidadesDelRol' se ejecuta iterativamente (según la cantidad de funcionalidades que se ingresaron al crear el rol)
+ * luego de haber insertado el rol en la tabla correspondiente. Este procedimiento recibe el nombre del rol al cual añadir una
+ * funcionalidad e inserta ambos en la tabla RolXFuncionalidad, devolviendo 1 en caso de éxito y 0 en caso de error
+*/
 CREATE PROCEDURE FAGD.funcionalidadesDelRol @nombreRol nvarchar (255), @codigoFuncionalidad numeric (18)
 AS 
 BEGIN
@@ -1832,6 +1841,12 @@ END
 GO
 
 --------------------------------------------------------------------------------------------------------------------------
+
+/*'updatearRol' se ejecuta al momento de actualizar un rol, recibiendo tanto el nombre que este tenía antes de la actualización
+ * como así también el que tendrá luego, además del estado que tendrá. Verifica que no haya un rol con el nuevo nombre o si el 
+ * mismo se mantiene invariante. En esos casos, procede a hacer un update de la tabla Rol con los datos ingresados, devolviendo 1
+ * en caso de éxito, 2 si ya existe un rol con ese nombre y 0 en caso de error 
+ */
 
 CREATE PROCEDURE FAGD.updatearRol @nombreViejo nvarchar (255), @nombreNuevo nvarchar(255), @estado bit
 AS
@@ -1865,6 +1880,11 @@ GO
 
 -------------------------------------------------------------------------------------------------------------------------
 
+/*'limpiarFuncionalidades' se ejecuta al modificar un rol, después de haber realizado el update en la tabla. Lo que hace este 
+ * procedimiento es borrar todas las filas que haya en la tabla RolXFuncionalidad para que luego sean insertadas las nuevas 
+ * funcionalidades. Recibe el nombre del rol y procede a hacer un Delete de las filas que contengan a ese rol.
+ */
+
 CREATE PROCEDURE FAGD.limpiarFuncionalidades @nombreRol nvarchar (255)
 AS
 BEGIN 
@@ -1888,6 +1908,12 @@ END
 GO
 
 --------------------------------------------------------------------------------------------------------------------------------
+
+
+---------------------------------------------------------- ABM USUARIO ---------------------------------------------------------
+/*'guardarUsuario recibe los datos propios de cada usuario y un rol a desempeñar en determinado hotel. Verifica que no exista un usuario
+ * con el mismo username y procede a hacer los inserts en las tablas Usuario y UsuarioXRolXHotel 
+*/
 
 CREATE PROCEDURE FAGD.guardarUsuario
 @nombre nvarchar (255),
@@ -1940,7 +1966,9 @@ END
 GO
 
 ------------------------------------------------------------------------------------------------------------------------
-
+/*'nuevoPuesto' inserta en la tabla UsuarioXRolXhotel el rol de un usuario en determinado hotel, recibiendo estos como parámetros.
+ * Devuelve 1 en caso de éxito y 0 en caso contrario
+ */
 CREATE PROCEDURE FAGD.nuevoPuesto @username nvarchar(255), @hotelCalle nvarchar (255), @hotelNro numeric (18), @rol nvarchar (255)
 AS 
 BEGIN
@@ -1965,7 +1993,9 @@ END
 GO
 
 ---------------------------------------------------------------------------------------------------------------------------
-
+/*'borarPuesto' elimina el rol de un usuario en cierto hotel, realizando los debidos Deletes en la tabla UsuarioXRolXHotel según
+ * el usuario, el rol y el hotel recibidos. 
+*/
 CREATE PROCEDURE FAGD.borrarPuesto @username nvarchar(255), @hotelCalle nvarchar (255), @hotelNro numeric (18), @rol nvarchar (255)
 AS 
 BEGIN
@@ -1989,7 +2019,10 @@ END
 GO
 
 -----------------------------------------------------------------------------------------------------------------------------
-
+/*'cambiarEstadoUsuario' se ejecuta desde el menú de modificación de usuario. Al presionar el botón, el procedimiento verifica el estado
+ * actual del Usuario en la tabla Usuario, si es 1 (activo) lo cambia a 0 (inactivo) y viceversa. Devuelve 0 si inhabilitó al usuario, 
+ * 1 si lo habilitó y 2 en caso de error
+*/
 CREATE PROCEDURE FAGD.cambiarEstadoUsuario @username nvarchar(255)
 AS 
 BEGIN
@@ -2020,8 +2053,11 @@ BEGIN
 	END CATCH
 END
 GO
+-----------------------------------------------------------------------------------------------------------------------------
 
-
+/*'updatearDatosUsuario' recibe los datos personales del usuario a modificar y realiza los updates pertinentes. No modifica ni su estado 
+ * ni sus roles a cumplir.
+*/
 CREATE PROCEDURE FAGD.updatearDatosUsuario
 @username nvarchar (255),
 @nombre nvarchar (255),
@@ -2064,6 +2100,7 @@ BEGIN
 	END CATCH
 END
 GO			
+-----------------------------------------------------------------------------------------------------------------------------
 
 
 -------------------------------------------------------------------ABM Login------------------------------------------------------------------------------
