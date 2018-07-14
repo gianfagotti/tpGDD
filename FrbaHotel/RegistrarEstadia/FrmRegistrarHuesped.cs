@@ -39,6 +39,7 @@ namespace FrbaHotel.RegistrarEstadia
             nroReserva = nroRes;
             nroEstadia = nroEst;
             menuAVolver = form;
+            //Datatable para la datagridview
             tablaConInfoClientes = new DataTable();
             tablaConInfoClientes.Columns.Add("codigoCli");
             DataColumn column = tablaConInfoClientes.Columns["codigoCli"];
@@ -68,7 +69,7 @@ namespace FrbaHotel.RegistrarEstadia
             infoQuery.Read();
             txtTitular.Text = infoQuery.GetString(1) + " " + infoQuery.GetString(2);
             persDisp = totalPers - 1;
-            //Defino las variables de cada registro consulta
+            //Defino las variables de cada registro consulta y de la datagridview datatable que las va a almacenar
             codigoCli = infoQuery.GetDecimal(0);
             nombre = infoQuery.GetString(1);
             apellido = infoQuery.GetString(2);
@@ -112,7 +113,7 @@ namespace FrbaHotel.RegistrarEstadia
     MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
                 {
             foreach (DataRow fila in tablaConInfoClientes.Rows)
-            {
+            {//Despues de la confirmación se registran todos los clientes para la estadia, validando que no se agregue uno 2 veces o que se sustraiga al que efectuó la reserva, dando lugar a organizarlos en las habitaciones
                 infoQuery = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.ConfirmarEstadiaXCliente " + fila["CodigoCli"].ToString() + "," + nroEstadia);
                 if (infoQuery.Read())
                 {
@@ -141,7 +142,7 @@ namespace FrbaHotel.RegistrarEstadia
         {
            
             if (persDisp > 0)
-            {
+            {//Se solicita el formulario para registrar un cliente que no existe en la base
                 AbmCliente.FrmAltaCliente registrarHuesped = new AbmCliente.FrmAltaCliente(this);
                 registrarHuesped.Show();
             }
@@ -162,7 +163,7 @@ namespace FrbaHotel.RegistrarEstadia
         private void btnSeleCliente_Click(object sender, EventArgs e)
         {
             if (persDisp > 0)
-            {
+            {//Se solicita el formulario para seleccionar un cliente ya cargado en la base para la estadia
                 this.Hide();
                 GenerarModificacionReserva.BuscarClientes busquedaCliente = new GenerarModificacionReserva.BuscarClientes(this);
                 busquedaCliente.Show();
@@ -177,6 +178,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
+            //Se limpia por completo la tabla con los huespedes involucrados, a excepcion del que hizo la reserva
             tablaConInfoClientes.Clear();
             persDisp = totalPers - 1;
             DataRow row = tablaConInfoClientes.NewRow();
@@ -189,7 +191,7 @@ namespace FrbaHotel.RegistrarEstadia
         private void dgvHuesped_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
-            {
+            {//Para quitar cualquier huesped en particular, nuevamente a excepcion del titular de la reserva 
                 int item = dgvHuesped.CurrentRow.Index;
                 if (dgvHuesped.CurrentRow.Cells[1].Value.ToString() == codigoCli.ToString())
                 {

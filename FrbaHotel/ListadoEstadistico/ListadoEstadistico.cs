@@ -19,6 +19,7 @@ namespace FrbaHotel.ListadoEstadistico
 
         public ListadoEstadistico(AbmRol.frmMenuEmpleado form)
         {
+            //Se cargan los combobox con los parametros de evaluacion
             InitializeComponent();
             frmMenuEmpleado = form;
             cboCateg.Items.Insert(0, "Hotel con mayor cantidad de reservas canceladas");
@@ -65,6 +66,7 @@ namespace FrbaHotel.ListadoEstadistico
                 MessageBox.Show("Falta seleccionar el año de evaluación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            //Dependiendo del trimestre elegido se define el rango de fechas para la evaluacion en las consultas
             string trimestreInicio = "";
             string trimestreFin = "";
                 switch (cboTrim.SelectedIndex)
@@ -89,6 +91,7 @@ namespace FrbaHotel.ListadoEstadistico
 
             }
             string categoriaSeleccionada = "";
+            //Dependiendo de la categoria elegida se arma la consulta, que en comun todas reciben las mismas fechas de parametro
             switch (cboCateg.SelectedIndex)
             {
                 case 0:
