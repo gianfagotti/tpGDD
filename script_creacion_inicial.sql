@@ -555,13 +555,14 @@ GO
 
 
 ------------------------------------------------------------------------------------------
+/* Función que me devuelve 0 si la habitación esta disponible entre esas fechas. Caso contrario me devuelve de 1 a 5 dependiendo el caso */
 create function FAGD.habitacionDisponible
 ( @desde datetime, @hasta datetime,@codigo numeric(18,0))
 
 	RETURNS bit
 as
 begin
--- caso donde la fecha de inicio de la reserva, esta entre las pedidas
+-- Verifico si la fecha de inicio de la reserva, esta entre las pedidas
 if(exists 
 	(select RH.habitacion_codigo	
 	from FAGD.ReservaXHabitacion RH, FAGD.Reserva R
@@ -574,7 +575,7 @@ if(exists
 begin
 return 1
 end
--- caso donde la fecha hasta de la reserva, esta entre las pedidas
+-- Verifico si la fecha hasta de la reserva, esta entre las pedidas
 if(exists 
 	(select RH.habitacion_codigo	
 	from FAGD.ReservaXHabitacion RH, FAGD.Reserva R
@@ -587,7 +588,7 @@ if(exists
 begin
 return 2
 end
--- caso donde la fecha de inicio de la reserva pedida, esta entre las fechas de la reserva
+-- Verifico si la fecha de inicio de la reserva pedida, esta entre las fechas de la reserva
 if(exists 
 	(select RH.habitacion_codigo	
 	from FAGD.ReservaXHabitacion RH, FAGD.Reserva R
@@ -600,7 +601,7 @@ if(exists
 begin
 return 3
 end
--- caso donde la fecha hasta de la reserva pedida, esta entre las fechas de la reserva
+-- Verifico si la fecha hasta de la reserva pedida, esta entre las fechas de la reserva
 if(exists 
 	(select RH.habitacion_codigo	
 	from FAGD.ReservaXHabitacion RH, FAGD.Reserva R
@@ -613,7 +614,7 @@ if(exists
 begin
 return 4
 end
--- caso donde las fechas son iguales
+-- Verifico si las fechas son iguales
 if(exists 
 	(select RH.habitacion_codigo	
 	from FAGD.ReservaXHabitacion RH, FAGD.Reserva R
@@ -1613,6 +1614,10 @@ GO
 
 ------------------------------------------------------------------------------
 
+/* Store procedure que recibe todos los datos de un cliente y los inserta en la tabla FAGD.Cliente. Devuelve el código del nuevo cliente si todo esta correcto. 
+	En el caso que el cliente ingresado tenga el mismo tipo y número de documento que otro no se ingresara el cliente y devolver 2. Por otro lado, en caso de 
+		de que el INSERT rompa, es decir se ingreso un mail ya existente se devolvera 0. */
+
 create proc FAGD.guardarNuevoCliente 
 @nombre nvarchar(255),
 @apellido nvarchar(255),
@@ -1666,6 +1671,10 @@ end
 GO
 
 ---------------------------------------------------------------------------------------------------------------------------------
+
+/* Al igual que el anterior, este Store procedure recibe todos los datos de un cliente ya existente. Se verifica nuevamente que el tipo y número de documento, y el
+	mail ingresados no correspondan a otro cliente. En caso de todo este correcto, se updateara el cliente y se retornara 1. Si algo esta mal, devolvera 2 en el 
+	primero de los casos y 0 en el segundo. */
 
 create proc FAGD.modificarCliente
 @codigo numeric(18),
@@ -1737,38 +1746,10 @@ begin
 end
 GO
 
--------------------------------------------------------------------------------------------------------------------------
-
-create proc FAGD.crearRegimen
-@precio numeric(18),
-@descripcion nvarchar(255),
-@estado bit
-
-as
-begin
-	DECLARE @resultado numeric(18)
-	begin tran nuReg
-	begin try
-		if (not exists(select regimen_descripcion from FAGD.Regimen where regimen_descripcion = @descripcion))
-			begin
-				insert into FAGD.Regimen(regimen_precioBase, regimen_descripcion, regimen_estado)
-				values (@precio, @descripcion, @estado)
-				set @resultado = 1;
-			end
-		else
-			set @resultado = 2;
-		select @resultado as resultado
-		commit tran nuReg
-	end try
-	begin catch
-		rollback tran nuReg
-		set @resultado = 0
-		select @resultado as resultado
-	end catch
-end
-GO
-
 -----------------------------------------------------------------------------------------------------------------------------------------
+
+/* Store procedure donde se recibe todos los datos de una habitación. Si el número de habitación ya existia en el hotel donde se quiere agregar, no se hara el
+	INSERT y devolvera 2. Por algun error en el INSERT se devolvera 0. Caso contrario, es decir que todo se inserte correctamente devolvera 1.  */
 
 create proc FAGD.GuardarNuevaHabitacion
 @numero numeric(18),
@@ -1809,12 +1790,15 @@ GO
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
+/* Store procedure que modifica todos los datos de la habitación. Al igual que en el procedure anterior, verifica que no exista el número de habitación
+	en dicho hotel. En caso de error o no cumplir con esto, devolvera 0 o 2 respectivamente. Si todo esta bien, se modificara el hotel y devolvera 1. */
+
 create proc FAGD.ModificarHabitacion
 @idHabitacion numeric(18),
 @numero numeric(18),
 @piso numeric(18),
 @ubicacion nvarchar(255),
-@tipoHab nvarchar(255),
+@tipoHab nvarchar(255), --Como el tipo no se puede modificar, este siempre sera el mismo.
 @descripcion nvarchar(255),
 @idHotel numeric(18),
 @estado bit
@@ -2070,7 +2054,7 @@ END
 GO
 
 ---------------------------------------------------------------------------------------------------------------------------
-/*'borarPuesto' elimina el rol de un usuario en cierto hotel, realizando los debidos Deletes en la tabla UsuarioXRolXHotel según
+/*'borrarPuesto' elimina el rol de un usuario en cierto hotel, realizando los debidos Deletes en la tabla UsuarioXRolXHotel según
  * el usuario, el rol y el hotel recibidos. 
 */
 CREATE PROCEDURE FAGD.borrarPuesto @username nvarchar(255), @hotelCalle nvarchar (255), @hotelNro numeric (18), @rol nvarchar (255)
@@ -2289,6 +2273,11 @@ GO
 
 ----------------------------------------------------------------------------------------------------------------
 
+/* Store procedure que busca habitaciones disponibles para reservar según el hotel, los dias que se quedara, el tipo de régimen (este puede pedirse o no, por lo que
+	si no se especifica se devolveran todas las habitaciones para todos los régimenes del hotel), y el tipo de habitación que se desea. Para esto, se buscaran las 
+		habitaciones que no esten reservadas para ese intervalo, devolviendo la información de la habitación y su costo por noche. En el caso de que el hotel este 
+			inhabilitado en ese intervalo elegido, no se devolvera ninguna habitación. */
+
 create procedure FAGD.BuscarHabitacionesDisponibles
 @codigoHotel numeric(18),
 @desde datetime,
@@ -2338,6 +2327,9 @@ GO
 
 ---------------------------------------------------------------------------------------------------------
 
+/* En este store procedure, si intentara generar una nueva reserva, con todos sus datos, devolviendo el número de la nueva reserva generada en caso correcto y 0
+	en caso de un error en el INSERT. Se insetara siempre ya que tanto las habitaciones, como el estado del cliente y hotel fueron validados previamente. */
+
 create procedure FAGD.InsertarNuevaReserva
 @fecha_realizada datetime,
 @fecha_inicio datetime,
@@ -2382,6 +2374,9 @@ GO
 
 ---------------------------------------------------------------------------------------------------------
 
+/* Store procedure que guarda en una tabla intermedia las habitaciones que fueron pedidas para una reserva ya generada. En caso que todo este correcto,
+	se devolvera el codigo de la reserva. Caso contrario retornara 0. */
+
 create procedure FAGD.InsertarReservaXHabitacion
 @reserva numeric(18),
 @habitacion numeric(18)
@@ -2410,6 +2405,8 @@ GO
 
 ---------------------------------------------------------------------------------------------------------
 
+/* Store procedure que me devuelve todas las habitaciones reservadas para una reserva especifica. */
+
 create procedure FAGD.BuscarHabitacionesReservadas
 @reserva numeric(18)
 
@@ -2424,6 +2421,9 @@ end
 GO
 
 ---------------------------------------------------------------------------------------------------------
+
+/* Store procedure donde se podran modificar todos los datos de una reserva menos el hotel y el cliente, retornando 1 en caso de que la modificación haya sido
+	exitosa. Caso contrario retornara 0. */
 
 create procedure FAGD.ModificarReserva
 @reserva numeric(18),
@@ -2475,6 +2475,9 @@ end
 GO
 
 ---------------------------------------------------------------------------------------------------------
+
+/* Store procedure para cancelar una reserva. Para esto, modifica el estado de la reserva dependiendo quien lo haya pedido (Empleado o Guest) y se insertara el
+	código de la reserva en la tabla ReservaCancelada. En caso de que esto ocurra devolvera 1. Caso contario 0. */
 
 create procedure FAGD.CancelarReserva
 @reserva numeric(18),

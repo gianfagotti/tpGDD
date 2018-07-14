@@ -44,14 +44,22 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         public void llenarCampos(string reserva)
         {
-            consulta = "SELECT reserva_fechaInicio, reserva_FechaFin, reserva_clienteCodigo, reserva_codigoHotel, reserva_costoTotal, regimen_descripcion FROM FAGD.Reserva join FAGD.Regimen on (reserva_codigoRegimen = regimen_codigo) where reserva_codigo = " + reserva;
+            consulta = "SELECT reserva_fechaInicio, reserva_FechaFin, reserva_clienteCodigo, reserva_codigoHotel, reserva_costoTotal, regimen_descripcion, reserva_errorCliente FROM FAGD.Reserva join FAGD.Regimen on (reserva_codigoRegimen = regimen_codigo) where reserva_codigo = " + reserva;
             resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(consulta);
             if (resultado.Read())
             {
                 dtpDesde.Value = resultado.GetDateTime(0);
                 dtpHasta.Value = resultado.GetDateTime(1);
                 dias = dtpHasta.Value.Date.Subtract(dtpDesde.Value.Date).Days;
-                txtCliente.Text = resultado.GetDecimal(2).ToString();
+                try
+                {
+                    txtCliente.Text = resultado.GetDecimal(2).ToString();
+                }
+                catch
+                {
+                    txtCliente.Text = resultado.GetDecimal(6).ToString();
+                }
+                
                 hotel = resultado.GetDecimal(3).ToString();
                 txtTotal.Text = resultado.GetDecimal(4).ToString();
                 total = resultado.GetDecimal(4);
@@ -410,8 +418,6 @@ namespace FrbaHotel.GenerarModificacionReserva
                         dtpHasta.Enabled = true;
                         cboRegimen.Enabled = true;
                         dgvSacar.DataSource = bSource2;
-                        if (Login.FrmTipoUsuario.usuario == "guest")
-                            cboHotel.Enabled = true;
                     }
                     total -= precio;
                     txtTotal.Text = total.ToString();
