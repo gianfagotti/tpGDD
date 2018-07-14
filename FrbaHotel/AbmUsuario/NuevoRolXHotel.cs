@@ -69,7 +69,7 @@ namespace FrbaHotel.AbmUsuario
 
 
         private void llenarCboRol() {
-            String select = "SELECT rol_nombre FROM FAGD.Rol";
+            String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador general'";
 
             reader = Login.FrmTipoUsuario.BD.comando(select);
 

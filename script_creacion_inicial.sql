@@ -1000,7 +1000,7 @@ SET habitacion_codigo = (SELECT DISTINCT ha.habitacion_codigo FROM FAGD.Estadia 
 -------------------------------- ROLES Y FUNCIONALIDADES INICIALES --------------------------------- 
 
 INSERT INTO FAGD.Rol (rol_nombre,rol_estado)	
-		values ('administrador',1),('recepcionista',1),('cliente',1)
+		values ('Administrador General',1),('Administrador',1),('Recepcionista',1),('Cliente',1)
 GO
 
 INSERT INTO FAGD.Funcionalidad(funcionalidad_detalle)
@@ -1008,34 +1008,42 @@ INSERT INTO FAGD.Funcionalidad(funcionalidad_detalle)
 		       ('ABM_Habitaciones'),('ABM_Usuarios'),('ABM_Regimenes'),('Estadisticas')
 GO
 
-INSERT INTO FAGD.RolXFuncionalidad(rol_codigo,funcionalidad_codigo)
+/*Funcionalidades del administrador general*/
+INSERT INTO FAGD.RolXFuncionalidad(rol_codigo,funcionalidad_codigo)  
 		values (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10)
 GO
 
+/*Funcionalidades del administrador*/
+INSERT INTO FAGD.RolXFuncionalidad(rol_codigo,funcionalidad_codigo)  
+		values (2,4),(2,5),(2,6),(2,7),(2,8),(2,9),(2,10)
+GO
+
+/*Funcionalidades del recepcionista*/
 INSERT INTO FAGD.RolXFuncionalidad(rol_codigo,funcionalidad_codigo)
-		values (2,1),(2,2),(2,3),(2,4)
+		values (3,1),(3,2),(3,3),(3,4)
 GO
 
+/*Funcionalidades del cliente*/
 INSERT INTO FAGD.RolXFuncionalidad(rol_codigo,funcionalidad_codigo)
-		values (3,1)
+		values (4,1)
 GO
 
 
-INSERT INTO FAGD.Usuario (usuario_username,usuario_password, usuario_nombre, usuario_apellido, usuario_direccion, usuario_mail, usuario_telefono, usuario_fechaNacimiento, usuario_tipoDoc, usuario_nroDoc, usuario_estado)
-		values ('IRAA','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','Ivan','Arnaudo','Calle Falsa 123','ivan.arnaudo@gmail.com','11111111','02/09/96','DNI',39775257,1),('MAGNO','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','Alvaro','Dati','Calle verdadera 345','alvarocuervo96@gmail.com','1550352388','02/09/96','DNI',40648321,1)
+INSERT INTO FAGD.Usuario (usuario_username,usuario_password,usuario_estado)
+		values ('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',1)
 GO
 
-INSERT INTO FAGD.Usuario (usuario_username,usuario_estado)
-		values ('GUEST', 1)
+INSERT INTO FAGD.Usuario (usuario_username,usuario_estado, usuario_mail)
+		values ('GUEST', 1, '')
 GO
 
 INSERT INTO FAGD.UsuarioXRolXHotel(usuario_username,rol_codigo,hotel_codigo)
-		values('IRAA',1,1),('IRAA',2,1),('IRAA',1,2),('IRAA',1,3),('IRAA',2,3),('MAGNO',1,1),('MAGNO',2,1),('MAGNO',1,2),('MAGNO',1,3),('MAGNO',2,3)
+	   SELECT 'admin',1,hotel_codigo FROM FAGD.Hotel
 GO
 
 INSERT INTO FAGD.UsuarioXRolXHotel(usuario_username, rol_codigo, hotel_codigo)
 		select distinct U.usuario_username, R.rol_codigo, H.hotel_codigo from FAGD.Rol R, FAGD.Usuario U, FAGD.Hotel H
-			where R.rol_nombre = 'cliente' and U.usuario_username = 'GUEST';
+			where R.rol_nombre = 'Cliente' and U.usuario_username = 'GUEST';
 GO
 
 
@@ -1063,7 +1071,8 @@ WHERE hotel.hotel_codigo = hab.habitacion_codigoHotel AND
 	  res.reserva_codigo = resCancel.reservaCancelada_codigoReserva AND
 	  res.reserva_codigoHotel = hotel.hotel_codigo AND
 	  resCancel.reservaCancelada_fechaCancelacion BETWEEN @inicioTrimestre AND @finTrimestre
-GROUP BY hotel.hotel_codigo			
+GROUP BY hotel.hotel_codigo	
+ORDER BY TotalCancelaciones DESC		
 END
 GO
 

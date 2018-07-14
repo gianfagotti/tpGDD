@@ -48,7 +48,7 @@ namespace FrbaHotel.RegistrarEstadia
         } 
 
         private string filtrarExactamentePor(string columna, string valor)
-        {
+        {//filtrado puntual por campo de columna
             if (!string.IsNullOrEmpty(valor))
             {
                 return columna + " = '" + valor + "' AND ";
@@ -57,7 +57,7 @@ namespace FrbaHotel.RegistrarEstadia
         }
 
         private void FrmCheckout_Load(object sender, EventArgs e)
-        {
+        {//Se consulta nuevamente por TODAS las estadias ACTIVAS que aun falta para que concluyan (menores a la fecha del sistema)
             string query = "SELECT DISTINCT clieXEst.estadia_codigo estadiaCodigo,  clieXEst.habitacion_codigo habCodigo, ha.habitacion_nro habNumero, ha.habitacion_piso habPiso FROM FAGD.Estadia est, FAGD.ClienteXEstadia clieXEst, FAGD.Habitacion ha WHERE est.estadia_fechaInicio <= '" + Login.FrmTipoUsuario.fechaAppConvertida + "' AND est.estadia_fechaFin >= '" + Login.FrmTipoUsuario.fechaAppConvertida + "'  AND clieXEst.estadia_codigo = est.estadia_codigo AND clieXEst.habitacion_codigo = ha.habitacion_codigo AND ha.habitacion_codigoHotel = " + Login.FrmSeleccionarHotel.codigoHotel;
             sAdapter = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
             dTable = Login.FrmTipoUsuario.BD.dameDataTable(sAdapter);
@@ -72,6 +72,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            //filtrado de estadias
             DataView dvData = new DataView(dTable);
             string query = "";
             query = query + this.filtrarExactamentePor("estadiaCodigo", txtEst.Text);
@@ -85,6 +86,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
+            //Se limpia por completo los filtros de busqueda
             txtEst.Clear();
             txtNrohab.Clear();
             txtPiso.Clear();
@@ -97,7 +99,7 @@ namespace FrbaHotel.RegistrarEstadia
         {
             if (e.ColumnIndex == 0)
             {
-                //Se intenta comenzar el proceso de facturación
+                //Se intenta comenzar el proceso de facturación tomando como parametros los campos de referencia de la datagridview, la fecha del sistema y el usuario que se logueó para hacer la operación
                 consulta = "EXEC FAGD.CheckoutParaEstadia ";
                 consulta = consulta + dgvFinalizar.CurrentRow.Cells[1].Value.ToString();
                 consulta = consulta + ",'" + Login.FrmTipoUsuario.fechaAppConvertida + "',";

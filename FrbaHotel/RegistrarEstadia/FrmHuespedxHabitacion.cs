@@ -45,6 +45,7 @@ namespace FrbaHotel.RegistrarEstadia
 
         private void cbohab_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Se debe elegir la habitacion y en base a eso rellenar los demas textbox con la informacion adicional
             query = "SELECT ha.habitacion_nro, ha.habitacion_piso, tipoHa.habitacionTipo_descripcion, tipoHa.habitacionTipo_cantHuespedes FROM FAGD.Habitacion ha, FAGD.HabitacionTipo tipoHa WHERE ha.habitacion_tipoCodigo = tipoHa.habitacionTipo_codigo AND ha.habitacion_codigo = " + cbohab.Text;
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             if (infoQuery.Read())
@@ -84,19 +85,20 @@ namespace FrbaHotel.RegistrarEstadia
                     return;
 
                 }
-
+                
                 if (MessageBox.Show("¿Está seguro de agregar el cliente a la habitación seleccionada? Esta acción no se puede deshacer.", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
     MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
                 {
-
+                    
                     int index = dgvDistri.CurrentRow.Index;
                     query = "SELECT COUNT(*) FROM FAGD.ClienteXEstadia WHERE estadia_codigo = " + estadia + " AND habitacion_codigo = " + cbohab.Text;
                     infoQuery = Login.FrmTipoUsuario.BD.comando(query);
                     infoQuery.Read();
                     int cantLimite = infoQuery.GetInt32(0);
                     infoQuery.Close();
+                    //Se revisa que el límite de huespedes en la habitacion no sea superado
                     if (cantLimite < Convert.ToInt32(txtCantHab.Text))
-                    {
+                    {//Se da lugar a la accion de registrar el cliente para la estadia en la habitacion particular seleccionada con confirmación
                         query = "EXEC FAGD.SeleccionarHabitacionDeCliente " + cbohab.Text + "," + dgvDistri.CurrentRow.Cells[1].Value.ToString() + "," + estadia;
                         infoQuery = Login.FrmTipoUsuario.BD.comando(query);
                         infoQuery.Read();

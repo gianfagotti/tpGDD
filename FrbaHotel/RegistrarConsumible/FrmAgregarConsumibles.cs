@@ -25,7 +25,7 @@ namespace FrbaHotel.RegistrarConsumible
 
         public FrmAgregarConsumibles(string estadiaCodigo, string habCodigo, string habNumero, string piso, FrmSeleccionEstadia selecEst, AbmRol.frmMenuEmpleado menu)
         {
-            
+            //Cargado del form con las datatable iniciales y textbox
             InitializeComponent();
             menuAVolver = menu;
             formAnterior = selecEst;
@@ -48,7 +48,7 @@ namespace FrbaHotel.RegistrarConsumible
 
           private void FrmAgregarConsumibles_Load(object sender, EventArgs e)
         {
-               
+            //Se llena la datagridview con la informacion de cada consumible en la base a traves del adaptadorSql que returnea la dataTable con los registros 
             string consultaConsumible = "SELECT consumible_codigo Codigo, consumible_descripcion Descripcion, consumible_precio Precio FROM FAGD.Consumible";
             adaptador = Login.FrmTipoUsuario.BD.dameDataAdapter(consultaConsumible);
             tablaConDatosConsum = Login.FrmTipoUsuario.BD.dameDataTable(adaptador);         
@@ -89,7 +89,7 @@ namespace FrbaHotel.RegistrarConsumible
             if (MessageBox.Show("¿Está seguro que desea continuar?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
     MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
-
+                //Se adiciona de a 1 consumible por vez y luego se los agrupa en el itemFactura
                 foreach (DataRow fila in tablaConDatosConsumARegis.Rows)
                 {
                     resultadoDeOperacion = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarConsuXEstXHabitacion " + txtCodigoEst.Text + "," + fila["Codigo"].ToString() + "," + txthab.Text);
@@ -136,6 +136,7 @@ namespace FrbaHotel.RegistrarConsumible
 
         private void dgvCons_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //Si se toca la celda de la primer columna de la primer datagridv se adiciona toda la fila al datatable que se vincula a la segunda datagridv
             if (e.ColumnIndex == 0)
             {
                 string codigoConsu = dgvCons.CurrentRow.Cells[1].Value.ToString();
@@ -153,7 +154,7 @@ namespace FrbaHotel.RegistrarConsumible
         private void dgvConsReg_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
-            {
+            {//Se quita consumible en particular
                 int consuARemover = dgvConsReg.CurrentRow.Index;
                 tablaConDatosConsumARegis.Rows.RemoveAt(consuARemover);
             }

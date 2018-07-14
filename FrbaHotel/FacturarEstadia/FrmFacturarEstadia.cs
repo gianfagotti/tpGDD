@@ -27,6 +27,7 @@ namespace FrbaHotel.FacturarEstadia
             InitializeComponent();
             menuAVolver = menu;
             txtEst.Text = codigoEstadia;
+            //Recuperacion de los modos de pago existentes
             query = "SELECT DISTINCT modalidadPago_descripcion FROM FAGD.ModalidadPago";
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             while (infoQuery.Read() == true)
@@ -34,6 +35,7 @@ namespace FrbaHotel.FacturarEstadia
                 cboMode.Items.Add(infoQuery.GetSqlString(0));
             }
             infoQuery.Close();
+            //En base a la estadia a facturar se recupera toda la informacion correspondiente
             query = "SELECT estadia_fechaInicio, estadia_fechaFin, estadia_diasSobrantes, estadia_cantNoches, estadia_precioNoche FROM FAGD.Estadia WHERE estadia_codigo = " + codigoEstadia;
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             infoQuery.Read();
@@ -139,12 +141,13 @@ namespace FrbaHotel.FacturarEstadia
             if (MessageBox.Show("¿Está seguro que desea continuar?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
     MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
                 {
-
+            //Se selecciona la modalidad de pago elegida
             query = "SELECT modalidadPago_codigo FROM FAGD.ModalidadPago WHERE modalidadPago_descripcion = '" + cboMode.Text + "'";
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             infoQuery.Read();
             modalidadDePagoElegida = infoQuery.GetDecimal(0);
             infoQuery.Close();
+            //Se actualiza la factura que ya habia sido creada previamente en la instancia del Check-in con los campos correspondientes 
             query = "EXEC FAGD.EmitirFacturaActualizada '" + txtEst.Text + "','" + modalidadDePagoElegida.ToString() + "','" + Login.FrmTipoUsuario.fechaAppConvertida + "'";
             infoQuery = Login.FrmTipoUsuario.BD.comando(query);
             infoQuery.Read();
@@ -156,11 +159,12 @@ namespace FrbaHotel.FacturarEstadia
                 return;
             }
             infoQuery.Close();
-            if (modalidadDePagoElegida == 2)
-            {
+            if (modalidadDePagoElegida == 2 )
+            {//El cliente eligio pagar con Tarjeta
                 FrmPagoTarjeta pagoTarjeta = new FrmPagoTarjeta(facturaEmitida.ToString(), menuAVolver);
                 pagoTarjeta.Show();
             }
+            //El cliente eligio pagar en efectivo
             MessageBox.Show("Se ha emitido la factura correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
             menuAVolver.Show();
