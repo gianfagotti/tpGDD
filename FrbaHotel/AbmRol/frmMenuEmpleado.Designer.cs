@@ -37,6 +37,8 @@
             this.butModHab = new System.Windows.Forms.Button();
             this.butCrearHabitacion = new System.Windows.Forms.Button();
             this.grbRegimenes = new System.Windows.Forms.GroupBox();
+            this.butBajaReg = new System.Windows.Forms.Button();
+            this.butModReg = new System.Windows.Forms.Button();
             this.butCrearRegimen = new System.Windows.Forms.Button();
             this.grbRoles = new System.Windows.Forms.GroupBox();
             this.btnModificarRol = new System.Windows.Forms.Button();
@@ -64,8 +66,6 @@
             this.lbltitulo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtfechinia = new System.Windows.Forms.TextBox();
-            this.butModReg = new System.Windows.Forms.Button();
-            this.butBajaReg = new System.Windows.Forms.Button();
             this.grbHuespedes.SuspendLayout();
             this.grbHabitaciones.SuspendLayout();
             this.grbRegimenes.SuspendLayout();
@@ -176,6 +176,26 @@
             this.grbRegimenes.TabIndex = 2;
             this.grbRegimenes.TabStop = false;
             this.grbRegimenes.Text = "Administración de regímenes";
+            // 
+            // butBajaReg
+            // 
+            this.butBajaReg.Location = new System.Drawing.Point(33, 73);
+            this.butBajaReg.Name = "butBajaReg";
+            this.butBajaReg.Size = new System.Drawing.Size(149, 23);
+            this.butBajaReg.TabIndex = 17;
+            this.butBajaReg.Text = "Inhabilitar régimen";
+            this.butBajaReg.UseVisualStyleBackColor = true;
+            this.butBajaReg.Click += new System.EventHandler(this.butBajaReg_Click);
+            // 
+            // butModReg
+            // 
+            this.butModReg.Location = new System.Drawing.Point(33, 48);
+            this.butModReg.Name = "butModReg";
+            this.butModReg.Size = new System.Drawing.Size(149, 23);
+            this.butModReg.TabIndex = 16;
+            this.butModReg.Text = "Modificar régimen existente";
+            this.butModReg.UseVisualStyleBackColor = true;
+            this.butModReg.Click += new System.EventHandler(this.butModReg_Click);
             // 
             // butCrearRegimen
             // 
@@ -462,24 +482,6 @@
             this.txtfechinia.Size = new System.Drawing.Size(166, 22);
             this.txtfechinia.TabIndex = 15;
             this.txtfechinia.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // butModReg
-            // 
-            this.butModReg.Location = new System.Drawing.Point(33, 48);
-            this.butModReg.Name = "butModReg";
-            this.butModReg.Size = new System.Drawing.Size(149, 23);
-            this.butModReg.TabIndex = 16;
-            this.butModReg.Text = "Modificar régimen existente";
-            this.butModReg.UseVisualStyleBackColor = true;
-            // 
-            // butBajaReg
-            // 
-            this.butBajaReg.Location = new System.Drawing.Point(33, 73);
-            this.butBajaReg.Name = "butBajaReg";
-            this.butBajaReg.Size = new System.Drawing.Size(149, 23);
-            this.butBajaReg.TabIndex = 17;
-            this.butBajaReg.Text = "Inhabilitar régimen";
-            this.butBajaReg.UseVisualStyleBackColor = true;
             // 
             // frmMenuEmpleado
             // 
