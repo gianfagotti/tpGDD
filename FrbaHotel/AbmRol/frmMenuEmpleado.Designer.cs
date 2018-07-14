@@ -64,6 +64,8 @@
             this.lbltitulo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtfechinia = new System.Windows.Forms.TextBox();
+            this.butModReg = new System.Windows.Forms.Button();
+            this.butBajaReg = new System.Windows.Forms.Button();
             this.grbHuespedes.SuspendLayout();
             this.grbHabitaciones.SuspendLayout();
             this.grbRegimenes.SuspendLayout();
@@ -164,11 +166,13 @@
             // 
             // grbRegimenes
             // 
+            this.grbRegimenes.Controls.Add(this.butBajaReg);
+            this.grbRegimenes.Controls.Add(this.butModReg);
             this.grbRegimenes.Controls.Add(this.butCrearRegimen);
             this.grbRegimenes.Enabled = false;
-            this.grbRegimenes.Location = new System.Drawing.Point(20, 262);
+            this.grbRegimenes.Location = new System.Drawing.Point(514, 84);
             this.grbRegimenes.Name = "grbRegimenes";
-            this.grbRegimenes.Size = new System.Drawing.Size(221, 52);
+            this.grbRegimenes.Size = new System.Drawing.Size(200, 102);
             this.grbRegimenes.TabIndex = 2;
             this.grbRegimenes.TabStop = false;
             this.grbRegimenes.Text = "Administración de regímenes";
@@ -262,18 +266,18 @@
             // 
             this.grbConsumibles.Controls.Add(this.btnRegistrarConsumible);
             this.grbConsumibles.Enabled = false;
-            this.grbConsumibles.Location = new System.Drawing.Point(514, 75);
+            this.grbConsumibles.Location = new System.Drawing.Point(19, 262);
             this.grbConsumibles.Name = "grbConsumibles";
-            this.grbConsumibles.Size = new System.Drawing.Size(200, 111);
+            this.grbConsumibles.Size = new System.Drawing.Size(221, 52);
             this.grbConsumibles.TabIndex = 5;
             this.grbConsumibles.TabStop = false;
             this.grbConsumibles.Text = "Administración de consumibles";
             // 
             // btnRegistrarConsumible
             // 
-            this.btnRegistrarConsumible.Location = new System.Drawing.Point(27, 22);
+            this.btnRegistrarConsumible.Location = new System.Drawing.Point(33, 19);
             this.btnRegistrarConsumible.Name = "btnRegistrarConsumible";
-            this.btnRegistrarConsumible.Size = new System.Drawing.Size(149, 23);
+            this.btnRegistrarConsumible.Size = new System.Drawing.Size(158, 23);
             this.btnRegistrarConsumible.TabIndex = 11;
             this.btnRegistrarConsumible.Text = "Registrar consumición";
             this.btnRegistrarConsumible.UseVisualStyleBackColor = true;
@@ -459,6 +463,24 @@
             this.txtfechinia.TabIndex = 15;
             this.txtfechinia.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // butModReg
+            // 
+            this.butModReg.Location = new System.Drawing.Point(33, 48);
+            this.butModReg.Name = "butModReg";
+            this.butModReg.Size = new System.Drawing.Size(149, 23);
+            this.butModReg.TabIndex = 16;
+            this.butModReg.Text = "Modificar régimen existente";
+            this.butModReg.UseVisualStyleBackColor = true;
+            // 
+            // butBajaReg
+            // 
+            this.butBajaReg.Location = new System.Drawing.Point(33, 73);
+            this.butBajaReg.Name = "butBajaReg";
+            this.butBajaReg.Size = new System.Drawing.Size(149, 23);
+            this.butBajaReg.TabIndex = 17;
+            this.butBajaReg.Text = "Inhabilitar régimen";
+            this.butBajaReg.UseVisualStyleBackColor = true;
+            // 
             // frmMenuEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -536,5 +558,7 @@
         private System.Windows.Forms.Label lbltitulo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtfechinia;
+        private System.Windows.Forms.Button butBajaReg;
+        private System.Windows.Forms.Button butModReg;
     }
 }
