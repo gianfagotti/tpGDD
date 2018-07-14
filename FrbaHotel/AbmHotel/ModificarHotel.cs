@@ -87,7 +87,7 @@ namespace FrbaHotel.AbmHotel
                 MessageBox.Show("Debe completar todos los datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (validarEmail(this.txtMailHotel.Text) != true)
+            if (funcionesGlobales.validarEmail(this.txtMailHotel.Text) != true)
             {
                 MessageBox.Show("Ingrese un email válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -212,19 +212,5 @@ namespace FrbaHotel.AbmHotel
             this.Close();
             frmMenuEmpleado.Show();
         }
-
-        private static bool validarEmail(string email)
-        {
-            try
-            {
-                new System.Net.Mail.MailAddress(email);
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-        }
-
     }
 }

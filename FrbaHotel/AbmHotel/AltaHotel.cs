@@ -100,7 +100,7 @@ namespace FrbaHotel.AbmHotel
                 MessageBox.Show("Debe completar todos los datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (validarEmail(this.txtMailHotel.Text) != true)
+            if (funcionesGlobales.validarEmail(this.txtMailHotel.Text) != true)
             {
                 MessageBox.Show("Ingrese un email válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -139,7 +139,7 @@ namespace FrbaHotel.AbmHotel
                     }
                     MessageBox.Show("Hotel creado satisfactoriamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Hide();
-                    SeleccionarAdministrador frmSeleccionarAdministrador = new SeleccionarAdministrador(frmMenuEmpleado, nombreHotelIngresado);                                                 //Se le avisa al usuario que el hotel fue correctamente ingresado.
+                    SeleccionarAdministrador frmSeleccionarAdministrador = new SeleccionarAdministrador(frmMenuEmpleado, nombreHotelIngresado);                                                 //Se le avisa al usuario que el hotel fue correctamente creado, y se procede al formulario para la eleccion del administrador del mismo.
                     frmSeleccionarAdministrador.Show();
                 }
             }
@@ -197,19 +197,6 @@ namespace FrbaHotel.AbmHotel
              else
              {
                  e.Handled = true;
-             }
-         }
-
-         private static bool validarEmail(string email)
-         {
-             try
-             {
-                 new System.Net.Mail.MailAddress(email);
-                 return true;
-             }
-             catch (FormatException)
-             {
-                 return false;
              }
          }
     }
