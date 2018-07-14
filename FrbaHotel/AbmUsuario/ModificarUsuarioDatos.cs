@@ -149,7 +149,7 @@ namespace FrbaHotel.AbmUsuario
                 }
                 else
                 {
-                    if (validarEmail(txtMail.Text))
+                    if (funcionesGlobales.validarEmail(txtMail.Text))
                     {
                         return true;
                     }
@@ -196,21 +196,5 @@ namespace FrbaHotel.AbmUsuario
             }
         }
 
-        /*valido formato del mail*/
-         private static bool validarEmail(string email)
-        {
-            try
-            {
-                new System.Net.Mail.MailAddress(email);
-                return true;
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Ingrese un mail válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-        }
-
-
-    }
+     }
 }
