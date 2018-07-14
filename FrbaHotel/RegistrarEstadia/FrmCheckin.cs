@@ -30,12 +30,12 @@ namespace FrbaHotel.RegistrarEstadia
             menuAnterior = menuReg;
 
             estadoReservaCorrecto = 0;
-            resultadoQuery = Login.FrmTipoUsuario.BD.comando("SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA CORRECTA'");
+            resultadoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA CORRECTA'");
             resultadoQuery.Read();
             estadoReservaCorrecto = resultadoQuery.GetDecimal(0);
             resultadoQuery.Close();
             estadoReservaModificado = 0;
-            resultadoQuery = Login.FrmTipoUsuario.BD.comando("SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA MODIFICADA'");
+            resultadoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT estado_codigo FROM FAGD.Estado WHERE estado_descripcion = 'RESERVA MODIFICADA'");
             resultadoQuery.Read();
             estadoReservaModificado = resultadoQuery.GetDecimal(0);
             resultadoQuery.Close();
@@ -72,7 +72,7 @@ namespace FrbaHotel.RegistrarEstadia
                 MessageBox.Show("Debe ingresar un numero de reserva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            resultadoQuery = Login.FrmTipoUsuario.BD.comando("SELECT reserva_codigo, reserva_estado, reserva_fechaInicio, reserva_fechaFin FROM FAGD.Reserva WHERE reserva_codigo = " + txtReserv.Text);
+            resultadoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT reserva_codigo, reserva_estado, reserva_fechaInicio, reserva_fechaFin FROM FAGD.Reserva WHERE reserva_codigo = " + txtReserv.Text);
             if (resultadoQuery.Read() == true)
             {
                 decimal estadoDeReserva = resultadoQuery.GetDecimal(1);
@@ -94,7 +94,7 @@ namespace FrbaHotel.RegistrarEstadia
                     return;
                 } 
 
-                resultadoQuery = Login.FrmTipoUsuario.BD.comando("SELECT hotel.hotel_codigo FROM FAGD.Habitacion ha, FAGD.Hotel hotel, FAGD.ReservaXHabitacion resxh  WHERE resxh.habitacion_codigo = ha.habitacion_codigo AND ha.habitacion_codigoHotel = hotel.hotel_codigo AND resxh.reserva_codigo = " + txtReserv.Text);
+                resultadoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT hotel.hotel_codigo FROM FAGD.Habitacion ha, FAGD.Hotel hotel, FAGD.ReservaXHabitacion resxh  WHERE resxh.habitacion_codigo = ha.habitacion_codigo AND ha.habitacion_codigoHotel = hotel.hotel_codigo AND resxh.reserva_codigo = " + txtReserv.Text);
                 decimal hotelDeLaQuery = 0;
                 if (resultadoQuery.Read())
                 {
@@ -113,7 +113,7 @@ namespace FrbaHotel.RegistrarEstadia
                 }
 
                 string confirmacion2 = "EXEC FAGD.CheckinParaEstadia " + txtReserv.Text + ",'" + Login.FrmLoginUsuario.username + "','" + Login.FrmTipoUsuario.fechaAppConvertida + "'";
-                resultadoQuery = Login.FrmTipoUsuario.BD.comando(confirmacion2);
+                resultadoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(confirmacion2);
                 resultadoQuery.Read();
                 codigoEstadiaQueSeAcabaDeCrear = resultadoQuery.GetDecimal(0);
                 resultadoQuery.Close();
@@ -122,7 +122,7 @@ namespace FrbaHotel.RegistrarEstadia
                     MessageBox.Show("El check-in ha concluido correctamente. El código de la estadia generada es: "+codigoEstadiaQueSeAcabaDeCrear.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                      string fact = "EXEC FAGD.RegistrarDatosInicialesFactura " + codigoEstadiaQueSeAcabaDeCrear.ToString() + ",'" + Login.FrmTipoUsuario.fechaAppConvertida + "'";
-                    resultadoQuery = Login.FrmTipoUsuario.BD.comando(fact);
+                    resultadoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(fact);
                     resultadoQuery.Read();
                     decimal factura = resultadoQuery.GetDecimal(0);
                     if (factura == 0)

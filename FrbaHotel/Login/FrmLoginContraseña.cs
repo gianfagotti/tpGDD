@@ -30,7 +30,7 @@ namespace FrbaHotel.Login
             else
             {
                 string contraseñaIngresada = Login.FrmTipoUsuario.encriptar(txtContraseña.Text);
-                tabla = Login.FrmTipoUsuario.BD.consulta("SELECT usuario_username, usuario_password, usuario_estado FROM FAGD.Usuario WHERE usuario_password = '"+contraseñaIngresada+"' AND usuario_username = '"+usuarioIngresado+"'");
+                tabla = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT usuario_username, usuario_password, usuario_estado FROM FAGD.Usuario WHERE usuario_password = '"+contraseñaIngresada+"' AND usuario_username = '"+usuarioIngresado+"'");
                 if (tabla.Rows.Count == 1)
                 {
                     this.Close();
@@ -50,7 +50,7 @@ namespace FrbaHotel.Login
                         this.Hide();
                         FrmTipoUsuario frmTipoUsuario = new FrmTipoUsuario();
                         frmTipoUsuario.Show();
-                        resultado = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.desactivarUsuario '"+usuarioIngresado+"'");
+                        resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("EXEC FAGD.desactivarUsuario '"+usuarioIngresado+"'");
                         resultado.Close();
                     }
                 }

@@ -112,8 +112,8 @@ namespace FrbaHotel.ListadoEstadistico
 
             }
 
-            adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(categoriaSeleccionada);
-            tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
+            adaptadorSql = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(categoriaSeleccionada);
+            tablaConDatos = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(adaptadorSql);
             //Establezo que la dataGridView va a ser alimentada por la tabla virtual del adaptador, siendo la bindSource el puente que las une
             BindingSource bindSource = new BindingSource();
             //Seteo la fuente de la bindSource, la tabla del adaptador

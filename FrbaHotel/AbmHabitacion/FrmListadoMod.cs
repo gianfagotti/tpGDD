@@ -26,14 +26,14 @@ namespace FrbaHotel.AbmHabitacion
 
             codigoHotel = Login.FrmSeleccionarHotel.codigoHotel;
 
-            resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT habitacionTipo_descripcion FROM FAGD.HabitacionTipo");
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT DISTINCT habitacionTipo_descripcion FROM FAGD.HabitacionTipo");
             while (resultado.Read() == true)
             {
                 cboTipoHabitacion.Items.Add(resultado.GetSqlString(0));
             }
             resultado.Close();
 
-            resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT habitacion_ubicacion FROM FAGD.Habitacion");
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT DISTINCT habitacion_ubicacion FROM FAGD.Habitacion");
             while (resultado.Read() == true)
             {
                 cboUbicacion.Items.Add(resultado.GetSqlString(0));
@@ -111,8 +111,8 @@ namespace FrbaHotel.AbmHabitacion
             }
             
 
-            adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(consulta);
-            tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
+            adaptadorSql = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(consulta);
+            tablaConDatos = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(adaptadorSql);
 
             BindingSource bSource = new BindingSource();
 
@@ -135,7 +135,7 @@ namespace FrbaHotel.AbmHabitacion
                 decimal id = 0;
 
                 string consulta = "select habitacion_codigo from FAGD.Habitacion where habitacion_nro = " + numero + " and habitacion_codigoHotel = " + codigoHotel;
-                resultado = Login.FrmTipoUsuario.BD.comando(consulta);
+                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(consulta);
                 if (resultado.Read())
                 {
                     id = resultado.GetDecimal(0);

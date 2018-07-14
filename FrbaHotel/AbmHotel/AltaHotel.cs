@@ -33,7 +33,7 @@ namespace FrbaHotel.AbmHotel
         {
             InitializeComponent();
             frmMenuEmpleado = frmMenuEmpleadoRecibido;
-            regimenes = Login.FrmTipoUsuario.BD.comando("SELECT regimen_descripcion FROM FAGD.Regimen");
+            regimenes = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT regimen_descripcion FROM FAGD.Regimen");
             while (regimenes.Read() == true)
             {
                 this.clbRegimenes.Items.Add(regimenes.GetSqlString(0), true);
@@ -107,7 +107,7 @@ namespace FrbaHotel.AbmHotel
             else
             {
                 nombreHotelIngresado = this.txtNombreHotel.Text;
-                hoteles = Login.FrmTipoUsuario.BD.consulta("SELECT hotel_nombre FROM FAGD.Hotel WHERE hotel_nombre = '" + nombreHotelIngresado + "'");
+                hoteles = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT hotel_nombre FROM FAGD.Hotel WHERE hotel_nombre = '" + nombreHotelIngresado + "'");
                 if (hoteles.Rows.Count == 1)
                 {
                     MessageBox.Show("Ya existe un hotel con ese nombre, ingrese un nombre válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -115,7 +115,7 @@ namespace FrbaHotel.AbmHotel
                 }
                 calleHotelIngresado = this.txtCalleHotel.Text;
                 alturaHotelIngresado = this.txtAlturaHotel.Text;
-                callesYAlturas = Login.FrmTipoUsuario.BD.consulta("SELECT hotel_calle, hotel_nroCalle FROM FAGD.Hotel WHERE hotel_calle = '" + calleHotelIngresado + "' AND hotel_nroCalle = " + alturaHotelIngresado);
+                callesYAlturas = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT hotel_calle, hotel_nroCalle FROM FAGD.Hotel WHERE hotel_calle = '" + calleHotelIngresado + "' AND hotel_nroCalle = " + alturaHotelIngresado);
                 if (callesYAlturas.Rows.Count != 0)
                 {
                     MessageBox.Show("Ya existe un hotel con esa dirección, ingrese un dirección válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -130,11 +130,11 @@ namespace FrbaHotel.AbmHotel
                     paisHotelIngresado = this.txtPaisHotel.Text;
                     fechaCreacionHotelIngresado = Convert.ToDateTime(this.dtpFechaCreacionHotel.Value);
                     fechaCreacionHotelIngresadoPosta = fechaCreacionHotelIngresado.Date.ToString("yyyyMMdd HH:mm:ss");
-                    resultadosCreacionDeHotel = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.insertarHotel " + estrellasHotelIngresado + ", " + recargaEstrellasHotelIngresado + ", '" + paisHotelIngresado + "', '" + ciudadHotelIngresado + "', '" + calleHotelIngresado + "', " + alturaHotelIngresado + ", '" + nombreHotelIngresado + "', '" + fechaCreacionHotelIngresadoPosta + "', '" + mailHotelIngresado + "', " + telefonoHotelIngresado);
+                    resultadosCreacionDeHotel = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("EXEC FAGD.insertarHotel " + estrellasHotelIngresado + ", " + recargaEstrellasHotelIngresado + ", '" + paisHotelIngresado + "', '" + ciudadHotelIngresado + "', '" + calleHotelIngresado + "', " + alturaHotelIngresado + ", '" + nombreHotelIngresado + "', '" + fechaCreacionHotelIngresadoPosta + "', '" + mailHotelIngresado + "', " + telefonoHotelIngresado);
                     resultadosCreacionDeHotel.Close();
                     foreach(object itemChecked in clbRegimenes.CheckedItems)
                     {
-                        resultadosCreacionDeRegimen = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.insertarRegimenDeHotelCreado '"+nombreHotelIngresado+"', '"+itemChecked.ToString()+"'");
+                        resultadosCreacionDeRegimen = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("EXEC FAGD.insertarRegimenDeHotelCreado '"+nombreHotelIngresado+"', '"+itemChecked.ToString()+"'");
                         resultadosCreacionDeRegimen.Close();
                     }
                     MessageBox.Show("Hotel creado satisfactoriamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -28,14 +28,14 @@ namespace FrbaHotel.AbmHabitacion
 
             codigoHotel = Login.FrmSeleccionarHotel.codigoHotel;
             limpiarCampos();
-            resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT habitacionTipo_descripcion FROM FAGD.HabitacionTipo");
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT DISTINCT habitacionTipo_descripcion FROM FAGD.HabitacionTipo");
             while (resultado.Read() == true)
             {
                 cboTipo.Items.Add(resultado.GetSqlString(0));
             }
             resultado.Close();
 
-            resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT habitacion_ubicacion FROM FAGD.Habitacion");
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT DISTINCT habitacion_ubicacion FROM FAGD.Habitacion");
             while (resultado.Read() == true)
             {
                 cboUbicacion.Items.Add(resultado.GetSqlString(0));
@@ -49,8 +49,8 @@ namespace FrbaHotel.AbmHabitacion
         {
             consulta = "SELECT H.habitacion_nro Numero, H.habitacion_piso Piso, H.habitacion_ubicacion Ubicacion, H.habitacion_descripcion Descripcion, H.habitacion_estado Estado, T.habitacionTipo_descripcion Tipo FROM FAGD.Habitacion H, FAGD.HabitacionTipo T, FAGD.Hotel Ho WHERE Ho.hotel_codigo = H.habitacion_codigoHotel AND H.habitacion_tipoCodigo = T.habitacionTipo_codigo AND H.habitacion_codigoHotel = " + codigoHotel + "order by H.habitacion_nro";
 
-            adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(consulta);
-            tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
+            adaptadorSql = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(consulta);
+            tablaConDatos = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(adaptadorSql);
 
             BindingSource bSource = new BindingSource();
 
@@ -63,8 +63,8 @@ namespace FrbaHotel.AbmHabitacion
             consulta = "SELECT H.habitacion_nro Numero, H.habitacion_piso Piso, H.habitacion_ubicacion Ubicacion, H.habitacion_descripcion Descripcion, H.habitacion_estado Estado, T.habitacionTipo_descripcion Tipo FROM FAGD.Habitacion H, FAGD.HabitacionTipo T, FAGD.Hotel Ho WHERE Ho.hotel_codigo = H.habitacion_codigoHotel AND H.habitacion_tipoCodigo = T.habitacionTipo_codigo AND H.habitacion_codigoHotel = " + codigoHotel + "order by H.habitacion_nro";
 
 
-            adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(consulta);
-            tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
+            adaptadorSql = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(consulta);
+            tablaConDatos = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(adaptadorSql);
 
             BindingSource bSource = new BindingSource();
 
@@ -144,14 +144,14 @@ namespace FrbaHotel.AbmHabitacion
                 {
                     consulta = "update FAGD.Habitacion set habitacion_estado=0 where habitacion_nro = " + nroHabitacion + " AND habitacion_codigoHotel = " + codigoHotel;
 
-                    resultado = Login.FrmTipoUsuario.BD.comando(consulta);
+                    resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(consulta);
                     if (resultado.Read() == true)
                     {
                     }
                     resultado.Close();
                     MessageBox.Show("La habitación fue modificada satisfactoriamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
+                tablaConDatos = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(adaptadorSql);
                 //BindingSource to sync DataTable and DataGridView
                 BindingSource bSource = new BindingSource();
                 //set the BindingSource DataSource

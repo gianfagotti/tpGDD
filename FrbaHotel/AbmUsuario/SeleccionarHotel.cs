@@ -69,7 +69,7 @@ namespace FrbaHotel.AbmUsuario
       //      }
 
             int fila = 0;
-            tablaH = Login.FrmTipoUsuario.BD.consulta(select);
+            tablaH = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta(select);
             while (fila < tablaH.Rows.Count)
             {
                 cboHotel.Items.Add(tablaH.Rows[fila][0].ToString() + "-" + tablaH.Rows[fila][1].ToString());

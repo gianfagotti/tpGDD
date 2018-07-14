@@ -85,7 +85,7 @@ namespace FrbaHotel.AbmUsuario
 
 
                 decimal resultado = 0;
-                reader = Login.FrmTipoUsuario.BD.comando(exe);
+                reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
                 if (reader.Read())
                 {
                     resultado = reader.GetDecimal(0);
@@ -132,7 +132,7 @@ namespace FrbaHotel.AbmUsuario
             else
             {
 
-                DateTime fechaMinima = VarGlobales.getDate().AddYears(-16);
+                DateTime fechaMinima = FechaConfig.getDate().AddYears(-16);
                 DateTime fechaIngresada = Convert.ToDateTime(dtpFechaNac.Value);
                 int resultado = DateTime.Compare(fechaMinima, fechaIngresada);
 
@@ -161,7 +161,7 @@ namespace FrbaHotel.AbmUsuario
         private void llenarCampos() {
 
             String select = "SELECT * FROM FAGD.Usuario WHERE usuario_username = '"+usuario+"'";
-            tabla = Login.FrmTipoUsuario.BD.consulta(select);
+            tabla = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta(select);
             txtUsername.Text = usuario;
             txtNombre.Text = tabla.Rows[0][2].ToString();
             txtApellido.Text = tabla.Rows[0][3].ToString();

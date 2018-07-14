@@ -24,7 +24,7 @@ namespace FrbaHotel.Login
             InitializeComponent();
             codigoHotel = codigoHotelRecibido;
             usuarioIngresado = usuarioIngresadoRecibido;
-            tabla = Login.FrmTipoUsuario.BD.consulta("SELECT rol_nombre, FAGD.Rol.rol_codigo FROM FAGD.Rol JOIN FAGD.UsuarioXRolXHotel ON (FAGD.Rol.rol_codigo = FAGD.UsuarioXRolXHotel.rol_codigo) WHERE hotel_codigo = " + codigoHotel + " AND usuario_username = '" + usuarioIngresado + "' AND rol_estado = 1");
+            tabla = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT rol_nombre, FAGD.Rol.rol_codigo FROM FAGD.Rol JOIN FAGD.UsuarioXRolXHotel ON (FAGD.Rol.rol_codigo = FAGD.UsuarioXRolXHotel.rol_codigo) WHERE hotel_codigo = " + codigoHotel + " AND usuario_username = '" + usuarioIngresado + "' AND rol_estado = 1");
             while (i < tabla.Rows.Count)
                 {
                   cmbRolesRegistrados.Items.Add(tabla.Rows[i][0].ToString());
@@ -57,7 +57,7 @@ namespace FrbaHotel.Login
             }
             else
             {
-                resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT rol_codigo FROM FAGD.Rol where rol_nombre = '" + cmbRolesRegistrados.SelectedItem.ToString() + "'");
+                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT DISTINCT rol_codigo FROM FAGD.Rol where rol_nombre = '" + cmbRolesRegistrados.SelectedItem.ToString() + "'");
                 if (resultado.Read() == true)
                 {
                     codigoRol = resultado.GetDecimal(0);

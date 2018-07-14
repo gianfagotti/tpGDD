@@ -14,18 +14,17 @@ namespace FrbaHotel.Login
     public partial class FrmTipoUsuario : Form
     {
     
-        public static Conector2 BD = new Conector2();
+        public static ConectorBaseDeDatos conexionBaseDeDatos = new ConectorBaseDeDatos();
         public static string usuario = "";
-        public static DateTime fechaApp = VarGlobales.getDate();
+        public static DateTime fechaApp = FechaConfig.getDate();
         public static string fechaAppConvertida = fechaApp.Date.ToString("yyyy-MM-dd HH:mm:ss");
         public FrmTipoUsuario()
         {
             InitializeComponent();
-            BD.conectar();
-            //Se actualiza el estado de la reserva segun la fecha del archivo config PODRIA CAPAZ IR EN OTRO FORM 
-            
+            conexionBaseDeDatos.conectar();
+            //Se actualiza el estado de la reserva segun la fecha del archivo config 
            string comandoReservas = "EXEC FAGD.SetearEstadosReservaSegunConfig '" + fechaAppConvertida + "'";
-            SqlDataReader resultado = BD.comando(comandoReservas);
+            SqlDataReader resultado = conexionBaseDeDatos.comando(comandoReservas);
             resultado.Close();
         }
 

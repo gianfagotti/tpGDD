@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace FrbaHotel
 {
-    public class Conector2
+    public class ConectorBaseDeDatos
     {
         private SqlConnection connection;
 
-        public Conector2()
+        public ConectorBaseDeDatos()
         {
             
         }
@@ -35,20 +35,8 @@ namespace FrbaHotel
 
             }
         }
-
-
-        public SqlCommand dameStoreProcedure(string nombre)
-        {
-            SqlCommand queryCommand = new SqlCommand(nombre, connection);
-            queryCommand.CommandType = CommandType.StoredProcedure;
-            return queryCommand;
-        }
-        public int executeIntegerProcedure(string query)
-        {
-            SqlCommand queryCommand = new SqlCommand(query, connection);
-            queryCommand.CommandType = CommandType.StoredProcedure;
-            return (int)queryCommand.ExecuteScalar();
-        }
+    
+     
         public void executeOnly(string query)
         {
             SqlCommand queryCommand = new SqlCommand();

@@ -74,8 +74,8 @@ namespace FrbaHotel.GenerarModificacionReserva
         private void BuscarClientes_Load(object sender, EventArgs e)
         {
             string query = "SELECT cliente_codigo CodigoCli, cliente_nombre Nombre,cliente_apellido Apellido,cliente_tipoDocumento TipoDoc,cliente_nroDocumento NroDoc,cliente_mail Mail from FAGD.Cliente";
-            sAdapter = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
-            dTable = Login.FrmTipoUsuario.BD.dameDataTable(sAdapter);
+            sAdapter = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(query);
+            dTable = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(sAdapter);
             //BindingSource to sync DataTable and DataGridView
             BindingSource bSource = new BindingSource();
             //set the BindingSource DataSource

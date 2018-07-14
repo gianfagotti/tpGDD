@@ -59,8 +59,8 @@ namespace FrbaHotel.RegistrarEstadia
         private void FrmCheckout_Load(object sender, EventArgs e)
         {//Se consulta nuevamente por TODAS las estadias ACTIVAS que aun falta para que concluyan (menores a la fecha del sistema)
             string query = "SELECT DISTINCT clieXEst.estadia_codigo estadiaCodigo,  clieXEst.habitacion_codigo habCodigo, ha.habitacion_nro habNumero, ha.habitacion_piso habPiso FROM FAGD.Estadia est, FAGD.ClienteXEstadia clieXEst, FAGD.Habitacion ha WHERE est.estadia_fechaInicio <= '" + Login.FrmTipoUsuario.fechaAppConvertida + "' AND est.estadia_fechaFin >= '" + Login.FrmTipoUsuario.fechaAppConvertida + "'  AND clieXEst.estadia_codigo = est.estadia_codigo AND clieXEst.habitacion_codigo = ha.habitacion_codigo AND ha.habitacion_codigoHotel = " + Login.FrmSeleccionarHotel.codigoHotel;
-            sAdapter = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
-            dTable = Login.FrmTipoUsuario.BD.dameDataTable(sAdapter);
+            sAdapter = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(query);
+            dTable = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(sAdapter);
             BindingSource bSource = new BindingSource(); 
             bSource.DataSource = dTable;  
             dgvFinalizar.DataSource = bSource;
@@ -104,7 +104,7 @@ namespace FrbaHotel.RegistrarEstadia
                 consulta = consulta + dgvFinalizar.CurrentRow.Cells[1].Value.ToString();
                 consulta = consulta + ",'" + Login.FrmTipoUsuario.fechaAppConvertida + "',";
                 consulta = consulta + Login.FrmLoginUsuario.username;
-                resultado = Login.FrmTipoUsuario.BD.comando(consulta);
+                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(consulta);
                 resultado.Read();
                 if (resultado.GetDecimal(0) == 1)
                 {

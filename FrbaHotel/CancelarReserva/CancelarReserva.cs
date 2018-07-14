@@ -24,15 +24,15 @@ namespace FrbaHotel.CancelarReserva
 
             txtCodigoReserva.Focus();
 
-            resultado = Login.FrmTipoUsuario.BD.comando("Select estado_codigo from FAGD.Estado where estado_descripcion = 'RESERVA CANCELADA POR NO-SHOW'");
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("Select estado_codigo from FAGD.Estado where estado_descripcion = 'RESERVA CANCELADA POR NO-SHOW'");
             resultado.Read();
             noShow = resultado.GetDecimal(0);
             resultado.Close();
-            resultado = Login.FrmTipoUsuario.BD.comando("Select estado_codigo from FAGD.Estado where estado_descripcion = 'RESERVA CANCELADA POR RECEPCION'");
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("Select estado_codigo from FAGD.Estado where estado_descripcion = 'RESERVA CANCELADA POR RECEPCION'");
             resultado.Read();
             xUser = resultado.GetDecimal(0);
             resultado.Close();
-            resultado = Login.FrmTipoUsuario.BD.comando("Select estado_codigo from FAGD.Estado where estado_descripcion = 'RESERVA CANCELADA POR CLIENTE'");
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("Select estado_codigo from FAGD.Estado where estado_descripcion = 'RESERVA CANCELADA POR CLIENTE'");
             resultado.Read();
             xGuest = resultado.GetDecimal(0);
             resultado.Close();
@@ -58,14 +58,14 @@ namespace FrbaHotel.CancelarReserva
                 return;
             }
 
-            resultado = Login.FrmTipoUsuario.BD.comando("Select reserva_codigo, reserva_estado, reserva_fechaInicio from FAGD.Reserva where reserva_codigo = " + txtCodigoReserva.Text);
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("Select reserva_codigo, reserva_estado, reserva_fechaInicio from FAGD.Reserva where reserva_codigo = " + txtCodigoReserva.Text);
             if (resultado.Read())
             {
                 decimal estado = resultado.GetDecimal(1);
                 DateTime fechaIncio = resultado.GetDateTime(2);
                 resultado.Close();
 
-                if (fechaIncio.Date <= VarGlobales.getDate().Date)
+                if (fechaIncio.Date <= FechaConfig.getDate().Date)
                 {
                     MessageBox.Show("La reserva no se puede cancelar porque ya paso el plazo para cancelar", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -81,7 +81,7 @@ namespace FrbaHotel.CancelarReserva
 
                 consulta = consulta + txtCodigoReserva.Text + ",";
                 consulta = consulta +  "'" + txtMotivo.Text + "',";
-                consulta = consulta + "'" + VarGlobales.getDate().ToString("yyyyMMdd HH:mm:ss") + "',";
+                consulta = consulta + "'" + FechaConfig.getDate().ToString("yyyyMMdd HH:mm:ss") + "',";
                 if (Login.FrmTipoUsuario.usuario == "guest")
                 {
                     consulta = consulta + "'GUEST',";
@@ -93,7 +93,7 @@ namespace FrbaHotel.CancelarReserva
                     consulta = consulta + xUser;
                 }
 
-                resultado = Login.FrmTipoUsuario.BD.comando(consulta);
+                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(consulta);
                 if (resultado.Read())
                 {
                     if (resultado.GetDecimal(0) == 1)

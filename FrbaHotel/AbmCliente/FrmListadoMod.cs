@@ -63,8 +63,8 @@ namespace FrbaHotel.AbmCliente
                 consulta = consulta + " where " + query;
             }
 
-            adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(consulta);
-            tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
+            adaptadorSql = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(consulta);
+            tablaConDatos = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(adaptadorSql);
 
             BindingSource bSource = new BindingSource();
 

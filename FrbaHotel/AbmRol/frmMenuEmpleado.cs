@@ -23,7 +23,7 @@ namespace FrbaHotel.AbmRol
 
         private void habilitarGroupsBoxs(decimal codigoRol)
         {
-            resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT F.funcionalidad_detalle FROM FAGD.RolXFuncionalidad R, FAGD.Funcionalidad F where R.funcionalidad_codigo = F.funcionalidad_codigo and  R.rol_codigo =" + codigoRol.ToString() + ";");
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT DISTINCT F.funcionalidad_detalle FROM FAGD.RolXFuncionalidad R, FAGD.Funcionalidad F where R.funcionalidad_codigo = F.funcionalidad_codigo and  R.rol_codigo =" + codigoRol.ToString() + ";");
             while (resultado.Read() == true)
             {
                 switch (resultado.GetSqlString(0).ToString())

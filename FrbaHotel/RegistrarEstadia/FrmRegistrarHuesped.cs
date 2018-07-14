@@ -51,7 +51,7 @@ namespace FrbaHotel.RegistrarEstadia
             dgvHuesped.DataSource = bSource2;
             //Para tener disponible la cantidad de clientes a hospedar
             query = "SELECT SUM(tipoHa.habitacionTipo_cantHuespedes) FROM FAGD.ReservaXHabitacion resxh, FAGD.Habitacion ha, FAGD.HabitacionTipo tipoHa WHERE resxh.habitacion_codigo = ha.habitacion_codigo AND tipoHa.habitacionTipo_codigo = ha.habitacion_tipoCodigo AND resxh.reserva_codigo = " + nroReserva;
-            infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+            infoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(query);
             if (infoQuery.Read())
             {
                 txtLimit.Text = infoQuery.GetDecimal(0).ToString();
@@ -65,7 +65,7 @@ namespace FrbaHotel.RegistrarEstadia
                 this.Close();
             }
             query = "SELECT cli.cliente_codigo CodigoCli, cli.cliente_nombre Nombre, cli.cliente_apellido Apellido FROM FAGD.Reserva res, FAGD.Cliente cli where res.reserva_clienteCodigo = cli.cliente_codigo and res.reserva_codigo = " + nroReserva;
-            infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+            infoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(query);
             infoQuery.Read();
             txtTitular.Text = infoQuery.GetString(1) + " " + infoQuery.GetString(2);
             persDisp = totalPers - 1;
@@ -114,7 +114,7 @@ namespace FrbaHotel.RegistrarEstadia
                 {
             foreach (DataRow fila in tablaConInfoClientes.Rows)
             {//Despues de la confirmación se registran todos los clientes para la estadia, validando que no se agregue uno 2 veces o que se sustraiga al que efectuó la reserva, dando lugar a organizarlos en las habitaciones
-                infoQuery = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.ConfirmarEstadiaXCliente " + fila["CodigoCli"].ToString() + "," + nroEstadia);
+                infoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("EXEC FAGD.ConfirmarEstadiaXCliente " + fila["CodigoCli"].ToString() + "," + nroEstadia);
                 if (infoQuery.Read())
                 {
                     if (infoQuery.GetDecimal(0) == 0)

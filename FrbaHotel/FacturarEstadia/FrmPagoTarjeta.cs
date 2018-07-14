@@ -84,7 +84,7 @@ namespace FrbaHotel.FacturarEstadia
             {
 
                 string query = "EXEC FAGD.AsociarTarjetaParaPago " + facturaAsociada + ",'" + cboEntidad.Text + "','" + txtnroTarj.Text + "','" + cboBank.Text + "','" + txtTitu.Text + "'";
-                SqlDataReader resultado = Login.FrmTipoUsuario.BD.comando(query);
+                SqlDataReader resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(query);
                 resultado.Read();
                 if (resultado.GetDecimal(0) != 0)
                 {

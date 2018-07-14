@@ -25,8 +25,8 @@ namespace FrbaHotel.AbmRol
 
             /*carga de la DGV*/
             String select = "SELECT * FROM FAGD.Funcionalidad";
-            adapter = Login.FrmTipoUsuario.BD.dameDataAdapter(select);
-            tabla = Login.FrmTipoUsuario.BD.dameDataTable(adapter);
+            adapter = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(select);
+            tabla = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(adapter);
             BindingSource bindSource = new BindingSource();
             bindSource.DataSource = tabla;
             dgvFuncionalidades.DataSource = bindSource;
@@ -63,7 +63,7 @@ namespace FrbaHotel.AbmRol
                 else exe = exe + "0";
 
                 decimal mensaje = 0;
-                resultado = Login.FrmTipoUsuario.BD.comando(exe);
+                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
                 if (resultado.Read())
                 {
                     mensaje = resultado.GetDecimal(0);
@@ -96,7 +96,7 @@ namespace FrbaHotel.AbmRol
                             else
                             {
                                 exe = "EXEC FAGD.funcionalidadesDelRol '" + txtNombreRol.Text + "', '" + codigoFuncionalidad + "'";
-                                resultado = Login.FrmTipoUsuario.BD.comando(exe);
+                                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
 
                                 if (resultado.Read())
                                 {

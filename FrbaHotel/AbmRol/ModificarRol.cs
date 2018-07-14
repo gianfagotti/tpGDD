@@ -51,8 +51,8 @@ namespace FrbaHotel.AbmRol
         private void cargarDGV(String rolSeleccionado)
         {
             String select = "SELECT * FROM FAGD.Funcionalidad ORDER BY funcionalidad_codigo ASC";
-            adapter = Login.FrmTipoUsuario.BD.dameDataAdapter(select);
-            tabla = Login.FrmTipoUsuario.BD.dameDataTable(adapter);
+            adapter = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(select);
+            tabla = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(adapter);
             BindingSource bindSource = new BindingSource();
             bindSource.DataSource = tabla;
             dgvFuncionalidades.DataSource = bindSource;
@@ -64,7 +64,7 @@ namespace FrbaHotel.AbmRol
         {
             String select = "SELECT funcionalidad_codigo FROM FAGD.RolXFuncionalidad WHERE rol_codigo = (SELECT rol_codigo FROM "
                            + "FAGD.Rol WHERE rol_nombre = '" + rolSeleccionado + "')";
-            tabla2 = Login.FrmTipoUsuario.BD.consulta(select);
+            tabla2 = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta(select);
 
             if (tabla2.Rows.Count > 0)
             {
@@ -83,7 +83,7 @@ namespace FrbaHotel.AbmRol
         private void ckeckearEstado(String rolSeleccionado)
         {
             String select = "SELECT rol_estado FROM FAGD.Rol WHERE rol_nombre = '" + rolSeleccionado + "'";
-            tablaChk = Login.FrmTipoUsuario.BD.consulta(select);
+            tablaChk = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta(select);
             if (tablaChk.Rows.Count == 1)
             {
                 if ((bool)tablaChk.Rows[0][0]) chkRolActivo.Checked = true;
@@ -106,7 +106,7 @@ namespace FrbaHotel.AbmRol
             else exe = exe + "0";
 
             decimal mensaje = 0;
-            resultado = Login.FrmTipoUsuario.BD.comando(exe);
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
             if (resultado.Read())
             {
                 mensaje = resultado.GetDecimal(0);
@@ -121,7 +121,7 @@ namespace FrbaHotel.AbmRol
             {
                 exe = "EXEC FAGD.limpiarFuncionalidades '" + rolAModificar + "'";
                 mensaje = 0;
-                resultado = Login.FrmTipoUsuario.BD.comando(exe);
+                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
                 if (resultado.Read())
                 {
                     mensaje = resultado.GetDecimal(0);
@@ -149,7 +149,7 @@ namespace FrbaHotel.AbmRol
                             {
 
                                 exe = "EXEC FAGD.funcionalidadesDelRol '" + txtNombreRol.Text + "', '" + codigoFuncionalidad + "'";
-                                resultado = Login.FrmTipoUsuario.BD.comando(exe);
+                                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
 
                                 if (resultado.Read())
                                 {

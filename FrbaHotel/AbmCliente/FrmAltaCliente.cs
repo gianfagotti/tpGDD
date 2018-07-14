@@ -23,7 +23,7 @@ namespace FrbaHotel.AbmCliente
             InitializeComponent();
             abmPadre = form;
 
-            dtpFechaNacimiento.Value = VarGlobales.getDate();
+            dtpFechaNacimiento.Value = FechaConfig.getDate();
 
         }
 
@@ -64,7 +64,7 @@ namespace FrbaHotel.AbmCliente
                     comando = comando + "0";
 
                 decimal resu = 0;
-                resultado = Login.FrmTipoUsuario.BD.comando(comando);
+                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(comando);
                 if (resultado.Read()) {
                     resu = resultado.GetDecimal(0);
                 }
@@ -106,7 +106,7 @@ namespace FrbaHotel.AbmCliente
             txtLocalidad.Text = string.Empty;
             txtNacionalidad.Text = string.Empty;
             cboTipoDoc.SelectedIndex = -1;
-            dtpFechaNacimiento.Value = VarGlobales.getDate();
+            dtpFechaNacimiento.Value = FechaConfig.getDate();
             txtNombre.Focus();
         }
 
@@ -158,7 +158,7 @@ namespace FrbaHotel.AbmCliente
             }
             else
             {
-                if (!VarGlobales.validarEmail(txtMail.Text))
+                if (!FechaConfig.validarEmail(txtMail.Text))
                 {
                     a = 1;
                     mensaje = mensaje + "El campo mail es invalido\n";
@@ -192,7 +192,7 @@ namespace FrbaHotel.AbmCliente
             DateTime fecha;
             fecha = Convert.ToDateTime(dtpFechaNacimiento.Value);
 
-            DateTime s = VarGlobales.getDate();
+            DateTime s = FechaConfig.getDate();
 
             int result = DateTime.Compare(fecha, s);
 

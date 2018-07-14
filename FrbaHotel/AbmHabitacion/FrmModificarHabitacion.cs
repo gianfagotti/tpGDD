@@ -24,14 +24,14 @@ namespace FrbaHotel.AbmHabitacion
             frmMenuEmpleado = form;
             codigoHabitacion = codigoHab;
 
-            resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT habitacionTipo_descripcion FROM FAGD.HabitacionTipo");
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT DISTINCT habitacionTipo_descripcion FROM FAGD.HabitacionTipo");
             while (resultado.Read() == true)
             {
                 cboTipoHabitacion.Items.Add(resultado.GetSqlString(0));
             }
             resultado.Close();
 
-            resultado = Login.FrmTipoUsuario.BD.comando("SELECT DISTINCT habitacion_ubicacion FROM FAGD.Habitacion");
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT DISTINCT habitacion_ubicacion FROM FAGD.Habitacion");
             while (resultado.Read() == true)
             {
                 cboUbicacion.Items.Add(resultado.GetSqlString(0));
@@ -96,7 +96,7 @@ namespace FrbaHotel.AbmHabitacion
                     comando = comando + "0";
 
                 decimal resu = 0;
-                resultado = Login.FrmTipoUsuario.BD.comando(comando);
+                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(comando);
                 if (resultado.Read())
                     resu = resultado.GetDecimal(0);
                 resultado.Close();

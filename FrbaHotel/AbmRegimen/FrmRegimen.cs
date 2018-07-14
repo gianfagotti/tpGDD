@@ -23,7 +23,7 @@ namespace FrbaHotel.AbmRegimen
             abm = abmPadre;
             this.Text = accion + "Regimen";
             button3.Text = accion;
-            txtCodigo.Text = Login.FrmTipoUsuario.BD.executeAndReturn("SELECT count(*) + 1 FROM FAGD.Regimen");
+            txtCodigo.Text = Login.FrmTipoUsuario.conexionBaseDeDatos.executeAndReturn("SELECT count(*) + 1 FROM FAGD.Regimen");
         }
 
         public FrmRegimen(Form abmPadre, string accion, string id, string precio, string descripcion, bool estado)
@@ -100,7 +100,7 @@ namespace FrbaHotel.AbmRegimen
                         else
                             query = query + "0";
                         decimal resu = 0;
-                        resultado = Login.FrmTipoUsuario.BD.comando(query);
+                        resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(query);
                         if (resultado.Read())
                         {
                             resu = resultado.GetDecimal(0);
@@ -116,7 +116,7 @@ namespace FrbaHotel.AbmRegimen
                         else
                             MessageBox.Show("Error al querer crear el regimen");
 
-                        txtCodigo.Text = Login.FrmTipoUsuario.BD.executeAndReturn("SELECT count(*) + 1 FROM FAGD.Regimen");
+                        txtCodigo.Text = Login.FrmTipoUsuario.conexionBaseDeDatos.executeAndReturn("SELECT count(*) + 1 FROM FAGD.Regimen");
                         break;
 
 

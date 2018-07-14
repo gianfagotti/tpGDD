@@ -24,7 +24,7 @@ namespace FrbaHotel.AbmRol
             frmMenuEmpleado = form;
             String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador general'";
             
-            reader = Login.FrmTipoUsuario.BD.comando(select);
+            reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(select);
             
             DataTable tabla = new DataTable();
             tabla.Columns.Add("rol_nombre", typeof(string));

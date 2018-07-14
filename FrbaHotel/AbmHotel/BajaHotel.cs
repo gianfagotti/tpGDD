@@ -46,7 +46,7 @@ namespace FrbaHotel.AbmHotel
             }
             fechaInicioBaja = this.dtpFechaInicioBajaHotel.Value;
             fechaInicioBajaPosta = fechaInicioBaja.ToString("yyyy-MM-dd");
-            reservasQueContienenALaFechaBajaHotel = Login.FrmTipoUsuario.BD.consulta("SELECT * FROM FAGD.Reserva WHERE '" + fechaInicioBajaPosta + "' >= reserva_fechaInicio AND '" + fechaInicioBajaPosta + "' <= reserva_fechaFin AND reserva_codigoHotel = " + codigoHotelIngresado + " AND ((reserva_estado = 1) OR (reserva_estado = 2) OR (reserva_estado = 6))");
+            reservasQueContienenALaFechaBajaHotel = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT * FROM FAGD.Reserva WHERE '" + fechaInicioBajaPosta + "' >= reserva_fechaInicio AND '" + fechaInicioBajaPosta + "' <= reserva_fechaFin AND reserva_codigoHotel = " + codigoHotelIngresado + " AND ((reserva_estado = 1) OR (reserva_estado = 2) OR (reserva_estado = 6))");
             if (reservasQueContienenALaFechaBajaHotel.Rows.Count >= 1)
             {
                 MessageBox.Show("La fecha de inicio de baja no es válida. Elija una fecha donde no hayan reservas efectuadas.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -54,14 +54,14 @@ namespace FrbaHotel.AbmHotel
             }
             fechaFinBaja = this.dtpFechaFinBajaHotel.Value;
             fechaFinBajaPosta = fechaFinBaja.ToString("yyyy-MM-dd");
-            reservasQueContienenALaFechaAltaHotel = Login.FrmTipoUsuario.BD.consulta("SELECT * FROM FAGD.Reserva WHERE '" + fechaFinBajaPosta + "' >= reserva_fechaInicio AND '" + fechaFinBajaPosta + "' <= reserva_fechaFin AND reserva_codigoHotel = " + codigoHotelIngresado + " AND ((reserva_estado = 1) OR (reserva_estado = 2) OR (reserva_estado = 6))");
+            reservasQueContienenALaFechaAltaHotel = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT * FROM FAGD.Reserva WHERE '" + fechaFinBajaPosta + "' >= reserva_fechaInicio AND '" + fechaFinBajaPosta + "' <= reserva_fechaFin AND reserva_codigoHotel = " + codigoHotelIngresado + " AND ((reserva_estado = 1) OR (reserva_estado = 2) OR (reserva_estado = 6))");
             if (reservasQueContienenALaFechaAltaHotel.Rows.Count >= 1)
             {
                 MessageBox.Show("La fecha de finalización de baja no es válida. Elija una fecha donde no hayan reservas efectuadas.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             motivoBaja = this.txtMotivoBajaHotel.Text;
-            resultado = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.darDeBajaHotel '" + fechaInicioBajaPosta + "', '" + fechaFinBajaPosta + "', '" + motivoBaja + "' , " + codigoHotelIngresado);
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("EXEC FAGD.darDeBajaHotel '" + fechaInicioBajaPosta + "', '" + fechaFinBajaPosta + "', '" + motivoBaja + "' , " + codigoHotelIngresado);
             resultado.Close();
             MessageBox.Show("Hotel dado de baja satisfactoriamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();

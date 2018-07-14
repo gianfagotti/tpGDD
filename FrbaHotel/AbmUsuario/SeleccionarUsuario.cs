@@ -71,7 +71,7 @@ namespace FrbaHotel.AbmUsuario
             String select = "SELECT usuario_username FROM FAGD.Usuario WHERE usuario_username <> 'GUEST' AND usuario_username <> 'admin' AND usuario_username IN (SELECT usuario_username FROM "
                            +"FAGD.UsuarioXRolXHotel WHERE hotel_codigo = '" +hotelLogin+"')";
 
-            reader = Login.FrmTipoUsuario.BD.comando(select);
+            reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(select);
 
             DataTable tabla = new DataTable();
             tabla.Columns.Add("usuario_username", typeof(string));
@@ -103,7 +103,7 @@ namespace FrbaHotel.AbmUsuario
             {
                 String exe = "EXEC FAGD.cambiarEstadoUsuario '"+usuario+"'";
                 decimal resultado = 0;
-                reader = Login.FrmTipoUsuario.BD.comando(exe);
+                reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
                 if (reader.Read()){
                     resultado = reader.GetDecimal(0);
                  }

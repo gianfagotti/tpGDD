@@ -318,7 +318,7 @@
     <Compile Include="RegistrarEstadia\FrmRegistrarHuesped.Designer.cs">
       <DependentUpon>FrmRegistrarHuesped.cs</DependentUpon>
     </Compile>
-    <Compile Include="VarGlobales.cs" />
+    <Compile Include="FechaConfig.cs" />
     <EmbeddedResource Include="AbmCliente\FrmAltaCliente.resx">
       <DependentUpon>FrmAltaCliente.cs</DependentUpon>
     </EmbeddedResource>

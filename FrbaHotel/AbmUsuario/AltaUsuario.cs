@@ -21,7 +21,7 @@ namespace FrbaHotel.AbmUsuario
         public AltaUsuario(Form formAnterior)
         {
             InitializeComponent();
-            dtpFechaNac.Value = VarGlobales.getDate();
+            dtpFechaNac.Value = FechaConfig.getDate();
             ultimoFormulario = formAnterior;
             cargarComboRol();
             cargarComboHotel();
@@ -97,7 +97,7 @@ namespace FrbaHotel.AbmUsuario
                
 
                 decimal resultado = 0;
-                reader = Login.FrmTipoUsuario.BD.comando(exe);
+                reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
                 if (reader.Read())
                 {
                     resultado = reader.GetDecimal(0);
@@ -150,7 +150,7 @@ namespace FrbaHotel.AbmUsuario
             else
             {
 
-                DateTime fechaMinima = VarGlobales.getDate().AddYears(-16);
+                DateTime fechaMinima = FechaConfig.getDate().AddYears(-16);
                 DateTime fechaIngresada = Convert.ToDateTime(dtpFechaNac.Value);
                 int resultado = DateTime.Compare(fechaMinima, fechaIngresada);
 
@@ -183,7 +183,7 @@ namespace FrbaHotel.AbmUsuario
             String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador general'";
             DataTable tabla = new DataTable();
 
-            reader = Login.FrmTipoUsuario.BD.comando(select);
+            reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(select);
             
             tabla.Columns.Add("rol_nombre", typeof(string));
             tabla.Load(reader);
@@ -197,7 +197,7 @@ namespace FrbaHotel.AbmUsuario
         private void cargarComboHotel(){
 
             int fila = 0;
-            tablaH = Login.FrmTipoUsuario.BD.consulta("SELECT DISTINCT hotel_calle, hotel_nroCalle FROM FAGD.Hotel");
+            tablaH = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT DISTINCT hotel_calle, hotel_nroCalle FROM FAGD.Hotel");
             while (fila < tablaH.Rows.Count){
                 cboHotel.Items.Add(tablaH.Rows[fila][0].ToString() + "-" + tablaH.Rows[fila][1].ToString());
                 fila++;

@@ -28,7 +28,7 @@ namespace FrbaHotel.RegistrarEstadia
             formAVolver = menu;
             dgvDistri.DataSource = tablaConInfoHuespedes;
             query = "SELECT habitacion_codigo FROM FAGD.ReservaXHabitacion WHERE reserva_codigo = " + reservaCodigo;
-            infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+            infoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(query);
             while(infoQuery.Read())
             {
                 cbohab.Items.Add(infoQuery.GetDecimal(0));
@@ -47,7 +47,7 @@ namespace FrbaHotel.RegistrarEstadia
         {
             //Se debe elegir la habitacion y en base a eso rellenar los demas textbox con la informacion adicional
             query = "SELECT ha.habitacion_nro, ha.habitacion_piso, tipoHa.habitacionTipo_descripcion, tipoHa.habitacionTipo_cantHuespedes FROM FAGD.Habitacion ha, FAGD.HabitacionTipo tipoHa WHERE ha.habitacion_tipoCodigo = tipoHa.habitacionTipo_codigo AND ha.habitacion_codigo = " + cbohab.Text;
-            infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+            infoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(query);
             if (infoQuery.Read())
             {
                 txtnroHab.Text = infoQuery.GetDecimal(0).ToString();
@@ -92,7 +92,7 @@ namespace FrbaHotel.RegistrarEstadia
                     
                     int index = dgvDistri.CurrentRow.Index;
                     query = "SELECT COUNT(*) FROM FAGD.ClienteXEstadia WHERE estadia_codigo = " + estadia + " AND habitacion_codigo = " + cbohab.Text;
-                    infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+                    infoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(query);
                     infoQuery.Read();
                     int cantLimite = infoQuery.GetInt32(0);
                     infoQuery.Close();
@@ -100,7 +100,7 @@ namespace FrbaHotel.RegistrarEstadia
                     if (cantLimite < Convert.ToInt32(txtCantHab.Text))
                     {//Se da lugar a la accion de registrar el cliente para la estadia en la habitacion particular seleccionada con confirmación
                         query = "EXEC FAGD.SeleccionarHabitacionDeCliente " + cbohab.Text + "," + dgvDistri.CurrentRow.Cells[1].Value.ToString() + "," + estadia;
-                        infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+                        infoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(query);
                         infoQuery.Read();
                         if (infoQuery.GetDecimal(0) == 1)
                         {

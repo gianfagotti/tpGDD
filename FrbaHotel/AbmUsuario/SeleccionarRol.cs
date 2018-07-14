@@ -62,7 +62,7 @@ namespace FrbaHotel.AbmUsuario
             {
                 String exe = crearConsulta();
                 decimal resultado = 0;
-                reader = Login.FrmTipoUsuario.BD.comando(exe);
+                reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
 
                 if (reader.Read())
                 {
@@ -118,7 +118,7 @@ namespace FrbaHotel.AbmUsuario
                                 + calle + "' AND hotel_nroCalle = '" + nro + "'))";
             }
 
-            reader = Login.FrmTipoUsuario.BD.comando(select);
+            reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(select);
 
             DataTable tabla = new DataTable();
             tabla.Columns.Add("rol_nombre", typeof(string));

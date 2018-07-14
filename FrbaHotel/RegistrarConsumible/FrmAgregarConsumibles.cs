@@ -50,8 +50,8 @@ namespace FrbaHotel.RegistrarConsumible
         {
             //Se llena la datagridview con la informacion de cada consumible en la base a traves del adaptadorSql que returnea la dataTable con los registros 
             string consultaConsumible = "SELECT consumible_codigo Codigo, consumible_descripcion Descripcion, consumible_precio Precio FROM FAGD.Consumible";
-            adaptador = Login.FrmTipoUsuario.BD.dameDataAdapter(consultaConsumible);
-            tablaConDatosConsum = Login.FrmTipoUsuario.BD.dameDataTable(adaptador);         
+            adaptador = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(consultaConsumible);
+            tablaConDatosConsum = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(adaptador);         
             BindingSource bSourceConsum = new BindingSource();
             bSourceConsum.DataSource = tablaConDatosConsum;    
             dgvCons.DataSource = bSourceConsum;
@@ -92,7 +92,7 @@ namespace FrbaHotel.RegistrarConsumible
                 //Se adiciona de a 1 consumible por vez y luego se los agrupa en el itemFactura
                 foreach (DataRow fila in tablaConDatosConsumARegis.Rows)
                 {
-                    resultadoDeOperacion = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.RegistrarConsuXEstXHabitacion " + txtCodigoEst.Text + "," + fila["Codigo"].ToString() + "," + txthab.Text);
+                    resultadoDeOperacion = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("EXEC FAGD.RegistrarConsuXEstXHabitacion " + txtCodigoEst.Text + "," + fila["Codigo"].ToString() + "," + txthab.Text);
                     if (resultadoDeOperacion.Read())
                     {
                         if (resultadoDeOperacion.GetDecimal(0) == 0)

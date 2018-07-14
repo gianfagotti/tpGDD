@@ -39,7 +39,7 @@ namespace FrbaHotel.AbmUsuario
                 string passVieja = string.Empty;
                 string select = "SELECT usuario_password FROM FAGD.Usuario WHERE usuario_username = '" + usuario + "'";
 
-                reader = Login.FrmTipoUsuario.BD.comando(select);
+                reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(select);
 
                 if (reader.Read()){
                     passVieja = reader.GetString(0);
@@ -47,7 +47,7 @@ namespace FrbaHotel.AbmUsuario
                     if (ingresadaVieja == passVieja)
                     {
                         string exe = "UPDATE FAGD.Usuario SET usuario_password = '" + ingresadaNueva + "' WHERE usuario_username = '" + usuario + "'";
-                        reader = Login.FrmTipoUsuario.BD.comando(exe);
+                        reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
                         reader.Read();
                         MessageBox.Show("Password cambiada correctamente!","Exito",MessageBoxButtons.OK,MessageBoxIcon.Information);
                         reader.Close();

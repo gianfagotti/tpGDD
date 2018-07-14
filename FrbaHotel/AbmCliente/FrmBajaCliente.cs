@@ -28,8 +28,8 @@ namespace FrbaHotel.AbmCliente
         private void Baja_Load(object sender, EventArgs e)
         {
             string query = "select cliente_codigo Código, cliente_tipoDocumento as 'Tipo Documento', cliente_nroDocumento Documento, cliente_nombre Nombre, cliente_apellido Apellido, cliente_mail Mail, cliente_estado Estado from FAGD.Cliente";
-            adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
-            tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
+            adaptadorSql = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(query);
+            tablaConDatos = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(adaptadorSql);
             //BindingSource to sync DataTable and DataGridView
             BindingSource bSource = new BindingSource();
             //set the BindingSource DataSource
@@ -103,14 +103,14 @@ namespace FrbaHotel.AbmCliente
                 {
                     consulta = "update FAGD.Cliente set cliente_estado=0 where cliente_codigo = " + codigo;
 
-                    resultado = Login.FrmTipoUsuario.BD.comando(consulta);
+                    resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(consulta);
                     if (resultado.Read() == true)
                     {
                     }
                     resultado.Close();
                     MessageBox.Show("El cliente fue inhabilitado satisfactoriamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                tablaConDatos = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
+                tablaConDatos = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(adaptadorSql);
                 //BindingSource to sync DataTable and DataGridView
                 BindingSource bSource = new BindingSource();
                 //set the BindingSource DataSource

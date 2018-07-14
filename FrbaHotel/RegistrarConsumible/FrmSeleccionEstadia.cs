@@ -62,8 +62,8 @@ namespace FrbaHotel.RegistrarConsumible
         {
             //Consulta que nos trae todas las estadias ACTIVAS menores a la fecha actual del sistema
             string query = "SELECT DISTINCT clieXEst.estadia_codigo CodigoEstadia, clieXEst.habitacion_codigo CodigoHab, ha.habitacion_nro HabNumero, ha.habitacion_piso Piso FROM FAGD.Estadia est, FAGD.ClienteXEstadia clieXEst, FAGD.Habitacion ha WHERE est.estadia_fechaFin >= '" + Login.FrmTipoUsuario.fechaAppConvertida + "' AND est.estadia_fechaInicio <= '" + Login.FrmTipoUsuario.fechaAppConvertida + "' AND clieXEst.estadia_codigo = est.estadia_codigo AND clieXEst.habitacion_codigo = ha.habitacion_codigo AND ha.habitacion_codigoHotel = " + Login.FrmSeleccionarHotel.codigoHotel;
-            adaptadorSql = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
-            tablaConDatosEstadias = Login.FrmTipoUsuario.BD.dameDataTable(adaptadorSql);
+            adaptadorSql = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(query);
+            tablaConDatosEstadias = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(adaptadorSql);
             BindingSource bSource = new BindingSource();
             bSource.DataSource = tablaConDatosEstadias;
             dgvEstadias.DataSource = bSource;

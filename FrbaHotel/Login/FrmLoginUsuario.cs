@@ -59,7 +59,7 @@ namespace FrbaHotel.Login
             else
             {
                 string usuarioIngresado = this.txtUsuario.Text;
-                tabla = Login.FrmTipoUsuario.BD.consulta("SELECT usuario_username, usuario_estado FROM FAGD.Usuario WHERE usuario_username = '"+usuarioIngresado+"'");
+                tabla = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT usuario_username, usuario_estado FROM FAGD.Usuario WHERE usuario_username = '"+usuarioIngresado+"'");
                 if (tabla.Rows.Count == 1 && (bool)tabla.Rows[0][1])
                 {
                     username = tabla.Rows[0][0].ToString();

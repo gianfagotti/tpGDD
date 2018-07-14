@@ -56,7 +56,7 @@ namespace FrbaHotel.AbmUsuario
                           + "NOT IN (SELECT hotel_codigo FROM FAGD.UsuarioXRolXHotel WHERE '" + usuario + "' = usuario_username)";
             
             int fila = 0;
-            tablaH = Login.FrmTipoUsuario.BD.consulta(select);
+            tablaH = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta(select);
             while (fila < tablaH.Rows.Count)
             {
                 cboHotel.Items.Add(tablaH.Rows[fila][0].ToString() + "-" + tablaH.Rows[fila][1].ToString());
@@ -71,7 +71,7 @@ namespace FrbaHotel.AbmUsuario
         private void llenarCboRol() {
             String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador general'";
 
-            reader = Login.FrmTipoUsuario.BD.comando(select);
+            reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(select);
 
             DataTable tabla = new DataTable();
             tabla.Columns.Add("rol_nombre", typeof(string));
@@ -99,7 +99,7 @@ namespace FrbaHotel.AbmUsuario
                 
                 
                 decimal resultado = 0;
-                reader2 = Login.FrmTipoUsuario.BD.comando(exe);
+                reader2 = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
                 if (reader2.Read())
                 {
                     resultado = reader2.GetDecimal(0);

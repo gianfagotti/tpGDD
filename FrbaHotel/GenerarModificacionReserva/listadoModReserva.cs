@@ -28,10 +28,10 @@ namespace FrbaHotel.GenerarModificacionReserva
                 MessageBox.Show("Debe ingresar un numero de reserva", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            SqlDataReader comando = Login.FrmTipoUsuario.BD.comando("select reserva_codigo, reserva_fechaInicio from FAGD.Reserva where reserva_codigo = " + txtNroReserva.Text + " AND reserva_codigo not in (select reservaCancelada_codigoReserva from FAGD.ReservaCancelada)");
+            SqlDataReader comando = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("select reserva_codigo, reserva_fechaInicio from FAGD.Reserva where reserva_codigo = " + txtNroReserva.Text + " AND reserva_codigo not in (select reservaCancelada_codigoReserva from FAGD.ReservaCancelada)");
             if (comando.Read())
             {
-                if ((comando.GetDecimal(0).ToString() == txtNroReserva.Text) && (comando.GetDateTime(1).Date >= VarGlobales.getDate().Date))
+                if ((comando.GetDecimal(0).ToString() == txtNroReserva.Text) && (comando.GetDateTime(1).Date >= FechaConfig.getDate().Date))
                 {
                     comando.Close();
                     this.Hide();

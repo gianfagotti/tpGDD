@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace FrbaHotel
 {
-    class VarGlobales
+    class FechaConfig
     {
 
         internal static DateTime getDate()

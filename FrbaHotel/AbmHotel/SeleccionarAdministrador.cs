@@ -24,7 +24,7 @@ namespace FrbaHotel.AbmHotel
             frmMenuEmpleado = frmMenuEmpleadoRecibido;
             nombreHotel = nombreHotelIngresadoRecibido;
             InitializeComponent();
-            usuarios = Login.FrmTipoUsuario.BD.consulta("SELECT usuario_username FROM FAGD.Usuario WHERE usuario_username <> 'GUEST'");
+            usuarios = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT usuario_username FROM FAGD.Usuario WHERE usuario_username <> 'GUEST'");
             while (i < usuarios.Rows.Count)
             {
                 cboSeleccionarAdministrador.Items.Add(usuarios.Rows[i][0].ToString());
@@ -42,9 +42,9 @@ namespace FrbaHotel.AbmHotel
             else
             {
                 String usuarioSeleccionado = cboSeleccionarAdministrador.Text;
-                hotel = Login.FrmTipoUsuario.BD.consulta("SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_nombre = '" + nombreHotel + "'");
+                hotel = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_nombre = '" + nombreHotel + "'");
                 codigoHotel = Convert.ToDecimal(hotel.Rows[0][0]);
-                resultado = Login.FrmTipoUsuario.BD.comando("EXEC FAGD.insertarAdministradorNuevoHotel '" + usuarioSeleccionado + "', " + codigoHotel);
+                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("EXEC FAGD.insertarAdministradorNuevoHotel '" + usuarioSeleccionado + "', " + codigoHotel);
                 MessageBox.Show("Administrador asignado satisfactoriamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 resultado.Close();
                 this.Hide();

@@ -35,8 +35,8 @@ namespace FrbaHotel.GenerarModificacionReserva
             InitializeComponent();
             abmPadre = form;
             txtCliente.ResetText();
-            dtpDesde.Value = VarGlobales.getDate();
-            dtpHasta.Value = VarGlobales.getDate();
+            dtpDesde.Value = FechaConfig.getDate();
+            dtpHasta.Value = FechaConfig.getDate();
             dataGridView1.DataSource = null;
             dataGridView2.DataSource = null;
             total = 0;
@@ -83,8 +83,8 @@ namespace FrbaHotel.GenerarModificacionReserva
             cboRegimen.Enabled = true;
             dtpDesde.Enabled = true;
             dtpHasta.Enabled = true;
-            dtpDesde.Value = VarGlobales.getDate();
-            dtpHasta.Value = VarGlobales.getDate();
+            dtpDesde.Value = FechaConfig.getDate();
+            dtpHasta.Value = FechaConfig.getDate();
 
         }
 
@@ -96,7 +96,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             {
                 cboHotel.Enabled = true;
 
-                tabla = Login.FrmTipoUsuario.BD.consulta("SELECT DISTINCT hotel_codigo, hotel_calle, hotel_nroCalle, hotel_nombre FROM FAGD.Hotel where hotel_estado = 1");
+                tabla = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT DISTINCT hotel_codigo, hotel_calle, hotel_nroCalle, hotel_nombre FROM FAGD.Hotel where hotel_estado = 1");
                 while (Fila < tabla.Rows.Count)
                 {
                     if (string.IsNullOrEmpty(tabla.Rows[Fila][3].ToString()))
@@ -117,7 +117,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                 cboHotel.SelectedIndex = 0;
 
                 consulta = "select distinct habitacionTipo_descripcion from FAGD.HabitacionTipo, FAGD.Habitacion, FAGD.Hotel where habitacionTipo_codigo = habitacion_tipoCodigo AND habitacion_codigoHotel = hotel_codigo AND hotel_codigo = " + Login.FrmSeleccionarHotel.codigoHotel;
-                resultado = Login.FrmTipoUsuario.BD.comando(consulta);
+                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(consulta);
                 cboTipoHabitacion.Items.Clear();
                 while (resultado.Read() == true)
                 {
@@ -125,7 +125,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                 }
                 resultado.Close();
                 consulta = "select distinct R.regimen_descripcion from FAGD.Regimen R, FAGD.HotelXRegimen H where R.regimen_codigo = H.regimen_codigo AND H.hotel_codigo = " + Login.FrmSeleccionarHotel.codigoHotel;
-                resultado = Login.FrmTipoUsuario.BD.comando(consulta);
+                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(consulta);
                 cboRegimen.Items.Clear();
                 while (resultado.Read() == true)
                 {
@@ -140,7 +140,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             codHotelSeleccionado = Convert.ToDecimal(cboHotel.Text.Split('-')[0]);
 
             consulta = "select distinct habitacionTipo_descripcion from FAGD.HabitacionTipo, FAGD.Habitacion, FAGD.Hotel where habitacionTipo_codigo = habitacion_tipoCodigo AND habitacion_codigoHotel = hotel_codigo AND hotel_codigo = " + codHotelSeleccionado;
-            resultado = Login.FrmTipoUsuario.BD.comando(consulta);
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(consulta);
             cboTipoHabitacion.Items.Clear();
             while (resultado.Read() == true)
             {
@@ -148,7 +148,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
             resultado.Close();
             consulta = "select distinct R.regimen_descripcion from FAGD.Regimen R, FAGD.HotelXRegimen H where R.regimen_codigo = H.regimen_codigo AND H.hotel_codigo = " + codHotelSeleccionado;
-            resultado = Login.FrmTipoUsuario.BD.comando(consulta);
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(consulta);
             cboRegimen.Items.Clear();
             while (resultado.Read() == true)
             {
@@ -208,7 +208,7 @@ namespace FrbaHotel.GenerarModificacionReserva
                 MessageBox.Show("La fecha desde debe ser menor a la fecha hasta\n", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            result = DateTime.Compare(fechaDesde.Date, VarGlobales.getDate());
+            result = DateTime.Compare(fechaDesde.Date, FechaConfig.getDate());
             if (result < 0)
             {
                 MessageBox.Show("La fecha desde debe ser mayor a la fecha actual\n", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -228,8 +228,8 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
             query = query + "'" + cboTipoHabitacion.Text + "'";
 
-            sAdapter = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
-            dTable = Login.FrmTipoUsuario.BD.dameDataTable(sAdapter);
+            sAdapter = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(query);
+            dTable = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(sAdapter);
             //BindingSource to sync DataTable and DataGridView
             BindingSource bSource = new BindingSource();
             //set the BindingSource DataSource
@@ -258,7 +258,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
             bool habilitado = false;
 
-            resultado = Login.FrmTipoUsuario.BD.comando("select cliente_estado from FAGD.Cliente where cliente_codigo = " + txtCliente.Text);
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("select cliente_estado from FAGD.Cliente where cliente_codigo = " + txtCliente.Text);
             if (resultado.Read())
                 habilitado = resultado.GetBoolean(0);
 
@@ -272,7 +272,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             double ab = (dtpHasta.Value - dtpDesde.Value).TotalDays;
 
             string command = "EXEC FAGD.InsertarNuevaReserva ";
-            command = command + "'" + VarGlobales.getDate().ToString("yyyyMMdd HH:mm:ss") + "',";
+            command = command + "'" + FechaConfig.getDate().ToString("yyyyMMdd HH:mm:ss") + "',";
             command = command + "'" + dtpDesde.Value.Date.ToString("yyyyMMdd HH:mm:ss") + "',";
             command = command + "'" + dtpHasta.Value.Date.ToString("yyyyMMdd HH:mm:ss") + "',";
             
@@ -292,7 +292,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             command = command + Convert.ToInt32(total).ToString();
 
             decimal id = 0;
-            resultado = Login.FrmTipoUsuario.BD.comando(command);
+            resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(command);
             if (resultado.Read() == true)
             {
                 id = resultado.GetDecimal(0);
@@ -311,7 +311,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             for (int i = 0; i < cant; i++)
             {
                 codigoHabitacion = dataGridView2.Rows[i].Cells[1].Value.ToString();
-                resultado = Login.FrmTipoUsuario.BD.comando(insertar + codigoHabitacion);
+                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(insertar + codigoHabitacion);
 
                 if (!resultado.Read() || resultado.GetDecimal(0) == 0)
                 {

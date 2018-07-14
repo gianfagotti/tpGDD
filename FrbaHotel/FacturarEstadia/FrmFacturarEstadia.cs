@@ -29,7 +29,7 @@ namespace FrbaHotel.FacturarEstadia
             txtEst.Text = codigoEstadia;
             //Recuperacion de los modos de pago existentes
             query = "SELECT DISTINCT modalidadPago_descripcion FROM FAGD.ModalidadPago";
-            infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+            infoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(query);
             while (infoQuery.Read() == true)
             {
                 cboMode.Items.Add(infoQuery.GetSqlString(0));
@@ -37,7 +37,7 @@ namespace FrbaHotel.FacturarEstadia
             infoQuery.Close();
             //En base a la estadia a facturar se recupera toda la informacion correspondiente
             query = "SELECT estadia_fechaInicio, estadia_fechaFin, estadia_diasSobrantes, estadia_cantNoches, estadia_precioNoche FROM FAGD.Estadia WHERE estadia_codigo = " + codigoEstadia;
-            infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+            infoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(query);
             infoQuery.Read();
             DateTime fechaInicioEstadia = infoQuery.GetDateTime(0);
             DateTime fechaFinEstadia = infoQuery.GetDateTime(1);
@@ -84,8 +84,8 @@ namespace FrbaHotel.FacturarEstadia
             txtMontoAloj.Text = (precioNoche * (contadorDiasSobrantes + contadorCantNoches)).ToString();
             //Se registran cada uno de los costos de consumibles almacenados en los item de Factura para luego revisar si se deducen en su totalidad por el regimen de estadía que el cliente contrató
             query = "SELECT item.itemFactura_cantidad Cantidad, item.itemFactura_descripcion Descripcion, item.itemFactura_itemMonto Monto FROM FAGD.ItemFactura item, FAGD.Factura fact WHERE item.itemFactura_nroFactura = fact.factura_nro AND item.itemFactura_descripcion != 'Estadia' AND fact.factura_codigoEstadia = " + codigoEstadia;
-            SqlDataAdapter sAdapter = Login.FrmTipoUsuario.BD.dameDataAdapter(query);
-            tablaInfoConsumibles = Login.FrmTipoUsuario.BD.dameDataTable(sAdapter);
+            SqlDataAdapter sAdapter = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(query);
+            tablaInfoConsumibles = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(sAdapter);
             BindingSource BindingSource2 = new BindingSource();
             BindingSource2.DataSource = tablaInfoConsumibles;    
             dgvConsumibles.DataSource = BindingSource2;
@@ -103,7 +103,7 @@ namespace FrbaHotel.FacturarEstadia
 
             //Se revisa el regimen de la estadia
             query = "SELECT R.reserva_codigoRegimen FROM FAGD.Reserva R, FAGD.Estadia est WHERE est.estadia_codigoReserva = R.reserva_codigo AND est.estadia_codigo = " + codigoEstadia;
-            infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+            infoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(query);
             infoQuery.Read();
             decimal regimen = infoQuery.GetDecimal(0);
             infoQuery.Close();
@@ -143,13 +143,13 @@ namespace FrbaHotel.FacturarEstadia
                 {
             //Se selecciona la modalidad de pago elegida
             query = "SELECT modalidadPago_codigo FROM FAGD.ModalidadPago WHERE modalidadPago_descripcion = '" + cboMode.Text + "'";
-            infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+            infoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(query);
             infoQuery.Read();
             modalidadDePagoElegida = infoQuery.GetDecimal(0);
             infoQuery.Close();
             //Se actualiza la factura que ya habia sido creada previamente en la instancia del Check-in con los campos correspondientes 
             query = "EXEC FAGD.EmitirFacturaActualizada '" + txtEst.Text + "','" + modalidadDePagoElegida.ToString() + "','" + Login.FrmTipoUsuario.fechaAppConvertida + "'";
-            infoQuery = Login.FrmTipoUsuario.BD.comando(query);
+            infoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(query);
             infoQuery.Read();
             facturaEmitida = infoQuery.GetDecimal(0);
             if (facturaEmitida == 0)

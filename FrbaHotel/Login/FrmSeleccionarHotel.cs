@@ -13,7 +13,7 @@ namespace FrbaHotel.Login
 {
     public partial class FrmSeleccionarHotel : Form
     {
-        private DateTime fechaArchivoConfiguracion = VarGlobales.getDate();
+        private DateTime fechaArchivoConfiguracion = FechaConfig.getDate();
         private DataTable tabla, tabla2, tabla3, tablaHotelesDeBaja, tablaHotelesDeAlta;
         private SqlDataReader resultado2, resultado;
         int Fila = 0;
@@ -31,7 +31,7 @@ namespace FrbaHotel.Login
             usuarioIngresado = usuario;
             InitializeComponent();
 
-            tabla = Login.FrmTipoUsuario.BD.consulta("SELECT DISTINCT [GD1C2018].[FAGD].[Hotel].[hotel_codigo] ,[hotel_calle],[hotel_nroCalle],[hotel_nombre],usuario_username  FROM [GD1C2018].[FAGD].[Hotel] JOIN [GD1C2018].[FAGD].[UsuarioXRolXHotel] ON([GD1C2018].[FAGD].[Hotel].hotel_codigo = [GD1C2018].[FAGD].[UsuarioXRolXHotel].hotel_codigo) WHERE usuario_username = '" + usuarioIngresado + "'");
+            tabla = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT DISTINCT [GD1C2018].[FAGD].[Hotel].[hotel_codigo] ,[hotel_calle],[hotel_nroCalle],[hotel_nombre],usuario_username  FROM [GD1C2018].[FAGD].[Hotel] JOIN [GD1C2018].[FAGD].[UsuarioXRolXHotel] ON([GD1C2018].[FAGD].[Hotel].hotel_codigo = [GD1C2018].[FAGD].[UsuarioXRolXHotel].hotel_codigo) WHERE usuario_username = '" + usuarioIngresado + "'");
             while (Fila < tabla.Rows.Count)
             {
                 if (string.IsNullOrEmpty(tabla.Rows[Fila][3].ToString()))
@@ -67,12 +67,12 @@ namespace FrbaHotel.Login
             {
                 hotelSeleccionado = cboSeleccionarHotel.Text;
                 codigoHotel = Convert.ToDecimal(hotelSeleccionado.Split(guion)[0]);
-                tabla2 = Login.FrmTipoUsuario.BD.consulta("SELECT * FROM [GD1C2018].[FAGD].[Hotel] WHERE hotel_estado = " + 0 + "AND hotel_codigo = " + codigoHotel);
+                tabla2 = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT * FROM [GD1C2018].[FAGD].[Hotel] WHERE hotel_estado = " + 0 + "AND hotel_codigo = " + codigoHotel);
                 if (tabla2.Rows.Count == 1)
                 {
                     MessageBox.Show("El hotel está inhabilitado, tenga en cuenta que algunas funcionalidades se verán reducidas", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                tabla3 = Login.FrmTipoUsuario.BD.consulta("SELECT rol_nombre, FAGD.Rol.rol_codigo FROM FAGD.Rol JOIN FAGD.UsuarioXRolXHotel ON (FAGD.Rol.rol_codigo = FAGD.UsuarioXRolXHotel.rol_codigo) WHERE hotel_codigo = " + codigoHotel + " AND usuario_username = '" + usuarioIngresado + "'");
+                tabla3 = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT rol_nombre, FAGD.Rol.rol_codigo FROM FAGD.Rol JOIN FAGD.UsuarioXRolXHotel ON (FAGD.Rol.rol_codigo = FAGD.UsuarioXRolXHotel.rol_codigo) WHERE hotel_codigo = " + codigoHotel + " AND usuario_username = '" + usuarioIngresado + "'");
                 if (tabla3.Rows.Count == 1)
                 {
                     codigoRol = Convert.ToDecimal(tabla3.Rows[0][1]);
@@ -100,21 +100,21 @@ namespace FrbaHotel.Login
 
             string fecha = fechaArchivoConfiguracion.ToString("yyyy-MM-dd");
 
-            tablaHotelesDeBaja = Login.FrmTipoUsuario.BD.consulta("SELECT H.hotel_codigo FROM FAGD.Hotel H JOIN FAGD.BajaHotel B ON (H.hotel_codigo = B.hotel_codigo) WHERE H.hotel_estado = 1 AND (B.fecha_inicio <= '" + fecha + "' AND '" + fecha + "' <= B.fecha_fin)");    
+            tablaHotelesDeBaja = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT H.hotel_codigo FROM FAGD.Hotel H JOIN FAGD.BajaHotel B ON (H.hotel_codigo = B.hotel_codigo) WHERE H.hotel_estado = 1 AND (B.fecha_inicio <= '" + fecha + "' AND '" + fecha + "' <= B.fecha_fin)");    
             if (tablaHotelesDeBaja.Rows.Count >= 1)
             {
                 int FilaHotelesBaja = 0;
                 while (FilaHotelesBaja < tablaHotelesDeBaja.Rows.Count)
                 {
                     codigoHotelBaja = Convert.ToDecimal(tablaHotelesDeBaja.Rows[FilaHotelesBaja][0]);
-                    resultado2 = Login.FrmTipoUsuario.BD.comando("UPDATE FAGD.Hotel SET hotel_estado = 0 WHERE hotel_codigo = " + codigoHotelBaja);
+                    resultado2 = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("UPDATE FAGD.Hotel SET hotel_estado = 0 WHERE hotel_codigo = " + codigoHotelBaja);
                     resultado2.Read();
                     resultado2.Close();
                     FilaHotelesBaja++;
                 }
             }
 
-            tablaHotelesDeAlta = Login.FrmTipoUsuario.BD.consulta("SELECT H.hotel_codigo FROM FAGD.Hotel H JOIN FAGD.BajaHotel B ON (H.hotel_codigo = B.hotel_codigo) WHERE H.hotel_estado = 0 AND NOT (B.fecha_inicio <= '" + fecha + "') AND NOT ('" + fecha + "' <= B.fecha_fin)");
+            tablaHotelesDeAlta = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT H.hotel_codigo FROM FAGD.Hotel H JOIN FAGD.BajaHotel B ON (H.hotel_codigo = B.hotel_codigo) WHERE H.hotel_estado = 0 AND NOT (B.fecha_inicio <= '" + fecha + "') AND NOT ('" + fecha + "' <= B.fecha_fin)");
             if (tablaHotelesDeAlta.Rows.Count >= 1)
             {
                 int FilaHotelesAlta = 0;
@@ -122,7 +122,7 @@ namespace FrbaHotel.Login
                 while (FilaHotelesAlta < tablaHotelesDeAlta.Rows.Count)
                 {
                     codigoHotelAlta = Convert.ToDecimal(tablaHotelesDeAlta.Rows[FilaHotelesAlta][0]);
-                    resultado = Login.FrmTipoUsuario.BD.comando("UPDATE FAGD.Hotel SET hotel_estado = 1 WHERE hotel_codigo = " + codigoHotelAlta);
+                    resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("UPDATE FAGD.Hotel SET hotel_estado = 1 WHERE hotel_codigo = " + codigoHotelAlta);
                     resultado.Read();
                     resultado.Close();
                     FilaHotelesAlta++;

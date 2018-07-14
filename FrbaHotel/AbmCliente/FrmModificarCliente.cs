@@ -62,7 +62,7 @@ namespace FrbaHotel.AbmCliente
             txtLocalidadMod.Text = string.Empty;
             txtNacionalidadMod.Text = string.Empty;
             cboTipoDocMod.SelectedIndex = -1;
-            dtpFechaNacimientoMod.Value = VarGlobales.getDate();
+            dtpFechaNacimientoMod.Value = FechaConfig.getDate();
             txtNombreMod.Focus();
         }
 
@@ -114,7 +114,7 @@ namespace FrbaHotel.AbmCliente
             }
             else
             {
-                if (!VarGlobales.validarEmail(txtMailMod.Text))
+                if (!FechaConfig.validarEmail(txtMailMod.Text))
                 {
                     a = 1;
                     mensaje = mensaje + "El campo mail es invalido\n";
@@ -198,7 +198,7 @@ namespace FrbaHotel.AbmCliente
                     comando = comando + "0";
 
                 decimal resu = 0;
-                resultado = Login.FrmTipoUsuario.BD.comando(comando);
+                resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(comando);
                 if (resultado.Read())
                 {
                     resu = resultado.GetDecimal(0);
