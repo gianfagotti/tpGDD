@@ -24,8 +24,7 @@ namespace FrbaHotel.AbmUsuario
             usuario = usuarioSeleccionado;
             ultimoForm = formAnterior;
             InitializeComponent();
-            //dtpFechaNac.Value = VarGlobales.getDate();
-            llenarCampos();
+            llenarCampos(); /*Relleno los campos con los datos provenientes de la BD del usuario seleccionado en el form anterior */
         }
 
 
@@ -40,8 +39,9 @@ namespace FrbaHotel.AbmUsuario
             ultimoForm.Show();
         }
 
-        private void btnVaciar_Click(object sender, EventArgs e)
+        private void btnVaciar_Click(object sender, EventArgs e) /*Vacío textos y cbo's*/
         {
+            
             Action<Control.ControlCollection> func = null;
 
             func = (controls) =>
@@ -69,9 +69,11 @@ namespace FrbaHotel.AbmUsuario
             Boolean exito = chequearCampos();
             if (exito)
             {
+                /*Convierto la fecha para su uso en sql*/
                 DateTime fecha = Convert.ToDateTime(dtpFechaNac.Value);
                 string fechaNacimiento = fecha.Date.ToString("yyyyMMdd HH:mm:ss");
 
+                /*Creo la query para la ejecución del procedure*/
                 string exe = "EXEC FAGD.updatearDatosUsuario ";
                 exe = exe + "'" + usuario + "', ";
                 exe = exe + "'" + txtNombre.Text + "', ";
@@ -85,6 +87,7 @@ namespace FrbaHotel.AbmUsuario
 
 
                 decimal resultado = 0;
+                /*ejecuto la query*/
                 reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
                 if (reader.Read())
                 {
@@ -92,12 +95,14 @@ namespace FrbaHotel.AbmUsuario
                 }
 
                 reader.Close();
+                /*Verifico errores*/
                 if (resultado == 0)
                 {
                     MessageBox.Show("Ya existe un usuario con ese mail", "Error");
                     txtMail.Focus();
                 }
                 else
+                    /*Confirmo al usuario la transacción*/
                 {
                     MessageBox.Show("Usuario guardado correctamente!", "Usuario Guardado");
                     ultimoForm.Show();
@@ -113,7 +118,7 @@ namespace FrbaHotel.AbmUsuario
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private Boolean chequearCampos()
+        private Boolean chequearCampos() /*Nuevamente, checkeo campos vacíos, si el usuario es >16 y si el mail tiene un formato correcto*/
         {
 
             if (string.IsNullOrEmpty(txtNombre.Text) ||
@@ -159,7 +164,7 @@ namespace FrbaHotel.AbmUsuario
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private void llenarCampos() {
-
+            /*Realizo una query que me traiga los datos del usuario para llenar los campos con los mismos*/
             String select = "SELECT * FROM FAGD.Usuario WHERE usuario_username = '"+usuario+"'";
             tabla = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta(select);
             txtUsername.Text = usuario;
@@ -174,7 +179,7 @@ namespace FrbaHotel.AbmUsuario
            
         }
 
-
+        /*Inhabilito uso de letras en documento y telefono*/
         private void txtDocumento_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -191,6 +196,7 @@ namespace FrbaHotel.AbmUsuario
             }
         }
 
+        /*valido formato del mail*/
          private static bool validarEmail(string email)
         {
             try

@@ -50,7 +50,7 @@ namespace FrbaHotel.AbmUsuario
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+        /*Lleno el combo box con todos los hoteles donde NO trabaja el usuario a actualizar*/
         private void llenarCboHotel() {
             String select = "SELECT hotel_calle, hotel_nroCalle FROM FAGD.Hotel WHERE hotel_codigo "
                           + "NOT IN (SELECT hotel_codigo FROM FAGD.UsuarioXRolXHotel WHERE '" + usuario + "' = usuario_username)";
@@ -67,7 +67,7 @@ namespace FrbaHotel.AbmUsuario
         }
 
 
-
+        /*lleno el combo box con todos los roles (exceptuando 'administrador general')*/
         private void llenarCboRol() {
             String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador general'";
 
@@ -86,7 +86,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Boolean exito = checkearCampos();
+            Boolean exito = checkearCampos(); /*checkeo que los campos estén completos*/
 
             if (exito) { 
                 String direccionHotelR = cboHotel.Text;
@@ -96,17 +96,19 @@ namespace FrbaHotel.AbmUsuario
                 String rol = cboRol.Text;
     
                 string exe = "EXEC FAGD.nuevoPuesto '" + usuario + "', '" + calle + "', '" + nro + "', '" + rol +"'";
-                
-                
                 decimal resultado = 0;
+                
+                /*genero el nuevo puesto en el hotel ingresado*/
                 reader2 = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
                 if (reader2.Read())
                 {
                     resultado = reader2.GetDecimal(0);
                 }
                 reader2.Close();
+                /*Verifico posibles errores*/
                 if (resultado == 0) MessageBox.Show("Hubo un error al crear el puesto.", "Error");
                 else{
+                    /*Notifico del éxito y vuelvo al menú de modificación*/
                     MessageBox.Show("Puesto guardado correctamente!", "Usuario Guardado");
                     menu.Show();
                     ultimoFormulario.Close();
@@ -116,8 +118,6 @@ namespace FrbaHotel.AbmUsuario
             }
           }
          
-
-
         private Boolean checkearCampos() {
 
             if (string.IsNullOrEmpty(cboHotel.Text) || string.IsNullOrEmpty(cboRol.Text)) {

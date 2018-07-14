@@ -21,6 +21,8 @@ namespace FrbaHotel.AbmRol
             txtfechinia.Text = Login.FrmTipoUsuario.fechaApp.ToString("dd/MM/yyyy");
         }
 
+
+        /*Se habilitan los Group boxes según las funcionalidades del rol escogido al iniciar sesión*/
         private void habilitarGroupsBoxs(decimal codigoRol)
         {
             resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT DISTINCT F.funcionalidad_detalle FROM FAGD.RolXFuncionalidad R, FAGD.Funcionalidad F where R.funcionalidad_codigo = F.funcionalidad_codigo and  R.rol_codigo =" + codigoRol.ToString() + ";");
@@ -66,6 +68,7 @@ namespace FrbaHotel.AbmRol
         }
 
 
+        /*Seteo de funcionalidades de los botones del menú del Empleado*/
         private void btnNuevaReserva_Click(object sender, EventArgs e)
         {
             GenerarModificacionReserva.GenerarReserva frmGenerarReserva = new GenerarModificacionReserva.GenerarReserva(this);
