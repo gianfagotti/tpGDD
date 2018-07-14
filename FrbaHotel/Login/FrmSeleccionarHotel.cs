@@ -27,7 +27,7 @@ namespace FrbaHotel.Login
 
         public FrmSeleccionarHotel(String usuario)
         {
-            checkearHoteles();
+            checkearHoteles();                                                                                                                                  //Se llama a esta funcion cada vez que se cargue este formulario, con el fin de actualizar, segun la fecha del app.config, el estado de los hoteles. (habilitado o inhabilitado)
             usuarioIngresado = usuario;
             InitializeComponent();
 
@@ -36,7 +36,7 @@ namespace FrbaHotel.Login
             {
                 if (string.IsNullOrEmpty(tabla.Rows[Fila][3].ToString()))
                 {
-                    cboSeleccionarHotel.Items.Add(tabla.Rows[Fila][0].ToString() + "-" + tabla.Rows[Fila][1].ToString() + " " + tabla.Rows[Fila][2]);
+                    cboSeleccionarHotel.Items.Add(tabla.Rows[Fila][0].ToString() + "-" + tabla.Rows[Fila][1].ToString() + " " + tabla.Rows[Fila][2]);           //En esta seccion de codigo se cargan todos los hoteles del usuario logueado al combo box. Si sus hoteles asociados tienen un nombre, se carga el codigo del hotel, un guion, y dicho nombre; de no ser asi, se carga el codigo del hotel, un guion, la calle y altura.
                 }
                 else
                 {
@@ -61,7 +61,7 @@ namespace FrbaHotel.Login
         {
             if (string.IsNullOrEmpty(cboSeleccionarHotel.Text))
             {
-                MessageBox.Show("Por favor, seleccione un hotel", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Por favor, seleccione un hotel", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);                                                                         //Se valida que se seleccione algun hotel.
             }
             else
             {
@@ -70,13 +70,13 @@ namespace FrbaHotel.Login
                 tabla2 = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT * FROM [GD1C2018].[FAGD].[Hotel] WHERE hotel_estado = " + 0 + "AND hotel_codigo = " + codigoHotel);
                 if (tabla2.Rows.Count == 1)
                 {
-                    MessageBox.Show("El hotel está inhabilitado, tenga en cuenta que algunas funcionalidades se verán reducidas", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("El hotel está inhabilitado, tenga en cuenta que algunas funcionalidades se verán reducidas", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); //Se obtiene el codigo del hotel seleccionado en el combo box. Si dicho hotel esta inhabilitado para la fecha actual del sistema, se le avisa al usuario que algunas funcionalidades estarán reducidas.
                 }
                 tabla3 = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT rol_nombre, FAGD.Rol.rol_codigo FROM FAGD.Rol JOIN FAGD.UsuarioXRolXHotel ON (FAGD.Rol.rol_codigo = FAGD.UsuarioXRolXHotel.rol_codigo) WHERE hotel_codigo = " + codigoHotel + " AND usuario_username = '" + usuarioIngresado + "'");
                 if (tabla3.Rows.Count == 1)
                 {
                     codigoRol = Convert.ToDecimal(tabla3.Rows[0][1]);
-                    AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado(codigoRol);
+                    AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado(codigoRol);                                                                                               //Se chequea la cantidad de roles asignados que tiene el usuario logueado para el hotel seleccionado con la BD. Si es uno solo, se entra a la aplicacion con dicho rol, de no ser asi, se abre el formulario que le permite seleccionar el rol deseado.
                     this.Close();
                     frmMenuEmpleado.Show();
                 }
@@ -96,7 +96,7 @@ namespace FrbaHotel.Login
             frmTipoUsuario.Show();
         }
 
-        private void checkearHoteles(){
+        private void checkearHoteles(){                                                                                                                                                              //Funcion que se encarga de actualizar los estados de todos los hoteles para la fecha actual.
 
             string fecha = fechaArchivoConfiguracion.ToString("yyyy-MM-dd");
 

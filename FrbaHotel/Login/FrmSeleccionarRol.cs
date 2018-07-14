@@ -23,7 +23,7 @@ namespace FrbaHotel.Login
         {
             InitializeComponent();
             codigoHotel = codigoHotelRecibido;
-            usuarioIngresado = usuarioIngresadoRecibido;
+            usuarioIngresado = usuarioIngresadoRecibido;                                                                                 //Se cargan todos los roles registrados para el usuario logueado, para el hotel seleccionado, en un combo box del cual el usuario debera elegir.
             tabla = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT rol_nombre, FAGD.Rol.rol_codigo FROM FAGD.Rol JOIN FAGD.UsuarioXRolXHotel ON (FAGD.Rol.rol_codigo = FAGD.UsuarioXRolXHotel.rol_codigo) WHERE hotel_codigo = " + codigoHotel + " AND usuario_username = '" + usuarioIngresado + "' AND rol_estado = 1");
             while (i < tabla.Rows.Count)
                 {
@@ -53,7 +53,7 @@ namespace FrbaHotel.Login
         {
             if (string.IsNullOrEmpty(cmbRolesRegistrados.Text))
             {
-                MessageBox.Show("Por favor, seleccione uno de sus roles registrados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Por favor, seleccione uno de sus roles registrados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);                                             //Se valida que se haya seleccionado algo del combo box.
             }
             else
             {
@@ -62,7 +62,7 @@ namespace FrbaHotel.Login
                 {
                     codigoRol = resultado.GetDecimal(0);
                     resultado.Close();
-                    AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado(codigoRol);
+                    AbmRol.frmMenuEmpleado frmMenuEmpleado = new AbmRol.frmMenuEmpleado(codigoRol);                                                                                     //Se ingresa al sistema con el rol, hotel y usuario ingresados en los formularios.
                     this.Close();
                     frmMenuEmpleado.Show();
                 }

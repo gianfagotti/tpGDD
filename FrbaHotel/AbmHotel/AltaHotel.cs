@@ -37,9 +37,9 @@ namespace FrbaHotel.AbmHotel
             while (regimenes.Read() == true)
             {
                 this.clbRegimenes.Items.Add(regimenes.GetSqlString(0), true);
-            }
+            }                                                                                                                                       //Se carga la fecha del sistema segun el app config. en el date time picker, como sugerencia inicial.
             regimenes.Close();
-            dtpFechaCreacionHotel.Value = Login.FrmTipoUsuario.fechaApp;
+            dtpFechaCreacionHotel.Value = Login.FrmTipoUsuario.fechaApp;                                                                           //Se cargan como opción de un checked list box, todos los regimenes registrados, para que el usuario elija cuales tendrá el hotel.
         }
 
         private void lblMail_Click(object sender, EventArgs e)
@@ -63,7 +63,7 @@ namespace FrbaHotel.AbmHotel
 
             func = (controls) =>
             {
-                foreach (Control control in controls)
+                foreach (Control control in controls)                                                                                               //Se borran todos los textbox y se vuelve los comobo box a su estado original.
                     if (control is TextBox)
                         (control as TextBox).Clear();
                     else
@@ -89,7 +89,7 @@ namespace FrbaHotel.AbmHotel
             func = (controls) =>
             {
                 foreach (Control control in controls)
-                    if (control is TextBox && string.IsNullOrEmpty(control.Text))
+                    if (control is TextBox && string.IsNullOrEmpty(control.Text))                                                                       //Se validan que todos los textbox asi como los combo box esten completos.
                         txtsVacios++;
                     else
                         func(control.Controls);
@@ -110,7 +110,7 @@ namespace FrbaHotel.AbmHotel
                 hoteles = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT hotel_nombre FROM FAGD.Hotel WHERE hotel_nombre = '" + nombreHotelIngresado + "'");
                 if (hoteles.Rows.Count == 1)
                 {
-                    MessageBox.Show("Ya existe un hotel con ese nombre, ingrese un nombre válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ya existe un hotel con ese nombre, ingrese un nombre válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);                                    //Se valida que en la base de datos no haya hoteles con el nombre ingresado en el textbox nombreHotel.
                     return;
                 }
                 calleHotelIngresado = this.txtCalleHotel.Text;
@@ -118,7 +118,7 @@ namespace FrbaHotel.AbmHotel
                 callesYAlturas = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta("SELECT hotel_calle, hotel_nroCalle FROM FAGD.Hotel WHERE hotel_calle = '" + calleHotelIngresado + "' AND hotel_nroCalle = " + alturaHotelIngresado);
                 if (callesYAlturas.Rows.Count != 0)
                 {
-                    MessageBox.Show("Ya existe un hotel con esa dirección, ingrese un dirección válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ya existe un hotel con esa dirección, ingrese un dirección válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);                              //Se valida que no haya un hotel en la base de datos que tenga la misma dirección que la ingresada en el formulario.
                 }
                 else
                 {
@@ -128,18 +128,18 @@ namespace FrbaHotel.AbmHotel
                     recargaEstrellasHotelIngresado = this.txtRecargaPorEstrellasHotel.Text;
                     ciudadHotelIngresado =  this.txtCiudadHotel.Text;
                     paisHotelIngresado = this.txtPaisHotel.Text;
-                    fechaCreacionHotelIngresado = Convert.ToDateTime(this.dtpFechaCreacionHotel.Value);
+                    fechaCreacionHotelIngresado = Convert.ToDateTime(this.dtpFechaCreacionHotel.Value);                                                                                       //De no haber ningun tipo de repetidos o inconvenientes, se carga el hotel en la base de datos.
                     fechaCreacionHotelIngresadoPosta = fechaCreacionHotelIngresado.Date.ToString("yyyyMMdd HH:mm:ss");
                     resultadosCreacionDeHotel = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("EXEC FAGD.insertarHotel " + estrellasHotelIngresado + ", " + recargaEstrellasHotelIngresado + ", '" + paisHotelIngresado + "', '" + ciudadHotelIngresado + "', '" + calleHotelIngresado + "', " + alturaHotelIngresado + ", '" + nombreHotelIngresado + "', '" + fechaCreacionHotelIngresadoPosta + "', '" + mailHotelIngresado + "', " + telefonoHotelIngresado);
                     resultadosCreacionDeHotel.Close();
                     foreach(object itemChecked in clbRegimenes.CheckedItems)
                     {
-                        resultadosCreacionDeRegimen = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("EXEC FAGD.insertarRegimenDeHotelCreado '"+nombreHotelIngresado+"', '"+itemChecked.ToString()+"'");
+                        resultadosCreacionDeRegimen = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("EXEC FAGD.insertarRegimenDeHotelCreado '"+nombreHotelIngresado+"', '"+itemChecked.ToString()+"'"); //Se carga uno por uno los regimenes seleccionados, para el hotel creado.
                         resultadosCreacionDeRegimen.Close();
                     }
                     MessageBox.Show("Hotel creado satisfactoriamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Hide();
-                    SeleccionarAdministrador frmSeleccionarAdministrador = new SeleccionarAdministrador(frmMenuEmpleado, nombreHotelIngresado);
+                    SeleccionarAdministrador frmSeleccionarAdministrador = new SeleccionarAdministrador(frmMenuEmpleado, nombreHotelIngresado);                                                 //Se le avisa al usuario que el hotel fue correctamente ingresado.
                     frmSeleccionarAdministrador.Show();
                 }
             }
@@ -166,7 +166,7 @@ namespace FrbaHotel.AbmHotel
             {
                 e.Handled = false;
             }
-            else if (Char.IsControl(e.KeyChar))
+            else if (Char.IsControl(e.KeyChar))                                                                             //Funcion que solo permite que se ingresen numeros en los txts, de no apretar un numero en el teclado, no se carga
             {
                 e.Handled = false;
             }
@@ -190,7 +190,7 @@ namespace FrbaHotel.AbmHotel
              {
                  e.Handled = false;
              }
-             else if (Char.IsSeparator(e.KeyChar))
+             else if (Char.IsSeparator(e.KeyChar))                                                                              //Funcion que solo permite que se carguen letras en los txts, de no apretar una letra en el teclado, no se carga.
              {
                  e.Handled = false;
              }
