@@ -41,7 +41,7 @@ namespace FrbaHotel.AbmRol
         /*Envío el rol seleccionado como parámetro al formulario de modificación*/
         private void btnContinuar_Click(object sender, EventArgs e)
         {
-            AbmRol.ModificarRol modificarRol = new AbmRol.ModificarRol(this, rolSeleccionado);
+            AbmRol.ModificarRol modificarRol = new AbmRol.ModificarRol(this, frmMenuEmpleado, rolSeleccionado);
             this.Hide();
             modificarRol.Show();
         }

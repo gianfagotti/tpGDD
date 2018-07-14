@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.dtpFechaNac = new System.Windows.Forms.DateTimePicker();
-            this.btnVaciar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.cboDocumento = new System.Windows.Forms.ComboBox();
@@ -62,16 +61,6 @@
             this.dtpFechaNac.Size = new System.Drawing.Size(306, 20);
             this.dtpFechaNac.TabIndex = 8;
             this.dtpFechaNac.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            // 
-            // btnVaciar
-            // 
-            this.btnVaciar.Location = new System.Drawing.Point(14, 256);
-            this.btnVaciar.Name = "btnVaciar";
-            this.btnVaciar.Size = new System.Drawing.Size(93, 23);
-            this.btnVaciar.TabIndex = 50;
-            this.btnVaciar.Text = "Vaciar campos";
-            this.btnVaciar.UseVisualStyleBackColor = true;
-            this.btnVaciar.Click += new System.EventHandler(this.btnVaciar_Click);
             // 
             // btnVolver
             // 
@@ -259,7 +248,6 @@
             this.ClientSize = new System.Drawing.Size(435, 289);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dtpFechaNac);
-            this.Controls.Add(this.btnVaciar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.cboDocumento);
@@ -290,7 +278,6 @@
         #endregion
 
         private System.Windows.Forms.DateTimePicker dtpFechaNac;
-        private System.Windows.Forms.Button btnVaciar;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.ComboBox cboDocumento;

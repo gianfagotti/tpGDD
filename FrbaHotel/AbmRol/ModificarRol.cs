@@ -14,16 +14,18 @@ namespace FrbaHotel.AbmRol
     public partial class ModificarRol : Form
     {
         Form ultimoFormulario;
+        Form frmEmpleado;
         SqlDataReader resultado;
         SqlDataAdapter adapter;
         DataTable tabla, tabla2;
         DataTable tablaChk;
         String rolAModificar;
 
-        public ModificarRol(Form form, String rolSeleccionado)
+        public ModificarRol(Form form, Form form2, String rolSeleccionado)
         {
             rolAModificar = rolSeleccionado;
             ultimoFormulario = form;
+            frmEmpleado = form2;
 
             InitializeComponent();
 
@@ -171,7 +173,7 @@ namespace FrbaHotel.AbmRol
                     MessageBox.Show("Rol guardado correctamente!");
                     limpiarCampos();
                     this.Close();
-                    ultimoFormulario.Show();
+                    frmEmpleado.Show();
                 }
             }
         }

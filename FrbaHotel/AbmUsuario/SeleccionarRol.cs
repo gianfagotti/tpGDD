@@ -112,7 +112,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void llenarCboRol() {
             /*traigo los roles...*/
-            String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador General' AND ";
+            String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador General' AND rol_nombre <> 'Cliente' AND ";
             /*...que no ejerce el usuario*/
             if (alta){
                 select = select + "rol_codigo NOT IN (SELECT rol_codigo FROM FAGD.UsuarioXRolXHotel WHERE usuario_username = '"

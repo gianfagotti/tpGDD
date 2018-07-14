@@ -172,11 +172,13 @@ namespace FrbaHotel.AbmUsuario
                 }
                 else
                 {
-                    if (funcionesGlobales.validarEmail(txtMail.Text)) /*valido que el mail tenga un formato correcto*/
+                    if (!funcionesGlobales.validarEmail(txtMail.Text)) /*valido que el mail tenga un formato correcto*/
                     {
-                        return true;
+                        MessageBox.Show("El mail debe tener un formato válido.", "Error");
+                        return false;
                     }
-                    else return false;
+                    else return true;
+                   
                 }
             }
 
@@ -190,7 +192,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void cargarComboRol() /*Cargo los roles a insertar en el combo box, exceptuando 'Administrador general' */
         {
-            String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador general'";
+            String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador general' AND rol_nombre <> 'Cliente'";
             DataTable tabla = new DataTable();
 
             reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(select);

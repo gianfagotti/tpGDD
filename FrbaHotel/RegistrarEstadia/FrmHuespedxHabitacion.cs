@@ -108,6 +108,7 @@ namespace FrbaHotel.RegistrarEstadia
                             tablaConInfoHuespedes.Rows.RemoveAt(index);
                             dgvDistri.DataSource = tablaConInfoHuespedes;
                             infoQuery.Close();
+                            this.Close();
                         }
                         else
                         {

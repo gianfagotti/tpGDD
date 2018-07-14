@@ -145,6 +145,13 @@
             // 
             this.cboTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTipoDoc.FormattingEnabled = true;
+            this.cboTipoDoc.Items.AddRange(new object[] {
+            "DNI",
+            "PASAPORTE",
+            "CARNET EXT.",
+            "RUC",
+            "P. NACI.",
+            "OTROS"});
             this.cboTipoDoc.Location = new System.Drawing.Point(136, 65);
             this.cboTipoDoc.Name = "cboTipoDoc";
             this.cboTipoDoc.Size = new System.Drawing.Size(149, 21);

@@ -39,25 +39,6 @@ namespace FrbaHotel.AbmUsuario
             ultimoForm.Show();
         }
 
-        private void btnVaciar_Click(object sender, EventArgs e) /*Vacío textos y cbo's*/
-        {
-            
-            Action<Control.ControlCollection> func = null;
-
-            func = (controls) =>
-                {
-                    foreach (Control control in controls)
-                        if (control is TextBox)
-                            (control as TextBox).Clear();
-                        else
-                            func(control.Controls);
-                };
-
-            func(Controls);
-            cboDocumento.SelectedIndex = -1;
-
-        }
-
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -149,11 +130,12 @@ namespace FrbaHotel.AbmUsuario
                 }
                 else
                 {
-                    if (funcionesGlobales.validarEmail(txtMail.Text))
+                    if (!funcionesGlobales.validarEmail(txtMail.Text))
                     {
-                        return true;
+                        MessageBox.Show("El mail debe tener un formato correcto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
                     }
-                    else return false;
+                    else return true;
                 }
             }
         }
