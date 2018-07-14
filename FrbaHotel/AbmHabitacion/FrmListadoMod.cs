@@ -85,7 +85,7 @@ namespace FrbaHotel.AbmHabitacion
 
         private void butBuscar_Click(object sender, EventArgs e)
         {
-            string consulta = "SELECT H.habitacion_codigo Codigo, H.habitacion_nro Numero, H.habitacion_piso Piso, H.habitacion_ubicacion Ubicacion, H.habitacion_descripcion Descripcion, H.habitacion_estado Estado, T.habitacionTipo_descripcion FROM FAGD.Habitacion H, FAGD.HabitacionTipo T WHERE habitacion_codigoHotel = " + codigoHotel;
+            string consulta = "SELECT H.habitacion_codigo Codigo, H.habitacion_nro Numero, H.habitacion_piso Piso, H.habitacion_ubicacion Ubicacion, H.habitacion_descripcion Descripcion, H.habitacion_estado Estado, T.habitacionTipo_descripcion as 'Tipo habitación' FROM FAGD.Habitacion H, FAGD.HabitacionTipo T WHERE habitacion_codigoHotel = " + codigoHotel;
             consulta = consulta + "AND H.habitacion_tipoCodigo = T.habitacionTipo_codigo";
             string query = "";
 
