@@ -1012,6 +1012,11 @@ GO
 
 -----------------------	  PROCEDIMIENTOS PARA LISTADO ESTADÍSTICO    -----------------------
 
+/*
+Este procedimiento filtra y ordena 5 hoteles con mayor cantidad de reservas canceladas, contabilizando la cantidad de registros que aparecen en la tablaReservaCancelada
+que se relacionen con reservas que poseen habitaciones que pertenecen al hotel en cuestión.
+*/
+
 CREATE PROCEDURE FAGD.ListadoHotelesMayorCantidadReservasCanceladas @trimestreInicio DATETIME, @trimestreFin DATETIME
 AS	BEGIN
 		
@@ -1040,7 +1045,11 @@ GO
 
 ---------------------------------------------------------------------------------------------------
 
-
+/*
+Este procedimiento filtra y ordena 5 hoteles con mayor cantidad de consumibles facturados, limitados por inicio y fin de un trimestre en un año en particular.
+Se busca todas las facturas que pertenezcan a estadias que transcurren gracias a reservas de habitaciones de cada uno de los hoteles 
+y se contabiliza la cantidad de registros que dicha tabla resultado genera.
+*/
 
 CREATE PROCEDURE FAGD.ListadoHotelesMayorCantidadConsumFacturados @trimestreInicio DATETIME, @trimestreFin DATETIME
 AS BEGIN
@@ -1069,6 +1078,13 @@ GO
 
 ---------------------------------------------------------------------------------------------------
 
+
+/*
+Este procedimiento filtra y ordena 5 hoteles con mayor cantidad de días de baja, limitado por trimestre inicio y fin en un año en particular. 
+Se busca al hotel para determinar si su codigo figura en la tabla BajaHotel y en base a si pertenece se contabilizan la cantidad de dias que el hotel
+permanecio de baja. Si casualmente la baja del hotel concluye posteriormente al trimestre, solo se contabilizan estrictamente los dias desde que comienza hasta
+que el trimestre finaliza, y de no suceder esto, se contabilizan todos los que transcurran hasta que la fecha de finalizacion de la baja lo indique.
+*/
 
 CREATE PROCEDURE FAGD.ListadoHotelesMayorCantidadDiasDeBaja @trimestreInicio DATETIME, @trimestreFin DATETIME
 AS BEGIN
@@ -1108,6 +1124,14 @@ GO
 
 ---------------------------------------------------------------------------------------------------
 
+/*
+Este procedimiento filtra y ordena 5 habitaciones con mayor cantidad de días de uso, limitado por trimestre inicio y fin en un año en particular. Se localiza en la tabla
+ReservaXHabitacion que relaciona las habitaciones con las reservas que las involucra y se cerciora que dicha reserva ha sido efectivizada, es decir
+un codigo estadia se ha generado a partir de ella. Finalmente se cuentan la cantidad de veces que aparece el codigo de cada habitacion para
+revisar cuantas veces se efectivizo una estadia para esa habitacion y se suma la cantidad de noches  del campo reserva para determinar exactamente 
+cuantos dias dicha habitacion fue utilizada.
+*/
+
 CREATE PROCEDURE FAGD.ListadoHabitacionesMasVecesUtilizadas @trimestreInicio DATETIME, @trimestreFin DATETIME 
 AS BEGIN
 
@@ -1142,6 +1166,11 @@ GO
 
 ---------------------------------------------------------------------------------------------------
 
+/*
+Este procedimiento filtra y ordena 5 clientes con mayor puntaje segun un trimestre, limitado por trimestre inicio y fin en un año en particular. A partir de esto se filtran aquellos 
+item facturas de una factura que corresponden a una estadia en la que ese cliente participo y se contabilizan tanto si son gastos de alojamientos, como si son 
+consumibles, seleccionados en consultas separadas pero adicionados al final.
+*/
 
 CREATE PROCEDURE FAGD.ListadoClientesConMayoresPuntajes @trimestreInicio DATETIME, @trimestreFin DATETIME
 AS	BEGIN
@@ -1181,6 +1210,13 @@ GO
 
 
 ---------------------------------------------------------------------------------------------------
+
+/*
+Actualiza los valores en el estado de reserva a partir de la fecha de configuracion actual del sistema, siendo cancelada por no show si
+ya paso la fecha de inicio pactada o correcta si todavia esta por venir. Adicionalmente se suman los inserts a reservaCancelada para aquellas reservas
+que si han expirado. Aclaracion: se borra de la tabla cancelada estos registros cargados excepcionalmente por no show de fecha config al principio del 
+procedure por cuestiones de performance.
+*/
 
 CREATE PROCEDURE FAGD.SetearEstadosReservaSegunConfig @fechaDelConfig DATETIME
 AS BEGIN
@@ -1228,6 +1264,11 @@ GO
 
 ---------------------------------------------------------------------------------------------------
 
+/*
+Realiza el checkin de una reserva, actualizando el estado a efectivizada (6), y cargando los valores de cantidad de noches y el precio de noche preCalculados
+gracias a los campos de reserva que serán aprovechados en la inserción del nuevo registro de Estadía.
+*/
+
 CREATE PROCEDURE FAGD.CheckinParaEstadia @reservaNro numeric(18,0), @username nvarchar(255), @fechaInicio DATETIME
 AS BEGIN
 
@@ -1269,6 +1310,9 @@ GO
 
 ------------------------------------------------------------------------------
 
+/*
+Se registra la estadia tomando a cada cliente del formulario que se asocio a la estadia que esta por iniciarse insertando ambos campos en la tabla intermedia.
+*/
 
 CREATE PROC FAGD.ConfirmarEstadiaXCliente @clienteCodigo numeric(18,0), @estadiaCodigo numeric(18,0)
 AS BEGIN
@@ -1292,6 +1336,10 @@ GO
 
 ------------------------------------------------------------------------------
 
+/*
+Se registra la habitacion que el cliente asociada a la estadia particular utilizará
+*/
+
 CREATE PROC FAGD.SeleccionarHabitacionDeCliente @habitacion numeric(18,0), @cliente numeric(18,0), @estadia numeric(18,0)
 AS BEGIN
 
@@ -1313,6 +1361,13 @@ END
 GO
 
 ------------------------------------------------------------------------------
+
+/*
+Se efectiviza el checkout para todas las habitaciones de una estadia, comprobando la cantidad de dias que realmente se utilizaron de los que originalmente estaban
+previstos que el cliente aprovechara, para establecer la nueva fecha de finalizacion y tener en cuenta cuantos dias de la estadia se facturarán como
+"Dia no utilizado de Alojamiento" mas adelante en la factura.
+*/
+
 
 CREATE PROC FAGD.CheckoutParaEstadia @nroEstadia numeric(18,0), @fechaDelCheckout DATETIME, @username nvarchar(255)
 AS BEGIN
@@ -1364,6 +1419,11 @@ END
 GO
 
 ------------------------------------------------------------------------------
+
+/*
+Se registra un consumible solicitado por una habitacion de una estadia en particular, para lo cual se actualiza un itemFactura asociado a la factura que fue 
+creada en la instancia de check-in para luego poder liquidar todos los consumos de manera unificada en la facturacion al momento del egreso.
+*/
 
 CREATE PROCEDURE FAGD.RegistrarConsuXEstXHabitacion @estadiaCodigo numeric(18,0), @consumibleCodigo numeric(18,0), @habCodigo numeric(18,0)
 AS BEGIN
@@ -1418,6 +1478,12 @@ GO
 
 -----------------------------------------------------------------------------
 
+/*
+Se genera la factura al instante de validarse el check-in para una estadía, dejando en NULL varios de los campos menos la fecha en que se genero, para poder
+asociar los itemFactura adecuados posteriormente. El campo total es cargado con los costos de la estadia o consumiciones si los hubiese por alguna situacion
+excepcional, pero posteriormente serán actualizados.
+*/
+
 CREATE PROCEDURE FAGD.RegistrarDatosInicialesFactura  @estadia numeric(18,0), @fechaActual DATETIME
 AS BEGIN
 
@@ -1465,6 +1531,12 @@ GO
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
+/*
+Se actualiza la factura previamente creada con los valores definitivos, tanto el total a pagar, como la fecha de facturacion definitiva (en la que será impresa)
+y además se detallara finalmente la modalidad de pago que el cliente utilizará. En vistas de que el check-out de la estadia es OBLIGATORIO para que se le pueda efectuar
+la facturación definitiva en todos los casos la factura quedara con un valor de forma de pago definido y este no es contemplado en las instancias del check-in.
+*/
+
 CREATE PROC FAGD.EmitirFacturaActualizada @estadiaCodigo numeric(18,0), @modalidadPago numeric(18,0), @inicioDeEstadia DATETIME
 AS BEGIN
 
@@ -1511,6 +1583,11 @@ GO
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+Si el cliente eligio abonar su factura con tarjeta de credito/debito, este procedimiento registra los datos (a excepcion del codigo de seguridad) de la tarjeta
+que se utilizará para concretar el pago asociandola a la factura correspondiente.
+*/
 
 CREATE PROC FAGD.AsociarTarjetaParaPago  @factura numeric(18), @entidadFinanc nvarchar(255), @numeroTarj numeric(18), @banco nvarchar(255), @titular nvarchar(255)
 AS BEGIN
