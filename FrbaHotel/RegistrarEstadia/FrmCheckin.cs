@@ -72,6 +72,25 @@ namespace FrbaHotel.RegistrarEstadia
                 MessageBox.Show("Debe ingresar un numero de reserva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            resultadoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT reserva_clienteCodigo FROM FAGD.Reserva WHERE reserva_codigo = " + txtReserv.Text);
+            if (resultadoQuery.Read() == true)
+            {
+                try
+                 {
+                     decimal prueba = resultadoQuery.GetDecimal(0);
+                     resultadoQuery.Close();
+                 }
+                 catch
+                 {
+                     MessageBox.Show("No se puede hacer el check-in, de un cliente erroneo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                     resultadoQuery.Close();
+                     return;
+                 }
+            }
+
+            resultadoQuery.Close();
+
             resultadoQuery = Login.FrmTipoUsuario.conexionBaseDeDatos.comando("SELECT reserva_codigo, reserva_estado, reserva_fechaInicio, reserva_fechaFin FROM FAGD.Reserva WHERE reserva_codigo = " + txtReserv.Text);
             if (resultadoQuery.Read() == true)
             {

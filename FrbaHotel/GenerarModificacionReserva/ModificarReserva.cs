@@ -57,7 +57,9 @@ namespace FrbaHotel.GenerarModificacionReserva
                 }
                 catch
                 {
-                    txtCliente.Text = resultado.GetDecimal(6).ToString();
+                    MessageBox.Show("El cliente de la reserva es erroneo, por favor cancele la reserva y genere una nueva", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    abmPadre.Show();
+                    this.Shown += new EventHandler(ModificarReserva_CloseOnStart);
                 }
                 
                 hotel = resultado.GetDecimal(3).ToString();
