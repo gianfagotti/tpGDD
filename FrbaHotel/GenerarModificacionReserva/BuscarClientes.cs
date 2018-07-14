@@ -38,31 +38,13 @@ namespace FrbaHotel.GenerarModificacionReserva
             DataView dvData = new DataView(dTable);
             string query = "";
 
-            query = query + this.filtrarExactamentePor("TipoDoc", cboTipoDoc.Text);
+            query = query + funcionesGlobales.filtrarExactamentePor("TipoDoc", cboTipoDoc.Text);
 
-            query = query + this.filtrarExactamentePor("NroDoc", txtNroDoc.Text);
-            query = query + this.filtrarAproximadamentePor("Mail", txtMail.Text);
+            query = query + funcionesGlobales.filtrarExactamentePor("NroDoc", txtNroDoc.Text);
+            query = query + funcionesGlobales.filtrarAproximadamentePor("Mail", txtMail.Text);
             if (query.Length > 0) { query = query.Remove(query.Length - 4); }
             dvData.RowFilter = query;
             dataGridView1.DataSource = dvData;
-        }
-
-        private string filtrarExactamentePor(string columna, string valor)
-        {
-            if (!string.IsNullOrEmpty(valor))
-            {
-                return columna + " = '" + valor + "' AND ";
-            }
-            return "";
-        }
-
-        private string filtrarAproximadamentePor(string columna, string valor)
-        {
-            if (!string.IsNullOrEmpty(valor))
-            {
-                return columna + " LIKE '%" + valor + "%' AND ";
-            }
-            return "";
         }
 
         private void butVolver_Click(object sender, EventArgs e)
@@ -76,11 +58,8 @@ namespace FrbaHotel.GenerarModificacionReserva
             string query = "SELECT cliente_codigo CodigoCli, cliente_nombre Nombre,cliente_apellido Apellido,cliente_tipoDocumento TipoDoc,cliente_nroDocumento NroDoc,cliente_mail Mail from FAGD.Cliente";
             sAdapter = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(query);
             dTable = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(sAdapter);
-            //BindingSource to sync DataTable and DataGridView
             BindingSource bSource = new BindingSource();
-            //set the BindingSource DataSource
             bSource.DataSource = dTable;
-            //set the DataGridView DataSource
             dataGridView1.DataSource = bSource;
         }
 

@@ -36,7 +36,9 @@ namespace FrbaHotel.GenerarModificacionReserva
             tabla2 = new DataTable();
             reservaMod = codigoReserva;
 
+            //Cargo todos los datos de la reserva
             llenarCampos(codigoReserva);
+            //Cargo la data griv con las habitaciones reservadas
             llenarDataGriv(codigoReserva);
         }
 
@@ -217,11 +219,8 @@ namespace FrbaHotel.GenerarModificacionReserva
 
             sAdapter = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(query);
             dTable = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(sAdapter);
-            //BindingSource to sync DataTable and DataGridView
             BindingSource bSource = new BindingSource();
-            //set the BindingSource DataSource
             bSource.DataSource = dTable;
-            //set the DataGridView DataSource
             dgvAgregar.DataSource = bSource;
 
             dias = dtpHasta.Value.Date.Subtract(dtpDesde.Value.Date).Days;

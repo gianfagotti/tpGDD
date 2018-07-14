@@ -214,6 +214,7 @@
     <Compile Include="FacturarEstadia\FrmFacturarEstadia.Designer.cs">
       <DependentUpon>FrmFacturarEstadia.cs</DependentUpon>
     </Compile>
+    <Compile Include="funcionesGlobales.cs" />
     <Compile Include="GenerarModificacionReserva\BuscarClientes.cs">
       <SubType>Form</SubType>
     </Compile>

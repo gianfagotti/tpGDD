@@ -92,6 +92,7 @@ namespace FrbaHotel.GenerarModificacionReserva
         {
             clienteSeleccionado = "";
 
+            //Si es un invitado cargo todos los hoteles en el combo box
             if (Login.FrmTipoUsuario.usuario == "guest")
             {
                 cboHotel.Enabled = true;
@@ -113,9 +114,11 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
             else
             {
+                //Si es un usuario, limito el combo box al hotel al que inicio sesión
                 cboHotel.Items.Add(Login.FrmSeleccionarHotel.hotelSeleccionado);
                 cboHotel.SelectedIndex = 0;
 
+                //Cargo los tipos de habitación y las ubicaciones
                 consulta = "select distinct habitacionTipo_descripcion from FAGD.HabitacionTipo, FAGD.Habitacion, FAGD.Hotel where habitacionTipo_codigo = habitacion_tipoCodigo AND habitacion_codigoHotel = hotel_codigo AND hotel_codigo = " + Login.FrmSeleccionarHotel.codigoHotel;
                 resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(consulta);
                 cboTipoHabitacion.Items.Clear();
@@ -137,6 +140,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void cboHotel_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Cargos los tipos de habitación y ubicaciones cuando selecciona un hotel (Para los GUEST)
             codHotelSeleccionado = Convert.ToDecimal(cboHotel.Text.Split('-')[0]);
 
             consulta = "select distinct habitacionTipo_descripcion from FAGD.HabitacionTipo, FAGD.Habitacion, FAGD.Hotel where habitacionTipo_codigo = habitacion_tipoCodigo AND habitacion_codigoHotel = hotel_codigo AND hotel_codigo = " + codHotelSeleccionado;
@@ -165,6 +169,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         private void GenerarReserva_Activated(object sender, EventArgs e)
         {
+            //Cargo al text box el cliente seleccionado
             if (clienteSeleccionado != "")
             {
                 txtCliente.Text = clienteSeleccionado;
@@ -230,16 +235,14 @@ namespace FrbaHotel.GenerarModificacionReserva
 
             sAdapter = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(query);
             dTable = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(sAdapter);
-            //BindingSource to sync DataTable and DataGridView
             BindingSource bSource = new BindingSource();
-            //set the BindingSource DataSource
             bSource.DataSource = dTable;
-            //set the DataGridView DataSource
             dataGridView1.DataSource = bSource;
 
             dias = dtpHasta.Value.Date.Subtract(dtpDesde.Value.Date).Days;
         }
 
+        //Filtra todas las habitaciones disponibles segun los datos ingresados
         private void button1_Click(object sender, EventArgs e)
         {
             string codigoHabitacion = "";
@@ -329,6 +332,7 @@ namespace FrbaHotel.GenerarModificacionReserva
 
         }
 
+        //Data griv de las habitaciones disponibles
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
@@ -383,6 +387,7 @@ namespace FrbaHotel.GenerarModificacionReserva
             }
         }
 
+        //Data griv de las habitaciones a reservar
         private void dataGridView2_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)

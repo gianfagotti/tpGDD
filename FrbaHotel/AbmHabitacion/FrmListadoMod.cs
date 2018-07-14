@@ -65,35 +65,17 @@ namespace FrbaHotel.AbmHabitacion
             limpiarCampos();
         }
 
-        private string filtrarExactamentePor(string columna, string valor)
-        {
-            if (!string.IsNullOrEmpty(valor))
-            {
-                return columna + " = '" + valor + "' AND ";
-            }
-            return "";
-        }
-
-        private string filtrarAproximadamentePor(string columna, string valor)
-        {
-            if (!string.IsNullOrEmpty(valor))
-            {
-                return columna + " LIKE '%" + valor + "%' AND ";
-            }
-            return "";
-        }
-
         private void butBuscar_Click(object sender, EventArgs e)
         {
             string consulta = "SELECT H.habitacion_codigo Codigo, H.habitacion_nro Numero, H.habitacion_piso Piso, H.habitacion_ubicacion Ubicacion, H.habitacion_descripcion Descripcion, H.habitacion_estado Estado, T.habitacionTipo_descripcion as 'Tipo habitación' FROM FAGD.Habitacion H, FAGD.HabitacionTipo T WHERE habitacion_codigoHotel = " + codigoHotel;
             consulta = consulta + "AND H.habitacion_tipoCodigo = T.habitacionTipo_codigo";
             string query = "";
 
-            query = query + this.filtrarExactamentePor("H.habitacion_nro", txtNroHab.Text);
-            query = query + this.filtrarExactamentePor("H.habitacion_piso", txtPiso.Text);
-            query = query + this.filtrarExactamentePor("H.habitacion_ubicacion", cboUbicacion.Text);
-            query = query + this.filtrarExactamentePor("T.habitacionTipo_descripcion", cboTipoHabitacion.Text);
-            query = query + this.filtrarAproximadamentePor("H.habitacion_descripcion", txtDescripcion.Text);
+            query = query + funcionesGlobales.filtrarExactamentePor("H.habitacion_nro", txtNroHab.Text);
+            query = query + funcionesGlobales.filtrarExactamentePor("H.habitacion_piso", txtPiso.Text);
+            query = query + funcionesGlobales.filtrarExactamentePor("H.habitacion_ubicacion", cboUbicacion.Text);
+            query = query + funcionesGlobales.filtrarExactamentePor("T.habitacionTipo_descripcion", cboTipoHabitacion.Text);
+            query = query + funcionesGlobales.filtrarAproximadamentePor("H.habitacion_descripcion", txtDescripcion.Text);
 
             if (chkHabilitado.Checked)
             {

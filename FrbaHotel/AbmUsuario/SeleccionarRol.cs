@@ -29,6 +29,7 @@ namespace FrbaHotel.AbmUsuario
 
         public SeleccionarRol(Form seleccionarUsuario ,Form formAnterior, String usuarioSeleccionado, String hotel, Boolean habilitarAlta)
         {
+            /*recibo como parámetros el usuario a modificar, el hotel al cual se le habilitará/eliminará un rol a ejercer y el booleano que indica cual de estos casos se trata*/
             ultimoFormulario = formAnterior;
             menu = seleccionarUsuario;
             usuario = usuarioSeleccionado;
@@ -37,12 +38,14 @@ namespace FrbaHotel.AbmUsuario
 
             InitializeComponent();
 
+            /*Separo los datos del hotel seleccionado en calle y altura*/
             String direccionHotelR = direccion;
             string[] direccionHotel = direccionHotelR.Split(separacion);
             calle = direccionHotel[0];
             nro = direccionHotel[1];
 
-            llenarCboRol();
+            llenarCboRol(); /*lleno el cboRol con los roles que el usuario (no) desempeña en el hotel*/
+            /*cambio la descripción del label dependiendo del caso*/
             if (alta) lblDescripcion.Text = "Seleccione un rol a desempeñar en el hotel";
             else lblDescripcion.Text = "Seleccione el rol que dejará de desempeñar en el hotel";
             
@@ -57,6 +60,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
+            /*verifico que se haya selecionado un rol*/
             if (String.IsNullOrEmpty(cboRol.Text)) MessageBox.Show("Seleccione un rol!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else
             {
@@ -70,6 +74,7 @@ namespace FrbaHotel.AbmUsuario
                 }
                 reader.Close();
 
+                /*Muestro los mensajes correspondientes al alta de un rol*/
                 if (alta)
                 {
                     if (resultado == 0) MessageBox.Show("Hubo un error al guardar el puesto.", "Error");
@@ -77,6 +82,7 @@ namespace FrbaHotel.AbmUsuario
                     menu.Show();
                     this.Close();
                 }
+                /*Muestro los mensajes correspondientes a la baja de un rol*/
                 else
                 {
                     if (resultado == 0) MessageBox.Show("Hubo un error al borrar el puesto.", "Error");
@@ -90,6 +96,7 @@ namespace FrbaHotel.AbmUsuario
             }
         }
 
+        /*creo la consulta a ejecutar según si se quiere habilitar o inhabilitar el uso del rol*/
         private String crearConsulta(){
             rol = cboRol.Text;
             String consulta;
@@ -104,14 +111,15 @@ namespace FrbaHotel.AbmUsuario
     }
 
         private void llenarCboRol() {
-
+            /*traigo los roles...*/
             String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador General' AND ";
-
+            /*...que no ejerce el usuario*/
             if (alta){
                 select = select + "rol_codigo NOT IN (SELECT rol_codigo FROM FAGD.UsuarioXRolXHotel WHERE usuario_username = '"
                                 + usuario + "' AND hotel_codigo = (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_calle = '"
                                 + calle +"' AND hotel_nroCalle = '" + nro + "'))";
             }
+            /*...que ya ejerce el usuario*/
             else {
                 select = select + "rol_codigo IN (SELECT rol_codigo FROM FAGD.UsuarioXRolXHotel WHERE usuario_username = '"
                                 + usuario + "' AND hotel_codigo = (SELECT hotel_codigo FROM FAGD.Hotel WHERE hotel_calle = '"

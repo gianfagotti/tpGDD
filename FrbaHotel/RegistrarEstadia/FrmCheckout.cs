@@ -45,15 +45,6 @@ namespace FrbaHotel.RegistrarEstadia
             {
                 e.Handled = true;
             }
-        } 
-
-        private string filtrarExactamentePor(string columna, string valor)
-        {//filtrado puntual por campo de columna
-            if (!string.IsNullOrEmpty(valor))
-            {
-                return columna + " = '" + valor + "' AND ";
-            }
-            return "";
         }
 
         private void FrmCheckout_Load(object sender, EventArgs e)
@@ -75,10 +66,10 @@ namespace FrbaHotel.RegistrarEstadia
             //filtrado de estadias
             DataView dvData = new DataView(dTable);
             string query = "";
-            query = query + this.filtrarExactamentePor("estadiaCodigo", txtEst.Text);
-            query = query + this.filtrarExactamentePor("habCodigo", txthab.Text);
-            query = query + this.filtrarExactamentePor("habNumero", txtNrohab.Text);
-            query = query + this.filtrarExactamentePor("habPiso", txtPiso.Text);
+            query = query + funcionesGlobales.filtrarExactamentePor("estadiaCodigo", txtEst.Text);
+            query = query + funcionesGlobales.filtrarExactamentePor("habCodigo", txthab.Text);
+            query = query + funcionesGlobales.filtrarExactamentePor("habNumero", txtNrohab.Text);
+            query = query + funcionesGlobales.filtrarExactamentePor("habPiso", txtPiso.Text);
             if (query.Length > 0) { query = query.Remove(query.Length - 4); }
             dvData.RowFilter = query;
             dgvFinalizar.DataSource = dvData;

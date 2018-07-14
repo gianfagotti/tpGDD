@@ -23,13 +23,15 @@ namespace FrbaHotel.AbmRol
             InitializeComponent();
             ultimoFormulario = form;
 
-            /*carga de la DGV*/
+            /*carga de la DGV con todas las funcionalidades existentes*/
             String select = "SELECT * FROM FAGD.Funcionalidad";
             adapter = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataAdapter(select);
             tabla = Login.FrmTipoUsuario.conexionBaseDeDatos.dameDataTable(adapter);
             BindingSource bindSource = new BindingSource();
             bindSource.DataSource = tabla;
             dgvFuncionalidades.DataSource = bindSource;
+
+            /*Imposibilito la posibilidad de alterar los campos*/
             dgvFuncionalidades.Columns[1].ReadOnly = true;
             dgvFuncionalidades.Columns[2].ReadOnly = true;
         }
@@ -51,12 +53,15 @@ namespace FrbaHotel.AbmRol
         {
 
             /*CREACION DEL ROL*/
+            /*----------------*/
+            /*Verificacion de llenado del txtbox con el nombre del rol*/
             if (String.IsNullOrEmpty(txtNombreRol.Text))
             {
                 MessageBox.Show("El Rol debe tener un nombre.");
             }
             else
             {
+                /*Ejecuto el procedimiento para insertar un nuevo rol, enviando como parametros el nombre y el estado*/
                 String exe = "EXEC FAGD.nuevoRol '" + txtNombreRol.Text + "', ";
                 if (chkRolActivo.Checked)
                      exe = exe + "1";
@@ -81,7 +86,7 @@ namespace FrbaHotel.AbmRol
                 }
 
 
-                /*LINKEO DE FUNCIONALIDADES*/
+                /*LINKEO DE FUNCIONALIDADES CON EL ROL INGRESADO*/
                 else
                 {
                     foreach (DataGridViewRow row in dgvFuncionalidades.Rows)
@@ -89,12 +94,15 @@ namespace FrbaHotel.AbmRol
                         if (Convert.ToBoolean(row.Cells[columnaHabilitar.Name].Value) == true)
                         {
                             String codigoFuncionalidad = row.Cells[1].Value.ToString();
+
+                            /*Bloqueo la posibilidad de que el rol pueda administrar usuarios (solo disponible para administradores)*/
                             if (codigoFuncionalidad == "8")
                             {
                                 MessageBox.Show("El manejo de usuarios solo puede llevarse a cabo por los Administradores. Se procederá a guardar el resto de las funcionalidades seleccionadas", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             }
                             else
                             {
+                                /*Inserto 1x1 las funcionalidades seleccionadas en el DGV en la tabla RolXFuncionalidad*/
                                 exe = "EXEC FAGD.funcionalidadesDelRol '" + txtNombreRol.Text + "', '" + codigoFuncionalidad + "'";
                                 resultado = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
 
@@ -110,6 +118,8 @@ namespace FrbaHotel.AbmRol
                             }
                         }
                     }
+
+                    /*En caso de éxito, reseteo el formulario y le aviso al usuario*/
                   
                     MessageBox.Show("Rol guardado correctamente!");
                     txtNombreRol.Clear();
