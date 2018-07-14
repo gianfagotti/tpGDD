@@ -16,7 +16,7 @@ namespace FrbaHotel.AbmRol
         {
             InitializeComponent();
         }
-
+        /*Seteo de funcionalidades de los botones del menú del Cliente*/
         private void btnNuevaReserva_Click(object sender, EventArgs e)
         {
 

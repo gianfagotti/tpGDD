@@ -23,10 +23,10 @@ namespace FrbaHotel.AbmUsuario
         {
             ultimoFormulario = formAnterior;
             usuario = usuarioSeleccionado;
-            alta = habilitarNuevo;
+            alta = habilitarNuevo; /*Recibo un booleano según el botón ingresado en el menú de modificación (true si es una habilitacion, false en caso contrario)*/
             InitializeComponent();
-            llenarCbo(alta);
-            if (alta) btnHotel.Enabled = true;
+            llenarCbo(); /*Lleno el cbo con los hoteles donde trabaja el usuario*/
+            if (alta) btnHotel.Enabled = true; /*en caso de habilitar un nuevo rol, permito que se cree un rol en un nuevo hotel (donde no trabaje actualmente el empleado) */
             
         }
 
@@ -46,28 +46,22 @@ namespace FrbaHotel.AbmUsuario
 
         private void btnContinuar_Click(object sender, EventArgs e)
         {
+            /*Verifico que se haya seleccionado un hotel*/
             if (String.IsNullOrEmpty(cboHotel.Text)) MessageBox.Show("Seleccione un hotel!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else{
                 String hotel = cboHotel.Text;
+                /*prosigo a seleccionar un rol a habilitar/eliminar según el booleano alta*/
                 SeleccionarRol frm = new SeleccionarRol(ultimoFormulario, this, usuario, hotel, alta);
                 this.Hide();
                 frm.Show();
             }
         }
 
-        private void llenarCbo(Boolean alta) {
+        private void llenarCbo() { /*selecciono los hoteles donde trabaja actualmente el usuario*/
 
             String select = "SELECT hotel_calle, hotel_nroCalle FROM FAGD.Hotel ";
-      //      if (alta)
-      //      {
-      //          select = select + "WHERE hotel_codigo NOT IN (SELECT hotel_codigo FROM FAGD.UsuarioXRolXHotel WHERE '" + usuario + "' ="
-      //                          + "usuario_username)";
-      //      }
-      //      else {
-                select = select + "WHERE hotel_codigo IN (SELECT hotel_codigo FROM FAGD.UsuarioXRolXHotel WHERE '" + usuario + "' = "
-                                + "usuario_username)";
-      //      }
-
+            select = select + "WHERE hotel_codigo IN (SELECT hotel_codigo FROM FAGD.UsuarioXRolXHotel WHERE '" + usuario + "' = "
+                            + "usuario_username)";
             int fila = 0;
             tablaH = Login.FrmTipoUsuario.conexionBaseDeDatos.consulta(select);
             while (fila < tablaH.Rows.Count)

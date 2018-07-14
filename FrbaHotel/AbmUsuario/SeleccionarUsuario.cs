@@ -23,8 +23,8 @@ namespace FrbaHotel.AbmUsuario
         {
             ultimoForm = form;
             InitializeComponent();
-            hotelLogin = Login.FrmSeleccionarHotel.codigoHotel;
-            cargarComboUsuarios();
+            hotelLogin = Login.FrmSeleccionarHotel.codigoHotel; /*Verifico en qué hotel se está logueado actualmente*/
+            cargarComboUsuarios(); /*lleno el combo box con los usuarios que ejercen algún rol en el hotel donde está logueado el admin*/
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,7 +57,7 @@ namespace FrbaHotel.AbmUsuario
 
         private void cboUsuarios_SelectedIndexChanged(object sender, EventArgs e)
         {
-            usuario = cboUsuarios.Text;
+            usuario = cboUsuarios.Text; /*seteo el valor de la variable cada vez que se selecciona un item en el combobox*/
         }
 
 
@@ -66,7 +66,7 @@ namespace FrbaHotel.AbmUsuario
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        private void cargarComboUsuarios()
+        private void cargarComboUsuarios() /*cargo el combo con los usuarios que ejercen algún rol en el hotel donde está logueado el administrador (exceptuando admin y guest)*/
         {
             String select = "SELECT usuario_username FROM FAGD.Usuario WHERE usuario_username <> 'GUEST' AND usuario_username <> 'admin' AND usuario_username IN (SELECT usuario_username FROM "
                            +"FAGD.UsuarioXRolXHotel WHERE hotel_codigo = '" +hotelLogin+"')";
@@ -89,7 +89,7 @@ namespace FrbaHotel.AbmUsuario
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        private Boolean checkearCbo() {
+        private Boolean checkearCbo() { /*verifico que se haya seleccionado algun rol*/
             if (String.IsNullOrEmpty(usuario))
             {
                 return false;
@@ -101,12 +101,14 @@ namespace FrbaHotel.AbmUsuario
         {
             if (checkearCbo())
             {
+                /*ejecuto el procedimiento que cambia el estado del usuario seleccionado */
                 String exe = "EXEC FAGD.cambiarEstadoUsuario '"+usuario+"'";
                 decimal resultado = 0;
                 reader = Login.FrmTipoUsuario.conexionBaseDeDatos.comando(exe);
                 if (reader.Read()){
                     resultado = reader.GetDecimal(0);
                  }
+                /*Si el procedimiento devuelve 1, el usuario pasó a habilitarse, si devuelve 2, a inhabilitarse, y si devuelve 0 hubo un error*/
                 if (resultado == 1) MessageBox.Show("El usuario se encuentra ahora HABILITADO.", "Estado cambiado");
                 if (resultado == 0) MessageBox.Show("El usuario se encuentra ahora INHABILITADO.", "Estado cambiado");
                 if (resultado == 2) MessageBox.Show("Se produjo un error al cambiar el estado del usuario.", "Error");

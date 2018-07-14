@@ -21,6 +21,8 @@ namespace FrbaHotel.AbmRol
         public frmSeleccionarRol(AbmRol.frmMenuEmpleado form)
         {
             InitializeComponent();
+
+            /*Cargo el combo box con los roles a modificar (exceptuando 'Administrador general')*/
             frmMenuEmpleado = form;
             String select = "SELECT rol_nombre FROM FAGD.Rol WHERE rol_nombre <> 'Administrador general'";
             
@@ -36,6 +38,7 @@ namespace FrbaHotel.AbmRol
             
         }
 
+        /*Envío el rol seleccionado como parámetro al formulario de modificación*/
         private void btnContinuar_Click(object sender, EventArgs e)
         {
             AbmRol.ModificarRol modificarRol = new AbmRol.ModificarRol(this, rolSeleccionado);
